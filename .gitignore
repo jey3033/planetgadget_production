@@ -7,10 +7,9 @@
 /.magento/local
 !/app
 !/app/*/
-!/app/etc
-!/app/etc/config.php
 !/app/code/**
 !/app/design/**
+!/app/etc/config.php
 !/app/i18n/**
 !/auth.json
 !/build_options.ini
@@ -23,4 +22,4 @@
 !/update
 !/update/.htaccess
 !/README.md
-
+!/op-exclude.txt
