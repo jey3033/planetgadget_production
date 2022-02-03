@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "af34760e1dc52a88275dea6adf98ff1e",
+    "content-hash": "811e614379e718544999d8c8105db3ee",
     "packages": [
         {
             "name": "2tvenom/cborencode",
@@ -2722,6 +2722,59 @@
                 "schema"
             ],
             "time": "2021-07-22T09:24:00+00:00"
+        },
+        {
+            "name": "kemana/module-accelerator-base",
+            "version": "dev-release-Staging-243",
+            "source": {
+                "type": "git",
+                "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_acceleratorbase.git",
+                "reference": "24c51acf132a0f0f5945934693e1222c76a2020f"
+            },
+            "require": {
+                "php": "~7.1.3||~7.2.0||~7.3.0||~7.4.0"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Kemana\\AcceleratorBase\\": ""
+                }
+            },
+            "license": [
+                "OSL-3.0",
+                "AFL-3.0"
+            ],
+            "description": "N/A",
+            "time": "2021-11-23T07:34:21+00:00"
+        },
+        {
+            "name": "kemana/theme-frontend-base",
+            "version": "dev-release-Staging-243",
+            "source": {
+                "type": "git",
+                "url": "https://git.kemana.com/kemana-dev/kemana-accelerator-themes/kemana-base.git",
+                "reference": "7c6e412593d313b189a2ed900db03153606b01d1"
+            },
+            "require": {
+                "magento/framework": "*",
+                "magento/theme-frontend-blank": "*",
+                "php": "~7.4.0"
+            },
+            "type": "magento2-theme",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ]
+            },
+            "license": [
+                "OSL-3.0",
+                "AFL-3.0"
+            ],
+            "description": "N/A",
+            "time": "2021-09-21T05:52:25+00:00"
         },
         {
             "name": "khanamiryan/qrcode-detector-decoder",
@@ -27782,7 +27835,10 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "alpha",
-    "stability-flags": [],
+    "stability-flags": {
+        "kemana/module-accelerator-base": 20,
+        "kemana/theme-frontend-base": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": [],
