@@ -21,8 +21,8 @@ use Magento\Framework\App\Helper\Context;
 
 class Data extends \Magento\Framework\App\Helper\AbstractHelper
 {
-    const PG_WEBSITEID = 1;
-    const PG_STOREID   = 1;
+    const PG_STORE_VIEW_INDONESIA = 1;
+    const PG_STORE_VIEW_ENGLISH   = 2;
 
     /**
      * @var Context
