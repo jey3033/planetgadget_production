@@ -20,10 +20,15 @@
         "kemana-accelerator-base": {
             "type": "git",
             "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_acceleratorbase.git"
+        },
+        "kemana-core": {
+            "type": "git",
+            "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_core.git"
         }
     },
     "require": {
         "kemana/module-accelerator-base": "dev-release-Staging-243",
+        "kemana/module-core": "2.43.0",
         "kemana/theme-frontend-base": "dev-release-Staging-243",
         "magento/composer-root-update-plugin": "~1.1",
         "magento/magento-cloud-metapackage": ">=2.4.3 <2.4.4"

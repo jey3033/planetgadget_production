@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "811e614379e718544999d8c8105db3ee",
+    "content-hash": "60544d39f855746c8e6df352e5f8aff2",
     "packages": [
         {
             "name": "2tvenom/cborencode",
@@ -2749,6 +2749,39 @@
             ],
             "description": "N/A",
             "time": "2021-11-23T07:34:21+00:00"
+        },
+        {
+            "name": "kemana/module-core",
+            "version": "2.43.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_core.git",
+                "reference": "90b2ab105ebcdca7abb1792f6647c8334381a1b5"
+            },
+            "require": {
+                "magento/framework": "*",
+                "magento/module-backend": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Kemana\\Core\\": ""
+                },
+                "files": [
+                    "registration.php"
+                ]
+            },
+            "license": [
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "email": "rfridwan@kemana.com",
+                    "name": "Rizal Fauzie Ridwan"
+                }
+            ],
+            "description": "Magento 2 backend for all kemana modules.",
+            "time": "2021-08-11T03:39:20+00:00"
         },
         {
             "name": "kemana/theme-frontend-base",
