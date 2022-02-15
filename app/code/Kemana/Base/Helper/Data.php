@@ -21,7 +21,14 @@ use Magento\Framework\App\Helper\Context;
 
 class Data extends \Magento\Framework\App\Helper\AbstractHelper
 {
+    /**
+     * Indonesia store view ID
+     */
     const PG_STORE_VIEW_INDONESIA = 1;
+
+    /**
+     * English store view ID
+     */
     const PG_STORE_VIEW_ENGLISH   = 2;
 
     /**
