@@ -6,16 +6,16 @@
 
 /**
  * @category Kemana
- * @package  Kemana_Base
+ * @package  Kemana_Common
  * @license  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  *
  *
  * @author   Achintha Madushan <amadushan@kemana.com>
  */
 
-namespace Kemana\Base\Setup\Patch\Data;
+namespace Kemana\Common\Setup\Patch\Data;
 
-use Kemana\Base\Helper\Data as HelperData;
+use Kemana\Common\Helper\Data as HelperData;
 use Magento\Cms\Model\PageFactory;
 use Magento\Framework\Setup\Patch\DataPatchInterface;
 use Magento\Store\Model\StoreManagerInterface;
