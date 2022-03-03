@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "932773f96397172dd8721c9cac8fd2e1",
+    "content-hash": "25d96954a3cd17e440acdd37aa0c7323",
     "packages": [
         {
             "name": "2tvenom/cborencode",
@@ -2871,6 +2871,42 @@
             ],
             "description": "Magento 2 backend for all kemana modules.",
             "time": "2021-08-11T03:39:20+00:00"
+        },
+        {
+            "name": "kemana/module-whatsapp-chat",
+            "version": "dev-release-Staging-241",
+            "source": {
+                "type": "git",
+                "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_whatsappchat.git",
+                "reference": "b297cc3b86dbc479799f6b410d47f18864b95839"
+            },
+            "require": {
+                "kemana/module-core": "*",
+                "magento/framework": "*",
+                "php": "~7.0.13|~7.1.0|~7.2.0|~7.3.0|~7.4.0"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Kemana\\WhatsAppChat\\": ""
+                }
+            },
+            "license": [
+                "OSL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Oshan Perera",
+                    "email": "operera@kemana.com",
+                    "homepage": "http://www.kemana.com/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Kemana WhatsApp Chat Extension for Magento 2",
+            "time": "2021-11-10T04:43:31+00:00"
         },
         {
             "name": "kemana/theme-frontend-base",
@@ -27942,6 +27978,7 @@
     "minimum-stability": "alpha",
     "stability-flags": {
         "kemana/module-accelerator-base": 20,
+        "kemana/module-whatsapp-chat": 20,
         "kemana/theme-frontend-base": 20
     },
     "prefer-stable": true,
