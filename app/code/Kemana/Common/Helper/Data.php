@@ -6,14 +6,14 @@
 
 /**
  * @category Kemana
- * @package  Kemana_Base
+ * @package  Kemana_Common
  * @license  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  *
  *
  * @author   Achintha Madushan <amadushan@kemana.com>
  */
 
-namespace Kemana\Base\Helper;
+namespace Kemana\Common\Helper;
 
 use Magento\Cms\Model\BlockFactory;
 use Magento\Cms\Model\PageFactory;

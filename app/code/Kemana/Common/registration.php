@@ -6,7 +6,7 @@
 
 /**
  * @category Kemana
- * @package  Kemana_Base
+ * @package  Kemana_Common
  * @license  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  *
  *
@@ -15,4 +15,4 @@
 
 use \Magento\Framework\Component\ComponentRegistrar;
 
-ComponentRegistrar::register(ComponentRegistrar::MODULE, 'Kemana_Base', __DIR__);
+ComponentRegistrar::register(ComponentRegistrar::MODULE, 'Kemana_Common', __DIR__);

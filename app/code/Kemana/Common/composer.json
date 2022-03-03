@@ -1,5 +1,5 @@
 {
-    "name": "kemana/base",
+    "name": "kemana/common",
     "description": "N/A",
     "config": {
         "sort-packages": true
@@ -17,7 +17,7 @@
             "registration.php"
         ],
         "psr-4": {
-            "Kemana\\Base\\": ""
+            "Kemana\\Common\\": ""
         }
     },
     "version": "100.0.0"
