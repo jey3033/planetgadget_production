@@ -36,6 +36,10 @@
         "kemana-geoip": {
             "type": "git",
             "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_geoip.git"
+        },
+        "kemana-whatsapp-chat": {
+            "type": "git",
+            "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_whatsappchat.git"
         }
     },
     "require": {
@@ -44,6 +48,7 @@
         "kemana/kemana_storelocator": "2.43.2",
         "kemana/module-accelerator-base": "dev-release-Staging-243",
         "kemana/module-core": "2.43.0",
+        "kemana/module-whatsapp-chat": "dev-release-Staging-241",
         "kemana/theme-frontend-base": "dev-release-Staging-243",
         "magento/composer-root-update-plugin": "~1.1",
         "magento/magento-cloud-metapackage": ">=2.4.3 <2.4.4"
