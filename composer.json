@@ -40,6 +40,10 @@
         "kemana-whatsapp-chat": {
             "type": "git",
             "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_whatsappchat.git"
+        },
+        "kemana-banner": {
+            "type": "git",
+            "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_banner.git"
         }
     },
     "require": {
@@ -47,6 +51,7 @@
         "kemana/kemana_geoip": "2.43.0",
         "kemana/kemana_storelocator": "2.43.2",
         "kemana/module-accelerator-base": "dev-release-Staging-243",
+        "kemana/module-banner": "2.43.1",
         "kemana/module-core": "2.43.0",
         "kemana/module-whatsapp-chat": "dev-release-Staging-241",
         "kemana/theme-frontend-base": "dev-release-Staging-243",

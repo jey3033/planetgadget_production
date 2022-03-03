@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "25d96954a3cd17e440acdd37aa0c7323",
+    "content-hash": "df9118393092f40d0a4ce6829502d735",
     "packages": [
         {
             "name": "2tvenom/cborencode",
@@ -2838,6 +2838,43 @@
             ],
             "description": "N/A",
             "time": "2021-11-23T07:34:21+00:00"
+        },
+        {
+            "name": "kemana/module-banner",
+            "version": "2.43.1",
+            "source": {
+                "type": "git",
+                "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_banner.git",
+                "reference": "439a2764bffd35a1a58e707b1e9b361655f7c963"
+            },
+            "require": {
+                "kemana/module-core": "*",
+                "magento/framework": "*",
+                "magento/module-backend": "*",
+                "php": "~7.3.0||~7.4.0"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Kemana\\Banner\\": ""
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "Gayan Thrimanne",
+                    "email": "gthrimanne@kemana.com",
+                    "homepage": "https://kemana.com/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Magento 2 Banner Slider extension",
+            "time": "2021-11-29T05:39:46+00:00"
         },
         {
             "name": "kemana/module-core",
