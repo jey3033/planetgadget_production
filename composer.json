@@ -48,6 +48,10 @@
         "kemana-labelmanager": {
             "type": "git",
             "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_labelmanager.git"
+        },
+        "module-categoriesenhanced": {
+            "type": "git",
+            "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_categoriesenhanced.git"
         }
     },
     "require": {
@@ -56,6 +60,7 @@
         "kemana/kemana_storelocator": "2.43.2",
         "kemana/module-accelerator-base": "dev-release-Staging-243",
         "kemana/module-banner": "2.43.1",
+        "kemana/module-categoriesenhanced": "2.43.1",
         "kemana/module-core": "2.43.0",
         "kemana/module-labelmanager": "2.43.2",
         "kemana/module-whatsapp-chat": "dev-release-Staging-241",
