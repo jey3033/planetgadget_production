@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f975917dd2ef701a49f415a6c0cbcecd",
+    "content-hash": "01dec5d0a7e9fd22ab41741cf0b76ff7",
     "packages": [
         {
             "name": "2tvenom/cborencode",
@@ -3624,6 +3624,101 @@
                 }
             ],
             "description": "Klarna Order Management Magento 2 Extension"
+        },
+        {
+            "name": "ks/logistic",
+            "version": "dev-release-Staging-243",
+            "source": {
+                "type": "git",
+                "url": "https://git.kemana.com/m2-extension/logistic.git",
+                "reference": "d9a9892bcb4a4314b041348fd399c1a839bd89b7"
+            },
+            "require": {
+                "kemana/module-core": "*",
+                "laminas/laminas-barcode": "2.*",
+                "php": ">=7.0.0",
+                "xtendable/mail-attachment": "2.*"
+            },
+            "type": "magento2-module",
+            "extra": {
+                "branch-alias": {
+                    "7.41.0": "master-241"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "KS\\Logistic\\": ""
+                }
+            },
+            "license": [
+                "OSL-3.0",
+                "AFL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Didi Kusnadi",
+                    "email": "dkusnadi@kemana.com",
+                    "homepage": "http://www.kemana.com/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Indonesia Directory and Shipping Method.",
+            "time": "2022-03-04T05:46:01+00:00"
+        },
+        {
+            "name": "laminas/laminas-barcode",
+            "version": "2.11.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laminas/laminas-barcode.git",
+                "reference": "e2a4b56e2f6c800992fe1c7e7cc0da851dcfdfa0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laminas/laminas-barcode/zipball/e2a4b56e2f6c800992fe1c7e7cc0da851dcfdfa0",
+                "reference": "e2a4b56e2f6c800992fe1c7e7cc0da851dcfdfa0",
+                "shasum": ""
+            },
+            "require": {
+                "laminas/laminas-servicemanager": "^3.10.0",
+                "laminas/laminas-stdlib": "^3.6.0",
+                "laminas/laminas-validator": "^2.15.1",
+                "php": "~7.4.0 || ~8.0.0 || ~8.1.0"
+            },
+            "conflict": {
+                "zendframework/zend-barcode": "*"
+            },
+            "require-dev": {
+                "laminas/laminas-coding-standard": "~2.3.0",
+                "laminas/laminas-config": "^3.7.0",
+                "phpunit/phpunit": "^9.3.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Laminas\\Barcode\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Programmatically create and render barcodes as images or in PDFs",
+            "homepage": "https://laminas.dev",
+            "keywords": [
+                "barcode",
+                "laminas"
+            ],
+            "funding": [
+                {
+                    "url": "https://funding.communitybridge.org/projects/laminas-project",
+                    "type": "community_bridge"
+                }
+            ],
+            "time": "2022-01-04T14:26:00+00:00"
         },
         {
             "name": "laminas/laminas-captcha",
@@ -28192,6 +28287,48 @@
             "time": "2020-12-11T19:33:31+00:00"
         },
         {
+            "name": "xtendable/mail-attachment",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lurahcondet/mailattachment.git",
+                "reference": "c5f3ae6d5b8236b6acf35732cda0563c6f22876a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lurahcondet/mailattachment/zipball/c5f3ae6d5b8236b6acf35732cda0563c6f22876a",
+                "reference": "c5f3ae6d5b8236b6acf35732cda0563c6f22876a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0.0"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Xtendable\\MailAttachment\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "OSL-3.0",
+                "AFL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Didi Kusnadi",
+                    "email": "jalapro08@gmail.com",
+                    "homepage": "http://www.kemana.com/",
+                    "role": "Backend Developer"
+                }
+            ],
+            "description": "Add ability to attach document into email and add reply-to header. Fix issue in office365, if from email not registered as valid account in office356",
+            "time": "2020-04-13T21:35:12+00:00"
+        },
+        {
             "name": "yotpo/magento2-module-yotpo-reviews",
             "version": "3.2.0",
             "dist": {
@@ -28309,7 +28446,8 @@
     "stability-flags": {
         "kemana/module-accelerator-base": 20,
         "kemana/module-whatsapp-chat": 20,
-        "kemana/theme-frontend-base": 20
+        "kemana/theme-frontend-base": 20,
+        "ks/logistic": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

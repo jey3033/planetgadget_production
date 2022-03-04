@@ -60,6 +60,10 @@
         "module-smtp": {
             "type": "git",
             "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_smtp.git"
+        },
+        "ks-logistic": {
+            "type": "git",
+            "url": "https://git.kemana.com/m2-extension/logistic.git"
         }
     },
     "require": {
@@ -75,6 +79,7 @@
         "kemana/module-social-login": "2.43.3",
         "kemana/module-whatsapp-chat": "dev-release-Staging-241",
         "kemana/theme-frontend-base": "dev-release-Staging-243",
+        "ks/logistic": "dev-release-Staging-243",
         "magento/composer-root-update-plugin": "~1.1",
         "magento/magento-cloud-metapackage": ">=2.4.3 <2.4.4"
     },
