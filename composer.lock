@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "df9118393092f40d0a4ce6829502d735",
+    "content-hash": "ff55bbb88a2c37c74974ca5a4b29651b",
     "packages": [
         {
             "name": "2tvenom/cborencode",
@@ -2908,6 +2908,38 @@
             ],
             "description": "Magento 2 backend for all kemana modules.",
             "time": "2021-08-11T03:39:20+00:00"
+        },
+        {
+            "name": "kemana/module-labelmanager",
+            "version": "2.43.2",
+            "source": {
+                "type": "git",
+                "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_labelmanager.git",
+                "reference": "8c72265d944792a5d9566dbd92783ad5ea3f5267"
+            },
+            "require": {
+                "kemana/module-core": "*",
+                "magento/framework": "*",
+                "magento/module-backend": "*",
+                "magento/module-cms": "*",
+                "magento/module-config": "*",
+                "magento/module-store": "*",
+                "php": "~7.2.0||~7.3.0||~7.4.0"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Kemana\\Labelmanager\\": ""
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "description": "Kemana M2 Product Labelmanager module",
+            "time": "2021-09-28T08:51:17+00:00"
         },
         {
             "name": "kemana/module-whatsapp-chat",
