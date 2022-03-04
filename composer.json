@@ -52,6 +52,14 @@
         "module-categoriesenhanced": {
             "type": "git",
             "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_categoriesenhanced.git"
+        },
+        "module-sociallogin": {
+            "type": "git",
+            "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_sociallogin.git"
+        },
+        "module-smtp": {
+            "type": "git",
+            "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_smtp.git"
         }
     },
     "require": {
@@ -63,6 +71,8 @@
         "kemana/module-categoriesenhanced": "2.43.1",
         "kemana/module-core": "2.43.0",
         "kemana/module-labelmanager": "2.43.2",
+        "kemana/module-smtp": "2.43.0",
+        "kemana/module-social-login": "2.43.3",
         "kemana/module-whatsapp-chat": "dev-release-Staging-241",
         "kemana/theme-frontend-base": "dev-release-Staging-243",
         "magento/composer-root-update-plugin": "~1.1",

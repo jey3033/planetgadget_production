@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "806353139e8eb16e8cdd7eed4547f27a",
+    "content-hash": "f975917dd2ef701a49f415a6c0cbcecd",
     "packages": [
         {
             "name": "2tvenom/cborencode",
@@ -2050,6 +2050,65 @@
             "time": "2021-11-16T11:51:30+00:00"
         },
         {
+            "name": "facebook/graph-sdk",
+            "version": "5.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/facebook/php-graph-sdk.git",
+                "reference": "2d8250638b33d73e7a87add65f47fabf91f8ad9b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/facebook/php-graph-sdk/zipball/2d8250638b33d73e7a87add65f47fabf91f8ad9b",
+                "reference": "2d8250638b33d73e7a87add65f47fabf91f8ad9b",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.4|^7.0"
+            },
+            "require-dev": {
+                "guzzlehttp/guzzle": "~5.0",
+                "mockery/mockery": "~0.8",
+                "phpunit/phpunit": "~4.0"
+            },
+            "suggest": {
+                "guzzlehttp/guzzle": "Allows for implementation of the Guzzle HTTP client",
+                "paragonie/random_compat": "Provides a better CSPRNG option in PHP 5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Facebook\\": "src/Facebook/"
+                },
+                "files": [
+                    "src/Facebook/polyfills.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Facebook Platform"
+            ],
+            "authors": [
+                {
+                    "name": "Facebook",
+                    "homepage": "https://github.com/facebook/php-graph-sdk/contributors"
+                }
+            ],
+            "description": "Facebook SDK for PHP",
+            "homepage": "https://github.com/facebook/php-graph-sdk",
+            "keywords": [
+                "facebook",
+                "sdk"
+            ],
+            "abandoned": true,
+            "time": "2018-12-11T22:56:31+00:00"
+        },
+        {
             "name": "fastly/magento2",
             "version": "1.2.179",
             "source": {
@@ -2514,6 +2573,63 @@
             "time": "2021-10-05T13:56:00+00:00"
         },
         {
+            "name": "hybridauth/hybridauth",
+            "version": "v2.18.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hybridauth/hybridauth.git",
+                "reference": "a879408ad340b68c79faeea2e7a85b95a1f261ba"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hybridauth/hybridauth/zipball/a879408ad340b68c79faeea2e7a85b95a1f261ba",
+                "reference": "a879408ad340b68c79faeea2e7a85b95a1f261ba",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "facebook/graph-sdk": "^5.4",
+                "paypal/rest-api-sdk-php": "*",
+                "php": ">=5.2.0"
+            },
+            "require-dev": {
+                "squizlabs/php_codesniffer": "2.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Hybrid": "hybridauth/"
+                },
+                "classmap": [
+                    "hybridauth/Hybrid"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "(MIT or GPL-3.0+)"
+            ],
+            "authors": [
+                {
+                    "name": "Miled",
+                    "email": "hybridauth@gmail.com"
+                }
+            ],
+            "description": "Open source social sign on PHP library.",
+            "homepage": "http://hybridauth.sourceforge.net",
+            "keywords": [
+                "OpenId",
+                "facebook",
+                "google",
+                "hybridauth",
+                "login",
+                "oauth",
+                "social",
+                "twitter",
+                "yahoo"
+            ],
+            "time": "2021-03-08T13:17:31+00:00"
+        },
+        {
             "name": "illuminate/config",
             "version": "v5.8.36",
             "source": {
@@ -2969,6 +3085,72 @@
             ],
             "description": "Kemana M2 Product Labelmanager module",
             "time": "2021-09-28T08:51:17+00:00"
+        },
+        {
+            "name": "kemana/module-smtp",
+            "version": "2.43.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_smtp.git",
+                "reference": "c10bcc3c0c81a91e484d9fed0d6d54571576dbc6"
+            },
+            "require": {
+                "kemana/module-core": "*",
+                "php": "~7.2.0||~7.3.0||~7.4.0"
+            },
+            "type": "magento2-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "dev-m240-php74"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Kemana\\Smtp\\": ""
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "description": "SMTP Extension for Magento 2 helps the owner of store simply install SMTP (Simple Mail Transfer Protocol) server which transmits the messages into codes or numbers",
+            "time": "2022-01-05T12:45:02+00:00"
+        },
+        {
+            "name": "kemana/module-social-login",
+            "version": "2.43.3",
+            "source": {
+                "type": "git",
+                "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_sociallogin.git",
+                "reference": "8c41d387bc6db66f29a26ba21885f57ec5f416ba"
+            },
+            "require": {
+                "hybridauth/hybridauth": "^2.14.0",
+                "kemana/module-core": "*",
+                "kemana/module-smtp": "*",
+                "php": "~7.2.0||~7.3.0||~7.4.0"
+            },
+            "type": "magento2-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "upgrade-241"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Kemana\\SocialLogin\\": ""
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "description": "Magento 2 Social Login Extension",
+            "time": "2022-02-21T06:33:42+00:00"
         },
         {
             "name": "kemana/module-whatsapp-chat",
@@ -22888,6 +23070,56 @@
                 "AFL-3.0"
             ],
             "description": "N/A"
+        },
+        {
+            "name": "paypal/rest-api-sdk-php",
+            "version": "1.14.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/paypal/PayPal-PHP-SDK.git",
+                "reference": "72e2f2466975bf128a31e02b15110180f059fc04"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/paypal/PayPal-PHP-SDK/zipball/72e2f2466975bf128a31e02b15110180f059fc04",
+                "reference": "72e2f2466975bf128a31e02b15110180f059fc04",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "php": ">=5.3.0",
+                "psr/log": "^1.0.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8.35"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "PayPal": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "PayPal",
+                    "homepage": "https://github.com/paypal/rest-api-sdk-php/contributors"
+                }
+            ],
+            "description": "PayPal's PHP SDK for REST APIs",
+            "homepage": "http://paypal.github.io/PayPal-PHP-SDK/",
+            "keywords": [
+                "payments",
+                "paypal",
+                "rest",
+                "sdk"
+            ],
+            "abandoned": true,
+            "time": "2019-01-04T20:04:25+00:00"
         },
         {
             "name": "pelago/emogrifier",
