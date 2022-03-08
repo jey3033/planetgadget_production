@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "39d25c64a4d4a91a93b9d08e8195873b",
+    "content-hash": "6de995fc1d5ffe80092977a9879b072b",
     "packages": [
         {
             "name": "2tvenom/cborencode",
@@ -3244,6 +3244,33 @@
             ],
             "description": "Magento 2 Social Login Extension",
             "time": "2022-02-21T06:33:42+00:00"
+        },
+        {
+            "name": "kemana/module-top-categories",
+            "version": "2.43.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_topcategories.git",
+                "reference": "21ce9711aabee7b21731f5f08b64b4d5f7cf05fd"
+            },
+            "require": {
+                "php": "~7.1.3||~7.2.0||~7.3.0||~7.4.0"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Kemana\\TopCategories\\": ""
+                }
+            },
+            "license": [
+                "OSL-3.0",
+                "AFL-3.0"
+            ],
+            "description": "Magento 2 Top Categories Module",
+            "time": "2022-01-20T03:25:27+00:00"
         },
         {
             "name": "kemana/module-whatsapp-chat",
