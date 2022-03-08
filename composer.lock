@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "01dec5d0a7e9fd22ab41741cf0b76ff7",
+    "content-hash": "c1a362edda389201b2fc41c5328d03fa",
     "packages": [
         {
             "name": "2tvenom/cborencode",
@@ -3117,6 +3117,65 @@
             ],
             "description": "SMTP Extension for Magento 2 helps the owner of store simply install SMTP (Simple Mail Transfer Protocol) server which transmits the messages into codes or numbers",
             "time": "2022-01-05T12:45:02+00:00"
+        },
+        {
+            "name": "kemana/module-snap",
+            "version": "2.43.2",
+            "source": {
+                "type": "git",
+                "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_snap.git",
+                "reference": "51a105086fdf5d3d245be3190608cadf1141ccd1"
+            },
+            "require": {
+                "magento/framework": "103.0.*",
+                "magento/module-checkout": "100.4.*",
+                "magento/module-customer": "103.0.*",
+                "magento/module-sales": "103.0.*",
+                "magento/module-store": "101.1.*",
+                "magento/module-ui": "101.2.*",
+                "php": "~7.3.0||~7.4.0"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "psr-4": {
+                    "Kemana\\Snap\\": ""
+                },
+                "files": [
+                    "registration.php"
+                ]
+            },
+            "license": [
+                "OSL-3.0",
+                "AFL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Imam Kusuma",
+                    "email": "ikusuma@kemana.com",
+                    "homepage": "http://www.kemana.com/",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Rizal Fauzie Ridwan",
+                    "email": "rfridwan@kemana.com",
+                    "homepage": "http://www.kemana.com/",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Cipto Raharjo Kabil",
+                    "email": "craharjo@kemana.com",
+                    "homepage": "http://www.kemana.com/",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Anton Vinoj",
+                    "email": "avinoj@kemana.com",
+                    "homepage": "http://www.kemana.com/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Snap Payment Method",
+            "time": "2021-10-15T09:44:53+00:00"
         },
         {
             "name": "kemana/module-social-login",
