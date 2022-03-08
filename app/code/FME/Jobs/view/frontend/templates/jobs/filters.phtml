@@ -1,0 +1,123 @@
+<?php
+/**
+ * FME Extensions
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the fmeextensions.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.fmeextensions.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category  FME
+ * @package   FME_Jobs
+ * @copyright Copyright (c) 2019 FME (http://fmeextensions.com/)
+ * @license   https://fmeextensions.com/LICENSE.txt
+ */
+?>
+<?php $currdatetime = $block->getCurrDateTime();
+       $arrCurrDateTime = (array)$currdatetime;
+       $arrCurrDateTime = $arrCurrDateTime['date'];?>
+<?php $jobCollection = $block->getJobsCollection();?>
+<?php if($jobCollection->getData()):?>
+      <div class="listing"
+      <?php if(!($block->jobHelper->getJobSideBarEnable())):?>
+        style="width: 100%" <?php endif;?>>
+        <?php foreach($jobCollection as $jobs):?>
+          <?php  $url = $jobs->getJobsUrlKey(); ?>        
+        <?php if(strtotime($block->jobHelper->getTimeAccordingToTimeZone($jobs->getJobsPublishDate())) > strtotime($arrCurrDateTime)):?>
+          <?php continue; ?>
+        <?php endif;?>        
+        <?php if(!($block->jobHelper->getJobExpiredStatus())):?>
+        <?php if(strtotime($block->jobHelper->getTimeAccordingToTimeZone($jobs->getJobsApplybyDate())) < strtotime($arrCurrDateTime)):?>          
+          <?php continue; ?>
+        <?php endif;?>
+        <?php endif;?>  
+        <div class="block">
+          <div class="title"> <a href="<?php echo $this->getUrl().$block->jobHelper->getJobFinalDetailIdentifier($url) ?>"><?php echo __($jobs->getJobsTitle());?></a>
+            <div class="date"> <span><?php echo __( $block->jobHelper->getTimeAccordingToTimeZone($jobs->getJobsPublishDate())) ?></span> </div>
+            <?php $department = $block->getDepartmentName($jobs->getJobsSelectDepartments())?>
+            <?php $location = $block->getLocation($jobs->getJobsLocation())?>
+            <div class="company"> <span><?php echo __($department) ?>, <?php echo __($location) ?></span> </div>
+          </div>
+      <?php $string = $jobs->getJobsDescription() ?>   
+      <?php $string = strip_tags($string);
+          if (strlen($string) > 500) {
+            $stringCut = substr($string, 0, 500);   
+            $string = substr($stringCut, 0, strrpos($stringCut, ' ')).'... '; }?>
+          <div class="content">
+            <p><?php echo __($string)?> </p>
+          </div>
+          <div class="footer_bar clearfix">
+            <div class="right_side"><a href="<?php echo $this->getUrl().$block->jobHelper->getJobFinalDetailIdentifier($url) ?>" class="view">View</a> </div>
+          </div>
+        </div>
+        <?php endforeach;?>
+        <?php if ($block->getPagerHtml()): ?>
+        <div class="order-products-toolbar toolbar bottom"><?php echo $block->getPagerHtml(); ?></div>
+    <?php endif; ?>        
+      </div>
+    <?php else:?>
+      <div class="listing">
+          <div class="block">
+              <div class="title">
+              <?php echo __('Sorry! No Jobs match right now! keep visiting the page to get in touch.');?>
+              </div>
+          </div>
+      </div>
+    <?php endif;?>
+
+    <script type="text/javascript">
+require([
+                    'jquery'   
+
+                ], function($){
+   
+jQuery(".toolbar a").click(function(event) { 
+event.preventDefault(); 
+  var formMessages = $('#form-messages');
+
+curUrl=this.href;
+curUrl=curUrl.split('?');
+var formData = <?php echo  $block->getSerializeFormData();?>;
+var ajaxUrl= '<?php echo $block->getUrl("job/index/filters"); ?>?'+curUrl[1];
+$.ajax({
+      type: 'POST',
+      url: ajaxUrl,
+      showLoader: true,
+      data: formData
+    })
+    .done(function(response) {      
+      $(formMessages).html(response);      
+    });
+
+                                     }); //click end here
+    //limiter start
+      jQuery("#limiter").change(function(event) { 
+event.preventDefault(); 
+  var formMessages = $('#form-messages');
+
+curUrl=this.value;
+curUrl=curUrl.split('?');
+var formData= <?php echo  $block->getSerializeFormData();?>;
+var ajaxUrl= '<?php echo $block->getUrl("job/index/filters"); ?>?'+curUrl[1];
+$.ajax({
+      type: 'POST',
+      url: ajaxUrl,
+      showLoader: true,
+      data: formData
+    })
+    .done(function(response) {      
+      $(formMessages).html(response);      
+    });
+
+                                     });
+    //limiter end                                                  
+
+                });//require close
+
+</script>
