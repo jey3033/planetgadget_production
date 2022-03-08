@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c1a362edda389201b2fc41c5328d03fa",
+    "content-hash": "39d25c64a4d4a91a93b9d08e8195873b",
     "packages": [
         {
             "name": "2tvenom/cborencode",
@@ -2991,6 +2991,40 @@
             ],
             "description": "Magento 2 Banner Slider extension",
             "time": "2021-11-29T05:39:46+00:00"
+        },
+        {
+            "name": "kemana/module-blog",
+            "version": "2.43.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_blog.git",
+                "reference": "464cf0a9d0b81bb12928e8b2697d620e17555da0"
+            },
+            "require": {
+                "kemana/module-core": "*",
+                "php": "~7.4.0"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Kemana\\Blog\\": ""
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "description": "Magento 2 Blog extension",
+            "keywords": [
+                "blog",
+                "kemana",
+                "magento 2",
+                "magento 2 blog",
+                "magento2"
+            ],
+            "time": "2022-03-04T05:00:10+00:00"
         },
         {
             "name": "kemana/module-categoriesenhanced",
