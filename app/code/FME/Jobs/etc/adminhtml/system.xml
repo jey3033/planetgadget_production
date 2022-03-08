@@ -1,0 +1,140 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * FME Extensions
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the fmeextensions.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.fmeextensions.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category  FME
+ * @package   FME_Jobs
+ * @copyright Copyright (c) 2019 FME (http://fmeextensions.com/)
+ * @license   https://fmeextensions.com/LICENSE.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>        
+    <tab id="fmeextensions" translate="label" sortOrder="1000">
+      <label>FME Extention</label>
+    </tab>
+        <section id="jobs" translate="label" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Careers</label>
+            <tab>fmeextensions</tab>
+            <resource>FME_Jobs::configuration</resource>
+            <group id="job_extension" translate="label" type="text" sortOrder="98" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Module Settings</label>
+                <field id="jobs_mod_enable" translate="label" type="select" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Extension Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>                                                     
+            </group>
+            <group id="basic_configs" translate="label" type="text" sortOrder="99" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Jobs Settings</label>
+                                
+                <field id="job_header_link" translate="label" type="text" sortOrder="102" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Header link title</label>              
+                </field>
+                <field id="job_header_link_enable" translate="label" type="select" sortOrder="101" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable header link</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="job_bottom_link" translate="label" type="text" sortOrder="104" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Footer Link Label</label>
+                    <comment>Label/Title for footer link</comment>
+                </field>
+                <field id="job_bottom_link_enable" translate="label" type="select" sortOrder="103" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Footer Link</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="jobs_module_label" translate="label" type="text" sortOrder="104" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Label for Jobs's Module</label>
+                    <comment>Label/Title for main page</comment>
+                </field>
+                <field id="jobs_module_description" translate="label" type="textarea" sortOrder="104" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Description for Jobs</label>                  
+                </field>
+                <field id="job_side_bar_enable" translate="label" type="select" sortOrder="105" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable side bar Filters</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="job_top_bar_enable" translate="label" type="select" sortOrder="105" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable top bar Filters</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="job_expired_jobs_show" translate="label" type="select" sortOrder="106" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Expired Jobs</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="jobs_sidebar_count_showmore" translate="label" type="text" sortOrder="107" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>No. of Items to show in each Sidebar Filter</label>
+                    <comment>Remaining items will be hidden in Showmore...</comment>
+                </field>                                        
+            </group>                       
+            <group id="job_seo_info" translate="label" type="text" sortOrder="500" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>SEO Configurations</label>
+                <field id="job_page_title" translate="label" type="text" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Page Title</label>                    
+                </field>
+                <field id="job_meta_description" translate="label" type="textarea" sortOrder="201" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Description</label>                  
+                </field>
+                <field id="job_meta_keywords" translate="label" type="text" sortOrder="202" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Keywords</label>                  
+                </field>
+                <field id="job_url_prefix" translate="label" type="text" sortOrder="203" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Slug</label>
+                    <backend_model>FME\Jobs\Model\Config\Backend\UrlConfig</backend_model>
+                    <comment>Jobs page access. URL (e.g. http://www.example.com/job)</comment>    
+                </field>
+                <field id="job_url_suffix" translate="label" type="text" sortOrder="203" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>URL Suffix</label>
+                    <comment>(e.g .html )</comment>    
+                </field>                
+            </group>       
+            <group id="job_detail" translate="label" type="text" sortOrder="900" showInDefault="1" showInWebsite="0" showInStore="1">
+                <label>Jobs Detail Settings</label>                
+                <field id="job_sharing_options" translate="label" type="select" sortOrder="104" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Job's Sharing Options</label>
+                    <comment>Show Add This Sharing Options</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="job_form_popup" translate="label" type="select" sortOrder="105" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Application Form Popup</label>              
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="job_enable_capthca" translate="label" type="select" sortOrder="106" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Antispam Check</label>              
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="job_google_captcha" translate="label" type="text" sortOrder="107" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Google Recaptcha Key:</label>                    
+                </field>                                                 
+            </group>
+            <group id="email" translate="label" type="text" sortOrder="1055" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Email Options</label>
+                <field id="sender_email_identity" translate="label" type="select" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1" >
+                    <label>Email Sender</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+                </field>
+                <field id="receiver_email_identity" translate="label" type="select" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1" >
+                    <label>Email Notification Receiver</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+                </field>
+                <field id="email_template" translate="label" type="select" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1" >
+                    <label>Email Template</label>
+                    <comment>Email template chosen based on theme fallback when "Default" option is selected.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+            </group>                                                
+        </section>
+    </system>
+</config>

@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * FME Extensions
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the fmeextensions.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.fmeextensions.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category  FME
+ * @package   FME_Jobs
+ * @copyright Copyright (c) 2019 FME (http://fmeextensions.com/)
+ * @license   https://fmeextensions.com/LICENSE.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <jobs>
+        	<basic_configs>
+        		<job_header_link>Careers</job_header_link>
+                <job_header_link_enable>0</job_header_link_enable>
+                <job_bottom_link>JOBS</job_bottom_link>
+                <jobs_sidebar_count_showmore>3</jobs_sidebar_count_showmore>
+                <jobs_module_label>Find The Job That Fits Your Life</jobs_module_label>
+                <job_side_bar_enable>0</job_side_bar_enable>                                
+        	</basic_configs>
+            <job_seo_info>
+                <job_page_title>Careers</job_page_title>
+                <job_url_prefix>job</job_url_prefix>
+                <job_url_suffix>.html</job_url_suffix>                
+            </job_seo_info>
+            <job_detail>
+                <job_form_popup>1</job_form_popup>              
+            </job_detail>                      	      	    
+        </jobs>         
+    </default>
+</config>
