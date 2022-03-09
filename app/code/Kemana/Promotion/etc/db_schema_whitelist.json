@@ -1,0 +1,27 @@
+{
+    "kemana_promotion": {
+        "column": {
+            "promotion_id": true,
+            "title": true,
+            "identifier": true,
+            "sort_order": true,
+            "landing_image": true,
+            "landing_image_mobile": true,
+            "short_content": true,
+            "content": true,
+            "stores": true,
+            "created_at": true,
+            "updated_at": true,
+            "is_active": true,
+            "meta_title": true,
+            "meta_keywords": true,
+            "meta_description": true
+        },
+        "index": {
+            "FTI_38A5483EDFAE1276590106FB616C70A1": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

@@ -1,0 +1,56 @@
+<?php
+/**
+ * Copyright © 2021 PT Kemana Teknologi Solusi. All rights reserved.
+ * http://www.kemana.com
+ */
+
+/**
+ * @category Kemana
+ * @package  Kemana_Promotion
+ * @license  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ *
+ * @author   Achintha Madushan <amadushan@kemana.com>
+ */
+
+$promotions =  $block->getPromotions()['searchResult']->getItems();
+
+$promotionShortContentLength = $block->getPromotionShortContentLength();
+
+?>
+<div class="promotions">
+    <div class="promotion-items">
+        <?php foreach ($promotions as $promotion): ?>
+        <div class="promotion-item">
+            <?php if ($promotion->getLandingImage()): ?>
+            <div class="image">
+                <img src="<?= $block->getMediaFolderUrl().$promotion->getLandingImage() ?>">
+            </div>
+            <?php endif; ?>
+            <?php if ($promotion->getLandingImageMobile()): ?>
+            <div class="image-mobile" style="display: none">
+                <img src="<?= $block->getMediaFolderUrl().$promotion->getLandingImageMobile() ?>">
+            </div>
+            <?php endif; ?>
+            <div class="promotion-description">
+                <div class="promotion-description-inner">
+                    <div class="title">
+                        <a href="<?= $block->getBaseUrl().$promotion['identifier'] ?>"><?= __($promotion->getTitle()) ?></a>
+                    </div>
+                    <?php if ($promotion->getShortContent()): ?>
+                        <div class="short-content">
+                            <?= strlen($promotion->getShortContent()) > $promotionShortContentLength ? __(substr($promotion->getShortContent(), 0, $promotionShortContentLength) . "...") : __($promotion->getShortContent()) ?>
+                        </div>
+                    <?php endif; ?>
+                    <div class="read-more">
+                        <a href="<?= $block->getBaseUrl().$promotion['identifier'] ?>"><?= __('Read More') ?></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php endforeach; ?>
+    </div>
+
+    <?php if ($block->getPagerHtml()): ?>
+    <div class="order-products-toolbar toolbar bottom"><?php echo $block->getPagerHtml(); ?></div>
+    <?php endif; ?>
+</div>
