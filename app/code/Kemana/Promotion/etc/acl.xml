@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2021 PT Kemana Teknologi Solusi. All rights reserved.
+ * http://www.kemana.com
+ */
+
+/**
+ * @category Kemana
+ * @package  Kemana_Promotion
+ * @license  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ *
+ * @author   Achintha Madushan <amadushan@kemana.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Kemana_Core::menu">
+                    <resource id="Kemana_Promotion::promotion" title="Kemana Promotion" sortOrder="55">
+                        <resource id="Kemana_Promotion::manage" title="Manage Promotion" sortOrder="10">
+                            <resource id="Kemana_Promotion::promotion_save" title="Add/Edit Promotion" translate="title" sortOrder="10" />
+                            <resource id="Kemana_Promotion::promotion_delete" title="Delete Promotion" translate="title" sortOrder="20" />
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

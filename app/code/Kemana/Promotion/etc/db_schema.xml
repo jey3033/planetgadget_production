@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2021 PT Kemana Teknologi Solusi. All rights reserved.
+ * http://www.kemana.com
+ */
+
+/**
+ * @category Kemana
+ * @package  Kemana_Promotion
+ * @license  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ *
+ * @author   Achintha Madushan <amadushan@kemana.com>
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="kemana_promotion" resource="default" engine="innodb"
+           comment="Kemana Promotion Table">
+        <column xsi:type="smallint" name="promotion_id" unsigned="false" nullable="false" identity="true"
+                comment="Promotion ID"/>
+        <column xsi:type="varchar" name="title" nullable="false" length="255" comment="Promotion Title"/>
+        <column xsi:type="mediumtext" name="identifier" nullable="false"
+                comment="Promotion String Identifier"/>
+        <column xsi:type="smallint" name="sort_order" unsigned="false" nullable="true" identity="false"
+                comment="Sort Order"/>
+        <column xsi:type="varchar" name="landing_image" nullable="true" length="255"
+                comment="Promotion Landing Page Image"/>
+        <column xsi:type="varchar" name="landing_image_mobile" nullable="true" length="255"
+                comment="Promotion Landing Page Image Mobile"/>
+        <column xsi:type="text" name="short_content" nullable="true" comment="Promotion Short Content"/>
+        <column xsi:type="mediumtext" name="content" nullable="true" comment="Promotion Detail Page Content"/>
+        <column xsi:type="varchar" name="stores" nullable="true" length="255" default="0"
+                comment="Promotion Stores"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Promotion Created Time"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Promotion Modification Time"/>
+        <column xsi:type="smallint" name="is_active" unsigned="false" nullable="false" identity="false"
+                default="0" comment="Is Promotion Active"/>
+        <column xsi:type="varchar" name="meta_title" nullable="true" length="255" comment="Promotion Meta Title"/>
+        <column xsi:type="text" name="meta_keywords" nullable="true" comment="Promotion Meta Keywords"/>
+        <column xsi:type="text" name="meta_description" nullable="true" comment="Promotion Meta Description"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="promotion_id"/>
+        </constraint>
+        <index referenceId="PROMOTION_TITLE_META_KEYWORDS_META_DESCRIPTION_IDENTIFIER_CONTENT" indexType="fulltext">
+            <column name="title"/>
+            <column name="meta_keywords"/>
+            <column name="meta_description"/>
+            <column name="identifier"/>
+            <column name="content"/>
+        </index>
+    </table>
+</schema>

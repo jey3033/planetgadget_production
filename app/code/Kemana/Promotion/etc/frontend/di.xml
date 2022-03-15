@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2021 PT Kemana Teknologi Solusi. All rights reserved.
+ * http://www.kemana.com
+ */
+
+/**
+ * @category Kemana
+ * @package  Kemana_Promotion
+ * @license  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ *
+ * @author   Achintha Madushan <amadushan@kemana.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\App\RouterList">
+        <arguments>
+            <argument name="routerList" xsi:type="array">
+                <item name="kemana_promotion_landing" xsi:type="array">
+                    <item name="class" xsi:type="string">Kemana\Promotion\Controller\Router</item>
+                    <item name="disable" xsi:type="boolean">false</item>
+                    <item name="sortOrder" xsi:type="string">60</item>
+                </item>
+            </argument>
+            <argument name="routerList" xsi:type="array">
+                <item name="kemana_promotion_detail" xsi:type="array">
+                    <item name="class" xsi:type="string">Kemana\Promotion\Controller\RouterDetail</item>
+                    <item name="disable" xsi:type="boolean">false</item>
+                    <item name="sortOrder" xsi:type="string">60</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+</config>
