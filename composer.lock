@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6de995fc1d5ffe80092977a9879b072b",
+    "content-hash": "fe63672319ba16159aba529f459d9e2f",
     "packages": [
         {
             "name": "2tvenom/cborencode",
@@ -2843,6 +2843,39 @@
                 "schema"
             ],
             "time": "2021-07-22T09:24:00+00:00"
+        },
+        {
+            "name": "kemana/brand",
+            "version": "dev-release-Staging-243",
+            "source": {
+                "type": "git",
+                "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana-brand.git",
+                "reference": "a7ed0b331e2ddd2b2eac3718a48dd63c7beb23ed"
+            },
+            "require": {
+                "kemana/module-core": "*",
+                "php": "~7.1.0||~7.2.0||~7.3.0||~7.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Kemana\\Brand\\": ""
+                }
+            },
+            "license": [
+                "GPL-3.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "muttaqiin",
+                    "email": "muttaqiin@kemana.com"
+                }
+            ],
+            "description": "Brand module for accelerator project",
+            "time": "2021-12-30T04:04:07+00:00"
         },
         {
             "name": "kemana/kemana_base",
@@ -28564,6 +28597,7 @@
     "aliases": [],
     "minimum-stability": "alpha",
     "stability-flags": {
+        "kemana/brand": 20,
         "kemana/module-accelerator-base": 20,
         "kemana/module-whatsapp-chat": 20,
         "kemana/theme-frontend-base": 20,
