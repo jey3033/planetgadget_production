@@ -1,0 +1,43 @@
+<div class="footer-middle">
+    <div class="footer-top-content">
+        <div class="footer-section">
+            <div class="row">
+                <div class="col-md-3 col-sm-12 newsletter-title">
+                    <h2>OUTFIT OFFERS</h2>
+                </div>
+                <div class="col-md-4 col-sm-12 newsletter-description">
+                    <h6>NEWSLETTER</h6>
+                    <p>Subscribe to the Outfit mailing list to receive updates on new arrivals, offers and other discount information</p>
+                </div>
+                <div class="col-md-5 col-sm-12 newsletter-form"><?= $block->getChildHtml('subscribe') ?></div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-main-content">
+        <div class="footer-section">
+            <div class="row">
+                <div class="col-md-3 col-sm-12 address-section">
+                    <?= $block->getChildHtml('footer-address-section') ?>
+                </div>
+                <div class="col-md-3 col-sm-12 social-icon-section">
+                    <?= $block->getChildHtml('footer-social-icon-section') ?>
+                </div>
+                <div class="col-md-4 col-sm-12 menu-section">
+                    <div class="col-md-6 col-sm-12 menu-items accordion-item">
+                        <?= $block->getChildHtml('footer-information-links-section') ?>
+                    </div>
+                    <div class="col-md-5 col-sm-12 menu-items accordion-item">
+                        <p class="title" data-role="collapsible">PRIVACY POLICY</p>
+                        <?= $block->getChildHtml('footer_links') ?>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12 section-icons">
+                    <?= $block->getChildHtml('footer-icons-section') ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="footer-section"><?= $block->getChildHtml('copyright') ?></div>
+    </div>
+</div>

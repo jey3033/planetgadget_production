@@ -34,10 +34,10 @@ if ($exist = ($block->getCategoryCollection()->getSize())) {
                                 <div class="category-name" href="<?= $_item->getUrl(); ?>">
                                     <?= $block->escapeHtml($_item->getName()) ?>
                                 </div>
-                                <div class="category-short-description">
-                                    <?= $block->escapeHtml($_item->getShortDescription()) ?>
-                                </div>
                             </a>
+                            <div class="category-short-description">
+                                <?= $block->escapeHtml($_item->getShortDescription()) ?>
+                            </div>
                         </li>
                     <?php endforeach ?>
                 </ul>

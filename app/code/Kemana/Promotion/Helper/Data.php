@@ -281,4 +281,12 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         return $this->promotionRepository->getList($searchCriteria)['searchResult']->getItems();
 
     }
+
+    /**
+     * @return int
+     */
+    public function getPromotionActiveStatus(): int
+    {
+        return self::ACTIVE_STATUS;
+    }
 }
