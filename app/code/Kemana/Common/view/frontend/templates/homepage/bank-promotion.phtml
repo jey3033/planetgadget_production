@@ -1,0 +1,33 @@
+<?php
+/**
+ * Copyright © 2022 PT Kemana Teknologi Solusi. All rights reserved.
+ * http://www.kemana.com
+ */
+
+/**
+ * @category Kemana
+ * @package  Kemana_Common
+ * @license  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ *
+ * @author   Achintha Madushan <amadushan@kemana.com>
+ */
+
+$bankPromotions =  $block->getLatestBankPromotions()
+?>
+<div class="home-bank-and-promotions">
+    <h1>Bank & Promotion</h1>
+    <?php if (!empty($bankPromotions)): ?>
+    <?php foreach ($bankPromotions as $bankPromotion): ?>
+            <?php if ($bankPromotion->getLandingImage()): ?>
+                <div class="image">
+                    <img src="<?= $block->getMediaFolderUrl().$bankPromotion->getLandingImage() ?>">
+                </div>
+            <?php endif; ?>
+            <?php if ($bankPromotion->getLandingImageMobile()): ?>
+                <div class="image-mobile" style="display: none">
+                    <img src="<?= $block->getMediaFolderUrl().$bankPromotion->getLandingImageMobile() ?>">
+                </div>
+            <?php endif; ?>
+        <?php endforeach; ?>
+    <?php endif; ?>
+</div>

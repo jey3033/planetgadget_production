@@ -1,0 +1,28 @@
+<?php
+/**
+ * Copyright © 2022 PT Kemana Teknologi Solusi. All rights reserved.
+ * http://www.kemana.com
+ */
+
+/**
+ * @category Kemana
+ * @package  Kemana_Common
+ * @license  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ *
+ * @author   Achintha Madushan <amadushan@kemana.com>
+ */
+
+$blogNews =  $block->getLatestBlogNews()
+?>
+<div class="home-blog-and-news">
+    <h1>News & Updates</h1>
+    <?php if (!empty($blogNews)): ?>
+        <?php foreach ($blogNews as $blogNewsData): ?>
+            <?php if ($blogNewsData->getImage()): ?>
+                <div class="image">
+                    <img src="<?= $block->getMediaFolderUrl().'kemana/blog/post/'.$blogNewsData->getImage() ?>">
+                </div>
+            <?php endif; ?>
+        <?php endforeach; ?>
+    <?php endif; ?>
+</div>
