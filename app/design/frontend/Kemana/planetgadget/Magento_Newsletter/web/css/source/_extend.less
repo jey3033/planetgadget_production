@@ -1,0 +1,79 @@
+// /**
+//  * Copyright © 2022 Kemana. All rights reserved.
+//  * @author Harshani Karunasekara <hkarunasekara@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+@footer-subscribe-input__font-family: @font-family__saprtan;
+@footer-subscribe-input-background__color: @color-white;
+@footer-subscribe-input-border__color: @color-white;
+@footer-subscribe-input-text__color: @color-pg-dark-gray;
+
+@footer-subscribe-button__background: @kemana-secondary-brand-color;
+@footer-subscribe-button__color: @kemana-primary-brand-color;
+@footer-subscribe-button__border: @border-width__base solid @kemana-secondary-brand-color;
+@footer-subscribe-button-hover__color: @kemana-primary-brand-color;
+@footer-subscribe-button-hover__background: @color-pg-orange;
+@footer-subscribe-button-hover__border: @border-width__base solid @color-pg-orange;
+@footer-subscribe-button__padding: 0 20px;
+
+@footer-subscribe-button__height: 40px;
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+
+    //  Newsletter subscription
+    .block.newsletter {
+        form {
+            border-radius: 20px;
+            .lib-css(background, @footer-subscribe-input-background__color);
+            max-width: 400px;
+        }
+
+        input {
+            font-style: normal;
+            border-radius: 20px;
+
+            &::placeholder {
+                font-style: normal;
+            }
+
+            &:-webkit-autofill {
+                background-color: @footer-subscribe-input-background__color !important;
+
+                &:hover,
+                &:focus {
+                   background-color: @footer-subscribe-input-background__color !important;
+                }
+            }
+        }
+
+        .actions {
+            .action.subscribe {
+                border-radius: 20px;
+
+                span {
+                    text-transform: none;
+                    .lib-icon-font(
+                        @icon-pg-right-thick,
+                        @_icon-font: @icon-font,
+                        @_icon-font-position: after,
+                        @_icon-font-color: @kemana-primary-brand-color,
+                        @_icon-font-size: 10px,
+                        @_icon-font-line-height: 40px);
+                    position: relative;
+                    padding-right: 13px;
+
+                    &:after {
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                    }
+                }
+            }
+        }
+    }
+}
