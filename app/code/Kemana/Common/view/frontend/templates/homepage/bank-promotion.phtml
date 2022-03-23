@@ -19,14 +19,14 @@ $bankPromotions =  $block->getLatestBankPromotions()
     <?php if (!empty($bankPromotions)): ?>
     <?php foreach ($bankPromotions as $bankPromotion): ?>
             <?php if ($bankPromotion->getLandingImage()): ?>
-                <div class="image">
+                <a href="<?= $bankPromotion->getIdentifier() ?>"><div class="image">
                     <img src="<?= $block->getMediaFolderUrl().$bankPromotion->getLandingImage() ?>">
                 </div>
             <?php endif; ?>
             <?php if ($bankPromotion->getLandingImageMobile()): ?>
-                <div class="image-mobile" style="display: none">
+                <a href="<?= $bankPromotion->getIdentifier() ?>"><div class="image-mobile" style="display: none">
                     <img src="<?= $block->getMediaFolderUrl().$bankPromotion->getLandingImageMobile() ?>">
-                </div>
+                </div></a>
             <?php endif; ?>
         <?php endforeach; ?>
     <?php endif; ?>
