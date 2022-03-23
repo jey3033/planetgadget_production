@@ -1,0 +1,705 @@
+// /**
+//  * Copyright © 2020 Kemana. All rights reserved.
+//  * @author Ashan Gunawardena <agunawardena@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+//  Footer variables
+@footer-newsletter__background-color: @color-pg-black2;
+@footer-copyright__background-color: @color-pg-black2;
+
+@footer-title__font-family: @font-family-name__base;
+
+//  Copyright Icons
+@footer-copyright-icon: @icon-copyright;
+
+//  Social Icons
+@footer-facebook-icon: @icon-facebook;
+@footer-twitter-icon: @icon-twitter;
+@footer-google-icon: @icon-google;
+@footer-instagram-icon: @icon-instagram;
+@footer-rss-icon: @icon-rss;
+
+@footer-social-icon__background-color: @color-kemana-gray1;
+@footer-social-icon__font-color: @kemana-primary-brand-color;
+@footer-social-icon__font-color-hover: @kemana-primary-brand-color;
+
+@footer-newsletter__padding: 40px 0;
+@footer-newsletter-desktop__padding: 30px 0;
+@footer-main-content__padding: 30px 0;
+@footer-bottom__padding: 18px 0;
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .page-footer {
+        .footer-top-content {
+            .lib-css(background-color, @footer-newsletter__background-color);
+            .lib-css(padding, @footer-newsletter__padding);
+        }
+
+        .footer-main-content {
+            .lib-css(background-color, @footer__background-color);
+            .lib-css(padding, @footer-main-content__padding);
+        }
+
+        .footer-bottom {
+            .lib-css(background-color, @footer-copyright__background-color);
+            .lib-css(padding, @footer-bottom__padding);
+            text-align: center;
+
+            .copyright {
+                .lib-css(color, @color-white);
+                .lib-font-size(12);
+                .lib-icon-font(
+                    @footer-copyright-icon,
+                    @_icon-font: @icon-font,
+                    @_icon-font-color: @color-white,
+                    @_icon-font-size: 11px,
+                    @_icon-font-line-height: 11px,
+                    @_icon-font-margin: -2px 8px 0 0,
+                    @_icon-font-position: before
+                );
+            }
+        }
+
+        .newsletter-title {
+            h2 {
+                .lib-css(color, @color-white);
+                .lib-css(font-weight, @font-weight__heavier);
+                .lib-font-size(28);
+                .lib-icon-font(
+                    @icon-email,
+                    @_icon-font: @icon-font,
+                    @_icon-font-color: @color-white,
+                    @_icon-font-size: 30px,
+                    @_icon-font-line-height: 30px,
+                    @_icon-font-margin: -5px 20px 0 0,
+                    @_icon-font-position: before
+                );
+                padding-left: 60px;
+                position: relative;
+                margin-bottom: 30px;
+
+                &:before {
+                    position: absolute;
+                    top: 9px;
+                    left: 0;
+                }
+            }
+        }
+
+        .newsletter-description {
+            margin-bottom: 20px;
+
+            h2 {
+                .lib-css(color, @color-white);
+                margin-bottom: 10px;
+            }
+
+            p {
+                .lib-css(color, @color-pg-light-gray);
+                margin-bottom: 0;
+            }
+        }
+
+        .footer-section {
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .address-section {
+            margin-bottom: 30px;
+
+            .logo {
+                float: left;
+                width: 100%;
+                margin: 0 0 18px;
+                max-width: none;
+                z-index: inherit;
+
+                img {
+                    margin: auto;
+                    width: 200px;
+                }
+            }
+
+            .customer-service {
+                float: left;
+                .lib-css(color, @color-white);
+                width: 100%;
+                margin-bottom: 20px;
+                .lib-font-size(14);
+                font-weight: @font-weight__bold;
+            }
+
+            .customer-service-info {
+                float: left;
+                .lib-css(color, @color-white);
+                width: 100%;
+                margin-bottom: 20px;
+                font-weight: @font-weight__heavier;
+
+                .hours {
+                    .lib-css(color, @color-pg-light-gray);
+                }
+            }
+
+            .email {
+                margin-bottom: 10px;
+
+                a {
+                    .lib-css(color, @kemana-secondary-brand-color);
+                    .lib-icon-font(
+                        @icon-pg-email,
+                        @_icon-font-color: @kemana-secondary-brand-color,
+                        @_icon-font-size: 30px,
+                        @_icon-font-line-height: 30px,
+                        @_icon-font-margin: 0 10px 0 0);
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+
+            .number {
+                margin-bottom: 10px;
+
+                a {
+                    .lib-css(color, @kemana-secondary-brand-color);
+                    .lib-icon-font(
+                        @icon-pg-phone,
+                        @_icon-font-color: @kemana-secondary-brand-color,
+                        @_icon-font-size: 30px,
+                        @_icon-font-line-height: 30px,
+                        @_icon-font-margin: 0 10px 0 0);
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+
+            .live-chat {
+                a {
+                    .lib-css(color, @kemana-secondary-brand-color);
+                    .lib-icon-font(
+                        @icon-pg-livechat,
+                        @_icon-font-color: @kemana-secondary-brand-color,
+                        @_icon-font-size: 30px,
+                        @_icon-font-line-height: 30px,
+                        @_icon-font-margin: 0 10px 0 0);
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+
+            .item {
+                margin-top: 30px;
+
+                .link-social-network {
+                    .lib-vendor-prefix-display();
+
+                    li {
+
+                        a {
+                            padding-right: 10px;
+
+                            &:before {
+                                height: 30px;
+                                width: 30px;
+                                .lib-font-size(30);
+                                .lib-css(color, @color-white);
+                            }
+                        }
+
+                        &.facebook {
+                            a {
+                                .lib-icon-font(
+                                    @icon-pg-facebook-2,
+                                    @_icon-font-color: @color-white,
+                                    @_icon-font-size: 30px,
+                                    @_icon-font-line-height: 30px);
+
+                                &:hover {
+                                    &:before {
+                                        .lib-css(color, @kemana-secondary-brand-color);
+                                    }
+                                }
+                            }
+                        }
+
+                        &.twitter {
+                            a {
+                                .lib-icon-font(
+                                    @icon-pg-tiktok,
+                                    @_icon-font-color: @color-white,
+                                    @_icon-font-size: 30px,
+                                    @_icon-font-line-height: 30px);
+
+                                &:hover {
+                                    &:before {
+                                        .lib-css(color, @kemana-secondary-brand-color);
+                                    }
+                                }
+                            }
+                        }
+
+                        &.google {
+                            a {
+                                .lib-icon-font(
+                                    @icon-pg-youtube,
+                                    @_icon-font-color: @color-white,
+                                    @_icon-font-size: 30px,
+                                    @_icon-font-line-height: 30px);
+
+                                &:hover {
+                                    &:before {
+                                        .lib-css(color, @kemana-secondary-brand-color);
+                                    }
+                                }
+                            }
+                        }
+
+                        &.instagram {
+                            a {
+                                .lib-icon-font(
+                                    @icon-pg-instagram-2,
+                                    @_icon-font-color: @color-white,
+                                    @_icon-font-size: 30px,
+                                    @_icon-font-line-height: 30px);
+
+                                &:hover {
+                                    &:before {
+                                        .lib-css(color, @kemana-secondary-brand-color);
+                                    }
+                                }
+                            }
+                        }
+
+                        &.rss {
+                            a {
+                                .lib-icon-font(
+                                    @icon-pg-whatsapp,
+                                    @_icon-font-color: @color-white,
+                                    @_icon-font-size: 30px,
+                                    @_icon-font-line-height: 30px);
+
+                                &:hover {
+                                    &:before {
+                                        .lib-css(color, @kemana-secondary-brand-color);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .menu-items {
+            .title {
+                .lib-css(font-family, @footer-title__font-family);
+                .lib-font-size(16);
+                .lib-line-height(18);
+                .lib-css(font-weight, @font-weight__bold);
+                .lib-css(color, @color-white);
+                .lib-icon-font(
+                    @icon-down-arrow,
+                    @_icon-font: @icon-font,
+                    @_icon-font-color: @color-white,
+                    @_icon-font-size: 7px,
+                    @_icon-font-line-height: 8px,
+                    @_icon-font-margin: 5px 0 0,
+                    @_icon-font-position: after
+                );
+                margin-bottom: 20px;
+                width: 100%;
+                cursor: pointer;
+
+                &:after {
+                    float: right;
+                }
+            }
+
+            .list {
+                li {
+                    .lib-css(letter-spacing, @text__letter__spacing);
+                    margin-bottom: 10px;
+
+                    a {
+                        .lib-css(color, @color-white);
+                    }
+                }
+            }
+
+            .title[aria-expanded="true"] {
+                .lib-icon-font-symbol(
+                    @icon-up-arrow,
+                    @_icon-font-position: after
+                );
+            }
+        }
+
+        .section-icons {
+            .item {
+                margin-bottom: 20px;
+                display: inline-block;
+                width: 100%;
+
+                .title {
+                    .lib-css(font-family, @footer-title__font-family);
+                    .lib-css(color, @color-white);
+                    .lib-font-size(16);
+                    .lib-line-height(19);
+                    .lib-css(font-weight, @font-weight__bold);
+                    margin-bottom: 20px;
+                }
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+
+                ul {
+                    .lib-vendor-prefix-display();
+                    flex-wrap: wrap;
+                }
+
+                li {
+                    display: inline-block;
+                    padding-right: 8px;
+                    padding-bottom: 10px;
+                    margin-right: 0;
+
+                    img {
+                        width: 52px;
+                    }
+
+                    &:nth-child(5n) {
+                        padding-right: 0;
+                    }
+
+                    &:last-child {
+                        margin-right: 0;
+                    }
+                }
+            }
+
+            .link-social-network {
+                li {
+                    text-align: center;
+                    margin-right: 4px;
+
+                    &:last-child {
+                        margin-right: 0;
+                    }
+
+                    a {
+                        height: 32px;
+                        width: 32px;
+                        border-radius: 50%;
+                        .lib-line-height(32);
+                        display: inline-block;
+
+                        span {
+                            width: 1px;
+                            height: 1px;
+                            font-size: 0;
+                        }
+
+                        &:hover {
+                            .lib-css(background, @footer-social-icon__background-color);
+                        }
+                    }
+
+                    &.facebook {
+                        a {
+                            .lib-icon-font(
+                                @footer-facebook-icon,
+                                @_icon-font: @icon-font,
+                                @_icon-font-color: @footer-social-icon__font-color,
+                                @_icon-font-color-hover: @footer-social-icon__font-color-hover,
+                                @_icon-font-size: 16px,
+                                @_icon-font-line-height: 32px,
+                                @_icon-font-margin: 0,
+                                @_icon-font-vertical-align: top,
+                                @_icon-font-position: before
+                            );
+                        }
+                    }
+
+                    &.twitter {
+                        a {
+                            .lib-icon-font(
+                                @footer-twitter-icon,
+                                @_icon-font: @icon-font,
+                                @_icon-font-color: @footer-social-icon__font-color,
+                                @_icon-font-color-hover: @footer-social-icon__font-color-hover,
+                                @_icon-font-size: 14px,
+                                @_icon-font-line-height: 32px,
+                                @_icon-font-margin: 0,
+                                @_icon-font-vertical-align: top,
+                                @_icon-font-position: before
+                            );
+                        }
+                    }
+
+                    &.google {
+                        a {
+                            .lib-icon-font(
+                                @footer-google-icon,
+                                @_icon-font: @icon-font,
+                                @_icon-font-color: @footer-social-icon__font-color,
+                                @_icon-font-color-hover: @footer-social-icon__font-color-hover,
+                                @_icon-font-size: 16px,
+                                @_icon-font-line-height: 32px,
+                                @_icon-font-margin: 0,
+                                @_icon-font-vertical-align: top,
+                                @_icon-font-position: before
+                            );
+                        }
+                    }
+
+                    &.instagram {
+                        a {
+                            .lib-icon-font(
+                                @footer-instagram-icon,
+                                @_icon-font: @icon-font,
+                                @_icon-font-color: @footer-social-icon__font-color,
+                                @_icon-font-color-hover: @footer-social-icon__font-color-hover,
+                                @_icon-font-size: 17px,
+                                @_icon-font-line-height: 32px,
+                                @_icon-font-margin: 0 0 0 3px,
+                                @_icon-font-vertical-align: top,
+                                @_icon-font-position: before
+                            );
+                        }
+                    }
+
+                    &.rss {
+                        a {
+                            .lib-icon-font(
+                                @footer-rss-icon,
+                                @_icon-font: @icon-font,
+                                @_icon-font-color: @footer-social-icon__font-color,
+                                @_icon-font-color-hover: @footer-social-icon__font-color-hover,
+                                @_icon-font-size: 16px,
+                                @_icon-font-line-height: 32px,
+                                @_icon-font-margin: 0,
+                                @_icon-font-vertical-align: top,
+                                @_icon-font-position: before
+                            );
+                        }
+                    }
+                }
+            }
+        }
+
+        .whatsapp {
+            .lib-css(background, @color-kemana-green4);
+            width: 35px;
+            height: 35px;
+            position: fixed;
+            right: 19px;
+            bottom: 10px;
+            border-radius: 50%;
+            z-index: 999999;
+            .lib-icon-font(
+                @icon-whatsapp,
+                @_icon-font-color: @color-white,
+                @_icon-font-color-hover: @color-white,
+                @_icon-font-size: 20px,
+                @_icon-font-line-height: 35px,
+                @_icon-font-margin: 0,
+                @_icon-font-vertical-align: top,
+                @_icon-font-position: before
+            );
+
+            span {
+                display: none;
+            }
+        }
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .page-footer {
+        .footer {
+            &.content {
+                padding-left: 0;
+                padding-right: 0;
+            }
+        }
+
+        .footer-section {
+            .lib-css(padding-left, @layout__width-xs-indent);
+            .lib-css(padding-right, @layout__width-xs-indent);
+
+            .menu-section {
+               .menu-items {
+                   >div {
+                       border-bottom: 2px solid @color-pg-black2;
+                   }
+
+                   &:first-child {
+                       >div {
+                           border-top: 2px solid @color-pg-black2;
+                       }
+                   }
+
+                   .title {
+                        margin-top: 20px;
+                   }
+               }
+            }
+
+            .section-icons {
+                .delivery {
+                    .title {
+                        margin-top: 30px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+//
+//  tablet
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .page-footer {
+        .footer {
+            &.content {
+                max-width: inherit;
+                padding-left: 0;
+                padding-right: 0;
+            }
+        }
+
+        .footer-section {
+            .lib-css(max-width, @layout__max-width);
+            .lib-css(padding-left, @layout-indent__width);
+            .lib-css(padding-right, @layout-indent__width);
+
+            .row {
+                align-items: center;
+            }
+        }
+
+        .footer-main-content {
+            .footer-section {
+                .row {
+                    align-items: unset;
+                }
+            }
+        }
+
+        .footer-top-content {
+            .lib-css(padding, @footer-newsletter-desktop__padding);
+        }
+
+        .whatsapp {
+            .lib-css(right, @indent__l);
+            .lib-css(bottom, @indent__base);
+            width: 56px;
+            height: 56px;
+            .lib-icon-font-size(
+                @_icon-font-size: 33px,
+                @_icon-font-line-height: 56px,
+                @_icon-font-position: before
+            );
+        }
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+    .page-footer {
+        .newsletter-title {
+            h2 {
+                margin-bottom: 0;
+                font-size: 2.2vw;
+            }
+        }
+
+        .newsletter-description {
+            margin-bottom: 0;
+        }
+
+        .address-section {
+            text-align: left;
+            margin-bottom: 0;
+
+            .logo {
+                width: 200px;
+
+                img {
+                    margin: 0;
+                }
+            }
+        }
+
+        .menu-items {
+            margin-bottom: 0;
+            display: inline-block;
+            vertical-align: top;
+
+            .title {
+                cursor: inherit;
+
+                &:after {
+                    display: none;
+                }
+            }
+
+            .list {
+                display: block !important;
+            }
+        }
+
+        .section-icons {
+            text-align: left;
+
+            .item {
+                li {
+                    padding-right: 10px;
+                }
+
+                .link-social-network {
+                    li {
+                        margin-right: 4px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+//
+//  Desktop Large
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xl) {
+    .page-footer {
+        .newsletter-title {
+            h2 {
+                .lib-font-size(28);
+            }
+        }
+    }
+}
