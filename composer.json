@@ -80,6 +80,10 @@
         "kemana-brand": {
             "type": "git",
             "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana-brand.git"
+        },
+        "kemana-paymentgroupattribute": {
+            "type": "git",
+            "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_paymentgroupattribute.git"
         }
     },
     "require": {
@@ -93,6 +97,7 @@
         "kemana/module-categoriesenhanced": "2.43.1",
         "kemana/module-core": "2.43.0",
         "kemana/module-labelmanager": "2.43.2",
+        "kemana/module-payment-group-attribute": "2.43.0",
         "kemana/module-smtp": "2.43.0",
         "kemana/module-snap": "2.43.2",
         "kemana/module-social-login": "2.43.3",

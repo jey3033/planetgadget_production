@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fe63672319ba16159aba529f459d9e2f",
+    "content-hash": "0a80b05953187a82c2d3e902079a7837",
     "packages": [
         {
             "name": "2tvenom/cborencode",
@@ -3152,6 +3152,35 @@
             ],
             "description": "Kemana M2 Product Labelmanager module",
             "time": "2021-09-28T08:51:17+00:00"
+        },
+        {
+            "name": "kemana/module-payment-group-attribute",
+            "version": "2.43.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_paymentgroupattribute.git",
+                "reference": "4175b7d0852a4f2dd700fcec730c4f190c2a74e1"
+            },
+            "require": {
+                "kemana/module-core": "*",
+                "magento/module-checkout": "*",
+                "php": "~7.1.3||~7.2.0||~7.3.0||~7.4.0"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Kemana\\PaymentGroupAttribute\\": ""
+                }
+            },
+            "license": [
+                "OSL-3.0",
+                "AFL-3.0"
+            ],
+            "description": "Kemana PaymentGroupAttribute Extension",
+            "time": "2021-08-12T03:13:54+00:00"
         },
         {
             "name": "kemana/module-smtp",
