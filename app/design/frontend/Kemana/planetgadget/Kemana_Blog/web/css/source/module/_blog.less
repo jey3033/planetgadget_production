@@ -1,0 +1,143 @@
+// /**
+//  * Copyright © 2022 Kemana. All rights reserved.
+//  * @author Ashan Gunawardena <agunawardena@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .post-list-wrapper {
+        .lib-css(background-color, @color-pg-light-gray2);
+
+        .blog-widget-title {
+            display: inline-block;
+            .lib-title-with-border(
+                @title-text-underline__enable: false
+            );
+        }
+
+        span {
+            a {
+                .lib-font-size(14);
+                .lib-line-height(24);
+                font-weight: @font-weight__bold;
+                margin-left: 15px;
+                .lib-icon-font(
+                    @icon-pg-right-thick,
+                    @_icon-font: @icon-font,
+                    @_icon-font-position: after,
+                    @_icon-font-color: @kemana-primary-brand-color,
+                    @_icon-font-size: 10px,
+                    @_icon-font-line-height: 24px);
+                position: relative;
+                padding-right: 13px;
+
+                &:after {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                }
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+
+    .post-list-container {
+        .post-item-wrapper {
+            .lib-vendor-prefix-display();
+            .lib-vendor-prefix-flex-direction(column);
+
+
+            .post-image {
+                border-radius: 5px 5px 0 0;
+            }
+
+            .post-info-wrapper {
+                float: left;
+                .lib-css(background-color, @color-white);
+                padding: 20px;
+                border-radius: 0 0 5px 5px;
+
+                .mp-post-info,
+                .mp-post-meta-info {
+                    display: none;
+                }
+
+                .mp-post-title {
+                    .lib-heading(h5);
+                }
+            }
+        }
+
+
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .post-list-wrapper {
+        padding-block: 40px;
+
+        .post-list-inner-container {
+            .lib-vendor-prefix-display();
+            .lib-vendor-prefix-flex-direction(column);
+
+            .blog-widget-title {
+                order: 1;
+
+                h2 {
+                    padding-inline: @indent__s;
+                    margin-bottom: 20px;
+                }
+            }
+
+            span {
+                order: 3;
+                margin-top: 20px;
+                text-align: center;
+            }
+
+            .post-list-container {
+                order: 2;
+
+                .post-item-wrapper {
+                    padding: 10px;
+                }
+            }
+        }
+    }
+
+
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .post-list-wrapper {
+        padding-block: 50px;
+
+        .post-list-inner-container {
+            max-width: @layout__max-width;
+            padding-inline: @indent__s;
+            margin-inline: auto;
+        }
+    }
+}
+
+//
+//  Desktop Large
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+}

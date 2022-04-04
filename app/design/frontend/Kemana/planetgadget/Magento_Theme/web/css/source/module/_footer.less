@@ -35,6 +35,8 @@
 
 & when (@media-common = true) {
     .page-footer {
+        .lib-css(background-color, @color-white);
+
         .footer-top-content {
             .lib-css(background-color, @footer-newsletter__background-color);
             .lib-css(padding, @footer-newsletter__padding);
@@ -105,7 +107,8 @@
             }
         }
 
-        .footer-section {
+        .footer-section,
+        .how-it-works {
             width: 100%;
             margin-left: auto;
             margin-right: auto;
@@ -141,7 +144,6 @@
                 .lib-css(color, @color-white);
                 width: 100%;
                 margin-bottom: 20px;
-                font-weight: @font-weight__heavier;
 
                 .hours {
                     .lib-css(color, @color-pg-light-gray);
@@ -588,7 +590,8 @@
             }
         }
 
-        .footer-section {
+        .footer-section,
+        .how-it-works {
             .lib-css(max-width, @layout__max-width);
             .lib-css(padding-left, @layout-indent__width);
             .lib-css(padding-right, @layout-indent__width);

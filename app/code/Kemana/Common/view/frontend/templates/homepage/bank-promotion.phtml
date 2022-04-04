@@ -15,19 +15,26 @@
 $bankPromotions =  $block->getLatestBankPromotions()
 ?>
 <div class="home-bank-and-promotions">
-    <h1>Bank & Promotion</h1>
-    <?php if (!empty($bankPromotions)): ?>
-    <?php foreach ($bankPromotions as $bankPromotion): ?>
-            <?php if ($bankPromotion->getLandingImage()): ?>
-                <a href="<?= $bankPromotion->getIdentifier() ?>"><div class="image">
-                    <img src="<?= $block->getMediaFolderUrl().$bankPromotion->getLandingImage() ?>">
-                </div>
-            <?php endif; ?>
-            <?php if ($bankPromotion->getLandingImageMobile()): ?>
-                <a href="<?= $bankPromotion->getIdentifier() ?>"><div class="image-mobile" style="display: none">
-                    <img src="<?= $block->getMediaFolderUrl().$bankPromotion->getLandingImageMobile() ?>">
-                </div></a>
-            <?php endif; ?>
-        <?php endforeach; ?>
-    <?php endif; ?>
+    <div class="banner-inner-container">
+        <h2>Bank & Partner <span>Promo</span></h2>
+        <span><a href="#">Lihat Semua</a></span>
+        <div class="row">
+        <?php if (!empty($bankPromotions)): ?>
+            <?php foreach ($bankPromotions as $bankPromotion): ?>
+            <div class="col-md-4 col-12 image-block">
+                <?php if ($bankPromotion->getLandingImage()): ?>
+                    <a href="<?= $bankPromotion->getIdentifier() ?>"><div class="image">
+                        <img src="<?= $block->getMediaFolderUrl().$bankPromotion->getLandingImage() ?>">
+                    </div></a>
+                <?php endif; ?>
+                <?php if ($bankPromotion->getLandingImageMobile()): ?>
+                    <a href="<?= $bankPromotion->getIdentifier() ?>"><div class="image-mobile" style="display: none">
+                        <img src="<?= $block->getMediaFolderUrl().$bankPromotion->getLandingImageMobile() ?>">
+                    </div></a>
+                <?php endif; ?>
+            </div>
+            <?php endforeach; ?>
+        <?php endif; ?>
+        </div>
+    </div>
 </div>
