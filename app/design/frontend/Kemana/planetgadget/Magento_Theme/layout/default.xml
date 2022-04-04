@@ -1,32 +1,8 @@
 <?xml version="1.0"?>
-<!--
-/**
- * Copyright © 2022 PT Kemana Teknologi Solusi. All rights reserved.
- * http://www.kemana.com
- */
-
-/**
- * @category Kemana
- * @package  Kemana_Common
- * @license  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- *
- * @author   Achintha Madushan <amadushan@kemana.com>
- */
--->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="default_head_blocks"/>
     <body>
-        <!--<referenceContainer name="header.container">
-            <container name="header.container.top" as="header_container_top" label="Page Header Container Top" htmlTag="div" htmlClass="page-header-top" before="-">
-            <container name="header.container.top.language.switcher" as="header_container_top_language_switcher" label="Page Header Container Top Language Switcher" htmlTag="div" htmlClass="page-header-top-language-switcher" before="-"/>
-                <container name="header.container.top.right.menu" as="header_container_top_right_menu" label="Page Header Container Top Right Menu" htmlTag="div" htmlClass="page-header-top-right-menu" after="header.container.top.language.switcher">
-                    <block class="Magento\Framework\View\Element\Template" name="top.right.menu" as="top.right.menu"
-                           template="Kemana_Common::default/top-right-menu.phtml"/>
-                </container>
-            </container>
-        </referenceContainer>-->
-
-        <move element="language_currency_wrapper_mobile" destination="header-top-wrapper" before="-"/>
-
+        <referenceBlock name="top.links" remove="false"/>
     </body>
 </page>

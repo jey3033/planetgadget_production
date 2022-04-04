@@ -1,0 +1,369 @@
+//
+//  Variables
+//  _____________________________________________
+
+//  Checkbox
+@kemana-checkbox-icon: @icon-checkbox;
+@kemana-checkbox-icon-checked: @icon-checkbox-checked;
+@kemana-checkbox__width: 15px;
+@kemana-checkbox__color: @color-kemana-dark2;
+@kemana-checkbox__margin: 1px 8px 0 0;
+
+//  Radio
+@kemana-radio-icon: @icon-radio-button;
+@kemana-radio-icon-checked: @icon-radio-button-checked;
+@kemana-radio__width: 15px;
+@kemana-radio__color: @color-kemana-dark2;
+@kemana-radio__margin: 0 8px 0 0;
+
+
+//  White button
+.lib-button-white(
+    @_white_button-padding: @kemana_white_button-padding,
+    @_white_button-font-weight: @kemana_white_button-font-weight,
+    @_white_button-color: @kemana_white_button-color,
+    @_white_button-background: @kemana_white_button-background,
+    @_white_button-border: @kemana_white_button-border,
+    @_white_button-color-hover: @kemana_white_button-color-hover,
+    @_white_button-background-hover: @kemana_white_button-background-hover,
+    @_white_button-border-hover: @kemana_white_button-border-hover
+) {
+    .lib-button-primary(
+        @_button-color: @_white_button-color,
+        @_button-font-weight: @_white_button-font-weight,
+        @_button-padding: @_white_button-padding,
+        @_button-background: @_white_button-background,
+        @_button-border: @_white_button-border,
+        @_button-color-hover: @_white_button-color-hover,
+        @_button-background-hover: @_white_button-background-hover,
+        @_button-border-hover: @_white_button-border-hover,
+        @_button-color-active: @_white_button-color-hover,
+        @_button-background-active: @_white_button-background-hover,
+        @_button-border-active: @_white_button-border-hover
+    );
+}
+
+//  Title with border
+.lib-title-with-border(
+    @title__font-size: 24px,
+    @title__line-height: 28px,
+    @title__font-weight: @font-weight__bold,
+    @title__font-color: @kemana-primary-brand-color,
+    @title__font-text-transform: none,
+    @title__text-align: left,
+    @title__margin-bottom: 30px,
+    @title-icon__margin-top: -10px,
+    @title-icon__width: 100%,
+    @title-icon__height: 10px,
+    @title-icon__background: @kemana-secondary-brand-color,
+    @title-text-underline__enable: false
+) {
+    .lib-css(text-align, @title__text-align);
+    .lib-css(color, @title__font-color);
+    .lib-css(text-transform, @title__font-text-transform);
+    margin-bottom: 0;
+
+    h2,
+    strong {
+        display: inline-block;
+        .lib-font-size(@title__font-size);
+        .lib-line-height(@title__line-height);
+        .lib-css(font-weight, @title__font-weight);
+        .lib-css(margin-bottom, @title__margin-bottom);
+
+        & when (@title-text-underline__enable = true) {
+            &:after {
+                content: '';
+                display: block;
+                margin: auto;
+                .lib-css(margin-top, @title-icon__margin-top);
+                .lib-css(width, @title-icon__width);
+                .lib-css(height, @title-icon__height);
+                .lib-css(background, @title-icon__background);
+            }
+        }
+
+        span {
+            display: inline-block;
+            .lib-css(margin-bottom, 0);
+
+            &:after {
+                content: '';
+                display: block;
+                margin: auto;
+                .lib-css(margin-top, @title-icon__margin-top);
+                .lib-css(width, @title-icon__width);
+                .lib-css(height, @title-icon__height);
+                .lib-css(background, @title-icon__background);
+            }
+        }
+    }
+}
+
+//  Cart items table
+.lib-kemana-product-table() {
+    table {
+        thead {
+            th {
+                .lib-line-height(16);
+                .lib-css(color, @kemana-primary-brand-color);
+                letter-spacing: 0.07px;
+            }
+        }
+
+        tbody {
+            td {
+                .lib-line-height(16);
+
+                .price-including-tax,
+                .price-excluding-tax {
+                    .price {
+                        .lib-css(font-family, @product-price__font-family);
+                        .lib-line-height(16);
+                        .lib-font-size(14);
+                        .lib-css(font-weight, @font-weight__regular);
+                    }
+                }
+            }
+        }
+    }
+}
+
+//  QTY box
+.lib-kemana-qty-box() {
+    .lib-vendor-prefix-display(flex);
+
+    .mark {
+        width: 30px;
+        height: 30px;
+        margin-top: 5px;
+        text-align: center;
+        border-radius: 20px;
+        cursor: pointer;
+
+        &.minus {
+            background: @color-kemana-gray5;
+            margin-right: 10px;
+
+            .lib-icon-font(
+                @icon-minus-icon,
+                @_icon-font: @icon-font,
+                @_icon-font-color: @color-kemana-gray1,
+                @_icon-font-size: 2px,
+                @_icon-font-line-height: 32px,
+                @_icon-font-margin: 0 auto,
+                @_icon-font-vertical-align: top,
+                @_icon-font-position: before
+            );
+        }
+
+        &.plus {
+            border: 1px solid @color-kemana-gray1;
+            margin-left: 10px;
+
+            .lib-icon-font(
+                @icon-plus,
+                @_icon-font: @icon-font,
+                @_icon-font-color: @color-kemana-dark3,
+                @_icon-font-size: 20px,
+                @_icon-font-line-height: 20px,
+                @_icon-font-margin: 0 auto,
+                @_icon-font-vertical-align: top,
+                @_icon-font-position: before
+            );
+
+            &:before {
+                width: 29px;
+                padding-top: 8px;
+            }
+        }
+    }
+
+    .qty {
+        width: 48px;
+        height: 40px;
+    }
+}
+
+//  Checkbox Mixin
+.lib-kemana-checkbox(
+    @_checkbox-icon: @kemana-checkbox-icon,
+    @_checkbox-icon-checked: @kemana-checkbox-icon-checked,
+    @_checkbox-icon-size: @kemana-checkbox__width,
+    @_checkbox-icon-color: @kemana-checkbox__color,
+    @_checkbox-icon-margin: @kemana-checkbox__margin,
+    @_checkbox-label-padding-left: @indent__base + @indent__xs
+) {
+    .checkbox {
+        display: block;
+        cursor: pointer;
+        position: relative;
+
+        input {
+            opacity: 0;
+            position: absolute !important;
+            width: @_checkbox-icon-size;
+            height: @_checkbox-icon-size;
+            margin: 0;
+            z-index: 1;
+
+            & + label {
+                line-height: 19px;
+                position: relative;
+                padding: 0;
+
+                &:not(:empty) {
+                    padding-left: @_checkbox-label-padding-left;
+                }
+
+                .lib-icon-font(
+                    @_checkbox-icon,
+                    @_icon-font: @icon-font,
+                    @_icon-font-color: @_checkbox-icon-color,
+                    @_icon-font-size: @_checkbox-icon-size,
+                    @_icon-font-line-height: @_checkbox-icon-size,
+                    @_icon-font-margin: @_checkbox-icon-margin,
+                    @_icon-font-position: before,
+                    @_icon-font-vertical-align: middle,
+                    @_icon-font-display: block
+                );
+
+                &:before {
+                    text-align: center;
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                }
+            }
+
+            &:checked + label {
+                .lib-icon-font-symbol(
+                    @_checkbox-icon-checked,
+                    @_icon-font-position: before
+                );
+            }
+        }
+
+        &:hover {
+            input {
+                &:checked + label {
+                    .lib-icon-font-symbol(
+                        @_checkbox-icon-checked,
+                        @_icon-font-position: before
+                    );
+                }
+            }
+        }
+    }
+}
+
+//  Radio Button Mixin
+.lib-kemana-radio-button(
+    @_radio-icon: @kemana-radio-icon,
+    @_radio-icon-checked: @kemana-radio-icon-checked,
+    @_radio-icon-size: @kemana-radio__width,
+    @_radio-icon-color: @kemana-radio__color,
+    @_radio-icon-margin: @kemana-radio__margin,
+    @_radio-label-padding-left: @indent__base + @indent__xs
+) {
+    .radios {
+        display: block;
+        cursor: pointer;
+        position: relative;
+
+        input {
+            opacity: 0;
+            position: absolute;
+            width: @_radio-icon-size;
+            height: @_radio-icon-size;
+            margin: 0;
+            z-index: 1;
+            cursor: pointer;
+
+            & + label {
+                line-height: @_radio-icon-size;
+                position: relative;
+                padding: 0;
+                cursor: pointer;
+
+                &:not(:empty) {
+                    padding-left: @_radio-label-padding-left;
+                }
+
+                .lib-icon-font(
+                    @_radio-icon,
+                    @_icon-font: @icon-font,
+                    @_icon-font-color: @_radio-icon-color,
+                    @_icon-font-size: @_radio-icon-size,
+                    @_icon-font-line-height: @_radio-icon-size,
+                    @_icon-font-margin: @_radio-icon-margin,
+                    @_icon-font-position: before,
+                    @_icon-font-vertical-align: top,
+                    @_icon-font-display: block
+                );
+
+                &:before {
+                    text-align: center;
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                }
+            }
+
+            &:checked + label {
+                .lib-icon-font-symbol(
+                    @_radio-icon-checked,
+                    @_icon-font-position: before
+                );
+            }
+        }
+
+        &:hover {
+            input {
+                & + label {
+                    .lib-icon-font-symbol(
+                        @_radio-icon-checked,
+                        @_icon-font-position: before
+                    );
+                }
+            }
+        }
+    }
+}
+
+// Custom Scrollbar
+
+.custom-scroll (
+    @scroll-color: @color-kemana-gray5,
+    @scroll-background-color: transparent
+) {
+
+    //  Firefox Specific styles
+
+    scrollbar-width: thin;
+    scrollbar-color: @scroll-color @scroll-background-color;
+
+    //  Chrome/Edge/Safari Styles
+
+    &::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: @scroll-background-color;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: @scroll-color;
+        border-radius: 5px;
+        border: 1px solid @scroll-background-color;
+    }
+}
+
+
+// Curved Button
+
+.lib-button-curved() {
+    .lib-button-primary();
+    .lib-css(border-radius, @pg_curved_button__border-radius);
+}

@@ -1,0 +1,77 @@
+//
+//  Variables
+//  _____________________________________________
+
+//  Color Variable
+@designcolor: design_color;
+@calendar_times_svg:calendar_times_svg;
+@user_svg:user_svg;
+@comments_svg:comments_svg;
+@eye_svg:eye_svg;
+@thumbs_up_svg:thumbs_up_svg;
+
+//  Custom Icons
+.lib-font-face(
+    @family-name: @icons-blog__font-name,
+    @font-path: @icons-blog__font-path,
+    @font-weight: @font-weight__regular,
+    @font-style: normal
+);
+
+//  Fonts
+@icons-blog__font-name: 'Blog-Icons';
+@icons-blog__font-path: '@{baseDir}Kemana_Blog/fonts/Blog-Icons';
+
+@icon-tags: "\f02c";
+@icon-comments: "\f086";
+@icon-folder-open-o: "\f115";
+@icon-account: "\e901";
+@icon-calendar: "\e903";
+@icon-expand-filters: "\e906";
+@icon-gift-registry: "\e908";
+@icon-password---visible: "\e909";
+@icon-rss1: "\e90a";
+@icon-search: "\e90b";
+
+//  Blog Variables
+@blog-desktop__max-width: 1100px;
+
+@blog-page-title: h3;
+
+@blog-tabs__font-size: @font-size__base;
+@blog-tabs-desktop__height: 35px;
+@blog-tabs-desktop__border: @border-width__base solid @border-color__base;
+
+@blog-search-button__width: 38px;
+@blog-search-icon: @icon-search;
+@blog-search-icon__color: #252525;
+@blog-search-icon__font-size: 25px;
+@blog-search-icon__background: @color-white;
+@blog-search-icon__top: 1px;
+@blog-search-icon__right: @blog-search-icon__top;
+
+@blog-rss-icon: @icon-rss1;
+@blog-rss-icon__color: #252525;
+@blog-rss-icon__font-size: 25px;
+
+@blog-post-item__border: @border-width__base solid @border-color__base;
+@blog-post-item-image__width: 35%;
+@blog-post-item-title: h6;
+
+@blog-post-item-icon__color: #252525;
+@blog-post-item-icon-calendar: @icon-calendar;
+@blog-post-item-icon-user: @icon-account;
+@blog-post-item-icon-traffic: @icon-password---visible;
+@blog-post-item-icon-comments: @icon-comments;
+@blog-post-item-icon-folder: @icon-folder-open-o;
+@blog-post-item-icon-tags: @icon-tags;
+@blog-post-item-icon-calendar__font-size: 23px;
+@blog-post-item-icon-user__font-size: 18px;
+@blog-post-item-icon-traffic__font-size: 13px;
+@blog-post-item-icon-folder__font-size: 14px;
+@blog-post-item-icon-tags__font-size: 14px;
+
+@blog-detail-author-content-image__width: 100px;
+@blog-detail-author-content__background: @color-white-dark-smoke;
+
+@blog-detail-login-button-desktop__width: 250px;

@@ -5,11 +5,11 @@
 //  */
 
 //  How it works variables
-@how-it-works__border: 1px solid @color-kemana-dark2;
-@how-it-works__margin-bottom: 50px;
+@how-it-works__border: none;
+@how-it-works__margin-bottom: 0;
 
-@how-it-works-item__padding: 30px 5px 15px;
-@how-it-works-item-icon__height: 42px;
+@how-it-works-item__padding: 20px 0;
+@how-it-works-item-icon__height: 50px;
 
 //
 //  Common
@@ -44,7 +44,7 @@
             .icon {
                 .lib-css(height, @how-it-works-item-icon__height);
                 display: block;
-                margin-bottom: 30px;
+                margin-bottom: 21px;
 
                 img {
                     width: auto;
@@ -52,16 +52,17 @@
                 }
             }
 
-            h6 {
-                .lib-css(color, @primary__color);
-                .lib-line-height(18);
+            h5 {
                 .lib-css(margin-bottom, @indent__s);
-                text-transform: uppercase;
             }
+        }
 
-            p {
-                .lib-css(color, @color-kemana-gray2);
-                .lib-css(letter-spacing, @text__letter__spacing);
+        .text-block:first-child {
+            .how-it-works-item {
+                .icon {
+                    .lib-css(height, @how-it-works-item-icon__height+10px);
+                    margin-bottom: 11px;
+                }
             }
         }
     }
