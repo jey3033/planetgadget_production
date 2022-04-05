@@ -4,5 +4,22 @@
     <update handle="default_head_blocks"/>
     <body>
         <referenceBlock name="top.links" remove="false"/>
+        <block class="Kemana\AcceleratorBase\Block\HeaderElement" name="language_currency_wrapper"
+               template="Magento_Theme::html/language_currency_wrapper.phtml">
+            <block class="Magento\Store\Block\Switcher" name="store_language"
+                   template="Magento_Store::switch/languages.phtml">
+                <arguments>
+                    <argument name="id_modifier" xsi:type="string">nav</argument>
+                    <argument name="view_model" xsi:type="object">Magento\Store\ViewModel\SwitcherUrlProvider
+                    </argument>
+                </arguments>
+            </block>
+            <block class="Magento\Directory\Block\Currency" name="store_currency"
+                   template="Magento_Store::switch/currency.phtml">
+                <arguments>
+                    <argument name="id_modifier" xsi:type="string">nav</argument>
+                </arguments>
+            </block>
+        </block>
     </body>
 </page>
