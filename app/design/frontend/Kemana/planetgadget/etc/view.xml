@@ -122,8 +122,8 @@
                 <height>207</height>
             </image>
             <image id="recently_viewed_products_grid_content_widget" type="small_image">
-                <width>72</width>
-                <height>92</height>
+                <width>90</width>
+                <height>90</height>
             </image>
             <image id="recently_viewed_products_images_names_widget" type="small_image">
                 <width>75</width>

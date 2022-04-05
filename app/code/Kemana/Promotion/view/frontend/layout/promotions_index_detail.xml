@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2021 PT Kemana Teknologi Solusi. All rights reserved.
+ * http://www.kemana.com
+ */
+
+/**
+ * @category Kemana
+ * @package  Kemana_Promotion
+ * @license  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ *
+ * @author   Achintha Madushan <amadushan@kemana.com>
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="breadcrumbs">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Kemana_Promotion::html/breadcrumbs.phtml</argument>
+            </action>
+        </referenceBlock>
+<!--        <referenceBlock name="breadcrumbs">
+            <action method="addCrumb">
+                <argument name="crumbName" xsi:type="string" translate="true">Promotions</argument>
+                <argument name="crumbInfo" xsi:type="array">
+                    <item name="title" xsi:type="string" translate="true">Promotions</item>
+                    <item name="label" xsi:type="string" translate="true">Promotions</item>
+                </argument>
+            </action>
+        </referenceBlock>-->
+        <referenceContainer name="content">
+            <container name="kemana.promotion.detail" as="kemana.promotion.detail" label="Kemana Promotion Detail" htmlTag="div" htmlClass="promotion-detail-main-wrapper">
+                <block class="Kemana\Promotion\Block\Promotion\Promotion" name="promotion_detail" as="promotion_detail" template="Kemana_Promotion::promotion/detail.phtml">
+                </block>
+            </container>
+        </referenceContainer>
+        <referenceBlock name="page.main.title" remove="true" />
+    </body>
+</page>

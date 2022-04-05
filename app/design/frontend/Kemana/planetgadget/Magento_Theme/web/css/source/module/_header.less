@@ -1,0 +1,772 @@
+// /**
+//  * Copyright © 2020 Kemana. All rights reserved.
+//  * @author Ashan Gunawardena <agunawardena@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+//  Header variables
+@logo-desktop__margin: 10px auto 10px 0;
+
+@navigation-mobile__background: @color-white;
+@navigation-mobile__padding: 15px;
+@navigation-mobile-close__icon: @icon-close-large;
+@navigation-mobile-close__font-size: 30px;
+@navigation-mobile-close__line-height: 31px;
+
+@header-dropdown__background: @color-white;
+@header-dropdown__border: 1px solid @color-kemana-gray4;
+
+@sale-text__color: @color-kemana-red;
+
+@header-logo-desktop-width: 260px;
+@header-logo-mobile-width: 84px;
+
+@header-nav-toggle-desktop__top: 27px;
+
+@navigation-wide-submenu-desktop__width: 550px;
+@navigation-wide-submenu-desktop-item__width: 50%;
+
+@header-account-icon: @icon-account-icon;
+@header-account-icon__color: @color-white;
+@header-account-icon__color-hover: @color-kemana-gray2;
+
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .page-header {
+        .compare {
+            &.wrapper {
+                display: none;
+            }
+        }
+
+        .minicart-wrapper {
+            .block-minicart {
+                &:before {
+                    right: 14px;
+                    top: -20px;
+                    border-width: 10px;
+                    display: none;
+                }
+
+                &:after {
+                    display: none;
+                }
+            }
+        }
+
+        .header {
+            &.content {
+                .lib-vendor-prefix-display();
+                justify-content: space-between;
+                align-items: center;
+            }
+        }
+
+        .header-left {
+            .lib-vendor-prefix-display();
+            align-items: center;
+
+            .block-mobile-addElement {
+                display: none;
+                .lib-visually-hidden();
+            }
+        }
+
+        .header-right {
+            .lib-vendor-prefix-display();
+            align-items: center;
+
+            .block-search {
+                .control {
+                    > .nested {
+                        display: none;
+                    }
+                }
+            }
+        }
+
+        .language-currency-wrapper {
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 20px;
+            position: relative;
+
+            .language-currency-block {
+                cursor: pointer;
+                position: relative;
+                width: 85px;
+
+                .language-flag {
+                    display: inline-block;
+                    vertical-align: middle;
+                    float: none;
+                    line-height: 1;
+
+                    img {
+                        margin: 2px 0;
+                        display: inline-block;
+                        vertical-align: middle;
+                        line-height: 1;
+                        width: 25px;
+                    }
+                }
+
+                .currency {
+                    .lib-font-size(12);
+                    .lib-css(color, @color-white);
+
+                    &:before {
+                        .lib-css(border-left, @border-width__base solid @color-kemana-gray3);
+                        content: '';
+                        display: inline-block;
+                        vertical-align: middle;
+                        height: 15px;
+                        margin: 0 8px;
+                    }
+
+                    .lib-icon-font(
+                        @icon-down-arrow,
+                        @_icon-font: @icon-font,
+                        @_icon-font-color: @color-white,
+                        @_icon-font-size: 7px,
+                        @_icon-font-line-height: 8px,
+                        @_icon-font-margin: 0 0 0 5px,
+                        @_icon-font-position: after
+                    );
+                    display: inline-block;
+                }
+            }
+
+            .language-currency-dropdown {
+                .lib-css(box-shadow, @submenu-desktop__box-shadow);
+                .lib-css(font-family, @font-family-name__base);
+                .lib-css(border, 1px solid @header-dropdown__border);
+                .lib-css(background-color, @header-dropdown__background);
+                display: none;
+                position: absolute;
+                top: 38px;
+                right: 0;
+                left: auto;
+                width: 232px;
+                padding: 12px 20px 15px;
+                z-index: 1;
+
+                .header-switcher {
+                    display: inline-block;
+                    vertical-align: middle;
+                    width: 100%;
+
+                    &.switcher-language {
+                        &:before {
+                            .lib-css(color, @kemana-primary-brand-color);
+                            content: 'Language:';
+                            display: block;
+                            margin-bottom: 5px;
+                        }
+                    }
+
+                    &.switcher-currency {
+                        &:before {
+                            .lib-css(color, @kemana-primary-brand-color);
+                            content: 'Currency:';
+                            display: block;
+                            margin-bottom: 5px;
+                        }
+                    }
+                }
+
+                .header-switcher + .header-switcher {
+                    padding-top: 15px;
+                    width: 100%;
+                    margin: 0;
+                }
+
+                .switcher-options {
+                    .lib-css(border, @border-width__base solid @border-color__base);
+                    display: block;
+                    width: 100%;
+                    vertical-align: middle;
+                    font-weight: normal;
+                    position: relative;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .header-right {
+            .language-currency-wrapper {
+                display: none;
+            }
+        }
+    }
+
+    .navigation {
+        .level0 {
+            &.sale {
+                .level-top {
+                    .lib-css(color, @sale-text__color);
+
+                    &:hover {
+                        .lib-css(color, @sale-text__color);
+
+                        &:after {
+                            .lib-css(border-color, @sale-text__color);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .nav-sections {
+        -webkit-overflow-scrolling: touch;
+        .lib-css(transition, left .3s, 1);
+        height: 100%;
+        left: -80%;
+        left: calc(~'-1 * (100% - @{active-nav-indent})');
+        overflow: auto;
+        position: fixed;
+        top: 0;
+        width: 80%;
+        width: calc(~'100% - @{active-nav-indent}');
+
+        .navigation {
+            .lib-css(font-family, @navigation__font-family);
+        }
+    }
+
+    //  Header Mobile extend to Tablet
+    .nav-before-open {
+        height: 100%;
+        overflow-x: hidden;
+        width: 100%;
+
+        .page-wrapper {
+            .lib-css(transition, left .3s, 1);
+            height: 100%;
+            left: 0;
+            overflow: hidden;
+            position: relative;
+        }
+    }
+
+    .nav-open {
+        .page-wrapper {
+            left: 80%;
+            left: calc(~'100% - @{active-nav-indent}');
+
+            .header-left {
+                > .nav-toggle {
+                    .lib-icon-font(
+                        @_icon-font-content: @navigation-mobile-close__icon,
+                        @_icon-font-size: @navigation-mobile-close__font-size,
+                        @_icon-font-line-height: @navigation-mobile-close__line-height,
+                        @_icon-font-color: @color-white,
+                        @_icon-font-position: before,
+                        @_icon-font-display: block
+                    );
+                    position: absolute;
+                    left: inherit;
+                    right: 40px;
+                    top: 10px;
+
+                    &:before {
+                        position: absolute;
+                        z-index: 3;
+                    }
+                }
+            }
+        }
+
+        .nav-sections {
+            .lib-css(background, @color-kemana-gray4);
+            @_shadow: 0 0 5px 0 rgba(50, 50, 50, .75);
+            .lib-css(box-shadow, @_shadow, 1);
+            left: 0;
+            z-index: 99;
+
+            .section-item-title {
+                display: none;
+            }
+
+            .navigation {
+                .navbar-collapse.topmenu {
+                    .lib-css(background, @navigation-mobile__background);
+                    .lib-css(padding, 0 @navigation-mobile__padding);
+                }
+
+                .level0 {
+                    border-top: 0;
+                    margin-bottom: 0;
+
+                    > .level-top {
+                        .lib-css(font-weight, @navigation-level0-item__font-weight);
+                        .lib-css(line-height, @navigation-level0-item__line-height);
+                        .lib-css(padding, @navigation-level0-item__padding);
+                        .lib-css(text-transform, @navigation-level0-item__text-transform);
+                        display: block;
+                        .lib-css(border-bottom, @navigation-level0-item__border);
+                    }
+
+                    &.submenu {
+                        .lib-css(background, @navigation-mobile__background);
+                        .lib-css(right, @active-nav-indent);
+                        .lib-css(padding-left, @navigation-mobile__padding);
+                        .lib-css(padding-right, @navigation-mobile__padding);
+                        position: fixed;
+                        left: 0 !important;
+                        height: 100%;
+
+                        .back-button {
+                            border-top: 0;
+                            .lib-css(font-weight, @navigation-level0-item__font-weight);
+                            .lib-css(line-height, @navigation-level0-item__line-height);
+                            .lib-css(padding, @navigation-level0-item__padding);
+                            .lib-css(text-transform, @navigation-level0-item__text-transform);
+                            .lib-css(border-bottom, @navigation-level0-item__border);
+                            padding-left: 15px;
+                            display: block;
+                            position: relative;
+                            cursor: pointer;
+                            .lib-icon-font(
+                                @_icon-font-content: @icon-angel-prev,
+                                @_icon-font-size: 11px,
+                                @_icon-font-line-height: 15px,
+                                @_icon-font-position: before,
+                                @_icon-font-display: block
+                            );
+
+                            &:before {
+                                left: 0;
+                                top: 16px;
+                                position: absolute;
+                            }
+                        }
+
+                        .category-item {
+                            a {
+                                .lib-css(font-weight, @navigation-level0-item__font-weight);
+                                .lib-css(line-height, @navigation-level0-item__line-height);
+                                .lib-css(padding, @navigation-level0-item__padding);
+                                .lib-css(text-transform, @navigation-level0-item__text-transform);
+                                .lib-css(border-bottom, @navigation-level0-item__border);
+                                display: block;
+                                position: relative;
+                            }
+
+                            &:last-child {
+                                > a {
+                                    border-bottom: 0;
+                                }
+                            }
+
+                            &.parent {
+                                > a {
+                                    .lib-icon-font(
+                                        @_icon-font-content: @icon-angel-next,
+                                        @_icon-font-size: 11px,
+                                        @_icon-font-line-height: 47px,
+                                        @_icon-font-position: after,
+                                        @_icon-font-display: block
+                                    );
+
+                                    &:after {
+                                        right: -10px;
+                                        padding-right: 10px;
+                                        top: 0;
+                                        position: absolute;
+                                        width: 30px;
+                                        height: 46px;
+                                        text-align: right;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    &:last-child {
+                        border-bottom: 0;
+
+                        > .level-top {
+                            border-bottom: 0;
+                        }
+                    }
+                }
+            }
+        }
+
+        .mobile-menu-inner {
+            padding: 20px 15px;
+            position: relative;
+
+            .language-currency-wrapper {
+                vertical-align: top;
+
+                .language-currency-block {
+                    .language-flag {
+                        vertical-align: top;
+                        margin: 0;
+                    }
+
+                    .currency {
+                        vertical-align: top;
+                        .lib-css(color, @color-kemana-dark2);
+
+                        &:before {
+                            .lib-css(border-left-color, @color-kemana-gray1);
+                        }
+
+                        &:after {
+                            .lib-css(color, @color-kemana-dark2);
+                        }
+                    }
+                }
+
+                .language-currency-dropdown {
+                    right: inherit;
+                }
+            }
+        }
+
+        .nav-toggle {
+            &:after {
+                background: rgba(0, 0, 0, @overlay__opacity);
+                content: '';
+                display: block;
+                height: 100%;
+                position: fixed;
+                right: 0;
+                top: 0;
+                width: 100%;
+                z-index: 1;
+            }
+        }
+
+        .navigation {
+            padding: 0;
+
+            ul {
+                margin: 0;
+
+                li {
+                    margin-bottom: 0;
+                }
+            }
+
+            a {
+                .lib-css(padding-top, @submenu__padding-top);
+                .lib-css(padding-right, @submenu__padding-right);
+                .lib-css(padding-bottom, @submenu__padding-bottom);
+                .lib-css(padding-left, @submenu__padding-left);
+                .lib-css(color, @navigation-level0-item__color);
+                display: block;
+
+                &:hover {
+                    .lib-css(color, @navigation-level0-item__color);
+                    .lib-css(text-decoration, @navigation-level0-item__text-decoration);
+                }
+            }
+
+            .parent {
+                .level-top {
+                    .lib-icon-font(
+                        @_icon-font-content: @icon-angel-next,
+                        @_icon-font-size: 11px,
+                        @_icon-font-line-height: 47px,
+                        @_icon-font-position: after,
+                        @_icon-font-display: block
+                    );
+                    position: relative;
+
+                    &:after {
+                        right: -10px;
+                        padding-right: 10px;
+                        top: 0;
+                        position: absolute;
+                        width: 30px;
+                        height: 46px;
+                        text-align: right;
+                    }
+                }
+            }
+        }
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .page-header {
+        .logo {
+            .lib-css(width, @header-logo-mobile-width);
+            padding-top: 12px;
+            margin: -10px auto 0;
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, 0);
+        }
+
+        .header-left {
+            width: ~'calc(100% - 51px)';
+
+            .block-mobile-addElement {
+                display: block;
+                overflow: unset;
+                position: relative;
+                width: 100%;
+                height: inherit;
+
+                .account-menu {
+                    margin-bottom: 0;
+
+                    .account-menu_content {
+                        .menu-content {
+                            .lib-css(border-bottom, 1px solid @color-kemana-gray5);
+                            width: ~'calc(100% - 30px)';
+                            list-style: none;
+                            padding-top: 15px;
+                            padding-left: 0;
+                            padding-bottom: 15px;
+                            margin-left: 15px;
+                            margin-right: 15px;
+                            margin-bottom: 0;
+
+                            .main-item {
+                                &:last-of-type {
+                                    margin-bottom: 0;
+                                }
+
+                                a {
+                                    .lib-css(color, @theme__color__primary-alt);
+                                    .lib-css(font-weight, @font-weight__heavier);
+
+                                    &:hover {
+                                        text-decoration: none;
+                                    }
+                                }
+                            }
+
+                            .account-login {
+                                .lib-icon-font(
+                                    @header-account-icon,
+                                    @_icon-font: @icon-font,
+                                    @_icon-font-color: @kemana-primary-brand-color,
+                                    @_icon-font-color-hover: @kemana-primary-brand-color,
+                                    @_icon-font-size: 20px,
+                                    @_icon-font-line-height: 22px,
+                                    @_icon-font-margin: 0 10px 0 0,
+                                    @_icon-font-position: before
+                                );
+                                .lib-vendor-prefix-display();
+                                .lib-vendor-prefix-flex-wrap();
+                                .lib-font-size(12);
+                                align-items: center;
+                                vertical-align: top;
+                                margin-bottom: 0;
+                                text-transform: uppercase;
+
+                                a {
+                                    .lib-css(font-weight, @font-weight__regular);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .page-header {
+        .header-left {
+            width: 68%;
+            display: block;
+            float: left;
+        }
+
+        .header-right {
+            width: auto;
+            float: right;
+            max-width: 446px;
+
+            .block-search {
+                .control {
+                    padding-bottom: 0;
+                }
+            }
+        }
+
+        .logo {
+            .lib-css(width, @header-logo-desktop-width);
+            margin-left: 45px;
+        }
+    }
+
+    .nav-toggle {
+        .lib-css(top, @header-nav-toggle-desktop__top);
+    }
+}
+
+//
+//  Desktop Large
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+    .page-header {
+        .header-left {
+            .lib-vendor-prefix-display();
+        }
+
+        .nav-sections {
+            margin-bottom: 0;
+            padding-left: 30px;
+            float: left;
+            background: transparent;
+            .lib-css(transition, left .3s, 1);
+            height: auto;
+            overflow: inherit;
+            position: static;
+            width: auto;
+        }
+
+        .nav-toggle {
+            display: none;
+        }
+
+        .header-right {
+            .language-currency-wrapper {
+                display: inline-block;
+            }
+        }
+
+        .logo {
+            margin-left: 0;
+        }
+
+        #megamenu {
+            .megamenu-wrapper {
+                .lib-css(width, @navigation-wide-submenu-desktop__width);
+                .lib-css(border, @border-width__base solid @submenu-desktop__border-color);
+                .lib-css(box-shadow, @submenu-desktop__box-shadow);
+                padding: 15px;
+                border-radius: 0;
+
+                ul.level0 {
+                    > li {
+                        .lib-css(width, @navigation-wide-submenu-desktop-item__width);
+                        display: inline-block;
+                        vertical-align: top;
+                        float: none;
+                        padding: 0;
+                    }
+                }
+
+                li.level1 {
+                    > a {
+                        .lib-css(font-family, @navigation__font-family);
+                        .lib-font-size(@navigation-desktop__font-size);
+                        .lib-line-height(20);
+                        .lib-css(font-weight, @font-weight__bold);
+
+                        span {
+                            .lib-font-size(@navigation-desktop__font-size);
+                            .lib-line-height(20);
+                        }
+                    }
+
+                    .submenu-title {
+                        .lib-css(font-family, @navigation__font-family);
+                        .lib-font-size(@navigation-desktop__font-size);
+                        .lib-line-height(20);
+                        .lib-css(font-weight, @font-weight__bold);
+                        .lib-css(color, @kemana-primary-brand-color);
+                        padding: 0 0 @indent__base 0;
+                    }
+
+                    ul,
+                    ul.level1 {
+                        padding-left: 0;
+                        margin-bottom: @indent__base !important;
+
+                        li {
+                            padding-right: 12%;
+                        }
+
+                        a {
+                            .lib-font-size(@navigation-level0-item__font-size);
+                            .lib-line-height(20);
+                            .lib-css(font-family, @navigation-submenu__font-family);
+                            .lib-css(font-weight, @font-weight__regular);
+                            .lib-css(color, @kemana-primary-brand-color);
+                            border: 0;
+                            padding: 0 0 @indent__s;
+
+                            &:hover {
+                                text-decoration: underline;
+                            }
+                        }
+                    }
+
+                    &.active {
+                        > a {
+                            text-decoration: underline;
+                        }
+                    }
+                }
+
+                ul.level0:not(.default-menu) {
+                    li.level1 {
+                        > a {
+                            .lib-css(color, @kemana-primary-brand-color);
+                            padding: 0 0 15px 0;
+                            border: 0;
+                        }
+                    }
+                }
+
+                &.tabs-menu {
+                    &.vertical {
+                        width: 640px!important;
+                        height: 540px;
+                        padding: 0;
+
+                        ul.level0 {
+                            li.level1 {
+                                width: 310px;
+
+                                a {
+                                    width: 50%;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+//
+//  Desktop Extra Large
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xl) {
+    .page-header {
+        .header-left {
+            width: 66%;
+            display: block;
+        }
+    }
+}

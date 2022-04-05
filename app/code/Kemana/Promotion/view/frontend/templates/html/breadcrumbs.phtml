@@ -1,0 +1,31 @@
+<?php
+/**
+ * Copyright © Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<?php if ($crumbs && is_array($crumbs)) : ?>
+
+    <?php
+    /** @var \Kemana\AcceleratorBase\Helper\Data $kemanaAcceleratorBaseHelper */
+    $kemanaAcceleratorBaseHelper = $this->helper(Kemana\AcceleratorBase\Helper\Data::class);
+    ?>
+    <div class="breadcrumbs">
+        <ul class="items">
+            <li class="back-btn">
+                <a href="<?= $kemanaAcceleratorBaseHelper->getRefererUrl() ?>"><?= $block->escapeHtml(__('Back')) ?></a>
+            </li>
+            <?php foreach ($crumbs as $crumbName => $crumbInfo) : ?>
+                <?php if($crumbName == "Brands"): continue; endif; ?>
+                <li class="item <?= $block->escapeHtmlAttr($crumbName) ?>">
+                    <?php if ($crumbInfo['link']) : ?>
+                        <a href="<?= $block->escapeUrl($crumbInfo['link']) ?>" title="<?= $block->escapeHtml(__($crumbInfo['title']->getText())) ?>">
+                            <?= $block->escapeHtml(__($crumbInfo['label']->getText())) ?>
+                        </a>
+                    <?php endif; ?>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+<?php endif; ?>
+
