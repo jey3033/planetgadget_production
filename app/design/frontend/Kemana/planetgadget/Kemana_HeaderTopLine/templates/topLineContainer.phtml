@@ -1,0 +1,23 @@
+<?php
+/** @var \Kemana\HeaderTopLine\Block\View\Element\Template\TopLine $block */
+?>
+<?php if ($block->isDisplayInThreeColumns() || $block->isDisplayInTwoColumns() || $block->isDisplayInOneColumn()): ?>
+    <div class="header-top-wrapper-left">
+        <?= $block->getBlockHtml('language_currency_wrapper'); ?>
+        <?= $block->getBlockHtml('top-line-left'); ?>
+    </div>
+<?php endif; ?>
+<?php if ($block->isDisplayInThreeColumns()): ?>
+    <div class="header-top-wrapper-middle">
+        <?= $block->getBlockHtml('top-line-middle'); ?>
+    </div>
+<?php endif; ?>
+<?php if ($block->isDisplayInThreeColumns() || $block->isDisplayInTwoColumns()): ?>
+    <div class="header-top-wrapper-right">
+        <?= $block->getBlockHtml('catalog.compare.link'); ?>
+        <a href="<?= $this->getUrl('bank-promotion') ?>">Bank Promo</a>
+        <a href="<?= $this->getUrl('trade-in-plus') ?>">Trade-In Plus</a>
+        <a href="<?= $this->getUrl('store-locations') ?>">Lokasi Toko</a>
+        <?= $block->getBlockHtml('top-line-right'); ?>
+    </div>
+<?php endif; ?>
