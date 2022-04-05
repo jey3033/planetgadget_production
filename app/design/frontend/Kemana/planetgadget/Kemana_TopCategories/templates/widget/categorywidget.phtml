@@ -3,44 +3,55 @@
  * @var $block \Kemana\TopCategories\Block\Widget\CategoryWidget
  */
 if ($exist = ($block->getCategoryCollection()->getSize())) {
-    $type = 'top-category-items';
+    $type = 'category-top-items';
     $mode = 'grid';
     $image = 'top_cat_content_widget_grid';
-    $title = __('Top Categories');
+    $title = __('Gadget & <span>Lifestyle</span>');
     $items = $this->getCategoryCollection();
 }
 ?>
 
 <?php if ($exist): ?>
     <div class="block widget block-top-cat <?= /* @escapeNotVerified */ $mode ?>">
-        <div class="block-title">
+        <div class="widget-title block-title">
             <h2 role="heading" aria-level="2"><?= /* @escapeNotVerified */ $title ?></h2>
         </div>
         <div class="block-content">
             <?= /* @escapeNotVerified */ '<!-- ' . $image . '-->' ?>
-            <div class="products-grid products-<?= /* @escapeNotVerified */ $mode ?> <?= /* @escapeNotVerified */ $mode ?>">
-                <ul class="product-items <?= /* @escapeNotVerified */ $type ?>">
+            <div class="category-top-<?= /* @escapeNotVerified */ $mode ?> <?= /* @escapeNotVerified
+             *
+             */
+$mode ?>">
+                <ol class="<?= /* @escapeNotVerified */ $type ?>">
                     <?php foreach ($items as $_item):
                         $imageUrl = ($_item->getImageUrl()) ? $_item->getImageUrl() : $block->getImagePlaceholder();
                         ?>
-                        <li class="product-item category-item">
-                            <a href="<?= $_item->getUrl(); ?>">
-                                <div class="category-image">
-                                    <?php if ($imageUrl != null): ?>
-                                        <img src="<?= $imageUrl; ?>"
-                                             alt="<?= $_item->getName(); ?>"/>
-                                    <?php endif; ?>
+                        <li class="category-item">
+                            <div class="category-item-container">
+                                <div class="category-item-left">
+                                    <a href="<?= $_item->getUrl(); ?>">
+                                        <div class="category-name" href="<?= $_item->getUrl(); ?>">
+                                            <?= $block->escapeHtml($_item->getName()) ?>
+                                        </div>
+                                    </a>
+                                    <div class="category-short-description">
+                                        <?= $block->escapeHtml($_item->getShortDescription()) ?>
+                                    </div>
                                 </div>
-                                <div class="category-name" href="<?= $_item->getUrl(); ?>">
-                                    <?= $block->escapeHtml($_item->getName()) ?>
+                                <div class="category-item-right">
+                                    <a href="<?= $_item->getUrl(); ?>">
+                                        <div class="category-image">
+                                            <?php if ($imageUrl != null): ?>
+                                                <img src="<?= $imageUrl; ?>"
+                                                     alt="<?= $_item->getName(); ?>"/>
+                                            <?php endif; ?>
+                                        </div>
+                                    </a>
                                 </div>
-                            </a>
-                            <div class="category-short-description">
-                                <?= $block->escapeHtml($_item->getShortDescription()) ?>
                             </div>
                         </li>
                     <?php endforeach ?>
-                </ul>
+                </ol>
                 <?php if (is_array($block->showViewAllLink())): ?>
                     <?php $data = $block->showViewAllLink() ?>
                     <div class="actions-toolbar">

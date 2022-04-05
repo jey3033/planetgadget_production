@@ -88,6 +88,10 @@
         "kemana-paymentshippinglogo": {
             "type": "git",
             "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_paymentshippinglogo.git"
+        },
+        "kemana-headertopline": {
+            "type": "git",
+            "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_headertopline.git"
         }
     },
     "require": {
@@ -101,6 +105,7 @@
         "kemana/module-blog": "2.43.0",
         "kemana/module-categoriesenhanced": "2.43.1",
         "kemana/module-core": "2.43.0",
+        "kemana/module-header-top-line": "dev-release-Staging-243",
         "kemana/module-labelmanager": "2.43.2",
         "kemana/module-payment-group-attribute": "2.43.0",
         "kemana/module-smtp": "2.43.0",
