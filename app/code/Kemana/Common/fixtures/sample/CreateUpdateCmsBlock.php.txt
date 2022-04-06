@@ -1,0 +1,512 @@
+<?php
+/**
+ * Copyright © 2020 PT Kemana Teknologi Solusi. All rights reserved.
+ * http://www.kemana.com
+ */
+
+/**
+ * @category Kemana
+ * @package  Kemana_Setup
+ * @license  Proprietary
+ *
+ * @author   Cipto Raharjo <craharjo@kemana.com>
+ */
+
+namespace Kemana\Setup\Setup\Patch\Data;
+
+use Kemana\Setup\Helper\Data as HelperData;
+use Magento\Cms\Model\BlockFactory;
+use Magento\Framework\Setup\Patch\DataPatchInterface;
+use Magento\Store\Model\StoreManagerInterface;
+
+/**
+ * Class CreateUpdateCmsBlock
+ * @package Kemana\Setup\Setup\Patch\Data
+ */
+class CreateUpdateCmsBlock implements DataPatchInterface
+{
+    const BLOCK_IDENTIFIER = 'main-footer';
+    const BLOCK_TITLE      = 'Main Footer';
+
+    /**
+     * @var BlockFactory
+     */
+    protected $blockFactory;
+
+    /**
+     * @var \Magento\Store\Model\StoreManagerInterface
+     */
+    protected $storeManager;
+
+    /**
+     * @var HelperData
+     */
+    protected $helperData;
+
+    /**
+     * CreateUpdateCmsBlock constructor.
+     *
+     * @param      BlockFactory                                $blockFactory
+     * @param      \Magento\Store\Model\StoreManagerInterface  $storeManager  The store manager
+     * @param      HelperData                                  $helperData    The helper data
+     */
+    public function __construct(
+        BlockFactory $blockFactory,
+        StoreManagerInterface $storeManager,
+        HelperData $helperData
+    ) {
+        $this->blockFactory = $blockFactory;
+        $this->storeManager = $storeManager;
+        $this->helperData   = $helperData;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public static function getDependencies()
+    {
+        return [];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getAliases()
+    {
+        return [];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function apply()
+    {
+        $storeList = $this->storeManager->getStores();
+        foreach ($storeList as $storeVal) {
+            $storeId   = $storeVal->getStoreId();
+            $blockData = $this->blockFactory->create()
+                ->getCollection()
+                ->addFieldToFilter('identifier', self::BLOCK_IDENTIFIER)
+                ->addFieldToFilter('store_id', $storeId)
+                ->getLastItem();
+
+            if ($storeId == HelperData::URBANICON_STOREID) {
+                $content = <<<EOD
+<div class="footer-middle">
+    <div class="footer-top-content">
+        <div class="footer-section">
+            <div class="row">
+                <div class="col-md-3 col-sm-12 part-1">
+                        {{trans "Gratis Pengiriman"}}
+                </div>
+                <div class="col-md-3 col-sm-12 part-2">
+                        {{trans "Garansi Resmi"}}
+                </div>
+                <div class="col-md-3 col-sm-12 part-3">
+                        {{trans "Pengiriman Terasuransi"}}
+                </div>
+                <div class="col-md-3 col-sm-12 part-4">
+                        {{trans "Gratis Pembelian"}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-main-content">
+        <div class="footer-section">
+            <div class="row">
+                <div class="col-md-3 col-sm-12 address-section">
+                    <p class="title">
+                        {{trans "Customer Service"}}
+                    </p>
+                    <p class="p1">
+                        {{trans "Kami siap melayani Anda"}}
+                    </p>
+                    <p class="p1">
+                        {{trans "[Senin - Jumat, 9.00 - 15.00 GMT+7]"}}
+                    </p>
+                    <div class="email">
+                        <a href="{{store url='#'}}">
+                            Live Chat
+                        </a>
+                    </div>
+                    <div class="number">
+                        {{config path="general/store_information/phone"}}
+                    </div>
+                    <div class="number zolo">
+                        +62 8118 515 999
+                    </div>
+                    <div class="socialmedia">
+                        <p class="title">
+                            {{trans "Ikuti social media kami"}}
+                        </p>
+                        <ul class="link-social-network">
+                            <li class="instagram">
+                                <a href="https://instagram.com/urbaniconstore" rel="noopener" target="_blank">
+                                    Instagram
+                                </a>
+                            </li>
+                            <li class="facebook">
+                                <a href="https://www.facebook.com/urbaniconstore" rel="noopener" target="_blank">
+                                    Facebook
+                                </a>
+                            </li>
+                            <li class="twitter">
+                                <a href="https://twitter.com/UrbanIconStore" rel="noopener" target="_blank">
+                                    Twitter
+                                </a>
+                            </li>
+                            <li class="youtube">
+                                <a href="https://www.youtube.com/channel/UCcJuFBOQf1kA7KaW104dB7g" rel="noopener" target="_blank">
+                                    Youtube
+                                </a>
+                            </li>
+                            <li class="pinterest">
+                                <a href="https://www.pinterest.com/urbaniconstore/urban-icon-store/" rel="noopener" target="_blank">
+                                    Pinterest
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12 menu-section">
+                    <div class="col-md-6 col-sm-12 menu-items accordion-item">
+                        <p class="title" data-role="collapsible">
+                            {{trans "Panduan"}}
+                        </p>
+                        <ul class="list">
+                            <li>
+                                <a href="{{store url='faq'}}">
+                                    {{trans "Pertanyaan (FAQ)"}}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{store url='how-to-buy'}}">
+                                    {{trans "Cara Pembelian"}}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{store url='how-to-pay'}}">
+                                    {{trans "Cara Pembayaran"}}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{store url='return-policy'}}">
+                                    {{trans "Cara Pengembalian"}}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{store url='check-order'}}">
+                                    {{trans "Cek Order Anda"}}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{store url='zero-installment'}}">
+                                    {{trans "Cicilan 0%"}}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{store url='store-locator'}}">
+                                    {{trans "Lokasi Toko"}}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{store url='service-centre'}}">
+                                    {{trans "Perawatan Jam Tangan"}}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{store url='handling'}}">
+                                    {{trans "Perawatan Bahan Kulit"}}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{store url='guarantee'}}">
+                                    {{trans "Garansi Dalam dan Luar"}}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6 col-sm-12 menu-items accordion-item">
+                        <p class="title" data-role="collapsible">
+                            {{trans "Informasi"}}
+                        </p>
+                        <ul class="list">
+                            <li>
+                                <a href="{{store url='bank-promo'}}">
+                                    {{trans "Bank Promo"}}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{store url='magazine'}}">
+                                    {{trans "Urban Icon Magazine"}}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{store url='about-us'}}">
+                                    {{trans "Tentang Urban Icon"}}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{store url='store-locator'}}">
+                                    {{trans "Lokasi Outlet"}}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{store url='privacy-policy'}}">
+                                    {{trans "Privasi"}}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{store url='copyright-policy'}}">
+                                    {{trans "Hak Cipta"}}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{store url='terms-and-conditions'}}">
+                                    {{trans "Syarat dan Ketentuan"}}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{store url='contact'}}">
+                                    {{trans "Hubungi Kami"}}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-5 col-sm-12 section-icons menu-items">
+                    <div class="item newsletter">
+                        <p class="title">
+                            {{trans "Newsletter"}}
+                        </p>
+                        <p class="p1">
+                            {{trans "Daftarkan email Anda untuk mendapatkan kabar produk terbaru, acara dan promo Urban Icon!"}}
+                        </p>
+                        {{block class="Magento\Newsletter\Block\Subscribe" name="form.subscribe" as="subscribe" before="-" template="Kemana_Newsletter::subscribe.phtml"}}
+                    </div>
+                    <div class="item payment installment">
+                        <p class="title">
+                            {{trans "Fasilitas Cicilan 0%"}}
+                        </p>
+                        <ul class="list payment-installment">
+                            <li><img src="{{media url="footer/installment_logo.png"}}" alt="" width="100%"></li>
+                        </ul>
+                    </div>
+                    <div class="item payment">
+                        <p class="title">
+                            {{trans "Metode Pembayaran"}}
+                        </p>
+                        <ul class="list payment">
+                            <li><img src="{{media url="footer/payment_logo.png"}}" alt="" width="100%"></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="footer-section">
+            {{widget type="Magento\Cms\Block\Widget\Block" template="widget/static_block/default.phtml" block_id="25"}} {{block class="Magento\Theme\Block\Html\Footer" name="copyright" template="Magento_Theme::html/copyright.phtml"}} {{widget type="Magento\Cms\Block\Widget\Block" template="widget/static_block/default.phtml" block_id="24"}}
+        </div>
+    </div>
+</div>
+EOD;
+            } elseif ($storeId == HelperData::FOSSIL_STOREID) {
+                $content = <<<EOD
+<div class="footer-middle">
+    <div class="footer-top-content">
+        <div class="footer-section">
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <p class="title">
+                        {{trans "Get the inside scoop!"}}
+                    </p>
+                    {{block class="Magento\Newsletter\Block\Subscribe" name="form.subscribe" as="subscribe" before="-" template="Kemana_Newsletter::subscribe.phtml"}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-main-content">
+        <div class="footer-section">
+            <div class="row">
+                <div class="col-md-4 col-sm-12 address-section">
+                    <div class="footer-logo">
+                        <img src="{{media url="footer/logo.png"}}" alt="" width="100%">
+                    </div>
+                    <p class="title">
+                        {{trans "Customer Service"}}
+                    </p>
+                    <p class="p1">
+                        {{trans "Monday - Friday, 9 AM - 4 PM GMT+7"}}
+                    </p>
+                    <div class="email">
+                        <a href="{{store url='#'}}">
+                            Live Chat
+                        </a>
+                    </div>
+                    <div class="email">
+                        <a href="mailto:{{config path="trans_email/ident_general/email"}}">{{config path="trans_email/ident_general/email"}}</a>
+                    </div>
+                    <div class="number">
+                        {{config path="general/store_information/phone"}}
+                    </div>
+                    <div class="number zolo">
+                        +62 811-129-3838
+                    </div>
+                    <div class="socialmedia">
+                        <ul class="link-social-network">
+
+                            <li class="facebook">
+                                <a href="https://www.facebook.com/FossilIndonesia/" rel="noopener" target="_blank">
+                                    Facebook
+                                </a>
+                            </li>
+                            <li class="twitter">
+                                <a href="#" rel="noopener" target="_blank">
+                                    Twitter
+                                </a>
+                            </li>
+                            <li class="pinterest">
+                                <a href="#" rel="noopener" target="_blank">
+                                    Pinterest
+                                </a>
+                            </li>
+                            <li class="instagram">
+                                <a href="https://www.instagram.com/fossilofficial.id/?hl=en" rel="noopener" target="_blank">
+                                    Instagram
+                                </a>
+                            </li>
+                            <li class="youtube">
+                                <a href="#" rel="noopener" target="_blank">
+                                    Youtube
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12 menu-items accordion-item">
+                    <p class="title" data-role="collapsible">
+                        {{trans "Customer Care"}}
+                    </p>
+                    <ul class="list">
+                        <li>
+                            <a href="{{store url='return-refund-policy'}}">
+                                {{trans "Return & Refund Policy"}}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{store url='warranty-and-repairs'}}">
+                                {{trans "Warranty & Repairs"}}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{store url='how-to-order-pay'}}">
+                                {{trans "How To Order"}}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{store url='how-to-order-pay'}}">
+                                {{trans "How To Pay"}}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{store url='check-order'}}">
+                                {{trans "Check My Order"}}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{store url='leather-care-instructions'}}">
+                                {{trans "Leather Care & Instructions"}}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{store url='check-order'}}">
+                                {{trans "Order Status"}}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{store url='bank-promo'}}">
+                                {{trans "Bank Promo"}}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{store url='faq'}}">
+                                {{trans "FAQ"}}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-4 col-sm-12 menu-items accordion-item">
+                    <p class="title" data-role="collapsible">
+                        {{trans "Company Info"}}
+                    </p>
+                    <ul class="list">
+                        <li>
+                            <a href="{{store url='https://www.fossilgroup.com/'}}" rel="noopener" target="_blank">
+                                {{trans "Fossil Group"}}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{store url='https://www.fossilgroup.com/compliance/regulatory-compliance/'}}" rel="noopener" target="_blank">
+                                {{trans "Regulatory Compliance"}}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{store url='http://www.fossilfoundation.org/'}}" rel="noopener" target="_blank">
+                                {{trans "Fossil Foundation"}}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{store url='who-we-are'}}">
+                                {{trans "About Us"}}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{store url='contact-us'}}">
+                                {{trans "Contact Us"}}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{store url='career'}}">
+                                {{trans "Careers"}}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{store url='store-locator'}}">
+                                {{trans "Store Locator"}}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{store url='privacy-policy'}}">
+                                {{trans "Privacy Policy"}}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{store url='term-of-use'}}">
+                                {{trans "Terms of Use"}}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="footer-section">
+            {{widget type="Magento\Cms\Block\Widget\Block" template="widget/static_block/default.phtml" block_id="25"}} {{block class="Magento\Theme\Block\Html\Footer" name="copyright" template="Magento_Theme::html/copyright.phtml"}} {{widget type="Magento\Cms\Block\Widget\Block" template="widget/static_block/default.phtml" block_id="24"}}
+        </div>
+    </div>
+</div>
+EOD;
+            }
+
+            $cmsBlockData = $blockData->getData();
+            if (empty($cmsBlockData)) {
+                $this->helperData->createBlock(self::BLOCK_IDENTIFIER, self::BLOCK_TITLE, $storeId, $content);
+            } else {
+                $blockId = $cmsBlockData['block_id'];
+                $this->helperData->updateBlock($blockId, $content);
+            }
+        }
+    }
+}

@@ -1,0 +1,263 @@
+frontend_label,frontend_input,is_required,option,default,attribute_code,is_global,default_value_text,default_value_yesno,default_value_date,default_value_textarea,is_unique,is_searchable,is_visible_in_advanced_search,is_comparable,is_filterable,is_filterable_in_search,position,is_used_for_promo_rules,is_html_allowed_on_front,is_visible_on_front,used_in_product_listing,used_for_sort_by,attribute_set
+Barcode,text,0,,,barcode,0,,,,,0,0,0,0,0,0,,,,0,0,0,"Meat-Beef
+Meat-Pork
+Meat-Lamb
+Meat-Chicken
+Snacks-Siomai
+Snacks-Fries
+Seafood-Fish
+Seafood-Mollusk
+Seafood-Crustaceans
+Seafood-Canned Seafood
+Snacks-Breaded
+Snacks-Balls
+Condiments-Sauces
+Snacks-Chips
+Condiments-Salt
+Condiments-Pepper
+Ready to Eat"
+Brand,select,0,"Frabelle Foods
+Frabelle Foods Astig Fries
+Frabelle Foods Potato Fries
+Frabelle Foods Astig Siomai
+Frabelle Foods Captain's Catch
+Frabelle Foods Seaglow
+Frabelle Foods Ocean Fresh
+Pacific Bay
+Mama Rosa
+Belgica
+Crows
+Delimundo
+Indomie
+Kikkoman
+Tabasco
+Mc Cormick
+Lee Kum Kee
+San Remo
+Bayani Brew
+Pilmico
+Lindemans
+Gulden Draak
+Baptist
+Westmalle
+Izumio
+Kagoshima
+NK Foods
+IBP - CAB
+Black Canyon
+St. Helen's
+Palo Duro
+Black Canyon
+Swift
+Excel
+Affco
+Friboi
+Kepak
+MidField
+Green Lea
+Friboi
+Olymel
+Incarlopsa
+Socopa
+Olymel
+Perdue
+Frabelle Marketplace",,brand,0,,,,,0,0,0,0,1,1,,,,1,1,,"Meat-Beef
+Meat-Pork
+Meat-Lamb
+Meat-Chicken
+Snacks-Siomai
+Snacks-Fries
+Seafood-Fish
+Seafood-Mollusk
+Seafood-Crustaceans
+Seafood-Canned Seafood
+Snacks-Breaded
+Snacks-Balls
+Condiments-Sauces
+Snacks-Chips
+Condiments-Salt
+Condiments-Pepper
+Ready to Eat"
+Grade,text,0,,,grade,0,,,,,0,0,0,1,0,0,,,,1,0,0,"Meat-Beef
+Snacks-Fries"
+Pack Size (Weight),text,0,,,pack_size,0,,,,,0,0,0,1,0,0,,,,1,1,0,"Meat-Beef
+Meat-Pork
+Meat-Lamb
+Meat-Chicken
+Snacks-Siomai
+Snacks-Fries
+Seafood-Fish
+Seafood-Mollusk
+Seafood-Crustaceans
+Seafood-Canned Seafood
+Snacks-Breaded
+Snacks-Balls
+Condiments-Sauces
+Snacks-Chips
+Condiments-Salt
+Condiments-Pepper
+Ready to Eat"
+UOM,select,0,"kg
+grams",,uom,0,,,,,0,0,0,1,1,1,,,,1,0,0,"Meat-Beef
+Meat-Pork
+Meat-Lamb
+Meat-Chicken
+Snacks-Siomai
+Snacks-Fries
+Seafood-Fish
+Seafood-Mollusk
+Seafood-Crustaceans
+Seafood-Canned Seafood
+Snacks-Breaded
+Snacks-Balls
+Condiments-Sauces
+Snacks-Chips
+Condiments-Salt
+Condiments-Pepper
+Ready to Eat
+Gift Box"
+Thickness,text,0,,,thickness,0,,,,,0,0,0,1,0,0,,,,1,0,0,"Meat-Beef
+Meat-Pork"
+No. of pcs per pack,text,0,,,pcs_per_pack,0,,,,,0,0,0,1,0,0,,,,1,0,0,"Meat-Beef
+Meat-Lamb
+Snacks-Siomai"
+Case Configuration,text,0,,,case_configuration,0,,,,,0,0,0,1,0,0,,,,1,0,0,"Meat-Beef
+Meat-Pork
+Meat-Lamb
+Meat-Chicken
+Snacks-Siomai
+Snacks-Fries
+Seafood-Fish
+Seafood-Mollusk
+Seafood-Crustaceans
+Seafood-Canned Seafood
+Snacks-Breaded
+Snacks-Balls
+Condiments-Sauces
+Snacks-Chips
+Condiments-Salt
+Condiments-Pepper
+Ready to Eat"
+Type of Cut,select,0,"Striploin
+Cubes
+Slab
+Cuberoll
+Forequarter
+Slice
+Chops
+Samgyeopsal
+Strips
+Quarter
+Usamgyeop
+Galbi
+Chadolbaegi
+Yakiniku
+Fillet Slab
+Shoestring
+Whole
+Balls
+Steak
+Fillet
+Sashimi
+Crazy Cut
+Roast
+Belly
+Drumstick
+Thighs
+Wings
+Breast Fillet
+Neck",,type_of_cut,0,,,,,0,0,0,1,1,1,,,,1,0,0,"Meat-Beef
+Meat-Pork
+Meat-Lamb
+Meat-Chicken
+Condiments-Sauces"
+Origin,text,0,,,origin,0,,,,,0,0,0,1,0,0,,,,1,0,0,"Meat-Beef
+Meat-Lamb
+Meat-Chicken
+Snacks-Siomai
+Snacks-Fries
+Seafood-Fish
+Seafood-Mollusk
+Seafood-Crustaceans
+Snacks-Breaded
+Snacks-Balls
+Condiments-Sauces
+Snacks-Chips
+Condiments-Salt
+Condiments-Pepper
+Ready to Eat"
+Keywords,text,0,,,keywords,0,,,,,0,1,0,0,0,0,,,,0,0,0,"Meat-Beef
+Meat-Pork
+Meat-Lamb
+Meat-Chicken
+Snacks-Siomai
+Snacks-Fries
+Seafood-Fish
+Seafood-Mollusk
+Seafood-Crustaceans
+Seafood-Canned Seafood
+Snacks-Breaded
+Snacks-Balls
+Condiments-Sauces
+Snacks-Chips
+Condiments-Salt
+Condiments-Pepper
+Ready to Eat
+Gift Box"
+Shelf Life ,text,0,,,shelf_life,0,,,,,0,0,0,0,0,0,,,,1,0,0,"Snacks-Siomai
+Snacks-Fries
+Seafood-Crustaceans
+Seafood-Canned Seafood
+Snacks-Breaded
+Snacks-Balls
+Condiments-Sauces
+Snacks-Chips
+Condiments-Salt
+Condiments-Pepper
+Ready to Eat"
+Storage Condition,text,0,,,storage_condition,0,,,,,0,0,0,0,0,0,,,,1,0,0,"Meat-Beef
+Meat-Pork
+Meat-Lamb
+Meat-Chicken
+Snacks-Siomai
+Snacks-Fries
+Seafood-Fish
+Seafood-Mollusk
+Seafood-Crustaceans
+Seafood-Canned Seafood
+Snacks-Breaded
+Snacks-Balls
+Condiments-Sauces
+Snacks-Chips
+Condiments-Salt
+Condiments-Pepper
+Ready to Eat
+Gift Box"
+Food Allergen,text,0,,,food_allergen,0,,,,,0,0,0,1,0,0,,,,1,0,0,"Snacks-Siomai
+Seafood-Crustaceans
+Seafood-Canned Seafood
+Snacks-Breaded
+Snacks-Balls
+Condiments-Sauces
+Snacks-Chips
+Ready to Eat"
+Flavor,text,0,,,flavor,0,,,,,0,0,0,1,0,0,,,,1,0,0,"Snacks-Siomai
+Snacks-Fries
+Seafood-Crustaceans
+Seafood-Canned Seafood
+Snacks-Breaded
+Snacks-Balls
+Condiments-Sauces
+Snacks-Chips
+Ready to Eat"
+Serving Suggestions,text,0,,,serving_suggestions,0,,,,,0,0,0,1,0,0,,,,1,0,0,"Snacks-Siomai
+Snacks-Fries
+Seafood-Crustaceans
+Seafood-Canned Seafood
+Snacks-Breaded
+Snacks-Balls
+Condiments-Sauces
+Snacks-Chips
+Ready to Eat"
+Specification (dimension),text,,,,specification,0,,,,,0,0,0,1,0,0,,,,1,0,0,Gift Box
+Capacity,text,,,,capacity,0,,,,,0,0,0,1,0,0,,,,1,0,0,Gift Box
