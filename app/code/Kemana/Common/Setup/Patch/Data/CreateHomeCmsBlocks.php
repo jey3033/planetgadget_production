@@ -7,7 +7,8 @@
 /**
  * @category Kemana
  * @package  Kemana_Common
- * @license  Proprietary
+ * @license  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ *
  *
  * @author   Achintha Madushan <amadushan@kemana.com>
  */
