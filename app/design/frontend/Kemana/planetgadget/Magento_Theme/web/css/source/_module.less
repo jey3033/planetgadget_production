@@ -35,9 +35,9 @@
 @header-icons-color: @color-white;
 @header-icons-color-hover: @color-kemana-gray2;
 
-@header-desktop__height: 94px;
+@header-desktop__height: 80px;
 @header-mobile__height: 50px;
-@header-desktop__padding: 16px @indent__s 16px;
+@header-desktop__padding: 0 @indent__s;
 
 @addto-color: @kemana-primary-brand-color;
 @addto-hover-color: @kemana-primary-brand-color;
@@ -517,7 +517,7 @@
         .lib-css(margin-bottom, @indent__base);
 
         .panel.wrapper {
-            border-bottom: 1px solid @secondary__color;
+            .lib-css(background-color, @color-pg-black2);
         }
 
         .header.panel {

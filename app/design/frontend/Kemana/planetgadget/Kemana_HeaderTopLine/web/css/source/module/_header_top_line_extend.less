@@ -1,0 +1,107 @@
+// /**
+//  * Copyright © 2022 Kemana. All rights reserved.
+//  * @author Harshani Karunasekara <hkarunasekara@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .header-top-wrapper {
+        .top-promotion {
+            display: none;
+        }
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .page-header {
+        .header-top-wrapper {
+            display: none;
+        }
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .page-header {
+        .header-top-wrapper {
+            padding-block: 6px;
+
+            .header-top-wrapper-right {
+                a {
+                    .lib-css(color, @color-white);
+                    padding-inline: 10px;
+                    .lib-font-size(10);
+                }
+
+                li {
+                    list-style: none;
+                }
+
+                .top-wrapper-links {
+                    margin-right: 0;
+
+                    .help-info-content {
+                        position: absolute;
+                        z-index: 99;
+                        top: 27px;
+                        right: 0;
+                        .lib-css(background, @color-white);
+                        .lib-css(border, 1px solid @color-pg-light-gray2);
+                        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+                        padding: @indent__base 0;
+                        border-radius: 5px;
+                        display: none;
+
+                        &:after {
+                            content: "";
+                            width: 10px;
+                            height: 10px;
+                            transform: rotate(-45deg);
+                            background: #fff;
+                            position: absolute;
+                            z-index: -1;
+                            top: -5px;
+                            right: 20px;
+                        }
+
+                        .heading {
+                            padding: 0 @indent__base @indent__s;
+                            .lib-css(font-weight, @font-weight__bold);
+                        }
+
+                        .text {
+                            .lib-line-height(20);
+                            padding: 12px @indent__base;
+
+                            &:hover {
+                                .lib-css(background-color, @color-pg-light-gray2);
+                            }
+                        }
+
+                        .time {
+                            padding: @indent__s @indent__base 0;
+                            white-space: nowrap;
+                            .lib-font-size(10);
+                            .lib-line-height(16);
+
+                            span {
+                                .lib-css(font-weight, @font-weight__bold);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
