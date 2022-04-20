@@ -1,0 +1,31 @@
+<?php
+/**
+ *  Kemana\AcceleratorBase\Block\HeaderElement $block
+ */
+$whishlistUrl = $block->getWhistlistUrl();
+$_session=$block->getSession();
+
+?>
+<?php // @codingStandardsIgnoreStart ?>
+<div class="block-mobile-addElement">
+    <div class="block account-menu">
+        <div class="account-menu_content" id="account-menu">
+            <ul class="menu-content">
+                <?php if (!$_session->isLoggedIn()): ?>
+                    <li class="main-item account-login"><a href="<?= $this->getUrl('customer/account/login'); ?>"><?=
+                            __('My Account') ?></a></li>
+                    <li><?= $block->getChildHtml('catalog.compare.link.mobile'); ?></li>
+                    <li><?= $block->getChildHtml('kemana-storelocator-mobile-header-link'); ?></li>
+                <?php elseif ($_session->isLoggedIn()): ?>
+                    <li class="main-item"><a href="<?= $this->getUrl('customer/account/index'); ?>"><?= __('Dashboard') ?></a></li>
+                    <li class="main-item"><a href="<?= $this->getUrl('sales/order/history/'); ?>"><?= __('Order History') ?></a></li>
+                    <li class="main-item"><a href="<?= $this->getUrl('wishlist'); ?>"><?= __('Wishlist ') ?></a></li>
+                    <li class="main-item"><a href="<?= $this->getUrl('customer/address/'); ?>"><?= __('Address Book') ?></a></li>
+                    <li class="main-item"><a href="<?= $this->getUrl('customer/account/logout'); ?>"><?= __('Logout') ?></a></li>
+                <?php endif; ?>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<?php // @codingStandardsIgnoreEnd ?>

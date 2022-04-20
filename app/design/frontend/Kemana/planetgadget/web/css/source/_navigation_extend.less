@@ -1,0 +1,80 @@
+// /**
+//  * Copyright © 2022 Kemana. All rights reserved.
+//  * @author Harshani Karunasekara <hkarunasekara@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .header-top-wrapper {
+        .top-promotion {
+            display: none;
+        }
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+    .navigation {
+        .level0 {
+            text-transform: none;
+
+            &:first-child {
+                a {
+                    .lib-icon-font(
+                        @icon-menu,
+                        @_icon-font: @icon-font,
+                        @_icon-font-color: @color-white,
+                        @_icon-font-size: 23px,
+                        @_icon-font-line-height: 23px,
+                        @_icon-font-margin: -5px 15px 0 0,
+                        @_icon-font-position: before
+                    );
+                    display: inline-block;
+
+                    &:hover {
+                        &:before {
+                            .lib-css (color, @kemana-secondary-brand-color);
+                        }
+                    }
+                }
+            }
+
+            > .level-top {
+                line-height: 80px;
+
+                &:hover {
+                    &:after {
+                        border: none;
+                    }
+                }
+            }
+
+            &.active {
+                > .level-top {
+                    &:before {
+                        .lib-css (color, @kemana-secondary-brand-color);
+                    }
+
+                    &:after {
+                        border-bottom: none;
+                    }
+                }
+            }
+
+            &.parent {
+                > .level-top {
+                    > .ui-menu-icon {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}
