@@ -21,6 +21,14 @@
         <referenceContainer name="content">
             <container name="homepage.main.content1" label="Main_Content" htmlTag="div" htmlClass="cms-main-container"
                        before="-"/>
+            <container name="homepage.banner.bottom" label="Main_Content_Banner_Bottom" htmlTag="div" htmlClass="cms-main-banner-bottom"
+                       before="homepage.main.content1">
+                <block class="Magento\Cms\Block\Block" name="main-banner-bottom-message">
+                    <arguments>
+                        <argument name="block_id" xsi:type="string">main_banner_bottom_message</argument>
+                    </arguments>
+                </block>
+            </container>
         </referenceContainer>
 
         <move element="home-page-category-top-section" destination="homepage.main.content1" before="-"/>
