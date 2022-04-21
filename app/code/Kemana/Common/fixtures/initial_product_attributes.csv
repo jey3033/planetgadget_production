@@ -1,0 +1,97 @@
+frontend_label,frontend_input,is_required,attribute_code,option,default,default_value_text,default_value_yesno,default_value_date,default_value_textarea,is_unique,is_global,is_searchable,is_filterable,is_comparable,is_visible_on_front,is_html_allowed_on_front,is_filterable_in_search,used_in_product_listing,used_for_sort_by,is_visible_in_advanced_search,is_used_for_promo_rules,position,attribute_set
+Processor,text,0,pg_processor,,,,,,,0,2,0,0,0,1,1,0,0,0,0,0,0,"HANDPHONE
+KOMPUTER
+TABLET"
+Detail OS,text,0,pg_os_detail,,,,,,,0,2,0,0,0,1,1,0,0,0,0,0,0,"HANDPHONE
+KOMPUTER
+TABLET"
+Display,text,0,pg_display,,,,,,,0,2,0,0,0,1,1,0,0,0,0,0,0,"HANDPHONE
+KOMPUTER
+TABLET"
+Resolusi Layar,text,0,pg_display_resolution,,,,,,,0,2,0,0,0,1,1,0,0,0,0,0,0,"HANDPHONE
+KOMPUTER
+TABLET"
+Baterai,text,0,pg_battery,,,,,,,0,2,0,0,0,1,1,1,0,0,0,0,0,"HANDPHONE
+KOMPUTER
+TABLET"
+Garansi,text,0,pg_guarantee,,,,,,,0,2,0,0,0,1,1,1,0,0,0,0,0,"HANDPHONE
+KOMPUTER
+OTHER PRODUCT"
+Kondisi Produk,select,0,pg_product_condition,"New
+Used",,,,,,0,2,0,1,0,1,1,0,0,0,0,0,0,"HANDPHONE
+KOMPUTER"
+Launch,text,0,pg_launch,,,,,,,0,2,0,0,0,1,1,0,0,0,0,0,0,HANDPHONE
+RAM,select,0,hp_ram,"2 GB
+3 GB
+4 GB
+6 GB
+8 GB
+12 GB",,,,,,0,1,0,1,0,1,1,1,0,0,0,0,0,"HANDPHONE
+TABLET"
+ROM,select,0,hp_rom,"32 GB
+64 GB
+128 GB
+256 GB
+512 GB",,,,,,0,1,0,1,0,1,1,1,0,0,0,0,0,"HANDPHONE
+TABLET"
+OS,select,0,hp_os,"Android
+iOS",,,,,,0,2,0,1,0,1,1,1,0,0,0,0,0,"HANDPHONE
+TABLET"
+Jaringan,multiselect,0,hp_network,"GSM
+CDMA
+HSPA
+EVDO
+LTE
+5G",,,,,,0,2,0,1,0,1,1,0,0,0,0,0,0,"HANDPHONE
+TABLET"
+SIM Card,text,0,hp_simcard,,,,,,,0,2,0,0,0,1,1,0,0,0,0,0,0,"HANDPHONE
+TABLET"
+Memory External,boolean,0,hp_extmemory,,,,0,,,0,2,0,0,0,1,1,0,0,0,0,0,0,"HANDPHONE
+TABLET"
+Memory External up to,text,0,hp_extmemory_limit,,,,,,,0,2,0,0,0,1,1,0,0,0,0,0,0,"HANDPHONE
+TABLET"
+Kamera Utama,text,0,hp_camera,,,,,,,0,2,0,0,0,1,1,1,0,0,0,0,0,"HANDPHONE
+TABLET"
+Kamera Selfie,text,0,hp_selfie,,,,,,,0,2,0,0,0,1,1,1,0,0,0,0,0,"HANDPHONE
+TABLET"
+Audio,text,0,hp_audio,,,,,,,0,2,0,0,0,1,1,0,0,0,0,0,0,HANDPHONE
+Resolusi Video,text,0,hp_video,,,,,,,0,2,0,0,0,1,1,0,0,0,0,0,0,HANDPHONE
+Dimensi Produk,text,0,hp_dimension,,,,,,,0,2,0,0,0,1,1,0,0,0,0,0,0,"HANDPHONE
+TABLET"
+Kelengkapan,multiselect,0,hp_kelengkapan,"Unit
+Manual Book
+Fast Charging
+Hp
+Kabel data
+sim ejector
+guide book
+Kartu Garansi
+Buku Manual",,,,,,0,2,0,0,0,1,1,0,0,0,0,0,0,"HANDPHONE
+TABLET"
+CPU,text,0,hp_cpu,,,,,,,0,2,0,0,0,1,1,0,0,0,0,0,0,HANDPHONE
+GPU,text,0,hp_gpu,,,,,,,0,2,0,0,0,1,1,0,0,0,0,0,0,HANDPHONE
+Brand Handphone,select,0,hp_brand,"Xiaomi
+Apple
+Samsung",,,,,,0,2,0,1,0,1,1,1,0,0,0,0,0,"HANDPHONE
+TABLET
+OTHER PRODUCT"
+Detail Processor,text,0,laptop_processor,,,,,,,0,2,0,0,0,1,1,0,0,0,0,0,0,KOMPUTER
+Memory,text,0,laptop_memory,,,,,,,0,2,0,0,0,1,1,0,0,0,0,0,0,KOMPUTER
+Tipe Grafis,text,0,laptop_graphical_type,,,,,,,0,2,0,0,0,1,1,0,0,0,0,0,0,KOMPUTER
+Tipe Layar,text,0,laptop_display_type,,,,,,,0,2,0,0,0,1,1,0,0,0,0,0,0,KOMPUTER
+Touchscreen,boolean,0,laptop_touchscreen,,,,0,,,0,2,0,0,0,1,1,0,0,0,0,0,0,KOMPUTER
+HDD,text,0,laptop_hdd,,,,,,,0,2,0,0,0,1,1,0,0,0,0,0,0,KOMPUTER
+Networking,multiselect,0,laptop_networking,"Wifi
+Bluetooth",,,,,,0,2,0,0,0,1,1,0,0,0,0,0,0,KOMPUTER
+Wireless,boolean,0,laptop_wireless,,,,1,,,0,2,0,0,0,1,1,0,0,0,0,0,0,KOMPUTER
+Wireless Protocol Type,text,0,laptop_wireless_type,,,,,,,0,2,0,0,0,1,1,0,0,0,0,0,0,KOMPUTER
+Bluetooth,text,0,laptop_bluetooth,,,,,,,0,2,0,0,0,1,1,0,0,0,0,0,0,KOMPUTER
+Interface,multiselect,0,laptop_interface,"1xUSB 2.0
+1xUSB 3.2
+1xUSB 3.2 Type C
+1xHDMI
+1xAudio Jack",,,,,,0,2,0,1,0,1,1,0,0,0,0,0,0,KOMPUTER
+Brand Komputer,select,0,laptop_brand,"Asus
+Samsung",,,,,,0,2,0,1,0,1,1,1,0,0,0,0,0,"KOMPUTER
+OTHER PRODUCT"
+Dimensi,text,0,other_dimension,,,,,,,0,2,0,0,0,1,1,0,0,0,0,0,0,OTHER PRODUCT

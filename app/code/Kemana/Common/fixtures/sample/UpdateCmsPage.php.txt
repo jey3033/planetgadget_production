@@ -1,0 +1,89 @@
+<?php
+/**
+ * Copyright © 2021 PT Kemana Teknologi Solusi. All rights reserved.
+ * http://www.kemana.com
+ */
+
+/**
+ * @category Kemana
+ * @package  Kemana_Setup
+ * @license  Proprietary
+ *
+ * @author   Cipto Raharjo <craharjo@kemana.com>
+ */
+
+namespace Kemana\Setup\Setup\Patch\Data;
+
+use Magento\Cms\Model\PageFactory;
+use Magento\Framework\Setup\Patch\DataPatchInterface;
+use Psr\Log\LoggerInterface;
+
+/**
+ * Class UpdateCmsPage
+ * @package Kemana\Setup\Setup\Patch\Data
+ */
+class UpdateCmsPage implements DataPatchInterface
+{
+    /**
+     * string
+     */
+    const PAGE_IDENTIFIER = 'home';
+
+    /**
+     * @var  \Magento\Cms\Model\PageFactory
+     */
+    private $pageFactory;
+
+    /**
+     * @var \Psr\Log\LoggerInterface
+     */
+    private $logger;
+
+    /**
+     * Constructs a new instance.
+     *
+     * @param      \Magento\Cms\Model\PageFactory  $pageFactory  The page factory
+     * @param      \Psr\Log\LoggerInterface        $logger       The logger
+     */
+    public function __construct(
+        PageFactory $pageFactory,
+        LoggerInterface $logger
+    ) {
+        $this->pageFactory = $pageFactory;
+        $this->logger      = $logger;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public static function getDependencies()
+    {
+        return [];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getAliases()
+    {
+        return [];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function apply()
+    {
+        try {
+            $home = $this->pageFactory->create()->load(self::PAGE_IDENTIFIER, 'identifier');
+            if ($home) {
+                $content = $home->getContent();
+                $content .= '{{widget type="Amasty\ShopbyBrand\Block\Widget\BrandSlider" template="widget/brand_list/slider.phtml"}}';
+                $home->setContent($content);
+                $home->save();
+            }
+        } catch (\Exception $e) {
+            $this->logger->critical('Error message', ['exception' => $e]);
+        }
+    }
+}
