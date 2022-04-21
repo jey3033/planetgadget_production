@@ -16,6 +16,8 @@ $_session=$block->getSession();
                             __('My Account') ?></a></li>
                     <li><?= $block->getChildHtml('catalog.compare.link.mobile'); ?></li>
                     <li><?= $block->getChildHtml('kemana-storelocator-mobile-header-link'); ?></li>
+                    <li class="main-item"><a href="<?= $this->getUrl('*/*/*'); ?>"><?= __('PG Club') ?></a></li>
+                    <li class="main-item"><a href="<?= $this->getUrl('*/*/*'); ?>"><?= __('Track') ?></a></li>
                 <?php elseif ($_session->isLoggedIn()): ?>
                     <li class="main-item"><a href="<?= $this->getUrl('customer/account/index'); ?>"><?= __('Dashboard') ?></a></li>
                     <li class="main-item"><a href="<?= $this->getUrl('sales/order/history/'); ?>"><?= __('Order History') ?></a></li>
