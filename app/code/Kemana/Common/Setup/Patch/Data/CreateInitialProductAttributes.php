@@ -32,6 +32,7 @@ class CreateInitialProductAttributes implements DataPatchInterface
      * @var Attribute
      */
     private $attribute;
+
     /**
      * @var ModuleDataSetupInterface
      */

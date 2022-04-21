@@ -34,18 +34,20 @@
         </block>
         <move element="footer-social-icon-section" destination="main.footer" after="footer-address-section"/>
         <referenceContainer name="header-right">
-            <block class="Magento\Framework\View\Element\Html\Link" name="custom-top-link-pg-club">
-                <arguments>
-                    <argument name="label" xsi:type="string" translate="true">PG Club</argument>
-                    <argument name="path" xsi:type="string">*/*/*</argument>
-                </arguments>
-            </block>
-            <block class="Magento\Framework\View\Element\Html\Link" name="custom-top-link-track">
-                <arguments>
-                    <argument name="label" xsi:type="string" translate="true">Track</argument>
-                    <argument name="path" xsi:type="string">*/*/*</argument>
-                </arguments>
-            </block>
+            <container name="header_right_links" as="header_right_links" htmlTag="div" htmlClass="header-links-right">
+                <block class="Magento\Framework\View\Element\Html\Link" name="custom-top-link-pg-club">
+                    <arguments>
+                        <argument name="label" xsi:type="string" translate="true">PG Club</argument>
+                        <argument name="path" xsi:type="string">*/*/*</argument>
+                    </arguments>
+                </block>
+                <block class="Magento\Framework\View\Element\Html\Link" name="custom-top-link-track">
+                    <arguments>
+                        <argument name="label" xsi:type="string" translate="true">Track</argument>
+                        <argument name="path" xsi:type="string">*/*/*</argument>
+                    </arguments>
+                </block>
+            </container>
         </referenceContainer>
     </body>
 </page>

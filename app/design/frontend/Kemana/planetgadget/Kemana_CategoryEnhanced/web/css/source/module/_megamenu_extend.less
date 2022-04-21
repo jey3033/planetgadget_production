@@ -1,0 +1,110 @@
+// /**
+//  * Copyright © 2020 Kemana. All rights reserved.
+//  * @author Ashan Gunawardena <agunawardena@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    nav#megamenu {
+        ul#nav {
+            li.level0 {
+                ul.level0 {
+                    &.submenu {
+                        li.level1 {
+
+                            ul.level1 {
+                                &.submenu {
+                                    position: absolute;
+                                    top: 0;
+                                    width: 310px;
+                                    padding: 10px 0;
+                                    box-shadow: inset 20px 0 20px -20px rgba(0,0,0,0.16);
+                                    height: 100%;
+                                    left: 0 !important;
+                                    min-height: 100%;
+
+
+                                    li {
+                                        padding-right: 0;
+                                    }
+
+                                    li.level2 {
+                                        a {
+                                            font-weight: @font-weight__bold;
+                                            .lib-font-size(14);
+                                        }
+
+                                        ul.level2 {
+                                            &.submenu {
+                                                margin-bottom: 0 !important;
+                                                padding: 0;
+
+                                                li {
+                                                    a {
+                                                        font-weight: @font-weight__regular;
+                                                        .lib-font-size(12);
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .page-header {
+        #megamenu {
+            .megamenu-wrapper {
+                &.tabs-menu {
+                    &.vertical {
+                        ul.level0 {
+                            li.level1 {
+                                >.megamenu-inner {
+                                    width: ~'calc(100% - 310px)';
+                                    margin-left: 0;
+                                    padding: 10px 0;
+                                    left: 310px;
+                                    height: 100% !important;
+
+                                    ul.level1 {
+                                        &.submenu {
+                                            display: block;
+
+                                            li.level2 {
+                                                padding-inline : 20px;
+                                                margin-top: 0;
+                                            }
+                                        }
+                                    }
+                                }
+
+                                ul.level1 {
+                                    &.submenu {
+                                        display: none;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

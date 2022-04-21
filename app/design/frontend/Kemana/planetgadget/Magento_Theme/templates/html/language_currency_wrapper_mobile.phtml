@@ -1,0 +1,26 @@
+<?php
+/**
+ *  Kemana\AcceleratorBase\Block\HeaderElement $block
+ */
+/** @var \Kemana\AcceleratorBase\Helper\Data $kemanaAcceleratorBaseHelper */
+$kemanaAcceleratorBaseHelper = $this->helper(Kemana\AcceleratorBase\Helper\Data::class);
+$currency = $kemanaAcceleratorBaseHelper->getCurrentCurrencyCode();
+$storeManager = $kemanaAcceleratorBaseHelper->getStoreManager();
+?>
+
+<div class="mobile-menu-inner">
+    <div class="mobile-inner-content-wrapper">
+        <div class="mobile-settings">
+            <div class="language-currency-wrapper">
+                <div class="language-currency-block">
+                    <span class="language-flag"></span>
+                    <span class="language"><?= substr($block->escapeHtml($storeManager->getStore()->getName()), 0, 2) ?></span>
+                </div>
+                <div class="language-currency-dropdown">
+                    <?= $block->getChildHtml("store_language_mobile"); ?>
+                    <?= $block->getChildHtml("store_currency_mobile"); ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

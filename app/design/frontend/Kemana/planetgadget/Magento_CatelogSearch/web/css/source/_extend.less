@@ -16,6 +16,23 @@
     .block-search {
         margin-top: 1px;
         margin-right: 13px;
+        .lib-css(background, @color-white);
+        border-radius: 5px;
+        height: 40px;
+        padding-block: 10px;
+
+        .label {
+            .lib-icon-font(
+                @_icon-font-content: @icon-pg-search,
+                @_icon-font-size: 20px,
+                @_icon-font-line-height: 20px,
+                @_icon-font-color: @kemana-primary-brand-color,
+                @_icon-font-color-hover: @color-kemana-gray2,
+                @_icon-font-color-active: @header-icons-color-hover,
+                @_icon-font-text-hide: true,
+                @_icon-font-margin: 0 15px 0 0
+            );
+        }
 
         input {
             .lib-css(background, @color-white);
@@ -33,12 +50,41 @@
         }
 
         input::-webkit-input-placeholder {
-            .lib-css(color, @color-kemana-gray10);
-            font-size: 14px;
+            .lib-css(color, @color-pg-dark-gray);
+            font-size: 12px;
             letter-spacing: .35px;
             font-style: normal;
             .lib-css(font-family, @font-family-name__base);
         }
 
+
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .block-search {
+        .action.search {
+            .lib-button-icon(
+                @_icon-font-content: @icon-remove,
+                @_icon-font-text-hide: true,
+                @_icon-font-size: 52px,
+                @_icon-font-line-height: 21px,
+                @_icon-font-color: @kemana-primary-brand-color
+            );
+        }
+    }
+}
+
+//
+//  Desktop Extra Large
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xl) {
+    .block-search {
+        width: 530px;
     }
 }
