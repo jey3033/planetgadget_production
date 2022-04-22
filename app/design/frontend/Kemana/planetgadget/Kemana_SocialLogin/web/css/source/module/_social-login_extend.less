@@ -139,6 +139,19 @@
                                 .lib-css(color, @color-white);
 
                             }
+
+                            &.customer-login-link {
+                                &:hover {
+                                    &:before {
+                                        .lib-css(color, @kemana-secondary-brand-color);
+                                    }
+
+                                    a {
+                                        .lib-css(color, @kemana-secondary-brand-color);
+                                        text-decoration: none;
+                                    }
+                                }
+                            }
                         }
                     }
                 }

@@ -33,7 +33,7 @@
 @header-mobile__border-bottom: @border-width__base solid @border-color__base;
 
 @header-icons-color: @color-white;
-@header-icons-color-hover: @color-kemana-gray2;
+@header-icons-color-hover: @kemana-secondary-brand-color;
 
 @header-desktop__height: 80px;
 @header-mobile__height: 50px;
@@ -66,6 +66,7 @@
 @import "module/_news-updates.less";
 @import "module/_home-product-list.less";
 @import "module/_home-category-top-section.less";
+@import "module/_home-banner.less";
 
 //
 //  Common
@@ -145,6 +146,16 @@
             top: 0;
             left: 0;
             right: 0;
+
+            .panel {
+                &.wrapper {
+                    .header-top-wrapper {
+                        opacity: 0;
+                        height: 0;
+                        padding-block: 0;
+                    }
+                }
+            }
         }
     }
 
