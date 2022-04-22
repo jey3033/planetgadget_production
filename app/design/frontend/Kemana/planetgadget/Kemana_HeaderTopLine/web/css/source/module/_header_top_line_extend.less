@@ -36,6 +36,7 @@
     .page-header {
         .header-top-wrapper {
             padding-block: 6px;
+            transition: .3s all ease;
 
             .header-top-wrapper-right {
                 a {
@@ -50,6 +51,20 @@
 
                 .top-wrapper-links {
                     margin-right: 0;
+
+                    a.help-info-toggle {
+                        .lib-icon-font(
+                            @_icon-font-content: @icon-pg-down-thick,
+                            @_icon-font-size: 9px,
+                            @_icon-font-line-height: 16px,
+                            @_icon-font-position: after,
+                            @_icon-font-margin: 0 0 0 10px
+                        );
+
+                        &:hover {
+                            text-decoration: underline;
+                        }
+                    }
 
                     .help-info-content {
                         position: absolute;
@@ -72,7 +87,7 @@
                             position: absolute;
                             z-index: -1;
                             top: -5px;
-                            right: 20px;
+                            right: 32px;
                         }
 
                         .heading {

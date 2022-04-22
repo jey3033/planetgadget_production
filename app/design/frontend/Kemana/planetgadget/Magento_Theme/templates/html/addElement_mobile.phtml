@@ -14,8 +14,6 @@ $_session=$block->getSession();
                 <?php if (!$_session->isLoggedIn()): ?>
                     <li class="main-item account-login"><a href="<?= $this->getUrl('customer/account/login'); ?>"><?=
                             __('My Account') ?></a></li>
-                    <li><?= $block->getChildHtml('catalog.compare.link.mobile'); ?></li>
-                    <li><?= $block->getChildHtml('kemana-storelocator-mobile-header-link'); ?></li>
                 <?php elseif ($_session->isLoggedIn()): ?>
                     <li class="main-item"><a href="<?= $this->getUrl('customer/account/index'); ?>"><?= __('Dashboard') ?></a></li>
                     <li class="main-item"><a href="<?= $this->getUrl('sales/order/history/'); ?>"><?= __('Order History') ?></a></li>

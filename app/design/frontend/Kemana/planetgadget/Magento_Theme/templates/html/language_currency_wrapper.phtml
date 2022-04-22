@@ -12,12 +12,8 @@ $storeManager = $kemanaAcceleratorBaseHelper->getStoreManager();
 <div class="language-currency-wrapper">
     <div class="language-currency-block">
         <span class="language-flag"></span>
-        <span class="language"><?= substr($block->escapeHtml($storeManager->getStore()->getName()), 0, 2) ?></span>
+        <span class="language"><?= $block->getChildHtml("store_language"); ?></span>
         <i class="fa fa-caret-down"></i>
-    </div>
-    <div class="language-currency-dropdown">
-        <?= $block->getChildHtml("store_language"); ?>
-        <?= $block->getChildHtml("store_currency"); ?>
     </div>
 </div>
 

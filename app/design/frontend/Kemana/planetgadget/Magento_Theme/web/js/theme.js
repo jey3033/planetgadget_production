@@ -360,5 +360,13 @@ define([
                 breakpoint: 300,
                 settings: "unslick"
             }]
+    });
+
+    /**
+     * 21. Dropdown Overlay
+     */
+
+    $("#menu-main-menu > .menu-parent-item").hover(function(){
+        $('#menu_overlay').fadeToggle();
     })
 });
