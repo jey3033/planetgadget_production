@@ -100,7 +100,6 @@
             .language-currency-block {
                 cursor: pointer;
                 position: relative;
-                width: 85px;
                 .lib-vendor-prefix-display();
 
                 .language-flag {
@@ -125,30 +124,39 @@
                         @_icon-font-margin: 0 5px 0 0
                     );
 
+                    &:before {
+                        padding-left: 1px;
+                    }
+
                 }
 
                 .language {
                     .lib-vendor-prefix-display();
 
                     li {
-                        .lib-font-size(10);
-                        .lib-line-height(16);
                         .lib-css(color, @color-white);
-                        padding-inline: 5px;
+                        padding: 0;
+                        .lib-line-height(16);
                         text-transform: uppercase;
                         list-style: none;
 
                         a {
                             display: inline-block;
                             .lib-css(color, @color-white);
-                            .lib-line-height(16);
+                            .lib-font-size(10);
+                            .lib-line-height(10);
+                            padding: 0 5px;
                             //width: 2ch;
                             //overflow: hidden;
                             //white-space: nowrap;
                         }
 
                         &:last-child {
-                            border-left: 1px solid #AEB4C1;
+
+
+                            a {
+                                border-left: 1px solid #AEB4C1;
+                            }
                         }
                     }
 
@@ -571,6 +579,14 @@
 
         .header-left {
             width: ~'calc(100% - 51px)';
+            width: 100%;
+            display: flex;
+            height: 48px;
+            position: absolute;
+
+            .nav-toggle {
+                left: 0;
+            }
 
             .block-mobile-addElement {
                 display: block;
@@ -671,10 +687,43 @@
             }
         }
 
+        .block-search {
+            position: absolute;
+            width: 100%;
+
+            .label {
+                width: 30px;
+                height: 48px;
+                z-index: 1;
+                top: -2px;
+                right: 43px;
+                left: unset;
+
+                &:before {
+                    .lib-css (color, @color-white);
+                    .lib-font-size(23);
+                }
+            }
+
+        }
+
         .header-right {
+            position: absolute;
+            width: calc(~'100% - 58px');
+            height: 48px;
+            margin-left: 38px;
+            justify-content: space-between;
+
             .header-links-right {
                 display: none;
             }
+
+            .minicart-wrapper {
+               position: absolute;
+                top: 0;
+                right: 0;
+            }
+
         }
     }
 }
@@ -956,15 +1005,19 @@
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xl) {
     .page-header {
         .header-left {
-            width: 40%;
+            width: 34%;
             display: block;
-            order: 1;
+        }
+
+        .block-search {
+            width: 43%;
+            max-width: 530px;
         }
 
         .header-right {
-            order: 2;
-            width: 60%;
+            width: 23%;
             max-width: unset;
+            justify-content: right;
 
             .language-currency-wrapper {
                 display: none;

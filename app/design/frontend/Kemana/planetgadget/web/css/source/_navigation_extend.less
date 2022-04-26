@@ -38,7 +38,7 @@
                     );
                     display: inline-block;
 
-                    &:hover {
+                    &:hover,  &.ui-state-focus {
                         &:before {
                             .lib-css (color, @kemana-secondary-brand-color);
                         }
@@ -49,7 +49,7 @@
             > .level-top {
                 line-height: 80px;
 
-                &:hover {
+                &:hover, &.ui-state-focus {
                     &:after {
                         border: none;
                     }

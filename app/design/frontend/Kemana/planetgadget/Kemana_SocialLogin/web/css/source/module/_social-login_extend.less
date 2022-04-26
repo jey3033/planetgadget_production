@@ -50,6 +50,29 @@
 }
 
 //
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .top-link {
+        .account-menu {
+            ul.menu-content {
+                li.main-item {
+                    &:before {
+                        .lib-font-size(23);
+                        .lib-line-height(48);
+                    }
+
+                    a {
+                        font-size: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+//
 //  Desktop
 //  _____________________________________________
 
