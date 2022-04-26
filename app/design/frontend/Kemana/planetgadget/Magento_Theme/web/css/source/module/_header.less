@@ -8,7 +8,7 @@
 @logo-desktop__margin: 20px auto 20px 0;
 
 @navigation-mobile__background: @color-white;
-@navigation-mobile__padding: 15px;
+@navigation-mobile__padding: 10px;
 @navigation-mobile-close__icon: @icon-close-large;
 @navigation-mobile-close__font-size: 30px;
 @navigation-mobile-close__line-height: 31px;
@@ -19,14 +19,14 @@
 @sale-text__color: @color-kemana-red;
 
 @header-logo-desktop-width: 260px;
-@header-logo-mobile-width: 84px;
+@header-logo-mobile-width: 158px;
 
 @header-nav-toggle-desktop__top: 27px;
 
 @navigation-wide-submenu-desktop__width: 550px;
 @navigation-wide-submenu-desktop-item__width: 50%;
 
-@header-account-icon: @icon-account-icon;
+@header-account-icon: @icon-pg-account;
 @header-account-icon__color: @color-white;
 @header-account-icon__color-hover: @color-kemana-gray2;
 
@@ -101,6 +101,7 @@
                 cursor: pointer;
                 position: relative;
                 width: 85px;
+                .lib-vendor-prefix-display();
 
                 .language-flag {
                     display: inline-block;
@@ -120,17 +121,37 @@
                     .lib-icon-font(
                         @icon-pg-language,
                         @_icon-font-color: @color-white,
-                        @_icon-font-size: 16px
+                        @_icon-font-size: 16px,
+                        @_icon-font-margin: 0 5px 0 0
                     );
 
                 }
 
                 .language {
-                    .lib-font-size(10);
-                    .lib-line-height(16);
-                    .lib-css(color, @color-white);
-                    padding-left: 10px;
-                    text-transform: uppercase;
+                    .lib-vendor-prefix-display();
+
+                    li {
+                        .lib-font-size(10);
+                        .lib-line-height(16);
+                        .lib-css(color, @color-white);
+                        padding-inline: 5px;
+                        text-transform: uppercase;
+                        list-style: none;
+
+                        a {
+                            display: inline-block;
+                            .lib-css(color, @color-white);
+                            .lib-line-height(16);
+                            //width: 2ch;
+                            //overflow: hidden;
+                            //white-space: nowrap;
+                        }
+
+                        &:last-child {
+                            border-left: 1px solid #AEB4C1;
+                        }
+                    }
+
 
                     //&:before {
                     //    .lib-css(border-left, @border-width__base solid @color-kemana-gray3);
@@ -150,7 +171,6 @@
                     //    @_icon-font-margin: 0 0 0 5px,
                     //    @_icon-font-position: after
                     //);
-                    display: inline-block;
                 }
             }
 
@@ -504,6 +524,14 @@
                         height: 46px;
                         text-align: right;
                     }
+
+                    .lib-icon-font(
+                        @_icon-font-content: @icon-menu,
+                        @_icon-font-size: 20px,
+                        @_icon-font-line-height: 20px,
+                        @_icon-font-position: before,
+                        @_icon-font-margin: 0 10px 0 0
+                    );
                 }
             }
         }
@@ -535,7 +563,7 @@
         .logo {
             .lib-css(width, @header-logo-mobile-width);
             padding-top: 12px;
-            margin: -10px auto 0;
+            margin: -14px auto 0;
             position: absolute;
             left: 50%;
             transform: translate(-50%, 0);
@@ -555,61 +583,99 @@
                     margin-bottom: 0;
 
                     .account-menu_content {
-                        //.menu-content {
-                        //    .lib-css(border-bottom, 1px solid @color-kemana-gray5);
-                        //    width: ~'calc(100% - 30px)';
-                        //    list-style: none;
-                        //    padding-top: 15px;
-                        //    padding-left: 0;
-                        //    padding-bottom: 15px;
-                        //    margin-left: 15px;
-                        //    margin-right: 15px;
-                        //    margin-bottom: 0;
-                        //
-                        //    .main-item {
-                        //        &:last-of-type {
-                        //            margin-bottom: 0;
-                        //        }
-                        //
-                        //        a {
-                        //            .lib-css(color, @theme__color__primary-alt);
-                        //            .lib-css(font-weight, @font-weight__heavier);
-                        //
-                        //            &:hover {
-                        //                text-decoration: none;
-                        //            }
-                        //        }
-                        //    }
-                        //
-                        //    .account-login {
-                        //        .lib-icon-font(
-                        //            @header-account-icon,
-                        //            @_icon-font: @icon-font,
-                        //            @_icon-font-color: @kemana-primary-brand-color,
-                        //            @_icon-font-color-hover: @kemana-primary-brand-color,
-                        //            @_icon-font-size: 23px,
-                        //            @_icon-font-line-height: 23px,
-                        //            @_icon-font-margin: 0 0 8px 0,
-                        //            @_icon-font-position: before
-                        //        );
-                        //        .lib-vendor-prefix-display();
-                        //        .lib-vendor-prefix-flex-wrap();
-                        //        .lib-font-size(12);
-                        //        align-items: center;
-                        //        vertical-align: top;
-                        //        margin-bottom: 0;
-                        //        text-transform: uppercase;
-                        //
-                        //        a {
-                        //            .lib-css(font-weight, @font-weight__regular);
-                        //        }
-                        //    }
-                        //}
+                        background: @color-white;
+
+                        .menu-content {
+                            width: ~'calc(100% - 20px)';
+                            list-style: none;
+                            padding-left: 0;
+                            margin-left: 10px;
+                            margin-right: 10px;
+                            margin-bottom: 0;
+
+                            .main-item {
+                                padding-block: 16px;
+                                margin-bottom: 0;
+                                border-top: 2px solid @color-kemana-gray5;
+
+                                &:last-of-type {
+                                    margin-bottom: 0;
+                                }
+
+                                a {
+                                    .lib-css(color, @theme__color__primary-alt);
+                                    .lib-css(font-weight, @font-weight__bold);
+
+                                    &:hover {
+                                        text-decoration: none;
+                                    }
+                                }
+
+                                &:nth-child(2) {
+                                    a {
+                                        .lib-icon-font(
+                                            @icon-pg-club,
+                                            @_icon-font: @icon-font,
+                                            @_icon-font-color: @kemana-primary-brand-color,
+                                            @_icon-font-size: 20px,
+                                            @_icon-font-line-height: 20px,
+                                            @_icon-font-margin: 0 10px 0 0,
+                                            @_icon-font-position: before
+                                        );
+                                    }
+
+                                }
+
+
+                                &:nth-child(3) {
+                                    a {
+                                        .lib-icon-font(
+                                            @icon-pg-track,
+                                            @_icon-font: @icon-font,
+                                            @_icon-font-color: @kemana-primary-brand-color,
+                                            @_icon-font-size: 20px,
+                                            @_icon-font-line-height: 20px,
+                                            @_icon-font-margin: 0 10px 0 0,
+                                            @_icon-font-position: before
+                                        );
+                                    }
+
+                                }
+                            }
+
+                            .account-login {
+                                .lib-icon-font(
+                                    @header-account-icon,
+                                    @_icon-font: @icon-font,
+                                    @_icon-font-color: @kemana-primary-brand-color,
+                                    @_icon-font-color-hover: @kemana-primary-brand-color,
+                                    @_icon-font-size: 20px,
+                                    @_icon-font-line-height: 20px,
+                                    @_icon-font-margin: 0 10px 0 0,
+                                    @_icon-font-position: before
+                                );
+                                .lib-vendor-prefix-display();
+                                .lib-vendor-prefix-flex-wrap();
+                                .lib-font-size(12);
+                                align-items: center;
+                                vertical-align: top;
+                                margin-bottom: 0;
+
+                                a {
+                                    .lib-css(font-weight, @font-weight__bold);
+                                }
+                            }
+                        }
                     }
                 }
             }
         }
 
+        .header-right {
+            .header-links-right {
+                display: none;
+            }
+        }
     }
 }
 
@@ -773,12 +839,12 @@
                     > a {
                         .lib-css(font-family, @navigation__font-family);
                         .lib-font-size(@navigation-desktop__font-size);
-                        .lib-line-height(20);
+                        .lib-line-height(19);
                         .lib-css(font-weight, @font-weight__bold);
 
                         span {
                             .lib-font-size(@navigation-desktop__font-size);
-                            .lib-line-height(20);
+                            .lib-line-height(19);
                         }
                     }
 
@@ -817,7 +883,7 @@
 
                         a {
                             .lib-font-size(@navigation-level0-item__font-size);
-                            .lib-line-height(24);
+                            .lib-line-height(13);
                             .lib-css(font-family, @navigation-submenu__font-family);
                             .lib-css(font-weight, @font-weight__regular);
                             .lib-css(color, @kemana-primary-brand-color);
@@ -841,7 +907,8 @@
                     li.level1 {
                         > a {
                             .lib-css(color, @kemana-primary-brand-color);
-                            padding: 10px 20px !important;
+                            padding: 7px 20px !important;
+                            .lib-line-height(13);
                             border: 0;
                         }
                     }
@@ -859,7 +926,7 @@
                             li.level1 {
                                 width: 310px;
 
-                                a {
+                                > a {
                                     width: 50%;
                                 }
                             }

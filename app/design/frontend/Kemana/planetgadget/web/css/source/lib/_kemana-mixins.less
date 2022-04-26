@@ -367,3 +367,16 @@
     .lib-button-primary();
     //.lib-css(border-radius, @pg_curved_button__border-radius);
 }
+
+// Border Button
+
+.lib-button-border() {
+    .lib-button-primary(
+        @_button-border: 1px solid @kemana-primary-brand-color,
+        @_button-background: @color-white,
+        @_button-background-hover: @kemana-primary-brand-color,
+        @_button-color-hover: @color-white,
+        @_button-border-hover: 1px solid @kemana-primary-brand-color
+    );
+
+}

@@ -1,0 +1,61 @@
+// /**
+//  * Copyright © 2020 Kemana. All rights reserved.
+//  * @author Harshani Karunasekara <hkarunasekara@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+//
+//  Variables
+//  _____________________________________________
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .pg-club-banner-desktop {
+        display: none;
+    }
+
+    .pg-club-banner-mobile {
+        height: 60px;
+        .lib-vendor-prefix-display();
+        background: @kemana-secondary-brand-color;
+
+        img {
+            height: 60px;
+            width: auto;
+            margin-inline: auto;
+        }
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .pg-club-banner-desktop {
+        height: 60px;
+        .lib-vendor-prefix-display();
+        background: @kemana-secondary-brand-color;
+
+        img {
+            height: 60px;
+            width: auto;
+            margin-inline: auto;
+        }
+    }
+
+    .pg-club-banner-mobile {
+        display: none;
+    }
+}
