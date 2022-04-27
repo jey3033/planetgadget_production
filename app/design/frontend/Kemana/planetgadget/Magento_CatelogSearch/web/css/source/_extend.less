@@ -16,9 +16,9 @@
     .block-search {
         margin-top: 1px;
         margin-right: 13px;
-        .lib-css(background, @color-white);
-        border-radius: 5px;
-        height: 40px;
+        //.lib-css(background, @color-white);
+        //border-radius: 5px;
+        //height: 40px;
         padding-block: 10px;
 
         .label {
@@ -37,11 +37,10 @@
         input {
             .lib-css(background, @color-white);
             .lib-css(border, @border-width__base solid @color-white);
-            .lib-css(color, @color-kemana-dark1);
-            font-size: 14px;
+            .lib-css(color, @kemana-primary-brand-color);
+            font-size: 12px;
             padding-left: 15px;
             font-style: normal;
-            letter-spacing: .35px;
             margin: 10px 0;
 
             &:focus {
@@ -65,6 +64,26 @@
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
     .block-search {
+        .control {
+            left: -11px;
+            bottom: -70px;
+            .lib-css(background-color, @color-pg-black2);
+            width: 100%;
+            padding: 10px;
+            margin: 0;
+            z-index: 999;
+            pointer-events: none;
+            transition: .3s all ease;
+
+            input {
+                background: @color-white;
+                border-radius: 5px;
+                padding: 10px 15px;
+                line-height: 20px;
+                height: 40px;
+            }
+        }
+
         .action.search {
             .lib-button-icon(
                 @_icon-font-content: @icon-remove,
@@ -73,6 +92,33 @@
                 @_icon-font-line-height: 21px,
                 @_icon-font-color: @kemana-primary-brand-color
             );
+        }
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .block-search {
+        .label {
+            position: absolute;
+            right : 0;
+            top: 20px;
+        }
+
+        .control {
+            padding: 0;
+
+            .input-text {
+                width: 530px;
+                border-radius: 5px;
+                background: @color-white;
+                line-height: 20px;
+                height: 40px;
+                padding: 10px 15px;
+            }
         }
     }
 }
@@ -87,12 +133,28 @@
 
         .action.search {
             right: 15px;
-            top: 8px;
+            top: 15px;
 
             .lib-icon-font(
                 @_icon-font-content: @icon-pg-close-button,
                 @_icon-font-size: 16px
                 );
+        }
+    }
+}
+
+//
+//  Desktop Extra Large
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xl) {
+    .block-search {
+        width: 530px;
+        max-width: none;
+
+        input {
+            opacity: 1;
+
         }
     }
 }
