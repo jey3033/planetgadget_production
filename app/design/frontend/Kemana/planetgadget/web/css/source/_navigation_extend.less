@@ -14,6 +14,36 @@
             display: none;
         }
     }
+
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .nav-open {
+        .page-wrapper {
+            .header-left {
+                > .nav-toggle {
+                    left: 0;
+                    top: 7px;
+
+                    .lib-icon-font(
+                        @icon-pg-close-button,
+                        @_icon-font-size: 20px,
+                        @_icon-font-color: @color-white
+                    );
+
+                    &:after {
+                        top: 48px;
+                    }
+                }
+            }
+
+        }
+
+    }
 }
 
 //
@@ -56,7 +86,9 @@
                 }
             }
 
-            &.active {
+
+            &.active,
+            &.has-active {
                 > .level-top {
                     &:before {
                         .lib-css (color, @kemana-secondary-brand-color);

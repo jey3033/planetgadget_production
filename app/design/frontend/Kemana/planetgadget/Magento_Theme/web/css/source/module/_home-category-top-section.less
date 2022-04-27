@@ -66,12 +66,14 @@
                     list-style: none;
                     .lib-vendor-prefix-display();
                     .lib-vendor-prefix-flex-wrap();
+                    margin-inline: -5px;
 
                     .category-item {
                         width: 50%;
                         margin: 0;
 
                         .category-item-container {
+                            position: relative;
                             margin: 5px;
                             height: 64px;
                         }
@@ -80,15 +82,20 @@
 
                 .category-item-left {
                     padding: 10px;
+                    position: relative;
+                    z-index: 2;
 
                     .category-short-description {
                         display: none;
                     }
                 }
                 .category-item-right {
+                    position: absolute;
+                    right: 0;
+
                     .category-image {
                         img {
-                            width: 64px !important;
+                            width: 64px;
                             height: 64px;
                         }
                     }
@@ -123,19 +130,27 @@
 
                     .category-item {
                         .category-item-container {
+                            position: relative;
                             margin: 10px;
+                            height: 120px;
                         }
                     }
                 }
 
                 .category-item-left {
-                    padding: 20px;
+                    padding: 20px 0 20px 20px;
+                    position: absolute;
+                    z-index: 2;
+                    width: ~'calc(100% - 100px)';
                 }
 
                 .category-item-right {
+                    position: absolute;
+                    right: 0;
+
                     .category-image {
                         img {
-                            width: 120px !important;
+                            width: 120px;
                             height: 120px;
                         }
                     }

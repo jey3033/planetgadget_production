@@ -14,6 +14,39 @@
             display: none;
         }
     }
+
+    .top-wrapper-links {
+        .help-info-content {
+            .text {
+                .lib-line-height(20px);
+                width: 100%;
+
+                &.phone {
+                    .lib-icon-font(
+                        @icon-pg-phone,
+                        @_icon-font-size: 20px,
+                        @_icon-font-margin: 0 10px 0 0
+                    );
+                }
+
+                &.email {
+                    .lib-icon-font(
+                        @icon-pg-email,
+                        @_icon-font-size: 20px,
+                        @_icon-font-margin: 0 10px 0 0
+                    );
+                }
+
+                &.live-chat {
+                    .lib-icon-font(
+                        @icon-pg-livechat,
+                        @_icon-font-size: 20px,
+                        @_icon-font-margin: 0 10px 0 0
+                    );
+                }
+            }
+        }
+    }
 }
 
 //
@@ -26,6 +59,43 @@
             display: none;
         }
     }
+
+    .top-wrapper-links {
+        a.help-info-toggle {
+            padding-bottom: 16px;
+            display: block;
+            width: 100%;
+        }
+
+        .help-info-content {
+            display: block !important;
+            margin-inline: -10px;
+            background: @color-white;
+            .lib-font-size(10);
+            .lib-line-height(16);
+
+            .heading {
+                padding: 13px 10px;
+                font-weight: @font-weight__bold;
+            }
+
+            .text {
+                padding: 13px 10px;
+
+                &:hover  {
+                    .lib-css(background, @color-pg-light-gray2);
+                }
+            }
+
+            .time {
+                padding: 13px 10px;
+
+                span {
+                    font-weight: @font-weight__bold;
+                }
+            }
+        }
+    }
 }
 
 //
@@ -35,7 +105,7 @@
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
     .page-header {
         .header-top-wrapper {
-            padding-block: 6px;
+            padding: 6px 10px;
             transition: .3s all ease;
 
             .header-top-wrapper-right {
@@ -44,7 +114,7 @@
                     .lib-css(color, @color-white);
                     padding-inline: 10px;
                     .lib-font-size(10);
-                    .lib-line-height(16);
+                    .lib-line-height(20);
                 }
 
                 li {
@@ -58,7 +128,7 @@
                         .lib-icon-font(
                             @_icon-font-content: @icon-pg-down-thick,
                             @_icon-font-size: 9px,
-                            @_icon-font-line-height: 16px,
+                            @_icon-font-line-height: 20px,
                             @_icon-font-position: after,
                             @_icon-font-margin: 0 0 0 10px
                         );
@@ -79,6 +149,7 @@
                         padding: @indent__base 0;
                         border-radius: 5px;
                         display: none;
+                        min-width: 256px;
 
                         &:after {
                             content: "";
@@ -98,11 +169,30 @@
                         }
 
                         .text {
-                            .lib-line-height(20);
-                            padding: 12px @indent__base;
+                            .lib-line-height(24);
+                            padding: @indent__s @indent__base;
+                            .lib-vendor-prefix-display();
 
                             &:hover {
                                 .lib-css(background-color, @color-pg-light-gray2);
+                            }
+
+                            &.phone {
+                                &:before {
+                                    .lib-font-size(24);
+                                }
+                            }
+
+                            &.email {
+                                &:before {
+                                    .lib-font-size(24);
+                                }
+                            }
+
+                            &.live-chat {
+                                &:before {
+                                    .lib-font-size(24);
+                                }
                             }
                         }
 

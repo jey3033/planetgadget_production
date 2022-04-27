@@ -134,7 +134,6 @@
                     .lib-vendor-prefix-display();
 
                     li {
-                        .lib-css(color, @color-white);
                         padding: 0;
                         .lib-line-height(16);
                         text-transform: uppercase;
@@ -142,7 +141,7 @@
 
                         a {
                             display: inline-block;
-                            .lib-css(color, @color-white);
+
                             .lib-font-size(10);
                             .lib-line-height(10);
                             padding: 0 5px;
@@ -324,7 +323,7 @@
         }
 
         .nav-sections {
-            .lib-css(background, @color-kemana-gray4);
+            .lib-css(background, @color-pg-light-gray3);
             @_shadow: 0 0 5px 0 rgba(50, 50, 50, .75);
             .lib-css(box-shadow, @_shadow, 1);
             left: 0;
@@ -441,7 +440,7 @@
         }
 
         .mobile-menu-inner {
-            padding: 20px 15px;
+            padding: 40px 15px 20px;
             position: relative;
 
             .language-currency-wrapper {
@@ -599,20 +598,17 @@
                     margin-bottom: 0;
 
                     .account-menu_content {
-                        background: @color-white;
-
                         .menu-content {
-                            width: ~'calc(100% - 20px)';
+                            background: @color-white;
+                            width: 100%;
                             list-style: none;
-                            padding-left: 0;
-                            margin-left: 10px;
-                            margin-right: 10px;
+                            padding: 0 10px;
                             margin-bottom: 0;
 
                             .main-item {
                                 padding-block: 16px;
                                 margin-bottom: 0;
-                                border-top: 2px solid @color-kemana-gray5;
+                                border-top: 1px solid @color-pg-light-gray2;
 
                                 &:last-of-type {
                                     margin-bottom: 0;
@@ -682,6 +678,36 @@
                                 }
                             }
                         }
+
+                        .menu-content-2 {
+                            width: 100%;
+                            list-style: none;
+                            padding: 0 10px;
+                            margin-bottom: 0;
+
+                            .main-item {
+                                padding-block: 16px;
+                                margin-bottom: 0;
+                                border-top: 1px solid @color-pg-light-gray2;
+
+                                &:first-child {
+                                    border-top: 0;
+                                }
+
+                                &:last-of-type {
+                                    margin-bottom: 0;
+                                }
+
+                                a {
+                                    .lib-css(color, @theme__color__primary-alt);
+                                    .lib-css(font-weight, @font-weight__heavier);
+
+                                    &:hover {
+                                        text-decoration: none;
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -695,13 +721,14 @@
                 width: 30px;
                 height: 48px;
                 z-index: 1;
-                top: -2px;
+                top: -5px;
                 right: 43px;
                 left: unset;
 
                 &:before {
                     .lib-css (color, @color-white);
                     .lib-font-size(23);
+                    .lib-line-height(23);
                 }
             }
 
@@ -823,6 +850,20 @@
             .lib-css(width, @header-logo-desktop-width);
             margin-left: 45px;
         }
+
+        .language-currency-wrapper {
+            .language-currency-block {
+                .language {
+                    li {
+                        .lib-css(color, @color-white);
+
+                        a {
+                            .lib-css(color, @color-white);
+                        }
+                    }
+                }
+            }
+        }
     }
 
     .nav-toggle {
@@ -859,6 +900,16 @@
         .header-right {
             .language-currency-wrapper {
                 display: inline-block;
+
+                .language-currency-block {
+                    .language {
+                        li {
+                            a {
+                                .lib-css(color, @color-white);
+                            }
+                        }
+                    }
+                }
             }
         }
 
