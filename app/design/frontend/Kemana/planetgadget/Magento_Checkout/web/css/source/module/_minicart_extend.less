@@ -49,7 +49,20 @@
                     }
                 }
             }
+
+            &.delete {
+                .lib-icon-font-symbol(@_icon-font-content: @icon-pg-close-button);
+
+                &:before {
+                    vertical-align: top;
+                }
+            }
         }
+    }
+
+    .block-minicart {
+
+
     }
 }
 
@@ -159,6 +172,15 @@
                         &.empty {
                             .lib-font-size(12);
                             font-weight: @font-weight__bold;
+
+                            &:before {
+                                content: '';
+                                width: 140px;
+                                height: 110px;
+                                display: block;
+                                background: url(../images/empty-cart.svg) center no-repeat;
+                                margin: 0 auto 20px;
+                            }
                         }
                     }
                 }

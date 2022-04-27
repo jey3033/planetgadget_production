@@ -30,13 +30,27 @@
                     .product-items {
                         margin-bottom: 0;
 
+                        .slick-track {
+                            .slick-slide {
+                                > div {
+                                    height: 100%;
+                                }
+                            }
+                        }
+
                         .product-item {
                             padding-inline: 10px;
+                            height: 100%;
 
                             .product-item-info {
                                 .lib-css(background-color, @color-white);
-                                padding-inline: 10px;
+                                padding: 10px;
                                 border-radius: 5px;
+                                height: 100%;
+
+                                .product-image-wrapper {
+                                    padding-bottom: 100%!important;
+                                }
                             }
                         }
                     }
@@ -62,6 +76,7 @@
                     .slick-track {
                        // width: 100% !important;
                     }
+
                     .product-items {
                         width: 100%;
 
