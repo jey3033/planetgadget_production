@@ -16,23 +16,6 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
-        <referenceContainer name="content">
-            <referenceBlock name="home-page-how-it-works" remove="true"/>
-            <container name="how-it-works" as="how-it-works">
-                <block class="Magento\Cms\Block\Block" name="how-it-works-footer">
-                    <arguments>
-                        <argument name="block_id" xsi:type="string">home-page-how-it-works</argument>
-                    </arguments>
-                </block>
-            </container>
-        </referenceContainer>
-        <move element="how-it-works" destination="footer" before="-"/>
-        <block class="Magento\Cms\Block\Block" name="footer-social-icon-section">
-            <arguments>
-                <argument name="block_id" xsi:type="string">footer-social-icon-section</argument>
-            </arguments>
-        </block>
-        <move element="footer-social-icon-section" destination="main.footer" after="footer-address-section"/>
         <referenceContainer name="header-right">
             <container name="header_right_links" as="header_right_links" htmlTag="div" htmlClass="header-links-right">
                 <block class="Magento\Framework\View\Element\Html\Link" name="custom-top-link-pg-club">
@@ -50,5 +33,22 @@
                 </block>
             </container>
         </referenceContainer>
+        <referenceContainer name="content">
+            <referenceBlock name="home-page-how-it-works" remove="true"/>
+            <container name="how-it-works" as="how-it-works">
+                <block class="Magento\Cms\Block\Block" name="how-it-works-footer">
+                    <arguments>
+                        <argument name="block_id" xsi:type="string">home-page-how-it-works</argument>
+                    </arguments>
+                </block>
+            </container>
+        </referenceContainer>
+        <move element="how-it-works" destination="footer" before="-"/>
+        <block class="Magento\Cms\Block\Block" name="footer-social-icon-section">
+            <arguments>
+                <argument name="block_id" xsi:type="string">footer-social-icon-section</argument>
+            </arguments>
+        </block>
+        <move element="footer-social-icon-section" destination="main.footer" after="footer-address-section"/>
     </body>
 </page>

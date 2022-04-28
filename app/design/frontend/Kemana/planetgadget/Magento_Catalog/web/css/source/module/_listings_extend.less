@@ -16,7 +16,7 @@
 
 @plp-product-item-title__height: auto;
 
-@plp-product-item-img-overlay__background: rgba(0, 0, 0, 0.2);
+@plp-product-item-img-overlay__background: rgba(225, 225, 225, 0.5);
 
 @product-price__font-family: @font-family-name__base;
 @product-price__font-size: 14;
@@ -45,5 +45,22 @@
 //  _____________________________________________
 
 & when (@media-common = true) {
+    .product-item {
+        .product-item-info {
 
+        }
+
+        .special-price,
+        .minimal-price {
+            .lib-line-height(16);
+
+            .price-wrapper {
+                .lib-line-height(16);
+            }
+        }
+
+        .old-price {
+            margin-left: 0;
+        }
+    }
 }

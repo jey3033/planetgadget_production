@@ -316,6 +316,9 @@ define([
                 settings: "unslick"
             }]
     })
+    .on('setPosition', function (event, slick) {
+        slick.$slides.css('height', slick.$slideTrack.height() + 'px');
+    });
 
     /**
      * 19.Login password show/hide
@@ -367,6 +370,6 @@ define([
      */
 
     $("#menu-main-menu > .menu-parent-item").hover(function(){
-        $('#menu_overlay').fadeToggle();
-    })
+        $('.modals-overlay').fadeToggle();
+    });
 });
