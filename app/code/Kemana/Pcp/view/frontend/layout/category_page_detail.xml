@@ -25,13 +25,8 @@
             </arguments>
         </block>
 
-        <container name="pcp_title" as="pcp_title" label="Category Page Title" htmlTag="div"
-                   htmlClass="category-detail-title" before="-">
-            <block class="Kemana\Pcp\Block\Category" name="category_title" template="Kemana_Pcp::page/title.phtml"/>
-        </container>
-
         <container name="pcp_banner" as="pcp_banner" label="Category Page Banner" htmlTag="div"
-                   htmlClass="category-detail-banner" after="pcp_title">
+                   htmlClass="category-detail-banner" after="-">
             <block class="Kemana\Pcp\Block\Category" name="category_banner" template="Kemana_Pcp::page/banner.phtml"/>
         </container>
 

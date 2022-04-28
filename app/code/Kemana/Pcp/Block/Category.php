@@ -137,6 +137,26 @@ class Category extends \Magento\Framework\View\Element\Template
     public function _prepareLayout()
     {
         $this->pageConfig->getTitle()->set(__($this->getPageTitle()));
+
+        if ($breadcrumbsBlock = $this->getLayout()->getBlock('breadcrumbs')) {
+            $breadcrumbsBlock->addCrumb(
+                'home',
+                [
+                    'label' => __('Home'),
+                    'title' => __('Home'),
+                    'link' => $this->getUrl()
+                ]
+            );
+            $breadcrumbsBlock->addCrumb(
+                'category',
+                [
+                    'label' => __($this->getPageTitle()),
+                    'title' => __($this->getPageTitle()),
+                    'link' => false
+                ]
+            );
+        }
+
         return parent::_prepareLayout();
     }
 
