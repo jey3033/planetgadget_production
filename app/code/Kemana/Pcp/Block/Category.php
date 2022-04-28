@@ -129,4 +129,31 @@ class Category extends \Magento\Framework\View\Element\Template
 
         return $skus;
     }
+
+    /**
+     * @return Category
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function _prepareLayout()
+    {
+        $this->pageConfig->getTitle()->set(__($this->getPageTitle()));
+        return parent::_prepareLayout();
+    }
+
+    /**
+     * @return string|null
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function getPageTitle() {
+        $title = null;
+
+        $category = $this->helper->loadCategory();
+        if ($category) {
+            $title = $category->getName();
+        }
+
+        return $title;
+    }
+
+
 }
