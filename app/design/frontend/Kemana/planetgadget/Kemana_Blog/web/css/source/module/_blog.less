@@ -52,17 +52,13 @@
         .post-item-wrapper {
             .lib-vendor-prefix-display();
             .lib-vendor-prefix-flex-direction(column);
-
-
-            .post-image {
-                border-radius: 5px 5px 0 0;
-            }
+            .lib-css(background-color, @color-white);
+            height: 100%;
+            border-radius: 5px;
 
             .post-info-wrapper {
                 float: left;
-                .lib-css(background-color, @color-white);
-                padding: 20px;
-                border-radius: 0 0 5px 5px;
+                padding: 18px 20px;
 
                 .mp-post-info,
                 .mp-post-meta-info {
@@ -71,6 +67,13 @@
 
                 .mp-post-title {
                     .lib-heading(h5);
+                    margin-bottom: 16px;
+                }
+
+                .post-short-description {
+                    p {
+                        margin-bottom: 8px;
+                    }
                 }
             }
         }

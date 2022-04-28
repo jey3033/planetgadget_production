@@ -36,14 +36,6 @@
             &.showcart {
                 position: relative;
 
-                &:before {
-                    position: absolute;
-                    display: block;
-                    top: 0;
-                    left: 50%;
-                    transform: translateX(-50%);
-                }
-
                 &:hover {
                     .text {
                         .lib-css(color, @kemana-secondary-brand-color);
@@ -57,7 +49,20 @@
                     }
                 }
             }
+
+            &.delete {
+                .lib-icon-font-symbol(@_icon-font-content: @icon-pg-close-button);
+
+                &:before {
+                    vertical-align: top;
+                }
+            }
         }
+    }
+
+    .block-minicart {
+
+
     }
 }
 
@@ -66,7 +71,16 @@
 //  _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
-
+    .minicart-wrapper {
+        .action {
+            &.showcart {
+                &:before {
+                    .lib-font-size(23);
+                    .lib-line-height(48);
+                }
+            }
+        }
+    }
 }
 
 //
@@ -96,6 +110,11 @@
                 padding-inline: 15px;
 
                 &:before {
+                    position: absolute;
+                    display: block;
+                    top: 0;
+                    left: 50%;
+                    transform: translateX(-50%);
                     .lib-font-size(23);
                     .lib-line-height(36);
                 }
@@ -153,6 +172,15 @@
                         &.empty {
                             .lib-font-size(12);
                             font-weight: @font-weight__bold;
+
+                            &:before {
+                                content: '';
+                                width: 140px;
+                                height: 110px;
+                                display: block;
+                                background: url(../images/empty-cart.svg) center no-repeat;
+                                margin: 0 auto 20px;
+                            }
                         }
                     }
                 }

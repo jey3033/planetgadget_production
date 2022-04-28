@@ -27,28 +27,26 @@ $mode ?>">
                         $imageUrl = ($_item->getImageUrl()) ? $_item->getImageUrl() : $block->getImagePlaceholder();
                         ?>
                         <li class="category-item">
+                            <a href="<?= $_item->getUrl(); ?>">
                             <div class="category-item-container">
                                 <div class="category-item-left">
-                                    <a href="<?= $_item->getUrl(); ?>">
-                                        <div class="category-name" href="<?= $_item->getUrl(); ?>">
-                                            <?= $block->escapeHtml($_item->getName()) ?>
-                                        </div>
-                                    </a>
+                                    <div class="category-name" href="<?= $_item->getUrl(); ?>">
+                                        <?= $block->escapeHtml($_item->getName()) ?>
+                                    </div>
                                     <div class="category-short-description">
                                         <?= $block->escapeHtml($_item->getShortDescription()) ?>
                                     </div>
                                 </div>
                                 <div class="category-item-right">
-                                    <a href="<?= $_item->getUrl(); ?>">
-                                        <div class="category-image">
-                                            <?php if ($imageUrl != null): ?>
-                                                <img src="<?= $imageUrl; ?>"
-                                                     alt="<?= $_item->getName(); ?>"/>
-                                            <?php endif; ?>
-                                        </div>
-                                    </a>
+                                    <div class="category-image">
+                                        <?php if ($imageUrl != null): ?>
+                                            <img src="<?= $imageUrl; ?>"
+                                                 alt="<?= $_item->getName(); ?>"/>
+                                        <?php endif; ?>
+                                    </div>
                                 </div>
                             </div>
+                            </a>
                         </li>
                     <?php endforeach ?>
                 </ol>

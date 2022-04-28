@@ -1,0 +1,76 @@
+<?php
+/**
+ * Copyright © 2020 PT Kemana Teknologi Solusi. All rights reserved.
+ * http://www.kemana.com
+ */
+
+/**
+ * @category Kemana
+ * @package  Kemana_SocialLogin
+ * @license  Proprietary
+ *
+ * @author   Aranga Wijesooriya <awijesooriya@kemana.com>
+ */
+?>
+<div class="social-login block-container authentication">
+    <div class="social-login-title">
+        <h2 class="login-title"><?= $escaper->escapeHtml(__('Login to Planet Gadget')) ?></h2>
+    </div>
+    <div class="block social-login-customer-authentication col-mp mp-12" id="social-login-authentication">
+        <!--<div class="block-title">
+            <span id="block-customer-login-heading" role="heading"
+                  aria-level="2"><?/*= __('Registered Customers') */?></span>
+        </div>-->
+        <div class="block-content" aria-labelledby="block-customer-login-heading">
+            <form class="form-customer-login" id="social-form-login" data-mage-init='{"validation":{}}'>
+                <?= $block->getBlockHtml('formkey') ?>
+                <fieldset class="fieldset login" data-hasrequired="<?= $escaper->escapeHtml(__('* Required Fields')) ?>">
+                    <?= $block->getChildHtml('form_before_login_fields') ?>
+                    <div class="field email required">
+                        <label class="label" for="email"><span><?= $escaper->escapeHtml(__('Email')) ?></span></label>
+                        <div class="control">
+                            <input name="username" id="social_login_email" type="email" class="input-text" placeholder="Enter your email"
+                                   value="<?= $block->escapeHtml($block->getUsername()) ?>"<?php if ($block->isAutocompleteDisabled()) :
+                                        ?> autocomplete="off"<?php endif; ?>
+                                   title="<?= $escaper->escapeHtml(__('Email')) ?>"
+                                   data-validate="{required:true, 'validate-email':true}" data-msg-required="<?= $escaper->escapeHtml(__('Please enter your email'))?>">
+                        </div>
+                    </div>
+                    <div class="field password required">
+                        <label class="label" for="password"><span><?= $escaper->escapeHtml(__('Password')) ?></span></label>
+                        <div class="control">
+                            <input name="password" id="social_login_pass" type="password" placeholder="Enter your password"
+                                   class="input-text"
+                                <?= $block->isAutocompleteDisabled() ? ' autocomplete="off"' : '' ?>
+                                   title="<?= $escaper->escapeHtml(__('Password')) ?>"
+                                   data-validate="{required:true, 'validate-password':true}" data-msg-required="<?= $escaper->escapeHtml(__('Please enter your Password'))?>">
+                                <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                                <i class="fa fa-eye" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="remember-me-container">
+                        <?= $block->getChildHtml('form_additional_info') ?>
+                        <div class="secondary forget-password">
+                            <a class="action remind" href="<?= $block->escapeUrl($block->getForgotPasswordUrl()) ?>"><span><?= $escaper->escapeHtml(__('Forgot Password?')) ?></span></a>
+                        </div>
+                    </div>
+                    <div class="actions-toolbar">
+                        <div class="primary">
+                            <button type="button" class="action login primary" id="bnt-social-login-authentication">
+                                <span><?= $escaper->escapeHtml(__('Login')) ?></span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="actions-toolbar">
+                        <div class="primary">
+                            <span class="login-inline-message"><?= $escaper->escapeHtml(__('Don\'t have an account?' )) ?></span>
+                            <a class="action create" href="<?= $block->escapeUrl($block->getRegisterUrl()) ?>"><span><?= $escaper->escapeHtml(__('Sign up now')) ?></span></a>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <?= $block->getChildHtml('hover.authentication.social') ?>
+</div>
+
