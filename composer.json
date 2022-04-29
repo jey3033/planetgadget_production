@@ -15,7 +15,7 @@
         },
         "kemana-base": {
             "type": "git",
-            "url": "https://git.kemana.com/kemana-dev/kemana-accelerator-themes/kemana-base.git"
+            "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_base.git"
         },
         "kemana-accelerator-base": {
             "type": "git",
@@ -24,12 +24,98 @@
         "kemana-core": {
             "type": "git",
             "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_core.git"
+        },
+        "kemana-storelocator": {
+            "type": "git",
+            "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_storelocator.git"
+        },
+        "kemana-base-theme": {
+            "type": "git",
+            "url": "https://git.kemana.com/kemana-dev/kemana-accelerator-themes/kemana-base.git"
+        },
+        "kemana-geoip": {
+            "type": "git",
+            "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_geoip.git"
+        },
+        "kemana-whatsapp-chat": {
+            "type": "git",
+            "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_whatsappchat.git"
+        },
+        "kemana-banner": {
+            "type": "git",
+            "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_banner.git"
+        },
+        "kemana-labelmanager": {
+            "type": "git",
+            "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_labelmanager.git"
+        },
+        "module-categoriesenhanced": {
+            "type": "git",
+            "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_categoriesenhanced.git"
+        },
+        "module-sociallogin": {
+            "type": "git",
+            "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_sociallogin.git"
+        },
+        "module-smtp": {
+            "type": "git",
+            "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_smtp.git"
+        },
+        "ks-logistic": {
+            "type": "git",
+            "url": "https://git.kemana.com/m2-extension/logistic.git"
+        },
+        "kemana-module-snap": {
+            "type": "git",
+            "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_snap.git"
+        },
+        "kemana-blog": {
+            "type": "git",
+            "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_blog.git"
+        },
+        "kemana-topcategories": {
+            "type": "git",
+            "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_topcategories.git"
+        },
+        "kemana-brand": {
+            "type": "git",
+            "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana-brand.git"
+        },
+        "kemana-paymentgroupattribute": {
+            "type": "git",
+            "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_paymentgroupattribute.git"
+        },
+        "kemana-paymentshippinglogo": {
+            "type": "git",
+            "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_paymentshippinglogo.git"
+        },
+        "kemana-headertopline": {
+            "type": "git",
+            "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_headertopline.git"
         }
     },
     "require": {
+        "kemana/brand": "dev-release-Staging-243",
+        "kemana/kemana_base": "2.43.0",
+        "kemana/kemana_geoip": "2.43.0",
+        "kemana/kemana_paymentphippinglogo": "2.43.0",
+        "kemana/kemana_storelocator": "2.43.2",
         "kemana/module-accelerator-base": "dev-release-Staging-243",
+        "kemana/module-banner": "2.43.1",
+        "kemana/module-blog": "2.43.0",
+        "kemana/module-categoriesenhanced": "2.43.1",
         "kemana/module-core": "2.43.0",
+        "kemana/module-header-top-line": "dev-release-Staging-243",
+        "kemana/module-labelmanager": "2.43.2",
+        "kemana/module-payment-group-attribute": "2.43.0",
+        "kemana/module-smtp": "2.43.0",
+        "kemana/module-snap": "2.43.2",
+        "kemana/module-social-login": "2.43.3",
+        "kemana/module-top-categories": "2.43.0",
+        "laminas/laminas-log": "^2.15",
+        "kemana/module-whatsapp-chat": "dev-release-Staging-241",
         "kemana/theme-frontend-base": "dev-release-Staging-243",
+        "ks/logistic": "dev-release-Staging-243",
         "magento/composer-root-update-plugin": "~1.1",
         "magento/magento-cloud-metapackage": ">=2.4.3 <2.4.4"
     },

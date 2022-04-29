@@ -1,0 +1,244 @@
+// /**
+//  * Copyright © 2020 Kemana. All rights reserved.
+//  * @author Harshani Karunasekara <hkarunasekara@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+//
+//  Variables
+//  _____________________________________________
+
+@minicart-header-icon: @icon-pg-cart;
+@minicart-header-icon__font-size: 30px;
+@minicart-header-icon__line-height: 50px;
+@minicart-header-icon-desktop__font-size: 21px;
+@minicart-header-icon-desktop__line-height: 21px;
+
+@minicart__padding-horizontal: 20px;
+
+@minicart-product-name-size: 12;
+
+@minicart-price__font-size: 12;
+@minicart-price__font-weight: @font-weight__bold;
+
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+
+    //
+    //  Minicart
+    //  ---------------------------------------------
+    .minicart-wrapper {
+        .action {
+            &.showcart {
+                position: relative;
+
+                &:hover {
+                    .text {
+                        .lib-css(color, @kemana-secondary-brand-color);
+                    }
+                }
+
+                .counter {
+                    &.qty {
+                        .lib-css(background, @color-pg-red);
+                        .lib-css(color, @color-white);
+                    }
+                }
+            }
+
+            &.delete {
+                .lib-icon-font-symbol(@_icon-font-content: @icon-pg-close-button);
+
+                &:before {
+                    vertical-align: top;
+                }
+            }
+        }
+    }
+
+    .block-minicart {
+
+
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .minicart-wrapper {
+        .action {
+            &.showcart {
+                &:before {
+                    .lib-font-size(23);
+                    .lib-line-height(48);
+                }
+            }
+        }
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .minicart-wrapper {
+        .mage-dropdown-dialog {
+            &:before {
+                content: "";
+                background: @color-white;
+                position: absolute;
+                right: 36%;
+                top: 63px;
+                width: 10px;
+                height: 10px;
+                transform: rotate(-45deg);
+                display: block;
+                z-index: 102;
+            }
+        }
+        .action {
+            &.showcart {
+                padding-top: 36px;
+                position: relative;
+                padding-inline: 15px;
+
+                &:before {
+                    position: absolute;
+                    display: block;
+                    top: 0;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    .lib-font-size(23);
+                    .lib-line-height(36);
+                }
+
+                &.active {
+                    &:before {
+                        .lib-font-size(23);
+                        .lib-line-height(36);
+                        .lib-css(color, @kemana-secondary-brand-color);
+                    }
+
+                    &:hover {
+                        &:before {
+                            .lib-css(color, @kemana-secondary-brand-color);
+                        }
+                    }
+                }
+
+                &:hover {
+                    &:before {
+                        .lib-css(color, @kemana-secondary-brand-color);
+                    }
+                }
+
+                .text {
+                    &:extend(.abs-visually-hidden-reset all);
+                    .lib-font-size(10);
+                    font-weight: @font-weight__semibold;
+                    .lib-css(color, @color-white);
+                    white-space: nowrap;
+                    padding-inline: 0;
+                    position: static;
+                }
+
+                .counter {
+                    &.qty {
+                        right: 4px;
+                        top: 0;
+                        min-width: 20px;
+                        height: 20px;
+                        line-height: 20px;
+                    }
+                }
+            }
+        }
+
+        .block-minicart {
+            top: 68px;
+            width: 310px;
+            border-radius: 5px;
+
+            .block-content {
+                &.message-empty {
+                    .subtitle {
+                        &.empty {
+                            .lib-font-size(12);
+                            font-weight: @font-weight__bold;
+
+                            &:before {
+                                content: '';
+                                width: 140px;
+                                height: 110px;
+                                display: block;
+                                background: url(../images/empty-cart.svg) center no-repeat;
+                                margin: 0 auto 20px;
+                            }
+                        }
+                    }
+                }
+
+                .minicart-items {
+                    .product-item-name {
+                        .lib-line-height(@minicart-product-name-size + 8);
+                        height: 20px;
+                    }
+
+                    .product-item-details {
+                        .price {
+
+                        }
+                    }
+                }
+
+                .subtotal {
+                    .lib-vendor-prefix-display();
+                    justify-content: space-between;
+
+                    .label {
+                        .lib-font-size(14);
+                        .lib-css(font-weight, @font-weight__bold);
+                        text-transform: none;
+                    }
+
+                    .amount {
+                        .price-wrapper {
+                            .price {
+                                .lib-font-size(14);
+                                .lib-css(font-weight, @font-weight__bold);
+                            }
+                        }
+                    }
+                }
+
+                > .actions {
+                    .lib-vendor-prefix-display();
+                    .lib-vendor-prefix-flex-direction(column);
+
+                    > .secondary,
+                    > .primary {
+                        width: 100%;
+                        max-width: 100%;
+                    }
+
+                    > .primary {
+                        margin-bottom: @indent__s;
+                        order: 1;
+                    }
+
+                    > .secondary {
+                        order: 2;
+                    }
+
+                }
+            }
+        }
+    }
+}

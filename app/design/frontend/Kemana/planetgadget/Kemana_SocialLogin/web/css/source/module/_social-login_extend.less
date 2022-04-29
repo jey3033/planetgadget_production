@@ -1,0 +1,211 @@
+// /**
+//  * Copyright © 2022 Kemana. All rights reserved.
+//  * @author Harshani Karunasekara <hkarunasekara@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .top-link {
+        position: relative;
+
+        .account-menu {
+            margin-bottom: 0;
+
+            .menu-content {
+                margin-bottom: 0;
+                padding: 0;
+
+                .main-item {
+                    .lib-font-size(10);
+                    .lib-css(font-weight, @font-weight__semibold);
+                    display: block;
+                    .lib-icon-font(
+                        @icon-pg-account,
+                        @_icon-font: @icon-font,
+                        @_icon-font-color: @header-account-icon__color,
+                        @_icon-font-color-hover: @header-account-icon__color-hover,
+                        @_icon-font-size: @top-header-icon__font-size,
+                        @_icon-font-line-height: @top-header-icon__line-height,
+                        @_icon-font-margin: 0,
+                        @_icon-font-position: before
+                    );
+                    vertical-align: top;
+
+                    a {
+                        .lib-css(width, unset);
+                        .lib-css(height, unset);
+                        display: block;
+                        //position: absolute;
+                        //left: 0;
+                        //top: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .top-link {
+        .account-menu {
+            ul.menu-content {
+                li.main-item {
+                    &:before {
+                        .lib-font-size(23);
+                        .lib-line-height(48);
+                    }
+
+                    a {
+                        font-size: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .page-header {
+        .account-detail__content {
+            z-index: 9999 !important;
+            top: 68px;
+            right: -100px !important;
+
+            &.social-login-accordion {
+                &:after {
+                    content: "";
+                    width: 10px;
+                    height: 10px;
+                    transform: rotate(-45deg);
+                    background: #fff;
+                    position: absolute;
+                    z-index: -1;
+                    top: -5px;
+                    right: 120px;
+                }
+
+                .social-login-title {
+                    display: block;
+                    h2 {
+                        .lib-font-size(16);
+                        .lib-line-height(22);
+                    }
+                    font-weight: @font-weight__regular;
+                }
+
+                .list-info {
+                    li {
+                        a {
+                            .lib-css(font-weight, @social-login-header-login-button__font-weight);
+                        }
+                    }
+                }
+
+                .actions-toolbar {
+                    .primary {
+                        .login-inline-message {
+                            padding-top: @indent__base;
+                        }
+                    }
+                }
+
+                .account-social-login {
+                    .btn-social {
+                        &.btn-facebook,
+                        &.btn-google {
+                            .lib-font-size(12);
+                        }
+                    }
+                }
+            }
+        }
+
+        .header-right {
+            .top-link {
+                margin: 0 15px;
+                //position: relative;
+                //top: -8px;
+
+                .account-menu {
+                    .menu-content {
+                        .main-item {
+                            width: 100%;
+                            height: 100%;
+                            position: relative;
+                            padding-top: 36px;
+
+                            &:before {
+                                position: absolute;
+                                top: 0;
+                                left: 50%;
+                                transform: translateX(-50%);
+                                line-height: 28px;
+                                margin-bottom: 8px;
+                                text-align: center;
+                            }
+
+                            a {
+                                width: auto;
+                                position: static;
+                                .lib-css(color, @color-white);
+
+                            }
+
+                            &.customer-login-link {
+                                &:hover {
+                                    &:before {
+                                        .lib-css(color, @kemana-secondary-brand-color);
+                                    }
+
+                                    a {
+                                        .lib-css(color, @kemana-secondary-brand-color);
+                                        text-decoration: none;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    //.top-link {
+    //    .account-menu {
+    //        .menu-content {
+    //
+    //
+    //            .main-item {
+    //                width: unset;
+    //                padding-inline: 15px;
+    //
+    //                &:before {
+    //                    position: absolute;
+    //                    display: block;
+    //                    top: 0;
+    //                    left: 50%;
+    //                    transform: translateX(-50%);
+    //                }
+    //
+    //                a {
+    //                    display: block;
+    //                    width: auto;
+    //                    padding-inline: 15px;
+    //
+    //                }
+    //            }
+    //        }
+    //    }
+    //}
+}

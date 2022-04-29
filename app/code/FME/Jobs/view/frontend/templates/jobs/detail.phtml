@@ -1,0 +1,282 @@
+<?php
+/**
+ * FME Extensions
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the fmeextensions.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.fmeextensions.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category  FME
+ * @package   FME_Jobs
+ * @copyright Copyright (c) 2019 FME (http://fmeextensions.com/)
+ * @license   https://fmeextensions.com/LICENSE.txt
+ */
+ ?>
+<link href="https://fonts.googleapis.com/css?family=Saira:400,500,600,700,800" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script> 
+<?php 
+      $currdatetime = $block->getCurrDateTime();
+      $arrCurrDateTime = (array)$currdatetime;
+      $arrCurrDateTime = $arrCurrDateTime['date'];
+      $item = $block->getJobDetail();
+      $item = $item->getData();
+      if (empty($item)) {
+        echo'<div class="title">This Job is not found or not valid for selected store view. Please visit job listing for appropriate jobs.</div>';
+      }
+
+?>
+<?php if (!empty($item)):?>
+<div id="wrapper">
+  <div class="inner_container">
+    <div class="fme_job_manager">
+      <div class="listing full_page">
+        <div class="block">
+          <div class="head">
+            <div class="title">
+              <h2><?php echo __($item[0]['jobs_title']);?></h2>
+              <div class="date"> <span><?php echo __(new Zend_Date(strtotime($item[0]['jobs_publish_date'])))?></span> </div>
+              <div class="company"> <span><?php echo __($block->getDetailPageDepartment($item[0]['jobs_select_departments'])) ?>, <?php echo __($block->getDetailPageDepartment($item[0]['jobs_location'])) ?></span> </div>
+            </div>
+          </div>
+          <div class="callout_btns clearfix">
+          <?php if($block->articlesHelper->getJobSharingOptions()): ?>
+            <div class="social_media_icons">  <span class='st_fblike_hcount'></span><span class='st_twitter_hcount'></span><span class='st_plusone_hcount'></span><span class='st_email_hcount'></span><span class='st_sharethis_hcount'></span>
+            </div>
+            <?php endif;?>            
+            <div class="apply_btn"> <a href="#slide" id="click-me"><?php echo __('Apply') ?></a> </div>
+          </div>
+          <div class="content">
+            <h3><?php echo __('Jobs Description')?></h3>
+            <p><?php echo __($item[0]['jobs_description'])?></p>
+            <h3><?php echo __('Skills Required')?></h3>
+            <p> <?php echo __($item[0]['jobs_required_skills'])?></p>
+            
+            <h4><?php echo __('Job Details')?></h4>
+            <table>
+              <tbody>
+              <?php if(!empty($item[0]['jobs_select_departments'])):?>
+                <tr>
+                  <th><?php echo __('Functional Area:')?></th>
+                  <td><?php echo __($block->getDetailPageDepartment($item[0]['jobs_select_departments'])) ?></td>
+                </tr>
+              <?php endif;?>
+                
+                <?php if(!empty($item[0]['jobs_open_positions'])):?>
+                <tr>
+                  <th><?php echo __('Total Positions:')?></th>
+                  <td><?php echo __($block->getDetailPageDepartment($item[0]['jobs_open_positions'])) ?></td>
+                </tr>
+                <?php endif;?>
+               <?php if(!empty($item[0]['jobs_job_type'])):?> 
+                <tr>
+                  <th><?php echo __('Job Shift:')?></th>
+                  <td><?php echo __($block->getDetailPageDepartment($item[0]['jobs_job_type'])) ?></td>
+                </tr>
+                <?php endif;?>                
+                <?php if(!empty($item[0]['jobs_job_type'])):?>
+                <tr>
+                  <th><?php echo __('Job Location:')?></th>
+                  <td><?php echo __($block->getDetailPageDepartment($item[0]['jobs_location'])) ?></td>
+                </tr>
+                <?php endif;?>
+                <?php if(!empty($item[0]['jobs_gender'])):?>
+                <tr>
+                  <th><?php echo __('Gender:')?></th>
+                  <td><?php echo __($block->getDetailPageDepartment($item[0]['jobs_gender'])) ?></td>
+                </tr>
+                <?php endif;?>
+                <?php if(!empty($item[0]['jobs_min_qualification'])):?>
+                <tr>
+                  <th><?php echo __('Minimum Education:')?></th>
+                  <td><?php echo __($block->getDetailPageDepartment($item[0]['jobs_min_qualification'])) ?></td>
+                </tr>
+                <?php endif;?>
+                <?php if(!empty($item[0]['jobs_career_level'])):?>
+                <tr>
+                  <th><?php echo __('Career Level:')?></th>
+                  <td><?php echo __($block->getDetailPageDepartment($item[0]['jobs_career_level'])) ?></td>
+                </tr>
+                <?php endif;?>
+                <?php if(!empty($item[0]['jobs_min_experience'])):?>
+                <tr>
+                  <th><?php echo __('Minimum Experience:')?></th>
+                  <td><?php echo __($block->getDetailPageDepartment($item[0]['jobs_min_experience'])) ?></td>
+                </tr>
+                <?php endif;?>
+                <?php if(!empty($item[0]['jobs_required_travel'])):?>
+                <tr>
+                  <th><?php echo __('Required Travel:')?></th>
+
+                  <td><?php echo __(($item[0]['jobs_required_travel'] == 0) ? 'No' : 'Yes' )?></td>
+                </tr>
+                <?php endif;?>                
+                <?php if(!empty($item[0]['jobs_applyby_date'])):?>
+                <tr>
+                  <th><?php echo __('Apply Before:')?></th>
+                  <td><?php echo __(new Zend_Date(strtotime($item[0]['jobs_applyby_date'])))?></td>
+                </tr>
+                <?php endif;?>
+                <?php if(!empty($item[0]['jobs_publish_date'])):?>
+                <tr>
+                  <th><?php echo __('Posting Date:')?></th>
+                  <td><?php echo __(new Zend_Date(strtotime($item[0]['jobs_publish_date'])))?></td>
+                </tr>
+                <?php endif;?>
+              </tbody>
+            </table>
+          </div>
+          <script>
+    require(
+        [
+            'jquery',
+            'Magento_Ui/js/modal/modal'
+        ],
+        function(
+            $,
+            modal
+        ) {
+            var options = {
+                type: 'popup',
+                responsive: true,
+                innerScroll: true,
+                title: 'Jobs Application',
+                buttons: [{
+                    text: $.mage.__('Continue'),
+                    class: '',
+                    click: function () {
+                        this.closeModal();
+                    }
+                }]
+            };
+
+            var popup = modal(options, $('#events_popup'));
+            $("#click-me").on('click',function(){ 
+                $("#events_popup").modal("openModal");
+            });
+
+        }
+    );
+</script>
+<script type="text/javascript">
+    function myFunction() {
+
+    var exists = document.getElementById("g-recaptcha-response");
+
+    if(exists == null){
+          }
+          else{
+            var check = document.getElementById("g-recaptcha-response").value;
+           if(check=='' || check == null){
+            document.getElementById("recaptcha").style.border = "1px solid #ea0e0e";
+            return false;
+          }
+          else{
+            document.getElementById("recaptcha").style.border = "none";
+            return true;
+          }
+
+        }
+      }
+    </script>
+
+<div <?php if($block->articlesHelper->getPopupEnable()):?> id="events_popup" style="display: none;" <?php endif; ?> class="events_popup" <?php if(!($block->articlesHelper->getPopupEnable())):?> id="slide" <?php endif;?> >
+<div id="wrapper">
+  <div class="inner_container">
+    <div class="fme_job_manager">
+      <div class="popup_form">
+      <div class="title"><?php echo __($item[0]['jobs_title']);?></div>
+        <form action=<?php  echo $block->getAddApplicationUrl() ?> method="post" enctype="multipart/form-data" data-hasrequired="<?php echo __('* Required Fields') ?>"
+                      data-mage-init='{"validation":{}}'>
+          <fieldset class="fieldset">
+          <input name="jobs_id" id="jobs_id" class="input_field" type="hidden" value="<?php echo __($item[0]['jobs_id'])?>">
+          <input name="jobs_title" id="jobs_title" class="input_field" type="hidden" value="<?php echo __($item[0]['jobs_title'])?>">
+          <input name="jobs_job_type" id="jobs_job_type" class="input_field" type="hidden" value="<?php echo __($block->getDetailPageDepartment($item[0]['jobs_job_type'])) ?>">
+          <input name="jobs_select_departments" id="jobs_select_departments" class="input_field" type="hidden" value="<?php echo __($block->getDetailPageDepartment($item[0]['jobs_select_departments'])) ?>">
+          <input name="jobs_location" id="jobs_location" class="input_field" type="hidden" value="<?php echo __($block->getDetailPageDepartment($item[0]['jobs_location'])) ?>">
+          <!--  -->
+          <div class="field name required">
+            <label ><?php echo __('Full Name*')?></label>
+              <div class="control">
+                <input name="fullname" id="fullname" class="input_field" data-validate="{required:true}">
+              </div>
+           </div>
+          <label ><?php echo __('Email*') ?> </label>
+                <input name="email" id="email" class="input_field" data-validate="{required:true, 'validate-email':true}">
+          <div class="field name required">
+            <label ><?php echo __('Date of Birth*')?></label>
+              <div class="control">
+                <input type="text" class="input_text required-entry" id="dob" name="dob" aria-required="true" >
+              </div>
+           </div>
+           
+           
+   <script>
+     require([
+          "jquery",
+          "mage/calendar"
+     ], function($){
+         $("#dob").calendar({
+              buttonText:"<?php echo __('Select Date') ?>",
+         });
+       });
+   </script>
+           <div class="field name required">
+            <label ><?php echo __('Nationality*')?></label>
+              <div class="control">
+                <input name="nationality" id="nationality" class="input_field" data-validate="{required:true}">
+              </div>
+           </div>
+           <div class="field name required">
+            <label ><?php echo __('Telephone*')?></label>
+              <div class="control">
+                <input name="telephone" id="telephone" class="input_field" data-validate="{required:true}">
+              </div>
+           </div>
+           <div class="field name required">
+            <label ><?php echo __('Address*')?></label>
+              <div class="control">
+                <input name="address" id="address" class="input_field" data-validate="{required:true}">
+              </div>
+           </div>
+           <div class="field name required">
+            <label ><?php echo __('Zipcode*')?></label>
+              <div class="control">
+                <input name="zipcode" id="zipcode" class="input_field" data-validate="{required:true}">
+              </div>
+           </div>
+           <div class="field name required">
+            <label ><?php echo __('C.V File*')?></label>
+              <div class="control">
+                <input type="file" name="cvfile" id="cvfile" class="input_field" data-validate="{required:true}">
+              </div>
+           </div>
+
+           <?php if($block->articlesHelper->isJobsCaptchaEnable()): ?>
+                    <div class="g-recaptcha" name="recaptcha" id="recaptcha" data-sitekey="<?php echo $block->articlesHelper->getJobsCaptchaKey() ?>"></div>          
+                <?php endif; ?>         
+          <button><?php echo __('Submit')?></button>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="footer_bar clearfix"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<?php endif;?>
+

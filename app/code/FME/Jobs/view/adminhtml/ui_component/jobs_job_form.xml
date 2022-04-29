@@ -1,0 +1,534 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * FME Extensions
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the fmeextensions.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.fmeextensions.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category  FME
+ * @package   FME_Jobs
+ * @copyright Copyright (c) 2019 FME (http://fmeextensions.com/)
+ * @license   https://fmeextensions.com/LICENSE.txt
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">jobs_job_form.jobs_form_data_source</item>
+            <item name="deps" xsi:type="string">jobs_job_form.jobs_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Job Information</item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">jobs_job_form</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="string">FME\Jobs\Block\Adminhtml\Job\Edit\BackButton</item>
+            <item name="delete" xsi:type="string">FME\Jobs\Block\Adminhtml\Job\Edit\DeleteButton</item>
+            <item name="reset" xsi:type="string">FME\Jobs\Block\Adminhtml\Job\Edit\ResetButton</item>
+            <item name="save" xsi:type="string">FME\Jobs\Block\Adminhtml\Job\Edit\SaveButton</item>
+            <item name="save_and_continue" xsi:type="string">FME\Jobs\Block\Adminhtml\Job\Edit\SaveAndContinueButton</item>
+        </item>
+    </argument>
+    <dataSource name="jobs_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">FME\Jobs\Model\Job\DataProvider</argument>
+            <argument name="name" xsi:type="string">jobs_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">jobs_id</argument>
+            <argument name="requestFieldName" xsi:type="string">jobs_id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="jobs/job/save"/>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>     
+    <fieldset name="general">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+               <item name="additionalClasses" xsi:type="string">right</item>         
+               <item name="label" xsi:type="string" translate="true">General Form</item>
+               <item name="sortOrder" xsi:type="number">19</item>
+           </item>
+       </argument>        
+       <field name="jobs_id">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="visible" xsi:type="boolean">false</item>
+                <item name="dataType" xsi:type="string">text</item>
+                <item name="formElement" xsi:type="string">input</item>
+                <item name="source" xsi:type="string">job</item>
+                <item name="dataScope" xsi:type="string">jobs_id</item>
+            </item>
+        </argument>
+    </field>        
+
+    <field name="jobs_title">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="dataType" xsi:type="string">text</item>
+                <item name="label" xsi:type="string" translate="true">Job Title</item>
+                <item name="formElement" xsi:type="string">input</item>
+                <item name="source" xsi:type="string">job</item>
+                <item name="sortOrder" xsi:type="number">99</item>
+                <item name="dataScope" xsi:type="string">jobs_title</item>
+                <item name="validation" xsi:type="array">
+                    <item name="required-entry" xsi:type="boolean">true</item>
+                </item>
+            </item>
+        </argument>
+    </field>
+    <field name="jobs_url_key">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="dataType" xsi:type="string">text</item>
+                <item name="label" xsi:type="string" translate="true">Url Key</item>
+                <item name="formElement" xsi:type="string">input</item>
+                <item name="source" xsi:type="string">job</item>
+                <item name="sortOrder" xsi:type="number">100</item>
+                <item name="dataScope" xsi:type="string">jobs_url_key</item>
+                <item name="validation" xsi:type="array">
+                    <item name="required-entry" xsi:type="boolean">true</item>
+                </item>
+            </item>
+        </argument>
+    </field>
+    <field name="jobs_open_positions">
+        <argument name="data" xsi:type="array">        
+            <item name="options" xsi:type="object">FME\Jobs\Model\Job\Source\IsPositions</item>            
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">No. of Positions</item>    
+                <item name="visible" xsi:type="boolean">true</item>
+                <item name="dataType" xsi:type="string">number</item>
+                <item name="formElement" xsi:type="string">select</item>
+                <item name="source" xsi:type="string">item</item>
+                <item name="default" xsi:type="string">Some default value.</item>
+                <item name="dataScope" xsi:type="string">jobs_open_positions</item>
+                <item name="sortOrder" xsi:type="number">102</item>
+            </item>
+        </argument>      
+    </field>        
+    <field name="jobs_select_departments">
+        <argument name="data" xsi:type="array">        
+            <item name="options" xsi:type="object">FME\Jobs\Model\Job\Source\IsDepartment</item>            
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Select Department</item>    
+                <item name="visible" xsi:type="boolean">true</item>
+                <item name="dataType" xsi:type="string">number</item>
+                <item name="formElement" xsi:type="string">select</item>
+                <item name="source" xsi:type="string">item</item>
+                <item name="default" xsi:type="string">Some default value.</item>
+                <item name="dataScope" xsi:type="string">jobs_select_departments</item>
+                <item name="sortOrder" xsi:type="number">103</item>
+            </item>
+        </argument>      
+    </field>
+    <field name="jobs_job_type">
+        <argument name="data" xsi:type="array">        
+            <item name="options" xsi:type="object">FME\Jobs\Model\Job\Source\IsType</item>            
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Select Job Type</item>    
+                <item name="visible" xsi:type="boolean">true</item>
+                <item name="dataType" xsi:type="string">number</item>
+                <item name="formElement" xsi:type="string">select</item>
+                <item name="source" xsi:type="string">item</item>
+                <item name="dataScope" xsi:type="string">jobs_job_type</item>
+                <item name="sortOrder" xsi:type="number">104</item>
+            </item>
+        </argument>      
+    </field>
+    <field name="jobs_location">
+        <argument name="data" xsi:type="array">        
+            <item name="options" xsi:type="object">FME\Jobs\Model\Job\Source\IsLocation</item>            
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Job Location</item>    
+                <item name="visible" xsi:type="boolean">true</item>
+                <item name="dataType" xsi:type="string">number</item>
+                <item name="formElement" xsi:type="string">select</item>
+                <item name="source" xsi:type="string">item</item>
+                <item name="dataScope" xsi:type="string">jobs_location</item>
+                <item name="sortOrder" xsi:type="number">105</item>
+            </item>
+        </argument>      
+    </field>
+    <field name="jobs_gender">
+        <argument name="data" xsi:type="array">        
+            <item name="options" xsi:type="object">FME\Jobs\Model\Job\Source\IsGender</item>            
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Select Gender</item>    
+                <item name="visible" xsi:type="boolean">true</item>
+                <item name="dataType" xsi:type="string">number</item>
+                <item name="formElement" xsi:type="string">select</item>
+                <item name="source" xsi:type="string">item</item>
+                <item name="dataScope" xsi:type="string">jobs_gender</item>
+                <item name="sortOrder" xsi:type="number">106</item>
+            </item>
+        </argument>      
+    </field>
+    <field name="jobs_career_level">
+        <argument name="data" xsi:type="array">        
+            <item name="options" xsi:type="object">FME\Jobs\Model\Job\Source\IsCareer</item>            
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Career Level</item>    
+                <item name="visible" xsi:type="boolean">true</item>
+                <item name="dataType" xsi:type="string">number</item>
+                <item name="formElement" xsi:type="string">select</item>
+                <item name="source" xsi:type="string">item</item>
+                <item name="dataScope" xsi:type="string">jobs_career_level</item>
+                <item name="sortOrder" xsi:type="number">107</item>
+            </item>
+        </argument>      
+    </field>        
+    <field name="jobs_min_qualification">
+        <argument name="data" xsi:type="array">        
+            <item name="options" xsi:type="object">FME\Jobs\Model\Job\Source\IsQualifications</item>            
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Minimum Qualification Required</item>    
+                <item name="visible" xsi:type="boolean">true</item>
+                <item name="dataType" xsi:type="string">number</item>
+                <item name="formElement" xsi:type="string">select</item>
+                <item name="source" xsi:type="string">item</item>
+                <item name="dataScope" xsi:type="string">jobs_min_qualification</item>
+                <item name="sortOrder" xsi:type="number">108</item>
+            </item>
+        </argument>      
+    </field>
+    <field name="jobs_min_experience">
+        <argument name="data" xsi:type="array">        
+            <item name="options" xsi:type="object">FME\Jobs\Model\Job\Source\IsExperience</item>            
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Years of experience required</item>    
+                <item name="visible" xsi:type="boolean">true</item>
+                <item name="dataType" xsi:type="string">number</item>
+                <item name="formElement" xsi:type="string">select</item>
+                <item name="source" xsi:type="string">item</item>
+                <item name="dataScope" xsi:type="string">jobs_min_experience</item>
+                <item name="sortOrder" xsi:type="number">109</item>
+            </item>
+        </argument>      
+    </field>
+
+    <field name="jobs_required_travel">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="dataType" xsi:type="string">boolean</item>
+                <item name="label" xsi:type="string" translate="true">Required Travel</item>
+                <item name="formElement" xsi:type="string">checkbox</item>
+                <item name="prefer" xsi:type="string">toggle</item>
+                <item name="source" xsi:type="string">job</item>
+                <item name="sortOrder" xsi:type="number">110</item>
+                <item name="dataScope" xsi:type="string">jobs_required_travel</item>
+                <item name="valueMap" xsi:type="array">
+                    <item name="true" xsi:type="number">1</item>
+                    <item name="false" xsi:type="number">0</item>
+                </item>
+                <item name="default" xsi:type="number">1</item>
+            </item>
+        </argument>
+    </field>
+    <field name="jobs_publish_date">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="dataType" xsi:type="string">string</item>
+                <item name="label" xsi:type="string" translate="true">Publish Date</item>
+                <item name="formElement" xsi:type="string">date</item>
+                <item name="source" xsi:type="string">page</item>
+                <item name="sortOrder" xsi:type="number">111</item>
+                <item name="dataScope" xsi:type="string">jobs_publish_date</item>            
+                <item name="options" xsi:type="array">
+                    <item name="dateFormat" xsi:type="string">yyyy-MM-dd</item>
+                    <item name="timeFormat" xsi:type="string">HH:mm:ss</item>
+                    <item name="showsTime" xsi:type="boolean">true</item>
+                </item>
+                <item name="validation" xsi:type="array">
+                    <item name="required-entry" xsi:type="boolean">true</item>
+                </item>
+            </item>
+        </argument>
+    </field>
+    <field name="jobs_applyby_date">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="dataType" xsi:type="string">string</item>
+                <item name="label" xsi:type="string" translate="true">Apply By</item>
+                <item name="formElement" xsi:type="string">date</item>
+                <item name="source" xsi:type="string">page</item>
+                <item name="sortOrder" xsi:type="number">112</item>
+                <item name="dataScope" xsi:type="string">jobs_applyby_date</item>            
+                <item name="options" xsi:type="array">
+                    <item name="dateFormat" xsi:type="string">yyyy-MM-dd</item>
+                    <item name="timeFormat" xsi:type="string">HH:mm:ss</item>
+                    <item name="showsTime" xsi:type="boolean">true</item>
+                </item>
+                <item name="validation" xsi:type="array">
+                    <item name="required-entry" xsi:type="boolean">true</item>
+                </item>
+            </item>
+        </argument>
+    </field>
+    <field name="jobs_description">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string"/>
+                <item name="formElement" xsi:type="string">wysiwyg</item>
+                <item name="source" xsi:type="string">job</item>
+                <item name="wysiwyg" xsi:type="boolean">true</item>
+                <item name="dataScope" xsi:type="string">jobs_description</item>
+                <item name="sortOrder" xsi:type="number">125</item>
+                <item name="additionalClasses" xsi:type="string">admin__field-wide</item>
+                <item name="validation" xsi:type="array">
+                    <item name="required-entry" xsi:type="boolean">true</item>
+                </item>
+            </item>
+        </argument>
+    </field>        
+    <field name="jobs_required_skills">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="dataType" xsi:type="string">textarea</item>
+                <item name="label" xsi:type="string" translate="true">Required Skills</item>
+                <item name="formElement" xsi:type="string">textarea</item>
+                <item name="source" xsi:type="string"></item>
+                <item name="sortOrder" xsi:type="number">113</item>
+                <item name="dataScope" xsi:type="string">jobs_required_skills</item>
+                <item name="validation" xsi:type="array">   
+                </item>
+            </item>
+        </argument>
+    </field>
+    <field name="use_config_email">
+        <argument name="data" xsi:type="array">        
+            <item name="options" xsi:type="object">FME\Jobs\Model\Config\Source\Yesno</item>
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Use Config Email</item>    
+                <item name="dataType" xsi:type="string">int</item>
+                <item name="formElement" xsi:type="string">select</item>
+                <item name="source" xsi:type="string">job</item>
+                <item name="dataScope" xsi:type="string">use_config_email</item>
+                <item name="sortOrder" xsi:type="number">114</item>
+                <item name="validation" xsi:type="array">
+                    <item name="required-entry" xsi:type="boolean">true</item>
+                </item>
+                <item name="switcherConfig" xsi:type="array">
+                    <item name="enabled" xsi:type="boolean">true</item>
+                    <item name="rules" xsi:type="array">
+                        <item name="0" xsi:type="array">
+                            <item name="value" xsi:type="string">1</item>
+                            <item name="actions" xsi:type="array">
+                                <item name="0" xsi:type="array">
+                                    <item name="target" xsi:type="string">jobs_job_form.jobs_job_form.general.notification_email_receiver</item>
+                                    <item name="callback" xsi:type="string">hide</item>
+                                </item>
+                            </item>
+                        </item>
+                        <item name="1" xsi:type="array">
+                            <item name="value" xsi:type="string">0</item>
+                            <item name="actions" xsi:type="array">
+                                <item name="0" xsi:type="array">
+                                    <item name="target" xsi:type="string">jobs_job_form.jobs_job_form.general.notification_email_receiver</item>
+                                    <item name="callback" xsi:type="string">show</item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </item>
+            </item>
+        </argument>
+    </field>
+    <field name="notification_email_receiver">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="dataType" xsi:type="string">text</item>
+                <item name="label" xsi:type="string" translate="true">Notification Email To</item>
+                <item name="formElement" xsi:type="string">input</item>
+                <item name="source" xsi:type="string">job</item>
+                <item name="dataScope" xsi:type="string">notification_email_receiver</item>
+                <item name="sortOrder" xsi:type="number">115</item>
+                <item name="validation" xsi:type="array">
+                    <item name="required-entry" xsi:type="boolean">true</item>
+                    <item name="validate-email" xsi:type="boolean">true</item>
+                </item>
+            </item>
+        </argument>
+    </field>
+    <field name="use_config_template">
+        <argument name="data" xsi:type="array">        
+            <item name="options" xsi:type="array">
+                <item name="1" xsi:type="array">
+                    <item name="value" xsi:type="number">1</item>
+                    <item name="label" xsi:type="string" translate="true">Yes</item>
+                </item>
+                <item name="0" xsi:type="array">
+                    <item name="value" xsi:type="number">0</item>
+                    <item name="label" xsi:type="string" translate="true">No</item>
+                </item>
+            </item>
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Use Config Email Template</item>    
+                <item name="visible" xsi:type="boolean">true</item>
+                <item name="dataType" xsi:type="string">number</item>
+                <item name="formElement" xsi:type="string">select</item>
+                <item name="source" xsi:type="string">job</item>
+                <item name="dataScope" xsi:type="string">use_config_template</item>
+                <item name="sortOrder" xsi:type="number">116</item>
+                <item name="validation" xsi:type="array">
+                    <item name="required-entry" xsi:type="boolean">true</item>
+                </item>
+                <item name="switcherConfig" xsi:type="array">
+                    <item name="enabled" xsi:type="boolean">true</item>
+                    <item name="rules" xsi:type="array">
+                        <item name="0" xsi:type="array">
+                            <item name="value" xsi:type="string">1</item>
+                            <item name="actions" xsi:type="array">
+                                <item name="0" xsi:type="array">
+                                    <item name="target" xsi:type="string">jobs_job_form.jobs_job_form.general.email_notification_temp</item>
+                                    <item name="callback" xsi:type="string">hide</item>
+                                </item>
+                            </item>
+                        </item>
+                        <item name="1" xsi:type="array">
+                            <item name="value" xsi:type="string">0</item>
+                            <item name="actions" xsi:type="array">
+                                <item name="0" xsi:type="array">
+                                    <item name="target" xsi:type="string">jobs_job_form.jobs_job_form.general.email_notification_temp</item>
+                                    <item name="callback" xsi:type="string">show</item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </item>
+            </item>
+        </argument>
+    </field>
+    <field name="email_notification_temp">
+        <argument name="data" xsi:type="array">        
+            <item name="options" xsi:type="array">
+                <item name="0" xsi:type="array">
+                    <item name="value" xsi:type="string">jobs_email_email_template</item>
+                    <item name="label" xsi:type="string" translate="true">Jobs Form (Default)</item>
+                </item>
+                <item name="1" xsi:type="array">
+                    <item name="value" xsi:type="number">1</item>
+                    <item name="label" xsi:type="string" translate="true">New Pickup Order</item>
+                </item>
+                <item name="2" xsi:type="array">
+                    <item name="value" xsi:type="number">2</item>
+                    <item name="label" xsi:type="string" translate="true">New Pickup Order For Guest</item>
+                </item>
+            </item>
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Notification Email Template</item>
+                <item name="dataType" xsi:type="string">number</item>
+                <item name="formElement" xsi:type="string">select</item>
+                <item name="source" xsi:type="string">job</item>
+                <item name="dataScope" xsi:type="string">email_notification_temp</item>
+                <item name="sortOrder" xsi:type="number">117</item>
+                <item name="visibleValue" xsi:type="string">0</item>
+                <item name="validation" xsi:type="array">
+                    <item name="required-entry" xsi:type="boolean">true</item>
+                </item>
+            </item>
+        </argument>      
+    </field>
+    <field name="store_id">
+        <argument name="data" xsi:type="array">
+            <item name="options" xsi:type="object">Magento\Cms\Ui\Component\Listing\Column\Cms\Options</item>
+            <item name="config" xsi:type="array">
+                <item name="dataType" xsi:type="string">int</item>
+                <item name="sortOrder" xsi:type="number">118</item>
+                <item name="label" xsi:type="string" translate="true">Store View</item>
+                <item name="formElement" xsi:type="string">multiselect</item>
+                <item name="dataScope" xsi:type="string">store_id</item>
+                <item name="source" xsi:type="string">job</item>
+                <item name="validation" xsi:type="array">
+                    <item name="required-entry" xsi:type="boolean">true</item>
+                </item>
+            </item>
+        </argument>
+    </field>
+    <fieldset name="metainformation">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="label" xsi:type="string" translate="true">Meta Information</item>
+                <item name="sortOrder" xsi:type="number">299</item>
+            </item>
+        </argument>
+        <field name="job_page_title">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Page Title</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">job</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                    <item name="dataScope" xsi:type="string">job_page_title</item>
+                    <item name="validation" xsi:type="array">    
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="job_meta_keywords">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">textarea</item>
+                    <item name="label" xsi:type="string" translate="true">Keywords</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">job</item>
+                    <item name="sortOrder" xsi:type="number">21</item>
+                    <item name="dataScope" xsi:type="string">job_meta_keywords</item>
+                    <item name="validation" xsi:type="array">   
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="job_meta_description">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">textarea</item>
+                    <item name="label" xsi:type="string" translate="true">Description</item>
+                    <item name="formElement" xsi:type="string">textarea</item>
+                    <item name="source" xsi:type="string">job</item>
+                    <item name="sortOrder" xsi:type="number">22</item>
+                    <item name="dataScope" xsi:type="string">job_meta_description</item>
+                    <item name="validation" xsi:type="array">   
+                    </item>
+                </item>
+            </argument>
+        </field>                
+    </fieldset>
+    <field name="is_active">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="dataType" xsi:type="string">boolean</item>
+                <item name="label" xsi:type="string" translate="true">Job Enable</item>
+                <item name="formElement" xsi:type="string">checkbox</item>
+                <item name="prefer" xsi:type="string">toggle</item>
+                <item name="source" xsi:type="string">job</item>
+                <item name="sortOrder" xsi:type="number">00</item>
+                <item name="dataScope" xsi:type="string">is_active</item>
+                <item name="valueMap" xsi:type="array">
+                    <item name="true" xsi:type="number">1</item>
+                    <item name="false" xsi:type="number">0</item>
+                </item>
+                <item name="default" xsi:type="number">1</item>
+            </item>
+        </argument>
+    </field>             
+</fieldset>    
+</form>

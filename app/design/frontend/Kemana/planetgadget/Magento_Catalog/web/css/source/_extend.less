@@ -1,0 +1,110 @@
+// /**
+//  * Copyright © 2022 Kemana. All rights reserved.
+//  * @author Harshani Karunasekara <hkarunasekara@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+@import 'module/_listings_extend.less';
+//@import 'module/_toolbar.less';
+
+//
+//  Variables
+//  _____________________________________________
+
+@pdp-product-title-desktop__font-size: 30;
+@pdp-product-title__font-weight: @font-weight__bold;
+
+@pdp-product-price__font-family: @font-family-name__base;
+@pdp-product-price__font-weight: @font-weight__heavier;
+@plp-product-price__font-size: 16;
+@pdp-product-price__font-size: 24;
+
+@plp-product-item__border: 0;
+@plp-product-item-hover__border: 0;
+
+@plp-product-item__border-radius: 0;
+
+@product-old-price__font-weight: @font-weight__regular;
+@product-special-price__color: @color-kemana-red;
+@product-old-price__color: @color-pg-light-gray;
+
+@plp-compare-button__display: none;
+
+@product-old-price__font-size: 14;
+@product-grid-old-price__font-size: 12;
+
+@product-grid-items-per-row-layout-default: 2;
+
+@product-grid-items-per-row-layout-1-screen-s: 3;
+@product-grid-items-per-row-layout-1-screen-m: 4;
+@product-grid-items-per-row-layout-1-screen-l: 5;
+
+@product-grid-items-per-row-layout-2-left-screen-s: 3;
+@product-grid-items-per-row-layout-2-left-screen-m: 4;
+@product-grid-items-per-row-layout-2-left-screen-l: '';
+
+@product-grid-items-per-row-layout-2-right-screen-s: 3;
+@product-grid-items-per-row-layout-2-right-screen-m: 4;
+@product-grid-items-per-row-layout-2-right-screen-l: '';
+
+@product-grid-items-per-row-layout-3-screen-s: 3;
+@product-grid-items-per-row-layout-3-screen-m: '';
+@product-grid-items-per-row-layout-3-screen-l: '';
+
+@product-grid-items-padding: 0 @indent__base @indent__base;
+@product-grid-items-margin: 0 0 @indent__s;
+
+@product-name-text-decoration: none;
+@product-name-text-decoration-hover: @link__hover__text-decoration;
+
+@pdp-add-to-cart-action__margin-top: 30px;
+
+@toolbar-mode-icon-font-size: 26px;
+@product-h1-margin-bottom-desktop: @indent__base;
+
+@brandname__font-family: @font-family-name__base;
+@brandname__font-color: @kemana-primary-brand-color;
+@brandname__font-weight: @font-weight__bold;
+@brandname__font-size: 14;
+@brandname-pdp__font-size: 14;
+
+@discount-input_font-family: @font-family__ubuntu-italy;
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .abs-product-link,
+    .product-item-name,
+    .product.name a {
+        .lib-font-size(12);
+    }
+
+    .product-reviews-summary {
+        display: block;
+
+        .reviews-actions {
+            display: none;
+        }
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .block {
+        .products-grid {
+            .slick-slider {
+                margin: 0 !important;
+
+                .slick-list {
+                    padding: 0!important;
+                   // width: 100%!important;
+                }
+            }
+        }
+    }
+}

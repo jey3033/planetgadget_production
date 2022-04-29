@@ -1,0 +1,127 @@
+// /**
+//  * Copyright © 2020 Kemana. All rights reserved.
+//  * @author Ashan Gunawardena <agunawardena@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+//  How it works variables
+@how-it-works__border: none;
+@how-it-works__margin-bottom: 0;
+
+@how-it-works-item__padding: 20px 0;
+@how-it-works-item-icon__height: 56px;
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .cms-main-container {
+        .how-it-works {
+            &.fixed-width {
+                padding-left: @indent__xs;
+                padding-right: @indent__xs;
+            }
+        }
+    }
+
+    .how-it-works {
+        .lib-css(margin-bottom, @how-it-works__margin-bottom);
+
+        > .row {
+            margin: 0;
+            justify-content: space-around;
+        }
+
+        .text-block {
+            .lib-css(border, @how-it-works__border);
+        }
+
+        .how-it-works-item {
+            .lib-css(padding, @how-it-works-item__padding);
+            text-align: center;
+
+            .icon {
+                .lib-css(height, @how-it-works-item-icon__height);
+                display: block;
+                margin-bottom: 21px;
+
+                img {
+                    width: auto;
+                    float: none;
+                }
+            }
+
+            h5 {
+                .lib-css(margin-bottom, @indent__s);
+            }
+        }
+
+        .text-block:first-child {
+            .how-it-works-item {
+                .icon {
+                    .lib-css(height, @how-it-works-item-icon__height);
+                    margin-bottom: 11px;
+                }
+            }
+        }
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .how-it-works {
+        .text-block {
+            max-width: 48.333333%;
+            padding: 0;
+
+            &:nth-child(1),
+            &:nth-child(2) {
+                margin-bottom: 10px;
+            }
+        }
+
+        .how-it-works-item {
+            h6 {
+                .lib-font-size(14);
+                .lib-line-height(16);
+            }
+        }
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .how-it-works {
+        .col-sm-3,
+        .col-md-3 {
+            max-width: 24%;
+        }
+
+        .col-sm-4,
+        .col-md-4 {
+            max-width: 32.333333%;
+        }
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xl) {
+    .cms-main-container {
+        .how-it-works {
+            &.fixed-width {
+                padding-left: 0;
+                padding-right: 0;
+            }
+        }
+    }
+}

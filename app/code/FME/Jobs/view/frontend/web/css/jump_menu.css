@@ -1,0 +1,432 @@
+﻿/**
+ * FME Extensions
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the fmeextensions.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.fmeextensions.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category  FME
+ * @package   FME_Jobs
+ * @copyright Copyright (c) 2019 FME (http://fmeextensions.com/)
+ * @license   https://fmeextensions.com/LICENSE.txt
+ */
+
+.jump_button_container { width:100%; display:inline-block; clear:both; }
+
+.jump_button_container span a { font-size:13px; font-weight:400; color:#ec3233; line-height:26px; }
+
+.jump_button_container span a:hover { color:#3e4751; }
+
+.jump_menu_container .jump_button_container .jump_button {  cursor:pointer; border:none; font-size:14px; font-weight:400; text-transform:uppercase; color:#FFF; background-color:#ec3233; padding:9px 30px; padding-bottom:8px; -webkit-appearance: none; -webkit-border-radius:0; display:block; float:right; margin-right:28px; }
+
+.jump_menu_container .jump_button_container .jump_button:hover{background-color:#e02c2d;}
+
+
+
+.jump_menu_container { display:inline-block; }
+
+/*For Product Page*/
+
+.jump_menu_container { width:28%; padding-top:0px; margin-left: 15px; }
+
+.jump_menu_container ol, ul {
+  list-style: none;
+}
+
+.jump_menu_container blockquote, q {
+  quotes: none;
+}
+
+.jump_menu_container blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+
+.jump_menu_container table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.jump_menu_container .about {
+  margin: 70px auto 40px;
+  padding: 8px;
+  width: 260px;
+  font: 10px/18px;
+  color: #bbb;
+  text-align: center;
+  text-shadow: 0 -1px rgba(0, 0, 0, 0.3);
+  background: #383838;
+  background: rgba(34, 34, 34, 0.8);
+  background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3));
+  background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3));
+  background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3));
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3));
+  -webkit-box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2), 0 0 6px rgba(0, 0, 0, 0.4);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2), 0 0 6px rgba(0, 0, 0, 0.4);
+}
+.jump_menu_container .about a {
+  color: #eee;
+  text-decoration: none;
+  -webkit-transition: background 0.1s;
+  -moz-transition: background 0.1s;
+  -o-transition: background 0.1s;
+  transition: background 0.1s;
+}
+.jump_menu_container .about a:hover {
+  text-decoration: none;
+  background: #555;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.jump_menu_container .about-links {
+  height: 30px;
+}
+.jump_menu_container .about-links > a {
+  float: left;
+  width: 50%;
+  line-height: 30px;
+  font-size: 12px;
+}
+
+.jump_menu_container .about-author {
+  margin-top: 5px;
+}
+.jump_menu_container .about-author > a {
+  padding: 1px 3px;
+  margin: 0 -1px;
+}
+
+.jump_menu_container .deffirent_tyres {  }
+
+.jump_menu_container .container {
+  text-align:center; margin-right:0px; margin-left:0px; margin-bottom:15px; display:inline-block;
+}
+
+/*For Product Page*/
+
+.jump_menu_container .container {
+
+  text-align: center; float: right; margin-right:0px; margin-left:0px; margin-bottom:0px;
+}
+
+/*For Category Page*/
+
+.jump_menu_container .container { text-align: center; float: none; margin-right:0px; margin-left:0px; margin-bottom:0px; }
+
+.jump_menu_container .container {
+
+  text-align: center; float: none; margin-top:0px; margin-left:0px; margin-bottom:0px; display:inline-block; width:100%;
+  
+}
+
+.jump_menu_container .container > .dropdown {
+  margin-right:10px;
+  vertical-align:middle;
+}
+
+/*For Product Page*/
+
+section#body .product_page .product_view_container .product_detail .detail_pricing .block .right_col .quantity .jump_menu_container .container > .dropdown {
+  margin-right:0px; margin-bottom:0px;
+  vertical-align: top;
+}
+
+
+
+/*For Category Page*/
+
+section#body .main_container .search_results_products ul li .price_container .jump_menu_container .container > .dropdown {
+  margin-right:-3px; margin-bottom:0px;
+  vertical-align: top;
+}
+
+.jump_menu_container .dropdown {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  border:0;
+  padding:2px 0;
+}
+
+
+section#body .fitting_installation .result_title .results_per_page .jump_menu_container .dropdown { width:175px; }
+
+section#body .listing_page .result_title .results_per_page .jump_menu_container .dropdown { width:175px; margin-top: -3px; }
+
+/*For Product Page*/
+
+
+
+
+
+.jump_menu_container .dropdown2 {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  height: 40px;
+  width: 334px;
+  border:0;
+  padding:2px 0; margin-right:20px; margin-bottom:10px;
+}
+  
+
+  
+  /*For Category Page*/
+  
+  section#body .main_container .search_results_products ul li .price_container .jump_menu_container .dropdown {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  height: 38px;
+  width: 71px;
+  border:0;
+  padding:7px 0;
+}
+  
+  @media (min-width: 200px) and (max-width: 500px) {
+  
+  section#body .inner_pages_container .inner_pages_banner .search_filter .jump_menu_container .dropdown {
+  width: 110px; margin-bottom:20px;
+  }
+  }
+
+  @media (min-width: 200px) and (max-width: 600px) {
+    .jump_menu_container { width:100%; padding-top:0px; margin-left: 15px; }
+  }
+
+  
+  
+.jump_menu_container .dropdown3 {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  height: 38px;
+  width: 210px;
+  border: 1px solid #dedede;
+  }
+  
+  
+/* Safari-Opera-chrome-specific declarations here */
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+.jump_menu_container .container3{ min-height:44px !important;}
+}
+
+.jump_menu_container .dropdown:before, .dropdown:after {
+  content: '';
+  position: absolute;
+  z-index: 2;
+  top: 21px;
+  right: 18px;
+  width: 0;
+  height: 0;
+  border: 4px dashed;
+  border-color: #515a64 transparent;
+  pointer-events: none;
+}
+  
+  
+.jump_menu_container .dropdown3:before, .dropdown3:after {
+  content: '';
+  position: absolute;
+  z-index: 2;
+  top: 17px;
+  right: 15px;
+  width: 0;
+  height: 0;
+  border: 3px dashed;
+  border-color: #535c67 transparent;
+  pointer-events: none;
+}
+
+.jump_menu_container .dropdown:before {
+  border-bottom-style: solid;
+  border-top: none;
+}
+.jump_menu_container .dropdown3:before {
+  border-bottom-style: solid;
+  border-top: none;
+}
+
+.jump_menu_container .dropdown:after {
+  margin-top: 10px;
+  border-top-style: solid;
+  border-bottom: none;
+}
+.jump_menu_container .dropdown3:after {
+  margin-top: 12px;
+  border-top-style: solid;
+  border-bottom: none;
+}
+
+.jump_menu_container .dropdown-select {
+  position: relative;
+  width: 120%;
+  margin: 0; border:0;
+  height:42px;
+  font-size: 14px; font-weight:400;
+  color: #434c56;
+  -webkit-appearance: none;
+  box-sizing: border-box;
+    background:#efefef;
+	margin-right:0px;
+	overflow:hidden;
+}
+
+
+/*For Product Page*/
+
+.jump_menu_container .dropdown-select {
+  position: relative;
+  width: 140%;
+  margin: 0; border:0;
+  height:42px;
+  font-size: 14px; font-weight:400;
+  color: #434c56;
+  -webkit-appearance: none;
+  box-sizing: border-box;
+    background:#fff;
+	margin-right:0px;
+	overflow:hidden;
+}
+
+
+
+/*For Category Page*/
+
+.jump_menu_container .dropdown-select {
+  position: relative;
+  width: 127%;
+  margin: 0; border:0;
+  height:53px;
+  font-family: 'Saira', sans-serif;
+  font-size:15px; font-weight:400;
+  color: #474747;
+  -webkit-appearance: none;
+  box-sizing: border-box;
+    background:#f2f2f2;
+	margin-right:0px;
+	overflow:hidden;
+	margin-top:-2px;
+	padding-left:15px;
+	border-radius:0px;
+
+}
+
+.jump_menu_container .dropdown-select optgroup { margin-top:30px;}
+
+section#body .listing_page .result_title .results_per_page .jump_menu_container .dropdown-select {
+ box-shadow: inset 0px 0px 2px rgba(210,210,210,0.5);
+ border-top:#d2d2d2 1px solid;
+ border-left:0;
+ border-right:0;
+ border-bottom:0;
+}
+
+.jump_menu_container .dropdown-select.gray {
+	background:#bfc4cb;
+}
+
+.jump_menu_container p { font-size:15px; font-weight:400; color: #36404b; padding:15px 0; }
+
+.jump_menu_container .dropdown-select option { width:100% !important; }
+
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+.dropdown-select { padding-left: 10px;}
+.dropdown-select2 { padding-left:10px;}
+}
+
+.jump_menu_container .dropdown-select2 {
+  position: relative;
+  width: 130%;
+  margin: 0; border:0;
+  height:38px;
+  font-size: 14px; font-weight:600;
+  color: #434c56;
+  border-radius: 0;
+  -webkit-appearance: none; background-color:#535c67;
+}
+
+
+
+.jump_menu_container .dropdown-select:focus {
+  z-index: 3;
+  width: 100%;
+  color: #394349;
+  outline: 2px solid #535c67;
+  outline: 2px solid -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+
+.jump_menu_container .dropdown-select2:focus {
+  z-index: 3;
+  width: 100%;
+  color: #394349;
+  outline: 2px solid #535c67;
+  outline: 2px solid -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+.jump_menu_container .dropdown-select > option {
+  margin: 3px;
+  padding: 6px 8px;
+  text-shadow: none;
+  background: #f2f2f2;
+  cursor: pointer;
+}
+
+.jump_menu_container .dropdown-select2 > option {
+  margin: 3px;
+  padding: 6px 8px;
+  text-shadow: none;
+  background: #f2f2f2;
+  cursor: pointer;
+}
+
+/* Fix for IE 8 putting the arrows behind the select element. */
+.jump_menu_container .lt-ie9 .dropdown {
+  z-index: 1;
+}
+.jump_menu_container .lt-ie9 .dropdown-select {
+  z-index: -1;
+}
+.jump_menu_container .lt-ie9 .dropdown-select:focus {
+  z-index: 3;
+}
+
+/* Dirty fix for Firefox adding padding where it shouldn't. */
+@-moz-document url-prefix() {.dropdown-select {padding-left: 8px;}
+}
+
+/* Dirty fix for Firefox adding padding where it shouldn't. */
+@-moz-document url-prefix() {.dropdown-select2 {padding-left: 8px;}
+}
+
+.jump_menu_container .dropdown-dark:before {
+  border-bottom-color: #535c67;
+}
+.jump_menu_container .dropdown-dark:after {
+  border-top-color: #535c67;
+}
+.jump_menu_container .dropdown-dark .dropdown-select {
+  color: #aaa;
+  text-shadow: 0 1px black;
+  /* Fallback for IE 8 */
+  background: #535c67;
+}
+.jump_menu_container .dropdown-dark .dropdown-select:focus {
+  color: #ccc;
+}
+.jump_menu_container .dropdown-dark .dropdown-select > option {
+  background: #535c67;
+  text-shadow: 0 1px rgba(0, 0, 0, 0.4);
+}

@@ -1,0 +1,18 @@
+<?php
+/**
+ *  Kemana\AcceleratorBase\Block\HeaderElement $block
+ */
+/** @var \Kemana\AcceleratorBase\Helper\Data $kemanaAcceleratorBaseHelper */
+$kemanaAcceleratorBaseHelper = $this->helper(Kemana\AcceleratorBase\Helper\Data::class);
+$currency = $kemanaAcceleratorBaseHelper->getCurrentCurrencyCode();
+$storeManager = $kemanaAcceleratorBaseHelper->getStoreManager();
+// @codingStandardsIgnoreStart
+?>
+
+<div class="language-currency-wrapper">
+    <div class="language-currency-block">
+        <span class="language-flag"></span>
+        <span class="language"><?= $block->getChildHtml("store_language"); ?></span>
+    </div>
+</div>
+
