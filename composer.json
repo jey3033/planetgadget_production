@@ -92,6 +92,10 @@
         "kemana-headertopline": {
             "type": "git",
             "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_headertopline.git"
+        },
+        "kemana-compareproduct": {
+            "type": "git",
+            "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_compareproduct.git"
         }
     },
     "require": {
@@ -104,6 +108,7 @@
         "kemana/module-banner": "2.43.1",
         "kemana/module-blog": "2.43.0",
         "kemana/module-categoriesenhanced": "2.43.1",
+        "kemana/module-compare-product": "2.43.0",
         "kemana/module-core": "2.43.0",
         "kemana/module-header-top-line": "dev-release-Staging-243",
         "kemana/module-labelmanager": "2.43.2",
@@ -112,10 +117,10 @@
         "kemana/module-snap": "2.43.2",
         "kemana/module-social-login": "2.43.3",
         "kemana/module-top-categories": "2.43.0",
-        "laminas/laminas-log": "^2.15",
         "kemana/module-whatsapp-chat": "dev-release-Staging-241",
         "kemana/theme-frontend-base": "dev-release-Staging-243",
         "ks/logistic": "dev-release-Staging-243",
+        "laminas/laminas-log": "^2.15",
         "magento/composer-root-update-plugin": "~1.1",
         "magento/magento-cloud-metapackage": ">=2.4.3 <2.4.4"
     },
