@@ -31,7 +31,7 @@
         </container>
 
         <container name="pcp_sub_categories" as="pcp_sub_categories" label="Sub Categories" htmlTag="div"
-                   htmlClass="category-detail-sub-categories" after="pcp_banner">
+                   htmlClass="category-detail-sub-categories fixed-width" after="pcp_banner">
             <block class="Kemana\Pcp\Block\Category" name="category_sub_categories"
                    template="Kemana_Pcp::page/sub_categories.phtml"/>
         </container>
@@ -44,7 +44,7 @@
 
         <container name="pcp_recommendation_sensei" as="pcp_recommendation_sensei" label="You may also Like"
                    htmlTag="div"
-                   htmlClass="category-detail-recommendation-sensei" after="pcp_featured_gadgets">
+                   htmlClass="category-detail-recommendation-sensei fixed-width" after="pcp_featured_gadgets">
             <block class="Kemana\Pcp\Block\Category" name="category_recommendation_sensei"
                    template="Kemana_Pcp::page/category_recommendation_sensei.phtml"/>
         </container>

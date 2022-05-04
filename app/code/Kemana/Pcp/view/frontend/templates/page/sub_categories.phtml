@@ -18,22 +18,29 @@ $subCategories = $block->prepareSubCategoryData();
 ?>
 
 <?php if (count($subCategories)): ?>
-<div class="pcp-sub-categories">
+<ul class="pcp-sub-categories">
     <?php foreach ($subCategories as $category): ?>
-        <?php if ($category['name']): ?>
-            <div><?= $category['name'] ?></div>
-        <?php endif; ?>
+    <li class="category-item">
+        <div class="category-item-container ">
+            <div class="category-item-left">
+                <?php if ($category['name']): ?>
+                    <div class="category-name"><?= $category['name'] ?></div>
+                <?php endif; ?>
 
-        <?php if ($category['shortDescription']): ?>
-            <div><?= $category['shortDescription'] ?></div>
-        <?php endif; ?>
-
-        <?php if ($category['image']): ?>
-            <div>
-                <image src="<?= rtrim($block->getUrl(), "/") . $category['image'] ?>" alt="<?= $category['name'] ?>"/>
+                <?php if ($category['shortDescription']): ?>
+                    <div class="category-short-description"><?= $category['shortDescription'] ?></div>
+                <?php endif; ?>
             </div>
-        <?php endif; ?>
+            <div class="category-item-right">
+            <?php if ($category['image']): ?>
+                <div class="category-image">
+                    <image src="<?= rtrim($block->getUrl(), "/") . $category['image'] ?>" alt="<?= $category['name'] ?>"/>
+                </div>
+            <?php endif; ?>
+            </div>
+        </div>
+    </li>
     <?php endforeach; ?>
     <?php endif; ?>
-</div>
+</ul>
 
