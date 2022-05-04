@@ -96,6 +96,10 @@
         "kemana-compareproduct": {
             "type": "git",
             "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_compareproduct.git"
+        },
+        "kemana-social-share": {
+            "type": "git",
+            "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_socialshare.git"
         }
     },
     "require": {
@@ -116,6 +120,7 @@
         "kemana/module-smtp": "2.43.0",
         "kemana/module-snap": "2.43.2",
         "kemana/module-social-login": "2.43.3",
+        "kemana/module-social-share": "dev-release-Staging-243",
         "kemana/module-top-categories": "2.43.0",
         "kemana/module-whatsapp-chat": "dev-release-Staging-241",
         "kemana/theme-frontend-base": "dev-release-Staging-243",
