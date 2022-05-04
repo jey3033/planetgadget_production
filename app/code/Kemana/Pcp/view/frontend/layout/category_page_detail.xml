@@ -26,7 +26,7 @@
         </block>
 
         <container name="pcp_banner" as="pcp_banner" label="Category Page Banner" htmlTag="div"
-                   htmlClass="category-detail-banner" before="-">
+                   htmlClass="category-detail-banner" after="-">
             <block class="Kemana\Pcp\Block\Category" name="category_banner" template="Kemana_Pcp::page/banner.phtml"/>
         </container>
 
