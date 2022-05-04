@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2021 PT Kemana Teknologi Solusi. All rights reserved.
+ * Copyright © 2022 PT Kemana Teknologi Solusi. All rights reserved.
  * http://www.kemana.com
  */
 
@@ -20,6 +20,12 @@ namespace Kemana\Catalog\Block\Product\ProductList;
 class Toolbar extends \Magento\Catalog\Block\Product\ProductList\Toolbar
 {
     
+    /**
+     * Set collection to pager
+     *
+     * @param \Magento\Framework\Data\Collection $collection
+     * @return $this
+     */
     public function setCollection($collection)
     {
         $this->_collection = $collection;
