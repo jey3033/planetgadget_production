@@ -23,32 +23,6 @@
                     .category-top-items {
                         margin-bottom: 0;
                         padding-left: 0;
-
-                        .category-item-container {
-                            .lib-vendor-prefix-display();
-                            .lib-css(background-color, @color-white);
-                            border-radius: 5px;
-                            //margin: 10px;
-
-                            .category-item-left {
-                                a {
-                                    text-decoration: none;
-                                }
-
-                                .category-name {
-                                    .lib-font-size(16);
-                                    .lib-line-height(22);
-                                    font-weight: @font-weight__bold;
-                                    margin-bottom: 10px;
-                                }
-                            }
-
-                            .category-item-right {
-                                .category-image {
-                                    margin-bottom: 0;
-                                }
-                            }
-                        }
                     }
                 }
             }
@@ -76,32 +50,7 @@
                         width: 50%;
                         margin: 0;
 
-                        .category-item-container {
-                            position: relative;
-                            margin: 5px;
-                            height: 64px;
-                        }
-                    }
-                }
 
-                .category-item-left {
-                    padding: 10px;
-                    position: relative;
-                    z-index: 2;
-
-                    .category-short-description {
-                        display: none;
-                    }
-                }
-                .category-item-right {
-                    position: absolute;
-                    right: 0;
-
-                    .category-image {
-                        img {
-                            width: 64px;
-                            height: 64px;
-                        }
                     }
                 }
             }
@@ -129,37 +78,9 @@
                 .category-top-grid {
                     margin-inline: -@indent__s;
                 }
-
-                .category-top-items {
-
-                    .category-item {
-                        .category-item-container {
-                            position: relative;
-                            margin: 10px;
-                            height: 120px;
-                        }
-                    }
-                }
-
-                .category-item-left {
-                    padding: 20px 0 20px 20px;
-                    position: absolute;
-                    z-index: 2;
-                    width: ~'calc(100% - 100px)';
-                }
-
-                .category-item-right {
-                    position: absolute;
-                    right: 0;
-
-                    .category-image {
-                        img {
-                            width: 120px;
-                            height: 120px;
-                        }
-                    }
-                }
             }
         }
     }
+
+
 }

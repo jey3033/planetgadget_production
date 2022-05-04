@@ -30,6 +30,10 @@ $productsBlock->setConditionsEncoded("^[`1`:^[`type`:`Magento||CatalogWidget||Mo
 ?>
 
 <div class="pcp-featured-gadgets-wrapper">
-    <?= $productsBlock->toHtml(); ?>
+    <div class="pcp-featured-gadgets-container fixed-width">
+        <div class="widget-title"><h2>Preferred <span>Gadgets</span></h2></div>
+        <?= $productsBlock->toHtml(); ?>
+    </div>
 </div>
+
 

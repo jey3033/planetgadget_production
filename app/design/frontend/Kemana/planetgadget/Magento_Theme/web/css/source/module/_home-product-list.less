@@ -12,13 +12,15 @@
 
 & when (@media-common = true) {
     .home-new-arrivals-wrapper,
-    .home-best-seller-wrapper {
+    .home-best-seller-wrapper,
+    .pcp-featured-gadgets-wrapper {
         .lib-css(background-color, @color-pg-light-gray2);
     }
 
     .home-new-arrivals-container,
     .home-best-seller-container,
-    .home-editors-recommend-container {
+    .home-editors-recommend-container,
+    .pcp-featured-gadgets-container {
         .block {
             &.widget {
                 .widget-title {
@@ -31,28 +33,51 @@
                         margin-bottom: 0;
 
                         .slick-track {
+                            //height: 100%;
+
                             .slick-slide {
+                               // height: 100%;
+
                                 > div {
-                                    height: 100%;
+                                    //height: 100%;
                                 }
                             }
                         }
 
                         .product-item {
                             padding-inline: 10px;
-                            height: 100%;
+                            //height: 100%;
 
                             .product-item-info {
                                 .lib-css(background-color, @color-white);
                                 padding: 10px;
                                 border-radius: 5px;
-                                height: 100%;
+                               // height: 100%;
 
                                 .product-image-wrapper {
                                     padding-bottom: 100%!important;
                                 }
                             }
                         }
+                    }
+                }
+            }
+        }
+
+        .widget-title {
+            h2 {
+                span {
+                    display: inline-block;
+                    .lib-css(margin-bottom, 0);
+
+                    &:after {
+                        content: '';
+                        display: block;
+                        margin: auto;
+                        .lib-css(margin-top, -10px);
+                        .lib-css(width, 100%);
+                        .lib-css(height, 10px);
+                        .lib-css(background, @kemana-secondary-brand-color);
                     }
                 }
             }
@@ -67,23 +92,35 @@
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
     .home-new-arrivals-container,
     .home-best-seller-container,
-    .home-editors-recommend-container {
+    .home-editors-recommend-container,
+    .pcp-featured-gadgets-container {
         padding: 50px 5px 45px !important;
+
+        .widget-title {
+            h2 {
+                padding-inline: 5px;
+            }
+        }
 
         .block {
             &.widget {
                 .products-grid {
                     .slick-track {
-                       // width: 100% !important;
+                        display: flex !important;
+                        min-height: 0;
+                        min-width: 0;
+
+                        .slick-slide {
+                            height: auto;
+                            min-height: 0;
+                            min-width: 0;
+                        }
                     }
 
                     .product-items {
-                        width: 100%;
-
                         .product-item {
                             margin: 0;
                             padding: 5px;
-                            //width: 50% !important;
 
                             .product-item-info {
                                 .lib-css(background-color, @color-white);
@@ -107,7 +144,8 @@
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
     .home-new-arrivals-container,
     .home-best-seller-container,
-    .home-editors-recommend-container {
+    .home-editors-recommend-container,
+    .pcp-featured-gadgets-container {
         padding-block: 50px;
 
         .block {
@@ -118,6 +156,24 @@
                         .lib-line-height(31);
                     }
                 }
+
+                .products-grid {
+                    .product-items {
+                        .product-item {
+                            .product-item-info {
+                                height: 333px;
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .widget-title {
+            h2 {
+                .lib-font-size(28);
+                .lib-line-height(31);
             }
         }
     }
