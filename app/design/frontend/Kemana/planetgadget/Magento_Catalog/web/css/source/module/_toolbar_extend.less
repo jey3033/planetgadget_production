@@ -1,0 +1,46 @@
+// /**
+//  * Copyright © 2022 Kemana. All rights reserved.
+//  * @author Harshani Karunasekara <agunawardena@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+//
+//  Variables
+//  ---------------------------------------------
+
+@toolbar-background: transparent;
+@toolbar-mode-icon-font-size: 24px;
+@toolbar-element-background: @panel__background-color;
+
+@toolbar-product-count__color: @kemana-primary-brand-color;
+@toolbar-product-select__color: @kemana-primary-brand-color;
+@toolbar-sorter-label__color: @color-pg-dark-gray;
+//
+//  Common
+//  _____________________________________________
+& when (@media-common = true) {
+    .toolbar-amount {
+        .toolbar-number {
+            font-weight: @font-weight__bold;
+        }
+    }
+
+    .sorter {
+        .sorter-label {
+            .lib-css(color, @toolbar-sorter-label__color);
+            font-weight: @font-weight__bold;
+            .lib-line-height(40);
+            padding-top: 0;
+        }
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .toolbar-amount {
+        padding: 20px 10px 0;
+    }
+}

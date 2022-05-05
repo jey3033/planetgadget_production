@@ -1,0 +1,36 @@
+// /**
+//  * Copyright © 2020 Kemana. All rights reserved.
+//  * @author Ashan Gunawardena <agunawardena@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .product-labels {
+        .lib-css(letter-spacing, @product-label__letter-spacing);
+        .lib-css(font-weight, @product-label__font-weight);
+        .lib-css(font-size, @product-label__font-size);
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        z-index: 2;
+        text-transform: uppercase;
+
+        .label-sale {
+            .lib-css(padding, @product-label__padding);
+            .lib-css(background, @product-label-sale__background);
+            .lib-css(color, @product-label-sale__color);
+            display: inline-block;
+        }
+
+        .label-out-of-stock {
+            .lib-css(padding, @product-label__padding);
+            .lib-css(background, @product-label-out-of-stock__background);
+            .lib-css(color, @product-label-out-of-stock__color);
+            display: inline-block;
+        }
+    }
+}

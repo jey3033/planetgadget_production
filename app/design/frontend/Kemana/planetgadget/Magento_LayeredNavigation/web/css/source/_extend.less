@@ -1,0 +1,34 @@
+// /**
+//  * Copyright © 2020 Kemana. All rights reserved.
+//  * @author Ashan Gunawardena <agunawardena@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+//  Layered navigation
+@filter-title-background-color: @color-gray94;
+@filter-link: @kemana-primary-brand-color;
+@filter-link-hover: @kemana-primary-brand-color;
+@filter-quantity: @color-pg-dark-gray;
+
+//  Current item
+@filter-current-background-color: @color-kemana-gray4;
+@filter-current-text-color: @color-kemana-dark2;
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+}

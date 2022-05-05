@@ -35,7 +35,7 @@
 @product-item-desktop__padding: 0 10px;
 @product-item-mobile__padding: 0 5px;
 
-@product-desktop-grid-product-count: 3;
+@product-desktop-grid-product-count: 4;
 @product-related-grid-product-count: 4;
 @product-tablet-grid-product-count: 2;
 @product-mobile-grid-product-count: 2;
@@ -45,11 +45,34 @@
 //  _____________________________________________
 
 & when (@media-common = true) {
-    .product-item {
-        .product-item-info {
+    .page-products {
+        #kemana-bannerslider-block-before-content-2 {
+            display: none;
+        }
+    }
 
+    .products-grid {
+        .product-items {
+            .lib-vendor-prefix-display();
+            .lib-vendor-prefix-flex-wrap();
+
+            .product-item {
+                .product-item-info {
+                    .lib-css( background-color, @color-white);
+                    border-radius: 5px;
+                    height: 100%;
+                    padding: 10px;
+
+                    .product-image-wrapper {
+                        padding-bottom: 100% !important;
+                    }
+                }
+            }
         }
 
+    }
+
+    .product-item {
         .special-price,
         .minimal-price {
             .lib-line-height(16);

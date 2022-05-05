@@ -1,0 +1,170 @@
+// /**
+//  * Copyright © 2022 Kemana. All rights reserved.
+//  * @author Harshani Karunasekara <hkarunasekara@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+//
+//  Variables
+//  _____________________________________________
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .catalog-category-view,
+    .catalogsearch-result-index {
+        .page-title-wrapper {
+            display: none;
+        }
+
+        .page-main {
+            .category-view {
+                display: none;
+            }
+        }
+
+        .sidebar-additional {
+            display: none;
+        }
+
+        .products-grid {
+            .product-item-details {
+                .size-guide {
+                    display: block;
+                }
+            }
+        }
+    }
+
+    .catalogsearch-result-index {
+        .page-title-wrapper {
+            .page-title {
+                .lib-font-size(24);
+                .lib-line-height(28);
+            }
+        }
+    }
+
+    .search {
+        &.results {
+            .block {
+                text-align: center;
+                margin-top: 20px;
+                margin-bottom: 20px;
+
+                .title {
+                    .lib-line-height(16);
+                    .lib-css(color, @color-kemana-gray7);
+                    .lib-css(font-weight, @font-weight__regular);
+                }
+
+                .item {
+                    a {
+                        .lib-css(font-weight, @font-weight__heavier);
+                    }
+                }
+            }
+        }
+    }
+
+    .toolbar-products {
+        .page-title {
+            .lib-font-size(24);
+            .lib-line-height(28);
+            margin-bottom: 0;
+            display: block;
+            text-align: center;
+        }
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .toolbar-products {
+        .toolbar-sorter {
+            &.sorter {
+                padding-left: 10px;
+                position: relative;
+
+                .qty-selector {
+                    border: 1px solid transparent;
+                    width: 100%;
+                    position: static;
+
+                    .item-main {
+                        padding-left: 0;
+                        width: 85%;
+                        height: 34px;
+                    }
+                }
+
+                .qty-selector-dropdown {
+                    .lib-css(border, @abs-input-sort-custom__border);
+                    left: 0;
+                    margin: -1px -1px 0;
+                    width: ~'calc(100% + 2px)';
+                }
+            }
+        }
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .page-layout-2columns-left {
+        .sidebar-main {
+            .lib-css(padding, @indent__base);
+            width: 25%;
+            background-color: @color-white;
+            border-radius: 5px;
+        }
+
+        .column.main {
+            width: ~'calc(100% - 25%)';
+        }
+    }
+
+    .search {
+        &.results {
+            .block {
+                .lib-css(padding-right, @indent__s);
+                .lib-css(padding-left, @indent__s);
+                margin-top: 10px;
+                margin-bottom: 30px;
+                text-align: left;
+            }
+        }
+    }
+
+    .toolbar-products {
+        .page-title {
+            float: left;
+            text-align: left;
+            margin-right: 10px;
+        }
+    }
+}
+
+//
+//  Desktop large
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+    .page-layout-2columns-left {
+        .sidebar-main {
+            width: 290px;
+        }
+
+        .column.main {
+            width: ~'calc(100% - 320px)';
+        }
+    }
+}
