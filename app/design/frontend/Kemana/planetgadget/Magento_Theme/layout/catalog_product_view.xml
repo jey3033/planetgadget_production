@@ -17,6 +17,6 @@
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceBlock name="product.info.sku" remove="true"/>
-
+        <referenceBlock name="kslocator.link" remove="true"/>
     </body>
 </page>

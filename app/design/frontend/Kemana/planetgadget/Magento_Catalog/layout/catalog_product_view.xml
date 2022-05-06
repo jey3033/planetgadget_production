@@ -10,5 +10,11 @@
         <referenceBlock name="view.addto.compare" remove="false" />
         <move element="km.SocialShare.InlineCart" destination="product.info.social" after="-"/>
         <referenceBlock name="product.info.overview" remove="true" />
+
+        <referenceBlock name="product.info.details">
+            <arguments>
+                <argument name="view_model" xsi:type="object">Kemana\Catalog\ViewModel\Product\View</argument>
+            </arguments>
+        </referenceBlock>
     </body>
 </page>
