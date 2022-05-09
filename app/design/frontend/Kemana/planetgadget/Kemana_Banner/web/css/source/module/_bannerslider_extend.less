@@ -10,7 +10,7 @@
 //  _____________________________________________
 & when (@media-common = true) {
     .carousel-container {
-        margin-top: 11px;
+        margin-top: 0;
 
         .banner-item {
             .full-width-banner {
@@ -77,18 +77,46 @@
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
     .carousel-container {
         .banner-item {
-            .banner-description {
-                max-width: @layout__max-width;
-                top: 55%;
+            .full-width-banner {
+                .lib-vendor-prefix-display();
+                background-color: @color-white;
+                justify-content: center;
 
-                .actions-toolbar {
-                    padding-left: 120px;
+                .banner-img {
+                    img {
+                        max-height: 450px;
+                        width: auto;
+                    }
+                }
 
-                    .primary {
-                        text-align: left;
+                .banner-description {
+                    max-width: @layout__max-width;
+                    top: 55%;
+
+                    .actions-toolbar {
+                        padding-left: 120px;
+
+                        .primary {
+                            text-align: left;
+                            border-radius: 20px;
+                        }
+                    }
+                }
+
+                &.main-pcp-slider {
+                    .banner-description {
+                        .actions-toolbar {
+                            margin-right: 200px;
+                            margin-top: 213px;
+
+                            .primary {
+                                text-align: right;
+                            }
+                        }
                     }
                 }
             }
+
         }
     }
 }

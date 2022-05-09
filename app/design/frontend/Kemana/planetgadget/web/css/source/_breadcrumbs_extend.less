@@ -1,0 +1,94 @@
+// /**
+//  * Copyright © 2021 Kemana. All rights reserved.
+//  * @author Harshani Karunasekara <hkarunasekara@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+//
+//  Variables
+//  _____________________________________________
+
+@breadcrumb-back-button__icon: @icon-pg-prev;
+@breadcrumb-back-button__font-size: 9px;
+@breadcrumb-back-button__line-height: 20px;
+@breadcrumb-back-button__color: @color-pg-light-gray;
+@breadcrumb-back-button__margin: 0 6px 0 0;
+
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .breadcrumbs {
+        .items {
+            li {
+                margin-bottom: 0;
+                a {
+                    .lib-line-height(20);
+                    display: inline-block;
+                }
+            }
+
+            .back-btn,
+            .home {
+                .lib-css(font-weight, @font-weight__bold);
+            }
+
+            .back-btn {
+                &:before {
+                    .lib-css(font-weight, @font-weight__bold);
+                }
+
+                &:after {
+                    .lib-css(font-size, @breadcrumbs-icon__font-size);
+                    .lib-css(line-height, @breadcrumbs-icon__font-line-height);
+                    .lib-css(color, @breadcrumbs-icon__font-color);
+                    .lib-css(margin, @breadcrumbs-icon__font-margin);
+                    .lib-css(font-weight, @font-weight__bold);
+
+                }
+            }
+
+            .item:not(:last-child) {
+                &:after {
+                    .lib-css(font-weight, @font-weight__bold);
+                }
+            };
+        }
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .breadcrumbs {
+        .items {
+            .back-btn {
+                &:after {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .breadcrumbs {
+        margin-top: 30px;
+
+        .items {
+            .back-btn {
+                &:after {
+                    display: inline-block;
+                }
+            }
+        }
+    }
+}

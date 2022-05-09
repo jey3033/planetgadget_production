@@ -383,6 +383,7 @@
     }
 
     //  Inner Pages
+    .cms-index-index,
     .customer-account-login,
     .account,
     .cms-page-view,
@@ -418,7 +419,8 @@
     .kslocator-index-index,
     .checkout-onepage-failure,
     .faq-category-view,
-    .faq-question-view {
+    .faq-question-view,
+    .category-page-detail {
         .page-wrapper {
             .lib-css(margin-top, @header-mobile__height + @indent__base);
         }
@@ -428,6 +430,10 @@
         .page-wrapper {
             .lib-css(margin-top, @header-mobile__height);
         }
+    }
+
+    .cookie-status-message {
+        display: none;
     }
 }
 
@@ -589,6 +595,7 @@
         }
     }
 
+    .cms-index-index,
     .customer-account-login,
     .account,
     .cms-page-view,
@@ -624,9 +631,10 @@
     .kslocator-index-index,
     .checkout-onepage-failure,
     .faq-category-view,
-    .faq-question-view {
+    .faq-question-view,
+    .category-page-detail {
         .page-wrapper {
-            .lib-css(margin-top, @header-desktop__height + @indent__base);
+            .lib-css(margin-top, @header-desktop__height + 32px);
         }
     }
 

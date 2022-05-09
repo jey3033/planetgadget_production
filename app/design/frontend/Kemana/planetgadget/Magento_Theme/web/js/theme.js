@@ -307,8 +307,8 @@ define([
                     slidesToShow: 2,
                     rows: 2,
                     slidesToScroll: 1,
-                    centerMode: true,
-                    centerPadding: '0 25.5%'
+                    centerMode: false,
+                    centerPadding: '0 0 25.5%'
                 }
             },
             {
