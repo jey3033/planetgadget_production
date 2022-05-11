@@ -19,6 +19,7 @@ use Magento\Cms\Model\BlockFactory;
 use Magento\Cms\Model\PageFactory;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\Framework\App\Helper\Context;
+use Magento\Reports\Model\ResourceModel\Product\Sold\CollectionFactory;
 
 /**
  * Class Data
@@ -41,6 +42,11 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     const PG_STORE_VIEW_ENGLISH   = 2;
 
     /**
+     * Get sold item threshhold in PDP
+     */
+    const XML_PATH_SOLD_ITEM_COUNT_THRESHHOLD_IN_PDP = 'catalog/frontend/threshold_pdp_item_sold';
+
+    /**
      * @var Context
      */
     protected $context;
@@ -61,6 +67,16 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     protected $storeManager;
 
     /**
+     * @var CollectionFactory
+     */
+    protected $reportCollectionFactory;
+
+    /**
+     * @var string
+     */
+    protected $storeScope;
+
+    /**
      * @param Context $context
      * @param BlockFactory $blockFactory
      * @param PageFactory $pageFactory
@@ -70,12 +86,15 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         Context $context,
         BlockFactory $blockFactory,
         PageFactory $pageFactory,
-        StoreManagerInterface $storeManager
+        StoreManagerInterface $storeManager,
+        CollectionFactory  $reportCollectionFactory
     ) {
         $this->context      = $context;
         $this->blockFactory = $blockFactory;
         $this->pageFactory = $pageFactory;
         $this->storeManager = $storeManager;
+        $this->reportCollectionFactory = $reportCollectionFactory;
+        $this->storeScope = \Magento\Store\Model\ScopeInterface::SCOPE_STORE;
 
         parent::__construct($context);
     }
@@ -176,6 +195,41 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public function getMediaFolderUrl()
     {
         return $this->storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSoldItemCountThreshhold()
+    {
+        return $this->scopeConfig->getValue(self::XML_PATH_SOLD_ITEM_COUNT_THRESHHOLD_IN_PDP, $this->storeScope);
+    }
+
+    /**
+     * @param $productId
+     * @return int
+     * @throws \Zend_Db_Select_Exception
+     */
+    public function getSoldQtyByProductId($productId = null)
+    {
+        $productSaleData = $this->reportCollectionFactory->create();
+
+        $getProductSaleData = $productSaleData->addOrderedQty()->addAttributeToFilter('product_id', $productId);
+
+        if (!$getProductSaleData->count()) {
+            return 0;
+        }
+
+        $product = $getProductSaleData
+            ->getFirstItem();
+
+        if ($product->getData('ordered_qty') &&
+            ((int)$product->getData('ordered_qty') >= (int)$this->getSoldItemCountThreshhold())) {
+            return (int)$product->getData('ordered_qty');
+        }
+
+        return 0;
+
     }
 
 }
