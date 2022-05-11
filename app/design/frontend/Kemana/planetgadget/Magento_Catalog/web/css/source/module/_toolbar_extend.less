@@ -15,6 +15,7 @@
 @toolbar-product-count__color: @kemana-primary-brand-color;
 @toolbar-product-select__color: @kemana-primary-brand-color;
 @toolbar-sorter-label__color: @color-pg-dark-gray;
+
 //
 //  Common
 //  _____________________________________________
@@ -31,6 +32,28 @@
             font-weight: @font-weight__bold;
             .lib-line-height(40);
             padding-top: 0;
+        }
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .toolbar-products {
+        .toolbar-sorter {
+            background-color: @color-white;
+            .lib-css(border, 1px solid @color-pg-light-gray);
+            border-radius: 5px;
+
+            .sorter-label {
+                display: none;
+            }
+
+            .sorter-options {
+                width: 100%;
+            }
         }
     }
 }
