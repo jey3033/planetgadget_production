@@ -58,118 +58,50 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 
         parent::__construct($context);
     }
-
-    /**
-     * get stock status
-     *
-     * @param \Magento\Catalog\Model\Product $product
-     * @param $attribOptions
-     * @return bool 
-     */
-    public function getStockStatus($product, $attribOptions)
+    public function getStockStatus($product)
     {
-       
-        if($product->getTypeId() == Configurable::TYPE_CODE){
-            
-            $productChildId = $this->getConfigurableProductChildIdsByAttrValue($product, $attribOptions);
-            $getProductChildStockStatus = $this->getConfigurableProductChildStockStatus($product->getId());
-            
-            return $getProductChildStockStatus[$productChildId] ? true : false;
-            
-        }else if($product->getTypeId() == Type::TYPE_CODE){ // bundle products
-            
+        if($product->getTypeId() == Configurable::TYPE_CODE) {
+        
+            return $this->stockRegistry->getStockItemBySku($product->getSku())->getIsInStock();
+        
+        }else if($product->getTypeId() == Type::TYPE_CODE) {
+
             return $this->getBundledProductChildStockStatus($product);
-            
+        
         }else{
-            /** @var StockItemInterface $stockItem */
-            $stockItem = $this->stockRegistry->getStockItem($product->getId());
-            $isInStock = $stockItem ? $stockItem->getIsInStock() : false;
-            return $isInStock;
+            return $this->stockRegistry->getStockItemBySku($product->getSku())->getIsInStock();
         }
-    }
-    /**
-     * get stock status product child
-     *
-     * @param int $productId
-     * @return array 
-     */
-    public function getConfigurableProductChildStockStatus($productId)
-    {
-        $data = [];
-        /** @var \Magento\ConfigurableProduct\Model\Product\Type\Configurable $configurableProduct */
-        $children = $this->configurableProduct->getChildrenIds($productId);
-        foreach ($children as $child) {
-            foreach ($child as $item) {
-                /** @var \Magento\CatalogInventory\Api\StockRegistryInterface $stockRegistry */
-                $stockItem = $this->stockRegistry->getStockItem($item);
-                if($stockItem) {
-                    $data[$item] = $stockItem->getData('is_in_stock');
-                }
-            }
-        }
-
-        return $data;
-    }
-    /**
-     * get configurable product child ids by attribute
-     *
-     * @param \Magento\Catalog\Model\Product $product
-     * @param array $attribOptions ex. [ color => Red ]
-     * @return int 
-     */
-    public function getConfigurableProductChildIdsByAttrValue($product, $attribOptions){
-        $storeId = $this->storeManager->getStore()->getStoreId();
         
-        $productTypeInstance = $product->getTypeInstance();
-        $productTypeInstance->setStoreFilter($storeId, $product);
-        $usedProducts = $productTypeInstance->getUsedProducts($product);
-        
-        foreach($attribOptions as $option){
-            
-            $attr_code = strtolower($option['label']);
-            $attr_value = $option['value'];
-            
-            foreach ($usedProducts  as $child) {
-        
-                $customValue = $child->getAttributeText($attr_code);
-                if($customValue == $attr_value){
-                    return $child->getId();
-                }
-        
-            }
-        }
     }
 
     /**
-     * get bundle product child ids by attribute
+     * get bundle product child stock status
      *
      * @param \Magento\Catalog\Model\Product $product
      * @return bool 
      */
     public function getBundledProductChildStockStatus($product){
-        $data = [];
-        $bundleIds = [];
+        $isInStockBundleProductChilds = [];
         $stockStatus = true;
-       
-        $bundleIds = array_reduce(
-            $product->getTypeInstance(true)->getChildrenIds($product->getId()),
-            function (array $reduce, $value) {
-                return array_merge($reduce, $value);
-            }, []);
-
-        foreach($bundleIds as $item){
-            $stockItem = $this->stockRegistry->getStockItem($item);
-            $test = $stockItem->getBackorders();
-            if($stockItem) {
-                $data[$item] = $stockItem->getData('is_in_stock');
+        //get all the selection products used in bundle product.
+        $allBundleproductSelection = $product->getTypeInstance(true)
+            ->getSelectionsCollection(
+                $product->getTypeInstance(true)->getOptionsIds($product),
+                $product
+            );
+        
+        $OrigBundleSKus = $product->getSku();
+        foreach ($allBundleproductSelection as $bundle) {
+            if (str_contains($OrigBundleSKus, $bundle->getSku())) { 
+                $isInStockBundleProductChilds[] = (int) $this->stockRegistry->getStockItemBySku($bundle->getSku())->getIsInStock(); // 0 = out of stock, 1 = is in stock
             }
         }
-        if(array_search("0",$data))//
-        {
+        if(count(array_unique($isInStockBundleProductChilds)) === 1) {// check if 1 bundle child items is out of stock
+            $stockStatus = true;
+        } else {
             $stockStatus = false;
         }
         return $stockStatus;
     }
-
-        
+    
 }

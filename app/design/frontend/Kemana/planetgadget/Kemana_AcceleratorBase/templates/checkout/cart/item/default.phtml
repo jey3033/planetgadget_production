@@ -94,9 +94,9 @@ $kemanaCheckout = $this->helper(Kemana\Checkout\Helper\Data::class);
             <?= $block->getUnitPriceHtml($_item) ?>
         </td>
     <?php endif; ?>
-    <td class="col qty <?=$product->getChildId()?>" data-th="<?= $block->escapeHtmlAttr(__('Qty')) ?>">
+    <td class="col qty" data-th="<?= $block->escapeHtmlAttr(__('Qty')) ?>">
         <?php
-        if ($kemanaCheckout->getStockStatus($product, $_options)):?>
+        if ($kemanaCheckout->getStockStatus($product)):?>
             <div class="field qty">
                 <div class="control qty">
                     <label for="cart-<?= $block->escapeHtmlAttr($_item->getId()) ?>-qty">
