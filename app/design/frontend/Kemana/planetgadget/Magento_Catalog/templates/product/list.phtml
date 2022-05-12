@@ -65,6 +65,15 @@ $_helper = $block->getData('outputHelper');
                        tabindex="-1">
                         <?= $productImage->toHtml() ?>
                     </a>
+
+                    <!--Out Stock Stock Image - Handled according to the default Out Of Stock label logic-->
+                    <?php if (!$_product->isSaleable()):?>
+                        <?php if (!$_product->isAvailable()):?>
+                            <div class="sold-out"><img src='<?php echo $this->getViewFileUrl('images/sold-out.png')
+                                ; ?>' alt="sold out"></div>
+                        <?php endif; ?>
+                    <?php endif;?>
+
                     <div class="product details product-item-details">
                         <?php $_productNameStripped = $block->stripTags($_product->getName(), null, true); ?>
                         <strong class="product name product-item-name">
