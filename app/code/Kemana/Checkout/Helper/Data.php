@@ -20,6 +20,7 @@ use Magento\CatalogInventory\Api\Data\StockItemInterface;
 use Magento\ConfigurableProduct\Model\Product\Type\Configurable;
 use Magento\Bundle\Model\Product\Type;
 use Magento\Store\Model\StoreManagerInterface;
+
 /**
  * Class Data
  */
@@ -39,6 +40,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      * @var StoreManagerInterface
      */
     private $storemanager;
+
     /**
      * @param StockRegistryInterface $stockRegistry
      * @param Configurable $configurableProduct
@@ -58,17 +60,20 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 
         parent::__construct($context);
     }
+
+    /**
+     * check if item is in stock or out of stock
+     *
+     * @param \Magento\Catalog\Model\Product $product
+     * @return bool 
+     */
     public function getStockStatus($product)
     {
-        if($product->getTypeId() == Configurable::TYPE_CODE) {
-        
+        if ($product->getTypeId() == Configurable::TYPE_CODE) {
             return $this->stockRegistry->getStockItemBySku($product->getSku())->getIsInStock();
-        
-        }else if($product->getTypeId() == Type::TYPE_CODE) {
-
+        } elseif ($product->getTypeId() == Type::TYPE_CODE) {
             return $this->getBundledProductChildStockStatus($product);
-        
-        }else{
+        } else {
             return $this->stockRegistry->getStockItemBySku($product->getSku())->getIsInStock();
         }
         
@@ -81,6 +86,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      * @return bool 
      */
     public function getBundledProductChildStockStatus($product){
+        
         $isInStockBundleProductChilds = [];
         $stockStatus = true;
         //get all the selection products used in bundle product.
@@ -91,16 +97,20 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             );
         
         $OrigBundleSKus = $product->getSku();
+        
         foreach ($allBundleproductSelection as $bundle) {
             if (str_contains($OrigBundleSKus, $bundle->getSku())) { 
                 $isInStockBundleProductChilds[] = (int) $this->stockRegistry->getStockItemBySku($bundle->getSku())->getIsInStock(); // 0 = out of stock, 1 = is in stock
             }
+
         }
-        if(count(array_unique($isInStockBundleProductChilds)) === 1) {// check if 1 bundle child items is out of stock
+
+        if (count(array_unique($isInStockBundleProductChilds)) === 1) {// check if 1 bundle child items is out of stock
             $stockStatus = true;
         } else {
             $stockStatus = false;
         }
+
         return $stockStatus;
     }
     
