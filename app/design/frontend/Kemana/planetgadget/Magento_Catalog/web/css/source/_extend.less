@@ -3,21 +3,20 @@
 //  * @author Harshani Karunasekara <hkarunasekara@kemana.com>
 //  * http://www.kemana.com
 //  */
-
 @import 'module/_listings_extend.less';
-//@import 'module/_toolbar.less';
+@import 'module/_toolbar_extend.less';
 
 //
 //  Variables
 //  _____________________________________________
 
-@pdp-product-title-desktop__font-size: 30;
+@pdp-product-title-desktop__font-size: 28;
 @pdp-product-title__font-weight: @font-weight__bold;
 
 @pdp-product-price__font-family: @font-family-name__base;
-@pdp-product-price__font-weight: @font-weight__heavier;
+@pdp-product-price__font-weight: @font-weight__bold;
 @plp-product-price__font-size: 16;
-@pdp-product-price__font-size: 24;
+@pdp-product-price__font-size: 28;
 
 @plp-product-item__border: 0;
 @plp-product-item-hover__border: 0;
@@ -82,10 +81,11 @@
     }
 
     .product-reviews-summary {
-        display: block;
-
         .reviews-actions {
-            display: none;
+            a {
+                .lib-font-size(12);
+                .lib-line-height(20);
+            }
         }
     }
 }
@@ -105,6 +105,86 @@
                    // width: 100%!important;
                 }
             }
+        }
+    }
+}
+
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .product-info-main {
+        .page-title-wrapper {
+            .page-title {
+                .lib-line-height(38);
+                margin-bottom: 13px;
+            }
+        }
+    }
+}
+//
+//  Category page layout
+//  ---------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+    .catalog-product-view {
+        .column.main {
+            display: inline-block;
+        }
+    }
+
+    .product-info-main {
+        float: right;
+        margin-bottom: 0;
+        margin-top: 0;
+    }
+
+    .product.media {
+        float: left;
+    }
+
+    .product {
+        &.info {
+            &.detailed {
+
+            }
+        }
+    }
+
+    //  Product Grid border
+    .products-grid {
+        .product-item {
+            .lib-css(border, @plp-product-item__border);
+            .lib-css(border-radius, @plp-product-item__border-radius);
+
+            &:hover {
+                .lib-css(border, @plp-product-item-hover__border);
+            }
+        }
+    }
+
+    .page-layout-1column {
+        .product-info-main {
+            width: 100%;
+            max-width: 640px;
+            padding: 30px;
+            background: @color-white;
+            border-radius: 5px;
+            margin-bottom: 30px;
+
+            .box-tocart {
+                .actions {
+                    width: 200px;
+                }
+            }
+        }
+
+        .product.media {
+            width: ~'calc(100% - 660px)';
+            margin-bottom: 30px;
+            border-radius: 5px;
         }
     }
 }
