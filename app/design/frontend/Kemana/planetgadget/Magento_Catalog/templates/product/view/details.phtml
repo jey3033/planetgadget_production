@@ -27,21 +27,24 @@ $viewModel = $block->getViewModel();
                 $alias = $layout->getElementAlias($name);
                 $label = $block->getChildData($alias, 'title');
                 ?>
-                <div class="data item title"
-                     data-role="collapsible" id="tab-label-<?= $block->escapeHtmlAttr($alias) ?>">
-                    <a class="data switch"
-                       tabindex="-1"
-                       data-toggle="trigger"
-                       href="#<?= $block->escapeUrl($alias) ?>"
-                       id="tab-label-<?= $block->escapeHtmlAttr($alias) ?>-title">
-                        <?= /* @noEscape */ $label ?>
-                    </a>
-                </div>
-                <div class="data item content"
-                     aria-labelledby="tab-label-<?= $block->escapeHtmlAttr($alias) ?>-title" id="<?= $block->escapeHtmlAttr($alias) ?>" data-role="content">
-                    <?= /* @noEscape */ $html ?>
+                <div class="data-block">
+                    <div class="data item title"
+                         data-role="collapsible" id="tab-label-<?= $block->escapeHtmlAttr($alias) ?>">
+                        <a class="data switch"
+                           tabindex="-1"
+                           data-toggle="trigger"
+                           href="#<?= $block->escapeUrl($alias) ?>"
+                           id="tab-label-<?= $block->escapeHtmlAttr($alias) ?>-title">
+                            <?= /* @noEscape */ $label ?>
+                        </a>
+                    </div>
+                    <div class="data item content"
+                         aria-labelledby="tab-label-<?= $block->escapeHtmlAttr($alias) ?>-title" id="<?= $block->escapeHtmlAttr($alias) ?>" data-role="content">
+                        <?= /* @noEscape */ $html ?>
+                    </div>
                 </div>
             <?php endforeach;?>
+            <div class="data-block-warranty">
             <div class="data item title"
                  data-role="collapsible" id="tab-label-warranty">
                 <a class="data switch"
@@ -55,6 +58,7 @@ $viewModel = $block->getViewModel();
             <div class="data item content"
                  aria-labelledby="tab-label-<?= $block->escapeHtmlAttr('warranty') ?>-title" id="<?= $block->escapeHtmlAttr('warranty') ?>" data-role="content">
                 <?= /* @noEscape */ $viewModel->getWarrantyForCurrentProduct(); ?>
+            </div>
             </div>
         </div>
     </div>
