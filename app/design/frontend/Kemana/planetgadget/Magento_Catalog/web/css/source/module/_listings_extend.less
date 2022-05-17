@@ -56,9 +56,7 @@
 
     .products-grid {
         .product-items {
-            .lib-vendor-prefix-display();
-            .lib-vendor-prefix-flex-wrap();
-
+            display: block;
             .product-item {
                 .product-item-info {
                     .lib-css( background-color, @color-white);
@@ -122,6 +120,22 @@
 
         .old-price {
             margin-left: 0;
+        }
+
+        .discount {
+            display: inline-block;
+            border-radius: 0 20px 20px 20px;
+            height: 16px;
+            width: auto;
+            line-height: 16px;
+            padding: 0 10px;
+            text-align: center;
+            .lib-css(color, @color-white);
+            .lib-css(font-weight, @font-weight__bold);
+            text-transform: uppercase;
+            background: @color-pg-red;
+            .lib-font-size(10);
+            margin-left: 10px;
         }
 
         .tocompare {

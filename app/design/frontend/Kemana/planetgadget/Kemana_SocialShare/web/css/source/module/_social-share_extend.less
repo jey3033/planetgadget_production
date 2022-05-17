@@ -1,0 +1,312 @@
+// /**
+//  * Copyright © 2020 Kemana. All rights reserved.
+//  * @author Ashan Gunawardena <agunawardena@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .product-info-main {
+        .social-share {
+            position: relative;
+            float: right;
+
+            &:hover {
+                .title {
+                    text-decoration: underline;
+                }
+            }
+
+            .title {
+                .lib-font-size(14);
+                .lib-css(color, @social-share-title__font-color);
+                .lib-css(text-transform, @social-share-title__text-transform);
+                .lib-css(font-weight, @social-share-title__font-weight);
+                .lib-css(font-family, @font-family-name__base);
+                cursor: pointer;
+                margin-bottom: 5px;
+                padding-bottom: 15px;
+
+                .lib-icon-font(
+                    @social-share-title-icon,
+                    @_icon-font: @icon-font,
+                    @_icon-font-color: @social-share-icon__font-color,
+                    @_icon-font-color-hover: @social-share-icon__font-color-hover,
+                    @_icon-font-size: 14px,
+                    @_icon-font-line-height: 14px,
+                    @_icon-font-margin: 3px 10px 0 0,
+                    @_icon-font-vertical-align: top,
+                    @_icon-font-position: before
+                );
+
+                &:before {
+                    width: 14px;
+                }
+            }
+
+            .mp_social_share_inline_under_cart {
+                .lib-css(background-color, @color-white);
+                display: none;
+                box-shadow: 0 1px 10px rgba(0, 0, 0, 0.16);
+                padding: 12px 16px;
+                position: absolute;
+                right: 0;
+                z-index: 9;
+                top: 32px;
+
+                &.active {
+                    .lib-vendor-prefix-display();
+
+                    &:before {
+                        content: '';
+                        width: 0;
+                        height: 0;
+                        border-left: 20px solid transparent;
+                        border-right: 20px solid transparent;
+                        border-bottom: 16px solid @color-white;
+                        position: absolute;
+                        top: -16px;
+                        right: 4%;
+                    }
+                }
+
+                .a2a_kit {
+                    .lib-vendor-prefix-display();
+                }
+
+                a {
+                    float: none;
+
+                    &:not(:last-child) {
+                        padding-right: 10px;
+                    }
+
+                    &.a2a_counter {
+                        .lib-css(border, @social-share-icon__border);
+                        .lib-css(width, @social-share-icon__width);
+                        .lib-css(height, @social-share-icon__width);
+                        .lib-css(border-radius, @social-share-icon__border-radius);
+                        .lib-css(margin, @social-share-icon__margin);
+                        padding: 0;
+                        text-align: center;
+
+                        &:hover {
+                            .lib-css(border-color, @social-share-icon__border-hover);
+                        }
+
+                        span {
+                            display: none;
+                        }
+                    }
+
+                    &.a2a_button_facebook {
+                        .icon {
+                            & when (@social-share-font-icon = true) {
+                                .lib-icon-font(
+                                        @social-share-facebook-icon,
+                                    @_icon-font: @icon-font,
+                                    @_icon-font-color: @social-share-icon__font-color,
+                                    @_icon-font-color-hover: @social-share-icon__font-color-hover,
+                                    @_icon-font-size: 16px,
+                                    @_icon-font-line-height: 28px,
+                                    @_icon-font-margin: 0,
+                                    @_icon-font-vertical-align: top,
+                                    @_icon-font-position: before
+                                );
+                            }
+                        }
+                    }
+
+                    &.a2a_button_twitter {
+                        .icon {
+                            & when (@social-share-font-icon = true) {
+                                .lib-icon-font(
+                                        @social-share-twitter-icon,
+                                    @_icon-font: @icon-font,
+                                    @_icon-font-color: @social-share-icon__font-color,
+                                    @_icon-font-color-hover: @social-share-icon__font-color-hover,
+                                    @_icon-font-size: 12px,
+                                    @_icon-font-line-height: 28px,
+                                    @_icon-font-margin: 0,
+                                    @_icon-font-vertical-align: top,
+                                    @_icon-font-position: before
+                                );
+                            }
+                        }
+                    }
+
+                    &.a2a_button_pinterest {
+                        .icon {
+                            & when (@social-share-font-icon = true) {
+                                .lib-icon-font(
+                                    @social-share-pinterest-icon,
+                                    @_icon-font: @icon-font,
+                                    @_icon-font-color: @social-share-icon__font-color,
+                                    @_icon-font-color-hover: @social-share-icon__font-color-hover,
+                                    @_icon-font-size: 16px,
+                                    @_icon-font-line-height: 29px,
+                                    @_icon-font-margin: 0,
+                                    @_icon-font-vertical-align: top,
+                                    @_icon-font-position: before
+                                );
+                            }
+                        }
+                    }
+
+                    &.a2a_button_linkedin {
+                        .icon {
+                            & when (@social-share-font-icon = true) {
+                                .lib-icon-font(
+                                    @social-share-linkedin-icon,
+                                    @_icon-font: @icon-font,
+                                    @_icon-font-color: @social-share-icon__font-color,
+                                    @_icon-font-color-hover: @social-share-icon__font-color-hover,
+                                    @_icon-font-size: 15px,
+                                    @_icon-font-line-height: 28px,
+                                    @_icon-font-margin: 0,
+                                    @_icon-font-vertical-align: top,
+                                    @_icon-font-position: before
+                                );
+                            }
+                        }
+                    }
+
+                    &.a2a_button_tumblr {
+                        .icon {
+                            & when (@social-share-font-icon = true) {
+                                .lib-icon-font(
+                                    @social-share-tumblr-icon,
+                                    @_icon-font: @icon-font,
+                                    @_icon-font-color: @social-share-icon__font-color,
+                                    @_icon-font-color-hover: @social-share-icon__font-color-hover,
+                                    @_icon-font-size: 16px,
+                                    @_icon-font-line-height: 28px,
+                                    @_icon-font-margin: 0,
+                                    @_icon-font-vertical-align: top,
+                                    @_icon-font-position: before
+                                );
+                            }
+                        }
+                    }
+
+                    &.a2a_button_email {
+                        .icon {
+                            & when (@social-share-font-icon = true) {
+                                .lib-icon-font(
+                                        @social-share-email-icon,
+                                    @_icon-font: @icon-font,
+                                    @_icon-font-color: @social-share-icon__font-color,
+                                    @_icon-font-color-hover: @social-share-icon__font-color-hover,
+                                    @_icon-font-size: 16px,
+                                    @_icon-font-line-height: 28px,
+                                    @_icon-font-margin: 0,
+                                    @_icon-font-vertical-align: top,
+                                    @_icon-font-position: before
+                                );
+                            }
+                        }
+                    }
+
+                    &.a2a_button_google_plus {
+                        .icon {
+                            & when (@social-share-font-icon = true) {
+                                .lib-icon-font(
+                                    @social-share-google-icon,
+                                    @_icon-font: @icon-font,
+                                    @_icon-font-color: @social-share-icon__font-color,
+                                    @_icon-font-color-hover: @social-share-icon__font-color-hover,
+                                    @_icon-font-size: 16px,
+                                    @_icon-font-line-height: 28px,
+                                    @_icon-font-margin: 0,
+                                    @_icon-font-vertical-align: top,
+                                    @_icon-font-position: before
+                                );
+                            }
+                        }
+                    }
+
+                    &.a2a_button_instagram {
+                        .icon {
+                            & when (@social-share-font-icon = true) {
+                                .lib-icon-font(
+                                    @social-share-instagram-icon,
+                                    @_icon-font: @icon-font,
+                                    @_icon-font-color: @social-share-icon__font-color,
+                                    @_icon-font-color-hover: @social-share-icon__font-color-hover,
+                                    @_icon-font-size: 15px,
+                                    @_icon-font-line-height: 28px,
+                                    @_icon-font-margin: 0,
+                                    @_icon-font-vertical-align: top,
+                                    @_icon-font-position: before
+                                );
+                            }
+                        }
+                    }
+
+                    &.a2a_button_whatsapp {
+                        .icon {
+                            & when (@social-share-font-icon = true) {
+                                .lib-icon-font(
+                                    @social-share-whatsapp-icon,
+                                    @_icon-font: @icon-font,
+                                    @_icon-font-color: @social-share-icon__font-color,
+                                    @_icon-font-color-hover: @social-share-icon__font-color-hover,
+                                    @_icon-font-size: 16px,
+                                    @_icon-font-line-height: 28px,
+                                    @_icon-font-margin: 0 0 0 1px,
+                                    @_icon-font-vertical-align: top,
+                                    @_icon-font-position: before
+                                );
+                            }
+                        }
+                    }
+
+                    &.a2a_dd {
+                        & when (@social-share-font-icon = true) {
+                            .lib-icon-font(
+                                @social-share-counter-icon,
+                                @_icon-font: @icon-font,
+                                @_icon-font-color: @social-share-icon__font-color,
+                                @_icon-font-color-hover: @social-share-icon__font-color-hover,
+                                @_icon-font-size: 21px,
+                                @_icon-font-line-height: 29px,
+                                @_icon-font-margin: 0,
+                                @_icon-font-vertical-align: top,
+                                @_icon-font-position: before
+                            );
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xxl) {
+    .product-info-main {
+        .social-share {
+            .mp_social_share_inline_under_cart {
+                left: 50%;
+                -webkit-transform: translateX(-50%);
+                transform: translateX(-50%);
+                right: inherit;
+
+                &.active {
+                    &:before {
+                        left: 50%;
+                        -webkit-transform: translateX(-50%);
+                        transform: translateX(-50%);
+                        right: inherit;
+                    }
+                }
+            }
+        }
+    }
+}
