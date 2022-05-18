@@ -130,16 +130,16 @@ define([
     /**
      * 10.PDP Specification content set
      */
-    function specificationContent() {
-        $('.product.attribute.description').append('<div class="specification"></div>')
-        let title = $('#tab-label-additional').html();
-        let content = $('#additional').html();
-        $('#tab-label-additional').hide();
-        $('#additional').hide();
-        $('.specification').append(title).append(content);
-    }
-
-    specificationContent();
+    // function specificationContent() {
+    //     $('.product.attribute.description').append('<div class="specification"></div>')
+    //     let title = $('#tab-label-additional').html();
+    //     let content = $('#additional').html();
+    //     $('#tab-label-additional').hide();
+    //     $('#additional').hide();
+    //     $('.specification').append(title).append(content);
+    // }
+    //
+    // specificationContent();
 
     /**
      * 11.PDP No review Section set
@@ -307,8 +307,8 @@ define([
                     slidesToShow: 2,
                     rows: 2,
                     slidesToScroll: 1,
-                    centerMode: true,
-                    centerPadding: '0 25.5%'
+                    centerMode: false,
+                    centerPadding: '0 0 25.5%'
                 }
             },
             {
@@ -316,6 +316,9 @@ define([
                 settings: "unslick"
             }]
     })
+    .on('setPosition', function (event, slick) {
+        slick.$slides.css('height', slick.$slideTrack.height() + 'px');
+    });
 
     /**
      * 19.Login password show/hide
@@ -360,5 +363,13 @@ define([
                 breakpoint: 300,
                 settings: "unslick"
             }]
-    })
+    });
+
+    /**
+     * 21. Dropdown Overlay
+     */
+
+    $("#menu-main-menu > .menu-parent-item").hover(function(){
+        $('.modals-overlay').fadeToggle();
+    });
 });

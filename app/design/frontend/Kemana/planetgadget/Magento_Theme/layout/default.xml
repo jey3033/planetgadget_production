@@ -3,6 +3,7 @@
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <update handle="default_head_blocks"/>
     <body>
+        <move element="top.search" destination="header-wrapper" before="header-right"/>
         <referenceBlock name="top.links" remove="false"/>
         <block class="Kemana\AcceleratorBase\Block\HeaderElement" name="language_currency_wrapper"
                template="Magento_Theme::html/language_currency_wrapper.phtml">

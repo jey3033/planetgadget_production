@@ -1,0 +1,65 @@
+//  Variables
+
+@ns-lm-zindex: 2;
+@ns-lm-padding: 5px;
+
+@ns-lm-bottom-margin: 10px 0;
+@ns-lm-vertical-margin: 5px 0;
+@ns-lm-horizontal-margin: 0 5px;
+
+@ns-lm-font-size: @font-size__base;
+@ns-lm-font-family: @font-family__base;
+@ns-lm-font-weight: 400;
+
+// only for label align right ( product list)
+@ns-product-label-margin-right: @indent__l;
+
+//  Quick viewpage-product-shopthelook
+
+@ns-lm-qv-top-left-margin: 0 0 0 10px;
+
+//  Mobile
+@ns-mb-lm-font-size: @font-size__base;
+
+//  Default sale Label
+
+@ns-sp-sale-bg:@color-blue1;
+@ns-sp-sale-font-color:@color-white;
+
+//
+//  Common
+//  --------------------------------------
+
+& when (@media-common = true) {
+    .ns-product-label {
+        li {
+            border-radius: 0 20px 20px 20px;
+            height: 22px !important;
+            width: 78px;
+            line-height: 22px;
+            padding: 0 5px;
+            text-align: center;
+            .lib-css(color, @color-white);
+            .lib-css(font-weight, @font-weight__bold);
+            text-transform: uppercase;
+        }
+
+        &.bottom-left {
+            margin-block: 3px 0;
+        }
+
+        &.ns-product-label-1 {
+            li {
+                background-image: linear-gradient(#FF681A, #EB1717);
+            }
+        }
+    }
+}
+
+//
+//  Mobile
+//  ---------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m){
+
+}

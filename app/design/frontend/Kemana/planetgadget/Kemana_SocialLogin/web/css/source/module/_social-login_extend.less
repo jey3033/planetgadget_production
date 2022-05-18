@@ -50,6 +50,29 @@
 }
 
 //
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .top-link {
+        .account-menu {
+            ul.menu-content {
+                li.main-item {
+                    &:before {
+                        .lib-font-size(23);
+                        .lib-line-height(48);
+                    }
+
+                    a {
+                        font-size: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+//
 //  Desktop
 //  _____________________________________________
 
@@ -138,6 +161,19 @@
                                 position: static;
                                 .lib-css(color, @color-white);
 
+                            }
+
+                            &.customer-login-link {
+                                &:hover {
+                                    &:before {
+                                        .lib-css(color, @kemana-secondary-brand-color);
+                                    }
+
+                                    a {
+                                        .lib-css(color, @kemana-secondary-brand-color);
+                                        text-decoration: none;
+                                    }
+                                }
                             }
                         }
                     }

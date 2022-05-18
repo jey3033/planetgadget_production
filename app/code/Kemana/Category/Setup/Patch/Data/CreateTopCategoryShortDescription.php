@@ -23,28 +23,24 @@ use Magento\Framework\Setup\Patch\DataPatchInterface;
 use Magento\Catalog\Model\Category;
 
 /**
- * Class CreateStaticCmsPages
- * @package Kemana\Setup\Setup\Patch\Data
+ * Class CreateTopCategoryShortDescription
+ * @package Kemana\Category\Setup\Patch\Data
  */
 class CreateTopCategoryShortDescription implements DataPatchInterface
 {
     /**
-     * ModuleDataSetupInterface
-     *
      * @var ModuleDataSetupInterface
      */
     private $moduleDataSetup;
 
     /**
-     * EavSetupFactory
-     *
      * @var EavSetupFactory
      */
     private $eavSetupFactory;
 
     /**
      * @param ModuleDataSetupInterface $moduleDataSetup
-     * @param EavSetupFactory          $eavSetupFactory
+     * @param EavSetupFactory $eavSetupFactory
      */
     public function __construct(
         ModuleDataSetupInterface $moduleDataSetup,
@@ -53,8 +49,11 @@ class CreateTopCategoryShortDescription implements DataPatchInterface
         $this->moduleDataSetup = $moduleDataSetup;
         $this->eavSetupFactory = $eavSetupFactory;
     }
+
     /**
-     * {@inheritdoc}
+     * @return CreateTopCategoryShortDescription|void
+     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws \Zend_Validate_Exception
      */
     public function apply() {
 
@@ -74,14 +73,14 @@ class CreateTopCategoryShortDescription implements DataPatchInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return array|string[]
      */
     public static function getDependencies() {
         return [];
     }
 
     /**
-     * {@inheritdoc}
+     * @return array|string[]
      */
     public function getAliases() {
         return [];

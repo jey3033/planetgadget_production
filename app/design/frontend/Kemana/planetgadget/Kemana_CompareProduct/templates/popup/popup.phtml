@@ -1,0 +1,33 @@
+<?php
+/**
+ * @category Kemana
+ * @package  Kemana_CompareProduct
+ * @license  Proprietary
+ *
+ * @author   Charaka Gamlath <csgamlath@kemana.com>
+ */
+/** @var $block Magento\Framework\View\Element\Template */
+/** @var $escaper \Magento\Framework\Escaper */
+
+$compareUrl = $block->getUrl('catalog/product_compare');
+$clearUrl = $block->escapeHtml($this->helper(Magento\Catalog\Helper\Product\Compare::class)->getPostDataClearList())
+?>
+<div id="modal-popup-ajax-compare" style="display: none">
+    <div class="success_header"></div>
+    <div class="error_header"></div>
+    <div class="product_img"></div>
+    <div class="product_name"></div>
+    <div class="p_count_limit"></div>
+    <div class="p_count_remind"></div>
+    <div class="p_count_max"></div>
+    <div class="actions-toolbar">
+        <div class="primary">
+        <a id="compare_list_url" class="action compare-products primary" href="<?= $compareUrl ?>">
+            <span><?= /* @noEscape */ $escaper->escapeHtml(__('Compare Products')) ?></span>
+        </a>
+        <a id="compare-clear-all-popup" href="#" class="action clear-products primary clear" data-post="<?= $clearUrl ?>">
+            <span><?= /* @noEscape */ $escaper->escapeHtml(__('Clear the list')) ?></span>
+        </a>
+        </div>
+    </div>
+</div>

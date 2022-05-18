@@ -1,0 +1,175 @@
+// /**
+//  * Copyright © 2022 Kemana. All rights reserved.
+//  * @author Harshani Karunasekara <hkarunasekara@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+//
+//  Variables
+//  _____________________________________________
+
+@product-name-link__font-family: @font-family-name__base;
+@product-name-link__font-weight: @font-weight__heavier;
+@product-name-link__text-transform: none;
+@product-name-link__font-size: 14;
+@product-name-link-desktop-hover__color: false;
+
+@plp-product-item-title__height: auto;
+
+@plp-product-item-img-overlay__background: rgba(225, 225, 225, 0.5);
+
+@product-price__font-family: @font-family-name__base;
+@product-price__font-size: 14;
+@product-price__font-weight: @font-weight__bold;
+
+@product-name-link__color: @kemana-primary-brand-color;
+@product-name-link__color__active: @kemana-primary-brand-color;
+@product-name-link__color__hover: @kemana-primary-brand-color;
+@product-name-link__color__visited: @kemana-primary-brand-color;
+
+@product-name-link__text-decoration: none;
+@product-name-link__text-decoration__active: @link__hover__text-decoration;
+@product-name-link__text-decoration__hover: @link__hover__text-decoration;
+@product-name-link__text-decoration__visited: @link__hover__text-decoration;
+
+@product-item-desktop__padding: 0 10px;
+@product-item-mobile__padding: 0 5px;
+
+@product-desktop-grid-product-count: 4;
+@product-related-grid-product-count: 4;
+@product-tablet-grid-product-count: 2;
+@product-mobile-grid-product-count: 2;
+
+@product-compare__font-size: 18px;
+@product-compare__line-height: 29px;
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .page-products {
+        #kemana-bannerslider-block-before-content-2 {
+            display: none;
+        }
+    }
+
+    .products-grid {
+        .product-items {
+            display: block;
+            .product-item {
+                .product-item-info {
+                    .lib-css( background-color, @color-white);
+                    border-radius: 5px;
+                    height: 100%;
+                    padding: 10px;
+
+                    .product-image-wrapper {
+                        padding-bottom: 100% !important;
+
+                        &:hover {
+                            .img-overlay {
+                                opacity: 1;
+                            }
+                        }
+                    }
+
+                    .product-item-name {
+                        margin: @indent__base - 3px 0 @indent__s - 2px;
+                    }
+
+                    .product-reviews-summary {
+                        .rating-summary {
+                            height: 20px;
+                        }
+                    }
+
+                    .sold-out {
+                        position: absolute;
+                        z-index: 1;
+                        top: 0;
+                    }
+
+                    &:hover {
+                        .action {
+                            &.tocompare {
+                                opacity: 1;
+                            }
+                        }
+
+                        .img-overlay {
+                            opacity: 0;
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+    .product-item {
+        .special-price,
+        .minimal-price {
+            width: 100%;
+            .lib-line-height(16);
+
+            .price-wrapper {
+                .lib-line-height(16);
+            }
+        }
+
+        .old-price {
+            margin-left: 0;
+        }
+
+        .discount {
+            display: inline-block;
+            border-radius: 0 20px 20px 20px;
+            height: 16px;
+            width: auto;
+            line-height: 16px;
+            padding: 0 10px;
+            text-align: center;
+            .lib-css(color, @color-white);
+            .lib-css(font-weight, @font-weight__bold);
+            text-transform: uppercase;
+            background: @color-pg-red;
+            .lib-font-size(10);
+            margin-left: 10px;
+        }
+
+        .tocompare {
+            .lib-icon-font(
+                @icon-pg-compare,
+                @_icon-font: @icon-font,
+                @_icon-font-color: @product-grid-wishlist-icon-color,
+                @_icon-font-color-hover: @product-grid-wishlist-icon-hover,
+                @_icon-font-size: @product-compare__font-size,
+                @_icon-font-line-height: @product-compare__line-height,
+                @_icon-font-margin: 2px 0 0 0
+            );
+
+            width: 29px;
+            height: 29px;
+            border-radius: 50%;
+            background: @color-white !important;
+            padding: 0;
+            text-align: center;
+            position: absolute;
+            right: 10px;
+            top: 48px;
+            z-index: 2;
+            text-decoration: none;
+            opacity: 0;
+            box-shadow: 0 5px 20px #00000021;
+            .lib-vendor-prefix-display(flex);
+            .lib-css(justify-content, center, 1);
+            .lib-css(align-items, center, 1);
+
+            img,
+            span {
+                display: none;
+            }
+        }
+    }
+}

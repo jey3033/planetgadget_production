@@ -35,7 +35,7 @@
 
 & when (@media-common = true) {
     .page-footer {
-        .lib-css(background-color, @color-white);
+        .lib-css(background-color, @kemana-secondary-brand-color);
 
         .footer-top-content {
             .lib-css(background-color, @footer-newsletter__background-color);
@@ -237,7 +237,7 @@
                             }
                         }
 
-                        &.twitter {
+                        &.tiktok {
                             a {
                                 .lib-icon-font(
                                     @icon-pg-tiktok,
@@ -253,7 +253,7 @@
                             }
                         }
 
-                        &.google {
+                        &.youtube {
                             a {
                                 .lib-icon-font(
                                     @icon-pg-youtube,
@@ -285,7 +285,7 @@
                             }
                         }
 
-                        &.rss {
+                        &.whatsapp {
                             a {
                                 .lib-icon-font(
                                     @icon-pg-whatsapp,
@@ -436,7 +436,7 @@
                         }
                     }
 
-                    &.twitter {
+                    &.tiktok {
                         a {
                             .lib-icon-font(
                                 @footer-twitter-icon,
@@ -452,7 +452,7 @@
                         }
                     }
 
-                    &.google {
+                    &.youtube {
                         a {
                             .lib-icon-font(
                                 @footer-google-icon,
@@ -484,7 +484,7 @@
                         }
                     }
 
-                    &.rss {
+                    &.whatsapp {
                         a {
                             .lib-icon-font(
                                 @footer-rss-icon,
@@ -502,29 +502,12 @@
                 }
             }
         }
+    }
 
-        .whatsapp {
-            .lib-css(background, @color-kemana-green4);
-            width: 35px;
-            height: 35px;
-            position: fixed;
-            right: 19px;
-            bottom: 10px;
-            border-radius: 50%;
-            z-index: 999999;
-            .lib-icon-font(
-                @icon-whatsapp,
-                @_icon-font-color: @color-white,
-                @_icon-font-color-hover: @color-white,
-                @_icon-font-size: 20px,
-                @_icon-font-line-height: 35px,
-                @_icon-font-margin: 0,
-                @_icon-font-vertical-align: top,
-                @_icon-font-position: before
-            );
-
-            span {
-                display: none;
+    .page-wrapper {
+        #whatsappchat {
+            a {
+                max-width: 75px;
             }
         }
     }

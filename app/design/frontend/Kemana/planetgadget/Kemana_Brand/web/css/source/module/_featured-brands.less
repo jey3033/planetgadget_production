@@ -73,6 +73,7 @@
                     .lib-css(width, @brand-mobile-item-logo__width);
                     .lib-css(height, @brand-item-logo__height) !important;
                     object-fit: contain;
+                    border-radius: 5px;
                 }
 
                 .item-name {
@@ -98,6 +99,8 @@
             margin-bottom: 0;
 
             .block-content-wrapper {
+                .lib-vendor-prefix-display();
+
                 .brand-container {
                     padding-left: 0;
 
@@ -159,44 +162,67 @@
                     @_line-height: @home-featured-brand-container-title__line-height
                 );
                 .lib-css(text-transform, @home-featured-brand-container-title__text-transform);
-                margin-bottom: 25px;
+                margin-bottom: 10px;
+                display: inline-block;
 
-                strong {
-                    font-weight: bold;
-
+                h2 {
                     span {
-                        span {
-                            display: inline-block;
-                            .lib-css(margin-bottom, 0);
+                        display: inline-block;
+                        .lib-css(margin-bottom, 0);
 
-                            &:after {
-                                content: '';
-                                display: block;
-                                margin: auto;
-                                .lib-css(margin-top, -10px);
-                                .lib-css(width, 100%);
-                                .lib-css(height, 10px);
-                                .lib-css(background, @kemana-secondary-brand-color);
-                            }
+                        &:after {
+                            content: '';
+                            display: block;
+                            margin: auto;
+                            .lib-css(margin-top, -10px);
+                            .lib-css(width, 100%);
+                            .lib-css(height, 10px);
+                            .lib-css(background, @kemana-secondary-brand-color);
                         }
                     }
                 }
 
-                & when (@home-featured-brand-container-title-border = true) {
+                //& when (@home-featured-brand-container-title-border = true) {
+                //    &:after {
+                //        .lib-css(border-bottom, @home-featured-brand-container-title__border-bottom);
+                //        content: '';
+                //        display: block;
+                //        margin: 12px auto 0;
+                //        width: 40px;
+                //        height: 1px;
+                //        line-height: 1px;
+                //        font-size: 1px;
+                //    }
+                //}
+            }
+
+            span {
+                a {
+                    .lib-font-size(14);
+                    .lib-line-height(24);
+                    font-weight: @font-weight__bold;
+                    margin-left: 12px;
+                    .lib-icon-font(
+                        @icon-pg-right-thick,
+                        @_icon-font: @icon-font,
+                        @_icon-font-position: after,
+                        @_icon-font-color: @kemana-primary-brand-color,
+                        @_icon-font-size: 10px,
+                        @_icon-font-line-height: 24px);
+                    position: relative;
+                    padding-right: 13px;
+
                     &:after {
-                        .lib-css(border-bottom, @home-featured-brand-container-title__border-bottom);
-                        content: '';
-                        display: block;
-                        margin: 12px auto 0;
-                        width: 40px;
-                        height: 1px;
-                        line-height: 1px;
-                        font-size: 1px;
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                    }
+
+                    &:hover {
+                        text-decoration: underline;
                     }
                 }
             }
-
-
         }
 
         .block-button-wrapper {
@@ -418,6 +444,14 @@
     }
 
     .home-featured-brand-container {
+        .block-brand-featured {
+            .block-title {
+                h2 {
+                    .lib-font-size(28);
+                    .lib-line-height(31);
+                }
+            }
+        }
         .brand-content-wrapper {
             .brand-container {
                 .lib-css(margin-left, @brand-item-logo-container-home-desktop__margin);
