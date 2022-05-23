@@ -130,16 +130,16 @@ define([
     /**
      * 10.PDP Specification content set
      */
-    function specificationContent() {
-        $('.product.attribute.description').append('<div class="specification"></div>')
-        let title = $('#tab-label-additional').html();
-        let content = $('#additional').html();
-        $('#tab-label-additional').hide();
-        $('#additional').hide();
-        $('.specification').append(title).append(content);
-    }
-
-    specificationContent();
+    // function specificationContent() {
+    //     $('.product.attribute.description').append('<div class="specification"></div>')
+    //     let title = $('#tab-label-additional').html();
+    //     let content = $('#additional').html();
+    //     $('#tab-label-additional').hide();
+    //     $('#additional').hide();
+    //     $('.specification').append(title).append(content);
+    // }
+    //
+    // specificationContent();
 
     /**
      * 11.PDP No review Section set

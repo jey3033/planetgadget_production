@@ -1,0 +1,272 @@
+// /**
+//  * Copyright © 2022 Kemana. All rights reserved.
+//  * @author Harshani Karunasekara <hkarunasekara@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+//
+//  Variables
+//  _____________________________________________
+@compare-product-title__font-size: 24px;
+@compare-product-title__line-height: 33px;
+
+@compare-product-delete-icon: @icon-close-popup;
+@compare-product-delete-icon__font-size: 15px;
+@compare-product-delete-icon__line-height: @compare-product-delete-icon__font-size;
+
+@compare-product-item__width: 276px;
+@compare-product-item-mobile__width: 220px;
+
+@compare-product-item-name__font-weight: @font-weight__regular;
+@compare-product-item-name__line-height: 18px;
+
+@rating-icon__count: 5;
+@rating-icon__content: @icon-pg-rating-filled;
+@rating-icon__letter-spacing: 4px;
+@rating-icon__color: @kemana-primary-brand-color;
+@rating-icon__active__color: @kemana-primary-brand-color;
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .catalog-product_compare-index {
+        .page-title-wrapper {
+            .page-title {
+                .lib-font-size(@compare-product-title__font-size);
+                .lib-line-height(@compare-product-title__line-height);
+                .lib-css(margin-bottom, @indent__l);
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        .comparison {
+            position: relative;
+            margin-bottom: 0;
+
+            .table:not(.cart):not(.totals) {
+                > thead {
+                    > tr {
+                        > th,
+                        > td {
+                            border-bottom: 0;
+                        }
+                    }
+                }
+            }
+
+            .table {
+                &.table-comparison {
+                    tr {
+                        display: block;
+                        &:last-of-type {
+                            .cell.attribute {
+                                .lib-css(padding-bottom, @indent__base);
+                                border-bottom: 0;
+                            }
+                        }
+                    }
+
+                    .cell {
+                        .lib-css(width, @compare-product-item-mobile__width);
+                        .lib-css(padding, 15px @indent__base 15px 0);
+
+                        &.product-remove {
+                            .lib-css(padding, 0 @indent__base 2px 0);
+                        }
+
+                        &.product-item {
+                            .lib-css(padding, 0 @indent__base 0 0);
+                        }
+
+                        &.attribute {
+                            .lib-css(padding, 0 @indent__base 15px 0);
+                            .lib-css(border-bottom, @border-width__base solid @border-color__base);
+                        }
+
+                        &.remove {
+                            .delete {
+                                .lib-icon-font(
+                                    @compare-product-delete-icon,
+                                    @_icon-font-size: @compare-product-delete-icon__font-size,
+                                    @_icon-font-line-height: @compare-product-delete-icon__line-height,
+                                    @_icon-font-text-hide: true,
+                                    @_icon-font-color: @kemana-primary-brand-color,
+                                    @_icon-font-color-hover: @kemana-primary-brand-color,
+                                    @_icon-font-color-active: @kemana-primary-brand-color
+                                );
+                            }
+                        }
+
+                        .attribute {
+                            &.value {
+                                .lib-css(color, @secondary__color);
+                            }
+                        }
+                    }
+
+                    .product-item-photo {
+                        text-align: center;
+                        margin-bottom: 0;
+
+                        .product-image-container {
+                            float: none;
+                        }
+                    }
+
+                    .product-item-name {
+                        display: inline-block;
+                        width: 100%;
+                        text-align: center;
+                        height: @plp-product-item-title__height;
+                        margin: @indent__s 0 5px;
+
+                        a {
+                            .lib-typography(
+                                @_font-weight: @compare-product-item-name__font-weight,
+                                @_line-height: @compare-product-item-name__line-height
+                            );
+                        }
+                    }
+
+                    .price-box {
+                        display: inline-block;
+                        text-align: center;
+                        width: 100%;
+                        margin: 0 0 @indent__xs;
+
+                        .price {
+                            .lib-font-size(15);
+                            .lib-line-height(20);
+                            .lib-css(font-weight, @font-weight__bold);
+                        }
+
+                        .special-price {
+                            .lib-css(color, @kemana-secondary-brand-color);
+                        }
+
+                        .old-price {
+                            .lib-css(font-weight, @font-weight__semibold);
+                            .lib-css(color, @kemana-secondary-brand-color);
+
+                            .price {
+                                .lib-font-size(@font-size__base);
+                                .lib-line-height(18);
+                            }
+                        }
+                    }
+
+                    .product-item-actions {
+                        display: inline-block;
+                        text-align: center;
+                        margin: 0 0 @indent__l;
+
+                        .actions-primary {
+                            margin: @indent__xs 0 @indent__s;
+                            .primary {
+                                .lib-button-primary(
+                                    @_button-font-weight: @font-weight__bold,
+                                    @_button-padding: 0 20px,
+                                    @_button-line-height: 40px
+                                );
+                            }
+                        }
+
+                        .actions-secondary {
+                            margin-top: 0;
+
+                            .action.towishlist {
+                                opacity: 1;
+                                position: static;
+                                width: auto;
+                                height: auto;
+                                line-height: normal;
+                                box-shadow: none;
+
+                                .lib-icon-font(
+                                    @icon-heart-o,
+                                    @_icon-font-size: 15px,
+                                    @_icon-font-line-height: 16px,
+                                    @_icon-font-color: @kemana-primary-brand-color,
+                                    @_icon-font-margin: 0 @indent__xs 0 1px,
+                                    @_icon-font-position: before
+                                );
+
+                                &:hover {
+                                    background: transparent;
+                                }
+
+                                > span {
+                                    .lib-visually-hidden-reset();
+                                    .lib-font-size(@font-size__base);
+                                    .lib-line-height(18);
+                                }
+                            }
+                        }
+                    }
+
+                    .product-reviews-summary {
+                        margin-top: 0;
+
+                        .rating-summary {
+                            .lib-css(margin-right, @indent__s);
+
+                            .rating-result {
+                                &:before {
+                                    .lib-font-size(@font-size__base);
+                                    .lib-line-height(18);
+                                }
+
+                                > span {
+                                    &:before {
+                                        .lib-font-size(@font-size__base);
+                                        .lib-line-height(18);
+                                    }
+                                }
+                            }
+                        }
+
+                        .reviews-actions {
+                            a {
+                                .lib-css(font-weight, @font-weight__regular);
+                                .lib-css(color, @secondary__color);
+                                .lib-font-size(@font-size__base);
+                                letter-spacing: 0;
+                            }
+                        }
+                    }
+
+                    .review-control-vote {
+                        height: 15px;
+
+                        &:before {
+                            .lib-font-size(@font-size__base);
+                            .lib-line-height(18);
+                            letter-spacing: @rating-icon__letter-spacing;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .catalog-product_compare-index {
+        .comparison {
+            .table {
+                &.table-comparison {
+                    .cell {
+                        .lib-css(width, @compare-product-item__width);
+                    }
+                }
+            }
+        }
+    }
+}
