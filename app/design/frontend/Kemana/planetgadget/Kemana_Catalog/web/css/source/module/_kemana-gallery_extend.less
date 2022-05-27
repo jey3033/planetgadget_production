@@ -17,6 +17,7 @@
 @fotorama-gallery-thumb__background-color: @color-white;
 
 @fotorama-gallery-vertical-arrow__color: @color-kemana-gray2;
+@fotorama-gallery-vertical-arrow-hover__color: @kemana-primary-brand-color;
 @fotorama-gallery-vertical-arrow__font-size: 15px;
 @fotorama-gallery-vertical-arrow__line-height: 30px;
 @fotorama-gallery-vertical-arrow__width: 30px;
@@ -54,8 +55,14 @@
                     opacity: 1;
                     text-align: center;
 
+                    &:hover {
+                        .lib-css(background-color, @panel__background-color);
+                        border-radius: 5px;
+                    }
+
                     .fotorama__thumb--icon {
-                        .lib-css(width, @fotorama-gallery-vertical-arrow__width);
+                        .lib-css(width, 100%);
+                        height: 100%;
                         transform: none;
                         background: transparent;
                         padding-bottom: 0;
@@ -75,6 +82,7 @@
                             @fotorama-gallery-vertical-arrow-icon-left,
                             @_icon-font: @icon-font,
                             @_icon-font-color: @fotorama-gallery-vertical-arrow__color,
+                            @_icon-font-color-hover: @fotorama-gallery-vertical-arrow-hover__color,
                             @_icon-font-size: @fotorama-gallery-vertical-arrow__font-size,
                             @_icon-font-line-height: @fotorama-gallery-vertical-arrow__line-height,
                             @_icon-font-margin: @fotorama-gallery-vertical-arrow-icon-left__margin,
@@ -90,6 +98,7 @@
                             @fotorama-gallery-vertical-arrow-icon-right,
                             @_icon-font: @icon-font,
                             @_icon-font-color: @fotorama-gallery-vertical-arrow__color,
+                            @_icon-font-color-hover: @fotorama-gallery-vertical-arrow-hover__color,
                             @_icon-font-size: @fotorama-gallery-vertical-arrow__font-size,
                             @_icon-font-line-height: @fotorama-gallery-vertical-arrow__line-height,
                             @_icon-font-margin: @fotorama-gallery-vertical-arrow-icon-right__margin,
@@ -100,12 +109,19 @@
                 }
             }
 
+            &--horizontal {
+                .fotorama__thumb {
+                    border-radius: 5px;
+                }
+            }
+
             .fotorama__nav__shaft {
-                margin-top: 30px;
+                margin-top: 20px;
                 background: transparent;
 
                 .fotorama__nav__frame {
                     .lib-css(border, @fotorama-active-border);
+                    border-radius: 5px;
                     .lib-css(height, @fotorama-gallery-thumb__height);
                     margin-bottom: 20px;
                     padding: 0;
@@ -131,13 +147,12 @@
     .gallery-placeholder {
         .fotorama__stage {
             max-height: 530px;
-            margin-bottom: 10px;
-            margin-left: 20px;
+            margin-bottom: 0;
 
             .fotorama__stage__frame {
                 .lib-css(background-color, @color-white);
                 border-radius: 5px;
-                max-width: 530px;
+                width: ~'calc(100% - 20px)';
             }
         }
 
@@ -279,6 +294,14 @@
                         }
                     }
                 }
+
+                .fotorama__stage {
+                    margin-left: 20px;
+
+                    .fotorama__stage__frame {
+                        max-width: 530px;
+                    }
+                }
             }
         }
     }
@@ -322,15 +345,18 @@
         .page-wrapper {
             .gallery-placeholder {
                 .magnify-lens {
-                    width: 207px !important;
-                    height: 263px !important;
+                    width: 250px !important;
+                    height: 250px !important;
                     border: none;
+                    background: rgba(255, 198, 25, 0.3);
                 }
 
                 .magnifier-preview {
-                    left: 100% !important;
-                    width: 220px !important;
-                    height: 306px !important;
+                    left: ~'calc(100% + 10px)'!important;
+                    width: 265px !important;
+                    height: 265px !important;
+                    border-radius: 2.5px;
+                    box-shadow: 0 5px 20px #00000021;
 
                     img {
                         left: 0;
@@ -346,6 +372,8 @@
 
                 .fotorama__nav__shaft {
                     margin-top: 50px;
+                    //height: 440px;
+                    //overflow: hidden;
                 }
             }
         }
