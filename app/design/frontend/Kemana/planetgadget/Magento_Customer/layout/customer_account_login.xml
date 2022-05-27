@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="page.main.title" display="false"/>
+        <referenceContainer name="customer.login.container">
+            <container name="customer.auth.login" label="Customer auth Login Container" htmlTag="div" htmlClass="customer-login-wrapper">
+                <block class="Magento\Customer\Block\Form\Login" name="customer_form_login" template="Magento_Customer::form/login.phtml">
+                    <container name="form.additional.info" as="form_additional_info"/>
+                </block>
+            </container>
+            <container name="customer.auth.new" label="Customer create Container" htmlTag="div" htmlClass="customer-create-wrapper">
+                <block class="Magento\Customer\Block\Form\Login\Info" name="customer.new" template="Magento_Customer::newcustomer.phtml"/>
+            </container>
+        </referenceContainer>
+    </body>
+</page>
