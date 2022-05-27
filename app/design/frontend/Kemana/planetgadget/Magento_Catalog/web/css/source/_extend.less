@@ -29,7 +29,7 @@
 
 @plp-compare-button__display: none;
 
-@product-old-price__font-size: 14;
+@product-old-price__font-size: 12;
 @product-grid-old-price__font-size: 12;
 
 @product-grid-items-per-row-layout-default: 2;
@@ -74,6 +74,56 @@
 //  _____________________________________________
 
 & when (@media-common = true) {
+    .product-info-main,
+    .product-options-bottom {
+        .old-price {
+            text-decoration: none;
+
+            .weee {
+                text-decoration: line-through;
+            }
+        }
+
+        .price-box {
+            .weee {
+                margin-bottom: 0;
+                line-height: 16px;
+                height: 16px;
+
+                span {
+                    line-height: 16px;
+                    height: 16px;
+                }
+            }
+        }
+
+        .discount {
+            display: inline-block;
+            border-radius: 0 20px 20px 20px;
+            height: 16px;
+            width: auto;
+            line-height: 16px;
+            padding: 0 10px;
+            text-align: center;
+            .lib-css(color, @color-white);
+            .lib-css(font-weight, @font-weight__bold);
+            text-transform: uppercase;
+            background: @color-pg-red;
+            .lib-font-size(10);
+            margin-left: 10px;
+        }
+
+        .box-tocart {
+            .action {
+                &.tocart {
+                    &:before {
+                        content: '+';
+                    }
+                }
+            }
+        }
+
+    }
     .abs-product-link,
     .product-item-name,
     .product.name a {
@@ -107,6 +157,22 @@
             }
         }
     }
+
+    .product-info-main {
+        .page-title-wrapper {
+            .page-title {
+               .lib-heading(h2);
+            }
+        }
+
+        .price-box {
+            .price-wrapper {
+                .price {
+                    .lib-heading(h2);
+                }
+            }
+        }
+    }
 }
 
 
@@ -132,6 +198,11 @@
     .catalog-product-view {
         .column.main {
             display: inline-block;
+            padding-bottom: 30px;
+        }
+
+        .page-main-description {
+            padding: 0;
         }
     }
 
@@ -169,7 +240,7 @@
         .product-info-main {
             width: 100%;
             max-width: 640px;
-            padding: 30px;
+            padding: 30px 30px 35px;
             background: @color-white;
             border-radius: 5px;
             margin-bottom: 30px;

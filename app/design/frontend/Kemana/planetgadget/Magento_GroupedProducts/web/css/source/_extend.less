@@ -1,0 +1,36 @@
+// /**
+//  * Copyright © 2022 Kemana. All rights reserved.
+//  * @author Harshani Karunasekara <hkarunasekara@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .table.grouped {
+        thead,
+        tbody {
+            tr {
+                &:last-child {
+                    td {
+                        padding-bottom: 20px;
+                    }
+                }
+
+                td {
+                    &.qty {
+                        width: 134px;
+                    }
+                }
+            }
+        }
+
+        .control {
+            .qty {
+                height: 40px;
+            }
+        }
+    }
+}

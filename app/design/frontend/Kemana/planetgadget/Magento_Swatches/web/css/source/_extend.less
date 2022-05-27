@@ -11,7 +11,7 @@
 @swatch-attribute-option__selected__color: #646464;
 
 @swatch-option__background: @color-white;
-@swatch-option__border: @border-width__base solid @color-white;
+@swatch-option__border: @border-width__base solid @color-pg-light-gray;
 
 @swatch-option__width: 45px;
 @swatch-option__height: 25px;
@@ -27,7 +27,7 @@
 @swatch-more__hover__color: @color-orange-red1;
 @swatch-more__hover__outline: 0;
 
-@swatch-option__selected__border: @swatch-option__hover__border;
+@swatch-option__selected__border:  @border-width__base solid @kemana-secondary-brand-color;
 @swatch-option__selected__color: @swatch-option__hover__color;
 @swatch-option__selected__outline: 0;
 
@@ -37,10 +37,10 @@
 @swatch-option-text__background: @swatch-option__background;
 @swatch-option-text__color: @kemana-primary-brand-color;
 
-@swatch-option-text__width: 54px;
-@swatch-option-text__height: 30px;
+@swatch-option-text__width: auto;
+@swatch-option-text__height: 40px;
 
-@swatch-option-text__selected__background-color: @swatch-option__hover__color;
+@swatch-option-text__selected__background-color: @color-pg-yellow2;
 
 //  Size and Manufacturer attributes
 @attr-swatch-option__background: @swatch-option__background;
@@ -78,6 +78,10 @@
     .swatch-option {
         border-radius: 5px;
 
+        &.text {
+            padding: 14px 15px 13px;
+            .lib-line-height(13);
+        }
 
     }
 
