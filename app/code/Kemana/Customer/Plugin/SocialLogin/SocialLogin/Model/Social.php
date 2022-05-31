@@ -151,7 +151,6 @@ class Social extends \Kemana\SocialLogin\Model\Social
         $this->mathRandom                 = $mathRandom;
         $this->accountManagement          = $accountManagement;
         $this->emailNotificationInterface = $emailNotificationInterface;
-
         parent::__construct(
             $context,
             $registry,
@@ -283,6 +282,7 @@ class Social extends \Kemana\SocialLogin\Model\Social
             throw $e;
         }
 
+        
         /**
          * @var Customer $customer
          */
@@ -460,7 +460,7 @@ class Social extends \Kemana\SocialLogin\Model\Social
      */
     public function convertPhonenumber($phonenumber){
 
-        $newphonenumber = '';
+        $newphonenumber = '-';
         if ($phonenumber) {
             $newphonenumber = $phonenumber;
             $pnFirstDigit = substr($phonenumber, 0, 1); // get first digit in phonenumber

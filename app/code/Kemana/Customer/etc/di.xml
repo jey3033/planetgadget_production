@@ -21,4 +21,5 @@
         <plugin name="kemana_customer_social_login_add_phonenumber_param" type="Kemana\Customer\Plugin\SocialLogin\Controller\Social\AbstractSocial" />
     </type>
     <preference for="Kemana\SocialLogin\Model\Social" type="Kemana\Customer\Plugin\SocialLogin\SocialLogin\Model\Social" />
+    <preference for="Kemana\SocialLogin\Controller\Social\Login" type="Kemana\Customer\Plugin\SocialLogin\Controller\Social\Login" />
 </config>
