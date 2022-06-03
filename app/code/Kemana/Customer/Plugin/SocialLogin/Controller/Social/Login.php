@@ -71,6 +71,13 @@ class Login extends \Kemana\SocialLogin\Controller\Social\Login
             return $this->_appendJs();
         }
 
+        $this->refresh($customer);
+
+        if ($customer->getPhonenumber() === '-') {
+            $message =  __('Invalid mobile phone number');
+            $this->messageManager->addErrorMessage($message);
+        }
+
         $customerData = $this->customerModel->load($customer->getId());
         if (!$customer->getId()) {
             $requiredMoreInfo = (int) $this->apiHelper->requiredMoreInfo();
@@ -90,54 +97,6 @@ class Login extends \Kemana\SocialLogin\Controller\Social\Login
             
         }
         $this->refresh($customer);
-
-        if ($customer->getPhonenumber() === '-') {
-            $message =  __('Invalid mobile phone number');
-            $this->messageManager->addErrorMessage($message);
-
-            return $this->_appendJs(sprintf(
-                "<script>
-                window.opener.socialCallback('%s', window);</script>",
-                $this->_url->getUrl('customer/account/edit')
-            ));
-        }
         return $this->_appendJs();
-    }
-
-    /**
-     * @return bool
-     */
-    public function checkCustomerLogin()
-    {
-        return true;
-    }
-
-    /**
-     * @param $message
-     */
-    protected function setBodyResponse($message)
-    {
-        $content = '<html><head></head><body>';
-        $content .= '<div class="message message-error">' . __('Ooophs, we got an error: %1', $message) . '</div>';
-        $content .= <<<Style
-<style type="text/css">
-    .message{
-        background: #fffbbb;
-        border: none;
-        border-radius: 0;
-        color: #333333;
-        font-size: 1.4rem;
-        margin: 0 0 10px;
-        padding: 1.8rem 4rem 1.8rem 1.8rem;
-        position: relative;
-        text-shadow: none;
-    }
-    .message-error{
-        background:#ffcccc;
-    }
-</style>
-Style;
-        $content .= '</body></html>';
-        $this->getResponse()->setBody($content);
     }
 }

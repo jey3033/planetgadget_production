@@ -16,7 +16,7 @@ namespace Kemana\Customer\Observer;
  
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
-use Magento\Customer\Model\Context;
+use Magento\Customer\Model\Context as CustomerContext;
 
 /**
  * Class RestrictSiteIfEmptyPhoneNumber
@@ -39,7 +39,7 @@ class RestrictSiteIfEmptyPhoneNumber implements ObserverInterface
     /**
      * @type Context
      */
-    protected $_context;
+    protected $_httpContext;
 
     /**
      * @type Session
@@ -47,9 +47,9 @@ class RestrictSiteIfEmptyPhoneNumber implements ObserverInterface
     protected $_customerSession;
 
     /**
-     * @type CustomerFactory
+     * @type CustomerRepositoryInterface
      */
-    protected $_customerFactory;
+    protected $_customerRepository;
 
     /**
      * @param Http $response
@@ -63,14 +63,14 @@ class RestrictSiteIfEmptyPhoneNumber implements ObserverInterface
         \Magento\Framework\UrlFactory $urlFactory,
         \Magento\Framework\App\Http\Context $context,
         \Magento\Customer\Model\Session $customerSession,
-        \Magento\Customer\Model\CustomerFactory $customerFactory
+        \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository
     )
     {
         $this->_response            = $response;
         $this->_urlFactory          = $urlFactory;
-        $this->_context             = $context;
+        $this->_httpContext         = $context;
         $this->_customerSession     = $customerSession;
-        $this->_customerFactory     = $customerFactory;
+        $this->_customerRepository  = $customerRepository;
     }
  
     /**
@@ -79,24 +79,49 @@ class RestrictSiteIfEmptyPhoneNumber implements ObserverInterface
      */
     public function execute(Observer $observer)
     {
+        
+        $this->setSessionHttpContext();
+
         $allowedRoutes = [
             'customer_account_edit',
             'customer_account_login',
             'customer_account_logoutsuccess',
             'customer_section_load'
         ];
-        $customer = $this->_customerFactory->create();
         $request = $observer->getEvent()->getRequest();
         $actionFullName = strtolower($request->getFullActionName());
-       
-        if ($this->_customerSession->getId()) {
-            $customer->load($this->_customerSession->getId());
-            if ($customer->getPhonenumber() === '-'){
+        $this->_httpContext->setValue(
+        	'customer_id',
+        	$this->_customerSession->getId(),
+        	false
+    	);
+        $isCustomerLoggedIn = $this->_httpContext->getValue('customer_id');
+        if ($isCustomerLoggedIn) {
+            $customer = $this->_customerRepository->getById($this->_customerSession->getId());
+            if ($customer->getCustomAttribute('phonenumber')->getValue() === '-'){
                 if (!in_array($actionFullName, $allowedRoutes)){
                     $this->_response->setRedirect($this->_urlFactory->create()->getUrl('customer/account/edit'));
                 }
             }
             
+        }
+    }
+
+    /**
+     * Set session to Http Context after loggedin
+     * @return void
+     */
+    public function setSessionHttpContext(){
+
+        if ($this->_customerSession->isLoggedIn()) {
+            if ($this->_httpContext->getValue('customer_id') != $this->_customerSession->getId()) {
+                // set id current customer logged in
+                $this->_httpContext->setValue(
+                    'customer_id',
+                    $this->_customerSession->getId(),
+                    false
+                );
+            }
         }
     }
 }

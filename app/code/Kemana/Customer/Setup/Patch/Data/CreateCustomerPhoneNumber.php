@@ -34,10 +34,12 @@ class CreateCustomerPhoneNumber implements DataPatchInterface, PatchRevertableIn
      * @var ModuleDataSetupInterface
      */
     private $moduleDataSetup;
+
     /**
      * @var CustomerSetup
      */
     private $customerSetupFactory;
+
     /**
      * @var SetFactory
      */
