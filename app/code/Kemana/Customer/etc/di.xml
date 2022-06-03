@@ -17,8 +17,8 @@
     <type name="Magento\Customer\Controller\Account\CreatePost">
         <plugin name="kemana_customer_custom_before_post_validation" type="Kemana\Customer\Plugin\Customer\Controller\Account\CreatePost" />
     </type>
-    <type name="Kemana\SocialLogin\Controller\Social\AbstractSocial">
-        <plugin name="kemana_customer_social_login_add_phonenumber_param" type="Kemana\Customer\Plugin\SocialLogin\Controller\Social\AbstractSocial" />
+    <type name="Magento\Customer\Controller\Account\EditPost">
+        <plugin name="kemana_customer_custom_before_edit_post_validation" type="Kemana\Customer\Plugin\Customer\Controller\Account\EditPost" />
     </type>
     <type name="Kemana\SocialLogin\Controller\Social\AbstractSocial">
         <plugin name="kemana_customer_social_login_add_phonenumber_param" type="Kemana\Customer\Plugin\SocialLogin\Controller\Social\AbstractSocial" />
