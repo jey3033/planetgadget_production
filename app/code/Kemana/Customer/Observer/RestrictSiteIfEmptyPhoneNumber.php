@@ -98,12 +98,16 @@ class RestrictSiteIfEmptyPhoneNumber implements ObserverInterface
         $isCustomerLoggedIn = $this->_httpContext->getValue('customer_id');
         if ($isCustomerLoggedIn) {
             $customer = $this->_customerRepository->getById($this->_customerSession->getId());
-            if ($customer->getCustomAttribute('phonenumber')->getValue() === '-'){
+            if ($customerPhoneNumber = $customer->getCustomAttribute('phonenumber')) { // check if phonenumber value is exists
+                $customerPhoneNumberValue = $customerPhoneNumber->getValue();
+            } else {
+                $customerPhoneNumberValue = '-';
+            }
+            if ($customerPhoneNumberValue === '-'){
                 if (!in_array($actionFullName, $allowedRoutes)){
                     $this->_response->setRedirect($this->_urlFactory->create()->getUrl('customer/account/edit'));
                 }
             }
-            
         }
     }
 
