@@ -44,7 +44,15 @@
         </div>
         <?php $_phonenumber = $block->getLayout()->createBlock(\Kemana\Customer\Block\Widget\Phonenumber::class) ?>
         <?php if ($_phonenumber->isEnabled()) : ?>
-            <?= $_phonenumber->setPhonenumber($block->getCustomer()->getCustomAttribute('phonenumber')->getValue())->toHtml() ?>
+            <?php
+            
+                if ($customerPhoneNumber = $block->getCustomer()->getCustomAttribute('phonenumber')) {
+                    $customerPhoneNumberValue = $customerPhoneNumber->getValue();
+                } else {
+                    $customerPhoneNumberValue = '-';
+                }
+                echo $_phonenumber->setPhonenumber($customerPhoneNumberValue)->toHtml();
+            ?>
         <?php endif ?>
         <div class="field password current required">
             <label class="label" for="current-password"><span><?= $block->escapeHtml(__('Current Password')) ?></span></label>
