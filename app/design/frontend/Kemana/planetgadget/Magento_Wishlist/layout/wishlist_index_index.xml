@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="page.main.title">
+            <action method="setPageTitle">
+                <argument translate="true" name="title" xsi:type="string">My favorites</argument>
+            </action>
+        </referenceBlock>
+        <move element="page.main.title" destination="content" before="customer.wishlist"/>
+        <move element="customer.wishlist.button.toCart" destination="page.main.title" />
+        <move element="customer.wishlist.item.review" destination="customer.wishlist.items" after="customer.wishlist.item.price"/>
+        <referenceBlock name="customer.wishlist.item.edit" remove="true"/>
+        <referenceBlock name="customer.wishlist.item.remove" remove="true"/>
+        <referenceBlock name="customer.wishlist.button.update" remove="true"/>
+        <referenceBlock name="customer.wishlist.item.giftregistry" remove="true"/>
+    </body>
+</page>
