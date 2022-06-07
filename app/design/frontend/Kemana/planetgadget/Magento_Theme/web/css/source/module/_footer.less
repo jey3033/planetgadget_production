@@ -24,9 +24,10 @@
 @footer-social-icon__font-color: @kemana-primary-brand-color;
 @footer-social-icon__font-color-hover: @kemana-primary-brand-color;
 
-@footer-newsletter__padding: 40px 0;
-@footer-newsletter-desktop__padding: 30px 0;
+@footer-newsletter__padding: 30px 0;
+@footer-newsletter-desktop__padding: 40px 0;
 @footer-main-content__padding: 30px 0;
+@footer-main-content-desktop__padding: 50px 0;
 @footer-bottom__padding: 18px 0;
 
 //
@@ -560,7 +561,7 @@
 }
 
 //
-//  tablet
+//  Desktop
 //  _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
@@ -585,6 +586,7 @@
         }
 
         .footer-main-content {
+            .lib-css(padding, @footer-main-content-desktop__padding);
             .footer-section {
                 .row {
                     align-items: unset;
@@ -633,6 +635,7 @@
 
             .logo {
                 width: 200px;
+                margin-bottom: 30px;
 
                 img {
                     margin: 0;

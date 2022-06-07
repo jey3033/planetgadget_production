@@ -8,7 +8,7 @@
 //  Variables
 //  _____________________________________________
 @product-grid-wishlist-icon: @icon-pg-wishlist-hover;
-@product-grid-wishlist-icon-active: @icon-wishlist-empty;
+@product-grid-wishlist-icon-active: @icon-pg-wishlist-active;
 @product-grid-wishlist-icon-size: 15px;
 @product-grid-wishlist-icon-line-height: 16px;
 @product-grid-wishlist-icon-width: 29px;
@@ -18,7 +18,7 @@
 @product-grid-wishlist-icon-background-active: @color-white;
 @product-grid-wishlist-icon-color: @color-pg-light-gray;
 @product-grid-wishlist-icon-hover: @kemana-primary-brand-color;
-@product-grid-wishlist-icon-active: @color-pg-red;
+@product-grid-wishlist-icon-active-color: @color-pg-red;
 @product-grid-wishlist-icon-border-radius: 50%;
 
 @product-grid-wishlist-unavailable-button__color: @color-kemana-gray2;
@@ -26,3 +26,28 @@
 @product-grid-wishlist-unavailable-button__border: @border-width__base solid @color-kemana-gray1;
 @product-grid-wishlist-unavailable-button__margin: 0;
 @product-grid-wishlist-unavailable-button__text-transform: uppercase;
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .product-items,
+    .products.list.items,
+    .table-comparison {
+        .action {
+            &.towishlist {
+                &:before {
+                    margin: 8px 0 0 0;
+                    width: 16px;
+                }
+
+                &.active {
+                    &:before {
+                        .lib-css(color, @product-grid-wishlist-icon-active-color);
+                    }
+                }
+            }
+        }
+    }
+}

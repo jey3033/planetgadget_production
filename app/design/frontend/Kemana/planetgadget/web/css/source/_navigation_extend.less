@@ -65,12 +65,15 @@
 
             &:first-child {
                 a {
+                    .lib-line-height(20);
+                    padding-block: 31px 29px;
+
                     .lib-icon-font(
                         @icon-menu,
                         @_icon-font: @icon-font,
                         @_icon-font-color: @color-white,
                         @_icon-font-size: 23px,
-                        @_icon-font-line-height: 23px,
+                        @_icon-font-line-height: 20px,
                         @_icon-font-margin: -5px 15px 0 0,
                         @_icon-font-position: before
                     );
@@ -80,6 +83,11 @@
                         &:before {
                             .lib-css (color, @kemana-secondary-brand-color);
                         }
+                    }
+
+                    span {
+                        display: inline-block;
+                        .lib-line-height(20);
                     }
                 }
             }

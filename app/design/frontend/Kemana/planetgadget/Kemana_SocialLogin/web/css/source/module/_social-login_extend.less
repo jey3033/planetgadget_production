@@ -80,20 +80,28 @@
     .page-header {
         .account-detail__content {
             z-index: 9999 !important;
-            top: 68px;
-            right: -100px !important;
+            top: 61px;
+            right: -72px !important;
+            width: 200px;
+            border-radius: 5px;
+            padding: 10px 0;
+            border: none;
+
+            &:after {
+                content: "";
+                width: 12px;
+                height: 12px;
+                transform: rotate(-45deg);
+                background: @color-white;
+                position: absolute;
+                z-index: -1;
+                top: -5px;
+                right: 88px;
+            }
 
             &.social-login-accordion {
                 &:after {
-                    content: "";
-                    width: 10px;
-                    height: 10px;
-                    transform: rotate(-45deg);
-                    background: #fff;
-                    position: absolute;
-                    z-index: -1;
-                    top: -5px;
-                    right: 120px;
+                    right: 107px;
                 }
 
                 .social-login-title {
@@ -130,6 +138,25 @@
                     }
                 }
             }
+
+            .list-info {
+                li {
+                    margin-bottom: 0;
+                    padding: 0;
+                    .lib-line-height(13);
+
+                    a {
+                        .lib-line-height(13);
+                        text-align: center;
+                        padding: 10px 20px;
+
+                        &:hover {
+                            background: @color-pg-light-gray2;
+                            text-decoration: none;
+                        }
+                    }
+                }
+            }
         }
 
         .header-right {
@@ -142,17 +169,18 @@
                     .menu-content {
                         .main-item {
                             width: 100%;
-                            height: 100%;
                             position: relative;
-                            padding-top: 36px;
+                            padding-top: 31px;
+                            height: 43px;
+                            line-height: 12px;
 
                             &:before {
                                 position: absolute;
                                 top: 0;
                                 left: 50%;
                                 transform: translateX(-50%);
-                                line-height: 28px;
-                                margin-bottom: 8px;
+                                line-height: 24px;
+                                margin-bottom: 7px;
                                 text-align: center;
                             }
 
@@ -160,7 +188,19 @@
                                 width: auto;
                                 position: static;
                                 .lib-css(color, @color-white);
+                                .lib-line-height(12);
+                                height: 12px;
+                            }
 
+                            &:hover {
+                                &:before {
+                                    .lib-css(color, @kemana-secondary-brand-color);
+                                }
+
+                                a {
+                                    .lib-css(color, @kemana-secondary-brand-color);
+                                    text-decoration: none;
+                                }
                             }
 
                             &.customer-login-link {
