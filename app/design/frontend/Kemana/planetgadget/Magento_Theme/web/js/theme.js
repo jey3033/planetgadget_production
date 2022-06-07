@@ -369,4 +369,12 @@ define([
     $("#menu-main-menu > .menu-parent-item").hover(function(){
         $('.modals-overlay').fadeToggle();
     });
+
+    /**
+     * 22. wrap the review title
+     */
+
+    $( ".product-section-title" ).wrapInner( "<span></span>");
+
+
 });

@@ -18,7 +18,7 @@
 
 @sale-text__color: @color-kemana-red;
 
-@header-logo-desktop-width: 260px;
+@header-logo-desktop-width: 265px;
 @header-logo-mobile-width: 158px;
 
 @header-nav-toggle-desktop__top: 27px;
@@ -784,6 +784,7 @@
             order: 3;
 
             .header-links-right {
+                height: 43px;
                 .lib-vendor-prefix-display();
 
                 li {
@@ -793,9 +794,9 @@
                                 @icon-pg-club,
                                 @_icon-font: @icon-font,
                                 @_icon-font-color: @color-white,
-                                @_icon-font-size: 28px,
-                                @_icon-font-line-height: 28px,
-                                @_icon-font-margin: 0 0 8px 0,
+                                @_icon-font-size: 24px,
+                                @_icon-font-line-height: 24px,
+                                @_icon-font-margin: 0 0 7px 0,
                                 @_icon-font-position: before
                             );
 
@@ -809,7 +810,8 @@
                             }
 
                             position: relative;
-                            padding-top: 36px;
+                            padding-top: 31px;
+                            .lib-line-height(12);
                         }
                     }
 
@@ -819,9 +821,9 @@
                                 @icon-pg-track,
                                 @_icon-font: @icon-font,
                                 @_icon-font-color: @color-white,
-                                @_icon-font-size: 28px,
-                                @_icon-font-line-height: 28px,
-                                @_icon-font-margin: 0 0 8px 0,
+                                @_icon-font-size: 24px,
+                                @_icon-font-line-height: 24px,
+                                @_icon-font-margin: 0 0 7px 0,
                                 @_icon-font-position: before
                             );
 
@@ -835,7 +837,8 @@
                             }
 
                             position: relative;
-                            padding-top: 36px;
+                            padding-top: 31px;
+                            .lib-line-height(12);
                         }
                     }
 
@@ -1132,7 +1135,7 @@
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xl) {
     .page-header {
         .header-left {
-            width: 34%;
+            width: 38%;
             display: block;
         }
 
@@ -1142,7 +1145,7 @@
         }
 
         .header-right {
-            width: 24%;
+            width: 26%;
             max-width: unset;
             justify-content: right;
 

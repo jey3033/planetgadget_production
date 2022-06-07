@@ -105,23 +105,31 @@
     table {
         thead {
             th {
-                .lib-line-height(16);
-                .lib-css(color, @kemana-primary-brand-color);
-                letter-spacing: 0.07px;
+                .lib-line-height(12);
+                .lib-css(color, @color-pg-dark-gray);
             }
         }
 
         tbody {
             td {
-                .lib-line-height(16);
+                .lib-line-height(20);
 
                 .price-including-tax,
                 .price-excluding-tax {
                     .price {
                         .lib-css(font-family, @product-price__font-family);
-                        .lib-line-height(16);
-                        .lib-font-size(14);
-                        .lib-css(font-weight, @font-weight__regular);
+                        .lib-line-height(13);
+                        .lib-font-size(12);
+                        .lib-css(font-weight, @font-weight__heavier);
+                    }
+                }
+
+                &.subtotal {
+                    .price-including-tax,
+                    .price-excluding-tax {
+                        .price {
+                            .lib-css(font-weight, @font-weight__bold);
+                        }
                     }
                 }
             }
