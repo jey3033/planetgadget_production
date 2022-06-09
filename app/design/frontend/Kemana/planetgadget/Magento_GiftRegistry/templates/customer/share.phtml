@@ -19,6 +19,7 @@
                        type="text"
                        title="<?= $escaper->escapeHtmlAttr(__('Name')) ?>"
                        class="input-text"
+                       placeholder="Enter recipient's name"
                        id="recipients-name<%- data._index_ %>"
                        data-validate="{required:true}"/>
             </div>
@@ -33,6 +34,7 @@
                        id="recipients-email<%- data._index_ %>"
                        type="email"
                        class="input-text"
+                       placeholder="Enter email"
                        data-validate="{required:true, 'validate-email':true}"/>
             <button type="button" class="action remove" id="btn-remove<%- data._index_ %>">
                 <span><?= $escaper->escapeHtml(__('Remove')) ?></span>
@@ -41,10 +43,6 @@
         </div>
     </fieldset>
 </script>
-
-<h2 class="subtitle">
-    <?= /* @noEscape */ $block->getFormHeader() ?>
-</h2>
 
 <form action="<?= $escaper->escapeUrl($block->getSendUrl()) ?>"
       method="post"
@@ -71,6 +69,7 @@
                        type="text"
                        class="input-text"
                        data-validate="{required:true}"
+                       placeholder="Enter sender name"
                 />
             </div>
         </div>
@@ -82,6 +81,7 @@
                           id="sender_message"
                           cols="3"
                           rows="3"
+                          placeholder="Enter message"
                           data-validate="{required:true}"><?= $escaper->escapeHtml($senderMessage) ?></textarea>
             </div>
         </div>
