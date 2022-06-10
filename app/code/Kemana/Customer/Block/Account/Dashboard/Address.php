@@ -30,8 +30,10 @@ class Address extends \Magento\Customer\Block\Account\Dashboard\Address
         try {
             $address = $this->currentCustomerAddress->getDefaultShippingAddress();
             if ($address) {
-                if ($address->getCustomAttribute('map_point')->getValue()) {
-                    return "Already Pinpoint";
+                if ($map_point = $address->getCustomAttribute('map_point')) {
+                    if (!empty($map_point->getValue())) {
+                        return "Already Pinpoint";
+                    }
                 } else {
                     return "Not Pinpoint yet";
                 }
@@ -51,8 +53,10 @@ class Address extends \Magento\Customer\Block\Account\Dashboard\Address
         try {
             $address = $this->currentCustomerAddress->getDefaultBillingAddress();
             if ($address) {
-                if ($address->getCustomAttribute('map_point')) {
-                    return "Already Pinpoint";
+                if ($map_point = $address->getCustomAttribute('map_point')) {
+                    if (!empty($map_point->getValue())) {
+                        return "Already Pinpoint";
+                    }
                 } else {
                     return "Not Pinpoint yet";
                 }
