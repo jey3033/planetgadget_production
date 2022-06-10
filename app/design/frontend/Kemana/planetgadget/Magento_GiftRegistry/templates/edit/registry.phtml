@@ -51,8 +51,6 @@
 $fieldsets = $block->getGroupedRegistryAttributes();
 foreach ($fieldsets as $fieldset => $fields) : ?>
 <fieldset class="fieldset">
-    <legend class="legend"><span><?= $block->escapeHtml($block->getGroupLabel($fieldset)) ?></span></legend>
-
     <?php foreach ($fields as $field => $data) : ?>
         <?php $isRequired = $block->isAttributeRequired($data); ?>
         <div class="field<?= ($isRequired ? ' required' : ''); ?><?= $field == 'event_date' ? ' date' : '' ?>">
@@ -77,7 +75,9 @@ foreach ($fieldsets as $fieldset => $fields) : ?>
                     <?php if ($block->getEntity()->getFieldValue($data['id'] . '_region')) : ?>
                     "currentRegion": <?= $block->escapeJs($block->getEntity()->getFieldValue($data['id'] . '_region')) ?>,
                     <?php endif; ?>
-                    "regionJson": <?= /* @noEscape */ $this->helper(Magento\Directory\Helper\Data::class)->getRegionJson() ?>
+                    "regionJson": <?= /* @noEscape */ $this->helper(Magento\Directory\Helper\Data::class)->getRegionJson() ?>,
+                    "cityJson": <?php /* @escapeNotVerified */ echo $this->helper('KS\Logistic\Helper\Data')->getCitiesJson() ?>,
+                    "districtJson": <?php /* @escapeNotVerified */ echo $this->helper('KS\Logistic\Helper\Data')->getDistrictJson() ?>
                 }
             }
         }
