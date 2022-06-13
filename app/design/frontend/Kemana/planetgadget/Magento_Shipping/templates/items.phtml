@@ -27,7 +27,7 @@ $kemanaSalesHelper = $this->helper(Kemana\Sales\Helper\Data::class);
 </div>
 <?php foreach ($_order->getShipmentsCollection() as $_shipment) : ?>
     <div class="order-title">
-        <div class="shipping-no"><strong><?= $block->escapeHtml(__('Shipment #')) ?></strong> <?= $block->escapeHtml($_shipment->getIncrementId()) ?></div>
+        <div class="shipping-no"><strong><?= $block->escapeHtml(__('AWB No.')) ?></strong> #<?= $block->escapeHtml($_shipment->getIncrementId()) ?></div>
         <a href="<?= $block->escapeUrl($block->getPrintShipmentUrl($_shipment)) ?>"
            class="action print"
            target="_blank"
