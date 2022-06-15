@@ -1,0 +1,13 @@
+<?php
+/** @var \Kemana\Contact\Helper\Data $kemanaContactHelper */
+$kemanaContactHelper = $this->helper(Kemana\Contact\Helper\Data::class);
+$isEnableContactInfo = $kemanaContactHelper->isEnabledContactInfo();
+$contact_info_block_static = $kemanaContactHelper->getBlockIdContactInfo();
+if ($isEnableContactInfo) :
+?>
+<div class="contactinfo-container">
+    <div class="contactus-block-info">
+        <?= $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId($contact_info_block_static)->toHtml();?>
+    </div>
+</div>
+<?php endif; ?>
