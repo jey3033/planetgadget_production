@@ -22,7 +22,7 @@
                 <tr>
                     <th scope="col" class="col id"><?= $block->escapeHtml(__('Order Number')) ?></th>
                     <th scope="col" class="col date"><?= $block->escapeHtml(__('Date')) ?></th>
-                    <th scope="col" class="col send_to"><?= $block->escapeHtml(__('Send To')) ?></th>
+                    <th scope="col" class="col ship_to"><?= $block->escapeHtml(__('Ship To')) ?></th>
                     <?= $block->getChildHtml('extra.column.header') ?>
                     <th scope="col" class="col total"><?= $block->escapeHtml(__('Total')) ?></th>
                     <th scope="col" class="col status"><?= $block->escapeHtml(__('Status')) ?></th>
@@ -31,17 +31,17 @@
             </thead>
             <tbody>
                 <?php foreach ($_orders as $_order) :
-                    $sentTo = '';
+                    $shipTo = '';
                     if(!empty($_order->getShippingAddress())){
-                        $sentTo = $_order->getShippingAddress()->getName();
+                        $shipTo = $_order->getShippingAddress()->getName();
                     }else{
-                        $sentTo = $_order->getBillingAddress()->getName();
+                        $shipTo = $_order->getBillingAddress()->getName();
                     }
                     ?>
                     <tr>
                         <td data-th="<?= $block->escapeHtmlAttr(__('Order Number')) ?>" class="col id"><?= $block->escapeHtml($_order->getRealOrderId()) ?></td>
                         <td data-th="<?= $block->escapeHtmlAttr(__('Date')) ?>" class="col date"><?= /* @noEscape */ $kemanaAcceleratorBaseHelper->formatDate($_order->getCreatedAt(), "d M Y") ?></td>
-                        <td data-th="<?= $block->escapeHtmlAttr(__('Send To')) ?>" class="col send_to"><?= $block->escapeHtml($sentTo) ?></td>
+                        <td data-th="<?= $block->escapeHtmlAttr(__('Ship To')) ?>" class="col ship_to"><?= $block->escapeHtml($shipTo) ?></td>
                         <?php $extra = $block->getChildBlock('extra.container'); ?>
                         <?php if ($extra) : ?>
                             <?php $extra->setOrder($_order); ?>
@@ -51,7 +51,7 @@
                         <td data-th="<?= $block->escapeHtmlAttr(__('Status')) ?>" class="col status"><?= $block->escapeHtml($_order->getStatusLabel()) ?></td>
                         <td data-th="<?= $block->escapeHtmlAttr(__('Actions')) ?>" class="col actions">
                             <a href="<?= $block->escapeUrl($block->getViewUrl($_order)) ?>" class="action view">
-                                <span><?= $block->escapeHtml(__('Detail')) ?></span>
+                                <span><?= $block->escapeHtml(__('See Detail')) ?></span>
                             </a>
                             <?php if ($this->helper(\Magento\Sales\Helper\Reorder::class)->canReorder($_order->getEntityId())) : ?>
                                 <a href="#" data-post='<?= /* @noEscape */

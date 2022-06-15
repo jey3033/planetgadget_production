@@ -84,8 +84,10 @@ class Grid extends \Magento\Customer\Block\Address\Grid
     {
         try {
             if ($address) {
-                if ($address->getCustomAttribute('map_point')) {
-                    return "Already Pinpoint";
+                if ($map_point = $address->getCustomAttribute('map_point')) {
+                    if (!empty($map_point->getValue())) {
+                        return "Already Pinpoint";
+                    }
                 } else {
                     return "Not Pinpoint yet";
                 }
