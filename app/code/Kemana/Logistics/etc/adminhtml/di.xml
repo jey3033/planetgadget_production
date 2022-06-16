@@ -14,5 +14,5 @@
  */
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-    <preference for="KS\Logistic\Model\Carrier\Jne\Api" type="Kemana\Logistic\Model\Carrier\Jne\Api" />
+    <preference for="KS\Logistic\Model\Carrier\Jne\Api" type="Kemana\Logistics\Model\Carrier\Jne\Api" />
 </config>
