@@ -2,7 +2,7 @@
 
 namespace Kemana\Logistics\Model\Carrier\Jne;
 
-class Jne extends \KS\Logistic\Model\Carrier\Jne\Api
+class Api extends \KS\Logistic\Model\Carrier\Jne\Api
 {
     /**
      * Get Request No
