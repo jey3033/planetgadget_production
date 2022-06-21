@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2022 PT Kemana Teknologi Solusi. All rights reserved.
+ * http://www.kemana.com
+ */
+
+/**
+ * @category Kemana
+ * @package  Kemana_Jobs
+ * @license  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ *
+ * @author   Kristian Claridad <kclaridad@kemana.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- Get file path for cvfile, coverletterfile, idcardfile, educationcertfile in table fme_jobs_application -->
+    <preference for="FME\Jobs\Model\Job" type="Kemana\Jobs\Plugin\Jobs\Model\Job" />
+    <!-- Get another file link downloads coverletterfile, idcardfile, educationcertfile in table fme_jobs_application in fme application admin grid -->
+    <preference for="FME\Jobs\Ui\Component\Listing\Column\Attachments\Titleicon" type="Kemana\Jobs\Plugin\Jobs\Ui\Component\Listing\Column\Attachments\FileDownloads" />
+</config>
