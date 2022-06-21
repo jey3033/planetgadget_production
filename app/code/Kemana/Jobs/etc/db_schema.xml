@@ -22,8 +22,8 @@
     </table>
     <table name="fme_jobs_application" resource="default" engine="innodb"
            comment="FME Jobs Application Table">
-        <column xsi:type="varchar" name="coverletterfile" nullable="true" length="255" comment="Cover Letter File"/>
-        <column xsi:type="varchar" name="idcardfile" nullable="true" length="255" comment="ID Card File"/>
-        <column xsi:type="varchar" name="educationcertfile" nullable="true" length="255" comment="Education Certificate File"/>
+        <column xsi:type="varchar" name="cover_letter_file" nullable="true" length="255" comment="Cover Letter File"/>
+        <column xsi:type="varchar" name="id_card_file" nullable="true" length="255" comment="ID Card File"/>
+        <column xsi:type="varchar" name="education_cert_file" nullable="true" length="255" comment="Education Certificate File"/>
     </table>
 </schema>

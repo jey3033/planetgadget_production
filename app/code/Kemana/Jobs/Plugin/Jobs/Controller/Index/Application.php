@@ -35,13 +35,13 @@ class Application extends \FME\Jobs\Controller\Index\Application
     public function execute()
     {
       
-        try{
+        try {
     
             $files = $this->getRequest()->getFiles();
             $files = (array)$files;
             
             $saveData = [];
-            if($files!='')
+            if ($files!='')
             {
 
                 foreach ($files as $key => $value) {
@@ -93,9 +93,9 @@ class Application extends \FME\Jobs\Controller\Index\Application
             ->setFrom($this->_mymoduleHelper->getSenderEmail(), $storeScope)
             ->addTo($data['email'], $storeScope)
             ->getTransport();
-        try{
+        try {
             $transport->sendMessage();
-        }catch (LocalizedException $e){
+        } catch (LocalizedException $e) {
             $this->messageManager->addErrorMessage($e->getMessage());
         }
         /******Email To Applicant End******/
@@ -130,9 +130,9 @@ class Application extends \FME\Jobs\Controller\Index\Application
                 ->setFrom($this->_mymoduleHelper->getSenderEmail(), $storeScope)
                 ->addTo($to)
                 ->getTransport();
-            try{
+            try {
                 $transport->sendMessage();
-            }catch (LocalizedException $e){
+            } catch (LocalizedException $e) {
                 $this->messageManager->addErrorMessage($e->getMessage());
             }
         } else if ($jobdata1[0]['use_config_email'] != 1 && $jobdata1[0]['use_config_template'] == 1) {
@@ -150,9 +150,9 @@ class Application extends \FME\Jobs\Controller\Index\Application
                 ->setFrom($this->_mymoduleHelper->getSenderEmail(), $storeScope)
                 ->addTo($jobdata1[0]['notification_email_receiver'])
                 ->getTransport();
-            try{
+            try {
                 $transport->sendMessage();
-            }catch (LocalizedException $e){
+            } catch (LocalizedException $e) {
                 $this->messageManager->addErrorMessage($e->getMessage());
             }
         } else if ($jobdata1[0]['use_config_email'] == 1 && $jobdata1[0]['use_config_template'] != 1) {
@@ -170,9 +170,9 @@ class Application extends \FME\Jobs\Controller\Index\Application
                 ->setFrom($this->_mymoduleHelper->getSenderEmail(), $storeScope)
                 ->addTo($to)
                 ->getTransport();
-            try{
+            try {
                 $transport->sendMessage();
-            }catch (LocalizedException $e){
+            } catch (LocalizedException $e) {
                 $this->messageManager->addErrorMessage($e->getMessage());
             }
         } else {
@@ -191,14 +191,14 @@ class Application extends \FME\Jobs\Controller\Index\Application
                 ->setFrom($this->_mymoduleHelper->getSenderEmail(), $storeScope)
                 ->addTo($jobdata1[0]['notification_email_receiver'])
                 ->getTransport();
-            try{
+            try {
                 $transport->sendMessage();
-            }catch (LocalizedException $e){
+            } catch (LocalizedException $e) {
                 $this->messageManager->addErrorMessage($e->getMessage());
 
             }
         }
-        foreach($data as $key=>$val)
+        foreach ($data as $key=>$val)
         {
             $saveData[$key] = $val;
         }        

@@ -14,17 +14,18 @@
 
 /** @var \Kemana\Jobs\Block\Adminhtml\Applications\Edit\AdditionalFilePath $block */
 ?>
-<?php $dataCodeEdit   = $block->getAdditionalFilePath('educationcertfile'); ?>
+<?php $dataCodeEdit   = $block->getAdditionalFilePath('education_cert_file'); ?>
 <?php if (!empty($dataCodeEdit)) : ?>
-<div class="admin__fieldset-wrapper-content admin__fieldset">      
-<div class="admin__field  form-control">
-    <label class="admin__field-label">
-        <span><?= __('Education Certificate')?></span>
-    </label>
-    <div class="admin__field-control _required">        
-        <a  href="<?php echo $dataCodeEdit ?>">
-            <button ><?= __('Click to Download Education Certificate')?> </button>
-        </a>
+<div class="admin__fieldset-wrapper-content admin__fieldset">
+    <div class="admin__field  form-control">
+        <label class="admin__field-label">
+            <span><?= __('Education Certificate')?></span>
+        </label>
+        <div class="admin__field-control _required">
+            <a href="<?php echo $dataCodeEdit ?>">
+                <button><?= __('Click to Download Education Certificate')?> </button>
+            </a>
+        </div>
     </div>
 </div>
 <?php endif;?>

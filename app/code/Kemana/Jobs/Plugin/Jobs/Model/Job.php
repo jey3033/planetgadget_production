@@ -28,7 +28,7 @@ class Job extends \FME\Jobs\Model\Job
      */
    	public function getCvDownloadLink($cid)
     {
-        $select = $this->_getResource()->getConnection()->select()->from($this->_getResource()->getTable('fme_jobs_application'), ['cvfile', 'coverletterfile', 'idcardfile', 'educationcertfile'])
+        $select = $this->_getResource()->getConnection()->select()->from($this->_getResource()->getTable('fme_jobs_application'), ['cvfile', 'cover_letter_file', 'id_card_file', 'education_cert_file'])
         ->where('app_id = ?', $cid);
         $data = $this->_getResource()->getConnection()
           ->fetchAll($select);

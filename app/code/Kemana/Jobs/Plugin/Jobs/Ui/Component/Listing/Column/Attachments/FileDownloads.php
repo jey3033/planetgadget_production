@@ -19,6 +19,13 @@ namespace Kemana\Jobs\Plugin\Jobs\Ui\Component\Listing\Column\Attachments;
  */
 class FileDownloads extends \FME\Jobs\Ui\Component\Listing\Column\Attachments\Titleicon
 {
+    
+    /**
+     * Prepare Data Source
+     *
+     * @param array $dataSource
+     * @return array
+     */
     public function prepareDataSource(array $dataSource)
     {
         $baseurl =  $this->storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
@@ -27,19 +34,19 @@ class FileDownloads extends \FME\Jobs\Ui\Component\Listing\Column\Attachments\Ti
             foreach ($dataSource['data']['items'] as & $item) {
                 $url = $baseurl.'fme_jobs'.$item['cvfile'];
                 $item[$fieldName] = ("<a onclick=\"window.location='$url'\" href='$url' >".'Download CV'."</a>");
-                if (!empty($item['coverletterfile'])) {
-                    $coverletterfile_url = $baseurl.'fme_jobs'.$item['coverletterfile'];
-                    $item[$fieldName] .= ("<br><a onclick=\"window.location='$coverletterfile_url'\" href='$coverletterfile_url' >".'Download Cover Letter'."</a>");
+                if (!empty($item['cover_letter_file'])) {
+                    $cover_letter_file_url = $baseurl.'fme_jobs'.$item['cover_letter_file'];
+                    $item[$fieldName] .= ("<br><a onclick=\"window.location='$cover_letter_file_url'\" href='$cover_letter_file_url' >".'Download Cover Letter'."</a>");
                 }
 
-                if (!empty($item['idcardfile'])) {
-                    $idcardfile_url = $baseurl.'fme_jobs'.$item['idcardfile'];
-                    $item[$fieldName] .= ("<br><a onclick=\"window.location='$idcardfile_url'\" href='$idcardfile_url' >".'Download ID Card'."</a>");
+                if (!empty($item['id_card_file'])) {
+                    $id_card_file_url = $baseurl.'fme_jobs'.$item['id_card_file'];
+                    $item[$fieldName] .= ("<br><a onclick=\"window.location='$id_card_file_url'\" href='$id_card_file_url' >".'Download ID Card'."</a>");
                 }
 
-                if (!empty($item['educationcertfile'])) {
-                    $educationcertfile_url = $baseurl.'fme_jobs'.$item['educationcertfile'];
-                    $item[$fieldName] .= ("<br><a onclick=\"window.location='$educationcertfile_url'\" href='$educationcertfile_url' >".'Download Education Certificate'."</a>");
+                if (!empty($item['education_cert_file'])) {
+                    $education_cert_file_url = $baseurl.'fme_jobs'.$item['education_cert_file'];
+                    $item[$fieldName] .= ("<br><a onclick=\"window.location='$education_cert_file_url'\" href='$education_cert_file_url' >".'Download Education Certificate'."</a>");
                 }
             } 
         }

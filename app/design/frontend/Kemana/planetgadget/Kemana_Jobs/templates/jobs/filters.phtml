@@ -29,48 +29,48 @@
     /** @var \Magento\Framework\Pricing\Helper\Data $priceHelper */
     $priceHelper = $this->helper('Magento\Framework\Pricing\Helper\Data');
 ?>
-<?php if($jobCollection->getData()):?>
-      <div class="listing" <?php if(!($block->jobHelper->getJobSideBarEnable())):?> style="width: 100%" <?php endif;?>>
-        <?php if ($block->getPagerHtml()): ?>
-            <div class="order-products-toolbar toolbar bottom"><?php echo $block->getPagerHtml(); ?></div>
-        <?php endif; ?>    
-        <?php foreach($jobCollection as $jobs):?>
-          <?php  $url = $jobs->getJobsUrlKey(); ?>        
-        <?php if(strtotime($block->jobHelper->getTimeAccordingToTimeZone($jobs->getJobsPublishDate())) > strtotime($arrCurrDateTime)):?>
-          <?php continue; ?>
-        <?php endif;?>        
-        <?php if(!($block->jobHelper->getJobExpiredStatus())):?>
-        <?php if(strtotime($block->jobHelper->getTimeAccordingToTimeZone($jobs->getJobsApplybyDate())) < strtotime($arrCurrDateTime)):?>          
-          <?php continue; ?>
-        <?php endif;?>
-        <?php endif;?>  
-        <div class="block">
-            <a href="<?php echo $this->getUrl().$block->jobHelper->getJobFinalDetailIdentifier($url) ?>">
-                <div class="title">
-                    <?php $department = $block->getDepartmentName($jobs->getJobsSelectDepartments())?>
-                    <?php $location = $block->getLocation($jobs->getJobsLocation())?>
-                    <div class="company">
-                        <p><?php echo __($department) ?>, <?php echo __($location) ?></p>
-                    </div>
-                    <div class="job-title">
-                    <h3><?php echo __($jobs->getJobsTitle());?></h3>
-                    </div>
+<?php if ($jobCollection->getData()): ?>
+<div class="listing" <?php if (!($block->jobHelper->getJobSideBarEnable())):?> style="width: 100%" <?php endif;?>>
+    <?php if ($block->getPagerHtml()): ?>
+    <div class="order-products-toolbar toolbar bottom"><?php echo $block->getPagerHtml(); ?></div>
+    <?php endif; ?>
+    <?php foreach ($jobCollection as $jobs): ?>
+    <?php  $url = $jobs->getJobsUrlKey(); ?>
+    <?php if (strtotime($block->jobHelper->getTimeAccordingToTimeZone($jobs->getJobsPublishDate())) > strtotime($arrCurrDateTime)): ?>
+    <?php continue; ?>
+    <?php endif;?>
+    <?php if (!($block->jobHelper->getJobExpiredStatus())): ?>
+    <?php if (strtotime($block->jobHelper->getTimeAccordingToTimeZone($jobs->getJobsApplybyDate())) < strtotime($arrCurrDateTime)): ?>
+    <?php continue; ?>
+    <?php endif;?>
+    <?php endif;?>
+    <div class="block">
+        <a href="<?php echo $this->getUrl().$block->jobHelper->getJobFinalDetailIdentifier($url) ?>">
+            <div class="title">
+                <?php $department = $block->getDepartmentName($jobs->getJobsSelectDepartments())?>
+                <?php $location = $block->getLocation($jobs->getJobsLocation())?>
+                <div class="company">
+                    <p><?php echo __($department) ?>, <?php echo __($location) ?></p>
                 </div>
-                <?php $string = $jobs->getJobsDescription() ?>
-                <?php $string = preg_replace('/(<(script|style)\b[^>]*>).*?(<\/\2>)/is', "$1$3", $string); // remove <style|script tag when page builder using html ?>
-                <?php $string = $kemanaJobsHelper->formatJobContentToHtml($string); // format content when page builder using html
+                <div class="job-title">
+                    <h3><?php echo __($jobs->getJobsTitle());?></h3>
+                </div>
+            </div>
+            <?php $string = $jobs->getJobsDescription() ?>
+            <?php $string = preg_replace('/(<(script|style)\b[^>]*>).*?(<\/\2>)/is', "$1$3", $string); // remove <style|script tag when page builder using html ?>
+            <?php $string = $kemanaJobsHelper->formatJobContentToHtml($string); // format content when page builder using html
                     $string = $block->stripTags($string); // remove all html tags
                     if (strlen($string) > 500) {
                         $stringCut = substr($string, 0, 500);   
                         $string = substr($stringCut, 0, strrpos($stringCut, ' ')).'... '; 
                     }
                 ?>
-                <div class="content">
-                    <p><?php echo __($string)?> </p>
-                </div>
-                <div class="title">
-                    <div class="job-salary-range">
-                        <?php
+            <div class="content">
+                <p><?php echo __($string)?> </p>
+            </div>
+            <div class="title">
+                <div class="job-salary-range">
+                    <?php
                             $showSalaryRange = false;
                             if ($jobs->getSalaryFrom() > 0 || $jobs->getSalaryTo() > 0) {
                                 $showSalaryRange = true;
@@ -78,76 +78,74 @@
                                 $salaryTo = $priceHelper->currency($jobs->getSalaryTo(),true,false);
                             }
                         ?>
-                        <?php if($showSalaryRange):?>
-                            <span><?php echo $salaryFrom.' - '. $salaryTo ?></span>
-                        <?php endif;?>
-                    </div>
-                    <div class="date">
-                        <span><?php echo __( $kemanaJobsHelper->getTimeAccordingToTimeZone($jobs->getJobsPublishDate(), 'd M Y G:i:s A')) ?></span>
-                    </div>
+                    <?php if($showSalaryRange):?>
+                    <span><?php echo $salaryFrom.' - '. $salaryTo ?></span>
+                    <?php endif;?>
                 </div>
-            </a>
+                <div class="date">
+                    <span><?php echo __( $kemanaJobsHelper->getTimeAccordingToTimeZone($jobs->getJobsPublishDate(), 'd M Y G:i:s A')) ?></span>
+                </div>
+            </div>
+        </a>
+    </div>
+    <?php endforeach;?>
+</div>
+<?php else:?>
+<div class="listing">
+    <div class="block">
+        <div class="title">
+            <p>No results found</p>
+            <span><?php echo __('Sorry, there are no job openings matching your search.');?></span>
         </div>
-        <?php endforeach;?>    
-      </div>
-    <?php else:?>
-      <div class="listing">
-          <div class="block">
-              <div class="title">
-                <p>No results found</p>
-                <span><?php echo __('Sorry, there are no job openings matching your search.');?></span>
-              </div>
-          </div>
-      </div>
-    <?php endif;?>
+    </div>
+</div>
+<?php endif;?>
 
-    <script type="text/javascript">
-require([
-                    'jquery'   
+<script type="text/javascript">
+	require([
+		'jquery'
 
-                ], function($){
-   
-jQuery(".toolbar a").click(function(event) { 
-event.preventDefault(); 
-  var formMessages = $('#form-messages');
+	], function($) {
 
-curUrl=this.href;
-curUrl=curUrl.split('?');
-var formData = <?php echo  $block->getSerializeFormData();?>;
-var ajaxUrl= '<?php echo $block->getUrl("job/index/filters"); ?>?'+curUrl[1];
-$.ajax({
-      type: 'POST',
-      url: ajaxUrl,
-      showLoader: true,
-      data: formData
-    })
-    .done(function(response) {      
-      $(formMessages).html(response);      
-    });
+		jQuery(".toolbar a").click(function(event) {
+			event.preventDefault();
+			var formMessages = $('#form-messages');
 
-                                     }); //click end here
-    //limiter start
-      jQuery("#limiter").change(function(event) { 
-event.preventDefault(); 
-  var formMessages = $('#form-messages');
+			curUrl = this.href;
+			curUrl = curUrl.split('?');
+			var formData = <?php echo  $block->getSerializeFormData();?>;
+			var ajaxUrl = '<?php echo $block->getUrl("job/index/filters"); ?>?' + curUrl[1];
+			$.ajax({
+					type: 'POST',
+					url: ajaxUrl,
+					showLoader: true,
+					data: formData
+				})
+				.done(function(response) {
+					$(formMessages).html(response);
+				});
 
-curUrl=this.value;
-curUrl=curUrl.split('?');
-var formData= <?php echo  $block->getSerializeFormData();?>;
-var ajaxUrl= '<?php echo $block->getUrl("job/index/filters"); ?>?'+curUrl[1];
-$.ajax({
-      type: 'POST',
-      url: ajaxUrl,
-      showLoader: true,
-      data: formData
-    })
-    .done(function(response) {      
-      $(formMessages).html(response);      
-    });
+		}); //click end here
+		//limiter start
+		jQuery("#limiter").change(function(event) {
+			event.preventDefault();
+			var formMessages = $('#form-messages');
 
-                                     });
-    //limiter end                                                  
+			curUrl = this.value;
+			curUrl = curUrl.split('?');
+			var formData = <?php echo  $block->getSerializeFormData();?>;
+			var ajaxUrl = '<?php echo $block->getUrl("job/index/filters"); ?>?' + curUrl[1];
+			$.ajax({
+					type: 'POST',
+					url: ajaxUrl,
+					showLoader: true,
+					data: formData
+				})
+				.done(function(response) {
+					$(formMessages).html(response);
+				});
 
-                });//require close
-
+		});
+		//limiter end                                                  
+	}); //require close
 </script>

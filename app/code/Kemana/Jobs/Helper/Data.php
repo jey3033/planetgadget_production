@@ -49,12 +49,13 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      * @param Context $context
      * @param FilterProvider $filterProvider
      * @param StoreManagerInterface $storeManager
+     * @param TimezoneInterface $timezoneInterface
      */
     public function __construct(
         Context               $context,
         FilterProvider        $filterProvider,
         StoreManagerInterface $storeManager,
-        TimezoneInterface $timezoneInterface
+        TimezoneInterface     $timezoneInterface
     )
     {
         $this->_filterProvider = $filterProvider;

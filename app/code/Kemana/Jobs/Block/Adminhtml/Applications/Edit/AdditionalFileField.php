@@ -15,15 +15,20 @@
 namespace Kemana\Jobs\Block\Adminhtml\Applications\Edit;
 
 /**
- * Class CoverLetterField
+ * Class AdditionalFileField
  */
 class AdditionalFileField extends \Magento\Backend\Block\Template
 {
     
     /**
+     * @var Context
+     */
+    protected $_contextMgr;
+
+    /**
      * @var Job
      */
-    protected $_eventFactory;   
+    protected $_eventFactory;
     
     /**
      * @param Context $context
@@ -36,6 +41,7 @@ class AdditionalFileField extends \Magento\Backend\Block\Template
         
         $this->_eventFactory = $eventFactory;       
         $this->_contextMgr = $context;
+        
         parent::__construct($context);
     }
 
@@ -48,15 +54,14 @@ class AdditionalFileField extends \Magento\Backend\Block\Template
     public function getAdditionalFilePath($fieldpath)
     {
         $id = $this->getRequest()->getParam('app_id');
-        $urlCv = '';
+        $urlFilePath = '';
         if ($id) {
             $mediaobj = $this->_eventFactory->getCvDownloadLink($id);
-            $mediaobj = $mediaobj['0'][$fieldpath];
-            if (!empty($mediaobj)) {
+            if (!empty($mediaobj = $mediaobj['0'][$fieldpath])) {
                 $media_url = $this->_contextMgr->getStoreManager()->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
-                $urlCv = $media_url.'fme_jobs'.$mediaobj;  
+                $urlFilePath = $media_url.'fme_jobs'.$mediaobj;  
             }
-        return $urlCv;
+            return $urlFilePath;
         }
     }
 }

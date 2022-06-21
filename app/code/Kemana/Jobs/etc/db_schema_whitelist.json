@@ -7,9 +7,9 @@
     },
     "fme_jobs_application": {
         "column": {
-            "coverletterfile": true,
-            "idcardfile": true,
-            "educationcertfile": true
+            "cover_letter_file": true,
+            "id_card_file": true,
+            "education_cert_file": true
         }
     }
 }
