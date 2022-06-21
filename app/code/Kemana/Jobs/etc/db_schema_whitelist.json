@@ -1,0 +1,15 @@
+{
+    "fme_jobs": {
+        "column": {
+            "salary_from": true,
+            "salary_to": true
+        }
+    },
+    "fme_jobs_application": {
+        "column": {
+            "coverletterfile": true,
+            "idcardfile": true,
+            "educationcertfile": true
+        }
+    }
+}
