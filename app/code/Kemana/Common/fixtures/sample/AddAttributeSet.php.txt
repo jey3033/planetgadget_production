@@ -1,0 +1,98 @@
+<?php
+/**
+ * Copyright © 2021 PT Kemana Teknologi Solusi. All rights reserved.
+ * http://www.kemana.com
+ */
+
+/**
+ * @category Kemana
+ * @package  Kemana_Setup
+ * @license  Proprietary
+ *
+ * @author   Cipto Raharjo <craharjo@kemana.com>
+ */
+
+namespace Kemana\Setup\Setup\Patch\Data;
+
+use Kemana\Setup\Model\Data\Attribute;
+use Magento\Framework\App\State;
+use Magento\Framework\Setup\ModuleDataSetupInterface;
+use Magento\Framework\Setup\Patch\DataPatchInterface;
+
+/**
+ * Class AddAttributeSet
+ * @package Kemana\Setup\Setup\Patch\Data
+ */
+class AddAttributeSet implements DataPatchInterface
+{
+
+    const ATTRIBUTE_FIXTURE = ['Kemana_Setup::fixtures/attribute_set.csv'];
+
+    /**
+     * @var Attribute
+     */
+    private $attribute;
+    
+    /**
+     * @var ModuleDataSetupInterface
+     */
+    private $moduleDataSetup;
+
+    /**
+     * @var State
+     */
+    private $appState;
+
+    /**
+     * AddAttributeSet constructor.
+     * @param Attribute $attribute
+     * @param ModuleDataSetupInterface $moduleDataSetup
+     * @param State $appState
+     */
+    public function __construct(
+        Attribute $attribute,
+        ModuleDataSetupInterface $moduleDataSetup,
+        State $appState
+    ) {
+        $this->moduleDataSetup = $moduleDataSetup;
+        $this->attribute       = $attribute;
+        $this->appState        = $appState;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function apply()
+    {
+        //$this->appState->setAreaCode(Area::AREA_FRONTEND);
+        try {
+            $this->attribute->installAttributeSet(self::ATTRIBUTE_FIXTURE);
+        } catch (\Exception $e) {
+            $e->getMessage();
+        }
+    }
+
+    /**
+     *  Uninstall or remove all the data when related to this module
+     */
+    public function revert()
+    {
+
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getDependencies()
+    {
+        return [];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAliases()
+    {
+        return [];
+    }
+}

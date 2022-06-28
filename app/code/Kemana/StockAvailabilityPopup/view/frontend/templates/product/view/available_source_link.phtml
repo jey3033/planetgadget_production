@@ -1,0 +1,22 @@
+<?php
+/**
+ * Copyright © 2022 PT Kemana Teknologi Solusi. All rights reserved.
+ * http://www.kemana.com
+ */
+
+/**
+ * @category Kemana
+ * @package  Kemana_StockAvailabilityPopup
+ * @license  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ *
+ * @author   Achintha Madushan <amadushan@kemana.com>
+ */
+
+/** @var \Kemana\StockAvailabilityPopup\Block\Product\View $block */
+
+?>
+
+<div class="available-source-locations-link">
+    <span>Available at the nearest Planet Gadget Store. </span><a href="<?= $block->getUrl()
+    ?>stock-data/availability/stock/sku/<?= $block->getProduct()->getSku() ?>/id/<?= $block->getProduct()->getEntityId() ?>">Check Availability</a>
+</div>

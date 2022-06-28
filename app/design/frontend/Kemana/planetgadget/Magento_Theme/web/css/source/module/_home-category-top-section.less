@@ -1,0 +1,86 @@
+// /**
+//  * Copyright © 2020 Kemana. All rights reserved.
+//  * @author Harshani Karunasekara <hkarunasekara@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+//  Bank & Promo variables
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .category-top-section {
+        .block {
+            &.widget {
+                .widget-title {
+                    text-transform: none;
+                    text-align: left;
+                }
+
+                .category-top-grid {
+                    .category-top-items {
+                        margin-bottom: 0;
+                        padding-left: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .category-top-section {
+        padding-block: 50px 45px;
+
+        .block {
+            &.widget {
+                .category-top-items {
+                    list-style: none;
+                    .lib-vendor-prefix-display();
+                    .lib-vendor-prefix-flex-wrap();
+                    margin-inline: -5px;
+
+                    .category-item {
+                        width: 50%;
+                        margin: 0;
+
+
+                    }
+                }
+            }
+        }
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .category-top-section {
+        padding-block: 50px;
+
+        .block {
+            &.widget {
+                .widget-title {
+                    h2 {
+                        .lib-font-size(28);
+                        .lib-line-height(31);
+                    }
+                }
+
+                .category-top-grid {
+                    margin-inline: -@indent__s;
+                }
+            }
+        }
+    }
+
+
+}

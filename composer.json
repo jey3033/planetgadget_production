@@ -72,24 +72,71 @@
         "kemana-blog": {
             "type": "git",
             "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_blog.git"
+        },
+        "kemana-topcategories": {
+            "type": "git",
+            "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_topcategories.git"
+        },
+        "kemana-brand": {
+            "type": "git",
+            "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana-brand.git"
+        },
+        "kemana-paymentgroupattribute": {
+            "type": "git",
+            "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_paymentgroupattribute.git"
+        },
+        "kemana-paymentshippinglogo": {
+            "type": "git",
+            "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_paymentshippinglogo.git"
+        },
+        "kemana-headertopline": {
+            "type": "git",
+            "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_headertopline.git"
+        },
+        "kemana-compareproduct": {
+            "type": "git",
+            "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_compareproduct.git"
+        },
+        "kemana-social-share": {
+            "type": "git",
+            "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_socialshare.git"
+        },
+        "kemana-preorder": {
+            "type": "git",
+            "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_preorder.git"
+        },
+        "kemana-ajax-layered-navigation": {
+            "type": "git",
+            "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_ajaxlayerednavigation.git"
         }
     },
     "require": {
+        "kemana/brand": "dev-release-Staging-243",
         "kemana/kemana_base": "2.43.0",
         "kemana/kemana_geoip": "2.43.0",
+        "kemana/kemana_paymentphippinglogo": "2.43.0",
         "kemana/kemana_storelocator": "2.43.2",
         "kemana/module-accelerator-base": "dev-release-Staging-243",
+        "kemana/module-ajax-layered-navigation": "dev-release-Staging-243",
         "kemana/module-banner": "2.43.1",
         "kemana/module-blog": "2.43.0",
         "kemana/module-categoriesenhanced": "2.43.1",
+        "kemana/module-compare-product": "2.43.0",
         "kemana/module-core": "2.43.0",
+        "kemana/module-header-top-line": "dev-release-Staging-243",
         "kemana/module-labelmanager": "2.43.2",
+        "kemana/module-payment-group-attribute": "2.43.0",
         "kemana/module-smtp": "2.43.0",
         "kemana/module-snap": "2.43.2",
         "kemana/module-social-login": "2.43.3",
+        "kemana/module-social-share": "dev-release-Staging-243",
+        "kemana/module-top-categories": "2.43.0",
         "kemana/module-whatsapp-chat": "dev-release-Staging-241",
+        "kemana/preorder": "dev-release-Staging-243",
         "kemana/theme-frontend-base": "dev-release-Staging-243",
         "ks/logistic": "dev-release-Staging-243",
+        "laminas/laminas-log": "^2.15",
+        "magento/ece-tools": "2002.1.10",
         "magento/composer-root-update-plugin": "~1.1",
         "magento/magento-cloud-metapackage": ">=2.4.3 <2.4.4"
     },

@@ -1,0 +1,214 @@
+// /**
+//  * Copyright © 2022 Kemana. All rights reserved.
+//  * @author Harshani Karunasekara <hkarunasekara@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .header-top-wrapper {
+        .top-promotion {
+            display: none;
+        }
+    }
+
+    .top-wrapper-links {
+        .help-info-content {
+            .text {
+                .lib-line-height(20px);
+                width: 100%;
+
+                &.phone {
+                    .lib-icon-font(
+                        @icon-pg-phone,
+                        @_icon-font-size: 20px,
+                        @_icon-font-margin: 0 10px 0 0
+                    );
+                }
+
+                &.email {
+                    .lib-icon-font(
+                        @icon-pg-email,
+                        @_icon-font-size: 20px,
+                        @_icon-font-margin: 0 10px 0 0
+                    );
+                }
+
+                &.live-chat {
+                    .lib-icon-font(
+                        @icon-pg-livechat,
+                        @_icon-font-size: 20px,
+                        @_icon-font-margin: 0 10px 0 0
+                    );
+                }
+            }
+        }
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .page-header {
+        .header-top-wrapper {
+            display: none;
+        }
+    }
+
+    .top-wrapper-links {
+        a.help-info-toggle {
+            padding-bottom: 16px;
+            display: block;
+            width: 100%;
+        }
+
+        .help-info-content {
+            display: block !important;
+            margin-inline: -10px;
+            background: @color-white;
+            .lib-font-size(10);
+            .lib-line-height(16);
+
+            .heading {
+                padding: 13px 10px;
+                font-weight: @font-weight__bold;
+            }
+
+            .text {
+                padding: 13px 10px;
+
+                &:hover  {
+                    .lib-css(background, @color-pg-light-gray2);
+                }
+            }
+
+            .time {
+                padding: 13px 10px;
+
+                span {
+                    font-weight: @font-weight__bold;
+                }
+            }
+        }
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .page-header {
+        .header-top-wrapper {
+            padding: 6px 10px;
+            transition: .3s all ease;
+
+            .header-top-wrapper-right {
+                a {
+                    .lib-vendor-prefix-display();
+                    .lib-css(color, @color-white);
+                    padding-inline: 10px;
+                    .lib-font-size(10);
+                    .lib-line-height(20);
+                }
+
+                li {
+                    list-style: none;
+                }
+
+                .top-wrapper-links {
+                    margin-right: 0;
+
+                    a.help-info-toggle {
+                        .lib-icon-font(
+                            @_icon-font-content: @icon-pg-down-thick,
+                            @_icon-font-size: 9px,
+                            @_icon-font-line-height: 20px,
+                            @_icon-font-position: after,
+                            @_icon-font-margin: 0 0 0 10px
+                        );
+
+                        &:hover {
+                            text-decoration: underline;
+                        }
+                    }
+
+                    .help-info-content {
+                        position: absolute;
+                        z-index: 99;
+                        top: 27px;
+                        right: 0;
+                        .lib-css(background, @color-white);
+                        .lib-css(border, 1px solid @color-pg-light-gray2);
+                        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+                        padding: @indent__base 0;
+                        border-radius: 5px;
+                        display: none;
+                        min-width: 256px;
+
+                        &:after {
+                            content: "";
+                            width: 10px;
+                            height: 10px;
+                            transform: rotate(-45deg);
+                            background: #fff;
+                            position: absolute;
+                            z-index: -1;
+                            top: -5px;
+                            right: 32px;
+                        }
+
+                        .heading {
+                            padding: 0 @indent__base @indent__s;
+                            .lib-css(font-weight, @font-weight__bold);
+                        }
+
+                        .text {
+                            .lib-line-height(24);
+                            padding: @indent__s @indent__base;
+                            .lib-vendor-prefix-display();
+
+                            &:hover {
+                                .lib-css(background-color, @color-pg-light-gray2);
+                            }
+
+                            &.phone {
+                                &:before {
+                                    .lib-font-size(24);
+                                }
+                            }
+
+                            &.email {
+                                &:before {
+                                    .lib-font-size(24);
+                                }
+                            }
+
+                            &.live-chat {
+                                &:before {
+                                    .lib-font-size(24);
+                                }
+                            }
+                        }
+
+                        .time {
+                            padding: @indent__s @indent__base 0;
+                            white-space: nowrap;
+                            .lib-font-size(10);
+                            .lib-line-height(16);
+
+                            span {
+                                .lib-css(font-weight, @font-weight__bold);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

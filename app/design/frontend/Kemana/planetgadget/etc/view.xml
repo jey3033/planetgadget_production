@@ -49,8 +49,8 @@
                 <height>100</height>
             </image>
             <image id="mini_cart_product_thumbnail" type="thumbnail">
-                <width>60</width>
-                <height>77</height>
+                <width>70</width>
+                <height>70</height>
             </image>
             <image id="new_products_content_widget_grid" type="small_image">
                 <width>476</width>
@@ -122,8 +122,8 @@
                 <height>207</height>
             </image>
             <image id="recently_viewed_products_grid_content_widget" type="small_image">
-                <width>72</width>
-                <height>92</height>
+                <width>90</width>
+                <height>90</height>
             </image>
             <image id="recently_viewed_products_images_names_widget" type="small_image">
                 <width>75</width>

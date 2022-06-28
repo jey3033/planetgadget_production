@@ -1,0 +1,104 @@
+<?php
+/**
+ *  Kemana\AcceleratorBase\Block\HeaderElement $block
+ */
+$whishlistUrl = $block->getWhistlistUrl();
+$_session=$block->getSession();
+// @codingStandardsIgnoreStart
+?>
+
+<div class="block account-menu">
+    <div class="account-menu_content" id="account-menu">
+        <ul class="menu-content">
+            <?php if (!$_session->isLoggedIn()): ?>
+                <li class="main-item customer-login-link"><a href="<?= $this->getUrl('customer/account/login'); ?>"><?= __('Login / Register') ?></a></li>
+                <?= $block->getChildHtml('customer.account.top.link.hover') ?>
+            <?php elseif ($_session->isLoggedIn()): ?>
+                <li class="main-item"><a href="<?= $this->getUrl('customer/account/index'); ?>"><?= __('Account') ?></a></li>
+                <div class="account-detail__content">
+                    <ul class="list-info">
+                        <li><a href="<?= $this->getUrl('customer/account/index'); ?>"><?= __('My Account') ?></a></li>
+                        <li><a href="<?= $this->getUrl('sales/order/history/'); ?>"><?= __('Order History') ?></a></li>
+                        <li><a href="<?= $this->getUrl('customer/address/'); ?>"><?= __('Address Book') ?></a></li>
+                        <li><a href="<?= $this->getUrl('wishlist'); ?>"><?= __('Wishlist ') ?></a></li>
+                        <li><a href="<?= $this->getUrl('reward/customer/info/'); ?>"><?= __('Point & Membership ')
+                                ?></a></li>
+                        <li><a href="<?= $this->getUrl('customer/account/logout'); ?>"><?= __('Logout') ?></a></li>
+                    </ul>
+                </div>
+            <?php endif; ?>
+        </ul>
+    </div>
+</div>
+
+<script type="text/javascript">
+    require(["jquery","matchMedia"],function ($) {
+        $(document).ready(function () {
+            $(window).scroll(function () {
+                var scroll = $(window).scrollTop();
+                const $fixedHeaderWrapper = $("body, .page-header");
+                mediaCheck({
+                    media: '(min-width: 768px)',
+                    entry: function() { // desktop
+                        if (scroll > 30) {
+                            $fixedHeaderWrapper.addClass("fixed-header");
+                        }
+                        else if (!scroll){
+                            $fixedHeaderWrapper.removeClass("fixed-header");
+                        }
+                    },
+                    exit: function() { // mobile
+                        if (scroll > 23) {
+                            $fixedHeaderWrapper.addClass("fixed-header");
+                        }
+                        else if (!scroll){
+                            $fixedHeaderWrapper.removeClass("fixed-header");
+                        }
+                    }
+                });
+            });
+            $('.account-menu_content').mouseover(function () {
+                if($('.account-menu_content .account-detail__content').hasClass('active')){
+                    $('.account-menu_content .account-detail__content').removeClass('active');
+                }
+                if(!$('.account-menu_content .account-detail__content').hasClass('active')){
+                    $('.account-menu_content .account-detail__content').addClass('active');
+                }
+            });
+            $(document).mouseout(function (e) {
+                let accountWrap = $('.account-menu_content');
+
+                // if the target of the click isn't the container nor a descendant of the container
+                if (!accountWrap.is(e.target) && accountWrap.has(e.target).length === 0) {
+                    $('.account-menu_content .account-detail__content').removeClass('active');
+                }
+            });
+            if ($( ".magestore-bannerslider-standard" ).length) {
+                $('.page-layout-1column').removeClass('no-banner')
+            }else{
+                $('.page-layout-1column').addClass('no-banner')
+            }
+        });
+        if($(window).width() < 768) {
+            $(".section.has-btn").prepend('<button class="show_level2">Drop</button>');
+                $(".section.has-btn").prepend('<button class="back" style="display:none">Back</button>');
+                $(".show_level2").click(function () {
+                    $(this).parent().parent().addClass('active');
+                    $('body').addClass('show-menu-lv2');
+                    $(this).prev().css('display','block');
+                    $(this).css('display','none');
+                    $(this).next().next().css("display","block");
+                });
+                $('.back').click(function () {
+                    $(this).parent().parent().removeClass('active');
+                   $(this).next().next().next().css("display","none");
+                   $(this).css('display','none');
+                   $(this).next().css('display','block');
+                });
+            $('.section.divide:not(".has-btn")').children().addClass('123');
+            $('.section.divide:not(".has-btn")').children().css('display','block')
+            }
+        });
+    </script>
+    <?php // @codingStandardsIgnoreEnd ?>
+

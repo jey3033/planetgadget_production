@@ -1,0 +1,128 @@
+// /**
+//  * Copyright © 2022 Kemana. All rights reserved.
+//  * @author Harshani Karunasekara <hkarunasekara@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .header-top-wrapper {
+        .top-promotion {
+            display: none;
+        }
+    }
+
+    .navigation {
+        .topmenu {
+            .compare {
+                display: none;
+            }
+        }
+    }
+
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .nav-open {
+        .page-wrapper {
+            .header-left {
+                > .nav-toggle {
+                    left: 0;
+                    top: 7px;
+
+                    .lib-icon-font(
+                        @icon-pg-close-button,
+                        @_icon-font-size: 20px,
+                        @_icon-font-color: @color-white
+                    );
+
+                    &:after {
+                        top: 48px;
+                    }
+                }
+            }
+
+        }
+
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+    .navigation {
+        .level0 {
+            text-transform: none;
+
+            &:first-child {
+                a {
+                    .lib-line-height(20);
+                    padding-block: 31px 29px;
+
+                    .lib-icon-font(
+                        @icon-menu,
+                        @_icon-font: @icon-font,
+                        @_icon-font-color: @color-white,
+                        @_icon-font-size: 23px,
+                        @_icon-font-line-height: 20px,
+                        @_icon-font-margin: -5px 15px 0 0,
+                        @_icon-font-position: before
+                    );
+                    display: inline-block;
+
+                    &:hover,  &.ui-state-focus {
+                        &:before {
+                            .lib-css (color, @kemana-secondary-brand-color);
+                        }
+                    }
+
+                    span {
+                        display: inline-block;
+                        .lib-line-height(20);
+                    }
+                }
+            }
+
+            > .level-top {
+                line-height: 80px;
+
+                &:hover, &.ui-state-focus {
+                    &:after {
+                        border: none;
+                    }
+                }
+            }
+
+
+            &.active,
+            &.has-active {
+                > .level-top {
+                    &:before {
+                        .lib-css (color, @kemana-secondary-brand-color);
+                    }
+
+                    &:after {
+                        border-bottom: none;
+                    }
+                }
+            }
+
+            &.parent {
+                > .level-top {
+                    > .ui-menu-icon {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}

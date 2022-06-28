@@ -24,8 +24,7 @@ use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\Api\FilterBuilder;
 
 /**
- * Class CreateStaticCmsPages
- * @package Kemana\Setup\Setup\Patch\Data
+ * Class CreateCmsStaticPages
  */
 class CreateCmsStaticPages implements DataPatchInterface
 {

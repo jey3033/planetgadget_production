@@ -1,0 +1,262 @@
+// /**
+//  * Copyright © 2022 Kemana. All rights reserved.
+//  * @author Harshani Karunasekara <hkarunasekara@kemana.com>
+//  * http://www.kemana.com
+//  */
+@import 'module/_listings_extend.less';
+@import 'module/_toolbar_extend.less';
+@import 'module/checkout/_payment-options_extend.less';
+
+//
+//  Variables
+//  _____________________________________________
+
+@pdp-product-title-desktop__font-size: 28;
+@pdp-product-title__font-weight: @font-weight__bold;
+
+@pdp-product-price__font-family: @font-family-name__base;
+@pdp-product-price__font-weight: @font-weight__bold;
+@plp-product-price__font-size: 16;
+@pdp-product-price__font-size: 28;
+
+@plp-product-item__border: 0;
+@plp-product-item-hover__border: 0;
+
+@plp-product-item__border-radius: 0;
+
+@product-old-price__font-weight: @font-weight__regular;
+@product-special-price__color: @color-kemana-red;
+@product-old-price__color: @color-pg-light-gray;
+
+@plp-compare-button__display: none;
+
+@product-old-price__font-size: 12;
+@product-grid-old-price__font-size: 12;
+
+@product-grid-items-per-row-layout-default: 2;
+
+@product-grid-items-per-row-layout-1-screen-s: 3;
+@product-grid-items-per-row-layout-1-screen-m: 4;
+@product-grid-items-per-row-layout-1-screen-l: 5;
+
+@product-grid-items-per-row-layout-2-left-screen-s: 3;
+@product-grid-items-per-row-layout-2-left-screen-m: 4;
+@product-grid-items-per-row-layout-2-left-screen-l: '';
+
+@product-grid-items-per-row-layout-2-right-screen-s: 3;
+@product-grid-items-per-row-layout-2-right-screen-m: 4;
+@product-grid-items-per-row-layout-2-right-screen-l: '';
+
+@product-grid-items-per-row-layout-3-screen-s: 3;
+@product-grid-items-per-row-layout-3-screen-m: '';
+@product-grid-items-per-row-layout-3-screen-l: '';
+
+@product-grid-items-padding: 0 @indent__base @indent__base;
+@product-grid-items-margin: 0 0 @indent__s;
+
+@product-name-text-decoration: none;
+@product-name-text-decoration-hover: @link__hover__text-decoration;
+
+@pdp-add-to-cart-action__margin-top: 30px;
+
+@toolbar-mode-icon-font-size: 26px;
+@product-h1-margin-bottom-desktop: @indent__base;
+
+@brandname__font-family: @font-family-name__base;
+@brandname__font-color: @kemana-primary-brand-color;
+@brandname__font-weight: @font-weight__bold;
+@brandname__font-size: 14;
+@brandname-pdp__font-size: 14;
+
+@discount-input_font-family: @font-family__ubuntu-italy;
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .product-info-main,
+    .product-options-bottom {
+        .old-price {
+            text-decoration: none;
+
+            .weee {
+                text-decoration: line-through;
+            }
+        }
+
+        .price-box {
+            .weee {
+                margin-bottom: 0;
+                line-height: 16px;
+                height: 16px;
+
+                span {
+                    line-height: 16px;
+                    height: 16px;
+                }
+            }
+        }
+
+        .discount {
+            display: inline-block;
+            border-radius: 0 20px 20px 20px;
+            height: 16px;
+            width: auto;
+            line-height: 16px;
+            padding: 0 10px;
+            text-align: center;
+            .lib-css(color, @color-white);
+            .lib-css(font-weight, @font-weight__bold);
+            text-transform: uppercase;
+            background: @color-pg-red;
+            .lib-font-size(10);
+            margin-left: 10px;
+        }
+
+        .box-tocart {
+            .action {
+                &.tocart {
+                    &:before {
+                        content: '+';
+                    }
+                }
+            }
+        }
+
+    }
+    .abs-product-link,
+    .product-item-name,
+    .product.name a {
+        .lib-font-size(12);
+    }
+
+    .product-reviews-summary {
+        .reviews-actions {
+            a {
+                .lib-font-size(12);
+                .lib-line-height(20);
+            }
+        }
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .block {
+        .products-grid {
+            .slick-slider {
+                margin: 0 !important;
+
+                .slick-list {
+                    padding: 0!important;
+                   // width: 100%!important;
+                }
+            }
+        }
+    }
+
+    .product-info-main {
+        .page-title-wrapper {
+            .page-title {
+               .lib-heading(h2);
+            }
+        }
+
+        .price-box {
+            .price-wrapper {
+                .price {
+                    .lib-heading(h2);
+                }
+            }
+        }
+    }
+}
+
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .product-info-main {
+        .page-title-wrapper {
+            .page-title {
+                .lib-line-height(38);
+                margin-bottom: 13px;
+            }
+        }
+    }
+}
+//
+//  Category page layout
+//  ---------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+    .catalog-product-view {
+        .column.main {
+            display: inline-block;
+            padding-bottom: 30px;
+        }
+
+        .page-main-description {
+            padding: 0;
+        }
+    }
+
+    .product-info-main {
+        float: right;
+        margin-bottom: 0;
+        margin-top: 0;
+    }
+
+    .product.media {
+        float: left;
+    }
+
+    .product {
+        &.info {
+            &.detailed {
+
+            }
+        }
+    }
+
+    //  Product Grid border
+    .products-grid {
+        .product-item {
+            .lib-css(border, @plp-product-item__border);
+            .lib-css(border-radius, @plp-product-item__border-radius);
+
+            &:hover {
+                .lib-css(border, @plp-product-item-hover__border);
+            }
+        }
+    }
+
+    .page-layout-1column {
+        .product-info-main {
+            width: 100%;
+            max-width: 640px;
+            padding: 30px 30px 35px;
+            background: @color-white;
+            border-radius: 5px;
+            margin-bottom: 30px;
+
+            .box-tocart {
+                .actions {
+                    width: 200px;
+                }
+            }
+        }
+
+        .product.media {
+            width: ~'calc(100% - 660px)';
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+    }
+}

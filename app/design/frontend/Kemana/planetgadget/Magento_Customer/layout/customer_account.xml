@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" label="Customer My Account (All Pages)" design_abstraction="custom">
+    <head>
+        <title>Account Dashboard</title>
+    </head>
+    <body>
+        <attribute name="class" value="account"/>
+        <referenceBlock name="customer-account-navigation-downloadable-products-link" remove="true"/>
+        <referenceBlock name="customer-account-navigation-checkout-sku-link" remove="true"/>
+        <referenceBlock name="customer-account-navigation-my-credit-cards-link" remove="true"/>
+        <referenceBlock name="customer-account-navigation-gift-card-link" remove="true"/>
+        <referenceBlock name="customer-account-navigation-return-history-link" remove="true"/>
+        <referenceBlock name="customer-account-navigation-account-link">
+            <arguments>
+                <argument name="label" xsi:type="string" translate="true">Account Dashboard</argument>
+                <argument name="path" xsi:type="string">customer/account</argument>
+                <argument name="sortOrder" xsi:type="number">250</argument>
+            </arguments>
+        </referenceBlock>
+        <referenceBlock name="customer-account-navigation-orders-link">
+            <arguments>
+                <argument name="path" xsi:type="string">sales/order/history</argument>
+                <argument name="label" xsi:type="string" translate="true">My Order Page</argument>
+                <argument name="sortOrder" xsi:type="number">230</argument>
+            </arguments>
+        </referenceBlock>
+        <referenceBlock name="customer-account-navigation-wish-list-link">
+            <arguments>
+                <argument name="path" xsi:type="string">wishlist</argument>
+                <argument name="label" xsi:type="string" translate="true">Wishlist</argument>
+                <argument name="sortOrder" xsi:type="number">220</argument>
+            </arguments>
+        </referenceBlock>
+        <referenceBlock name="customer-account-navigation-address-link">
+            <arguments>
+                <argument name="label" xsi:type="string" translate="true">Address Book</argument>
+                <argument name="path" xsi:type="string">customer/address</argument>
+                <argument name="sortOrder" xsi:type="number">210</argument>
+            </arguments>
+        </referenceBlock>
+        <referenceBlock name="customer-account-navigation-account-edit-link">
+            <arguments>
+                <argument name="label" xsi:type="string" translate="true">Account Information</argument>
+                <argument name="path" xsi:type="string">customer/account/edit</argument>
+                <argument name="sortOrder" xsi:type="number">200</argument>
+            </arguments>
+        </referenceBlock>
+        <referenceBlock name="customer-account-navigation-reward-link">
+            <arguments>
+                <argument name="path" xsi:type="string">magento_reward/customer/info</argument>
+                <argument name="label" xsi:type="string">Reward Points &#38; Membership</argument>
+                <argument name="sortOrder" xsi:type="number">190</argument>
+            </arguments>
+        </referenceBlock>
+        <referenceBlock name="customer-account-navigation-product-reviews-link">
+            <arguments>
+                <argument name="path" xsi:type="string">review/customer</argument>
+                <argument name="label" xsi:type="string" translate="true">My Product Reviews</argument>
+                <argument name="sortOrder" xsi:type="number">180</argument>
+            </arguments>
+        </referenceBlock>
+        <referenceBlock name="customer-account-navigation-giftregistry-link">
+            <arguments>
+                <argument name="path" xsi:type="string">magento_giftregistry</argument>
+                <argument name="label" xsi:type="string">My Gift Registry</argument>
+                <argument name="sortOrder" xsi:type="number">170</argument>
+            </arguments>
+        </referenceBlock>
+        <referenceBlock name="customer-account-navigation-customer-balance-link">
+            <arguments>
+                <argument name="name" xsi:type="string">magento_customerbalance</argument>
+                <argument name="label" translate="true" xsi:type="string">Store Credit</argument>
+                <argument name="path" xsi:type="string">magento_customerbalance/info</argument>
+                <argument name="sortOrder" xsi:type="number">160</argument>
+            </arguments>
+        </referenceBlock>
+        <referenceBlock name="customer_account_navigation">
+            <block class="Magento\Customer\Block\Account\SortLinkInterface" name="customer-account-navigation-magento-invitation-link">
+                <arguments>
+                    <argument name="path" xsi:type="string">magento_invitation/</argument>
+                    <argument name="label" xsi:type="string" translate="true">My Invitations</argument>
+                    <argument name="sortOrder" xsi:type="number">150</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+        <referenceBlock name="customer-account-navigation-newsletter-subscriptions-link">
+            <arguments>
+                <argument name="path" xsi:type="string">newsletter/manage</argument>
+                <argument name="label" xsi:type="string" translate="true">Newsletter Subscription</argument>
+                <argument name="sortOrder" xsi:type="number">10</argument>
+            </arguments>
+        </referenceBlock>
+        <referenceBlock name="customer_account_navigation">
+            <block class="Magento\Framework\View\Element\Html\Link\Current" name="customer-account-navigation-logout-link">
+                <arguments>
+                    <argument name="path" xsi:type="string">customer/account/logout</argument>
+                    <argument name="label" xsi:type="string">Logout</argument>
+                    <argument name="sortOrder" xsi:type="number">140</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>
+

@@ -1,0 +1,170 @@
+// /**
+//  * Copyright © 2020 Kemana. All rights reserved.
+//  * @author Ashan Gunawardena <agunawardena@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+//
+//  Theme variables
+//  _____________________________________________
+
+@form-element-input-placeholder__font-family: @font-family__ubuntu-italy;
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    img {
+        width: 100%;
+        float: left;
+
+        &.captcha-img {
+            width: auto;
+        }
+    }
+
+    .mp-blog-view {
+        img {
+            width: auto;
+            float: none;
+        }
+    }
+
+    .loader {
+        img {
+            width: auto;
+            float: none;
+        }
+    }
+
+    .primary {
+        &.shop-now {
+
+        }
+    }
+
+    .action {
+        &.secondary {
+            .lib-button-primary(
+                @_button-font-weight: @font-weight__regular,
+                @_button-padding: 0 25px
+            );
+            &:extend(.abs-revert-secondary-color all);
+        }
+    }
+
+    //  Input text and password placeholder text style changed
+    input {
+        &[type="password"],
+        &[type="text"],
+        &[type="email"] {
+            &::placeholder {
+                .lib-css(font-family, @form-element-input-placeholder__font-family);
+            }
+        }
+    }
+
+    //password show hide icon styling
+    .fa {
+        position: absolute;
+        right: 5px;
+        top: 0;
+        z-index: 4;
+        cursor: pointer;
+        .lib-icon-font(
+            "",
+            @_icon-font: @icon-font,
+            @_icon-font-color: @color-kemana-gray2,
+            @_icon-font-size: 12px,
+            @_icon-font-line-height: 40px,
+            @_icon-font-margin: 0,
+            @_icon-font-position: after
+        );
+        &:after {
+            padding: 0 5px;
+        }
+
+        &.fa-eye-slash {
+            .lib-icon-font-symbol(
+                @_icon-font-content: @icon-password-hide,
+                @_icon-font-position: after
+            );
+        }
+        &.fa-eye {
+            .lib-icon-font-symbol(
+                @_icon-font-content: @icon-password-visible,
+                @_icon-font-position: after
+            );
+            display: none;
+        }
+    }
+
+    //  Radio and Checkbox styling
+    .lib-kemana-radio-button();
+    .lib-kemana-checkbox();
+
+    // Removed menu double nav-toggle
+    .nav-sections {
+        .section-item-content {
+            .navbar {
+                > .nav-toggle {
+                    display: none;
+                }
+            }
+        }
+    }
+
+    // Select box customization
+    select {
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        appearance: none;
+        background: url(../images/down-arrow.svg) no-repeat;
+        background-size: 11px;
+        background-position: 95% 11px;
+        padding-right: 30px;
+    }
+
+    .desktop-only {
+        display: none;
+    }
+
+    .mobile-only {
+        display: inline-block;
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .actions-toolbar {
+        .primary {
+            .action {
+                &:last-child {
+                    margin: 0;
+                }
+            }
+        }
+    }
+
+    .desktop-only {
+        display: inline-block;
+    }
+
+    .mobile-only {
+        display: none;
+    }
+}
+
+//
+//  Desktop Large
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+    .mobile-menu-inner {
+        display: none;
+    }
+}

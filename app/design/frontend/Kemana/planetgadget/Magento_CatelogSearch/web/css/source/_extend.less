@@ -1,0 +1,160 @@
+// /**
+//  * Copyright © 2020 Kemana. All rights reserved.
+//  * @author Harshani Karunasekara <hkarunasekara@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+//
+//  Variables
+//  _____________________________________________
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .block-search {
+        margin-top: 1px;
+        margin-right: 13px;
+        //.lib-css(background, @color-white);
+        //border-radius: 5px;
+        //height: 40px;
+        padding-block: 10px;
+
+        .label {
+            .lib-icon-font(
+                @_icon-font-content: @icon-pg-search,
+                @_icon-font-size: 20px,
+                @_icon-font-line-height: 20px,
+                @_icon-font-color: @kemana-primary-brand-color,
+                @_icon-font-color-hover: @color-kemana-gray2,
+                @_icon-font-color-active: @header-icons-color-hover,
+                @_icon-font-text-hide: true,
+                @_icon-font-margin: 0 15px 0 0
+            );
+        }
+
+        input {
+            .lib-css(background, @color-white);
+            .lib-css(border, @border-width__base solid @color-white);
+            .lib-css(color, @kemana-primary-brand-color);
+            font-size: 12px;
+            padding-left: 15px;
+            font-style: normal;
+            margin: 10px 0;
+
+            &:focus {
+                .lib-css(border, @border-width__base solid @color-white);
+            }
+        }
+
+        input::-webkit-input-placeholder {
+            .lib-css(color, @color-pg-dark-gray);
+            font-size: 12px;
+            letter-spacing: .35px;
+            font-style: normal;
+            .lib-css(font-family, @font-family-name__base);
+        }
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .block-search {
+        .control {
+            left: -11px;
+            bottom: -70px;
+            .lib-css(background-color, @color-pg-black2);
+            width: 100%;
+            padding: 10px;
+            margin: 0;
+            z-index: 999;
+            pointer-events: none;
+            transition: .3s all ease;
+
+            input {
+                background: @color-white;
+                border-radius: 5px;
+                padding: 10px 15px;
+                line-height: 20px;
+                height: 40px;
+            }
+        }
+
+        .action.search {
+            .lib-button-icon(
+                @_icon-font-content: @icon-remove,
+                @_icon-font-text-hide: true,
+                @_icon-font-size: 52px,
+                @_icon-font-line-height: 21px,
+                @_icon-font-color: @kemana-primary-brand-color
+            );
+        }
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .block-search {
+        .label {
+            position: absolute;
+            right : 0;
+            top: 20px;
+        }
+
+        .control {
+            padding: 0;
+
+            .input-text {
+                width: 530px;
+                border-radius: 5px;
+                background: @color-white;
+                line-height: 20px;
+                height: 40px;
+                padding: 10px 15px;
+            }
+        }
+    }
+}
+
+//
+//  Desktop Extra Large
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xl) {
+    .block-search {
+        width: 530px;
+
+        .action.search {
+            right: 15px;
+            top: 15px;
+
+            .lib-icon-font(
+                @_icon-font-content: @icon-pg-close-button,
+                @_icon-font-size: 16px
+                );
+        }
+    }
+}
+
+//
+//  Desktop Extra Large
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xl) {
+    .block-search {
+        width: 530px;
+        max-width: none;
+
+        input {
+            opacity: 1;
+
+        }
+    }
+}
