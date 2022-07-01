@@ -282,21 +282,17 @@ define([
     /**
      * 18.Product Widget slider
      */
-    $(".block .products-grid .product-items").slick({
-        /**
-         * normal options...
-         */
-        infinite: true,
+    $('.block .products-grid .product-items').slick({
+        infinite: false,
         slidesToShow: 6,
-        rows: 1,
         slidesToScroll: 1,
         arrows: true,
-        centerMode: false,
+        dots: true,
         responsive: [
             {
                 breakpoint: 1023,
                 settings: {
-                    slidesToShow: 6
+                    slidesToShow: 3
                 }
             },
             {
@@ -305,17 +301,48 @@ define([
                     arrows: false,
                     dots: false,
                     slidesToShow: 2,
-                    rows: 2,
-                    slidesToScroll: 1,
-                    centerMode: false,
-                    centerPadding: '0 0 25.5%'
+                    slidesToScroll: 2
                 }
             },
             {
                 breakpoint: 300,
-                settings: "unslick"
+                settings: "unslick" // destroys slick
             }]
-    })
+    });
+    // $(".block .products-grid .product-items").slick({
+    //     /**
+    //      * normal options...
+    //      */
+    //     infinite: true,
+    //     slidesToShow: 6,
+    //     rows: 1,
+    //     slidesToScroll: 1,
+    //     arrows: true,
+    //     centerMode: false,
+    //     responsive: [
+    //         {
+    //             breakpoint: 1023,
+    //             settings: {
+    //                 slidesToShow: 6
+    //             }
+    //         },
+    //         {
+    //             breakpoint: 767,
+    //             settings: {
+    //                 arrows: false,
+    //                 dots: false,
+    //                 slidesToShow: 2,
+    //                 rows: 2,
+    //                 slidesToScroll: 1,
+    //                 centerMode: false,
+    //                 centerPadding: '0 0 25.5%'
+    //             }
+    //         },
+    //         {
+    //             breakpoint: 300,
+    //             settings: "unslick"
+    //         }]
+    // })
 
     /**
      * 19.Login password show/hide
