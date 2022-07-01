@@ -1,0 +1,69 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// phpcs:disable Magento2.Files.LineLength
+// phpcs:disable Magento2.Templates.ThisInTemplate
+?>
+<?php
+/**
+ * @see \Magento\Reward\Block\Customer\Reward\Info
+ * @var \Magento\Reward\Block\Customer\Reward\Info $block
+ */
+?>
+<?php
+$helper = $this->helper(\Magento\Reward\Helper\Data::class);
+$maxBalance = $block->getMaxBalance();
+$minBalance = $block->getMinBalance();
+$expireIn = $block->getExpireIn();
+?>
+<div class="block block-reward-info">
+    <div class="block-content">
+        <ul clas="reward-ul-wrapper">
+            <li>
+                <?php if ($block->getPtsToAmountRateAmount() || $block->getAmountToPtsRatePts()) : ?>
+                    <?php if ($block->getPtsToAmountRateAmount()) : ?>
+                        <p><?= $block->getPtsToAmountRatePts() . ' Points = ' . $helper->formatAmount($block->getPtsToAmountRateAmount()) ?></p>
+                    <?php endif; ?>
+                    <?php if ($block->getAmountToPtsRatePts()) : ?>
+                        <p><?= $block->escapeHtml(__('%1 spent = %2 earned', '<strong>' . $helper->formatAmount($block->getAmountToPtsRateAmount()) . '</strong>', $helper->formatReward($block->getAmountToPtsRatePts(), null, null, '<strong>%s</strong>')), ['strong']) ?></p>
+                    <?php endif; ?>
+                <?php else : ?>
+                    <?= $block->escapeHtml(__('None')) ?>
+                <?php endif; ?>
+            </li>
+            <li>
+                <p><?= $block->escapeHtml(__('Earn points by shopping, and invite your friends to join through the My Invite menu')) ?></p>
+            </li>
+            <li>
+                <p><?= $block->escapeHtml(__('Points can be used to pay for your purchases at Planet Gadget.Store')) ?></p>
+            </li>
+        </ul>
+        <?php if ($maxBalance || $minBalance) : ?>
+            <div class="reward-limit">
+            <?php if ($maxBalance) : ?>
+                <p><?= $block->escapeHtml(__('Balance limit is %1.', $helper->formatReward($maxBalance))) ?></p>
+                <?php if ($block->getIsMaxBalanceReached()) : ?>
+                    <div class="message info empty"><span><?= $block->escapeHtml(__('Maximum balance is reached')) ?></span></div>
+                <?php endif; ?>
+            <?php endif; ?>
+            <?php if ($minBalance) : ?>
+                <p><?= $block->escapeHtml(__('Minimum Balance in order to redeem: %1.', $helper->formatReward($minBalance))) ?></p>
+                <?php if (!$block->getIsMinBalanceReached()) : ?>
+                    <div class="message info empty"><span><?= $block->escapeHtml(__('You need a higher balance to use your rewards points.')) ?></span></div>
+                <?php endif; ?>
+            <?php endif; ?>
+            </div>
+        <?php endif; ?>
+        <?php if ($expireIn) : ?>
+            <div class="reward-expiring">
+                <strong class="title"><?= $block->escapeHtml(__('Each earned reward points award expires in %1 days.', $expireIn)) ?></strong>
+                <?php if ($block->getIsHistoryPublished()) : ?>
+                    <p><?= $block->escapeHtml(__('Refer to reward points history to see when a specific record expires.')) ?></p>
+                <?php endif; ?>
+            </div>
+        <?php endif; ?>
+    </div>
+</div>

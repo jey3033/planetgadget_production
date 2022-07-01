@@ -49,13 +49,14 @@
 
             .mp_social_share_inline_under_cart {
                 .lib-css(background-color, @color-white);
+                .lib-css(border, 1px solid @color-pg-light-gray2);
                 display: none;
-                box-shadow: 0 1px 10px rgba(0, 0, 0, 0.16);
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.16);
                 padding: 12px 16px;
                 position: absolute;
                 right: 0;
                 z-index: 9;
-                top: 32px;
+                top: 29px;
 
                 &.active {
                     .lib-vendor-prefix-display();
@@ -64,12 +65,26 @@
                         content: '';
                         width: 0;
                         height: 0;
-                        border-left: 20px solid transparent;
-                        border-right: 20px solid transparent;
-                        border-bottom: 16px solid @color-white;
+                        border-left: 6px solid transparent;
+                        border-right: 6px solid transparent;
+                        border-bottom: 9px solid @color-white;
                         position: absolute;
-                        top: -16px;
+                        top: -9px;
                         right: 4%;
+                        z-index: 5;
+                    }
+
+                    &:after {
+                        content: '';
+                        width: 0;
+                        height: 0;
+                        border-left: 8px solid transparent;
+                        border-right: 8px solid transparent;
+                        border-bottom: 10px solid @color-pg-light-gray2;
+                        position: absolute;
+                        top: -10px;
+                        right: ~'calc(50% - 8px)';
+                        z-index: 4;
                     }
                 }
 
@@ -297,6 +312,8 @@
                 -webkit-transform: translateX(-50%);
                 transform: translateX(-50%);
                 right: inherit;
+                padding: 15px 20px;
+                border-radius: 5px;
 
                 &.active {
                     &:before {

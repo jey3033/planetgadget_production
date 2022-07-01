@@ -1,0 +1,183 @@
+// /**
+//  * Copyright © 2022 Kemana. All rights reserved.
+//  * @author Harshani Karunasekara <hkarunasekara@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+//
+//  Variables
+//  _____________________________________________
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .bundle-options-container {
+        margin-bottom: 0;
+
+        .product-add-form {
+            .lib-vendor-prefix-display();
+            .lib-css(background, @panel__background-color);
+            padding: 30px;
+            border-radius: 5px;
+        }
+
+        .legend {
+            &.title {
+                text-transform: none;
+                border-bottom: 0;
+            }
+        }
+
+        .action {
+            &.back {
+                display: inline-block;
+                font-weight: @font-weight__bold;
+                margin-bottom: 30px;
+            }
+        }
+
+        .fieldset-bundle-options {
+            .field {
+                &.option {
+                    padding-bottom: 20px;
+                    border-bottom: 1px solid @color-pg-light-gray2;
+                    max-width: 500px;
+                }
+            }
+
+            .label {
+                font-weight: @font-weight__bold;
+            }
+
+            .options-list {
+                .label {
+                    font-weight: @font-weight__heavier;
+                }
+            }
+
+            .price-container {
+                .price {
+                    .lib-font-size(12);
+                    font-weight: @font-weight__bold;
+                }
+            }
+
+            .qty {
+                display: none;
+            }
+        }
+
+        .block-bundle-summary {
+            background: transparent;
+            padding: 0;
+
+            > .title {
+                border-bottom: none;
+                padding-bottom: 0;
+
+                strong {
+                    .lib-heading(h3);
+                    text-transform: none;
+                }
+            }
+
+            .product-image-container {
+                display: none;
+            }
+
+            .product-details {
+                padding-left: 0;
+                .lib-vendor-prefix-display();
+                .lib-vendor-prefix-flex-direction(column);
+
+                .product,
+                .stock {
+                    display: none;
+                }
+
+                .box-tocart {
+                    order: 2;
+
+                    .label {
+                        display: none;
+                    }
+
+                    .actions {
+                        margin-top: 0;
+                        text-align: left;
+
+                        button {
+                            max-width: 200px;
+                        }
+                    }
+                }
+
+                .price-box {
+                    order: 1;
+
+                    .price {
+                        display: block;
+                        .lib-font-size(28);
+                        .lib-line-height(31);
+                        margin-bottom: 30px;
+                    }
+                }
+            }
+
+            .bundle {
+                &.items {
+                    > li {
+                        margin-bottom: 30px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .bundle-options-container {
+        .product-add-form {
+            width: 100%;
+        }
+
+        .bundle-options-wrapper {
+            width: ~'calc(50% + 10px)';
+            padding-right: 30px;
+
+            .legend {
+                &.title {
+                    .lib-font-size(28);
+                    .lib-line-height(31);
+                    padding-bottom: 0;
+                }
+            }
+        }
+
+        .block-bundle-summary {
+            width: ~'calc(50% - 10px)';
+            margin-top: 50px;
+
+            > .title {
+                strong {
+                    .lib-font-size(20);
+                    .lib-line-height(22);
+                }
+            }
+        }
+    }
+}

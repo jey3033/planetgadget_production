@@ -89,15 +89,18 @@
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
     .minicart-wrapper {
+        height: 43px;
+        line-height: 12px;
+
         .mage-dropdown-dialog {
             &:before {
                 content: "";
                 background: @color-white;
                 position: absolute;
                 right: 36%;
-                top: 63px;
-                width: 10px;
-                height: 10px;
+                top: 56px;
+                width: 12px;
+                height: 12px;
                 transform: rotate(-45deg);
                 display: block;
                 z-index: 102;
@@ -105,9 +108,10 @@
         }
         .action {
             &.showcart {
-                padding-top: 36px;
+                padding-top: 31px;
                 position: relative;
-                padding-inline: 15px;
+                padding-inline: 15px 0;
+                height: 43px;
 
                 &:before {
                     position: absolute;
@@ -116,13 +120,13 @@
                     left: 50%;
                     transform: translateX(-50%);
                     .lib-font-size(23);
-                    .lib-line-height(36);
+                    .lib-line-height(31);
                 }
 
                 &.active {
                     &:before {
                         .lib-font-size(23);
-                        .lib-line-height(36);
+                        .lib-line-height(31);
                         .lib-css(color, @kemana-secondary-brand-color);
                     }
 
@@ -142,6 +146,7 @@
                 .text {
                     &:extend(.abs-visually-hidden-reset all);
                     .lib-font-size(10);
+                    .lib-line-height(12);
                     font-weight: @font-weight__semibold;
                     .lib-css(color, @color-white);
                     white-space: nowrap;
@@ -162,7 +167,7 @@
         }
 
         .block-minicart {
-            top: 68px;
+            top: 61px;
             width: 310px;
             border-radius: 5px;
 
@@ -239,6 +244,18 @@
 
                 }
             }
+        }
+    }
+}
+
+//
+//  Desktop Large
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xl) {
+    .minicart-wrapper {
+        .block-minicart {
+            right: 0;
         }
     }
 }

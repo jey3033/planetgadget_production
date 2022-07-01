@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2022 PT Kemana Teknologi Solusi. All rights reserved.
+ * http://www.kemana.com
+ */
+
+/**
+ * @category Kemana
+ * @package  Kemana_GiftRegistry
+ * @license  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ *
+ * @author   Kristian Claridad <kclaridad@kemana.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- change_giftregistry_page_title -->
+    <preference for="Magento\GiftRegistry\Controller\Index\Index" type="Kemana\GiftRegistry\Controller\Index\Index" />
+    <!-- gift registry shipping address dropdown option change None to Select Address -->
+    <type name="Magento\GiftRegistry\Block\Customer\Address\Edit">
+        <plugin name="kemana_giftregistry_change_dropdown_value_none" type="Kemana\GiftRegistry\Plugin\Block\Customer\Address\Edit" sortOrder="1" />
+    </type>
+</config>

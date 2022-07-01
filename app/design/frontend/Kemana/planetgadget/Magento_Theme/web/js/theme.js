@@ -316,9 +316,6 @@ define([
                 settings: "unslick"
             }]
     })
-    .on('setPosition', function (event, slick) {
-        slick.$slides.css('height', slick.$slideTrack.height() + 'px');
-    });
 
     /**
      * 19.Login password show/hide
@@ -372,4 +369,12 @@ define([
     $("#menu-main-menu > .menu-parent-item").hover(function(){
         $('.modals-overlay').fadeToggle();
     });
+
+    /**
+     * 22. wrap the review title
+     */
+
+    $( ".product-section-title" ).wrapInner( "<span></span>");
+
+
 });

@@ -66,7 +66,11 @@
         .lib-vendor-prefix-display();
         .lib-css(background-color, @color-white);
         border-radius: 5px;
-        //margin: 10px;
+        transition: all .5s ease;
+
+        &:hover {
+            box-shadow: 0 5px 20px #00000021;
+        }
 
         .category-item-left {
             a {

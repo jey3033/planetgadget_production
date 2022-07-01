@@ -1,0 +1,34 @@
+<?php
+/**
+ * Copyright © 2021 PT Kemana Teknologi Solusi. All rights reserved.
+ * http://www.kemana.com
+ */
+
+/**
+ * @category Kemana
+ * @package  Kemana_Customer
+ * @license  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ *
+ * @author   Kristian Claridad <kclaridad@kemana.com>
+ */
+
+/** @var \Magento\Customer\Block\Widget\Phonenumber $block */
+?>
+<div class="field phonenumber <?= $block->isRequired() ? 'required' : '' ?>">
+    <label for="phonenumber" class="label">
+        <span>
+            <?= $block->escapeHtml(__($block->getStoreLabel('phonenumber'))) ?>
+        </span>
+    </label>
+    <div class="control">
+            
+        <input type="text"
+               name="phonenumber"
+               id="phonenumber"
+               placeholder="Example: 081234567890"
+               value="<?= $block->escapeHtmlAttr($block->getPhonenumber()) ?>"
+               title="<?= $block->escapeHtmlAttr(__($block->getStoreLabel('phonenumber'))) ?>"
+               class="input-text <?= $block->getAttributeValidationClass('phonenumber') ?: '' ?>"
+         >
+    </div>
+</div>

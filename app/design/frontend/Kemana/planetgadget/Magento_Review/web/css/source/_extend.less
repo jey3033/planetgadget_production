@@ -1,0 +1,258 @@
+// /**
+//  * Copyright © 2022 Kemana. All rights reserved.
+//  * @author Harshani Karunasekara <hkarunasekara@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+//
+//  Variables
+//  _____________________________________________
+
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .product-reviews-summary {
+        &.short {
+            display: block;
+
+            .rating-summary {
+                margin-right: 0;
+            }
+
+            .reviews-actions {
+                display: none;
+            }
+        }
+    }
+    .catalog-product-view {
+        #reviews {
+            display: grid;
+            //.lib-css(background, @panel__background-color);
+            //border-radius: 5px;
+            //padding: 30px;
+        }
+
+        #product-review-container {
+            .review-list {
+                .block-title {
+                    strong {
+                        text-transform: none;
+                        font-weight: @font-weight__bold;
+                    }
+                }
+            }
+
+            .review-items {
+                .review-item {
+                    .title {
+                        .lib-font-size(14);
+                        .lib-line-height(24);
+                        margin-bottom: 6px;
+                    }
+
+                    .description {
+                        .lib-font-size(12);
+                    }
+
+                    .review-details {
+                        .review-author {
+                            .review-details-value {
+                                .lib-font-size(12);
+                                font-weight: @font-weight__heavier;
+                                .lib-css(color, @kemana-primary-brand-color);
+                            }
+                        }
+
+                        .review-date {
+                            .lib-font-size(12);
+                            font-style: normal;
+                            .lib-css(color, @kemana-primary-brand-color);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .review-add {
+        .reivew-title {
+            text-transform: none;
+            font-weight: @font-weight__bold;
+            margin-bottom: 10px;
+            .lib-line-height(18);
+        }
+
+        .review-control-vote {
+            &:before {
+                .lib-font-size(24);
+                .lib-line-height(24);
+                height: 24px;
+            }
+
+            label {
+                &:before {
+                    .lib-font-size(24);
+                    .lib-line-height(24);
+                    height: 24px;
+                }
+            }
+        }
+    }
+
+    .rating-summary {
+        .rating-result {
+            &:before {
+                .lib-css(color, @rating-icon__color) !important;
+            }
+        }
+    }
+
+    .review-form {
+        .action.submit.primary {
+            .lib-button-primary();
+        }
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    #product-review-container {
+        .review-items {
+            .review-item {
+                .review-ratings {
+                    order: 1;
+                }
+
+                .title {
+                    order: 2;
+                }
+
+                .description {
+                    order: 4;
+                }
+
+                .review-details {
+                    order: 3;
+                }
+            }
+        }
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .catalog-product-view {
+        .product-full-width-section {
+            &#reviews {
+                background: @panel__background-color;
+                padding: 30px;
+                border-radius: 5px;
+            }
+        }
+
+        #reviews {
+            grid-template-columns: 410px auto;
+
+            .product-section-title {
+                grid-column-start: span 2;
+                .lib-font-size(28);
+                .lib-line-height(31);
+                border-bottom: none;
+                position: relative;
+                z-index: 0;
+                display: inline-block;
+
+                span {
+                    &:after {
+                        content: '';
+                        position: absolute;
+                        width: 40%;
+                        height: 10px;
+                        background: @kemana-secondary-brand-color;
+                        right: 1px;
+                        bottom: 2px;
+                        z-index: -1;
+                    }
+                }
+            }
+
+            .review-list {
+                grid-column-start: span 2;
+                display: none;
+            }
+
+            #product-review-container {
+                grid-row: 3;
+                grid-column: 2;
+
+                .review-list {
+                    display: block;
+
+                    .block-title {
+                        margin-bottom: 20px;
+                        .lib-line-height(18);
+                    }
+
+                    .no-reviews {
+                        background: @color-pg-light-gray3;
+                        border-radius: 5px;
+                        padding: 14px 15px 13px;
+                        .lib-font-size(12);
+                        .lib-line-height(13);
+                        font-style: normal;
+                    }
+                }
+            }
+
+            .review-add {
+                grid-row: 3;
+                grid-column: 1 ;
+                width: 410px;
+                margin-top: 0;
+            }
+
+            #product-review-container {
+                //width: ~'calc(100% - 410px)';
+                width: 100%;
+
+                .review-items {
+                    .review-item {
+                        display: grid;
+                        grid-template-columns: 263px auto;
+                        grid-template-rows: 32px 26px auto;
+
+                        .review-ratings {
+                            margin-bottom: 16px;
+                        }
+
+                        .description {
+                            padding-left: 67px;
+                            grid-row: 1 / span 3;
+                            grid-column: 2 / span 1;
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .review-add {
+        width: 410px;
+
+        .fieldset {
+            > .field {
+                max-width: 340px;
+            }
+        }
+    }
+}

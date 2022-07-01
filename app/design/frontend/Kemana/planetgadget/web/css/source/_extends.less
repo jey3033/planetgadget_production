@@ -40,13 +40,13 @@
 
 @abs-product-options-list: {
     dt {
-        .lib-css(font-weight, @font-weight__regular);
-        .lib-css(color, @color-kemana-dark1);
-        .lib-font-size(12);
-        .lib-line-height(13);
-        clear: left;
+        .lib-css(font-weight, @font-weight__bold);
+        .lib-css(color, @color-pg-dark-gray);
+        .lib-font-size(10);
+        .lib-line-height(12);
+        display: inline-block;
         float: left;
-        margin: 0 @indent__xs @indent__xs 0;
+        margin: 0 @indent__xs @indent__s 0;
 
         &:after {
             content: ': ';
@@ -54,12 +54,12 @@
     }
 
     dd {
-        .lib-font-size(12);
-        .lib-line-height(13);
-        .lib-css(color, @color-kemana-dark1);
+        .lib-font-size(10);
+        .lib-line-height(12);
+        .lib-css(color, @color-pg-dark-gray);
         display: inline-block;
         float: left;
-        margin: 0 0 @indent__xs;
+        margin: 0 0 @indent__s;
     }
 };
 
@@ -1388,16 +1388,15 @@
     .abs-shopping-cart-items {
         .action {
             &.continue {
-                font-weight: @font-weight__heavier;
-                .lib-link-as-button();
                 .lib-button(
                     @_button-padding: 0 19px,
                     @_button-icon-use: true,
                     @_button-font-content: @icon-angel-prev,
                     @_button-icon-font-size: 10px,
-                    @_button-icon-font-line-height: 44px,
+                    @_button-icon-font-line-height: 38px,
                     @_button-icon-font-position: before
                 );
+                .lib-button-white();
                 .lib-css(border-radius, @button__border-radius);
                 width: 100%;
                 text-align: center;
@@ -1586,12 +1585,12 @@
 & when (@media-common = true) {
     .abs-sidebar-totals {
         .mark {
-            font-weight: @font-weight__regular;
+            font-weight: @font-weight__heavier;
             padding: 0 0 15px;
             .lib-css(color, @kemana-primary-brand-color);
 
             strong {
-                font-weight: @font-weight__regular;
+                font-weight: @font-weight__heavier;
             }
         }
 
@@ -1602,7 +1601,7 @@
             .lib-css(color, @kemana-primary-brand-color);
 
             strong {
-                font-weight: @font-weight__regular;
+                font-weight: @font-weight__heavier;
             }
         }
 
@@ -1615,6 +1614,7 @@
                 strong {
                     .lib-css(font-family, @font-family-name__base);
                     font-weight: @font-weight__bold;
+                    .lib-font-size(14);
                 }
             }
         }
@@ -1690,30 +1690,30 @@
         > .title {
             .lib-css(border-top, @cart-border);
             cursor: pointer;
-            font-weight: @font-weight__regular;
+            font-weight: @font-weight__heavier;
             .lib-icon-font(
                 @_icon-font-content: @checkout-payment-option-title-icon,
-                @_icon-font-size: 20px,
+                @_icon-font-size: 10px,
                 @_icon-font-position: after,
                 @_icon-font-display: block
             );
             .lib-css(color, @checkout-payment-option-title__color);
             margin-bottom: 0;
             overflow: hidden;
-            padding: 12px 0 13px;
+            padding: 16px 0 17px;
             position: relative;
 
             &:after {
-                position: absolute;
+                position: relative;
                 right: 0;
-                top: 7px;
+                top: 0;
             }
 
             strong {
                 .column.main & {
-                    .lib-font-size(14);
+                    .lib-font-size(12);
                     .lib-line-height(16);
-                    font-weight: @font-weight__regular;
+                    font-weight: @font-weight__bold;
                 }
             }
 
