@@ -1,0 +1,86 @@
+// /**
+//  * Copyright © 2022 Kemana. All rights reserved.
+//  * @author Harshani Karunasekara <hkarunasekara@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+//
+//  Variables
+//  _____________________________________________
+
+@account-register-wrapper-width: 420px;
+@account-register-border-color: @color-white;
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .customer-account-create,
+    .customer-account-forgotpassword,
+    .multishipping-checkout-register,
+    .customer-account-createpassword,
+    .customer-account-confirmation {
+        .page-wrapper {
+            .page-main {
+                background: @panel__background-color;
+                border-radius: 5px;
+                margin: 10px 0 50px;
+                padding: 30px 10px 20px;
+                width: 100%;
+
+                .page-title-wrapper {
+                    .page-title {
+                        .lib-font-size(20);
+                        .lib-line-height(22);
+                        .lib-css(border-bottom, none);
+                        .lib-css(padding-bottom, 15px);
+                        .lib-css(margin-bottom, 13px);
+                    }
+                }
+            }
+        }
+    }
+
+    .form-create-account {
+        .fieldset {
+            > .field {
+                &.date {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+
+    .account-social-login-title,
+    .account-social-login {
+
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .customer-account-create,
+    .customer-account-forgotpassword,
+    .multishipping-checkout-register,
+    .customer-account-createpassword,
+    .customer-account-confirmation {
+        .page-wrapper {
+            .page-main {
+                margin: 30px auto 50px;
+                padding: 30px;
+            }
+        }
+    }
+}
