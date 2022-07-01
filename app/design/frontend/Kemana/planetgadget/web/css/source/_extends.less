@@ -221,19 +221,21 @@
             }
 
             > .action {
-                .lib-button-primary(
-                    @_button-font-weight: @font-weight__regular,
-                    @_button-padding: 7px 25px,
-                    @_button-line-height: normal
-                );
-                .lib-button-revert-secondary-color();
-                text-decoration: none;
-                float: right;
-                margin-top: -8px;
+                //.lib-button-primary(
+                //    @_button-font-weight: @font-weight__regular,
+                //    @_button-padding: 7px 25px,
+                //    @_button-line-height: normal
+                //);
+                //.lib-button-revert-secondary-color();
+                //text-decoration: none;
+                //float: right;
+                margin: 0 0 0 10px;
+
 
                 &.edit,
                 &.view {
-                    text-transform: uppercase;
+                    .lib-font-size(12);
+                    text-transform: none;
                 }
             }
         }
@@ -244,7 +246,7 @@
             .lib-css(font-family, @font-family-name__base);
 
             > span {
-                .lib-font-size(@font-size__base);
+                .lib-font-size(14);
             }
 
             > .action {
@@ -264,7 +266,6 @@
 
             .box-content {
                 .lib-font-size(@font-size__base);
-                color: @color-kemana-dark1;
                 margin-bottom: @indent__base;
 
                 &.address-box-content {
@@ -286,8 +287,8 @@
                 .lib-css(font-family, @font-family-name__base);
                 .lib-font-size(12);
                 .lib-line-height(13);
-                color: @color-kemana-dark4;
-                font-weight: @font-weight__heavier;
+
+                font-weight: @font-weight__bold;
 
                 .action:not(:last-child) {
                     padding-right: @indent__s;
@@ -633,7 +634,7 @@
 & when (@media-common = true) {
     .abs-add-fields {
         .fieldset {
-            margin-bottom: 50px;
+            margin-bottom: 30px;
 
             .field {
                 &:not(.choice) {
@@ -650,7 +651,7 @@
                     > .secondary {
                         .action {
                             &.add {
-                                margin-top: @indent__l;
+                                margin-top: 0;
                             }
                         }
 
@@ -695,7 +696,7 @@
             .field {
                 &:not(.choice) {
                     .control {
-                        width: 50%;
+                        width: 100%;
                     }
                 }
             }
@@ -704,6 +705,9 @@
                 .action {
                     &.remove {
                         &:extend(.abs-action-remove-desktop all);
+                        margin-left: 340px;
+                        top: 38px;
+                        font-weight: @font-weight__bold;
                     }
                 }
             }
@@ -1492,8 +1496,14 @@
 
 & when (@media-common = true) {
     .abs-field-date-input {
-        margin-right: @indent__s;
-        width: calc(~'100% -' @icon-calendar__font-size + @indent__s);
+        margin-right: 0;
+        width: 100%;
+    }
+
+    .ui-datepicker-trigger {
+        position: absolute;
+        right: 14px;
+        top: 6px;
     }
 }
 

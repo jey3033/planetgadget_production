@@ -8,7 +8,7 @@
 //  Theme variables
 //  _____________________________________________
 
-@form-element-input-placeholder__font-family: @font-family__ubuntu-italy;
+@form-element-input-placeholder__font-family: @font-family__saprtan;
 
 //
 //  Common
@@ -75,8 +75,8 @@
         .lib-icon-font(
             "",
             @_icon-font: @icon-font,
-            @_icon-font-color: @color-kemana-gray2,
-            @_icon-font-size: 12px,
+            @_icon-font-color: @color-pg-light-gray,
+            @_icon-font-size: 14px,
             @_icon-font-line-height: 40px,
             @_icon-font-margin: 0,
             @_icon-font-position: after
@@ -87,16 +87,20 @@
 
         &.fa-eye-slash {
             .lib-icon-font-symbol(
-                @_icon-font-content: @icon-password-hide,
+                @_icon-font-content: @icon-pg-closed-eye,
                 @_icon-font-position: after
             );
         }
         &.fa-eye {
             .lib-icon-font-symbol(
-                @_icon-font-content: @icon-password-visible,
+                @_icon-font-content: @icon-pg-open-eye,
                 @_icon-font-position: after
             );
             display: none;
+
+            &:after {
+                .lib-font-size(10px);
+            }
         }
     }
 
