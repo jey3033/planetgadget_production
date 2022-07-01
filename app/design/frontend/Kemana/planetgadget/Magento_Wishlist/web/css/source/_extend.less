@@ -50,4 +50,108 @@
             }
         }
     }
+
+    .wishlist-index-index {
+        .products-grid {
+            &.wishlist {
+                .product-item {
+                    padding-inline: 10px;
+
+                    .box-tocart {
+                        .field {
+                            &.qty {
+                                display: none;
+                            }
+                        }
+                        .product-item-actions {
+                            width: 100%;
+                        }
+
+                        .stock {
+                            &.unavailable {
+                                border-radius: 5px;
+                            }
+                        }
+                    }
+
+                    .product-item-info {
+                        .lib-vendor-prefix-display();
+                        .lib-vendor-prefix-flex-direction();
+                        padding-bottom: 20px;
+
+                        .product-reviews-summary {
+                            order: 2;
+                        }
+
+                        .product-item-name {
+                            display: -webkit-box;
+                        }
+
+                        .price-box {
+                            order: 1;
+                            margin-block: 0;
+
+                            .price-as-configured {
+                                margin-bottom: 0;
+                            }
+                        }
+
+                        .product-item-inner {
+                            order: 3;
+                            margin-top: 10px;
+
+                            .product-item-actions {
+                                .edit {
+                                    display: none;
+                                }
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+
+        .main {
+            .form-wishlist-items {
+                .actions-toolbar {
+                    float: right;
+
+                    .primary {
+                        button {
+                            .lib-button-white();
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .form{
+        &.share {
+            .fieldset {
+                float: left;
+                width: 100%;
+                border: none;
+                padding: 0;
+                margin-top: 10px;
+
+                .field {
+                    max-width: 340px;
+
+                    > .control {
+                        display: inline-flex;
+                    }
+                }
+
+                .legend {
+                    display: none;
+                }
+
+                .legend + br {
+                    display: none;
+                }
+            }
+        }
+    }
 }
