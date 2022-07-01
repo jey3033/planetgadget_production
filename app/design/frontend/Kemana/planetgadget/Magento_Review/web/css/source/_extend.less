@@ -51,6 +51,7 @@
                         .lib-font-size(14);
                         .lib-line-height(24);
                         margin-bottom: 6px;
+                        font-weight: @font-weight__bold;
                     }
 
                     .description {
@@ -172,6 +173,8 @@
                 display: inline-block;
 
                 span {
+                    position: relative;
+
                     &:after {
                         content: '';
                         position: absolute;
@@ -198,11 +201,12 @@
                     display: block;
 
                     .block-title {
-                        margin-bottom: 20px;
+                        margin-bottom: 0;
                         .lib-line-height(18);
                     }
 
                     .no-reviews {
+                        margin-top: 20px;
                         background: @color-pg-light-gray3;
                         border-radius: 5px;
                         padding: 14px 15px 13px;
@@ -229,6 +233,7 @@
                         display: grid;
                         grid-template-columns: 263px auto;
                         grid-template-rows: 32px 26px auto;
+                        padding-top: 30px;
 
                         .review-ratings {
                             margin-bottom: 16px;
@@ -239,6 +244,11 @@
                             grid-row: 1 / span 3;
                             grid-column: 2 / span 1;
                             width: 100%;
+                            margin-bottom: 30px;
+                        }
+
+                        .review-details {
+                            margin-bottom: 30px;
                         }
                     }
                 }
@@ -252,7 +262,17 @@
         .fieldset {
             > .field {
                 max-width: 340px;
+
+                &.review-field-nickname {
+                    margin-top: 20px;
+                }
             }
+        }
+    }
+
+    .review-field-ratings {
+        .nested {
+            height: 26px;
         }
     }
 }
