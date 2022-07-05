@@ -1,0 +1,46 @@
+// /**
+//  * Copyright © 2022 Kemana. All rights reserved.
+//  * @author Harshani Karunasekara <hkarunasekara@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .form-add-invitations {
+        .action {
+            &.add {
+                .lib-button-white();
+
+                &:before {
+                    .lib-line-height(38);
+                }
+
+              > span {
+                  .lib-visually-hidden-reset();
+              }
+            }
+        }
+
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .form-add-invitations {
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .form-add-invitations {
+
+    }
+
+    .table-invitations {
+    }
+}

@@ -12,7 +12,7 @@
  * @author   Achintha Madushan <amadushan@kemana.com>
  */
 
-namespace Kemana\Promotion\Controller;
+namespace Kemana\Promotion\Controller; 
 
 /**
  * Class RouterDetail
