@@ -52,11 +52,11 @@ class SourceLocation
      * @param \Kemana\SourceDistanceShipping\Helper\Data $helper
      */
     public function __construct(
-        \Magento\Framework\Api\SearchCriteriaBuilder $searchCriteriaBuilder,
+        \Magento\Framework\Api\SearchCriteriaBuilder            $searchCriteriaBuilder,
         \Magento\InventoryApi\Api\SourceItemRepositoryInterface $sourceItemRepositoryInterface,
-        \Magento\Inventory\Model\SourceItemRepository $sourceItemRepository,
-        \Magento\InventoryApi\Api\SourceRepositoryInterface $sourceRepositoryInterface,
-        \Kemana\SourceDistanceShipping\Helper\Data $helper
+        \Magento\Inventory\Model\SourceItemRepository           $sourceItemRepository,
+        \Magento\InventoryApi\Api\SourceRepositoryInterface     $sourceRepositoryInterface,
+        \Kemana\SourceDistanceShipping\Helper\Data              $helper
     )
     {
         $this->searchCriteriaBuilder = $searchCriteriaBuilder;
@@ -73,12 +73,13 @@ class SourceLocation
      * @param $orderItemData
      * @return \Magento\InventoryApi\Api\Data\SourceItemInterface[]
      */
-    public function sourceLocationsToFullFillOrder($orderItemData)
+    public function sourceLocationsToFullFillOrder($orderItemData): array
     {
         $sourcesForItems = [];
         $count = 0;
 
         foreach ($orderItemData as $itemData) {
+            // Get source locations which current item and quantity available
             $this->searchCriteriaBuilder->addFilter('sku', $itemData['sku']);
             $this->searchCriteriaBuilder->addFilter('quantity', $itemData['qty'], 'gt');
             $this->searchCriteriaBuilder->addFilter('status', '1');
@@ -88,17 +89,19 @@ class SourceLocation
             $sourceItemData = $this->sourceItemRepositoryInterface->getList($searchCriteria);
 
             $sourceLocations = $sourceItemData->getItems();
-             if (!empty($sourceLocations)) {
-                 foreach ($sourceLocations as $sourceLocation) {
-                     $sourcesForItems[$count][] = $sourceLocation->getSourceCode();
-                 }
 
-                 $count++;
+            // If found any source location then store in an array
+            if (!empty($sourceLocations)) {
+                foreach ($sourceLocations as $sourceLocation) {
+                    $sourcesForItems[$count][] = $sourceLocation->getSourceCode();
+                }
+
+                $count++;
             }
         }
 
         if (count($orderItemData) > 1) {
-
+            // Get locations common to all items
             $locationsIncludesAllItems = array_intersect(...$sourcesForItems);
 
             if (count($locationsIncludesAllItems)) {
@@ -110,7 +113,6 @@ class SourceLocation
         }
 
         return [];
-
     }
 
     /**
@@ -124,7 +126,7 @@ class SourceLocation
         try {
             return $this->sourceRepositoryInterface->get($sourceCode);
         } catch (\Exception $e) {
-            $this->helper->log($e->getMessage(),'error');
+            $this->helper->log($e->getMessage(), 'error');
         }
     }
 
@@ -137,8 +139,10 @@ class SourceLocation
     public function getSourceLocationsAddress($sourceLocations): array
     {
         $sourceLocationsWithAddress = [];
-        foreach ($sourceLocations as $sourceData) {
-            $sourceLocationData = $this->getSourceLocationDetails($sourceData[0]);
+
+        foreach ($sourceLocations as $sourceCode) {
+            // Get source location data by code and store addresses in an array
+            $sourceLocationData = $this->getSourceLocationDetails($sourceCode);
             $sourceLocationsWithAddress[] = [
                 'source_code' => $sourceLocationData->getSourceCode(),
                 'address' => $this->helper->prepareAddressString($sourceLocationData)

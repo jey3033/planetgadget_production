@@ -53,14 +53,14 @@ class Distance
      */
     public function checkDistanceFromShippingAddressToSourceLocation($customerShippingAddress, $sourceLocationsAddress, $distanceFromMethod): bool
     {
-        $lonLatForCustomerAddress = $this->getLongitudeLatitude($customerShippingAddress);
-        $lonLatForSourceAddress = $this->getLongitudeLatitude($sourceLocationsAddress);
 
-        $distanceBetweenTwoCoordinates = $this->getDistanceBetweenLongLat($lonLatForCustomerAddress, $lonLatForSourceAddress);
+        $distanceBetweenTwoAddressesMeters = $this->getDistanceBetweenTwoAddresses($customerShippingAddress, $sourceLocationsAddress);
 
-        if ($distanceBetweenTwoCoordinates) {
+        if ($distanceBetweenTwoAddressesMeters) {
 
-            if ($distanceFromMethod > $distanceBetweenTwoCoordinates) {
+            $distanceBetweenTwoAddressesKm = $distanceBetweenTwoAddressesMeters / 1000;
+
+            if ($distanceFromMethod > $distanceBetweenTwoAddressesKm) {
                 return true;
             }
         }
@@ -69,6 +69,44 @@ class Distance
     }
 
     /**
+     * Get distance of two addresses using Google Api
+     *
+     * @param $address1
+     * @param $address2
+     * @return false|mixed
+     */
+    public function getDistanceBetweenTwoAddresses($address1, $address2)
+    {
+        if (!$address1 || !$address2) {
+            return false;
+        }
+
+        $address1 = str_replace(' ', '+', $address1);
+        $address2 = str_replace(' ', '+', $address2);
+
+        $googleKey = $this->helper->getGoogleApiKey();
+        $requestUrl = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" . $address1 . "&destinations=" . $address2 . "&travelMode=driving&sensor=false&key=" . $googleKey;
+
+        $response = $this->request->apiTransport($requestUrl);
+
+        // Check the response element one by one and access correct value
+        if ($response && $response['responseStatus'] && (isset($response['response']['status']) && $response['response']['status'] == 'OK')) {
+
+            if (isset($response['response']['rows']) && isset($response['response']['rows'][0]) &&
+                isset($response['response']['rows'][0]['elements']) && $response['response']['rows'][0]['elements'][0]['distance']
+            ) {
+                return $response['response']['rows'][0]['elements'][0]['distance']['value'];
+            }
+
+        } else {
+            $this->helper->log('Failed when getting distance between Address 1 : ' . $address1 . ' and Address 2 :' . $address2, 'error');
+        }
+
+        return false;
+    }
+
+    /**
+     * @TODO not using at the moment but keep the functions for future use
      * Get longitude and latitude using string address
      *
      * @param $address
@@ -86,10 +124,10 @@ class Distance
 
         $response = $this->request->apiTransport($requestUrl);
 
-        if ($response && $response['responseStatus'] && (isset($response['response']['status'] ) && $response['response']['status'] == 'OK')) {
+        if ($response && $response['responseStatus'] && (isset($response['response']['status']) && $response['response']['status'] == 'OK')) {
 
             if (isset($response['response']['results']) && isset($response['response']['results'][0]) &&
-                    isset($response['response']['results'][0]['geometry']) && $response['response']['results'][0]['geometry']['location']
+                isset($response['response']['results'][0]['geometry']) && $response['response']['results'][0]['geometry']['location']
             ) {
                 return [
                     'lon' => $response['response']['results'][0]['geometry']['location']['lng'],
@@ -106,6 +144,7 @@ class Distance
     }
 
     /**
+     * @TODO not using at the moment but keep the functions for future use
      * Calculate distance between two locations using latitude and langitude
      *
      * @param $fromLonLat
@@ -134,6 +173,5 @@ class Distance
     }
 
 }
-
 
 

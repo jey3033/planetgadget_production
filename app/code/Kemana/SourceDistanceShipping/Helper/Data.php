@@ -19,7 +19,6 @@ namespace Kemana\SourceDistanceShipping\Helper;
  */
 class Data extends \Magento\Framework\App\Helper\AbstractHelper
 {
-
     /**
      * @var \Magento\Framework\App\Helper\Context
      */
@@ -80,6 +79,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         $this->addressMapper = $addressMapper;
         $this->storeManager = $storeManager;
         $this->storeScope = \Magento\Store\Model\ScopeInterface::SCOPE_STORE;
+
         parent::__construct($context);
     }
 

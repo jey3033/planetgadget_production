@@ -23,7 +23,7 @@
     <type name="Kemana\SourceDistanceShipping\Logger\Logger">
         <arguments>
             <argument name="name" xsi:type="string">SourceDistanceBaseShipping</argument>
-            <argument name="handlers"  xsi:type="array">
+            <argument name="handlers" xsi:type="array">
                 <item name="system" xsi:type="object">Kemana\SourceDistanceShipping\Logger\Handler</item>
             </argument>
         </arguments>

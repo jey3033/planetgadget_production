@@ -82,9 +82,9 @@ class SourceDistanceBased extends AbstractCarrier implements CarrierInterface
         \Magento\Shipping\Model\Rate\ResultFactory                  $rateResultFactory,
         \Magento\Quote\Model\Quote\Address\RateResult\MethodFactory $rateMethodFactory,
         \Kemana\SourceDistanceShipping\Helper\Data                  $helper,
-        \Magento\Checkout\Model\Session                            $checkoutSession,
-        \Kemana\SourceDistanceShipping\Model\Source\SourceLocation $sourceLocation,
-        \Kemana\SourceDistanceShipping\Model\Source\Distance $distance,
+        \Magento\Checkout\Model\Session                             $checkoutSession,
+        \Kemana\SourceDistanceShipping\Model\Source\SourceLocation  $sourceLocation,
+        \Kemana\SourceDistanceShipping\Model\Source\Distance        $distance,
         array                                                       $data = []
     )
     {
@@ -111,37 +111,35 @@ class SourceDistanceBased extends AbstractCarrier implements CarrierInterface
             return;
         }
 
-        /////////////////////////////
-
-        //get the customer selected shipping address - destination in $request
+        // Get customer shipping address
         $customerShippingAddress = $this->getCustomerShippingAddress();
 
-        //get all source locations
+        // If customer shipping address not available then return
+        if (empty($customerShippingAddress)) {
+            return;
+        }
 
-
-        // loop all source locations
-
-        //check all items in cart and the quantities - if found insert into a array
-
+        // Get items in the cart with quantities
         $itemsInCartWithQuantity = $this->getCartItemsWithQuantity();
 
+        // Get source locations which those all items and quantities available
         $sourceLocations = $this->sourceLocation->sourceLocationsToFullFillOrder($itemsInCartWithQuantity);
 
+        // If source location not available then return
         if (empty($sourceLocations)) {
             return;
         }
 
-
-        //loop above array - get the address and get the distance between above customer address and this. if found locaiton under radiuse
-        //of shipping method then show this shipping method
+        // Get all source locations addresses
         $sourceLocationsAddress = $this->sourceLocation->getSourceLocationsAddress($sourceLocations);
 
+        // Check distance between customer current shipping address and source location address
         foreach ($sourceLocationsAddress as $address) {
             $canShowMethod = $this->distance->checkDistanceFromShippingAddressToSourceLocation($customerShippingAddress, $address['address'], $this->getConfigData('distance'));
 
+            // If any of address found within the distance which defined in backend then stop the cheking other address and show the method
             if ($canShowMethod) {
                 return $this->appendMethod();
-                break;
             }
         }
     }
@@ -157,15 +155,16 @@ class SourceDistanceBased extends AbstractCarrier implements CarrierInterface
     /**
      * @return \Magento\Shipping\Model\Rate\Result
      */
-    public function appendMethod() {
+    public function appendMethod()
+    {
 
         $result = $this->rateResultFactory->create();
         $method = $this->rateMethodFactory->create();
 
         $method->setCarrier($this->_code);
-        $method->setCarrierTitle($this->getConfigData('title').' muntal');
+        $method->setCarrierTitle($this->getConfigData('title'));
         $method->setMethod($this->_code);
-        $method->setMethodTitle($this->getConfigData('name').' olisan adral');
+        $method->setMethodTitle($this->getConfigData('name'));
 
         $shippingCost = (float)$this->getConfigData('shipping_cost');
 

@@ -58,17 +58,14 @@ class Request
      */
     public function apiTransport($url, string $method = 'GET', $params = null)
     {
-        $this->helper->log('Start','info');
-        $this->helper->log('Url : ' . $url);
+        $this->helper->log('Start', 'info');
+        $this->helper->log('Url : ' . $url, 'info');
 
         try {
-
             $this->curl->addHeader('Content-Type', 'application/json');
-            //$this->curl->addHeader("Content-Length", 200);
             $this->curl->setOption(CURLOPT_FOLLOWLOCATION, 1);
             $this->curl->setOption(CURLOPT_SSL_VERIFYPEER, 0);
             $this->curl->setOption(CURLOPT_TIMEOUT, 10);
-            //$this->curl->setOption(CURLOPT_SSL_VERIFYHOST, 0);
 
             if ($method == 'POST') {
                 $params = is_array($params) ? $this->json->serialize($params) : $params;
@@ -86,11 +83,10 @@ class Request
             $arrayResponse = $this->json->unserialize($response);
 
 
-
             if (isset($arrayResponse['error_message'])) {
                 $this->helper->log('Error Response : ' . $response);
 
-                $this->helper->log('End','info');
+                $this->helper->log('End', 'info');
 
                 return [
                     'responseStatus' => false,
@@ -98,8 +94,8 @@ class Request
                 ];
             }
 
-            $this->helper->log('Success Response : ' . $response);
-            $this->helper->log('End','info');
+            $this->helper->log('Success Response : ' . $response, 'info');
+            $this->helper->log('End', 'info');
 
             return [
                 'responseStatus' => true,
@@ -108,7 +104,7 @@ class Request
 
         } catch (\Exception $e) {
             $this->helper->log($e->getMessage());
-            $this->helper->log('End','info');
+            $this->helper->log('End', 'info');
         }
 
         return false;
