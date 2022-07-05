@@ -108,7 +108,7 @@ class SourceDistanceBased extends AbstractCarrier implements CarrierInterface
     public function collectRates(RateRequest $request)
     {
         if (!$this->getConfigFlag('active')) {
-            return false;
+            return;
         }
 
         /////////////////////////////
@@ -127,7 +127,9 @@ class SourceDistanceBased extends AbstractCarrier implements CarrierInterface
 
         $sourceLocations = $this->sourceLocation->sourceLocationsToFullFillOrder($itemsInCartWithQuantity);
 
-
+        if (empty($sourceLocations)) {
+            return;
+        }
 
 
         //loop above array - get the address and get the distance between above customer address and this. if found locaiton under radiuse

@@ -109,7 +109,7 @@ class SourceLocation
             return $sourcesForItems;
         }
 
-        return false;
+        return [];
 
     }
 
@@ -138,7 +138,7 @@ class SourceLocation
     {
         $sourceLocationsWithAddress = [];
         foreach ($sourceLocations as $sourceData) {
-            $sourceLocationData = $this->getSourceLocationDetails($sourceData->getSourceCode());
+            $sourceLocationData = $this->getSourceLocationDetails($sourceData[0]);
             $sourceLocationsWithAddress[] = [
                 'source_code' => $sourceLocationData->getSourceCode(),
                 'address' => $this->helper->prepareAddressString($sourceLocationData)
