@@ -109,7 +109,9 @@ class SourceLocation
             }
 
         } else {
-            return $sourcesForItems;
+            if (isset($sourcesForItems[0])) {
+                return $sourcesForItems[0];
+            }
         }
 
         return [];
