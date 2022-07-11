@@ -11,7 +11,7 @@
         <fieldset class="fieldset">
             <?= $block->getBlockHtml('formkey') ?>
             <legend class="legend"><span><?= $block->escapeHtml(__('Subscription option')) ?></span></legend><br/>
-            <span>By subscribing to the Newsletter, you can get the latest news & promos from Planet Gadget.</span><br/>
+            <span><?=$block->escapeHtml(__('By subscribing to the Newsletter, you can get the latest news & promos from Planet Gadget.')) ?></span><br/>
             <div class="field choice checkbox">
                 <input type="checkbox" name="is_subscribed" id="subscription" value="1" title="<?= $block->escapeHtmlAttr(__('General Subscription')) ?>"<?php if ($block->getIsSubscribed()) : ?> checked="checked"<?php endif; ?> class="checkbox">
                 <label for="subscription" class="label"><span><?= $block->escapeHtml(__('General Subscription')) ?></span></label>

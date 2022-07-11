@@ -27,7 +27,7 @@
                 <input name="registrant[<%- data._index_ %>][firstname]"
                        value=""
                        type="text"
-                       placeholder="Enter first name"
+                       placeholder="<?= $block->escapeHtml(__('Enter first name')) ?>"
                        class="input-text"
                        data-validate="{required:true}"
                        id="registrant:firstname<%- data._index_ %>" />
@@ -41,7 +41,7 @@
                 <input name="registrant[<%- data._index_ %>][lastname]"
                        value=""
                        type="text"
-                       placeholder="Enter last name"
+                       placeholder="<?= $block->escapeHtml(__('Enter last name')) ?>"
                        class="input-text"
                        data-validate="{required:true}"
                        id="registrant:lastname<%- data._index_ %>" />
@@ -55,7 +55,7 @@
                 <input name="registrant[<%- data._index_ %>][email]"
                        value=""
                        title="<?= $block->escapeHtmlAttr(__('Email')) ?>"
-                       placeholder="Enter email"
+                       placeholder="<?= $block->escapeHtml(__('Enter email')) ?>"
                        id="registrant:email<%- data._index_ %>"
                        type="email"
                        class="input-text"
