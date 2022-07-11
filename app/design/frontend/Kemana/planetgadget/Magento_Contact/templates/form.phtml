@@ -37,7 +37,7 @@ $viewModel = $block->getViewModel();
                            value="<?= $block->escapeHtmlAttr($this->helper(Magento\Contact\Helper\Data::class)->getPostValue('name') ?: $this->helper(Magento\Contact\Helper\Data::class)->getUserName()) ?>"
                            class="form-control"
                            type="text"
-                           placeholder="Enter full name"
+                           placeholder="<?= $block->escapeHtml(__('Enter full name')) ?>"
                            data-validate="{required:true}"/>
                 </div>
             </div>
@@ -50,7 +50,7 @@ $viewModel = $block->getViewModel();
                            value="<?= $block->escapeHtmlAttr($this->helper(Magento\Contact\Helper\Data::class)->getPostValue('email') ?: $this->helper(Magento\Contact\Helper\Data::class)->getUserEmail()) ?>"
                            class="form-control"
                            type="email"
-                           placeholder="Enter email"
+                           placeholder="<?= $block->escapeHtml(__('Enter email')) ?>"
                            data-validate="{required:true, 'validate-email':true}"/>
                 </div>
             </div>
@@ -62,7 +62,7 @@ $viewModel = $block->getViewModel();
                            title="<?= $block->escapeHtmlAttr(__('Phone Number')) ?>"
                            value="<?= $block->escapeHtmlAttr($this->helper(Magento\Contact\Helper\Data::class)->getPostValue('telephone')) ?>"
                            class="form-control"
-                           placeholder="Example: 081234567890"
+                           placeholder="<?= $block->escapeHtml(__('Example: 081234567890')) ?>"
                            type="tel"
                            data-validate="{required:true}"/>
                 </div>
@@ -76,7 +76,7 @@ $viewModel = $block->getViewModel();
                            value="<?= $block->escapeHtmlAttr($this->helper(Magento\Contact\Helper\Data::class)->getPostValue('location')) ?>"
                            class="form-control"
                            type="text"
-                           placeholder="Enter location"
+                           placeholder="<?= $block->escapeHtml(__('Enter location')) ?>"
                            data-validate="{required:true}"/>
                 </div>
             </div>
@@ -91,7 +91,7 @@ $viewModel = $block->getViewModel();
                           class="form-control"
                           cols="5"
                           rows="3"
-                          placeholder="Enter message"
+                          placeholder="<?= $block->escapeHtml(__('Enter message')) ?>"
                           data-validate="{required:true}"><?= $block->escapeHtml($this->helper(Magento\Contact\Helper\Data::class)->getPostValue('comment')) ?></textarea>
                 </div>
             </div>
