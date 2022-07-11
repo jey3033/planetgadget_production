@@ -12,7 +12,7 @@
  *
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
- * 
+ *
  * @category  FME
  * @package   FME_Jobs
  * @copyright Copyright (c) 2019 FME (http://fmeextensions.com/)
