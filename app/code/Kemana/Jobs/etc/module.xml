@@ -15,5 +15,8 @@
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
     <module name="Kemana_Jobs" >
+        <sequence>
+            <module name="FME_Jobs"/>
+        </sequence>
     </module>
 </config>
