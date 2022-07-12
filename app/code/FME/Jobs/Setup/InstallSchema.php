@@ -26,7 +26,7 @@ use Magento\Framework\Setup\SchemaSetupInterface;
 use Magento\Framework\DB\Adapter\AdapterInterface;
 
 class InstallSchema implements InstallSchemaInterface
-{    
+{
     public function install(SchemaSetupInterface $setup, ModuleContextInterface $context)
     {
         $installer = $setup;
@@ -444,13 +444,7 @@ class InstallSchema implements InstallSchemaInterface
             255,
             ['nullable' => false, 'primary' => true],
             'Store ID'
-        )->addForeignKey(
-            $installer->getFkName('fme_jobs_store', 'jobs_id', 'fme_jobs', 'jobs_id'),
-            'jobs_id',
-            $installer->getTable('fme_jobs'),
-            'jobs_id',
-            \Magento\Framework\DB\Ddl\Table::ACTION_CASCADE
         );
-        $installer->getConnection()->createTable($table);       
+        $installer->getConnection()->createTable($table);
     }
 }

@@ -171,7 +171,7 @@
                         </ul>
                     </div>
                     <?php if ($countDiv):?>
-                    <div class="show_more_d"><a href="javascript:void(0)">Show More</a></div>
+                    <div class="show_more_d"><a href="javascript:void(0)"><?= $block->escapeHtml(__('Show More')) ?></a></div>
                     <?php endif;?>
                 </div>
                 <?php endif;?>
@@ -223,7 +223,7 @@
                         </div>
 
                         <?php if ($countDiv):?>
-                        <div class="show_more_l"><a href="javascript:void(0)">Show More</a></div>
+                        <div class="show_more_l"><a href="javascript:void(0)"><?= $block->escapeHtml(__('Show More')) ?></a></div>
                         <?php endif;?>
                     </div>
                     <?php endif;?>
@@ -281,12 +281,12 @@
                             </ul>
                         </div>
                         <?php if ($countDiv):?>
-                        <div class="show_more_t"><a href="javascript:void(0)">Show More</a></div>
+                        <div class="show_more_t"><a href="javascript:void(0)"><?= $block->escapeHtml(__('Show More')) ?></a></div>
                         <?php endif;?>
                     </div>
                     <div class="field search_filters">
-                        <button type="submit"><?php echo __('Search') ?></button>
-                        <button onclick='window.location.reload(true);' ?><?php echo __('Reset') ?></button>
+                        <button type="submit"><?php echo __('Search Job') ?></button>
+                        <button onclick='window.location.reload(true);' ?><?= $block->escapeHtml(__('Reset Filter')) ?></button>
                     </div>
                 </form>
                 <!-- end form -->
