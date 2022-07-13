@@ -15,7 +15,6 @@
 namespace Kemana\Checkout\Helper;
 
 use Magento\Framework\App\Helper\Context;
-use Magento\CatalogInventory\Api\Data\StockItemInterface;
 use Magento\ConfigurableProduct\Model\Product\Type\Configurable;
 use Magento\Bundle\Model\Product\Type;
 use Magento\Store\Model\StoreManagerInterface;
