@@ -14,7 +14,12 @@ $customerAddressView = $block->getData('customer_address');
                     <address>
                         <?= $this->getLayout()->getBlock('address_book')->getAddressHtml($address) ?>
                         <br/>
-                        <?= $block->getAddressMapPoint($block->getAddressById($address->getId())) ?>
+                        <?php
+                            $mapPoint = $block->getAddressMapPoint($block->getAddressById($address->getId()));
+                        ?>
+                        <span class="map-point-label <?=($mapPoint === 'Already Pinpoint') ? 'active' : ''?>">
+                            <?= $block->escapeHtml(__($mapPoint)) ?>
+                        </span>
                     </address>
                     <div class="box-actions">
                         <a class="action edit" href="<?= $block->escapeUrl($block->getUrl('customer/address/edit', ['id' => $address->getId()])) ?>"><span><?= $block->escapeHtml(__('Edit')) ?></span></a>
