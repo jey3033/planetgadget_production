@@ -1,0 +1,151 @@
+<?php
+/**
+ * FME Extensions
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the fmeextensions.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.fmeextensions.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category  FME
+ * @package   FME_Jobs
+ * @copyright Copyright (c) 2019 FME (http://fmeextensions.com/)
+ * @license   https://fmeextensions.com/LICENSE.txt
+ */
+?>
+<?php $currdatetime = $block->getCurrDateTime();
+       $arrCurrDateTime = (array)$currdatetime;
+       $arrCurrDateTime = $arrCurrDateTime['date'];?>
+<?php $jobCollection = $block->getJobsCollection();?>
+<?php
+    /** @var \Kemana\Jobs\Helper\Data $kemanaJobsHelper */
+    $kemanaJobsHelper = $this->helper(Kemana\Jobs\Helper\Data::class);
+    /** @var \Magento\Framework\Pricing\Helper\Data $priceHelper */
+    $priceHelper = $this->helper('Magento\Framework\Pricing\Helper\Data');
+?>
+<?php if ($jobCollection->getData()): ?>
+<div class="listing" <?php if (!($block->jobHelper->getJobSideBarEnable())):?> style="width: 100%" <?php endif;?>>
+    <?php if ($block->getPagerHtml()): ?>
+    <div class="order-products-toolbar toolbar bottom"><?php echo $block->getPagerHtml(); ?></div>
+    <?php endif; ?>
+    <?php foreach ($jobCollection as $jobs): ?>
+    <?php  $url = $jobs->getJobsUrlKey(); ?>
+    <?php if (strtotime($block->jobHelper->getTimeAccordingToTimeZone($jobs->getJobsPublishDate())) > strtotime($arrCurrDateTime)): ?>
+    <?php continue; ?>
+    <?php endif;?>
+    <?php if (!($block->jobHelper->getJobExpiredStatus())): ?>
+    <?php if (strtotime($block->jobHelper->getTimeAccordingToTimeZone($jobs->getJobsApplybyDate())) < strtotime($arrCurrDateTime)): ?>
+    <?php continue; ?>
+    <?php endif;?>
+    <?php endif;?>
+    <div class="block">
+        <a href="<?php echo $this->getUrl().$block->jobHelper->getJobFinalDetailIdentifier($url) ?>">
+            <div class="title">
+                <?php $department = $block->getDepartmentName($jobs->getJobsSelectDepartments())?>
+                <?php $location = $block->getLocation($jobs->getJobsLocation())?>
+                <div class="company">
+                    <p><?php echo __($department) ?>, <?php echo __($location) ?></p>
+                </div>
+                <div class="job-title">
+                    <h3><?php echo __($jobs->getJobsTitle());?></h3>
+                </div>
+            </div>
+            <?php $string = $jobs->getJobsDescription() ?>
+            <?php $string = preg_replace('/(<(script|style)\b[^>]*>).*?(<\/\2>)/is', "$1$3", $string); // remove <style|script tag when page builder using html ?>
+            <?php $string = $kemanaJobsHelper->formatJobContentToHtml($string); // format content when page builder using html
+                    $string = $block->stripTags($string); // remove all html tags
+                    if (strlen($string) > 500) {
+                        $stringCut = substr($string, 0, 500);   
+                        $string = substr($stringCut, 0, strrpos($stringCut, ' ')).'... '; 
+                    }
+                ?>
+            <div class="content">
+                <p><?php echo __($string)?> </p>
+            </div>
+            <div class="title">
+                <div class="job-salary-range">
+                    <?php
+                            $showSalaryRange = false;
+                            if ($jobs->getSalaryFrom() > 0 || $jobs->getSalaryTo() > 0) {
+                                $showSalaryRange = true;
+                                $salaryFrom = $priceHelper->currency($jobs->getSalaryFrom(),true,false);
+                                $salaryTo = $priceHelper->currency($jobs->getSalaryTo(),true,false);
+                            }
+                        ?>
+                    <?php if($showSalaryRange):?>
+                    <span><?php echo $salaryFrom.' - '. $salaryTo ?></span>
+                    <?php endif;?>
+                </div>
+                <div class="date">
+                    <span><?php echo __( $kemanaJobsHelper->getTimeAccordingToTimeZone($jobs->getJobsPublishDate(), 'd M Y G:i:s A')) ?></span>
+                </div>
+            </div>
+        </a>
+    </div>
+    <?php endforeach;?>
+</div>
+<?php else:?>
+<div class="listing">
+    <div class="block">
+        <div class="title">
+            <p><?= $block->escapeHtml(__('No results found')) ?></p>
+            <span><?php echo __('Sorry, there are no job openings matching your search.');?></span>
+        </div>
+    </div>
+</div>
+<?php endif;?>
+
+<script type="text/javascript">
+	require([
+		'jquery'
+
+	], function($) {
+
+		jQuery(".toolbar a").click(function(event) {
+			event.preventDefault();
+			var formMessages = $('#form-messages');
+
+			curUrl = this.href;
+			curUrl = curUrl.split('?');
+			var formData = <?php echo  $block->getSerializeFormData();?>;
+			var ajaxUrl = '<?php echo $block->getUrl("job/index/filters"); ?>?' + curUrl[1];
+			$.ajax({
+					type: 'POST',
+					url: ajaxUrl,
+					showLoader: true,
+					data: formData
+				})
+				.done(function(response) {
+					$(formMessages).html(response);
+				});
+
+		}); //click end here
+		//limiter start
+		jQuery("#limiter").change(function(event) {
+			event.preventDefault();
+			var formMessages = $('#form-messages');
+
+			curUrl = this.value;
+			curUrl = curUrl.split('?');
+			var formData = <?php echo  $block->getSerializeFormData();?>;
+			var ajaxUrl = '<?php echo $block->getUrl("job/index/filters"); ?>?' + curUrl[1];
+			$.ajax({
+					type: 'POST',
+					url: ajaxUrl,
+					showLoader: true,
+					data: formData
+				})
+				.done(function(response) {
+					$(formMessages).html(response);
+				});
+
+		});
+		//limiter end                                                  
+	}); //require close
+</script>

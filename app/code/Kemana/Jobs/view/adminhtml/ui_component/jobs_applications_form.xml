@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright © 2022 PT Kemana Teknologi Solusi. All rights reserved.
+ * http://www.kemana.com
+ */
+
+/**
+ * @category Kemana
+ * @package  Kemana_Jobs
+ * @license  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ *
+ * @author   Kristian Claridad <kclaridad@kemana.com>
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <fieldset name="general">
+        <container name="uploaded_file_cover_letter">
+            <argument name="data" xsi:type="array">    
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">120</item>
+                </item>
+            </argument>
+            <htmlContent name="html_content">
+                <block class="Kemana\Jobs\Block\Adminhtml\Applications\Edit\AdditionalFileField" name="coverletter.file.field" template="Kemana_Jobs::/mdata/coverletter_field.phtml"/>
+            </htmlContent>
+        </container>
+        <container name="uploaded_file_idcard">
+            <argument name="data" xsi:type="array">    
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">125</item>
+                </item>
+            </argument>
+            <htmlContent name="html_content">
+                <block class="Kemana\Jobs\Block\Adminhtml\Applications\Edit\AdditionalFileField" name="idcard.file.field" template="Kemana_Jobs::/mdata/idcard_field.phtml"/>
+            </htmlContent>
+        </container>
+        <container name="uploaded_file_education_certificate">
+            <argument name="data" xsi:type="array">    
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">130</item>
+                </item>
+            </argument>
+            <htmlContent name="html_content">
+                <block class="Kemana\Jobs\Block\Adminhtml\Applications\Edit\AdditionalFileField" name="education.certificate.file.field" template="Kemana_Jobs::/mdata/educationcert_field.phtml"/>
+            </htmlContent>
+        </container>
+    </fieldset>    
+</form>

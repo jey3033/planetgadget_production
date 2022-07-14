@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2022 PT Kemana Teknologi Solusi. All rights reserved.
+ * http://www.kemana.com
+ */
+
+/**
+ * @category Kemana
+ * @package  Kemana_SourceDistanceShipping
+ * @license  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ *
+ * @author   Achintha Madushan <amadushan@kemana.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Kemana\SourceDistanceShipping\Logger\Handler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <type name="Kemana\SourceDistanceShipping\Logger\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">SourceDistanceBaseShipping</argument>
+            <argument name="handlers" xsi:type="array">
+                <item name="system" xsi:type="object">Kemana\SourceDistanceShipping\Logger\Handler</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

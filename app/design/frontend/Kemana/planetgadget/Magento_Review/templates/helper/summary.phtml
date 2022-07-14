@@ -45,5 +45,5 @@ $urlForm = $block->getReviewsUrl() . '#review-form';
 <?php $helper = $this->helper('Kemana\Common\Helper\Data'); ?>
 
 <?php if ($helper->getSoldQtyByProductId($block->getProduct()->getId())): ?>
-<div class="items-sold">Sold <?= $helper->getSoldQtyByProductId($block->getProduct()->getId()) ?></div>
+<div class="items-sold"><?= $block->escapeHtml(__('Sold')) ?> <?= $helper->getSoldQtyByProductId($block->getProduct()->getId()) ?></div>
 <?php endif; ?>

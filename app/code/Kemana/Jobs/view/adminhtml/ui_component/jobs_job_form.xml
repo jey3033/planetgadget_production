@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright © 2022 PT Kemana Teknologi Solusi. All rights reserved.
+ * http://www.kemana.com
+ */
+
+/**
+ * @category Kemana
+ * @package  Kemana_Jobs
+ * @license  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ *
+ * @author   Kristian Claridad <kclaridad@kemana.com>
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <fieldset name="general">    
+        <field name="salary_from">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Salary From</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">job</item>
+                    <item name="sortOrder" xsi:type="number">120</item>
+                    <item name="dataScope" xsi:type="string">salary_from</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">false</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="salary_to">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Salary To</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">job</item>
+                    <item name="sortOrder" xsi:type="number">121</item>
+                    <item name="dataScope" xsi:type="string">salary_to</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">false</item>
+                    </item>
+                </item>
+            </argument>
+        </field>    
+    </fieldset>    
+</form>
