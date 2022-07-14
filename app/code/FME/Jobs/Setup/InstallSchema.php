@@ -304,12 +304,14 @@ class InstallSchema implements InstallSchemaInterface
         );
 
         $installer->getConnection()->createTable($table);
-        
+
+        // Added by Kemana
+
         /**
          * Add new column 'fme_jobs' table
          */
         if (version_compare($context->getVersion(), '1.1.7', '<')) {
-            
+
             $setup->getConnection()->addColumn(
                 $setup->getTable('fme_jobs'),
                 'salary_from',
@@ -329,7 +331,9 @@ class InstallSchema implements InstallSchemaInterface
                 ]
             );
         }
-        
+
+        // End - Added by Kemana
+
         /**
          * Create table 'fme_jobs_application'
          */
@@ -448,12 +452,13 @@ class InstallSchema implements InstallSchemaInterface
             ['jobs_id']
         );
         $installer->getConnection()->createTable($table);
-        
+
+        // Added by Kemana
         /**
          * Add new column 'fme_jobs_application' table
          */
         if (version_compare($context->getVersion(), '1.1.7', '<')) {
-            
+
             $setup->getConnection()->addColumn(
                 $setup->getTable('fme_jobs_application'),
                 'cover_letter_file',
@@ -483,6 +488,7 @@ class InstallSchema implements InstallSchemaInterface
             );
         }
 
+        // End - Added by Kemana
         /*
             Multisotre Table ..fme_jobs_store
         */
