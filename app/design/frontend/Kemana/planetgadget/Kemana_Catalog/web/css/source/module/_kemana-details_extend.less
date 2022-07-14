@@ -125,7 +125,7 @@
                         margin-bottom: 0;
 
                         .swatch-opt {
-                            margin-bottom: 10px;
+                            margin-bottom: 20px;
 
                             .swatch-attribute-selected-option {
                                 display: none;
@@ -160,6 +160,7 @@
                                 margin-bottom: 10px;
                                 width: 100%;
                                 float: left;
+                                .lib-line-height(13);
                             }
                         }
                     }
@@ -172,8 +173,10 @@
 
                         .qty {
                             label {
+                                .lib-line-height(13);
                                 margin-bottom: 10px;
                                 float: left;
+                                .lib-css(font-weight, @font-weight__bold);
                             }
                         }
                     }
@@ -262,7 +265,7 @@
                             @_icon-font-color-hover: @product-grid-wishlist-icon-hover,
                             @_icon-font-size: @product-grid-wishlist-icon-size,
                             @_icon-font-line-height: @product-grid-wishlist-icon-line-height,
-                            @_icon-font-margin: 0 10px 0 0,
+                            @_icon-font-margin: 2px 10px 0 0,
                             @_icon-font-vertical-align: top,
                             @_icon-font-position: before
                         );
@@ -339,9 +342,14 @@
             width: 100%;
             .lib-icon-font(
                 @icon-pg-store,
-                @_icon-font-color: @kemana-primary-brand-color,
-                @_icon-font-margin: -3px 6px 0 0
+                @_icon-font-color: @color-pg-light-gray,
+                @_icon-font-margin: -3px 6px 0 0,
+                @_icon-font-size: 16px
             );
+
+            &:before {
+                width: 18px;
+            }
 
             a {
                 font-weight: @font-weight__bold;
@@ -521,6 +529,12 @@
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
     .catalog-product-view {
+        .column {
+            &.main {
+                padding-bottom: 20px;
+            }
+        }
+
         .product-info-main {
             margin-bottom: 30px;
             margin-top: 20px;
@@ -618,16 +632,26 @@
             &.info {
                 &.detailed {
                     .data-block {
-                        background: @panel__background-color;
-                        margin-inline: -10px;
-                        padding: 25px 10px;
-                        border-radius: 5px;
-
                         .title {
                             .switch {
                                 padding: 0;
                             }
                         }
+
+                        &.block-reviews {
+                            margin-top: 30px;
+                            margin-inline: -10px;
+                            padding: 25px 10px;
+                            background: @panel__background-color;
+                            border-radius: 5px;
+                        }
+                    }
+
+                    .data-block-wrapper {
+                        background: @panel__background-color;
+                        border-radius: 5px;
+                        margin-inline: -10px;
+                        padding: 25px 10px;
                     }
                 }
             }
@@ -645,11 +669,106 @@
         .breadcrumbs {
             .lib-css(max-width, @pdo-page-max-width);
         }
+
+        .product {
+            &.info {
+                &.detailed {
+                    .data-block {
+                        background: @color-white;
+
+                        .title {
+                            .lib-heading(h2);
+                            .lib-font-size(28);
+                            .lib-line-height(30);
+                            margin-bottom: 30px;
+                            position: relative;
+                            z-index: 0;
+
+                            a {
+                                position: relative;
+
+                                &:hover {
+                                    text-decoration: none;
+                                }
+
+                                &:after {
+                                    content: '';
+                                    position: absolute;
+                                    width: 40%;
+                                    height: 10px;
+                                    background: @kemana-secondary-brand-color;
+                                    right: 1px;
+                                    bottom: 2px;
+                                    z-index: -1;
+                                }
+                            }
+                        }
+
+                        .additional-attributes-wrapper {
+                            .col {
+                                border-bottom: 1px solid @color-pg-light-gray2;
+                            }
+
+                            tbody {
+                                tr {
+                                    th {
+                                        padding: 12px 30px 12px 0;
+                                        min-width: 220px;
+                                        width: 220px;
+                                    }
+
+                                    td {
+                                        padding: 12px 0;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    .data-block-wrapper {
+                        float: left;
+                        width: 100%;
+                        //.lib-vendor-prefix-display();
+                        margin-bottom: 30px;
+                        background: @color-white;
+                        border-radius: 5px;
+
+                        .block-description {
+                            float: left;
+                            width: 50%;
+                            padding: 30px;
+                        }
+
+                        .data-block-wrapper-right {
+                            float: right;
+                            width: 50%;
+                            padding: 30px 30px 30px 0;
+
+                            .block-warranty {
+                                margin-top: 50px;
+                            }
+                        }
+                    }
+
+                    .block-reviews {
+                        float: left;
+                        width: 100%;
+                        background: @color-white;
+                        border-radius: 5px;
+                        padding: 30px;
+                    }
+                }
+            }
+        }
+
+
     }
 
     .product-add-form {
         max-width: 100%;
     }
+
+
 }
 
 //
@@ -670,86 +789,5 @@
         }
     }
 
-    .product {
-        &.info {
-            &.detailed {
-                .data-block {
-                    background: @color-white;
-                    border-radius: 5px;
-                    padding: 30px;
-                    margin-bottom: 30px;
 
-                    .title {
-                        .lib-heading(h2);
-                        .lib-font-size(28);
-                        .lib-line-height(30);
-                        margin-bottom: 30px;
-                        position: relative;
-                        z-index: 0;
-
-                        a {
-                            position: relative;
-
-                            &:hover {
-                                text-decoration: none;
-                            }
-
-                            &:after {
-                                content: '';
-                                position: absolute;
-                                width: 40%;
-                                height: 10px;
-                                background: @kemana-secondary-brand-color;
-                                right: 1px;
-                                bottom: 2px;
-                                z-index: -1;
-                            }
-                        }
-                    }
-
-                    .additional-attributes-wrapper {
-                        .col {
-                            border-bottom: 1px solid @color-pg-light-gray2;
-                        }
-
-                        tbody {
-                            tr {
-                                th {
-                                    padding: 12px 30px 12px 0;
-                                    min-width: 220px;
-                                    width: 220px;
-                                }
-
-                                td {
-                                    padding: 12px 0;
-                                }
-                            }
-                        }
-                    }
-
-                    //&:first-child {
-                    //    width: 50%;
-                    //    border-radius: 5px 0 0 5px;
-                    //
-                    //    .content {
-                    //        max-width: 510px;
-                    //    }
-                    //}
-                    //
-                    //&:nth-child(2) {
-                    //    width: 50%;
-                    //    border-radius: 0 5px 5px 0;
-                    //
-                    //    .content {
-                    //        max-width: 610px;
-                    //    }
-                    //}
-                    //
-                    //&:nth-child(3) {
-                    //    width: 100%;
-                    //}
-                }
-            }
-        }
-    }
 }
