@@ -54,9 +54,9 @@
             }
         }
 
-        > .legend {
-            display: none;
-        }
+        //> .legend {
+        //    display: none;
+        //}
     }
 
     .login-container {
@@ -206,6 +206,37 @@
             padding: 0;
         }
 
+        .table-wrapper {
+            thead {
+                .lib-css(border-bottom, @account-table-border);
+
+                th {
+                    background-color: transparent;
+                    color: @color-pg-dark-gray;
+                    padding: 10px 15px;
+
+                    &:first-child {
+                        padding-left: 0;
+                    }
+                }
+            }
+
+            tbody {
+                td {
+                    padding: 20px 15px 0 15px;
+                    color: @kemana-primary-brand-color;
+
+                    &:first-child {
+                        padding-left: 0;
+                    }
+
+                    .action {
+                        color: @kemana-primary-brand-color;
+                        font-weight: @font-weight__bold;
+                    }
+                }
+            }
+        }
     }
 
     .form-edit-account {
@@ -294,6 +325,12 @@
                 }
             }
         }
+
+        .fieldset {
+            > .field {
+                max-width: 100%;
+            }
+        }
     }
 
     .control {
@@ -347,13 +384,24 @@
                                 }
 
                                 &.current {
-                                    strong {
+                                    a {
+                                        //display: block;
+                                        //padding: 15px 30px;
+                                        //.lib-font-size(14);
+                                        //.lib-line-height(16);
+                                        //width: 100%;
+                                        border-left: 3px solid @color-pg-yellow;
+                                    }
+
+                                    > strong {
                                         display: block;
-                                        padding: 13px 30px;
+                                        padding: 15px 30px;
                                         .lib-font-size(14);
+                                        .lib-line-height(16);
                                         width: 100%;
                                         border-left: 3px solid @color-pg-yellow;
                                     }
+
                                 }
                             }
                         }
@@ -374,11 +422,56 @@
                             &.block-dashboard-addresses {
                                 padding: 0;
                             }
+
+                            &.block-addresses-list {
+                                margin-bottom: 0;
+                            }
                         }
                     }
                 }
             }
         }
+
+        .column.main {
+            .block:not(.widget) {
+                &.block-dashboard-addresses,
+                &.block-dashboard-orders {
+                    padding: 0;
+                }
+
+                &.block-dashboard-orders {
+                    margin-bottom: 0!important;
+
+                    .block-title {
+                        border-bottom: none;
+                        padding-bottom: 0;
+                    }
+                }
+
+                &.block-order-details-view {
+                    margin-bottom: 0!important;
+                }
+            }
+        }
+
+        .form-address-edit {
+            .pinpoint {
+                margin-bottom: 30px;
+
+                button {
+                    .lib-button-white();
+                    .lib-icon-font(
+                        @icon-pg-pinpoint-not-set,
+                        @_icon-font-size: 14px,
+                        @_icon-font-margin: 0 10px 0 0);
+
+                    &:before {
+                        width: 14px;
+                    }
+                }
+            }
+        }
+
     }
 }
 
