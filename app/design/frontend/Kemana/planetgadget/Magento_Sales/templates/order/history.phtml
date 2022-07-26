@@ -20,7 +20,7 @@
             <caption class="table-caption"><?= $block->escapeHtml(__('Orders')) ?></caption>
             <thead>
                 <tr>
-                    <th scope="col" class="col id"><?= $block->escapeHtml(__('Order Number')) ?></th>
+                    <th scope="col" class="col id"><?= $block->escapeHtml(__('Order')) ?></th>
                     <th scope="col" class="col date"><?= $block->escapeHtml(__('Date')) ?></th>
                     <th scope="col" class="col ship_to"><?= $block->escapeHtml(__('Ship To')) ?></th>
                     <?= $block->getChildHtml('extra.column.header') ?>
@@ -39,7 +39,7 @@
                     }
                     ?>
                     <tr>
-                        <td data-th="<?= $block->escapeHtmlAttr(__('Order Number')) ?>" class="col id"><?= $block->escapeHtml($_order->getRealOrderId()) ?></td>
+                        <td data-th="<?= $block->escapeHtmlAttr(__('Order')) ?>" class="col id"><?= $block->escapeHtml($_order->getRealOrderId()) ?></td>
                         <td data-th="<?= $block->escapeHtmlAttr(__('Date')) ?>" class="col date"><?= /* @noEscape */ $kemanaAcceleratorBaseHelper->formatDate($_order->getCreatedAt(), "d M Y") ?></td>
                         <td data-th="<?= $block->escapeHtmlAttr(__('Ship To')) ?>" class="col ship_to"><?= $block->escapeHtml($shipTo) ?></td>
                         <?php $extra = $block->getChildBlock('extra.container'); ?>
@@ -51,7 +51,7 @@
                         <td data-th="<?= $block->escapeHtmlAttr(__('Status')) ?>" class="col status"><?= $block->escapeHtml($_order->getStatusLabel()) ?></td>
                         <td data-th="<?= $block->escapeHtmlAttr(__('Actions')) ?>" class="col actions">
                             <a href="<?= $block->escapeUrl($block->getViewUrl($_order)) ?>" class="action view">
-                                <span><?= $block->escapeHtml(__('See Detail')) ?></span>
+                                <span><?= $block->escapeHtml(__('Detail')) ?></span>
                             </a>
                             <?php if ($this->helper(\Magento\Sales\Helper\Reorder::class)->canReorder($_order->getEntityId())) : ?>
                                 <a href="#" data-post='<?= /* @noEscape */
