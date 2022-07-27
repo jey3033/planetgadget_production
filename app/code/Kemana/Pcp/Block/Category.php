@@ -104,7 +104,7 @@ class Category extends \Magento\Framework\View\Element\Template
                         "image" => $loadCategory->getImageUrl()
                     ];
 
-                    $length++;
+                    $loopLength++;
                 }
             }
 
