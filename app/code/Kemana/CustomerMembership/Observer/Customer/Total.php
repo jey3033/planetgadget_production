@@ -75,20 +75,15 @@ class Total implements \Magento\Framework\Event\ObserverInterface
 
                                 $newLifeTimeSale = ((int)$order->getBaseGrandTotal() + $currentLifeTimeSale);
 
+                                $membershipLevels = json_decode($this->helper->getCustomerMembershipLevels());
+
                                 // Match new lifetime sale amount with membership levels
-                                $goldMembershipAmount = $this->helper->getCustomerMembershipGoldAmount();
-                                $platinumMembershipAmount = $this->helper->getCustomerMembershipPlatinumAmount();
-
-                                $membershipGroupIds = $this->helper->getCustomerMembershipGroupIds();
-                                $goldGroupId = $membershipGroupIds['gold'];
-                                $platinumGroupId = $membershipGroupIds['platinum'];
-
-                                if ($newLifeTimeSale < $platinumMembershipAmount) {
-                                    $customer->setGroupId($goldGroupId);
-                                }
-
-                                if ($newLifeTimeSale > $goldMembershipAmount) {
-                                    $customer->setGroupId($platinumGroupId);
+                                if ($membershipLevels) {
+                                    foreach ($membershipLevels as $level) {
+                                        if ($newLifeTimeSale >= (int)$level->from_sale && $newLifeTimeSale <= (int)$level->to_sale) {
+                                            $customer->setGroupId($level->customer_group);
+                                        }
+                                    }
                                 }
 
                                 // Update new lifetime sale amount in customer object
@@ -101,8 +96,8 @@ class Total implements \Magento\Framework\Event\ObserverInterface
                             }
 
                         } catch (\Exception $e) {
-                            $this->helper->log("Error while processing the Customer ID ".$order->getCustomerId().". Order ID : ".$order->getId()." for
-                            update the lifetime sale amount and the membership level. Error : ".$e->getMessage());
+                            $this->helper->log("Error while processing the Customer ID " . $order->getCustomerId() . ". Order ID : " . $order->getId() . " for
+                            update the lifetime sale amount and the membership level. Error : " . $e->getMessage());
                         }
 
                     } else {
