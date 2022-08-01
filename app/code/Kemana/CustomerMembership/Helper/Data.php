@@ -34,14 +34,9 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     const XML_PATH_CUSTOMER_MEMBERSHIP_IS_ENABLE = 'membership/general/is_enabled';
 
     /**
-     * Landing Page Title
+     * Get membership level admin configurations values
      */
-    const XML_PATH_CUSTOMER_MEMBERSHIP_GOLD_AMOUNT = 'membership/general/gold_amount';
-
-    /**
-     * Get the custom front url name for landing page
-     */
-    const XML_PATH_CUSTOMER_MEMBERSHIP_PLATINUM_AMOUNT = 'membership/general/platinum_amount';
+    const XML_PATH_CUSTOMER_MEMBERSHIP_LEVELS = 'membership/general/membership_levels';
 
     /**
      * Enabled the log
@@ -77,17 +72,6 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      * @var SearchCriteriaBuilder
      */
     protected $searchCriteriaBuilder;
-
-    /**
-     * Gold membership level
-     */
-    const GOLD = 'Gold';
-
-    /**
-     * Platinum membership level
-     */
-    const PLATINUM = 'Platinum';
-
 
     /**
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
@@ -126,19 +110,10 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     /**
      * @return mixed
      */
-    public function getCustomerMembershipGoldAmount()
+    public function getCustomerMembershipLevels()
     {
-        return (int)$this->scopeConfig->getValue(self::XML_PATH_CUSTOMER_MEMBERSHIP_GOLD_AMOUNT, $this->storeScope);
+        return $this->scopeConfig->getValue(self::XML_PATH_CUSTOMER_MEMBERSHIP_LEVELS, $this->storeScope);
     }
-
-    /**
-     * @return mixed
-     */
-    public function getCustomerMembershipPlatinumAmount()
-    {
-        return (int)$this->scopeConfig->getValue(self::XML_PATH_CUSTOMER_MEMBERSHIP_PLATINUM_AMOUNT, $this->storeScope);
-    }
-
 
     /**
      * @return string
@@ -158,6 +133,9 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         return $this->storeManager->getStore()->getBaseUrl();
     }
 
+    /**
+     * @return int|null
+     */
     public function getLoggedInCustomerId(): ?int
     {
         return $this->userContextInterface->getUserId();
@@ -170,7 +148,6 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     {
         return $this->scopeConfig->getValue(self::XML_PATH_IS_ENABLE_LOG, $this->storeScope);
     }
-
 
     /**
      * @param $message
@@ -212,41 +189,17 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     }
 
     /**
-     * @return string
-     */
-    public function getMembershipGoldCode(): string
-    {
-        return self::GOLD;
-    }
-
-    /**
-     * @return string
-     */
-    public function getMembershipPlatinumCode(): string
-    {
-        return self::PLATINUM;
-    }
-
-    /**
-     * @return string[]
      * @throws \Magento\Framework\Exception\LocalizedException
      */
-    public function getCustomerMembershipGroupIds(): array
+    public function getCustomerGroupsIdWithName()
     {
-        $groupIds = ['gold', 'platinum'];
-        $allCustomerGroups = $this->getCustomerGroups();
+        $groups = [];
 
-        foreach ($allCustomerGroups as $group) {
-            if ($group->getCode() == $this->getMembershipGoldCode()) {
-                $groupIds['gold'] = $group->getId();
-            }
-
-            if ($group->getCode() == $this->getMembershipPlatinumCode()) {
-                $groupIds['platinum'] = $group->getId();
-            }
+        foreach ($this->getCustomerGroups() as $group) {
+            $groups[$group->getId()] = $group->getCode();
         }
 
-        return $groupIds;
+        return $groups;
     }
 
 }

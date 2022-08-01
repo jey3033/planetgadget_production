@@ -7,8 +7,10 @@ $posts = $block->getCollection();
 ?>
 <div class="post-list-wrapper">
     <div class="post-list-inner-container">
-        <div class="blog-widget-title"><h2>News & <span>Updates</span></h2></div><span><a href="#">Lihat
-                Semua</a></span>
+        <div class="blog-widget-title">
+            <h2><?= $block->escapeHtml(__('News & %1',sprintf('<span>%s</span>','Updates')),['span']) ?></h2>
+        </div>
+        <span><a href="<?= $block->getBlogUrl(''); ?>"><?= $block->escapeHtml(__('See more')) ?></a></span>
         <div class="post-list-container mpcss" id="mpblog-list-container">
             <div class="widget-title">
                 <a href="<?= $block->getBlogUrl(''); ?>"><?= $block->getTitle(); ?></a>
