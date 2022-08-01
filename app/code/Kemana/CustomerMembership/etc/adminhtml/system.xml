@@ -29,17 +29,11 @@
                     <label>Enable</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
-                <field id="gold_amount" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1"
+                <field id="membership_levels" translate="label" sortOrder="15" showInDefault="1" showInWebsite="1"
                        showInStore="1">
-                    <label>Lifetime Sale Amount For Gold</label>
-                    <validate>integer</validate>
-                    <comment>Lifetime sale amount should be equal or less than to this amount.</comment>
-                </field>
-                <field id="platinum_amount" translate="label" type="text" sortOrder="30" showInDefault="1"
-                       showInWebsite="1" showInStore="1">
-                    <label>Lifetime Sale Amount For Platinum</label>
-                    <validate>integer</validate>
-                    <comment>Lifetime sale amount should be equal or greater than to this amount.</comment>
+                    <label>Membership Levels</label>
+                    <frontend_model>Kemana\CustomerMembership\Block\Adminhtml\Form\Field\Levels</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
                 </field>
                 <field id="enable_log" translate="label" type="select" sortOrder="100" showInDefault="1"
                        showInWebsite="1" showInStore="0" canRestore="1">

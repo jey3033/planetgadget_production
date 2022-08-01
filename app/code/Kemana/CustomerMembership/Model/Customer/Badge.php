@@ -52,7 +52,7 @@ class Badge extends \Magento\Framework\App\Helper\AbstractHelper
 
     /**
      * @param $customerID
-     * @return false|string
+     * @return false|mixed
      */
     public function getCustomerMembershipBadge($customerID = null)
     {
@@ -72,16 +72,19 @@ class Badge extends \Magento\Framework\App\Helper\AbstractHelper
 
             $customer = $this->customerRepositoryInterface->getById($customerID);
 
-            $membershipGroupIds = $this->helper->getCustomerMembershipGroupIds();
-            $goldGroupId = $membershipGroupIds['gold'];
-            $platinumGroupId = $membershipGroupIds['platinum'];
+            $membershipLevels = json_decode($this->helper->getCustomerMembershipLevels());
+            $groupIdsNames = $this->helper->getCustomerGroupsIdWithName();
 
-            if ($customer->getGroupId() == $goldGroupId) {
-                return $this->helper->getMembershipGoldCode();
+            if (isset($groupIdsNames[$customer->getGroupId()])) {
+                return $groupIdsNames[$customer->getGroupId()];
             }
 
-            if ($customer->getGroupId() == $platinumGroupId) {
-                return $this->helper->getMembershipPlatinumCode();
+            if ($membershipLevels) {
+                foreach ($membershipLevels as $level) {
+                    if (true) {
+                        return $groupIdsNames[$customer->getGroupId()];
+                    }
+                }
             }
 
         } catch (\Exception $e) {
