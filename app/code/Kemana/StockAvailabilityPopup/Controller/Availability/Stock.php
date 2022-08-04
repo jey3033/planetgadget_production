@@ -72,13 +72,13 @@ class Stock implements HttpGetActionInterface
     {
         $sourceStockData = [];
         $response = $this->jsonFactory->create();
-        //$sku = 'XI-70061-WH';
+
         $sku = $this->request->getParam('sku');
 
         $product = $this->productRepository->getById($this->request->getParam('id'));
 
-        if ($product->getData('sku')){
-            $sku = $this->request->getParam('sku');
+        if (!$sku){
+            $sku = $product->getData('sku');
         }
 
         $sourceData = $this->sourceDataForSku->getSourceItemBySku($sku);

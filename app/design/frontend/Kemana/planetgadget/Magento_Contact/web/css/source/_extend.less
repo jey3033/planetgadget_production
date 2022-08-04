@@ -1,0 +1,219 @@
+// /**
+//  * Copyright © 2022 Kemana. All rights reserved.
+//  * @author Harshani Karunasekara <hkarunasekara@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+//
+//  Variables
+//  _____________________________________________
+
+@other-pages-max-width: 1080px;
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .contact-index-index {
+        .page-main {
+            background: @panel__background-color;
+            border-radius: 5px;
+            padding: 30px 10px;
+            margin-bottom: 50px;
+        }
+
+        .form {
+            &.contact {
+                .actions-toolbar {
+                    .primary {
+                        width: auto;
+
+                        .action {
+                            padding-inline: 20px;
+                        }
+                    }
+                }
+            }
+        }
+
+        .contact-right {
+            background: @color-pg-light-gray3;
+            border-radius: 5px;
+            padding: 30px;
+
+            .contactus-block-info {
+                .operating-hours {
+                    padding-bottom: 10px;
+                }
+
+                .contact-email {
+                    .lib-icon-font(
+                        @icon-pg-email,
+                        @_icon-font-size: 20px,
+                        @_icon-font-margin: 0 10px 0 0);
+                    display: block;
+                }
+
+                .contact-phone {
+                    .lib-icon-font(@icon-pg-phone,
+                        @_icon-font-size: 20px,
+                        @_icon-font-margin: 0 10px 0 0);
+                    display: block;
+                }
+
+                .contact-livechat {
+                    .lib-icon-font(@icon-pg-livechat,
+                        @_icon-font-size: 20px,
+                        @_icon-font-margin: 0 10px 0 0);
+                    display: block;
+                }
+
+                .contact-socialmedia-link {
+                    border-top: 1px solid @color-pg-light-gray2;
+                    padding-top: 20px;
+
+                    .link-social-network {
+                        .lib-vendor-prefix-display();
+                        padding: 0;
+                        margin-bottom: 0;
+
+                        li {
+                            height: 30px;
+                            list-style: none;
+                            padding-right: 10px;
+                            margin-bottom: 0;
+
+                            a {
+                                height: 30px;
+                                width: 30px;
+
+                                &:before {
+                                    height: 30px;
+                                    width: 30px;
+                                    .lib-font-size(30);
+                                }
+                            }
+
+                            &.facebook {
+                                a {
+                                    .lib-icon-font(
+                                        @icon-pg-facebook-2,
+                                        @_icon-font-size: 30px,
+                                        @_icon-font-line-height: 30px);
+
+                                    &:hover {
+                                        &:before {
+                                            .lib-css(color, @kemana-secondary-brand-color);
+                                        }
+                                    }
+                                }
+                            }
+
+                            &.tiktok {
+                                a {
+                                    .lib-icon-font(
+                                        @icon-pg-tiktok,
+                                        @_icon-font-size: 30px,
+                                        @_icon-font-line-height: 30px);
+
+                                    &:hover {
+                                        &:before {
+                                            .lib-css(color, @kemana-secondary-brand-color);
+                                        }
+                                    }
+                                }
+                            }
+
+                            &.youtube {
+                                a {
+                                    .lib-icon-font(
+                                        @icon-pg-youtube,
+                                        @_icon-font-size: 30px,
+                                        @_icon-font-line-height: 30px);
+
+                                    &:hover {
+                                        &:before {
+                                            .lib-css(color, @kemana-secondary-brand-color);
+                                        }
+                                    }
+                                }
+                            }
+
+                            &.instagram {
+                                a {
+                                    .lib-icon-font(
+                                        @icon-pg-instagram-2,
+                                        @_icon-font-size: 30px,
+                                        @_icon-font-line-height: 30px);
+
+                                    &:hover {
+                                        &:before {
+                                            .lib-css(color, @kemana-secondary-brand-color);
+                                        }
+                                    }
+                                }
+                            }
+
+                            &.whatsapp {
+                                a {
+                                    .lib-icon-font(
+                                        @icon-pg-whatsapp,
+                                        @_icon-font-size: 30px,
+                                        @_icon-font-line-height: 30px);
+
+                                    &:hover {
+                                        &:before {
+                                            .lib-css(color, @kemana-secondary-brand-color);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .contact-index-index {
+        .form {
+            &.contact {
+                .fieldset {
+                    margin-bottom: 13px;
+                }
+            }
+        }
+        .contact-right {
+            margin-top: 30px;
+        }
+    }
+}
+
+//
+//  Desktop Large
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+    .contact-index-index {
+        .page-main {
+            padding: 30px;
+        }
+
+        .form {
+            &.contact {
+                max-width: 500px;
+            }
+        }
+
+        .contact-right {
+            padding-left: 30px;
+        }
+    }
+}

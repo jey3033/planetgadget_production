@@ -17,6 +17,108 @@
 ?>
 
 <div class="available-source-locations-link">
-    <span>Available at the nearest Planet Gadget Store. </span><a href="<?= $block->getUrl()
-    ?>stock-data/availability/stock/sku/<?= $block->getProduct()->getSku() ?>/id/<?= $block->getProduct()->getEntityId() ?>">Check Availability</a>
+    <span>Available at the nearest Planet Gadget Store. </span>
+    <a href="#" id="show-availability" data-productId="<?= $block->getProduct()->getEntityId() ?>"
+       data-sku="<?= $block->getProduct()->getSku() ?>"
+       data-type="<?= $block->getProduct()->getTypeId() ?>"><?= __('Check Availability') ?></a>
 </div>
+
+<div id="popup-modal">
+</div>
+
+<script>
+    require(
+        [
+            'jquery',
+            'Magento_Ui/js/modal/modal'
+        ],
+        function (
+            $,
+            modal
+        ) {
+            var options = {
+                type: 'popup',
+                responsive: true,
+                innerScroll: true,
+                title: $.mage.__('Check Availability'),
+                buttons: [{
+                    text: $.mage.__('Close'),
+                    class: '',
+                    click: function () {
+                        this.closeModal();
+                    }
+                }]
+            };
+
+            var popup = modal(options, $('#popup-modal'));
+
+            // When click show availability link
+            $("#show-availability").on('click', function () {
+
+                let productType = $(this).attr("data-type");
+
+                if (productType == "simple") {
+
+                    var productId = $(this).attr("data-productId");
+                    var sku = $(this).attr("data-sku");
+
+                } else if (productType == "configurable") {
+
+                    // TODO : define the logic to get the selected simple product id
+
+                    var productId = $(this).attr("data-productId");
+                    var sku = $(this).attr("data-sku");
+                }
+                // TODO : Continue else if for bundle products
+
+                $(document).ready(function () {
+
+                    var getStockUrl = "<?php echo $this->getUrl() . 'stock-data/availability/stock/'?>";
+
+                    $.ajax({
+                        url: getStockUrl + "sku/" + sku + "/id/" + productId,
+                        type: 'GET',
+                        dataType: 'json',
+                        complete: function (response) {
+                            let popUpContent = "";
+                            if (response.responseJSON.response) {
+
+                                response.responseJSON.locationData.forEach(locations);
+
+                                function locations(item) {
+
+                                    let row = "<div><span>" + item.locationName + "</span><span> " + Math.floor(item.stockQty) + " unit</span></div>";
+                                    row = row + "<div><span>" + item.street + "&nbsp;" + item.district + "&nbsp;" + item.city + "&nbsp;" + item.region + "&nbsp;" + item.postcode + "</span></div>";
+                                    row = row + "<div>" + item.phone + "</div>";
+
+                                    popUpContent = popUpContent + row;
+                                }
+
+                            } else {
+                                popUpContent = $.mage.__('No available stores found.');
+                            }
+
+                            $("#popup-modal").html(popUpContent);
+                            $("#popup-modal").modal("openModal");
+
+                        },
+
+                        error: function (xhr, status, errorThrown) {
+                            let popUpContent = $.mage.__('No available stores found.');
+
+                            $("#popup-modal").html(popUpContent);
+                            $("#popup-modal").modal("openModal");
+
+                        }
+
+                    });
+                });
+
+            });
+        }
+    );
+
+    ////////////////////////
+
+
+</script>
