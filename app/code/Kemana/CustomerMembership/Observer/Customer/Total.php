@@ -70,30 +70,34 @@ class Total implements \Magento\Framework\Event\ObserverInterface
 
                             $customer = $this->customerRepositoryInterface->getById($order->getCustomerId());
 
-                            if ($customer->getCustomAttribute('life_time_total_sale_amount')) {
+                            // For fresh customers
+                            if (!$customer->getCustomAttribute('life_time_total_sale_amount')) {
+                                $newLifeTimeSale = (int)$order->getBaseGrandTotal();
+                            } else {
+                                // For existing customers
                                 $currentLifeTimeSale = (int)$customer->getCustomAttribute('life_time_total_sale_amount')->getValue();
-
                                 $newLifeTimeSale = ((int)$order->getBaseGrandTotal() + $currentLifeTimeSale);
+                            }
 
-                                $membershipLevels = json_decode($this->helper->getCustomerMembershipLevels());
+                            $membershipLevels = json_decode($this->helper->getCustomerMembershipLevels());
 
-                                // Match new lifetime sale amount with membership levels
-                                if ($membershipLevels) {
-                                    foreach ($membershipLevels as $level) {
-                                        if ($newLifeTimeSale >= (int)$level->from_sale && $newLifeTimeSale <= (int)$level->to_sale) {
-                                            $customer->setGroupId($level->customer_group);
-                                        }
+                            // Match new lifetime sale amount with membership levels
+                            if ($membershipLevels) {
+                                foreach ($membershipLevels as $level) {
+                                    if ($newLifeTimeSale >= (int)$level->from_sale && $newLifeTimeSale <= (int)$level->to_sale) {
+                                        $customer->setGroupId($level->customer_group);
                                     }
                                 }
-
-                                // Update new lifetime sale amount in customer object
-                                $customer->setCustomAttribute('life_time_total_sale_amount', $newLifeTimeSale);
-                                $this->customerRepositoryInterface->save($customer);
-
-                                // Update order
-                                $order->setIsCalculatedLifeTimeSaleAmount(1);
-                                $order->save();
                             }
+
+                            // Update new lifetime sale amount in customer object
+                            $customer->setCustomAttribute('life_time_total_sale_amount', $newLifeTimeSale);
+                            $this->customerRepositoryInterface->save($customer);
+
+                            // Update order
+                            $order->setIsCalculatedLifeTimeSaleAmount(1);
+                            $order->save();
+
 
                         } catch (\Exception $e) {
                             $this->helper->log("Error while processing the Customer ID " . $order->getCustomerId() . ". Order ID : " . $order->getId() . " for
