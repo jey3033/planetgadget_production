@@ -142,7 +142,11 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             $sku = $product->getSku();
         }
         
-        $isBackOrderEnable = $product->getExtensionAttributes()->getStockItem()->getBackorders();
+        $isBackOrderEnable = 0;
+        if ($getStockItem = $product->getExtensionAttributes()->getStockItem()) {
+            $isBackOrderEnable = $getStockItem->getBackorders();
+        }
+        
         $checkStockSource = $this->stockFilterByWebsiteCodeAndSku($collection, $websiteCode, $sku, $isBackOrderEnable);
         
         if (!empty($checkStockSource->getData())) {

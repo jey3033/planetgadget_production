@@ -107,6 +107,27 @@ class Social extends \Kemana\SocialLogin\Model\Social
     protected $emailNotificationInterface;
 
     /**
+     * Reward helper
+     *
+     * @var \Magento\Reward\Helper\Data
+     */
+    protected $_rewardData;
+
+    /**
+     * Reward factory
+     *
+     * @var \Magento\Reward\Model\RewardFactory
+     */
+    protected $_rewardFactory;
+
+    /**
+     * Customer registry
+     *
+     * @var \Magento\Customer\Model\CustomerRegistry
+     */
+    protected $customerRegistry;
+
+    /**
      * Social constructor.
      * @param Context $context
      * @param Registry $registry
@@ -123,6 +144,9 @@ class Social extends \Kemana\SocialLogin\Model\Social
      * @param Random $mathRandom
      * @param AccountManagementInterface $accountManagement
      * @param EmailNotificationInterface $emailNotificationInterface
+     * @param \Magento\Reward\Helper\Data $rewardData
+     * @param \Magento\Reward\Model\RewardFactory $rewardFactory,
+     * @param \Magento\Customer\Model\CustomerRegistry $customerRegistry
      */
     public function __construct(
         Context $context,
@@ -139,7 +163,10 @@ class Social extends \Kemana\SocialLogin\Model\Social
         array $data = [],
         Random $mathRandom,
         AccountManagementInterface $accountManagement,
-        EmailNotificationInterface $emailNotificationInterface
+        EmailNotificationInterface $emailNotificationInterface,
+        \Magento\Reward\Helper\Data $rewardData,
+        \Magento\Reward\Model\RewardFactory $rewardFactory,
+        \Magento\Customer\Model\CustomerRegistry $customerRegistry
     ) {
         $this->customerFactory            = $customerFactory;
         $this->customerRepository         = $customerRepository;
@@ -151,6 +178,9 @@ class Social extends \Kemana\SocialLogin\Model\Social
         $this->mathRandom                 = $mathRandom;
         $this->accountManagement          = $accountManagement;
         $this->emailNotificationInterface = $emailNotificationInterface;
+        $this->_rewardData                = $rewardData;
+        $this->_rewardFactory             = $rewardFactory;
+        $this->customerRegistry           = $customerRegistry;
         parent::__construct(
             $context,
             $registry,
@@ -254,12 +284,14 @@ class Social extends \Kemana\SocialLogin\Model\Social
                     $customer,
                     $this->emailNotificationInterface::NEW_ACCOUNT_EMAIL_REGISTERED
                 );
+                $this->setRewardsAfterSocialLoginCreateAccount($customer);
             } else {
                 // If customer exists existing hash will be used by Repository
                 $customer = $this->customerRepository->save($customer);
 
                 $newPasswordToken  = $this->mathRandom->getUniqueHash();
                 $this->accountManagement->changeResetPasswordLinkToken($customer, $newPasswordToken);
+                $this->setRewardsAfterSocialLoginCreateAccount($customer);
             }
 
             if ($this->apiHelper->canSendPassword($store)) {
@@ -458,7 +490,8 @@ class Social extends \Kemana\SocialLogin\Model\Social
      * @param $phonenumber
      * @return string
      */
-    public function convertPhonenumber($phonenumber){
+    public function convertPhonenumber($phonenumber)
+    {
 
         $newphonenumber = '-';
         if ($phonenumber) {
@@ -472,5 +505,41 @@ class Social extends \Kemana\SocialLogin\Model\Social
             }
         }
         return $newphonenumber;
+    }
+
+    /**
+     * set register reward points after customer account create
+     * @param $customer
+     * @return null
+     */
+    public function setRewardsAfterSocialLoginCreateAccount($customer)
+    {
+        $subscribeByDefault = $this->_rewardData->getNotificationConfig(
+            'subscribe_by_default',
+            $this->storeManager->getStore()->getWebsiteId()
+        );
+
+        try {
+            $customerModel = $this->customerRegistry
+                ->retrieveByEmail($customer->getEmail());
+            $customerModel->setRewardUpdateNotification($subscribeByDefault);
+            $customerModel->setRewardWarningNotification($subscribeByDefault);
+            $customerModel->getResource()
+                ->saveAttribute($customerModel, 'reward_update_notification');
+            $customerModel->getResource()
+                ->saveAttribute($customerModel, 'reward_warning_notification');
+
+            $this->_rewardFactory->create()->setCustomer(
+                $customer
+            )->setActionEntity(
+                $customer
+            )->setStore(
+                $this->storeManager->getStore()->getId()
+            )->setAction(
+                \Magento\Reward\Model\Reward::REWARD_ACTION_REGISTER
+            )->updateRewardPoints();
+        } catch (\Exception $e) {
+            throw $e;
+        }
     }
 }

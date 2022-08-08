@@ -120,7 +120,7 @@
         <?php if ($block->isDefaultBilling()): ?>
             <div class="message info"><?php /* @escapeNotVerified */ echo __("It's a default billing address.") ?></div>
         <?php elseif ($block->canSetAsDefaultBilling()): ?>
-            <div class="field choice set billing">
+            <div class="field choice checkbox set billing">
                 <input type="checkbox" id="primary_billing" name="default_billing" value="1" class="checkbox">
                 <label class="label" for="primary_billing"><span><?php /* @escapeNotVerified */ echo __('Use as my default billing address') ?></span></label>
             </div>
@@ -131,7 +131,7 @@
         <?php if ($block->isDefaultShipping()): ?>
             <div class="message info"><?php /* @escapeNotVerified */ echo __("It's a default shipping address.") ?></div>
         <?php elseif ($block->canSetAsDefaultShipping()): ?>
-            <div class="field choice set shipping">
+            <div class="field choice checkbox set shipping">
                 <input type="checkbox" id="primary_shipping" name="default_shipping" value="1" class="checkbox">
                 <label class="label" for="primary_shipping"><span><?php /* @escapeNotVerified */ echo __('Use as my default shipping address') ?></span></label>
             </div>
@@ -152,7 +152,7 @@
     </div>
 </form>
 <?php if($gmapApiKey) :?>
-    <div id="gosend-popup-modal" style="display: none;">  
+    <div id="gosend-popup-modal" style="display: none;">
         <span class="subtitle"><?= __('Please make sure your pinned point in map match with your address.'); ?></span>
         <div class="autocompletegosendwrap">
             <input id="autocompleteGosend" placeholder="<?= __('Find address or location'); ?>" type="text" autocomplete="off" />
@@ -211,7 +211,7 @@
                 "districtJson": <?php /* @escapeNotVerified */ echo $this->helper('KS\Logistic\Helper\Data')->getDistrictJson() ?>,
                 "districtListId": "#district_id",
                 "districtInputId": "#district",
-                "defaultDistrictInput": "<?php /* @escapeNotVerified */ echo $districtText ? $districtText->getValue():null ?>"    
+                "defaultDistrictInput": "<?php /* @escapeNotVerified */ echo $districtText ? $districtText->getValue():null ?>"
             }
         }
     }
