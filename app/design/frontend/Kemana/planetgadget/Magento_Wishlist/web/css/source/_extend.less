@@ -52,6 +52,15 @@
     }
 
     .wishlist-index-index {
+        .page-title-wrapper {
+            button {
+                float: right;
+                position: absolute;
+                top: 0;
+                right: 0;
+            }
+        }
+
         .products-grid {
             &.wishlist {
                 .product-item {
@@ -107,6 +116,22 @@
                             }
                         }
 
+                        .box-tocart {
+                            bottom: 0;
+
+                            .product-item-actions {
+                                .actions-primary {
+                                    .action {
+                                        &:before {
+                                            content: '+';
+                                            left: 0;
+                                            top: 0;
+                                        }
+
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -125,6 +150,17 @@
                 }
             }
         }
+    }
+
+    .wishlist-index-share {
+        .form {
+            &.share {
+                .fieldset {
+                    margin-top: 0;
+                }
+            }
+        }
+
     }
 
     .form{

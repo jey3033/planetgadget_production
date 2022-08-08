@@ -101,45 +101,20 @@ $kemanaCheckout = $this->helper(Kemana\Checkout\Helper\Data::class);
                 <div class="control qty">
                     <label for="cart-<?= $block->escapeHtmlAttr($_item->getId()) ?>-qty">
                         <span class="label"><?= $block->escapeHtml(__('Qty')) ?></span>
-                        <?php if (!$qtyDropDown): ?>
-
-                            <a class="alo_qty alo_qty_dec ajax-cart-qty-minus" href="javascript:void(0)"></a>
                             <input id="cart-<?= /* @escapeNotVerified */ $_item->getId() ?>-qty"
-                                name="cart[<?= /* @escapeNotVerified */ $_item->getId() ?>][qty]"
-                                data-cart-item-id="<?= /* @escapeNotVerified */ $_item->getSku() ?>"
-                                value="<?= /* @escapeNotVerified */ $block->getQty() ?>"
-                                type="number"
-                                size="4"
-                                title="<?= $block->escapeHtml(__('Qty')); ?>"
-                                class="input-text qty"
-                                maxlength="12"
-                                data-validate="{required:true,'validate-greater-than-zero':true}"
-                                data-role="cart-item-qty"/>
-                            <a class="alo_qty alo_qty_inc ajax-cart-qty-plus" href="javascript:void(0)"></a>
-
-                        <?php else: ?>
-                        <input type="hidden" id="cart-<?= $block->escapeHtmlAttr($_item->getId()) ?>-qty"
-                            name="cart[<?= $block->escapeHtmlAttr($_item->getId()) ?>][qty]"
-                            data-cart-item-id="<?= $block->escapeHtmlAttr($_item->getSku()) ?>"
-                            title="<?= $block->escapeHtmlAttr(__('Qty')) ?>"
-                            class="qty-input"
-                            data-validate="{required:true,'validate-greater-than-zero':true}"
-                            data-role="cart-item-qty"/>
-
-                        <ul class="qty-selector" data-mage-init='{"customDropDown":{"ajax":true}}'>
-                            <li class="item-main" data-item="<?= $block->escapeHtmlAttr($block->getQty()) ?>">
-                                <?= $block->escapeHtmlAttr($block->getQty()) ?>
-                            </li>
-                            <ul class="qty-selector-dropdown" style="display: none">
-                                <?php
-                                for ($qty = 1; $qty <= $qtyCount; $qty++) { ?>
-                                    <li class="item" data-item="<?= $qty ?>">
-                                        <?= $qty ?>
-                                    </li>
-                                <?php } ?>
-                            </ul>
-                        </ul>
-                        <?php endif; ?>
+                                   name="cart[<?= /* @escapeNotVerified */ $_item->getId() ?>][qty]"
+                                   data-cart-item-id="<?= /* @escapeNotVerified */ $_item->getSku() ?>"
+                                   value="<?= /* @escapeNotVerified */ $block->getQty() ?>"
+                                   type="number"
+                                   size="4"
+                                   title="<?= $block->escapeHtml(__('Qty')) ?>"
+                                   class="input-text qty"
+                                   data-validate="{required:true,'validate-greater-than-zero':true}"
+                                   data-role="cart-item-qty"/>
+                            <div class="qty-selector" data-mage-init='{"customDropDown":{"ajax":true}}'>
+                                <button type="button"  id="<?= /* @escapeNotVerified */ $_item->getId() ?>-upt" class="increaseQty">+</button>
+                                <button type="button"   id="<?= /* @escapeNotVerified */ $_item->getId() ?>-dec"  class="decreaseQty">-</button>
+                            </div>
                     </label>
                 </div>
             </div>
