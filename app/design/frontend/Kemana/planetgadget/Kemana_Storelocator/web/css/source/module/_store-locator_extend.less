@@ -1,0 +1,100 @@
+// /**
+//  * Copyright © 2022 Kemana. All rights reserved.
+//  * @author Harshani Karunasekara <hkarunasekara@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .kslocator-index-index {
+        .page-main {
+            background: @panel__background-color;
+            border-radius: 5px;
+            padding: 30px;
+            margin-bottom: 50px;
+        }
+
+        .column {
+            &.main {
+                padding-bottom: 0;
+            }
+        }
+    }
+
+    .kemana_store_list {
+        .store-items {
+            &:first-child {
+                border-radius: 5px 0 0 0;
+            }
+
+            &:last-child {
+                border-radius: 0 0 0 5px;
+            }
+
+            &:hover {
+                background: @color-pg-light-yellow;
+                border-color: @color-pg-orange;
+            }
+        }
+    }
+
+    .store-phone-number {
+        .lib-css(font-weight, @store-locator-store-name__font-weight);
+    }
+
+    .today_schedule {
+        .lib-css(font-weight, @store-locator-store-name__font-weight);
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .kemana_center {
+        .kemana_store_list {
+            margin-right: 0;
+        }
+    }
+
+    .select-radius-wrapper {
+        max-width: 200px;
+    }
+
+    .search-locate-btn-wrapper {
+        .action {
+            &.primary {
+                padding-inline: 20px;
+            }
+        }
+    }
+
+    #current-address {
+        max-width: 390px;
+        width: 33%;
+    }
+
+    .store-locator-filter {
+        .column_left {
+            .block-content {
+                .kemana_input {
+                    &.search-locate-btn-wrapper {
+                        div {
+                            span {
+                                text-transform: none;
+                            }
+                        }
+
+                        .btn-nearby {
+                            .lib-button-white();
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
