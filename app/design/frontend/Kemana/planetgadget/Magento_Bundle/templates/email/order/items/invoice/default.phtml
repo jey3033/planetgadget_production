@@ -32,10 +32,12 @@
             ?>
             <?php if ($_item->getOrderItem()->getParentItem()) : ?>
                 <?php $attributes = $block->getSelectionAttributes($_item) ?>
+                    <?php if (isset($attributes['option_id'])) : ?>
                     <?php if ($_prevOptionId != $attributes['option_id']) : ?>
                         <strong class="bundle-product-option-label"><?= $block->escapeHtml($attributes['option_label']); ?> : </strong>
                         <span class="bundle-product-option-value"><?= $block->escapeHtml($_item->getName()); ?></span> <br/>
                         <?php $_prevOptionId = $attributes['option_id'] ?>
+                    <?php endif; ?>
                     <?php endif; ?>
                 <?php endif; ?>
             <?php endforeach; ?>
