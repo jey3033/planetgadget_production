@@ -19,6 +19,8 @@ use Kemana\StockAvailabilityPopup\Model\Stock\SourceDataForSku;
 use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\App\RequestInterface;
 use Magento\Catalog\Model\ProductRepository;
+use Magento\Catalog\Model\Product;
+use Magento\ConfigurableProduct\Model\Product\Type\Configurable;
 
 /**
  * Class Detail
@@ -55,13 +57,17 @@ class Stock implements HttpGetActionInterface
         JsonFactory      $jsonFactory,
         SourceDataForSku $sourceDataForSku,
         RequestInterface $request,
-        ProductRepository $productRepository
+        ProductRepository $productRepository,
+        Product $product,
+        Configurable $configurable
     )
     {
         $this->jsonFactory = $jsonFactory;
         $this->sourceDataForSku = $sourceDataForSku;
         $this->request = $request;
         $this->productRepository = $productRepository;
+        $this->product = $product;
+        $this->configurable = $configurable;
     }
 
     /**
@@ -72,40 +78,76 @@ class Stock implements HttpGetActionInterface
     {
         $sourceStockData = [];
         $response = $this->jsonFactory->create();
+        $requestInfo = $this->request->getParams();
 
-        $sku = $this->request->getParam('sku');
+        $productIds = [];
+        $productid = $requestInfo['product'];
+        $addProduct = $this->product->load($productid);
 
-        $product = $this->productRepository->getById($this->request->getParam('id'));
-
-        if (!$sku){
-            $sku = $product->getData('sku');
+        // simple product logic
+        if($addProduct->getTypeId() == 'simple'){
+            $productIds[] = $requestInfo['product'];
         }
 
-        $sourceData = $this->sourceDataForSku->getSourceItemBySku($sku);
+        // configuration product logic
+        if ($addProduct->getTypeId() == Configurable::TYPE_CODE) 
+        {
+            $attributes = $requestInfo['super_attribute'];
+            $simple_product = $this->configurable->getProductByAttributes($attributes, $addProduct);
+            if($simple_product){
+                $productIds[] = $simple_product->getId();
+            }
+        }
 
-        if (!empty($sourceData)) {
-
-            foreach ($sourceData as $data) {
-                $locationData = $this->sourceDataForSku->getSourceItemLocationData($data->getData('source_code'));
-
-                if ($locationData && $locationData->getData('is_pickup_location_active')) {
-                    $sourceStockData[] = [
-                        'locationName' => $locationData->getData('name'),
-                        'stockQty' => $data->getData('quantity'),
-                        'street' => $locationData->getData('street'),
-                        'region_id' => $locationData->getData('region_id'),
-                        'region' => $locationData->getData('region'),
-                        'city' => $locationData->getData('city'),
-                        'postcode' => $locationData->getData('postcode'),
-                        'city_id' => $locationData->getData('city_id'),
-                        'district_id' => $locationData->getData('district_id'),
-                        'district' => $locationData->getData('district'),
-                        'phone' => $locationData->getData('phone')
-                    ];
+        // bundle product logic
+        if($addProduct->getTypeId() == 'bundle'){
+            $buyRequest = new \Magento\Framework\DataObject($requestInfo);
+            $cartCandidates = $addProduct->getTypeInstance()->prepareForCartAdvanced($buyRequest, $addProduct);
+            foreach ($cartCandidates as $cartCandidate) {
+                if ($cartCandidate->getTypeId() != 'bundle') {
+                        $productIds[] = $cartCandidate->getId();
                 }
             }
+        }
 
-            return $response->setData(['locationData' => $sourceStockData, 'response' => true]);
+        // gruop product logic
+        if($addProduct->getTypeId() == 'grouped'){
+            if(isset($requestInfo['super_group'])){
+                foreach ($requestInfo['super_group'] as $product => $qty) {
+                        $productIds[] = $product;       
+                }
+            }
+        }        
+        if($productIds){
+            $result = [];
+            foreach ($productIds as $key => $productid) {
+                $product = $this->productRepository->getById($productid);
+                $sku = $product->getData('sku');
+                $sourceData = $this->sourceDataForSku->getSourceItemBySku($sku);
+                
+                if (!empty($sourceData)) {
+                    foreach ($sourceData as $data) {
+                        $locationData = $this->sourceDataForSku->getSourceItemLocationData($data->getData('source_code'));
+                        if ($locationData && $locationData->getData('is_pickup_location_active')) {
+                            $sourceStockData[] = [
+                                'locationName' => $locationData->getData('name'),
+                                'stockQty' => $data->getData('quantity'),
+                                'street' => $locationData->getData('street'),
+                                'region_id' => $locationData->getData('region_id'),
+                                'region' => $locationData->getData('region'),
+                                'city' => $locationData->getData('city'),
+                                'postcode' => $locationData->getData('postcode'),
+                                'city_id' => $locationData->getData('city_id'),
+                                'district_id' => $locationData->getData('district_id'),
+                                'district' => $locationData->getData('district'),
+                                'phone' => $locationData->getData('phone')
+                            ];
+                        }
+                    }
+                    $result[$sku] = $sourceStockData;
+                }
+            }
+            return $response->setData(['locationData' => $result, 'response' => true]);
         }
 
         return $response->setData(['locationData' => [], 'response' => false]);
