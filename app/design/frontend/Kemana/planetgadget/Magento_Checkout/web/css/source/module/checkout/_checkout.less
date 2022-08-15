@@ -1,0 +1,430 @@
+// /**
+//  * Copyright © 2020 Kemana. All rights reserved.
+//  * @author Ashan Gunawardena <agunawardena@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+//
+//  Variables
+//  _____________________________________________
+
+@checkout-wrapper__max-width: 1100px;
+@checkout__background-color: @color-kemana-gray5;
+
+@checkout-header-text__color: @color-white;
+@checkout-header-text__font-weight: @font-weight__heavier;
+
+@checkout-header-desktop__height: 80px;
+@checkout-header-desktop__padding: 16px 33px;
+
+@checkout-header-desktop-logo__width: 130px;
+@checkout-header-mobile-logo__width: 159px;
+
+@checkout-footer__background-color: @color-kemana-gray4;
+
+@checkout-wrapper__margin: 0;
+@checkout-wrapper__columns: 8;
+
+@checkout-step-title__border: @border-width__base solid @color-kemana-gray1;
+@checkout-step-title__font-size: @sub-heading__font-size;
+@checkout-step-title__font-weight: @font-weight__bold;
+@checkout-step-title__padding: @indent__base;
+
+@checkout-step-title-mobile__font-size: @checkout-step-title__font-size;
+
+@kemana-radio-checkout__margin: 0 8px 0 0;
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .page-header {
+        .header {
+            &.content {
+                &.km-checkout-page-wrapper {
+                    .lib-vendor-prefix-flex-wrap();
+                    justify-content: normal;
+
+                    .logo {
+                        bottom: 16px;
+                        width: 265px !important;
+                    }
+
+                    .action {
+                        &.nav-toggle {
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .checkout-index-index {
+        .lib-css(background, @checkout__background-color);
+        overflow-x: hidden;
+
+        .lib-kemana-radio-button(
+            @_radio-icon-margin: @kemana-radio-checkout__margin
+        );
+
+        .checkout-header-text {
+            display: none;
+        }
+        .page-header {
+            .top-header {
+                display: none;
+            }
+
+            .header-right {
+                display: none;
+            }
+        }
+
+        .page-title-wrapper {
+            &:extend(.abs-visually-hidden all);
+        }
+
+        .page-wrapper {
+            min-height: inherit;
+        }
+
+        .page-main {
+            .lib-css(max-width, @checkout-wrapper__max-width);
+        }
+
+        .column:not(.sidebar-main),
+        .column:not(.sidebar-additional) {
+            form {
+                .actions-toolbar {
+                    margin-left: 0;
+                    text-align: left;
+
+                    .secondary {
+                        text-align: left;
+                        padding-left: 15px;
+
+                        .action {
+                            &.remind {
+                                .lib-css(font-weight, @font-weight__heavier);
+                            }
+                        }
+                    }
+                }
+
+                &.form-login {
+                    .primary {
+                        display: inline-block;
+                        margin-bottom: 0;
+                        float: none;
+                    }
+
+                    .secondary {
+                        display: inline-block;
+                        float: none;
+                    }
+                }
+            }
+        }
+    }
+
+    .checkout-container {
+        &:extend(.abs-add-clearfix all);
+        .lib-css(margin, 0 0 @checkout-wrapper__margin);
+    }
+
+    .opc-wrapper {
+        .lib-css(margin, 0 0 @checkout-wrapper__margin);
+
+        .opc {
+            > .checkout-shipping-address,
+            > .checkout-shipping-method,
+            > .checkout-payment-method {
+                .lib-css(padding, @indent__base @indent__base 0);
+                .lib-css(background, @checkout-summary__background-color);
+
+                > .checkout-shipping-method {
+                    padding: 0;
+                    margin-top: 0;
+                    background: transparent;
+                }
+
+                .step-title {
+                    text-transform: uppercase;
+                }
+            }
+
+            > .checkout-shipping-method {
+                margin-top: @indent__base;
+            }
+        }
+
+        .opc {
+            &:extend(.abs-reset-list all);
+        }
+
+        .step-title {
+            &:extend(.abs-checkout-title all);
+            .lib-line-height(20);
+            .lib-css(letter-spacing, @text__letter__spacing__s);
+        }
+
+        .sub-title {
+            margin-top: @indent__base;
+            margin-bottom: @indent__base;
+            .lib-css(color, @color-kemana-dark1);
+        }
+
+        .step-content {
+            margin: 0;
+
+            .actions-toolbar {
+                &#shipping-method-buttons-container {
+                    position: absolute;
+                    left: -20px;
+                    bottom: -76px;
+                    margin-left: 0;
+                }
+            }
+        }
+    }
+
+    .checkout-index-index {
+        .nav-sections,
+        .nav-toggle {
+            display: none;
+        }
+    }
+
+    .checkout-onepage-success,
+    .checkout-onepage-failure {
+        &:extend(.abs-add-clearfix all);
+
+        .page-title-wrapper {
+            display: none;
+        }
+
+        .print {
+            display: none;
+        }
+
+        .checkout-success,
+        .checkout-failed {
+            width: 100%;
+            max-width: 768px;
+            margin: 30px auto 0;
+            text-align: center;
+
+            .image-div {
+                background-size: contain;
+                width: 150px;
+                height: 150px;
+                display: inline-block;
+                margin-bottom: 30px;
+            }
+
+            .line-one {
+                .lib-font-size(20);
+                .lib-line-height(30);
+                .lib-css(color, @theme__color__secondary);
+                .lib-css(font-weight, @font-weight__heavier);
+                margin-bottom: 20px;
+            }
+
+            .line-two {
+                .lib-font-size(20);
+                .lib-line-height(30);
+                .lib-css(color, @theme__color__secondary);
+                .lib-css(font-weight, @font-weight__heavier);
+                margin-bottom: 30px;
+
+                .order-number {
+                    .lib-css(color, @color-kemana-green2);
+
+                    strong {
+                        .lib-css(font-weight, @font-weight__heavier);
+                    }
+                }
+            }
+
+            .line-three {
+                .lib-font-size(20);
+                .lib-line-height(30);
+                .lib-css(color, @theme__color__secondary);
+                .lib-css(font-weight, @font-weight__heavier);
+                margin-bottom: 30px;
+
+                > span {
+                    .lib-css(color, @color-kemana-green2);
+                }
+            }
+
+            .line-four {
+                .lib-line-height(24);
+                margin-bottom: 20px;
+            }
+
+            .line-five {
+                .lib-line-height(24);
+                margin-bottom: 40px;
+
+                a {
+                    .lib-css(font-weight, @font-weight__heavier);
+                }
+            }
+
+            .actions-toolbar {
+                > .primary {
+                    float: none;
+
+                    .action {
+                        width: auto;
+                    }
+                }
+            }
+        }
+
+        .checkout-failed {
+            .line-one {
+                .lib-font-size(20);
+                .lib-line-height(23);
+                margin-bottom: 10px;
+            }
+
+            .line-two {
+                .lib-font-size(16);
+                .lib-line-height(18);
+            }
+
+            .line-three {
+                .lib-font-size(16);
+                .lib-line-height(22);
+                .lib-css(font-weight, @font-weight__regular);
+                margin-bottom: 40px;
+            }
+        }
+
+        #registration {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .checkout-success {
+            .image-div {
+                background: url(../images/success-checklist.svg) center no-repeat;
+            }
+        }
+
+        .checkout-failed {
+            .image-div {
+                background: url(../images/transaction-failed.svg) center no-repeat;
+            }
+        }
+    }
+
+    .page-footer-checkout {
+        .lib-css(background, @checkout-footer__background-color);
+        padding: 18px @indent__xs;
+        text-align: center;
+
+        p {
+            .lib-font-size(12);
+            .lib-line-height(13);
+            .lib-css(color, @color-kemana-dark1);
+            margin-bottom: 0;
+        }
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .page-header {
+        .header {
+            &.km-checkout-page-wrapper {
+                .logo {
+                    .lib-css(max-width, @checkout-header-mobile-logo__width);
+                    padding-top: 0;
+                    margin: 2px 0 0;
+                    transform: none;
+                    position: static;
+                    bottom: 12px;
+                    height: 24px;
+                }
+            }
+        }
+    }
+
+    .checkout-index-index {
+        .page-header {
+            margin-bottom: 0;
+        }
+
+        .page-main {
+            padding-left: 0;
+            padding-right: 0;
+        }
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .page-header {
+        .header {
+            &.content {
+                &.km-checkout-page-wrapper {
+                    .lib-css(height, @checkout-header-desktop__height);
+                    .lib-css(padding, @checkout-header-desktop__padding);
+                    max-width: none;
+
+                    .logo {
+                        .lib-css(width, @checkout-header-desktop-logo__width);
+                    }
+                }
+            }
+        }
+    }
+
+    .checkout-index-index {
+        .page-header {
+            .lib-css(margin-bottom, @indent__l);
+        }
+    }
+
+    .opc-wrapper {
+        &:extend(.abs-add-box-sizing-desktop-m all);
+        //.lib-layout-column(2, 1, @checkout-wrapper__columns);
+        padding-right: @indent__base;
+        width: ~'calc(100% - @{checkout-sidebar__width})';
+        max-width: 750px;
+        float: left;
+    }
+
+    .checkout-container {
+        padding-bottom: 77px;
+    }
+
+    .checkout-onepage-success,
+    .checkout-onepage-failure {
+        .print {
+            float: right;
+            margin: 22px 0 0;
+        }
+    }
+}
+
+//
+//  Desktop Extra large
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xl) {
+    .opc-wrapper {
+        padding-right: 0;
+    }
+}
