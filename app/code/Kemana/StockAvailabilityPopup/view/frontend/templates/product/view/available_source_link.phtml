@@ -15,110 +15,102 @@
 /** @var \Kemana\StockAvailabilityPopup\Block\Product\View $block */
 
 ?>
+<?php if ($block->getProduct()->getTypeId() != 'bundle'): ?>
+    <div id="available-source-message" style="color: red;"></div>
+    <div class="available-source-locations-link">
+        <span>Available at the nearest Planet Gadget Store. </span>
+        <a href="javascript:void(0)" id="show-availability" data-productId="<?= $block->getProduct()->getEntityId() ?>"
+           data-sku="<?= $block->getProduct()->getSku() ?>"
+           data-type="<?= $block->getProduct()->getTypeId() ?>"><?= __('Check Availability') ?></a>
+    </div>
 
-<div class="available-source-locations-link">
-    <span>Available at the nearest Planet Gadget Store. </span>
-    <a href="#" id="show-availability" data-productId="<?= $block->getProduct()->getEntityId() ?>"
-       data-sku="<?= $block->getProduct()->getSku() ?>"
-       data-type="<?= $block->getProduct()->getTypeId() ?>"><?= __('Check Availability') ?></a>
-</div>
+    <div id="popup-modal">
+    </div>
 
-<div id="popup-modal">
-</div>
-
-<script>
-    require(
-        [
-            'jquery',
-            'Magento_Ui/js/modal/modal'
-        ],
-        function (
-            $,
-            modal
-        ) {
-            var options = {
-                type: 'popup',
-                responsive: true,
-                innerScroll: true,
-                title: $.mage.__('Check Availability'),
-                buttons: [{
-                    text: $.mage.__('Close'),
-                    class: '',
-                    click: function () {
-                        this.closeModal();
-                    }
-                }]
-            };
-
-            var popup = modal(options, $('#popup-modal'));
-
-            // When click show availability link
-            $("#show-availability").on('click', function () {
-
-                let productType = $(this).attr("data-type");
-
-                if (productType == "simple") {
-
-                    var productId = $(this).attr("data-productId");
-                    var sku = $(this).attr("data-sku");
-
-                } else if (productType == "configurable") {
-
-                    // TODO : define the logic to get the selected simple product id
-
-                    var productId = $(this).attr("data-productId");
-                    var sku = $(this).attr("data-sku");
-                }
-                // TODO : Continue else if for bundle products
-
-                $(document).ready(function () {
-
-                    var getStockUrl = "<?php echo $this->getUrl() . 'stock-data/availability/stock/'?>";
-
-                    $.ajax({
-                        url: getStockUrl + "sku/" + sku + "/id/" + productId,
-                        type: 'GET',
-                        dataType: 'json',
-                        complete: function (response) {
-                            let popUpContent = "";
-                            if (response.responseJSON.response) {
-
-                                response.responseJSON.locationData.forEach(locations);
-
-                                function locations(item) {
-
-                                    let row = "<div><span>" + item.locationName + "</span><span> " + Math.floor(item.stockQty) + " unit</span></div>";
-                                    row = row + "<div><span>" + item.street + "&nbsp;" + item.district + "&nbsp;" + item.city + "&nbsp;" + item.region + "&nbsp;" + item.postcode + "</span></div>";
-                                    row = row + "<div>" + item.phone + "</div>";
-
-                                    popUpContent = popUpContent + row;
-                                }
-
-                            } else {
-                                popUpContent = $.mage.__('No available stores found.');
-                            }
-
-                            $("#popup-modal").html(popUpContent);
-                            $("#popup-modal").modal("openModal");
-
-                        },
-
-                        error: function (xhr, status, errorThrown) {
-                            let popUpContent = $.mage.__('No available stores found.');
-
-                            $("#popup-modal").html(popUpContent);
-                            $("#popup-modal").modal("openModal");
-
+    <script>
+        require(
+            [
+                'jquery',
+                'Magento_Ui/js/modal/modal',
+                'Magento_Catalog/js/product/view/product-ids-resolver'
+            ],
+            function (
+                $,
+                modal,
+                idsResolver
+            ) {
+                var options = {
+                    type: 'popup',
+                    responsive: true,
+                    innerScroll: true,
+                    title: $.mage.__('Check Availability'),
+                    buttons: [{
+                        text: $.mage.__('Close'),
+                        class: '',
+                        click: function () {
+                            this.closeModal();
                         }
+                    }]
+                };
 
-                    });
+                var popup = modal(options, $('#popup-modal'));
+
+                // When click show availability link
+                $("#show-availability").on('click', function () {
+                    
+
+                    var form= $('form#product_addtocart_form'),
+                        validation = true,
+                        getStockUrl = "<?php echo $this->getUrl() . 'stock-data/availability/stock/'?>",
+                        data = {},
+                        productType = $(this).attr("data-type"),
+                        formdata = form.serializeArray();
+                        form.serializeArray().map(function(x){data[x.name] = x.value; })
+                        if (productType == "configurable") {
+                            $.each(data,function(key,value){
+                                if(key.indexOf('super_attribute') != -1 && value == ''){
+                                    $('#available-source-message').html($.mage.__('please select options.'));    
+                                    validation = false;
+                                    setTimeout(function(){
+                                        $('#available-source-message').html('');    
+                                    }, 2000);
+                                }
+                            })        
+                        }
+                        console.log(validation)
+                        if(validation){
+                            $.ajax({
+                                url: getStockUrl,
+                                type: "GET",
+                                data:data,
+                                showLoader: false,
+                                dataType: 'json',
+                                success: function (response) {
+                                    let popUpContent = "";
+                                    if (response.response) {
+                                        $.each(response.locationData,function(sku,items){
+                                            $.each(items,function(key,item){
+                                                let row = "<div><span>SKU:" + sku + "</span></div>";
+                                                row += "<div><span>" + item.locationName + "</span><span> " + Math.floor(item.stockQty) + " unit</span></div>";
+                                                row += "<div><span>" + item.street + "&nbsp;" + item.district + "&nbsp;" + item.city + "&nbsp;" + item.region + "&nbsp;" + item.postcode + "</span></div>";
+                                                row += "<div>" + item.phone + "</div>";
+                                                popUpContent = popUpContent + row;    
+                                            });
+                                        });
+                                    } else {
+                                        popUpContent = $.mage.__('No available stores found.');
+                                    }
+                                    $("#popup-modal").html(popUpContent);
+                                    $("#popup-modal").modal("openModal");
+                                },
+                                error: function (xhr, status, errorThrown) {
+                                    let popUpContent = $.mage.__('No available stores found.');
+                                    
+                                }
+                            });
+                        }
                 });
-
-            });
-        }
-    );
-
-    ////////////////////////
-
-
-</script>
+            }
+        );
+    </script>
+<?php endif ?>

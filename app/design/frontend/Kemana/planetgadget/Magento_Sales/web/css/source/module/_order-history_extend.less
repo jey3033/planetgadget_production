@@ -26,3 +26,27 @@
         }
     }
 }
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .account {
+        .block-order-details-view {
+            margin-bottom: 0 !important;
+
+            .block-content {
+                .box {
+                    &.box-order-billing-method {
+                        margin-bottom: 0 !important;
+
+                        .payment-method {
+                            margin-bottom: 0 !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
