@@ -22,10 +22,46 @@
 
             .ui-datepicker-prev,
             .ui-datepicker-next {
-                top: 10px;
+                top: 0;
+                height: 38px;
+                width: 37px;
+                border-radius: 5px;
+                background: @color-pg-light-gray3;
+
+                &:hover {
+                    background: @color-pg-light-gray2;
+                }
+
+                span {
+                    border: none;
+                    margin-left: -5px;
+                    top: 0;
+                    margin-top: 0;
+
+                    .lib-icon-font(
+                        @icon-pg-down,
+                        @_icon-font-size: 10px,
+                        @_icon-font-line-height: 37px,
+                        @_icon-font-color: @kemana-primary-brand-color);
+                }
+            }
+
+            .ui-datepicker-prev {
+                right: 47px;
+                left: unset;
+
+                span {
+                    .lib-icon-font(
+                        @icon-pg-up,
+                        @_icon-font-size: 10px,
+                        @_icon-font-line-height: 37px,
+                        @_icon-font-color: @kemana-primary-brand-color);
+                }
             }
 
             .ui-datepicker-title {
+                margin-inline: 0 150px;
+
                 select {
                     border: none;
                     padding: 13px 15px 12px;
@@ -93,5 +129,28 @@
                 }
             }
         }
+
+        .ui-datepicker-calendar {
+            .ui-datepicker-week-col {
+                display: none;
+            }
+        }
+
+        .ui-datepicker-buttonpane {
+            border-top: none;
+
+            button {
+                .lib-line-height(33);
+                padding: 0 10px;
+                background: transparent;
+                border: none;
+
+                &:hover {
+                    background: @kemana-secondary-brand-color;
+                }
+
+            }
+        }
+
     }
 }

@@ -38,37 +38,25 @@
     }
 
     .order-links {
-        width: fit-content;
-        border-radius: 5px 5px 0 0;
-        .lib-css(border, @account-table-border);
-        border-bottom: none;
+        border-radius: 5px;
+        .lib-css(border, 1px solid @color-pg-light-gray);
 
         .item {
             .lib-font-size(12);
             color: @kemana-primary-brand-color;
             text-transform: none;
-            background: @color-pg-light-gray3;
             border: none;
 
             a,
             strong {
-                padding: 13px @indent__base;
-            }
-
-            &:first-child {
-                border-radius: 5px 0 0 0;
-            }
-
-            &:last-child {
-                border-radius: 0 5px 0 0;
+                padding: 10px @indent__base;
+                font-weight: @font-weight__heavier;
             }
         }
     }
 
     .order-details-items {
-        border-radius: 0 5px 5px 5px;
         padding-top: 10px;
-        margin-bottom: 40px;
 
         &.invoice,
         &.shipments {
@@ -149,6 +137,7 @@
                         .price {
                             .lib-font-size(12);
                             color: @kemana-primary-brand-color;
+                            font-weight: @font-weight__heavier;
                         }
                     }
                 }
@@ -196,5 +185,89 @@
                 display: none;
             }
         }
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .order-links {
+        .item {
+            border-radius: 5px;
+
+            a,
+            strong {
+            }
+        }
+    }
+
+    .order-details-items {
+        border-radius: 5px;
+        padding: 20px 10px;
+        margin-bottom: 20px;
+    }
+
+    .table-order-items,
+    .order-items {
+        .table:not(.cart) {
+            &:not(.totals) {
+                &:not(.table-comparison) {
+                    tbody {
+                        > tr {
+                            > td {
+                                border-bottom: none;
+
+                                &.name {
+                                    .lib-vendor-prefix-display();
+                                    margin-bottom: @indent__s;
+                                    padding-left: 0;
+
+                                    .item-details {
+                                        padding-left: 90px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .order-links {
+        width: fit-content;
+        border-radius: 5px 5px 0 0;
+        .lib-css(border, @account-table-border);
+        border-bottom: none;
+
+        .item {
+            background: @color-pg-light-gray3;
+
+            a,
+            strong {
+                padding: 13px @indent__base;
+            }
+
+            &:first-child {
+                border-radius: 5px 0 0 0;
+            }
+
+            &:last-child {
+                border-radius: 0 5px 0 0;
+            }
+        }
+    }
+
+    .order-details-items {
+        margin-bottom: 40px;
+        border-radius: 0 5px 5px 5px;
     }
 }

@@ -1,0 +1,20 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Magento\Framework\View\Element\Template $block */
+?>
+<p><img src="<?php echo $block->getViewFileUrl('images/Logout.svg'); ?>" alt="" /></p>
+<h1><?= $block->escapeHtml(__('Anda telah Logout')) ?></h1>
+<p><?= $block->escapeHtml(__('You have signed out and will go to our homepage in 5 seconds.')) ?></p>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Customer/js/logout-rredirect": {
+                "url": "<?= $block->escapeJs($block->escapeUrl($block->getUrl())) ?>"
+            }
+        }
+    }
+</script>
