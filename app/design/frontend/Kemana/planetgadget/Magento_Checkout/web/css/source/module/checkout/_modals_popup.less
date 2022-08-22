@@ -1,0 +1,182 @@
+// /**
+//  * Copyright © 2020 Kemana. All rights reserved.
+//  * @author Ashan Gunawardena <agunawardena@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+//
+//  Variables
+//  _____________________________________________
+
+@checkout-modal-popup__width: 640px;
+@checkout-modal-popup__width2: 420px;
+@checkout-modal-popup__height: 565px;
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .checkout-index-index {
+        .modal-popup {
+            .field-tooltip {
+                display: none;
+
+                .field-tooltip-content {
+                    &:extend(.abs-checkout-tooltip-content-position-top all);
+                }
+            }
+
+            .modal-inner-wrap {
+                .field {
+                    .control {
+                        &._with-tooltip {
+                            input {
+                                width: 100%;
+                            }
+                        }
+                    }
+                }
+
+                .modal-header {
+                    padding-top: 30px !important;
+                }
+
+                .modal-title {
+                    font-size: 20px;
+                    text-align: center;
+                    border-bottom: unset;
+                    text-transform: capitalize;
+                }
+
+                .autocompletegosendwrap {
+                    margin-top: 15px;
+                }
+            }
+
+            .modal-content {
+                padding-right: 6px;
+                margin-right: 6px;
+            }
+
+            .modal-footer {
+                .action-hide-popup {
+                    .lib-button-as-link(
+                        @_padding: 13px 30px 13px 20px
+                    );
+                    font-weight: @font-weight__heavier;
+                }
+
+                .pinpoint-map-confirm{
+                    border-radius: 20px;
+                }
+            }
+        }
+    }
+
+    .checkout-index-index {
+        aside.modal-popup.modal-slide._inner-scroll._show {
+            .modal-inner-wrap {
+                width: @checkout-modal-popup__width2;
+
+                .modal-footer {
+                    display: grid;
+
+                    .action-save-address{
+                        height: 40px;
+                    }
+
+                    .action-hide-popup {
+                        &:hover {
+                            text-decoration: none !important;
+                        }
+
+                        font-weight: bold;
+                        height: 40px;
+                        margin-top: 10px;
+                        border: 1px solid @primary__color__dark !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .checkout-index-index {
+        .modal-popup.modal-slide {
+            .modal-inner-wrap {
+                height: fit-content;
+                overflow: unset !important;
+                width: fit-content;
+             }
+
+             width: fit-content;
+        }
+
+        .action-close {
+            right: 15px;
+                &:before {
+                    color: @primary__color__dark !important;
+                }
+            }
+    }
+
+    checkout-index-index {
+        aside.modal-popup.modal-slide._inner-scroll._show {
+            #shipping-new-address-form{
+                display: grid;
+            }
+        }
+    }
+
+    .checkout-index-index {
+        aside.modal-popup.modal-slide._inner-scroll._show {
+            .modal-inner-wrap {
+                width: unset !important;
+            }
+        }
+    }
+
+    .fieldset{
+        .field[name*=".firstname"]{
+            width: 100% !important;
+        }
+        .field[name*=".lastname"]{
+            width: 100% !important;
+            margin: auto;
+        }
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .checkout-index-index {
+        .modal-popup {
+            #opc-new-shipping-address{
+                max-height: 453px;
+            }
+
+            .form-shipping-address {
+                .lib-css(max-width, @checkout-shipping-address__max-width);
+            }
+
+            .modal-inner-wrap {
+                .lib-css(width, @checkout-modal-popup__width);
+                .lib-css(height, @checkout-modal-popup__height);
+            }
+
+            #modal-content-16 {
+                margin-left: 10px;
+            }
+        }
+    }
+}

@@ -8,6 +8,8 @@
 //  Variables
 //  _____________________________________________
 @color-gray-line1: #E3E3E3;
+@color-lightyellow-bg: #FFF9E8;
+@color-oragne-bd: #FFC619;
 
 //
 //  Common
@@ -112,6 +114,10 @@
                         vertical-align: sub;
                     }
                 }
+
+                #checkout-shipping-method-load {
+                    margin-top: 50px;
+                }                
 
                 .action-select-store-pickup {
                     background: @color-pg-light-gray2 0% 0% no-repeat padding-box;
@@ -284,6 +290,47 @@
                     }
                 }
             }
+
+            .shipping-address-item{
+                margin-left: 0px;
+            }
+
+            .shipping-address-items{
+                margin-left: 20px;
+                padding: 50px 0;
+
+                .selected-item {
+                    background-color: @color-lightyellow-bg;
+                    border-color: @color-oragne-bd !important;
+                    border-radius: 5px;
+                    width: 278px;
+                    height: fit-content;
+                    line-height: 20px;
+                }
+
+                .not-selected-item {
+                    border-radius: 5px;
+                    width: 278px;
+                    height: fit-content;
+                    line-height: 20px;
+
+                }
+
+                span.username {
+                    font-weight: bold;
+                }
+
+            }            
+        }
+    }
+
+    .new-address-popup {
+        margin-top: -30px !important;
+
+        .action-show-popup {
+            margin-left: 20px;
+            background-color: @color-white;
+            border: 1px solid @primary__color__dark;
         }
     }
 }
@@ -388,7 +435,37 @@
                     }
                 }
             }
+
+            .action-show-popup {
+                width: 100%;
+            }
+
+            .shipping-address-item{
+                margin-left: 0 !important;
+                margin: 10px 0 10px;
+                width: 100% !important;
+            }
+
         }
+
+        .modal-inner-wrap {
+            .modal-content {
+                .opc-block-summary {
+                    margin-left: unset !important;
+                }
+            }
+        }
+
+        .new-address-popup {
+            margin: 0 0 0 !important;
+            .action-show-popup {
+                margin-left: 0 !important;
+            }
+        }
+
+        .shipping-address-items{
+            margin-left: 0 !important;
+        }        
     }
 }
 
