@@ -1,0 +1,220 @@
+// /**
+//  * Copyright © 2022 Kemana. All rights reserved.
+//  * @author Harshani Karunasekara <hkarunasekara@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .job-index-index {
+        .page-main {
+            max-width: unset;
+            padding-inline: 0;
+        }
+
+        .inner_container {
+            max-width: unset;
+            padding-inline: 0;
+
+            .fme_job_manager {
+                float: left;
+                margin-bottom: 50px;
+
+                .search_filters {
+                    background: url(../images/career-banner-2x.png) no-repeat;
+                    padding-block: 70px;
+                    border-bottom: none;
+                    margin-bottom: 30px;
+
+                    .search_filters_inner_container {
+                        max-width: 1080px;
+                        margin-inline: auto;
+                        text-align: center;
+                    }
+
+                    h2 {
+                        .lib-css(color, @color-white);
+                    }
+
+                    p {
+                        .lib-css(color, @color-white);
+                        margin-bottom: 30px;
+                    }
+
+                    button {
+                        .lib-button-primary();
+                        width: 90px;
+                        margin-left: 8px;
+                    }
+
+                    &.field {
+                        background: transparent;
+                        padding: 30px;
+                        border-bottom: 0;
+                        margin-bottom: 0;
+
+                        button {
+                            width: 100%;
+                            margin-left: 0;
+
+                            &:last-child {
+                                margin-top: 10px;
+                                .lib-button-white();
+                            }
+                        }
+                    }
+                }
+
+                .page_content_top {
+                    display: none;
+                }
+
+                .page_content_bottom {
+                    max-width: 1080px;
+                    margin-inline: auto;
+                }
+
+                .sidebar {
+                    width: 310px;
+                    background: @panel__background-color;
+                    border-radius: 5px;
+
+                    .title {
+                        border-bottom: 0;
+                        padding-bottom: 0;
+                        .lib-font-size(14);
+                        .lib-line-height(20);
+                        font-weight: @font-weight__bold;
+                        .lib-css(color, @kemana-primary-brand-color);
+                        position: relative;
+
+                        a {
+                            .lib-icon-font(
+                                @icon-pg-up-thick,
+                                @_icon-font-size: 10px,
+                                @_icon-font-position: after
+                            );
+
+                            &:after {
+                                position: absolute;
+                                background: none;
+                                right: 0;
+                                margin-top: 0;
+                            }
+                        }
+                    }
+
+                    .block {
+                        padding: 30px 30px 0;
+                        margin-bottom: 0;
+                        border: none;
+                        background: transparent;
+
+                        .show_more_d,
+                        .show_more_l{
+                            display: none;
+                        }
+                    }
+
+                    .selection {
+                        margin-bottom: 0;
+                        border-bottom: 1px solid @border-color__base;
+
+                        ul {
+                            padding-left: 28px;
+
+                            li {
+                                margin-bottom: 0;
+
+                                input[type=checkbox] {
+                                    &:not(old) + label {
+                                        background: none;
+                                        .lib-font-size(12);
+                                        .lib-line-height(20);
+                                        cursor: pointer;
+                                        padding-left: 28px;
+
+                                        &:before {
+                                            top: 0;
+                                        }
+                                    }
+                                }
+
+                                &:hover {
+                                    label {
+                                        .lib-css(color, @kemana-primary-brand-color) !important;
+                                        text-decoration: underline;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                #form-messages {
+                    float: right;
+                    padding: 30px;
+                    width: ~'calc(100% - 330px)';
+                    background: @panel__background-color;
+                    border-radius: 5px;
+                }
+
+                .listing {
+                    width: 100%;
+
+                    .block {
+                        border-bottom: 0;
+
+                        .title {
+                            padding: 0;
+                            margin-bottom: 0;
+                        }
+                    }
+                }
+            }
+        }
+
+        .jump_menu_container {
+            margin-left: 0;
+            width: 30%;
+            max-width: 310px;
+            margin-inline: 9px 8px;
+
+            &:first-child {
+                margin-left: 0;
+            }
+
+            .container {
+                padding-inline: 0;
+
+                > .dropdown {
+                    margin-right: 0;
+                }
+            }
+
+            .dropdown-select {
+                width: 100%;
+                height: 40px;
+                .lib-font-size(12);
+                font-family: unset;
+                .lib-css(color, @kemana-primary-brand-color);
+                font-weight: @font-weight__heavier;
+                border: 1px solid @border-color__base;
+                border-radius: 5px;
+            }
+
+            .dropdown {
+                &:before {
+                    display: none;
+                }
+
+                &:after {
+                    top: 10px;
+                }
+            }
+        }
+    }
+}

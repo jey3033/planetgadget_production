@@ -69,8 +69,8 @@
                 <height>265</height>
             </image>
             <image id="product_comparison_list" type="small_image">
-                <width>140</width>
-                <height>140</height>
+                <width>290</width>
+                <height>290</height>
             </image>
             <image id="product_page_image_large" type="image"/>
             <image id="product_page_image_medium" type="image">
