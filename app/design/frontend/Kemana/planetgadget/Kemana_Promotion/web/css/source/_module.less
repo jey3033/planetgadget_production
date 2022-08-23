@@ -16,24 +16,27 @@
                 .lib-vendor-prefix-flex-wrap(wrap);
 
                 .promotion-item {
-                    width: 33.33%;
-                    padding: 10px;
+                    .lib-vendor-prefix-display();
+                    .lib-vendor-prefix-flex-direction(column);
+                    width: ~'calc(33.33% - 20px)';
+                    height: 100%;
+                    margin: 10px;
+                    background: @panel__background-color;
+                    border-radius: 5px;
 
                     .image {
 
                     }
 
                     .promotion-description {
-                        background: @panel__background-color;
-                        border-radius: 0 0 5px 5px;
-                        padding: 20px;
+                        padding: 18px 20px;
 
                         .promotion-description-inner {
                             .title {
                                 .lib-font-size(14);
                                 .lib-line-height(20);
                                 font-weight: @font-weight__bold;
-                                margin-bottom: 20px;
+                                margin-bottom: 18px;
                             }
 
                             .short-content {
@@ -41,7 +44,7 @@
                             }
 
                             .read-more {
-
+                                display: none;
                             }
                         }
                     }
