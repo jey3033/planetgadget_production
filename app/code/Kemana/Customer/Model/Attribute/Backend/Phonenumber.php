@@ -1,4 +1,16 @@
 <?php 
+/**
+ * Copyright © 2022 PT Kemana Teknologi Solusi. All rights reserved.
+ * http://www.kemana.com
+ */
+
+/**
+ * @category Kemana
+ * @package  Kemana_Customer
+ * @license  Proprietary
+ *
+ * @author   Parth Godhani <pgodhani@kemana.com>
+ */
 
 namespace Kemana\Customer\Model\Attribute\Backend;
 
@@ -6,6 +18,10 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\CouldNotSaveException;
 
+/**
+ * Class Phonenumber
+ * @package Kemana\Customer\Model\Attribute\Backend
+ */
 class Phonenumber extends \Magento\Eav\Model\Entity\Attribute\Backend\AbstractBackend
 {
     /**

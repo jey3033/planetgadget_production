@@ -9,7 +9,7 @@
  * @package  Kemana_Customer
  * @license  Proprietary
  *
- * @author   Kristian Claridad <kclaridad@kemana.com>
+ * @author   Parth Godhani <pgodhani@kemana.com>
  */
 
 namespace Kemana\Customer\Setup\Patch\Data;
@@ -24,7 +24,7 @@ use Magento\Framework\Setup\Patch\DataPatchInterface;
 use Magento\Framework\Setup\Patch\PatchRevertableInterface;
 
 /**
- * Class CreateCustomerPhoneNumber
+ * Class UpdateCustomerPhoneNumber
  * @package Kemana\Customer\Setup\Patch\Data
  */
 class UpdateCustomerPhoneNumber implements DataPatchInterface, PatchRevertableInterface
