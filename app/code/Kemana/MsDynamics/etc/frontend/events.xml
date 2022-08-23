@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2022 PT Kemana Teknologi Solusi. All rights reserved.
+ * http://www.kemana.com
+ */
+
+/**
+ * @category Kemana
+ * @package  Kemana_MsDynamics
+ * @license  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ *
+ * @author   Achintha Madushan <amadushan@kemana.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="customer_register_success">
+        <observer name="kemana_customer_register_success"
+                  instance="Kemana\MsDynamics\Observer\CustomerRegisterSuccess"/>
+    </event>
+    <event name="customer_address_save_after">
+        <observer name="kemana_customer_address_save_after"
+                  instance="Kemana\MsDynamics\Observer\CustomerAddressSaveAfter"/>
+    </event>
+</config>
