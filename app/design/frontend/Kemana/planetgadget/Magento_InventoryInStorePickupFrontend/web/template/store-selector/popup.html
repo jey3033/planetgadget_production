@@ -5,6 +5,8 @@
  */
 -->
 <div id="store-selector-popup">
+    <br/>
+    <span class="store-selector-popup18-empty-query" data-bind="i18n: 'Tulis nama toko, provinsi, kota atau alamat'"></span>
     <div class="block block-search store-selector-search">
         <div class="field search">
             <label class="label" for="store-selector-search-input">
@@ -32,7 +34,9 @@
         </div>
     </div>
     <p class="store-selector-popup-no-locations" if="searchQuery() && nearbyLocations() && !nearbyLocations().length">
-        <translate args="'We were unable to find nearby locations for provided search query.'"/>
+        <span class="no-location-1" data-bind="i18n: 'Hasil tidak ditemukan'"></span>
+        <br/><br/>
+        <span class="no-location-2" data-bind="i18n: 'Maaf, kami tidak memiliki toko yang sesuai dengan kata kunci yang Anda ketik. Silahkan coba lagi dengan mengetik kata yang lain atau yang lebih umum.'"></span>
     </p>
     <p class="store-selector-popup-empty-query" ifnot="searchQuery()">
         <translate args="'Please provide postcode or city name to find nearest pickup locations.'"/>
@@ -42,11 +46,16 @@
             <!-- ko foreach: { data: nearbyLocations(), as: 'location' } -->
                 <!-- ko template: { name: $parent.storeSelectorPopupItemTemplate } --><!-- /ko -->
             <!-- /ko -->
-            <div class="action">
+            <!-- <div class="action">
                 <button click="submitselectPickupLocation()"><translate args="'Ship Here'"/></button>
+            </div> -->
+            <!-- <div class="map" id="store-map" style="width:300px;height: 500px;">
+            </div> -->
+            <div class="map" id="store-map">
             </div>
-            <div class="map" id="store-map" style="width:300px;height: 500px;">
-            </div>
+        </div>
+        <div class="action">
+            <button click="submitselectPickupLocation()"><span data-bind="i18n: 'PILIH TOKO'"></span></button>
         </div>
     </form>
 </div>

@@ -11,7 +11,8 @@
 @checkout-modal-popup__width: 640px;
 @checkout-modal-popup__width2: 420px;
 @checkout-modal-popup__height: 565px;
-
+@color-gray-border-1: #AEB4C1;
+@color-gray-text-1: #808A9F;
 //
 //  Common
 //  _____________________________________________
@@ -99,6 +100,86 @@
                 }
             }
         }
+
+        aside.modal-popup.store-selector-popup.modal-slide._inner-scroll._show {
+            .modal-inner-wrap {
+                padding-right: 10px;
+
+                .modal-title{
+                    text-align: left;
+                }
+                .field.search {
+                    border: 1px solid @color-gray-border-1;
+                    border-radius: 5px;
+                }
+                #opc-store-selector-popup .block-search {
+                    border-bottom: unset;
+                    padding: 10px 0px;
+                }
+                .store-selector-popup-empty-query{
+                    display: none;
+                }
+                .store-selector-popup-table {
+                    .items{
+                        display: flex;
+                        border: 1px solid @color-gray-border-1;
+                        border-radius: 5px;
+                    }
+                    .location {
+                        display: block !important;
+                        padding: 10px;
+
+                        .col {
+                            flex-grow: unset;
+
+                            .location-address{
+                                //width: 210px;
+                                color: @primary__color__dark;
+                            }
+                        }
+                        .location-details{
+                            border-bottom: 1px solid @color-gray-border-1;
+                        }
+                        .col-location-action-flex{
+                            display: flex;
+
+                            .col-location-deatil-grid{
+                                .location-name{
+                                    font-size: 12px;
+                                    font-weight: bold;
+                                }
+                                .location-address{
+                                    margin-top: -10px;
+
+                                    a{
+                                        margin-top: 10px;
+                                        font-size: 10px;
+                                        font-weight: bold;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .action {
+                        button {
+                            width: 100%;
+                            margin-top: 20px;
+                        }
+                    }
+                }
+
+                #store-selector-popup{
+                    .store-selector-popup-no-locations{
+                        margin-top: -10px;
+
+                        .no-location-1{
+                            color: @color-gray-text-1;
+                            font-weight: bold;
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -141,6 +222,20 @@
                 width: unset !important;
             }
         }
+
+        aside.modal-popup.store-selector-popup.modal-slide._inner-scroll._show {
+            .modal-inner-wrap {
+                .field.search {
+                    height: 40px;
+                }
+                .store-selector-search {
+                    label.label {
+                        position: unset !important;
+                        margin-top: 8px;
+                    }
+                }
+            }
+        }      
     }
 
     .fieldset{
@@ -178,5 +273,32 @@
                 margin-left: 10px;
             }
         }
+
+        aside.modal-popup.store-selector-popup.modal-slide._inner-scroll._show {
+            .modal-inner-wrap {
+                width: 640px;
+                height: 642px;
+
+                .store-selector-popup-table {
+                    div#store-map {
+                        width: 50%;
+                        height: 100%;
+                    }
+                    .items{
+                        margin-top: -10px;
+                        height: 397px;    
+                    }
+                    .location {
+                        width: 54%;
+                        overflow-y: scroll;
+                    }
+                    .action {
+                        button {
+                            margin-top: 20px;
+                        }
+                    }                
+                }
+            }
+        }      
     }
 }
