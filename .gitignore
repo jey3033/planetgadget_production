@@ -7,15 +7,12 @@
 /.magento/local
 !/app
 !/app/*/
-!/app/etc
-!/app/etc/config.php
 !/app/code/**
 !/app/design/**
 !/app/i18n/**
 !/auth.json
 !/build_options.ini
 !/composer.json
-!/composer.lock
 !/magento-vars.php
 !/m2-hotfixes
 !/m2-hotfixes/**
@@ -23,3 +20,4 @@
 !/update
 !/update/.htaccess
 !/README.md
+!/op-exclude.txt
