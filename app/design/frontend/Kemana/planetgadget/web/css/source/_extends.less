@@ -275,6 +275,20 @@
                 .name {
                     font-weight: @font-weight__heavier;
                 }
+
+                .map-point-label {
+                    .lib-css(color, @color-pg-light-gray);
+                    .lib-icon-font(
+                        @icon-pg-pinpoint-not-set,
+                        @_icon-font-size: 14px,
+                        @_icon-font-color: @color-pg-light-gray,
+                        @_icon-font-margin: 0 8px 0 0
+                    );
+
+                    &:before {
+                        width: 14px;
+                    }
+                }
             }
 
             p {
@@ -652,6 +666,7 @@
                         .action {
                             &.add {
                                 margin-top: 0;
+                                .lib-button-white();
                             }
                         }
 
@@ -674,8 +689,13 @@
         }
 
         .additional {
-            margin-top: 55px;
+            margin-top: 20px;
             position: relative;
+            border-bottom: 1px solid @border-color__base;
+
+            &:last-child {
+                border-bottom: 0;
+            }
         }
 
         .action {
@@ -706,7 +726,7 @@
                     &.remove {
                         &:extend(.abs-action-remove-desktop all);
                         margin-left: 340px;
-                        top: 38px;
+                        top: 10px;
                         font-weight: @font-weight__bold;
                     }
                 }
@@ -1539,8 +1559,8 @@
             @_size: @checkout-tooltip-icon-arrow__font-size,
             @_color: @checkout-tooltip-content__background-color
         );
-        .lib-css(margin-top, @checkout-tooltip-icon-arrow__left);
-        right: @indent__s;
+        .lib-css(margin-top, -11px);
+        right: 89px;
         left: auto;
         top: 0;
     }
