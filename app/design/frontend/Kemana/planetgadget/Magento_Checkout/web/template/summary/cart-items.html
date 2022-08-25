@@ -7,7 +7,8 @@
 <div class="block items-in-cart" data-bind="mageInit: {'collapsible':{'openedState': 'active', 'active': isItemsBlockExpanded()}}">
     <div class="title" data-role="title">
         <strong role="heading" aria-level="1">
-            <span data-bind="i18n: 'Item Summary'" class="title"></span>
+            <span class="values" data-bind="html: getCartLineItemsCount()"></span>
+            <span data-bind="i18n: ' products in the cart'" class="title"></span>
         </strong>
     </div>
     <div class="content minicart-items" data-role="content">
