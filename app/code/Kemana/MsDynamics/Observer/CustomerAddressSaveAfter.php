@@ -112,9 +112,9 @@ class CustomerAddressSaveAfter implements \Magento\Framework\Event\ObserverInter
 
         $updateCustomerInErp = $this->erpCustomer->updateCustomerInErp($this->helper->getFunctionUpdateCustomer(), $dataToCustomer);
 
-        if (isset($updateCustomerInErp->customer_no)) {
+        if (isset($updateCustomerInErp[1]->customer_no)) {
             $this->helper->log('Customer ID ' . $customerAddress->getCustomerId() . ' updated with address', 'info');
-            $this->helper->log('Start Customer Address Save After Event.', 'info');
+            $this->helper->log('End Customer Address Save After Event.', 'info');
         }
 
         return true;

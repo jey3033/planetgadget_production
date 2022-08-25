@@ -59,8 +59,8 @@ class Customer
             $this->helper->getXmlRequestBodyToErp($apiFunction, $postParameters));
 
         if ($getCustomerFromErp['responseStatus']) {
-            if (isset(json_decode($getCustomerFromErp['response'])[1][0])) {
-                return json_decode($getCustomerFromErp['response'])[1][0];
+            if (isset(json_decode($getCustomerFromErp['response'])[1])) {
+                return json_decode($getCustomerFromErp['response']);
             }
         }
 
@@ -81,7 +81,7 @@ class Customer
 
         if ($getCustomerFromErp['responseStatus']) {
             if (isset(json_decode($getCustomerFromErp['response'])[1])) {
-                return json_decode($getCustomerFromErp['response'])[1];
+                return json_decode($getCustomerFromErp['response']);
             }
         }
 
@@ -102,7 +102,7 @@ class Customer
 
         if ($getCustomerFromErp['responseStatus']) {
             if (isset(json_decode($getCustomerFromErp['response'])[1])) {
-                return json_decode($getCustomerFromErp['response'])[1];
+                return json_decode($getCustomerFromErp['response']);
             }
         }
         return false;
@@ -122,7 +122,7 @@ class Customer
 
         if ($getCustomerFromErp['responseStatus']) {
             if (isset(json_decode($getCustomerFromErp['response'])[1])) {
-                return json_decode($getCustomerFromErp['response'])[1];
+                return json_decode($getCustomerFromErp['response']);
             }
         }
         return false;

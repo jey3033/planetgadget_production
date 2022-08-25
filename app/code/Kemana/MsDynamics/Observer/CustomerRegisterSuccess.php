@@ -98,21 +98,32 @@ class CustomerRegisterSuccess implements \Magento\Framework\Event\ObserverInterf
 
         $createCustomerInErp = $this->erpCustomer->createCustomerInErp($this->helper->getFunctionCreateCustomer(), $dataToCustomer);
 
-        if (isset($createCustomerInErp->customer_no)) {
+        if (isset($createCustomerInErp[0]->status_code) && $createCustomerInErp[0]->status_code == 901) {
+            $this->helper->log('This customer already exist in ERP. So ERP customer number is updating in Magento', 'info');
+
+            $dataToCustomer['customer_no'] = $createCustomerInErp[1]->customer_no;
+            $updateCustomer = $this->erpCustomer->updateCustomerInErp($this->helper->getFunctionUpdateCustomer(), $dataToCustomer);
+
+            if ($updateCustomer[1]->customer_no) {
+                $this->helper->log('Customer ' . $customer->getId() . " updated successfully in ERP after Successfully Register event. Because this customer already exist in the ERP", 'info');
+            }
+        }
+
+        if (isset($createCustomerInErp[1]->customer_no)) {
 
             $getCustomer = $this->customerRepository->getById($customer->getId());
-            $getCustomer->setCustomAttribute('ms_dynamic_customer_number', $createCustomerInErp->customer_no);
+            $getCustomer->setCustomAttribute('ms_dynamic_customer_number', $createCustomerInErp[1]->customer_no);
             $this->customerRepository->save($getCustomer);
 
             $ackCustomerData = [
                 "magento_customer_id" => $customer->getId(),
-                "customer_no" => $createCustomerInErp->customer_no
+                "customer_no" => $createCustomerInErp[1]->customer_no
             ];
 
             $ackCustomer = $this->erpCustomer->ackCustomer($this->helper->getFunctionAckCustomer(), $ackCustomerData);
 
-            if ($ackCustomer->customer_no) {
-                $this->helper->log('End Customer Register Success Event', 'info');
+            if ($ackCustomer[1]->customer_no) {
+                $this->helper->log('End Customer Register Success Event successfully and customer ' . $customer->getId() . ' sent to ERP', 'info');
             }
         }
 
