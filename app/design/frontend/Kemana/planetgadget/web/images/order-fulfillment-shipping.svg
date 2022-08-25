@@ -1,0 +1,13 @@
+<svg id="Order_Fulfillment_Shipping" data-name="Order Fulfillment Shipping" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="28" height="18" viewBox="0 0 28 18">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_4180" data-name="Rectangle 4180" width="28" height="18" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="Group_7031" data-name="Group 7031" clip-path="url(#clip-path)">
+    <path id="Path_8347" data-name="Path 8347" d="M25.71,9.6,20,6.987V3a1,1,0,0,0-1-1H4A1,1,0,0,0,3,3V14a1,1,0,0,0,1,1H6.2a2.152,2.152,0,0,0,3.987,0H19a.989.989,0,0,0,.974-.873h.67a2.143,2.143,0,0,0,4.256,0h.248a.5.5,0,0,0,.5-.451L26,10.106a.5.5,0,0,0-.29-.5m-2.938,5.412a1.156,1.156,0,1,1,1.156-1.156,1.158,1.158,0,0,1-1.156,1.156m1.942-2.076a2.144,2.144,0,0,0-3.962.189H20V8.086l4.969,2.277ZM4,3H19V14H10.336a2.144,2.144,0,0,0-4.274,0H4V3H4M7.043,14.186A1.156,1.156,0,1,1,8.2,15.342a1.157,1.157,0,0,1-1.155-1.156"/>
+    <line id="Line_578" data-name="Line 578" x2="0.001" transform="translate(3.999 3)" fill="#e3e3e3"/>
+    <rect id="Rectangle_4178" data-name="Rectangle 4178" width="9.845" height="1" transform="translate(6.314 5.506)"/>
+    <rect id="Rectangle_4179" data-name="Rectangle 4179" width="7.955" height="1" transform="translate(8.198 8.273)"/>
+  </g>
+</svg>

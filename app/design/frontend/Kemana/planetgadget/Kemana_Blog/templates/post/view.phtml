@@ -48,27 +48,26 @@ $color = $helper->getBlogConfig('general/font_color');
                         <?= /* @noEscape */ $kemanaBlogArticleHelper->getTimeAccordingToTimeZone($_post->getPublishDate(), 'd M Y')?>
                     </span>
                     <?php if ($categoryHtml = $block->getPostCategoryHtml($_post)) : ?>
-                        &nbsp;|&nbsp;
+                        <span class ="line">|</span>
                         <span><i class="mp-blog-icon mp-folder-open"></i>
                             <?= /* @noEscape */ __($categoryHtml); ?>
                         </span>
                     <?php endif; ?>
                     <?php if ($_post->getViewTraffic()) : ?>
-                        &nbsp;|&nbsp;
+                        <span class ="line">|</span>
                         <span><i class="mp-blog-icon mp-blog-traffic" aria-hidden="true">
                             </i> <?= /* @noEscape */ $block->escapeHtml(__($_post->getViewTraffic()))?>
                         </span>
                     <?php endif; ?>
                     <?php if ($authorName && $helper->showAuthorInfo()) : ?>
-                        &nbsp;|&nbsp;
+                        <span class ="line">|</span>
                         <span><i class="mp-blog-icon mp-blog-user">&nbsp;</i><?= /* @noEscape */ __('By: %1', '<a class="mp-info" href="' . $author->getUrl() . '">' . $authorName . '</a>') ?></span>
                         <?php if ($authorName != $modifierName && $modifierName) : ?>
-                            &nbsp;|&nbsp;
+                            <span class ="line">|</span>
                             <span><i class="mp-blog-icon mp-edit">&nbsp;</i><?= /* @noEscape */ __('Modify By: %1 at %2', '<a class="mp-info" href="' . $modifier->getUrl() . '">' . $modifierName . '</a>', $kemanaBlogArticleHelper->getTimeAccordingToTimeZone($_post->getUpdatedAt(),'d M Y')) ?></span>
                         <?php endif; ?>
                     <?php endif; ?>
                 </div>
-                <hr/>
             </div>
         </div>
     </div>

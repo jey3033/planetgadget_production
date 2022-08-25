@@ -21,5 +21,10 @@
                 <threshold_pdp_item_sold>5</threshold_pdp_item_sold>
             </frontend>
         </catalog>
+        <customer>
+            <address>
+                <dob_show>opt</dob_show>
+            </address>
+        </customer>
     </default>
 </config>

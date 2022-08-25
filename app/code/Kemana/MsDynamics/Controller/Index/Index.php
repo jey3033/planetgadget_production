@@ -28,26 +28,33 @@ class Index extends \Magento\Framework\App\Action\Action
     protected $_pageFactory;
     protected $customer;
     protected $helper;
+    protected $syncCustomersToErp;
 
     public function __construct(
         \Magento\Framework\App\Action\Context      $context,
         \Magento\Framework\View\Result\PageFactory $pageFactory,
         \Kemana\MsDynamics\Model\Api\Erp\Customer  $customer,
-        \Kemana\MsDynamics\Helper\Data             $helper
+        \Kemana\MsDynamics\Helper\Data             $helper,
+        \Kemana\MsDynamics\Cron\SyncCustomersToErp $syncCustomersToErp
     )
     {
         $this->customer = $customer;
         $this->_pageFactory = $pageFactory;
         $this->helper = $helper;
+        $this->syncCustomersToErp = $syncCustomersToErp;
 
         return parent::__construct($context);
     }
 
     public function execute()
     {
+        $this->syncCustomersToErp->syncMissingCustomersFromRealTimeSync();
+        echo "Done";
+        exit;
         // Get Customer By ID
-        $customerInErp = $this->customer->getCustomerInErp($this->helper->getFunctionGetCustomer(), '602156481005');
-        //exit;
+        $customerInErp = $this->customer->getCustomerInErp($this->helper->getFunctionGetCustomer(), '60215644000');
+        echo "done";
+        exit;
         //json_decode($customerInErp['return_value'])[1][0]
 
         //Create a customer
@@ -99,20 +106,20 @@ class Index extends \Magento\Framework\App\Action\Action
             "city" => "DENPASRA",
             "postcode" => ""
         ];*/
-        $dataToCustomer = [
-            "magento_customer_id" => "11111002",
-            "customer_no" => "6281112341003",
-            "name" => 'DDDDDDDDD',
-            "name_2" => 'FFFFFFFFFFFFFFf',
-            "middle_name" => "",
-            "dob" => "1986-08-05",
-            "email" => "amadushan2@kemana.com",
-            "address" => 'FFGFF ss fs fd sdfsdf',
-            "address_2" => 'rfswf esfw fwefwef',
-            "city" => 'rrfef',
-            "postcode" => '4545435'
-        ];
-        $newCustomer = $this->customer->updateCustomerInErp($this->helper->getFunctionUpdateCustomer(), $dataToCustomer);//081236009294
+        /*  $dataToCustomer = [
+              "magento_customer_id" => "11111002",
+              "customer_no" => "6281112341003",
+              "name" => 'DDDDDDDDD',
+              "name_2" => 'FFFFFFFFFFFFFFf',
+              "middle_name" => "",
+              "dob" => "1986-08-05",
+              "email" => "amadushan2@kemana.com",
+              "address" => 'FFGFF ss fs fd sdfsdf',
+              "address_2" => 'rfswf esfw fwefwef',
+              "city" => 'rrfef',
+              "postcode" => '4545435'
+          ];*/
+        // $newCustomer = $this->customer->updateCustomerInErp($this->helper->getFunctionUpdateCustomer(), $dataToCustomer);//081236009294
 
 
     }

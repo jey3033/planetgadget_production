@@ -14,7 +14,7 @@
         <div class="product-item-name-block">
             <strong class="product-item-name" data-bind="html: $parent.name"></strong>
             <!-- ko if: (JSON.parse($parent.options).length > 0)-->
-            <div class="product options" data-bind="mageInit: {'collapsible':{'openedState': 'active'}}">
+            <div class="product options" data-bind="mageInit: {'collapsible':{'openedState': null}}">
                 <span data-role="title" class="toggle"><!-- ko i18n: 'View Details' --><!-- /ko --></span>
                 <div data-role="content" class="content">
                     <strong class="subtitle"><!-- ko i18n: 'Options Details' --><!-- /ko --></strong>
