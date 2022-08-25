@@ -19,6 +19,10 @@
         <observer name="kemana_customer_register_success"
                   instance="Kemana\MsDynamics\Observer\CustomerRegisterSuccess"/>
     </event>
+    <event name="customer_account_edited">
+        <observer name="kemana_customer_account_edited"
+                  instance="Kemana\MsDynamics\Observer\CustomerAccountEdited"/>
+    </event>
     <event name="customer_address_save_after">
         <observer name="kemana_customer_address_save_after"
                   instance="Kemana\MsDynamics\Observer\CustomerAddressSaveAfter"/>
