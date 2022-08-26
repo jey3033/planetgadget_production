@@ -23,7 +23,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-<?php 
+<?php
       $currdatetime = $block->getCurrDateTime();
       $arrCurrDateTime = (array)$currdatetime;
       $arrCurrDateTime = $arrCurrDateTime['date'];
@@ -92,7 +92,7 @@
 						?>
                         <?php echo __($jobDescription)?>
                         <h3><?php echo __('Skills Required')?></h3>
-                        <p> <?php echo __($item[0]['jobs_required_skills'])?></p>
+                        <?php echo __($item[0]['jobs_required_skills'])?>
 
                         <h4><?php echo __('Job Details')?></h4>
                         <table>
@@ -195,9 +195,9 @@
                             };
 
                             var popup = modal(options, $('#events_popup'));
-                            $("#click-me").on('click', function() {
-                                $("#events_popup").modal("openModal");
-                            });
+                            // $("#click-me").on('click', function() {
+                            //     $("#events_popup").modal("openModal");
+                            // });
 
                         }
                     );
@@ -223,58 +223,62 @@
 
                     <div <?php if ($block->articlesHelper->getPopupEnable()):?> id="events_popup" style="display: none;"
                         <?php endif; ?> class="events_popup" <?php if(!($block->articlesHelper->getPopupEnable())):?>
-                        id="slide" <?php endif;?>>
-                        <div id="wrapper">
-                            <div class="inner_container">
-                                <div class="fme_job_manager">
-                                    <div class="popup_form">
-                                        <h3 class="legend"><span><?= $block->escapeHtml(__('Apply Now')) ?></span></h3>
-                                        <form action=<?php  echo $block->getAddApplicationUrl() ?> method="post"
-                                            enctype="multipart/form-data"
-                                            data-hasrequired="<?php echo __('* Required Fields') ?>"
-                                            data-mage-init='{"validation":{}}'>
-                                            <fieldset class="fieldset with-border">
-                                                <input name="jobs_id" id="jobs_id" class="input_field" type="hidden"
-                                                    value="<?php echo __($item[0]['jobs_id'])?>">
-                                                <input name="jobs_title" id="jobs_title" class="input_field"
-                                                    type="hidden" value="<?php echo __($item[0]['jobs_title'])?>">
-                                                <input name="jobs_job_type" id="jobs_job_type" class="input_field"
-                                                    type="hidden"
-                                                    value="<?php echo __($block->getDetailPageDepartment($item[0]['jobs_job_type'])) ?>">
-                                                <input name="jobs_select_departments" id="jobs_select_departments"
-                                                    class="input_field" type="hidden"
-                                                    value="<?php echo __($block->getDetailPageDepartment($item[0]['jobs_select_departments'])) ?>">
-                                                <input name="jobs_location" id="jobs_location" class="input_field"
-                                                    type="hidden"
-                                                    value="<?php echo __($block->getDetailPageDepartment($item[0]['jobs_location'])) ?>">
+                        <?php endif;?>>
 
-                                                <div class="field name required">
-                                                    <label class="label" for="name"><span><?= $block->escapeHtml(__('Enter full Name')) ?></span></label>
-                                                    <div class="control">
-                                                        <input name="fullname" id="fullname" title="Enter full Name" value=""
-                                                            class="form-control" type="text"
-                                                            placeholder="<?= $block->escapeHtml(__('Enter full name')) ?>"
-                                                            data-validate="{required:true}" aria-required="true">
-                                                    </div>
+                    </div>
+
+                    <div>
+                    <div id="wrapper">
+                        <div class="inner_container">
+                            <div class="fme_job_manager">
+                                <div class="popup_form">
+                                    <h3 id="slide" class="legend"><span><?= $block->escapeHtml(__('Apply Now')) ?></span></h3>
+                                    <form action=<?php  echo $block->getAddApplicationUrl() ?> method="post"
+                                          enctype="multipart/form-data"
+                                          data-hasrequired="<?php echo __('* Required Fields') ?>"
+                                          data-mage-init='{"validation":{}}'>
+                                        <fieldset class="fieldset with-border">
+                                            <input name="jobs_id" id="jobs_id" class="input_field" type="hidden"
+                                                   value="<?php echo __($item[0]['jobs_id'])?>">
+                                            <input name="jobs_title" id="jobs_title" class="input_field"
+                                                   type="hidden" value="<?php echo __($item[0]['jobs_title'])?>">
+                                            <input name="jobs_job_type" id="jobs_job_type" class="input_field"
+                                                   type="hidden"
+                                                   value="<?php echo __($block->getDetailPageDepartment($item[0]['jobs_job_type'])) ?>">
+                                            <input name="jobs_select_departments" id="jobs_select_departments"
+                                                   class="input_field" type="hidden"
+                                                   value="<?php echo __($block->getDetailPageDepartment($item[0]['jobs_select_departments'])) ?>">
+                                            <input name="jobs_location" id="jobs_location" class="input_field"
+                                                   type="hidden"
+                                                   value="<?php echo __($block->getDetailPageDepartment($item[0]['jobs_location'])) ?>">
+
+                                            <div class="field name required">
+                                                <label class="label" for="name"><span><?= $block->escapeHtml(__('Enter full Name')) ?></span></label>
+                                                <div class="control">
+                                                    <input name="fullname" id="fullname" title="Enter full Name" value=""
+                                                           class="form-control" type="text"
+                                                           placeholder="<?= $block->escapeHtml(__('Enter full name')) ?>"
+                                                           data-validate="{required:true}" aria-required="true">
                                                 </div>
-                                                <div class="field email required">
-                                                    <label class="label" for="email"><span><?= $block->escapeHtml(__('Email')) ?></span></label>
-                                                    <div class="control">
-                                                        <input name="email" id="email" title="Email" value=""
-                                                            class="form-control" type="email" placeholder="<?= $block->escapeHtml(__('Enter email')) ?>"
-                                                            data-validate="{required:true, 'validate-email':true}"
-                                                            aria-required="true">
-                                                    </div>
+                                            </div>
+                                            <div class="field email required">
+                                                <label class="label" for="email"><span><?= $block->escapeHtml(__('Email')) ?></span></label>
+                                                <div class="control">
+                                                    <input name="email" id="email" title="Email" value=""
+                                                           class="form-control" type="email" placeholder="<?= $block->escapeHtml(__('Enter email')) ?>"
+                                                           data-validate="{required:true, 'validate-email':true}"
+                                                           aria-required="true">
                                                 </div>
-                                                <div class="field dob">
-                                                    <label class="label" for="dob"><span><?= $block->escapeHtml(__('Date of Birth (optional)')) ?></span></label>
-                                                    <div class="control">
-                                                        <input name="dob" id="dob" title="Dob" value=""
-                                                            class="form-control" type="text"
-                                                            placeholder="<?= $block->escapeHtml(__('Day/Month/Year')) ?>">
-                                                    </div>
+                                            </div>
+                                            <div class="field dob">
+                                                <label class="label" for="dob"><span><?= $block->escapeHtml(__('Date of Birth (optional)')) ?></span></label>
+                                                <div class="control">
+                                                    <input name="dob" id="dob" title="Dob" value=""
+                                                           class="form-control" type="text"
+                                                           placeholder="<?= $block->escapeHtml(__('Day/Month/Year')) ?>">
                                                 </div>
-                                                <script>
+                                            </div>
+                                            <script>
                                                 require([
                                                     "jquery",
                                                     "mage/calendar"
@@ -284,80 +288,79 @@
                                                         buttonText: "<?php echo __('Select Date') ?>",
                                                     });
                                                 });
-                                                </script>
-                                                <div class="field telephone required">
-                                                    <label class="label" for="telephone"><span><span><?= $block->escapeHtml(__('Telephone')) ?></span></label>
-                                                    <div class="control">
-                                                        <input name="telephone" id="telephone" title="Telephone"
-                                                            value="" class="form-control"
-                                                            placeholder="<?= $block->escapeHtml(__('Example: 081234567890')) ?>" type="tel"
-                                                            data-validate="{required:true}" aria-required="true">
-                                                    </div>
+                                            </script>
+                                            <div class="field telephone required">
+                                                <label class="label" for="telephone"><span><span><?= $block->escapeHtml(__('Telephone')) ?></span></label>
+                                                <div class="control">
+                                                    <input name="telephone" id="telephone" title="Telephone"
+                                                           value="" class="form-control"
+                                                           placeholder="<?= $block->escapeHtml(__('Example: 081234567890')) ?>" type="tel"
+                                                           data-validate="{required:true}" aria-required="true">
                                                 </div>
-                                                <div class="field address">
-                                                    <label class="label" for="name"><span><?= $block->escapeHtml(__('Address')) ?></span></label>
-                                                    <div class="control">
-                                                        <input name="address" id="address" title="Address"
-                                                            placeholder="<?= $block->escapeHtml(__('Enter street name, no. house, etc')) ?>" value=""
-                                                            class="form-control" type="text"
-                                                            data-validate="{required:true}">
-                                                    </div>
+                                            </div>
+                                            <div class="field address">
+                                                <label class="label" for="name"><span><?= $block->escapeHtml(__('Address')) ?></span></label>
+                                                <div class="control">
+                                                    <input name="address" id="address" title="Address"
+                                                           placeholder="<?= $block->escapeHtml(__('Enter street name, no. house, etc')) ?>" value=""
+                                                           class="form-control" type="text"
+                                                           data-validate="{required:true}">
                                                 </div>
-                                                <div class="field upload-cv">
-                                                    <label class="label" for="cvfile"><span><?= $block->escapeHtml(__('Upload CV')) ?></span><br /></label>
-                                                    <span><?= $block->escapeHtml(__('Accepted files: .pdf, .jpg, .png, .doc/docx, .zip, .rar')) ?></span>
-                                                    <div class="control">
-                                                        <input name="cvfile" id="cvfile" title="CV File" value=""
-                                                            class="form-control input_field" type="file"
-                                                            data-validate="{required:true}">
-                                                    </div>
+                                            </div>
+                                            <div class="field upload-cv">
+                                                <label class="label" for="cvfile"><span><?= $block->escapeHtml(__('Upload CV')) ?></span></label>
+                                                <span class="upload-files"><?= $block->escapeHtml(__('Accepted files: .pdf, .jpg, .png, .doc/docx, .zip, .rar')) ?></span>
+                                                <div class="control">
+                                                    <input name="cvfile" id="cvfile" title="CV File" value=""
+                                                           class="form-control input_field" type="file"
+                                                           data-validate="{required:true}">
                                                 </div>
-                                                <div class="field upload-cover-letter">
-                                                    <label class="label" for="upload-cover-letter"><span><?= $block->escapeHtml(__('Upload Cover Letter')) ?></span><br /></label>
-                                                    <span><?= $block->escapeHtml(__('Accepted files: .pdf, .jpg, .png, .doc/docx, .zip, .rar')) ?></span>
-                                                    <div class="control">
-                                                        <input name="cover_letter_file" id="cover_letter_file"
-                                                            title="Cover Letter File" value=""
-                                                            class="form-control input_field" type="file">
-                                                    </div>
+                                            </div>
+                                            <div class="field upload-cover-letter">
+                                                <label class="label" for="upload-cover-letter"><span><?= $block->escapeHtml(__('Upload Cover Letter')) ?></span></label>
+                                                <span class="upload-files"><?= $block->escapeHtml(__('Accepted files: .pdf, .jpg, .png, .doc/docx, .zip, .rar')) ?></span>
+                                                <div class="control">
+                                                    <input name="cover_letter_file" id="cover_letter_file"
+                                                           title="Cover Letter File" value=""
+                                                           class="form-control input_field" type="file">
                                                 </div>
-                                                <div class="field upload-id-card">
-                                                    <label class="label" for="upload-id-card"><span><?= $block->escapeHtml(__('Upload ID Card')) ?></span><br /></label>
-                                                    <span><?= $block->escapeHtml(__('Accepted files: .pdf, .jpg, .png, .doc/docx, .zip, .rar')) ?></span>
-                                                    <div class="control">
-                                                        <input name="id_card_file" id="id_card_file"
-                                                            title="ID Card File" value=""
-                                                            class="form-control input_field" type="file">
-                                                    </div>
+                                            </div>
+                                            <div class="field upload-id-card">
+                                                <label class="label" for="upload-id-card"><span><?= $block->escapeHtml(__('Upload ID Card')) ?></span></label>
+                                                <span class="upload-files"><?= $block->escapeHtml(__('Accepted files: .pdf, .jpg, .png, .doc/docx, .zip, .rar')) ?></span>
+                                                <div class="control">
+                                                    <input name="id_card_file" id="id_card_file"
+                                                           title="ID Card File" value=""
+                                                           class="form-control input_field" type="file">
                                                 </div>
-                                                <div class="field upload-education-certificate">
-                                                <label class="label" for="upload-education-certificate"><span><?= $block->escapeHtml(__('Upload Education Certificate')) ?></span><br /></label>
-                                                    <span><?= $block->escapeHtml(__('Accepted files: .pdf, .jpg, .png, .doc/docx, .zip, .rar')) ?></span>
-                                                    <div class="control">
-                                                        <input name="education_cert_file" id="education_cert_file"
-                                                            title="Education Certificate File" value=""
-                                                            class="form-control input_field" type="file">
-                                                    </div>
+                                            </div>
+                                            <div class="field upload-education-certificate">
+                                                <label class="label" for="upload-education-certificate"><span><?= $block->escapeHtml(__('Upload Education Certificate')) ?></span></label>
+                                                <span class="upload-files"><?= $block->escapeHtml(__('Accepted files: .pdf, .jpg, .png, .doc/docx, .zip, .rar')) ?></span>
+                                                <div class="control">
+                                                    <input name="education_cert_file" id="education_cert_file"
+                                                           title="Education Certificate File" value=""
+                                                           class="form-control input_field" type="file">
                                                 </div>
-                                                <?php if($block->articlesHelper->isJobsCaptchaEnable()): ?>
+                                            </div>
+                                            <?php if($block->articlesHelper->isJobsCaptchaEnable()): ?>
                                                 <div class="g-recaptcha" name="recaptcha" id="recaptcha"
-                                                    data-sitekey="<?php echo $block->articlesHelper->getJobsCaptchaKey() ?>">
+                                                     data-sitekey="<?php echo $block->articlesHelper->getJobsCaptchaKey() ?>">
                                                 </div>
-                                                <?php endif; ?>
-                                                <div class="action-toolbar applynow-button">
-                                                    <div class="primary">
-                                                        <button type="submit"
+                                            <?php endif; ?>
+                                            <div class="action-toolbar applynow-button">
+                                                <div class="primary">
+                                                    <button type="submit"
                                                             class="action login primary"><span><?php echo __('SEND APPLICATION')?></span></button>
-                                                    </div>
                                                 </div>
-                                            </fieldset>
-                                        </form>
-                                    </div>
+                                            </div>
+                                        </fieldset>
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
-
+                    </div>
                     <div class="footer_bar clearfix"></div>
                 </div>
             </div>
