@@ -34,6 +34,22 @@
             padding-top: 0;
         }
     }
+
+    .pager {
+        .limiter {
+            float: right;
+
+            .limiter-label,
+            .limiter-text {
+                .lib-css(color, @toolbar-sorter-label__color);
+                font-weight: @font-weight__bold;
+            }
+
+            select.limiter-options {
+                background-color: @color-white;
+            }
+        }
+    }
 }
 
 //
@@ -60,6 +76,7 @@
     .toolbar-amount {
         padding: 20px 0 0;
     }
+
 }
 
 //

@@ -115,7 +115,11 @@
 
     .product-item {
         .price-box {
-            .lib-line-height(16);
+            .lib-line-height(24);
+
+            .price {
+                .lib-line-height(@product-price__font-size + 10);
+            }
         }
 
         .special-price {
