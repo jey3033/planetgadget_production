@@ -10,6 +10,12 @@
 
 & when (@media-common = true) {
     button,
+    a.action.primary {
+        .lib-css(border-radius, @button__border-radius);
+        text-transform: uppercase;
+    }
+
+    button,
     a.action.primary.shop-now {
         .lib-button-curved();
     }

@@ -11,7 +11,7 @@
             <?php /** @var \Kemana\Blog\Model\Post $post */
             foreach ($postCollection as $post): ?>
                 <div class="post-list-item col-mp<?= $block->isGridView() ? ' post-item-grid mp-6 mp-xs-12' : ' post-item-list mp-12'; ?>">
-                    <div class="post-item-wraper">
+                    <div class="post-item-wrapper">
                         <?php if ($post->getImage()): ?>
                             <div class="post-image">
                                 <a href="<?= $post->getUrl() ?>">
@@ -21,7 +21,7 @@
                                 </a>
                             </div>
                         <?php endif; ?>
-                        <div class="post-info-wraper">
+                        <div class="post-info-wrapper">
                             <h2 class="mp-post-title">
                                 <a class="post-link-title" title="<?= $block->escapeHtml($post->getName()); ?>"
                                    href="<?= $post->getUrl() ?>">
