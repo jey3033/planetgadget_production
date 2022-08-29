@@ -64,9 +64,9 @@ class Request
      * @param string $method
      * @return array|false
      */
-    public function apiTransport(string $apiFunction, $postParameters, string $method = 'POST')
+    public function apiTransport(string $apiFunction, string $soapAction, $postParameters, string $method = 'POST')
     {
-        $apiUrl = $this->helper->getApiUrl();
+        $apiUrl = $this->helper->getApiUrl().'/'.$apiFunction;
 
         $this->helper->log('Start API Call : ' . $apiFunction, 'info');
         $this->helper->log('Url : ' . $apiUrl, 'info');
@@ -81,7 +81,7 @@ class Request
         try {
             $this->curl->setHeaders([
                 'Content-Type' => 'application/xml',
-                'SoapAction' => $apiFunction
+                'SoapAction' => $soapAction
             ]);
 
             $this->curl->setOption(CURLOPT_TIMEOUT, 50000);
@@ -101,13 +101,14 @@ class Request
             $responseStatus = $this->curl->getStatus();
             $xmlResponseBody = $this->curl->getBody();
 
-            $precessedResponse = $this->xmlProcessor->processResponse($this->curl->getBody(), $responseStatus, $apiFunction);
+            $precessedResponse = $this->xmlProcessor->processResponse($this->curl->getBody(), $responseStatus, $apiFunction, $soapAction);
 
             if ($responseStatus == '500') {
                 $this->helper->log('Error Response : ' . $xmlResponseBody);
                 $this->helper->log('End API Call : ' . $apiFunction, 'info');
 
                 return [
+                    'curlStatus' => $responseStatus,
                     'responseStatus' => false,
                     'response' => $precessedResponse
                 ];
@@ -118,6 +119,7 @@ class Request
                 $this->helper->log('End API Call : ' . $apiFunction, 'info');
 
                 return [
+                    'curlStatus' => $responseStatus,
                     'responseStatus' => true,
                     'response' => $precessedResponse
                 ];

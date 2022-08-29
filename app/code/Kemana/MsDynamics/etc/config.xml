@@ -19,7 +19,7 @@
         <msdynamic>
             <general>
                 <is_enabled>0</is_enabled>
-                <url>http://35.219.26.124:17147/TEST/WS/SKA/Codeunit/Kemana</url>
+                <url>http://35.219.26.124:17147/TEST/WS/SKA/Page</url>
                 <username>apikemana</username>
                 <xmlns>urn:microsoft-dynamics-schemas/codeunit/Kemana</xmlns>
                 <enable_log>1</enable_log>

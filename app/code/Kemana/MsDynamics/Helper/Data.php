@@ -135,12 +135,20 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         return ConfigProvider::CREATE_CUSTOMER_IN_ERP;
     }
 
+    public function getSoapActionCreateCustomer() {
+        return ConfigProvider::CREATE_CUSTOMER_SOAP_ACTION;
+    }
+
     /**
      * @return mixed
      */
     public function getFunctionCustomerList()
     {
         return ConfigProvider::GET_CUSTOMER_LIST_IN_ERP;
+    }
+
+    public function getSoapActionGetCustomerList(){
+        return ConfigProvider::GET_CUSTOMER_LIST_SOAP_ACTION;
     }
 
     /**
@@ -159,12 +167,20 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         return ConfigProvider::ACK_CUSTOMER_IN_ERP;
     }
 
+    public function getSoapActionAckCustomer(){
+        return ConfigProvider::ACK_CUSTOMER_SOAP_ACTION;
+    }
+
     /**
      * @return mixed
      */
     public function getFunctionUpdateCustomer()
     {
         return ConfigProvider::UPDATE_CUSTOMER_IN_ERP;
+    }
+
+    public function getSoapActionUpdateCustomer(){
+        return ConfigProvider::UPDATE_CUSTOMER_SOAP_ACTION;
     }
 
     /**
@@ -188,15 +204,63 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      * @param $postParameters
      * @return string
      */
-    public function getXmlRequestBodyToErp($apiFunction, $postParameters): string
+    public function getXmlRequestBodyToErp($apiFunction, $soapAction, $postParameters): string
     {
         return '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
                 <Body>
-                    <' . $apiFunction . ' xmlns="' . $this->getApiXmnls() . '">
-                        ' . $postParameters . '
-                    </' . $apiFunction . '>
+                        <' . $soapAction . ' xmlns="' . $this->getApiXmnls() ."/".$apiFunction. '">
+                            <'.$apiFunction.'>
+                                ' . $postParameters . '
+                            </'.$apiFunction.'>
+                        </' . $soapAction . '>
                 </Body>
         </Envelope>';
     }
 
+    /**
+     * @param $pureArray
+     * @return string
+     */
+    public function convertArrayToXml($pureArray): string
+    {
+        $xmlOutput = '';
+
+        foreach ($pureArray as $nodeName => $nodeValue) {
+            if (!$nodeValue) {
+                $xmlOutput .= '<'.$nodeName.'/>';
+                continue;
+            }
+
+            $xmlOutput .= '<'.$nodeName.'>'.$nodeValue.'</'.$nodeName.'>';
+        }
+
+        return $xmlOutput;
+    }
+
+    /**
+     * @param $errorMessage
+     * @return bool
+     */
+    public function checkAlreadyExistCustomerError($errorMessage): bool
+    {
+        $arrayMessage = explode(" ", $errorMessage);
+
+        if (isset($arrayMessage[1])) {
+            unset($arrayMessage[1]);
+        }
+
+        if (!count(array_diff($arrayMessage, $this->getCustomerAlreadyExistErrorInErp()))) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @return array
+     */
+    public function getCustomerAlreadyExistErrorInErp(): array
+    {
+        return ConfigProvider::CUSTOMER_ALREADY_EXIST_MESSAGE_ARRAY;
+    }
 }
