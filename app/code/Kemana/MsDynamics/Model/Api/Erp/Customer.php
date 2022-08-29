@@ -69,21 +69,22 @@ class Customer
 
     /**
      * @param $apiFunction
-     * @param array $customerData
+     * @param $customerData
      * @return false|mixed
      */
-    public function createCustomerInErp($apiFunction, array $customerData = [])
+    public function createCustomerInErp($apiFunction, $soapAction, $customerData)
     {
-        $postParameters = '<json>[' . json_encode($customerData) . ']</json>';
+        $postParameters = $customerData;
 
-        $getCustomerFromErp = $this->request->apiTransport($apiFunction,
-            $this->helper->getXmlRequestBodyToErp($apiFunction, $postParameters));
+        $getCustomerFromErp = $this->request->apiTransport($apiFunction, $soapAction,
+            $this->helper->getXmlRequestBodyToErp($apiFunction, $soapAction, $postParameters));
 
-        if ($getCustomerFromErp['responseStatus']) {
-            if (isset(json_decode($getCustomerFromErp['response'])[1])) {
-                return json_decode($getCustomerFromErp['response']);
+        //if ($getCustomerFromErp['responseStatus']) {
+            if (isset($getCustomerFromErp['response'])) {
+                return $getCustomerFromErp;
             }
-        }
+       // }
+
 
         return false;
     }
@@ -95,7 +96,7 @@ class Customer
      */
     public function ackCustomer($apiFunction, array $customerData = [])
     {
-        $postParameters = '<json>[' . json_encode($customerData) . ']</json>';
+        $postParameters = $customerData;
 
         $getCustomerFromErp = $this->request->apiTransport($apiFunction,
             $this->helper->getXmlRequestBodyToErp($apiFunction, $postParameters));
@@ -113,18 +114,17 @@ class Customer
      * @param array $customerData
      * @return false|mixed
      */
-    public function updateCustomerInErp($apiFunction, array $customerData = [])
+    public function updateCustomerInErp($apiFunction, $soapAction, $customerData = [])
     {
-        $postParameters = '<json>[' . json_encode($customerData) . ']</json>';
+        $postParameters = $customerData;
 
-        $getCustomerFromErp = $this->request->apiTransport($apiFunction,
-            $this->helper->getXmlRequestBodyToErp($apiFunction, $postParameters));
+        $getCustomerFromErp = $this->request->apiTransport($apiFunction,$soapAction,
+            $this->helper->getXmlRequestBodyToErp($apiFunction, $soapAction,$postParameters));
 
-        if ($getCustomerFromErp['responseStatus']) {
-            if (isset(json_decode($getCustomerFromErp['response'])[1])) {
-                return json_decode($getCustomerFromErp['response']);
-            }
+        if (isset($getCustomerFromErp['response'])) {
+            return $getCustomerFromErp;
         }
+
         return false;
     }
 
