@@ -76,57 +76,68 @@ class CustomerRegisterSuccess implements \Magento\Framework\Event\ObserverInterf
 
         $customer = $observer->getEvent()->getCustomer();
 
-        $customerGroup = $this->customerGroupRepository->getById($customer->getGroupId());
-
         $dataToCustomer = [
-            "magento_customer_id" => $customer->getId(),
-            "phone_no" => $customer->getCustomAttribute('phonenumber')->getValue(),
-            "name" => $customer->getFirstname(),
-            "name_2" => $customer->getLastname(),
-            "middle_name" => "",
-            "dob" => "1986-08-05",
-            "email" => $customer->getEmail(),
-            "salutation" => "",
-            "gender" => "",
-            "created_date" => "",
-            "club_code" => strtoupper($customerGroup->getCode()),
-            "address" => "",
-            "address_2" => "",
-            "city" => "",
-            "postcode" => ""
+            "MagentoCustomerID" => $customer->getId(),
+            "CustomerNo" => $customer->getCustomAttribute('phonenumber')->getValue(),
+            "Name" => $customer->getFirstname(),
+            "Name2" => $customer->getLastname(),
+            "MiddleName" => "",
+            "DoB" => "1986-08-05",
+            "Email" => $customer->getEmail(),
+            "Salutation" => "",
+            "Gender" => "",
+            "Address" => "",
+            "Address2" => "",
+            "City" => "",
+            "Postcode" => ""
         ];
 
-        $createCustomerInErp = $this->erpCustomer->createCustomerInErp($this->helper->getFunctionCreateCustomer(), $dataToCustomer);
+        $dataToCustomer = $this->helper->convertArrayToXml($dataToCustomer);
 
-        if (isset($createCustomerInErp[0]->status_code) && $createCustomerInErp[0]->status_code == 901) {
+        $createCustomerInErp = $this->erpCustomer->createCustomerInErp($this->helper->getFunctionCreateCustomer(),
+            $this->helper->getSoapActionCreateCustomer(), $dataToCustomer);
+
+        if ($createCustomerInErp['curlStatus'] == 500 && $this->helper->checkAlreadyExistCustomerError($createCustomerInErp['response'])) {
             $this->helper->log('This customer already exist in ERP. So ERP customer number is updating in Magento', 'info');
 
-            $dataToCustomer['customer_no'] = $createCustomerInErp[1]->customer_no;
-            $updateCustomer = $this->erpCustomer->updateCustomerInErp($this->helper->getFunctionUpdateCustomer(), $dataToCustomer);
+            $updateCustomer = $this->erpCustomer->updateCustomerInErp($this->helper->getFunctionUpdateCustomer(),
+                $this->helper->getSoapActionUpdateCustomer(),$dataToCustomer);
 
-            if ($updateCustomer[1]->customer_no) {
+            if (isset($updateCustomer['response']['CustomerNo'])) {
+                $this->updateCustomerMsDynamicNumber($customer->getId(), $updateCustomer['response']['CustomerNo']);
+
                 $this->helper->log('Customer ' . $customer->getId() . " updated successfully in ERP after Successfully Register event. Because this customer already exist in the ERP", 'info');
             }
         }
 
-        if (isset($createCustomerInErp[1]->customer_no)) {
+        if (isset($createCustomerInErp['response']['CustomerNo'])) {
 
-            $getCustomer = $this->customerRepository->getById($customer->getId());
-            $getCustomer->setCustomAttribute('ms_dynamic_customer_number', $createCustomerInErp[1]->customer_no);
-            $this->customerRepository->save($getCustomer);
+            $this->updateCustomerMsDynamicNumber($customer->getId(), $createCustomerInErp['response']['CustomerNo']);
 
-            $ackCustomerData = [
-                "magento_customer_id" => $customer->getId(),
-                "customer_no" => $createCustomerInErp[1]->customer_no
-            ];
+            $this->helper->log('End Customer Register Success Event successfully and customer ' . $customer->getId() . ' sent to ERP', 'info');
 
-            $ackCustomer = $this->erpCustomer->ackCustomer($this->helper->getFunctionAckCustomer(), $ackCustomerData);
-
-            if ($ackCustomer[1]->customer_no) {
-                $this->helper->log('End Customer Register Success Event successfully and customer ' . $customer->getId() . ' sent to ERP', 'info');
-            }
         }
 
+    }
+
+    /**
+     * @param $customerId
+     * @param $customerNumber
+     * @return bool
+     */
+    private function updateCustomerMsDynamicNumber($customerId, $customerNumber): bool
+    {
+        try {
+            $getCustomer = $this->customerRepository->getById($customerId);
+            $getCustomer->setCustomAttribute('ms_dynamic_customer_number', $customerNumber);
+            $this->customerRepository->save($getCustomer);
+
+            return true;
+        } catch (\Exception $e) {
+            $this->helper->log('End Customer Register Success Event - Failed to update Customer Number in Magento for Customer ' . $customerId . ' sent/update to ERP. Error :'.$e->getMessage(), 'info');
+        }
+
+        return false;
     }
 
 }

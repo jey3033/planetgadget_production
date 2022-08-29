@@ -64,7 +64,7 @@ class XmlProcessor
      * @param $apiFunction
      * @return array|mixed
      */
-    public function processResponse($xmlResponseBody, $responseStatus, $apiFunction)
+    public function processResponse($xmlResponseBody, $responseStatus, $apiFunction, $soapAction)
     {
         if (!is_string($xmlResponseBody)) {
             throw new \InvalidArgumentException(sprintf('"%s" data type is invalid. String is expected.', gettype($xmlResponseBody)));
@@ -80,8 +80,16 @@ class XmlProcessor
 
         if ($responseStatus == "200") {
             if (isset($responseData['Soap:Body'])) {
-                if (isset($responseData['Soap:Body'][$apiFunction . '_Result']['return_value'])) {
-                    return $responseData['Soap:Body'][$apiFunction . '_Result']['return_value'];
+                if (isset($responseData['Soap:Body'][$soapAction . '_Result'][$apiFunction])) {
+                    return $responseData['Soap:Body'][$soapAction . '_Result'][$apiFunction];
+                }
+            }
+        }
+
+        if ($responseStatus == "500") {
+            if (isset($responseData['s:Body'])) {
+                if (isset($responseData['s:Body']['s:Fault']['faultstring']['_value'])) {
+                    return $responseData['s:Body']['s:Fault']['faultstring']['_value'];
                 }
             }
         }

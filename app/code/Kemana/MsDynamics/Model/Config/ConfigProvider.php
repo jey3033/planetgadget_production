@@ -52,12 +52,16 @@ class ConfigProvider
     /**
      * XML Path API function name insert new customer
      */
-    const CREATE_CUSTOMER_IN_ERP = 'InsertCustomer';
+    const CREATE_CUSTOMER_IN_ERP = 'customercreate';
+
+    const CREATE_CUSTOMER_SOAP_ACTION = 'Create';
 
     /**
      * XML Path API function name get customer list
      */
-    const GET_CUSTOMER_LIST_IN_ERP = 'GetCustomers';
+    const GET_CUSTOMER_LIST_IN_ERP = 'customer';
+
+    const GET_CUSTOMER_LIST_SOAP_ACTION = 'ReadMultiple';
 
     /**
      * XML Path API function name get single customer
@@ -67,12 +71,16 @@ class ConfigProvider
     /**
      * XML Path API function name Ack customer
      */
-    const ACK_CUSTOMER_IN_ERP = 'AckCustomer';
+    const ACK_CUSTOMER_IN_ERP = 'customerack';
+
+    const ACK_CUSTOMER_SOAP_ACTION = 'CreateMultiple';
 
     /**
      * XML Path API function name update customer
      */
-    const UPDATE_CUSTOMER_IN_ERP = 'UpdateCustomer';
+    const UPDATE_CUSTOMER_IN_ERP = 'customerupdate';
+
+    const UPDATE_CUSTOMER_SOAP_ACTION = 'Create';
 
     /**
      * XML Path API function name delete customer
@@ -90,5 +98,11 @@ class ConfigProvider
         '900' => 'Customer not found',
         '901' => 'Customer already exist',
         '999' => 'Customer ack – update failed',
+    ];
+
+    const CUSTOMER_ALREADY_EXIST_MESSAGE_ARRAY = [
+        0 => 'Customer',
+        1 => 'already',
+        2 => 'exist',
     ];
 }
