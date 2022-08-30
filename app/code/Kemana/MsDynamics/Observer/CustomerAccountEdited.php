@@ -74,29 +74,30 @@ class CustomerAccountEdited implements \Magento\Framework\Event\ObserverInterfac
             return;
         }
 
+        //TODO Remove this default DOB
+        $dob = "1986-08-05";
+        if ($customer->getDob()) {
+            $dob = $customer->getDob();
+        }
+
         $dataToCustomer = [
-            "magento_customer_id" => $customer->getId(),
-            "customer_no" => $customer->getCustomAttribute('ms_dynamic_customer_number')->getValue(),
-            "phone_no" => $customer->getCustomAttribute('phonenumber')->getValue(),
-            "name" => $customer->getFirstname(),
-            "name_2" => $customer->getLastname(),
-            "middle_name" => "",
-            "dob" => "1986-08-05",
-            "email" => $customer->getEmail(),
-            "salutation" => "",
-            "gender" => "",
-            "created_date" => "",
-            "address" => "",
-            "address_2" => "",
-            "city" => "",
-            "postcode" => ""
+            "MagentoCustomerID" => $customer->getId(),
+            "CustomerNo" => $customer->getCustomAttribute('phonenumber')->getValue(),
+            "Name" => $customer->getFirstname(),
+            "Name2" => $customer->getLastname(),
+            "DoB" => $dob,
+            "Email" => $customer->getEmail(),
         ];
 
-        $updateCustomerInErp = $this->erpCustomer->updateCustomerInErp($this->helper->getFunctionUpdateCustomer(), $dataToCustomer);
+        $dataToCustomer = $this->helper->convertArrayToXml($dataToCustomer);
 
-        if (isset($updateCustomerInErp[1]->customer_no)) {
-            $this->helper->log('Customer ' . $customer->getId() . ' firstname and last name updated', 'info');
-            $this->helper->log('End Customer Account Edit Event.', 'info');
+        $updateCustomerInErp = $this->erpCustomer->updateCustomerInErp($this->helper->getFunctionUpdateCustomer(),
+            $this->helper->getSoapActionUpdateCustomer(), $dataToCustomer);
+
+        if (isset($updateCustomerInErp['response']['CustomerNo'])) {
+            //$this->updateCustomerMsDynamicNumber($customer->getId(), $updateCustomerInErp['response']['CustomerNo']);
+
+            $this->helper->log('Customer ' . $customer->getId() . " updated successfully in ERP after Account Edit Success event", 'info');
         }
     }
 }

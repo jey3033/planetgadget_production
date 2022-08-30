@@ -83,6 +83,7 @@ class CustomerAddressSaveAfter implements \Magento\Framework\Event\ObserverInter
             $address2 = $customerAddress->getStreet()[1];
         }
 
+
         $getCustomer = $this->customerRepository->getById($customerAddress->getCustomerId());
         $erpCustomerNumber = $getCustomer->getCustomAttribute('ms_dynamic_customer_number');
 
@@ -92,27 +93,27 @@ class CustomerAddressSaveAfter implements \Magento\Framework\Event\ObserverInter
             return;
         }
 
+        //TODO Remove this default DOB
+        $dob = "1986-08-05";
+        if ($getCustomer->getDob()) {
+            $dob = $getCustomer->getDob();
+        }
+
         $dataToCustomer = [
-            "magento_customer_id" => $customerAddress->getCustomerId(),
-            "customer_no" => $erpCustomerNumber->getValue(),
-            "phone_no" => $getCustomer->getCustomAttribute('phonenumber')->getValue(),
-            "name" => $getCustomer->getFirstname(),
-            "name_2" => $getCustomer->getLastname(),
-            "middle_name" => "",
-            "dob" => "1986-08-05",
-            "email" => $getCustomer->getEmail(),
-            "salutation" => "",
-            "gender" => "",
-            "created_date" => "",
-            "address" => $address1,
-            "address_2" => $address2,
-            "city" => $customerAddress->getCity(),
-            "postcode" => $customerAddress->getPostcode()
+            "MagentoCustomerID" => $getCustomer->getId(),
+            "CustomerNo" => $getCustomer->getCustomAttribute('phonenumber')->getValue(),
+            "Address" => $address1,
+            "Address2" => $address2,
+            "City" => $customerAddress->getCity(),
+            "Postcode" => $customerAddress->getPostcode()
         ];
 
-        $updateCustomerInErp = $this->erpCustomer->updateCustomerInErp($this->helper->getFunctionUpdateCustomer(), $dataToCustomer);
+        $dataToCustomer = $this->helper->convertArrayToXml($dataToCustomer);
 
-        if (isset($updateCustomerInErp[1]->customer_no)) {
+        $updateCustomerInErp = $this->erpCustomer->updateCustomerInErp($this->helper->getFunctionUpdateCustomer(),
+            $this->helper->getSoapActionUpdateCustomer(), $dataToCustomer);
+
+        if (isset($updateCustomerInErp['response']['CustomerNo'])) {
             $this->helper->log('Customer ID ' . $customerAddress->getCustomerId() . ' updated with address', 'info');
             $this->helper->log('End Customer Address Save After Event.', 'info');
         }

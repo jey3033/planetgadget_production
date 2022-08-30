@@ -36,16 +36,20 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     protected $storeScope;
 
+    protected $customerRepository;
+
     /**
      * @param \Magento\Framework\App\Helper\Context $context
      * @param \Kemana\MsDynamics\Logger\Logger $logger
      */
     public function __construct(
-        \Magento\Framework\App\Helper\Context $context,
-        \Kemana\MsDynamics\Logger\Logger      $logger
+        \Magento\Framework\App\Helper\Context             $context,
+        \Kemana\MsDynamics\Logger\Logger                  $logger,
+        \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository
     )
     {
         $this->logger = $logger;
+        $this->customerRepository = $customerRepository;
         $this->storeScope = \Magento\Store\Model\ScopeInterface::SCOPE_STORE;
 
         parent::__construct($context);
@@ -135,7 +139,8 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         return ConfigProvider::CREATE_CUSTOMER_IN_ERP;
     }
 
-    public function getSoapActionCreateCustomer() {
+    public function getSoapActionCreateCustomer()
+    {
         return ConfigProvider::CREATE_CUSTOMER_SOAP_ACTION;
     }
 
@@ -147,7 +152,8 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         return ConfigProvider::GET_CUSTOMER_LIST_IN_ERP;
     }
 
-    public function getSoapActionGetCustomerList(){
+    public function getSoapActionGetCustomerList()
+    {
         return ConfigProvider::GET_CUSTOMER_LIST_SOAP_ACTION;
     }
 
@@ -167,7 +173,8 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         return ConfigProvider::ACK_CUSTOMER_IN_ERP;
     }
 
-    public function getSoapActionAckCustomer(){
+    public function getSoapActionAckCustomer()
+    {
         return ConfigProvider::ACK_CUSTOMER_SOAP_ACTION;
     }
 
@@ -179,7 +186,8 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         return ConfigProvider::UPDATE_CUSTOMER_IN_ERP;
     }
 
-    public function getSoapActionUpdateCustomer(){
+    public function getSoapActionUpdateCustomer()
+    {
         return ConfigProvider::UPDATE_CUSTOMER_SOAP_ACTION;
     }
 
@@ -208,10 +216,10 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     {
         return '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
                 <Body>
-                        <' . $soapAction . ' xmlns="' . $this->getApiXmnls() ."/".$apiFunction. '">
-                            <'.$apiFunction.'>
+                        <' . $soapAction . ' xmlns="' . $this->getApiXmnls() . "/" . $apiFunction . '">
+                            <' . $apiFunction . '>
                                 ' . $postParameters . '
-                            </'.$apiFunction.'>
+                            </' . $apiFunction . '>
                         </' . $soapAction . '>
                 </Body>
         </Envelope>';
@@ -227,11 +235,11 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 
         foreach ($pureArray as $nodeName => $nodeValue) {
             if (!$nodeValue) {
-                $xmlOutput .= '<'.$nodeName.'/>';
+                $xmlOutput .= '<' . $nodeName . '/>';
                 continue;
             }
 
-            $xmlOutput .= '<'.$nodeName.'>'.$nodeValue.'</'.$nodeName.'>';
+            $xmlOutput .= '<' . $nodeName . '>' . $nodeValue . '</' . $nodeName . '>';
         }
 
         return $xmlOutput;
@@ -262,5 +270,27 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public function getCustomerAlreadyExistErrorInErp(): array
     {
         return ConfigProvider::CUSTOMER_ALREADY_EXIST_MESSAGE_ARRAY;
+    }
+
+    /**
+     * @param $customerId
+     * @param $customerNumber
+     * @return bool
+     */
+    public function updateCustomerMsDynamicNumber($customerId, $customerNumber): bool
+    {
+        try {
+            $getCustomer = $this->customerRepository->getById($customerId);
+            $getCustomer->setCustomAttribute('ms_dynamic_customer_number', $customerNumber);
+            $this->customerRepository->save($getCustomer);
+
+            $this->helper->log('Successfully updated the MsDynamicCustomerNumber in Magento for customer ' . $customerId, 'info');
+
+            return true;
+        } catch (\Exception $e) {
+            $this->helper->log('End Customer Register Success Event - Failed to update Customer Number in Magento for Customer ' . $customerId . ' sent/update to ERP. Error :' . $e->getMessage(), 'info');
+        }
+
+        return false;
     }
 }
