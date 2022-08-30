@@ -1,0 +1,32 @@
+<!--
+/**
+ * KS_Logistic
+ *
+ * @see README.md
+ *
+ */
+-->
+
+<!-- ko if: (visible()) -->
+    <!-- ko text: address().prefix --><!-- /ko --> <span class="shipping-information-username"> <!-- ko text: address().firstname --><!-- /ko --> <!-- ko text: address().middlename --><!-- /ko -->
+    <!-- ko text: address().lastname --><!-- /ko --> </span> <!-- ko text: address().suffix --><!-- /ko --><br/>
+    <!-- ko text: address().street --><!-- /ko --><br/>
+    <!-- ko foreach: { data: address().customAttributes, as: 'element' } -->
+        <!-- ko if: (element['attribute_code'] === "district") -->
+            <!-- ko text: element['value'] --><!-- /ko -->,&nbsp;
+        <!-- /ko -->
+    <!-- /ko -->
+    <!-- ko if: (getDistrict()) -->
+    <!-- ko text: getDistrict() --><!-- /ko -->,&nbsp;
+    <!-- /ko --><!-- ko text: address().city --><!-- /ko -->, <span data-bind="html: address().region"></span> <!-- ko text: address().postcode --><!-- /ko --><br/>
+    <!-- ko text: getCountryName(address().countryId) --><!-- /ko --><br/>
+    <!-- ko if: (address().telephone) -->
+    <div class="shipping-information-phone"><span>T:</span><a data-bind="text: address().telephone, attr: {'href': 'tel:' + address().telephone}"></a></div>
+    <!-- /ko -->
+
+    <!-- ko if: (getMapPoint()) -->
+    <div class="pin-point"><span data-bind="i18n: 'Map Point:'"></span><text args="getMapPoint()"/></div>      
+    <!-- /ko -->
+    
+    <br/>
+<!-- /ko -->
