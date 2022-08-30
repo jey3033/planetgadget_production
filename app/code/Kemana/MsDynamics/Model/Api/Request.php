@@ -66,7 +66,7 @@ class Request
      */
     public function apiTransport(string $apiFunction, string $soapAction, $postParameters, string $method = 'POST')
     {
-        $apiUrl = $this->helper->getApiUrl().'/'.$apiFunction;
+        $apiUrl = $this->helper->getApiUrl() . '/' . $apiFunction;
 
         $this->helper->log('Start API Call : ' . $apiFunction, 'info');
         $this->helper->log('Url : ' . $apiUrl, 'info');

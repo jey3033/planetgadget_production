@@ -76,20 +76,20 @@ class CustomerRegisterSuccess implements \Magento\Framework\Event\ObserverInterf
 
         $customer = $observer->getEvent()->getCustomer();
 
+        //TODO Remove this default DOB
+        $dob = "1986-08-05";
+        if ($customer->getDob()) {
+            $dob = $customer->getDob();
+        }
+
         $dataToCustomer = [
             "MagentoCustomerID" => $customer->getId(),
             "CustomerNo" => $customer->getCustomAttribute('phonenumber')->getValue(),
             "Name" => $customer->getFirstname(),
             "Name2" => $customer->getLastname(),
             "MiddleName" => "",
-            "DoB" => "1986-08-05",
-            "Email" => $customer->getEmail(),
-            "Salutation" => "",
-            "Gender" => "",
-            "Address" => "",
-            "Address2" => "",
-            "City" => "",
-            "Postcode" => ""
+            "DoB" => $dob,
+            "Email" => $customer->getEmail()
         ];
 
         $dataToCustomer = $this->helper->convertArrayToXml($dataToCustomer);
@@ -101,10 +101,10 @@ class CustomerRegisterSuccess implements \Magento\Framework\Event\ObserverInterf
             $this->helper->log('This customer already exist in ERP. So ERP customer number is updating in Magento', 'info');
 
             $updateCustomer = $this->erpCustomer->updateCustomerInErp($this->helper->getFunctionUpdateCustomer(),
-                $this->helper->getSoapActionUpdateCustomer(),$dataToCustomer);
+                $this->helper->getSoapActionUpdateCustomer(), $dataToCustomer);
 
             if (isset($updateCustomer['response']['CustomerNo'])) {
-                $this->updateCustomerMsDynamicNumber($customer->getId(), $updateCustomer['response']['CustomerNo']);
+                $this->helper->updateCustomerMsDynamicNumber($customer->getId(), $updateCustomer['response']['CustomerNo']);
 
                 $this->helper->log('Customer ' . $customer->getId() . " updated successfully in ERP after Successfully Register event. Because this customer already exist in the ERP", 'info');
             }
@@ -112,32 +112,10 @@ class CustomerRegisterSuccess implements \Magento\Framework\Event\ObserverInterf
 
         if (isset($createCustomerInErp['response']['CustomerNo'])) {
 
-            $this->updateCustomerMsDynamicNumber($customer->getId(), $createCustomerInErp['response']['CustomerNo']);
+            $this->helper->updateCustomerMsDynamicNumber($customer->getId(), $createCustomerInErp['response']['CustomerNo']);
 
             $this->helper->log('End Customer Register Success Event successfully and customer ' . $customer->getId() . ' sent to ERP', 'info');
 
         }
-
     }
-
-    /**
-     * @param $customerId
-     * @param $customerNumber
-     * @return bool
-     */
-    private function updateCustomerMsDynamicNumber($customerId, $customerNumber): bool
-    {
-        try {
-            $getCustomer = $this->customerRepository->getById($customerId);
-            $getCustomer->setCustomAttribute('ms_dynamic_customer_number', $customerNumber);
-            $this->customerRepository->save($getCustomer);
-
-            return true;
-        } catch (\Exception $e) {
-            $this->helper->log('End Customer Register Success Event - Failed to update Customer Number in Magento for Customer ' . $customerId . ' sent/update to ERP. Error :'.$e->getMessage(), 'info');
-        }
-
-        return false;
-    }
-
 }
