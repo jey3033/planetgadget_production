@@ -36,7 +36,7 @@
 				flex-wrap: wrap;
 			}
 
-			a.a2a_counter {
+			.a2a_counter {
 				border: 1px solid @color-gray-primary;
 				width: 32px;
 				height: 32px;
@@ -52,22 +52,17 @@
 				span {
 					display: none;
 				}
-			}
-			
-			a.a2a_button_facebook {
+
+				.icon{
+					display: inline-block;
+					text-decoration: none;
 				
-				.icon {
-					display: inline-block;
-					text-decoration: none;
-					
-					&:before {
+					&:before{
 						-webkit-font-smoothing: antialiased;
 						-moz-osx-font-smoothing: grayscale;
 						font-size: 16px;
 						line-height: 28px;
 						color: @color-gray-primary;
-						content: "\e904";
-						font-family: 'icons-kemana-theme';
 						margin: 0;
 						vertical-align: top;
 						display: inline-block;
@@ -75,257 +70,90 @@
 						overflow: hidden;
 						speak: none;
 						text-align: center;
-					}
-					
-					&:hover {
-						&:before {
-							color: @primary__color__dark;
-						}
-					}
-				}
-			}
-			
-			a.a2a_button_twitter {
-				.icon {
-					display: inline-block;
-					text-decoration: none;
-					
-					&:before {
-						-webkit-font-smoothing: antialiased;
-						-moz-osx-font-smoothing: grayscale;
-						font-size: 12px;
-						line-height: 28px;
-						color: @color-gray-primary;
-						content: "\e90a";
 						font-family: 'icons-kemana-theme';
-						margin: 0;
-						vertical-align: top;
-						display: inline-block;
-						font-weight: normal;
-						overflow: hidden;
-						speak: none;
-						text-align: center;
 					}
 					
-					&:hover {
-						&:before {
+					&:hover{
+						&:before{
 							color: @primary__color__dark;
 						}
 					}
 				}
 			}
-			
-			a.a2a_button_pinterest {
-				.icon {
-					display: inline-block;
-					text-decoration: none;
-					
+
+			.a2a_button_facebook {
+				.icon{
 					&:before {
-						-webkit-font-smoothing: antialiased;
-						-moz-osx-font-smoothing: grayscale;
-						font-size: 16px;
-						line-height: 29px;
-						color: @color-gray-primary;
-						content: "\f231";
-						font-family: 'icons-kemana-theme';
-						margin: 0;
-						vertical-align: top;
-						display: inline-block;
-						font-weight: normal;
-						overflow: hidden;
-						speak: none;
-						text-align: center;
+						content: @icon-facebook;	
 					}
-					
-					&:hover {
-						&:before {
-							color: @primary__color__dark;
-						}
-					}
-				}
+				}		
 			}
 			
-			a.a2a_button_linkedin {
-				.icon {
-					display: inline-block;
-					text-decoration: none;
-					
+			.a2a_button_twitter {
+				.icon{
 					&:before {
-						-webkit-font-smoothing: antialiased;
-						-moz-osx-font-smoothing: grayscale;
-						font-size: 15px;
-						line-height: 28px;
-						color: @color-gray-primary;
-						content: "\f0e1";
-						font-family: 'icons-kemana-theme';
-						margin: 0;
-						vertical-align: top;
-						display: inline-block;
-						font-weight: normal;
-						overflow: hidden;
-						speak: none;
-						text-align: center;
+						content: @icon-twitter;
 					}
-					
-					&:hover {
-						&:before {
-							color: @primary__color__dark;
-						}
-					}
-				}
+				}		
 			}
 			
-			a.a2a_button_tumblr {
-				.icon {
-					display: inline-block;
-					text-decoration: none;
-					
+			.a2a_button_pinterest {
+				.icon{
 					&:before {
-						-webkit-font-smoothing: antialiased;
-						-moz-osx-font-smoothing: grayscale;
-						font-size: 16px;
-						line-height: 28px;
-						color: @color-gray-primary;
-						content: "\f173";
-						font-family: 'icons-kemana-theme';
-						margin: 0;
-						vertical-align: top;
-						display: inline-block;
-						font-weight: normal;
-						overflow: hidden;
-						speak: none;
-						text-align: center;
-					}
-					
-					&:hover {
-						&:before {
-							color: @primary__color__dark;
-						}
+						content: @icon-pinterest-p;	
 					}
 				}
 			}
 			
-			a.a2a_button_email {
-				.icon {
-					display: inline-block;
-					text-decoration: none;
-					
+			.a2a_button_linkedin {
+				.icon{
 					&:before {
-						-webkit-font-smoothing: antialiased;
-						-moz-osx-font-smoothing: grayscale;
-						font-size: 16px;
-						line-height: 28px;
-						color: @color-gray-primary;
-						content: "\e902";
-						font-family: 'icons-kemana-theme';
-						margin: 0;
-						vertical-align: top;
-						display: inline-block;
-						font-weight: normal;
-						overflow: hidden;
-						speak: none;
-						text-align: center;
-					}
-					
-					&:hover {
-						&:before {
-							color: @primary__color__dark;
-						}
+						content: @icon-linkedin;		
 					}
 				}
 			}
 			
-			a.a2a_button_google_plus {
-				.icon {
-					display: inline-block;
-					text-decoration: none;
-					
+			.a2a_button_tumblr {
+				.icon{
+					&:before {	
+						content: @icon-tumblr;	
+					}
+				}		
+			}
+			
+			.a2a_button_email {
+				.icon{
 					&:before {
-						-webkit-font-smoothing: antialiased;
-						-moz-osx-font-smoothing: grayscale;
-						font-size: 16px;
-						line-height: 28px;
-						color: @color-gray-primary;
-						content: "\e905";
-						font-family: 'icons-kemana-theme';
-						margin: 0;
-						vertical-align: top;
-						display: inline-block;
-						font-weight: normal;
-						overflow: hidden;
-						speak: none;
-						text-align: center;
+						content: @icon-email;		
 					}
-					
-					&:hover {
-						&:before {
-							color: @primary__color__dark;
-						}
-					}
-				}
+				}	
 			}
 			
-			a.a2a_button_instagram {
-				.icon {
-					display: inline-block;
-					text-decoration: none;
-					
+			.a2a_button_google_plus {
+				.icon{
 					&:before {
-						-webkit-font-smoothing: antialiased;
-						-moz-osx-font-smoothing: grayscale;
-						font-size: 15px;
-						line-height: 28px;
-						color: @color-gray-primary;
-						content: "\e929";
-						font-family: 'icons-kemana-theme';
-						margin: 0;
-						vertical-align: top;
-						display: inline-block;
-						font-weight: normal;
-						overflow: hidden;
-						speak: none;
-						text-align: center;
-					}
-					
-					&:hover {
-						&:before {
-							color: @primary__color__dark;
-						}
+						content: @icon-google;		
 					}
 				}
 			}
 			
-			a.a2a_button_whatsapp {
-				.icon {
-					display: inline-block;
-					text-decoration: none;
-					
+			.a2a_button_instagram {
+				.icon{
 					&:before {
-						-webkit-font-smoothing: antialiased;
-						-moz-osx-font-smoothing: grayscale;
-						font-size: 16px;
-						line-height: 28px;
-						color: @color-gray-primary;
-						content: "\e92c";
-						font-family: 'icons-kemana-theme';
-						margin: 0 0 0 1px;
-						vertical-align: top;
-						display: inline-block;
-						font-weight: normal;
-						overflow: hidden;
-						speak: none;
-						text-align: center;
+						content: @icon-instagram;		
 					}
-					
-					&:hover {
-						&:before {
-							color: @primary__color__dark;
-						}
+				}	
+			}
+			
+			.a2a_button_whatsapp {
+				.icon{
+					&:before {	
+						content: @icon-whatsapp;
 					}
 				}
 			}
 			
-			a.a2a_dd {
+			.a2a_dd {
 				display: inline-block;
 				text-decoration: none;
 				
@@ -335,7 +163,7 @@
 					font-size: 21px;
 					line-height: 29px;
 					color: @color-gray-primary;
-					content: "\e61c";
+					content: @icon-expand;
 					font-family: 'icons-kemana-theme';
 					margin: 0;
 					vertical-align: top;
