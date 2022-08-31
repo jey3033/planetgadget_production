@@ -17,7 +17,7 @@
  */
 ?>
 <div class="social-share">
-    <div class="title"><?= /* @escapeNotVerified */ __('Share') ?></div>
+    <div class="title"><span data-bind="i18n: 'Bagikan Artikel ini'"></span></div>
     <div class="<?= $block->getContainerClass($block->getDisplayType()) ?>">
         <div class="a2a_kit <?= $block->getDisplayType() ?> <?= $block->getButtonSize() ?> <?= $block->getFloatStyle() ?>">
             <?php foreach ($block->getEnableService() as $enableService) : ?>
