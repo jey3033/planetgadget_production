@@ -29,32 +29,40 @@ class Index extends \Magento\Framework\App\Action\Action
     protected $customer;
     protected $helper;
     protected $syncCustomersToErp;
+    protected $syncCustomersFromErp;
 
     public function __construct(
-        \Magento\Framework\App\Action\Context      $context,
-        \Magento\Framework\View\Result\PageFactory $pageFactory,
-        \Kemana\MsDynamics\Model\Api\Erp\Customer  $customer,
-        \Kemana\MsDynamics\Helper\Data             $helper,
-        \Kemana\MsDynamics\Cron\SyncCustomersToErp $syncCustomersToErp
+        \Magento\Framework\App\Action\Context        $context,
+        \Magento\Framework\View\Result\PageFactory   $pageFactory,
+        \Kemana\MsDynamics\Model\Api\Erp\Customer    $customer,
+        \Kemana\MsDynamics\Helper\Data               $helper,
+        \Kemana\MsDynamics\Cron\SyncCustomersToErp   $syncCustomersToErp,
+        \Kemana\MsDynamics\Cron\SyncCustomersFromErp $syncCustomersFromErp
     )
     {
         $this->customer = $customer;
         $this->_pageFactory = $pageFactory;
         $this->helper = $helper;
         $this->syncCustomersToErp = $syncCustomersToErp;
+        $this->syncCustomersFromErp = $syncCustomersFromErp;
 
         return parent::__construct($context);
     }
 
     public function execute()
     {
+        $d = 0;
+        $this->syncCustomersFromErp->syncCustomersFromErpToMagento();
+        echo "Donee";
+        exit;
+
         $this->syncCustomersToErp->syncMissingCustomersFromRealTimeSync();
         echo "Done";
         exit;
         // Get Customer By ID
-        $customerInErp = $this->customer->getCustomerInErp($this->helper->getFunctionGetCustomer(), '60215644000');
-        echo "done";
-        exit;
+        /* $customerInErp = $this->customer->getCustomerInErp($this->helper->getFunctionGetCustomer(), '60215644000');
+         echo "done";
+         exit;*/
         //json_decode($customerInErp['return_value'])[1][0]
 
         //Create a customer

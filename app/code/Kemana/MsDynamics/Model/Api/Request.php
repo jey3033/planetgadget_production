@@ -84,10 +84,15 @@ class Request
                 'SoapAction' => $soapAction
             ]);
 
-            $this->curl->setOption(CURLOPT_TIMEOUT, 50000);
             $this->curl->setOption(CURLOPT_FOLLOWLOCATION, 1);
             $this->curl->setOption(CURLOPT_SSL_VERIFYPEER, 0);
-            $this->curl->setOption(CURLOPT_TIMEOUT, 10);
+
+            if (($apiFunction == "customer" && $soapAction == "ReadMultiple")
+                || ($apiFunction == "customerack" && $soapAction == "CreateMultiple")) {
+                $this->curl->setOption(CURLOPT_TIMEOUT, 100000);
+            } else {
+                $this->curl->setOption(CURLOPT_TIMEOUT, 20);
+            }
 
             // Basic Authorization
             $this->curl->setCredentials($this->helper->getApiUsername(), $this->helper->getApiPassword());
@@ -114,8 +119,11 @@ class Request
                 ];
             }
 
-            if ($responseStatus == '200') {
-                $this->helper->log('Success Response : ' . $xmlResponseBody);
+            if ($responseStatus == '200' || $responseStatus == '100') {
+                if ($soapAction != "ReadMultiple") {
+                    $this->helper->log('Success Response : ' . $xmlResponseBody);
+                }
+
                 $this->helper->log('End API Call : ' . $apiFunction, 'info');
 
                 return [
