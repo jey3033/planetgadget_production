@@ -226,6 +226,42 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     }
 
     /**
+     * @param $apiFunction
+     * @param $postParameters
+     * @return string
+     */
+    public function getXmlRequestBodyToGetUnSyncCustomersFromApi($apiFunction, $soapAction, $postParameters): string
+    {
+        return '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+                <Body>
+                        <' . $soapAction . ' xmlns="' . $this->getApiXmnls() . "/" . $apiFunction . '">
+                            <filter>
+                                ' . $postParameters . '
+                            </filter>
+                        </' . $soapAction . '>
+                </Body>
+        </Envelope>';
+    }
+
+    /**
+     * @param $apiFunction
+     * @param $postParameters
+     * @return string
+     */
+    public function getXmlRequestBodyToErpAckListOfCustomers($apiFunction, $soapAction, $postParameters): string
+    {
+        return '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+                <Body>
+                        <' . $soapAction . ' xmlns="' . $this->getApiXmnls() . "/" . $apiFunction . '">
+                            <' . $apiFunction . '_List>
+                                ' . $postParameters . '
+                            </' . $apiFunction . '_List>
+                        </' . $soapAction . '>
+                </Body>
+        </Envelope>';
+    }
+
+    /**
      * @param $pureArray
      * @return string
      */
@@ -241,6 +277,50 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 
             $xmlOutput .= '<' . $nodeName . '>' . $nodeValue . '</' . $nodeName . '>';
         }
+
+        return $xmlOutput;
+    }
+
+    /**
+     * @param $ackCustomerData
+     * @return string
+     */
+    public function convertAckCustomerListToXml($ackCustomerData): string
+    {
+        $xmlOutput = '';
+
+        if (empty($ackCustomerData)) {
+            return $xmlOutput;
+        }
+
+        foreach ($ackCustomerData as $ackCustomer) {
+            $xmlOutput .= '<customerack>';
+            foreach ($ackCustomer as $nodeName => $nodeValue) {
+                $xmlOutput .= '<' . $nodeName . '>' . $nodeValue . '</' . $nodeName . '>';
+            }
+            $xmlOutput .= '</customerack>';
+
+        }
+
+        return $xmlOutput;
+    }
+
+    /**
+     * @param $ackCustomerData
+     * @return string
+     */
+    public function convertAckCustomerSingleToXml($ackCustomerData): string
+    {
+        $xmlOutput = '';
+
+        if (empty($ackCustomerData)) {
+            return $xmlOutput;
+        }
+        $xmlOutput .= '<customerack>';
+        foreach ($ackCustomerData as $nodeName => $nodeValue) {
+            $xmlOutput .= '<' . $nodeName . '>' . $nodeValue . '</' . $nodeName . '>';
+        }
+        $xmlOutput .= '</customerack>';
 
         return $xmlOutput;
     }
@@ -284,11 +364,11 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             $getCustomer->setCustomAttribute('ms_dynamic_customer_number', $customerNumber);
             $this->customerRepository->save($getCustomer);
 
-            $this->helper->log('Successfully updated the MsDynamicCustomerNumber in Magento for customer ' . $customerId, 'info');
+            $this->log('Successfully updated the MsDynamicCustomerNumber in Magento for customer ' . $customerId, 'info');
 
             return true;
         } catch (\Exception $e) {
-            $this->helper->log('End Customer Register Success Event - Failed to update Customer Number in Magento for Customer ' . $customerId . ' sent/update to ERP. Error :' . $e->getMessage(), 'info');
+            $this->log('End Customer Register Success Event - Failed to update Customer Number in Magento for Customer ' . $customerId . ' sent/update to ERP. Error :' . $e->getMessage(), 'info');
         }
 
         return false;

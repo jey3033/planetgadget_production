@@ -2,8 +2,12 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
     <group id="default">
-        <job name="custom_cronjob" instance="Kemana\MsDynamics\Cron\SyncCustomersToErp"
+        <job name="msDynamicCustomersFromMagentoToErp" instance="Kemana\MsDynamics\Cron\SyncCustomersToErp"
              method="syncMissingCustomersFromRealTimeSync">
+            <schedule>30 7 * * *</schedule>
+        </job>
+        <job name="msDynamicCustomersFromErpToMagento" instance="Kemana\MsDynamics\Cron\SyncCustomersFromErp"
+             method="syncCustomersFromErpToMagento">
             <schedule>30 7 * * *</schedule>
         </job>
     </group>
