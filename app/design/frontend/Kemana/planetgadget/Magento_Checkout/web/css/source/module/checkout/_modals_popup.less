@@ -13,6 +13,8 @@
 @checkout-modal-popup__height: 565px;
 @color-gray-border-1: #AEB4C1;
 @color-gray-text-1: #808A9F;
+
+
 //
 //  Common
 //  _____________________________________________
@@ -133,7 +135,6 @@
                             flex-grow: unset;
 
                             .location-address{
-                                //width: 210px;
                                 color: @primary__color__dark;
                             }
                         }
@@ -155,6 +156,13 @@
                                         margin-top: 10px;
                                         font-size: 10px;
                                         font-weight: bold;
+
+                                        &:before {
+                                            content: "\e906";
+                                            font-family: 'icons-kemana-theme';
+                                            font-weight: normal;
+                                            margin: -3px 6px 0 0;
+                                        }
                                     }
                                 }
                             }

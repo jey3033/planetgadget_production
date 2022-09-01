@@ -1,0 +1,26 @@
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<div class="payment-option _collapsible opc-payment-additional rewardpoints" id="reward_placer" data-bind="mageInit: {'collapsible':{'openedState': '_active'}}">
+    <div class="payment-option-title" data-role="title">
+        <span class="action action-toggle">
+            <span data-bind="i18n: 'Gunakan poin saya'"></span>
+            <span class="optional" data-bind="i18n: '(opsional)'"></span>
+        </span>
+    </div>
+    <div class="payment-option-content field choice" data-role="content">
+        <div class="payment-option-inner">
+            <span data-bind="html: $t(label)"></span>
+        </div>
+        <div class="actions-toolbar" id="reward-points-buttons-container">
+            <div class="primary">
+                <button data-role="opc-use-reward" class="action action-use" data-bind="click: useRewardPoints">
+                    <span data-bind="i18n: 'Gunakan Poin'"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

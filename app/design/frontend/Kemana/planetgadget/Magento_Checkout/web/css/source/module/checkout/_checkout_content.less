@@ -296,7 +296,7 @@
             }
 
             .shipping-address-items{
-                margin-left: 20px;
+                margin-left: 15px;
                 padding: 50px 0;
 
                 .selected-item {
@@ -319,7 +319,9 @@
                 span.username {
                     font-weight: bold;
                 }
-
+                .shipping-address-phone{
+                    display: flex;
+                }
             }            
         }
     }
@@ -371,6 +373,13 @@
                             margin-top: 10px;
                             font-size: 10px;
                             font-weight: bold;
+
+                            &:before {
+                                content: "\e906";
+                                font-family: 'icons-kemana-theme';
+                                font-weight: normal;
+                                margin: -3px 6px 0 0;
+                            }
                         }
                     }
                 }               
@@ -566,28 +575,14 @@
     .opc-wrapper{
         #store-selector{
             #checkout-step-store-selector{
-                .no-selected-location{
-
-                }
                 .actions-toolbar{
                     .secondary{
                         padding-left: unset !important;
                         width: 100%;
-
-                        button.button.action{
-
-                        }
                     }
                 }
                 .selected-location-details{
                     margin-left: 10px !important;
-
-                    .location-name{
-
-                    }
-                    .location-address{
-
-                    }
                 }               
             }
             .step-title{
@@ -642,6 +637,19 @@
                         }
                     }
                 }
+            }
+        }
+        .shipping-address-items{
+            .shipping-address-item{
+                margin-left: 15px;
+            }
+
+            .selected-item {
+                margin-right: unset !important;
+            }
+
+            .not-selected-item {
+                margin-right: unset !important;
             }
         }       
     }  
