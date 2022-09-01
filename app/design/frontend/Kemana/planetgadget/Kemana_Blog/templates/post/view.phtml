@@ -109,23 +109,7 @@ $color = $helper->getBlogConfig('general/font_color');
         </script>
     <?php endif;?>
     <?php if ($helper->getBlogConfig('share/enabled')) : ?>
-        <div class="mp-clear"></div>
-        <script type="text/javascript"
-                src="//s7.addthis.com/js/300/addthis_widget.js#pubid=<?= /* @noEscape */ $block->getPubId() ?>"
-                async="async"></script>
-        <div class="mp-blog-share">
-            <div class="mp-blog-share-container" id="sharing">
-                <div class="share-col-left">
-                    <h6><?= /* @noEscape */ $block->escapeHtml(__('Share this post')) ?></h6>
-                </div>
-                <div class="share-col-right">
-                    <div class="post-sharing-button">
-                        <div class="addthis_inline_share_toolbox"></div>
-                        <!--                    <div class="addthis_sharing_toolbox"></div>-->
-                    </div>
-                </div>
-            </div>
-        </div>
+        <?php echo $block->getChildBlock('km.SocialShare')->toHtml(); ?>
     <?php endif; ?>
     <?php if ($authorName && $helper->showAuthorInfo()) :
         $block->resizeImage($author->getImage(), '135x', \Kemana\Blog\Helper\Image::TEMPLATE_MEDIA_TYPE_AUTH);
