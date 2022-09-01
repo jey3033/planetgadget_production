@@ -58,6 +58,15 @@ class CustomerAccountEdited implements \Magento\Framework\Event\ObserverInterfac
      */
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
+        if ((isset($_SERVER['SCRIPT_NAME']) && $_SERVER['SCRIPT_NAME'] == 'bin/magento')
+            || (isset($_SERVER['SHELL']) && $_SERVER['SCRIPT_NAME'] == '/bin/bash')) {
+            return;
+        }
+
+        if (!$this->helper->isEnable()) {
+            return;
+        }
+
         $this->helper->log('Start Customer Account Edit Event.', 'info');
 
         $customer = $this->customerRepository->get($observer->getData('email'));

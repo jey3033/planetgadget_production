@@ -28,4 +28,22 @@
             </argument>
         </arguments>
     </type>
+    <type name="Magento\Framework\Console\CommandListInterface">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="msDynamicCustomersFromErpToMagento" xsi:type="object">
+                    Kemana\MsDynamics\Console\Customer\SyncFromErpToMagento
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\Console\CommandListInterface">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="msDynamicCustomersFromMagentoToErp" xsi:type="object">
+                    Kemana\MsDynamics\Console\Customer\SyncFromMagentoToErp
+                </item>
+            </argument>
+        </arguments>
+    </type>
 </config>
