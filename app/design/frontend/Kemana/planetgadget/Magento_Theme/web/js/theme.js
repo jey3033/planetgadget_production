@@ -287,7 +287,7 @@ define([
         slidesToShow: 6,
         slidesToScroll: 1,
         arrows: true,
-        dots: true,
+        dots: false,
         responsive: [
             {
                 breakpoint: 1023,
@@ -301,7 +301,8 @@ define([
                     arrows: false,
                     dots: false,
                     slidesToShow: 2,
-                    slidesToScroll: 2
+                    slidesToScroll: 2,
+                    rows: 2
                 }
             },
             {

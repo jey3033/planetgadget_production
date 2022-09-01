@@ -1,0 +1,344 @@
+@font-face {
+	font-family: lato;
+	src: url(../css/fonts/lato-regular-webfont.woff2) format("woff2"), url(../css/fonts/lato-regular-webfont.woff) format("woff");
+	font-style: normal;
+	font-weight: 400
+}
+
+@font-face {
+	font-family: lato;
+	src: url(../css/fonts/lato-bold-webfont.woff2) format("woff2"), url(../css/fonts/lato-bold-webfont.woff) format("woff");
+	font-style: normal;
+	font-weight: 700
+}
+
+@font-face {
+	font-family: lato;
+	src: url(../css/fonts/lato-black-webfont.woff2) format("woff2"), url(../css/fonts/lato-black-webfont.woff) format("woff");
+	font-style: normal;
+	font-weight: 900
+}
+
+body {
+	margin: 0;
+	font-family: lato;
+	font-weight: 400
+}
+
+.page-main {
+	display: flex;
+	flex-direction: column
+}
+
+.contact-email {
+	display: flex;
+	justify-content: center
+}
+
+.contact-email span {
+	margin: 0 20px
+}
+
+.contact-number,
+.support-email {
+	font-size: 14px;
+	font-weight: 700;
+	color: #141414;
+	text-decoration: none
+}
+
+.contact-number:hover,
+.support-email:hover {
+	color: #af272f
+}
+
+.contact-number:before {
+	content: "\e906";
+	font-size: 18px
+}
+
+.support-email:before {
+	content: "\e902"
+}
+
+.error-page {
+	max-width: 620px;
+	width: 100%;
+	margin: 82px auto 78px;
+	box-sizing: border-box
+}
+
+.error-page .error-page-wrapper {
+	width: 100%;
+	display: inline-block
+}
+
+.error-page .logo {
+	width: 100%;
+	display: inline-block;
+	text-align: center
+}
+
+.error-page .error-page-title {
+	width: 100%;
+	display: inline-block;
+	text-align: center;
+	margin-top: 25px;
+	margin-bottom: 24px
+}
+
+.error-page .error-page-title h1 {
+	font-size: 18px;
+	line-height: 26px;
+	letter-spacing: .18px;
+	margin: 0 0 16px;
+	font-weight: 900;
+	color: #000
+}
+
+.error-page .error-page-title p {
+	color: #000;
+	font-size: 16px;
+	line-height: 24px;
+	margin: 0
+}
+
+.error-page .error-page-title p span {
+	color: #000;
+	word-break: break-all;
+	font-weight: 900
+}
+
+.error-page .message {
+	padding: 21px 17px;
+	padding-left: 39px;
+	color: #000;
+	font-weight: 700;
+	font-size: 14px;
+	line-height: 20px;
+	margin-bottom: 27px;
+	position: relative;
+	border-radius: 6px
+}
+
+.error-page .message.message-info {
+	border: 1px solid #000
+}
+
+.error-page .message.message-info div:before {
+	content: '';
+	background: url(../images/message-warning.svg) no-repeat;
+	width: 14px;
+	height: 14px;
+	position: absolute;
+	left: 16px;
+	top: 24px;
+	background-size: contain
+}
+
+.error-page .message.message-error {
+	background: #CE0000
+}
+
+.error-page .message.message-error:before {
+	content: '';
+	background: #CE0000;
+	width: 5px;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0
+}
+
+.error-page .message.message-error div:before {
+	content: '';
+	background: url(../images/message-error.svg) no-repeat;
+	width: 14px;
+	height: 14px;
+	position: absolute;
+	left: 16px;
+	top: 24px;
+	background-size: contain
+}
+
+.error-page .message.message-success {
+	background: #0A6
+}
+
+.error-page .message.message-success:before {
+	content: '';
+	background: #0A6;
+	width: 5px;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0
+}
+
+.error-page .message.message-success div:before {
+	content: '';
+	background: url(../images/message-success.svg) no-repeat;
+	width: 14px;
+	height: 14px;
+	position: absolute;
+	left: 16px;
+	top: 24px;
+	background-size: contain
+}
+
+.error-page .form {
+	padding: 40px;
+	border: 1px solid #E3E3E3;
+	border-radius: 5px;
+	display: inline-block;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.error-page .form fieldset {
+	border: 0;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between
+}
+
+.error-page .form legend {
+	color: #000;
+	font-size: 18px;
+	line-height: 18px;
+	margin-bottom: 24px;
+	letter-spacing: .18px;
+	font-weight: 900;
+	width: 100%;
+	padding: 0
+}
+
+.error-page .form .field {
+	display: inline-block;
+	margin-bottom: 24px
+}
+
+.error-page .form .field label {
+	display: inline-block;
+	width: 100%;
+	color: #000;
+	font-size: 14px;
+	line-height: 14px;
+	margin-bottom: 4px
+}
+
+.error-page .form .field.required>.label:after {
+	content: '*';
+	color: #CE0000;
+	margin: 0;
+	font-size: 14px
+}
+
+.error-page .form .field .control {
+	display: inline-block;
+	width: 100%
+}
+
+.error-page .form .field input,
+.error-page .form .field textarea {
+	background: #fff;
+	border: 1px solid #949494;
+	border-radius: 5px;
+	color: #000;
+	font-size: 16px;
+	height: 40px;
+	line-height: 1.42857143;
+	padding: 0 16px;
+	vertical-align: baseline;
+	width: 100%;
+	box-sizing: border-box;
+	display: inline-block;
+	font-family: lato
+}
+
+.error-page .form .field textarea {
+	height: 120px;
+	padding: 10px 16px
+}
+
+.error-page .form .field input::-webkit-input-placeholder,
+.error-page .form .field textarea::-webkit-input-placeholder {
+	color: #949494
+}
+
+.error-page .form .field input:focus-visible,
+.error-page .form .field textarea:focus-visible {
+	outline: 0
+}
+
+.error-page .form .field.email,
+.error-page .form .field.firstname {
+	width: 47.5%
+}
+
+.error-page .form .field.lastname,
+.error-page .form .field.telephone {
+	width: 47.5%
+}
+
+.error-page .form .field.comment {
+	width: 100%
+}
+
+.error-page .form .action.primary {
+	background: #ffc619;
+    border: 1px solid #ffc619;
+    color: #000;
+    cursor: pointer;
+    display: inline-block;
+    font-family: lato;
+    font-weight: 700;
+    padding: 0 30px;
+    font-size: 15px;
+    line-height: 38px;
+    box-sizing: border-box;
+    letter-spacing: 0px;
+    vertical-align: middle;
+    border-radius: 5px;
+    width: 100%;
+    text-transform: uppercase;
+}
+
+@media only screen and (max-width:767px) {
+	.contact-email span {
+		margin: 0 10px
+	}
+
+	.error-page {
+		max-width: none;
+		margin: 42px auto 24px
+	}
+
+	.error-page .error-page-top {
+		padding: 0 10px
+	}
+
+	.error-page .message {
+		margin-bottom: 24px
+	}
+
+	.error-page .form {
+		padding-left: 10px;
+		padding-right: 10px;
+		padding-top: 0;
+		padding-bottom: 0;
+		box-shadow: none
+	}
+
+	.error-page .form .field.email,
+	.error-page .form .field.firstname {
+		width: 100%
+	}
+
+	.error-page .form .field.lastname,
+	.error-page .form .field.telephone {
+		width: 100%
+	}
+}
