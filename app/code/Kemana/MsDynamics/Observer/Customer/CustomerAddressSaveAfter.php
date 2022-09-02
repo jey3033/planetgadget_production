@@ -109,6 +109,7 @@ class CustomerAddressSaveAfter implements \Magento\Framework\Event\ObserverInter
             "CustomerNo" => $getCustomer->getCustomAttribute('phonenumber')->getValue(),
             "Name" => $getCustomer->getFirstname(),
             "Name2" => $getCustomer->getLastname(),
+            "DoB" => $dob,
             "Address" => $address1,
             "Address2" => $address2,
             "City" => $customerAddress->getCity(),
