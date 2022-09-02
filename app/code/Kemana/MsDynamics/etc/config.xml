@@ -20,8 +20,10 @@
             <general>
                 <is_enabled>0</is_enabled>
                 <url>http://35.219.26.124:17147/TEST/WS/SKA/Page</url>
+                <url_for_delete>http://35.219.26.124:17147/TEST/WS/SKA/Codeunit/Kemana</url_for_delete>
                 <username>apikemana</username>
                 <xmlns>urn:microsoft-dynamics-schemas/codeunit/Kemana</xmlns>
+                <xmlns_for_delete>urn:microsoft-dynamics-schemas/codeunit/Kemana</xmlns_for_delete>
                 <enable_log>1</enable_log>
             </general>
         </msdynamic>

@@ -29,6 +29,8 @@ class ConfigProvider
      */
     const XML_PATH_API_URL = 'msdynamic/general/url';
 
+    const XML_PATH_API_URL_FOR_DELETE = 'msdynamic/general/url_for_delete';
+
     /**
      * XML Path API Usernama
      */
@@ -43,6 +45,8 @@ class ConfigProvider
      * XML Path XMLNS
      */
     const XML_PATH_API_XMLNS = 'msdynamic/general/xmlns';
+
+    const XML_PATH_API_XMLNS_FOR_DELETE = 'msdynamic/general/xmlns_for_delete';
 
     /**
      * XML Path is enabled log
@@ -86,6 +90,8 @@ class ConfigProvider
      * XML Path API function name delete customer
      */
     const DELETE_CUSTOMER_IN_ERP = 'BlockCustomer';
+
+    const DELETE_CUSTOMER_IN_ERP_SOAP_ACTION = 'BlockCustomer';
 
     /**
      * Main errors from the API

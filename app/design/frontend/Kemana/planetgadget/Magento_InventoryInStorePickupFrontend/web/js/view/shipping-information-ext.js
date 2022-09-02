@@ -18,6 +18,7 @@ define([
          *
          * @return {String}
          */
+    
         getShippingMethodTitle: function () {
             var shippingMethod = quote.shippingMethod(),
                 locationName = '';
@@ -29,7 +30,39 @@ define([
 
 
             if (quote.shippingAddress().firstname !== undefined) {
-                locationName = quote.shippingAddress().firstname + ' ' + quote.shippingAddress().lastname+ ' ' + quote.shippingAddress().street+ ' ' + quote.shippingAddress().telephone;
+                locationName = quote.shippingAddress().firstname + ' ' + quote.shippingAddress().lastname;
+            }
+
+            return locationName;
+        },
+        getShippingMethodAddress: function () {
+            var shippingMethod = quote.shippingMethod(),
+                locationName = '';
+
+            if (!this.isStorePickup()) {
+
+                return this._super();
+            }
+
+
+            if (quote.shippingAddress().firstname !== undefined) {
+                locationName = quote.shippingAddress().street;
+            }
+
+            return locationName;
+        },
+        getShippingMethodTelephone: function () {
+            var shippingMethod = quote.shippingMethod(),
+                locationName = '';
+
+            if (!this.isStorePickup()) {
+
+                return this._super();
+            }
+
+
+            if (quote.shippingAddress().firstname !== undefined) {
+                locationName = quote.shippingAddress().telephone;
             }
 
             return locationName;

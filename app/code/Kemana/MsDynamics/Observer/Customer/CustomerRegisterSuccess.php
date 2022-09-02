@@ -12,7 +12,7 @@
  * @author   Achintha Madushan <amadushan@kemana.com>
  */
 
-namespace Kemana\MsDynamics\Observer;
+namespace Kemana\MsDynamics\Observer\Customer;
 
 /**
  * Class CustomerRegisterSuccess

@@ -28,4 +28,6 @@
     <preference for="Magento\Customer\Block\Account\Dashboard\Address" type="Kemana\Customer\Block\Account\Dashboard\Address" />
     <preference for="Magento\Customer\Block\Address\Book" type="Kemana\Customer\Block\Address\Book" />
     <preference for="Magento\Customer\Block\Address\Grid" type="Kemana\Customer\Block\Address\Grid" />
+    <preference for="Magento\Framework\View\Element\Html\Date" type="Kemana\Customer\Framework\View\Element\Html\Date" />
+    <preference for="Magento\Framework\Stdlib\DateTime\Intl\DateFormatterFactory" type="Kemana\Customer\Framework\Stdlib\DateTime\Intl\DateFormatterFactory" />
 </config>
