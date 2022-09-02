@@ -17,14 +17,14 @@
         xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
     <event name="customer_register_success">
         <observer name="kemana_customer_register_success"
-                  instance="Kemana\MsDynamics\Observer\CustomerRegisterSuccess"/>
+                  instance="Kemana\MsDynamics\Observer\Customer\CustomerRegisterSuccess"/>
     </event>
     <event name="customer_account_edited">
         <observer name="kemana_customer_account_edited"
-                  instance="Kemana\MsDynamics\Observer\CustomerAccountEdited"/>
+                  instance="Kemana\MsDynamics\Observer\Customer\CustomerAccountEdited"/>
     </event>
     <event name="customer_address_save_after">
         <observer name="kemana_customer_address_save_after"
-                  instance="Kemana\MsDynamics\Observer\CustomerAddressSaveAfter"/>
+                  instance="Kemana\MsDynamics\Observer\Customer\CustomerAddressSaveAfter"/>
     </event>
 </config>

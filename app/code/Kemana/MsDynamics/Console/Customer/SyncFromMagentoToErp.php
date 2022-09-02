@@ -56,6 +56,10 @@ class SyncFromMagentoToErp extends Command
      * @param InputInterface $input
      * @param OutputInterface $output
      * @return int|void
+     * @throws \Magento\Framework\Exception\InputException
+     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws \Magento\Framework\Exception\State\InputMismatchException
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {

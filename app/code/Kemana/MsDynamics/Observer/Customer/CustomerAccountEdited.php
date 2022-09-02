@@ -12,12 +12,12 @@
  * @author   Achintha Madushan <amadushan@kemana.com>
  */
 
-namespace Kemana\MsDynamics\Observer;
+namespace Kemana\MsDynamics\Observer\Customer;
 
 /**
- * Class CustomerRegisterSuccess
+ * Class CustomerAccountEdited
  */
-class CustomerAddressSaveAfter implements \Magento\Framework\Event\ObserverInterface
+class CustomerAccountEdited implements \Magento\Framework\Event\ObserverInterface
 {
     /**
      * @var \Kemana\MsDynamics\Helper\Data
@@ -52,7 +52,7 @@ class CustomerAddressSaveAfter implements \Magento\Framework\Event\ObserverInter
 
     /**
      * @param \Magento\Framework\Event\Observer $observer
-     * @return bool|void
+     * @return void
      * @throws \Magento\Framework\Exception\LocalizedException
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
@@ -67,52 +67,35 @@ class CustomerAddressSaveAfter implements \Magento\Framework\Event\ObserverInter
             return;
         }
 
-        $this->helper->log('Start Customer Address Save After Event.', 'info');
+        $this->helper->log('Start Customer Account Edit Event.', 'info');
 
-        $customerAddress = $observer->getEvent()->getCustomerAddress();
+        $customer = $this->customerRepository->get($observer->getData('email'));
 
-        if (!$customerAddress->getDefaultShipping()) {
-            $this->helper->log('This is not a default shipping address. So Aborting.', 'info');
-            $this->helper->log('End Customer Address Success.', 'info');
+        if (!$customer->getCustomAttribute('ms_dynamic_customer_number')) {
+            $this->helper->log('This customer has no ERP customer number. So unable to update in ERP.', 'info');
+            $this->helper->log('End Customer Account Edit Event.', 'info');
             return;
         }
 
-        $address1 = "";
-        $address2 = "";
-
-        if (isset($customerAddress->getStreet()[0])) {
-            $address1 = $customerAddress->getStreet()[0];
-        }
-
-        if (isset($customerAddress->getStreet()[1])) {
-            $address2 = $customerAddress->getStreet()[1];
-        }
-
-
-        $getCustomer = $this->customerRepository->getById($customerAddress->getCustomerId());
-        $erpCustomerNumber = $getCustomer->getCustomAttribute('ms_dynamic_customer_number');
-
-        if (!$erpCustomerNumber) {
-            $this->helper->log('Customer ID ' . $customerAddress->getCustomerId() . ' not have ERP customer number', 'info');
-            $this->helper->log('Start Customer Address Save After Event.', 'info');
+        if ($customer->getDefaultShipping()) {
+            $this->helper->log('This customer has default shipping address. So he was updated while the Address Save After event. Skipped.', 'info');
+            $this->helper->log('End Customer Account Edit Event.', 'info');
             return;
         }
 
         //TODO Remove this default DOB
         $dob = "1986-08-05";
-        if ($getCustomer->getDob()) {
-            $dob = $getCustomer->getDob();
+        if ($customer->getDob()) {
+            $dob = $customer->getDob();
         }
 
         $dataToCustomer = [
-            "MagentoCustomerID" => $getCustomer->getId(),
-            "CustomerNo" => $getCustomer->getCustomAttribute('phonenumber')->getValue(),
-            "Name" => $getCustomer->getFirstname(),
-            "Name2" => $getCustomer->getLastname(),
-            "Address" => $address1,
-            "Address2" => $address2,
-            "City" => $customerAddress->getCity(),
-            "Postcode" => $customerAddress->getPostcode()
+            "MagentoCustomerID" => $customer->getId(),
+            "CustomerNo" => $customer->getCustomAttribute('phonenumber')->getValue(),
+            "Name" => $customer->getFirstname(),
+            "Name2" => $customer->getLastname(),
+            "DoB" => $dob,
+            "Email" => $customer->getEmail(),
         ];
 
         $dataToCustomer = $this->helper->convertArrayToXml($dataToCustomer);
@@ -121,12 +104,9 @@ class CustomerAddressSaveAfter implements \Magento\Framework\Event\ObserverInter
             $this->helper->getSoapActionUpdateCustomer(), $dataToCustomer);
 
         if (isset($updateCustomerInErp['response']['CustomerNo'])) {
-            $this->helper->log('Customer ID ' . $customerAddress->getCustomerId() . ' updated with address', 'info');
-            $this->helper->log('End Customer Address Save After Event.', 'info');
+            //$this->updateCustomerMsDynamicNumber($customer->getId(), $updateCustomerInErp['response']['CustomerNo']);
+
+            $this->helper->log('Customer ' . $customer->getId() . " updated successfully in ERP after Account Edit Success event", 'info');
         }
-
-        return true;
-
     }
-
 }

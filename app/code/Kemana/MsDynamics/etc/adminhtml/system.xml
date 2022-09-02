@@ -31,7 +31,16 @@
                 </field>
                 <field id="url" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1"
                        showInStore="1" canRestore="1">
-                    <label>Api Url</label>
+                    <label>Api Url - Common</label>
+                    <comment>Without backslash for end</comment>
+                    <depends>
+                        <field id="is_enabled">1</field>
+                    </depends>
+                </field>
+                <field id="url_for_delete" translate="label" type="text" sortOrder="35" showInDefault="1"
+                       showInWebsite="1"
+                       showInStore="1" canRestore="1">
+                    <label>Api Url - For Delete</label>
                     <comment>Without backslash for end</comment>
                     <depends>
                         <field id="is_enabled">1</field>
@@ -54,6 +63,15 @@
                 <field id="xmlns" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1"
                        showInStore="1" canRestore="1">
                     <label>XMLNS URN in XML Request Body</label>
+                    <comment>Without backslash for end</comment>
+                    <depends>
+                        <field id="is_enabled">1</field>
+                    </depends>
+                </field>
+                <field id="xmlns_for_delete" translate="label" type="text" sortOrder="60" showInDefault="1"
+                       showInWebsite="1"
+                       showInStore="1" canRestore="1">
+                    <label>XMLNS URN in XML Request Body - For Delete</label>
                     <comment>Without backslash for end</comment>
                     <depends>
                         <field id="is_enabled">1</field>
