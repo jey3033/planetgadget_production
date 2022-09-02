@@ -86,7 +86,7 @@ class CustomerAccountEdited implements \Magento\Framework\Event\ObserverInterfac
         //TODO Remove this default DOB
         $dob = "1986-08-05";
         if ($customer->getDob()) {
-            $dob = $customer->getDob();
+            $dob = date("Y-m-d", strtotime($customer->getDob()));
         }
 
         $dataToCustomer = [

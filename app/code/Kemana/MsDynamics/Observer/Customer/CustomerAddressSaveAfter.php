@@ -101,7 +101,7 @@ class CustomerAddressSaveAfter implements \Magento\Framework\Event\ObserverInter
         //TODO Remove this default DOB
         $dob = "1986-08-05";
         if ($getCustomer->getDob()) {
-            $dob = $getCustomer->getDob();
+            $dob = date("Y-m-d", strtotime($getCustomer->getDob()));
         }
 
         $dataToCustomer = [
