@@ -30,8 +30,8 @@ class SyncFromErpToMagento extends Command
     protected $syncCustomersFromErp;
 
     /**
-     * @param string|null $name
      * @param SyncCustomersFromErp $syncCustomersFromErp
+     * @param string|null $name
      */
     public function __construct(
         SyncCustomersFromErp $syncCustomersFromErp,
@@ -55,6 +55,9 @@ class SyncFromErpToMagento extends Command
      * @param InputInterface $input
      * @param OutputInterface $output
      * @return int|void
+     * @throws \Magento\Framework\Exception\InputException
+     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws \Magento\Framework\Exception\State\InputMismatchException
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {

@@ -68,6 +68,10 @@ class Request
     {
         $apiUrl = $this->helper->getApiUrl() . '/' . $apiFunction;
 
+        if ($soapAction == $this->helper->getSoapActionDeleteCustomer()) {
+            $apiUrl = $this->helper->getApiUrlForDelete();
+        }
+
         $this->helper->log('Start API Call : ' . $apiFunction, 'info');
         $this->helper->log('Url : ' . $apiUrl, 'info');
         $this->helper->log('Request Body : ' . $postParameters, 'info');
@@ -121,7 +125,7 @@ class Request
 
             if ($responseStatus == '200' || $responseStatus == '100') {
                 if ($soapAction != "ReadMultiple") {
-                    $this->helper->log('Success Response : ' . $xmlResponseBody);
+                    $this->helper->log('Success Response : ' . $xmlResponseBody, 'info');
                 }
 
                 $this->helper->log('End API Call : ' . $apiFunction, 'info');

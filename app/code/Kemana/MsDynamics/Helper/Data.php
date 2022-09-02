@@ -102,6 +102,14 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     /**
      * @return mixed
      */
+    public function getApiUrlForDelete()
+    {
+        return $this->scopeConfig->getValue(ConfigProvider::XML_PATH_API_URL_FOR_DELETE, $this->storeScope);
+    }
+
+    /**
+     * @return mixed
+     */
     public function getApiUsername()
     {
         return $this->scopeConfig->getValue(ConfigProvider::XML_PATH_API_USERNAME, $this->storeScope);
@@ -121,6 +129,14 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public function getApiXmnls()
     {
         return $this->scopeConfig->getValue(ConfigProvider::XML_PATH_API_XMLNS, $this->storeScope);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getApiXmnlsForDelete()
+    {
+        return $this->scopeConfig->getValue(ConfigProvider::XML_PATH_API_XMLNS_FOR_DELETE, $this->storeScope);
     }
 
     /**
@@ -197,6 +213,14 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public function getFunctionDeleteCustomer()
     {
         return ConfigProvider::DELETE_CUSTOMER_IN_ERP;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSoapActionDeleteCustomer()
+    {
+        return ConfigProvider::DELETE_CUSTOMER_IN_ERP_SOAP_ACTION;
     }
 
     /**
@@ -323,6 +347,22 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         $xmlOutput .= '</customerack>';
 
         return $xmlOutput;
+    }
+
+    /**
+     * @param $apiFunction
+     * @param $postParameters
+     * @return string
+     */
+    public function getXmlRequestBodyToDeleteCustomer($apiFunction, $soapAction, $postParameters): string
+    {
+        return '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+                <Body>
+                       <' . $soapAction . ' xmlns="' . $this->getApiXmnlsForDelete() . '">
+                           ' . $postParameters . '
+                       </' . $soapAction . '>
+                </Body>
+        </Envelope>';
     }
 
     /**
