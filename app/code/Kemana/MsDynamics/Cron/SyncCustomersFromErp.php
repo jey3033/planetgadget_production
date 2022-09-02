@@ -130,7 +130,7 @@ class SyncCustomersFromErp
         $i = 0;
         foreach ($getCustomersFromErp['response'] as $erpCustomer) {
             // TODO Remove this
-            if ($i > 35) {
+            if ($i > 70) {
                 break;
             }
             // TODO END
@@ -168,6 +168,7 @@ class SyncCustomersFromErp
                 $customer->setEmail('567' . $erpCustomer['Email'] . '123');
                 $customer->setFirstname($nameArray[0] ?? "");
                 $customer->setLastname($nameArray[1] ?? ".");
+                $customer->setDob($erpCustomer['DoB'] ?? "");
                 $customer->setCustomAttribute('phonenumber', $erpCustomer['PhoneNo']);
                 $customer->setCustomAttribute('ms_dynamic_customer_number', $erpCustomer['CustomerNo']);
 
