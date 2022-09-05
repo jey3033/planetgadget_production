@@ -17,6 +17,8 @@ namespace Kemana\MsDynamics\Cron;
 use Magento\Framework\Exception\InputException;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\State\InputMismatchException;
+use Magento\Catalog\Model\Product\Type;
+use Magento\Catalog\Model\Product\Attribute\Source\Status;
 
 /**
  * Class SyncProductsFromErp
@@ -39,11 +41,18 @@ class SyncProductsFromErp
      */
     public function __construct(
         \Kemana\MsDynamics\Helper\Data                      $helper,
-        \Kemana\MsDynamics\Model\Api\Erp\Customer           $erpCustomer
+        \Kemana\MsDynamics\Model\Api\Erp\Customer           $erpCustomer,
+        \Magento\Catalog\Api\Data\ProductInterfaceFactory   $productFactory, 
+        \Magento\Catalog\Api\ProductRepositoryInterface     $productRepository,
+        \Magento\CatalogInventory\Api\StockRegistryInterface $stockRegistry,
+        \Magento\Framework\App\State                        $state
     )
     {
         $this->helper = $helper;
         $this->erpCustomer = $erpCustomer;
+        $this->productFactory = $productFactory;
+        $this->productRepository = $productRepository;
+        $this->state = $state;
     }
 
     /**
@@ -69,11 +78,61 @@ class SyncProductsFromErp
 
         $getProductsFromErp = $this->erpCustomer->getUnSyncCustomersFromErp($this->helper->getFunctionProductList(),
             $this->helper->getSoapActionGetProductList(), $dataToGetProducts);
-        print_r($getProductsFromErp);die;
 
         if (!is_array($getProductsFromErp) || !count($getProductsFromErp)) {
             $this->helper->log('No product received from ERP to create product in Magento', 'error');
             return;
+        }
+
+        $this->state->setAreaCode(\Magento\Framework\App\Area::AREA_ADMINHTML);
+        $ackProductData = [];
+        foreach ($getProductsFromErp['response'] as $key => $productdata) {
+            if(isset($productdata['ProductNo']) && $productdata['ProductNo'] && $productdata['ProductNo'] == '100BB001'){
+                try {
+
+                    $this->helper->log('Started to create the product in Magento for ERP Product : ' . $productdata['ProductNo'], 'info');
+
+                    $product = $this->productFactory->create();
+                    $product->setSku($productdata['ProductNo']);
+                    $product->setName($productdata['Description']);
+                    $product->setWeight($productdata['GrossWeight']);
+                    $product->setPrice($productdata['Price']);
+                    $product->setAttributeSetId(4);
+                    $product->setTypeId(Type::TYPE_SIMPLE);
+                    $product->setStatus(Status::STATUS_ENABLED);
+                    $product = $this->productRepository->save($product);
+                    if($product->getId()){
+
+                        $this->helper->log('Successfully created the product in Magento for ERP product : ' . $productdata['ProductNo'], 'info');
+
+                        $ackProductData[] = [
+                                        "ProductNo" => $productdata['ProductNo'],
+                                        "MagentoProductID" => $product->getId(),
+                                    ];
+                    }
+                } catch (Exception $e) {
+                    $this->helper->log('Unable to create the product for EPR product ' . $productdata['ProductNo'] . ' in Magento. Error : ' . $e->getMessage(), 'error');
+                }
+            }
+        }
+
+        // Ack call
+
+        if (empty($ackProductData)) {
+            return;
+        }
+
+        $this->helper->log('Start Ack call for customers by CRON', 'info');
+
+        $ackProductData = $this->helper->convertAckProductListToXml($ackProductData);
+
+        $ackProduct = $this->erpCustomer->ackCustomer($this->helper->getFunctionAckProduct(),
+            $this->helper->getSoapActionAckProduct(), $ackProductData);
+
+        if ($ackProduct['responseStatus'] == '100') {
+            $this->helper->log('Ack call successfully done for below product' . $ackProductData, 'info');
+            $this->helper->log('End to get the not synced products from ERP and then create in Magento using Cron Job', 'info');
+            return $ackProductData;
         }
     }
 

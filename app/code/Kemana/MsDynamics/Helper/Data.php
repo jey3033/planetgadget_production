@@ -426,4 +426,41 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     {
         return ConfigProvider::GET_PRODUCT_LIST_SOAP_ACTION;
     }
+
+    /**
+     * @param $ackCustomerData
+     * @return string
+     */
+    public function convertAckProductListToXml($ackCustomerData): string
+    {
+        $xmlOutput = '';
+
+        if (empty($ackCustomerData)) {
+            return $xmlOutput;
+        }
+
+        foreach ($ackCustomerData as $ackCustomer) {
+            $xmlOutput .= '<productack>';
+            foreach ($ackCustomer as $nodeName => $nodeValue) {
+                $xmlOutput .= '<' . $nodeName . '>' . $nodeValue . '</' . $nodeName . '>';
+            }
+            $xmlOutput .= '</productack>';
+
+        }
+
+        return $xmlOutput;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFunctionAckProduct()
+    {
+        return ConfigProvider::ACK_PRODUCT_IN_ERP;
+    }
+
+    public function getSoapActionAckProduct()
+    {
+        return ConfigProvider::ACK_PRODUCT_SOAP_ACTION;
+    }
 }
