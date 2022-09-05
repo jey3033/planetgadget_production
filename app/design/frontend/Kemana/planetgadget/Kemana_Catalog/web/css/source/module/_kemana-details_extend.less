@@ -57,15 +57,29 @@
 
             .product-reviews-summary {
                 margin-top: 0;
-                padding-bottom: 30px;
+                padding-bottom: 26px;
 
                 &.empty {
                     .add {
-                        font-style: italic;
+                        font-style: normal;
                     }
 
                     &:hover {
                         text-decoration: underline;
+                    }
+
+                    .rating-summary {
+                        display: none;
+                    }
+                }
+
+                .reviews-actions {
+                    a {
+                        span {
+                            &:first-child {
+                                margin-right: -3px;
+                            }
+                        }
                     }
                 }
 
@@ -173,8 +187,8 @@
 
                         .qty {
                             label {
-                                .lib-line-height(13);
-                                margin-bottom: 10px;
+                                .lib-line-height(20);
+                                margin-bottom: 6px;
                                 float: left;
                                 .lib-css(font-weight, @font-weight__bold);
                             }
@@ -343,8 +357,8 @@
             .lib-icon-font(
                 @icon-pg-store,
                 @_icon-font-color: @color-pg-light-gray,
-                @_icon-font-margin: -3px 6px 0 0,
-                @_icon-font-size: 16px
+                @_icon-font-margin: -1px 6px 0 0,
+                @_icon-font-size: 14px
             );
 
             &:before {
@@ -748,7 +762,7 @@
                                 &:after {
                                     content: '';
                                     position: absolute;
-                                    width: 40%;
+                                    width: 47%;
                                     height: 10px;
                                     background: @kemana-secondary-brand-color;
                                     right: 1px;
