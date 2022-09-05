@@ -111,4 +111,11 @@ class ConfigProvider
         1 => 'already',
         2 => 'exist',
     ];
+
+    /**
+     * XML Path API function name get customer list
+     */
+    const GET_PRODUCT_LIST_IN_ERP = 'product';
+
+    const GET_PRODUCT_LIST_SOAP_ACTION = 'ReadMultiple';
 }

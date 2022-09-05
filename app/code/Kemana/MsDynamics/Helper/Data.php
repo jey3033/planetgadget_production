@@ -413,4 +413,17 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 
         return false;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getFunctionProductList()
+    {
+        return ConfigProvider::GET_PRODUCT_LIST_IN_ERP;
+    }
+
+    public function getSoapActionGetProductList()
+    {
+        return ConfigProvider::GET_PRODUCT_LIST_SOAP_ACTION;
+    }
 }
