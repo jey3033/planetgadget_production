@@ -36,8 +36,44 @@ class SyncProductsFromErp
     protected $erpCustomer;
 
     /**
-     * @param \Kemana\MsDynamics\Helper\Data $helper
-     * @param \Kemana\MsDynamics\Model\Api\Erp\Customer $erpCustomer
+     * @var \Magento\Catalog\Api\Data\ProductInterfaceFactory
+     */
+    protected $productFactory;
+
+    /**
+     * @var \Magento\Catalog\Api\ProductRepositoryInterface
+     */
+    protected $productRepository;
+
+    /**
+     * @var \Magento\CatalogInventory\Api\StockRegistryInterface
+     */
+    protected $stockRegistry;
+
+    /**
+     * @var \Magento\Framework\App\State
+     */
+    protected $state;
+
+    /**
+     * @var \Magento\Catalog\Model\CategoryFactory
+     */
+    protected $categoryFactory;
+
+    /**
+     * @var \Magento\Catalog\Api\CategoryLinkManagementInterface
+     */
+    protected $categoryLinkRepository;
+
+    /**
+     * @param \Kemana\MsDynamics\Helper\Data                      
+     * @param \Kemana\MsDynamics\Model\Api\Erp\Customer           
+     * @param \Magento\Catalog\Api\Data\ProductInterfaceFactory   
+     * @param \Magento\Catalog\Api\ProductRepositoryInterface     
+     * @param \Magento\CatalogInventory\Api\StockRegistryInterface 
+     * @param \Magento\Framework\App\State                         
+     * @param \Magento\Catalog\Model\CategoryFactory               
+     * @param \Magento\Catalog\Api\CategoryLinkManagementInterface 
      */
     public function __construct(
         \Kemana\MsDynamics\Helper\Data                      $helper,
