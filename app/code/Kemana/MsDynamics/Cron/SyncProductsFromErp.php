@@ -45,7 +45,9 @@ class SyncProductsFromErp
         \Magento\Catalog\Api\Data\ProductInterfaceFactory   $productFactory, 
         \Magento\Catalog\Api\ProductRepositoryInterface     $productRepository,
         \Magento\CatalogInventory\Api\StockRegistryInterface $stockRegistry,
-        \Magento\Framework\App\State                        $state
+        \Magento\Framework\App\State                         $state,
+        \Magento\Catalog\Model\CategoryFactory               $categoryFactory,
+        \Magento\Catalog\Api\CategoryLinkManagementInterface $categoryLinkRepository
     )
     {
         $this->helper = $helper;
@@ -53,6 +55,8 @@ class SyncProductsFromErp
         $this->productFactory = $productFactory;
         $this->productRepository = $productRepository;
         $this->state = $state;
+        $this->categoryFactory = $categoryFactory;
+        $this->categoryLinkRepository = $categoryLinkRepository;
     }
 
     /**
@@ -86,10 +90,10 @@ class SyncProductsFromErp
 
         $this->state->setAreaCode(\Magento\Framework\App\Area::AREA_ADMINHTML);
         $ackProductData = [];
-        foreach ($getProductsFromErp['response'] as $key => $productdata) {
-            if(isset($productdata['ProductNo']) && $productdata['ProductNo'] && $productdata['ProductNo'] == '100BB001'){
-                try {
 
+        foreach ($getProductsFromErp['response'] as $key => $productdata) {
+            if(isset($productdata['ProductNo']) && $productdata['ProductNo']){
+                try {
                     $this->helper->log('Started to create the product in Magento for ERP Product : ' . $productdata['ProductNo'], 'info');
 
                     $product = $this->productFactory->create();
@@ -101,6 +105,23 @@ class SyncProductsFromErp
                     $product->setTypeId(Type::TYPE_SIMPLE);
                     $product->setStatus(Status::STATUS_ENABLED);
                     $product = $this->productRepository->save($product);
+
+                    $categoryIds = [];
+                    $categoryCollection = $this->categoryFactory->create()->getCollection()
+                            ->addAttributeToFilter('name', array('in' => array(
+                                $productdata['ItemCategory'], 
+                                ucfirst($productdata['ItemCategory']),
+                                strtoupper($productdata['ItemCategory']),
+                                strtolower($productdata['ItemCategory'])
+                            )))->getFirstItem();
+                    $catId = !empty($categoryCollection) ? $categoryCollection->getId() : 0;   
+                    if($catId){
+                        $categoryIds[] = $catId;
+                    }
+                    if(!empty($categoryIds)){
+                        $this->categoryLinkRepository->assignProductToCategories($product->getSku(), $categoryIds);
+                    }
+
                     if($product->getId()){
 
                         $this->helper->log('Successfully created the product in Magento for ERP product : ' . $productdata['ProductNo'], 'info');
