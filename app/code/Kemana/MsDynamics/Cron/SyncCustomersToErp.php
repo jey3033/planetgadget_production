@@ -76,21 +76,30 @@ class SyncCustomersToErp
     }
 
     /**
-     * @return void
+     * @return array
      * @throws \Magento\Framework\Exception\InputException
      * @throws \Magento\Framework\Exception\LocalizedException
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      * @throws \Magento\Framework\Exception\State\InputMismatchException
      */
-    public function syncMissingCustomersFromRealTimeSync()
+    public function syncMissingCustomersFromRealTimeSync($customerId = null)
     {
+        $singleCustomerFromGridResult = false;
+        $erpCustomerNumber = 0;
+
         if (!$this->helper->isEnable()) {
             return;
         }
 
         $this->helper->log('Start to process not synced customers to the ERP using the CRON JOB', 'info');
 
-        $notSyncCustomers = $this->customer->getNoySyncCustomersInPg();
+        $notSyncCustomers = $this->customer->getNoySyncCustomersInPg($customerId);
+
+        if ($customerId) {
+            $tmpNotSyncCustomers = $notSyncCustomers;
+            $notSyncCustomers = null;
+            $notSyncCustomers[] = $tmpNotSyncCustomers;
+        }
 
         $this->helper->log('Retrieved ' . count($notSyncCustomers) . ' customers from database to process', 'info');
 
@@ -163,14 +172,24 @@ class SyncCustomersToErp
                     $this->helper->updateCustomerMsDynamicNumber($customer->getId(), $updateCustomer['response']['CustomerNo']);
 
                     $this->helper->log('Customer ' . $customer->getId() . " updated successfully in ERP by Cron. Because this customer already exist in ERP", 'info');
+                    $singleCustomerFromGridResult = true;
+                    $erpCustomerNumber = $updateCustomer['response']['CustomerNo'];
                 }
             }
 
             if (isset($createCustomerInErp['response']['CustomerNo'])) {
 
+                if ($customerId) {
+                    $this->helper->log('Customer successfully created from the SYNC button click from admin customer grid', 'info');
+                }
+
+                $this->helper->log('Customer successfully created by the CRON', 'info');
+
                 $getCustomer = $this->customerRepository->getById($customer->getId());
                 $getCustomer->setCustomAttribute('ms_dynamic_customer_number', $createCustomerInErp['response']['CustomerNo']);
                 $this->customerRepository->save($getCustomer);
+
+                $erpCustomerNumber = $createCustomerInErp['response']['CustomerNo'];
 
                 $this->helper->log('Start Ack call for customer ' . $customer->getId() . ' by CRON', 'info');
 
@@ -186,11 +205,29 @@ class SyncCustomersToErp
 
                 if ($ackCustomer['response']['CustomerNo']) {
                     $this->helper->log('Customer ' . $customer->getId() . " successfully sent to the ERP and AckCustomer call successfully done", 'info');
+                    $singleCustomerFromGridResult = true;
                 }
 
-                $this->helper->log('End Cron job process for customer ' . $customer->getId() . ' sent to ERP by CRON', 'info');
+                if ($customerId) {
+                    $this->helper->log('End SYNC button event from customer admin grid for ' . $customer->getId() . '. Sent to ERP', 'info');
+                }
+
+                $this->helper->log('End Cron job process for customer ' . $customer->getId() . '. sent to ERP by CRON', 'info');
 
             }
+        }
+
+        if ($customerId) {
+            if ($singleCustomerFromGridResult) {
+                return [
+                    'result' => true,
+                    'msDynamicCustomerNumber' => $erpCustomerNumber ?? '',
+                ];
+            }
+
+            return [
+                'result' => false
+            ];
         }
     }
 }
