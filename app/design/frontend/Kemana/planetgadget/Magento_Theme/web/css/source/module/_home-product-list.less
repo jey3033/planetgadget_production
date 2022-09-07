@@ -69,22 +69,7 @@
         }
 
         .widget-title {
-            h2 {
-                span {
-                    display: inline-block;
-                    .lib-css(margin-bottom, 0);
-
-                    &:after {
-                        content: '';
-                        display: block;
-                        margin: auto;
-                        .lib-css(margin-top, -10px);
-                        .lib-css(width, 100%);
-                        .lib-css(height, 10px);
-                        .lib-css(background, @kemana-secondary-brand-color);
-                    }
-                }
-            }
+            .lib-title-with-border(@title-text-underline__enable: true);
         }
     }
 }

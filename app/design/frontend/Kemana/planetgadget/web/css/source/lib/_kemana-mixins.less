@@ -63,8 +63,8 @@
     .lib-css(text-transform, @title__font-text-transform);
     margin-bottom: 0;
 
-    h2,
-    strong {
+    h1,
+    h2 {
         display: inline-block;
         .lib-font-size(@title__font-size);
         .lib-line-height(@title__line-height);
@@ -72,29 +72,19 @@
         .lib-css(margin-bottom, @title__margin-bottom);
 
         & when (@title-text-underline__enable = true) {
-            &:after {
-                content: '';
-                display: block;
-                margin: auto;
-                .lib-css(margin-top, @title-icon__margin-top);
-                .lib-css(width, @title-icon__width);
-                .lib-css(height, @title-icon__height);
-                .lib-css(background, @title-icon__background);
-            }
-        }
+            span {
+                display: inline-block;
+                .lib-css(margin-bottom, 0);
 
-        span {
-            display: inline-block;
-            .lib-css(margin-bottom, 0);
-
-            &:after {
-                content: '';
-                display: block;
-                margin: auto;
-                .lib-css(margin-top, @title-icon__margin-top);
-                .lib-css(width, @title-icon__width);
-                .lib-css(height, @title-icon__height);
-                .lib-css(background, @title-icon__background);
+                &:after {
+                    content: '';
+                    display: block;
+                    margin: auto;
+                    .lib-css(margin-top, @title-icon__margin-top);
+                    .lib-css(width, @title-icon__width);
+                    .lib-css(height, @title-icon__height);
+                    .lib-css(background, @title-icon__background);
+                }
             }
         }
     }
