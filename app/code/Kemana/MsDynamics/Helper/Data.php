@@ -428,10 +428,10 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     }
 
     /**
-     * @param $ackCustomerData
+     * @param $ackProductData
      * @return string
      */
-    public function convertAckProductListToXml($ackCustomerData): string
+    public function convertAckProductListToXml($ackProductData): string
     {
         $xmlOutput = '';
 
@@ -459,6 +459,9 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         return ConfigProvider::ACK_PRODUCT_IN_ERP;
     }
 
+    /**
+     * @return mixed
+     */
     public function getSoapActionAckProduct()
     {
         return ConfigProvider::ACK_PRODUCT_SOAP_ACTION;

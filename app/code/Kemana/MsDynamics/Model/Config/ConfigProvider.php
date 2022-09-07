@@ -113,16 +113,22 @@ class ConfigProvider
     ];
 
     /**
-     * XML Path API function name get customer list
+     * XML Path API function name get product list
      */
     const GET_PRODUCT_LIST_IN_ERP = 'product';
 
+    /**
+     * XML Path API function name get product list soap action
+     */
     const GET_PRODUCT_LIST_SOAP_ACTION = 'ReadMultiple';
 
     /**
-     * XML Path API function name Ack customer
+     * XML Path API function name Ack product
      */
     const ACK_PRODUCT_IN_ERP = 'productack';
 
+    /**
+     * XML Path API function name Ack product soap action
+     */
     const ACK_PRODUCT_SOAP_ACTION = 'CreateMultiple';
 }
