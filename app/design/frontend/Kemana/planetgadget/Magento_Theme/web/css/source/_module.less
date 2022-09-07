@@ -485,8 +485,8 @@
     // CMS pages only
     .cms-main-container {
         .fixed-width {
-            .lib-css(padding-left, @layout-indent__width);
-            .lib-css(padding-right, @layout-indent__width);
+            .lib-css(padding-left, 40px);
+            .lib-css(padding-right, 40px);
         }
     }
 
@@ -655,6 +655,20 @@
     .account.page-print {
         .page-wrapper {
             margin-top: 100px;
+        }
+    }
+}
+
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+    .cms-main-container {
+        .fixed-width {
+            .lib-css(padding-left, @layout-indent__width);
+            .lib-css(padding-right, @layout-indent__width);
         }
     }
 }
