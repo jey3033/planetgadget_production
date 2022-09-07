@@ -12,7 +12,7 @@
  * @author   Achintha Madushan <amadushan@kemana.com>
  */
 
-namespace Kemana\MsDynamics\Observer;
+namespace Kemana\MsDynamics\Observer\Customer;
 
 /**
  * Class CustomerRegisterSuccess
@@ -58,6 +58,11 @@ class CustomerAddressSaveAfter implements \Magento\Framework\Event\ObserverInter
      */
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
+        if ((isset($_SERVER['SCRIPT_NAME']) && $_SERVER['SCRIPT_NAME'] == 'bin/magento')
+            || (isset($_SERVER['SHELL']) && $_SERVER['SCRIPT_NAME'] == '/bin/bash')) {
+            return;
+        }
+
         if (!$this->helper->isEnable()) {
             return;
         }
@@ -96,12 +101,15 @@ class CustomerAddressSaveAfter implements \Magento\Framework\Event\ObserverInter
         //TODO Remove this default DOB
         $dob = "1986-08-05";
         if ($getCustomer->getDob()) {
-            $dob = $getCustomer->getDob();
+            $dob = date("Y-m-d", strtotime($getCustomer->getDob()));
         }
 
         $dataToCustomer = [
             "MagentoCustomerID" => $getCustomer->getId(),
             "CustomerNo" => $getCustomer->getCustomAttribute('phonenumber')->getValue(),
+            "Name" => $getCustomer->getFirstname(),
+            "Name2" => $getCustomer->getLastname(),
+            "DoB" => $dob,
             "Address" => $address1,
             "Address2" => $address2,
             "City" => $customerAddress->getCity(),

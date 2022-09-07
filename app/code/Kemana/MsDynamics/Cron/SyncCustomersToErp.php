@@ -40,46 +40,38 @@ class SyncCustomersToErp
     protected $customerRepository;
 
     /**
-     * @var SearchCriteriaBuilder
-     */
-    protected $searchCriteriaBuilder;
-
-    /**
-     * @var FilterBuilder
-     */
-    protected $filterBuilder;
-
-    /**
      * @var \Magento\Customer\Api\AddressRepositoryInterface
      */
     protected $addressRepository;
+
+    /**
+     * @var \Kemana\MsDynamics\Model\Customer
+     */
+    protected $customer;
 
     /**
      * @param \Kemana\MsDynamics\Helper\Data $helper
      * @param \Kemana\MsDynamics\Model\Api\Erp\Customer $erpCustomer
      * @param \Magento\Customer\Api\GroupRepositoryInterface $customerGroupRepository
      * @param \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository
-     * @param \Magento\Framework\Api\SearchCriteriaBuilder $searchCriteriaBuilder
-     * @param \Magento\Framework\Api\FilterBuilder $filterBuilder
      * @param \Magento\Customer\Api\AddressRepositoryInterface $addressRepository
+     * @param \Kemana\MsDynamics\Model\Customer $customer
      */
     public function __construct(
         \Kemana\MsDynamics\Helper\Data                    $helper,
         \Kemana\MsDynamics\Model\Api\Erp\Customer         $erpCustomer,
         \Magento\Customer\Api\GroupRepositoryInterface    $customerGroupRepository,
         \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository,
-        \Magento\Framework\Api\SearchCriteriaBuilder      $searchCriteriaBuilder,
-        \Magento\Framework\Api\FilterBuilder              $filterBuilder,
-        \Magento\Customer\Api\AddressRepositoryInterface  $addressRepository
+        \Magento\Customer\Api\AddressRepositoryInterface  $addressRepository,
+        \Kemana\MsDynamics\Model\Customer                 $customer
     )
     {
         $this->helper = $helper;
         $this->erpCustomer = $erpCustomer;
         $this->customerGroupRepository = $customerGroupRepository;
         $this->customerRepository = $customerRepository;
-        $this->searchCriteriaBuilder = $searchCriteriaBuilder;
-        $this->filterBuilder = $filterBuilder;
         $this->addressRepository = $addressRepository;
+        $this->customer = $customer;
 
     }
 
@@ -92,16 +84,13 @@ class SyncCustomersToErp
      */
     public function syncMissingCustomersFromRealTimeSync()
     {
+        if (!$this->helper->isEnable()) {
+            return;
+        }
+
         $this->helper->log('Start to process not synced customers to the ERP using the CRON JOB', 'info');
 
-        $filterErpCustomerNumber = $this->filterBuilder
-            ->setField('ms_dynamic_customer_number')
-            ->setConditionType('null')
-            ->create();
-
-        $this->searchCriteriaBuilder->addFilters([$filterErpCustomerNumber]);
-        $searchCriteria = $this->searchCriteriaBuilder->create();
-        $notSyncCustomers = $this->customerRepository->getList($searchCriteria)->getItems();
+        $notSyncCustomers = $this->customer->getNoySyncCustomersInPg();
 
         $this->helper->log('Retrieved ' . count($notSyncCustomers) . ' customers from database to process', 'info');
 
@@ -137,8 +126,9 @@ class SyncCustomersToErp
             //TODO Remove this default DOB
             $dob = "1986-08-05";
             if ($customer->getDob()) {
-                $dob = $customer->getDob();
+                $dob = date("Y-m-d", strtotime($customer->getDob()));
             }
+            // TODO END
 
             //$this->helper->log('Birthday set as  0000-00-00 in ERP for customer' . $customer->getId() . ' due to no birthday in Magento', 'info');
 
@@ -163,7 +153,6 @@ class SyncCustomersToErp
             $createCustomerInErp = $this->erpCustomer->createCustomerInErp($this->helper->getFunctionCreateCustomer(),
                 $this->helper->getSoapActionCreateCustomer(), $dataToCustomer);
 
-            ///////////
             if ($createCustomerInErp['curlStatus'] == 500 && $this->helper->checkAlreadyExistCustomerError($createCustomerInErp['response'])) {
                 $this->helper->log('This customer already exist in ERP. So ERP customer number is updating in Magento', 'info');
 
@@ -190,7 +179,7 @@ class SyncCustomersToErp
                     "CustomerNo" => $createCustomerInErp['response']['CustomerNo']
                 ];
 
-                $ackCustomerData = $this->helper->convertArrayToXml($ackCustomerData);
+                $ackCustomerData = $this->helper->convertAckCustomerSingleToXml($ackCustomerData);
 
                 $ackCustomer = $this->erpCustomer->ackCustomer($this->helper->getFunctionAckCustomer(),
                     $this->helper->getSoapActionAckCustomer(), $ackCustomerData);
@@ -202,10 +191,6 @@ class SyncCustomersToErp
                 $this->helper->log('End Cron job process for customer ' . $customer->getId() . ' sent to ERP by CRON', 'info');
 
             }
-            /// //////
-
-
         }
     }
-
 }

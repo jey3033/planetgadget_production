@@ -12,7 +12,7 @@
  * @author   Achintha Madushan <amadushan@kemana.com>
  */
 
-namespace Kemana\MsDynamics\Observer;
+namespace Kemana\MsDynamics\Observer\Customer;
 
 /**
  * Class CustomerAccountEdited
@@ -58,6 +58,15 @@ class CustomerAccountEdited implements \Magento\Framework\Event\ObserverInterfac
      */
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
+        if ((isset($_SERVER['SCRIPT_NAME']) && $_SERVER['SCRIPT_NAME'] == 'bin/magento')
+            || (isset($_SERVER['SHELL']) && $_SERVER['SCRIPT_NAME'] == '/bin/bash')) {
+            return;
+        }
+
+        if (!$this->helper->isEnable()) {
+            return;
+        }
+
         $this->helper->log('Start Customer Account Edit Event.', 'info');
 
         $customer = $this->customerRepository->get($observer->getData('email'));
@@ -77,7 +86,7 @@ class CustomerAccountEdited implements \Magento\Framework\Event\ObserverInterfac
         //TODO Remove this default DOB
         $dob = "1986-08-05";
         if ($customer->getDob()) {
-            $dob = $customer->getDob();
+            $dob = date("Y-m-d", strtotime($customer->getDob()));
         }
 
         $dataToCustomer = [

@@ -99,11 +99,12 @@ class Customer
         $postParameters = $customerData;
 
         $getCustomerFromErp = $this->request->apiTransport($apiFunction, $soapAction,
-            $this->helper->getXmlRequestBodyToErp($apiFunction, $soapAction, $postParameters));
+            $this->helper->getXmlRequestBodyToErpAckListOfCustomers($apiFunction, $soapAction, $postParameters));
 
         if (isset($getCustomerFromErp['response'])) {
             return $getCustomerFromErp;
         }
+
         return false;
     }
 
@@ -118,6 +119,40 @@ class Customer
 
         $getCustomerFromErp = $this->request->apiTransport($apiFunction, $soapAction,
             $this->helper->getXmlRequestBodyToErp($apiFunction, $soapAction, $postParameters));
+
+        if (isset($getCustomerFromErp['response'])) {
+            return $getCustomerFromErp;
+        }
+
+        return false;
+    }
+
+    public function getUnSyncCustomersFromErp($apiFunction, $soapAction, $customerData)
+    {
+        $postParameters = $customerData;
+
+        $getCustomerFromErp = $this->request->apiTransport($apiFunction, $soapAction,
+            $this->helper->getXmlRequestBodyToGetUnSyncCustomersFromApi($apiFunction, $soapAction, $postParameters));
+
+        if (isset($getCustomerFromErp['response'])) {
+            return $getCustomerFromErp;
+        }
+
+        return false;
+    }
+
+
+    /**
+     * @param $apiFunction
+     * @param array $customerData
+     * @return false|mixed
+     */
+    public function deleteCustomerInErp($apiFunction, $soapAction, $customerData)
+    {
+        $postParameters = $customerData;
+
+        $getCustomerFromErp = $this->request->apiTransport($apiFunction, $soapAction,
+            $this->helper->getXmlRequestBodyToDeleteCustomer($apiFunction, $soapAction, $postParameters));
 
         if (isset($getCustomerFromErp['response'])) {
             return $getCustomerFromErp;

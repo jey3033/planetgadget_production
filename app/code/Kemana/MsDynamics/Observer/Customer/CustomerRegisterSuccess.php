@@ -12,7 +12,7 @@
  * @author   Achintha Madushan <amadushan@kemana.com>
  */
 
-namespace Kemana\MsDynamics\Observer;
+namespace Kemana\MsDynamics\Observer\Customer;
 
 /**
  * Class CustomerRegisterSuccess
@@ -79,7 +79,7 @@ class CustomerRegisterSuccess implements \Magento\Framework\Event\ObserverInterf
         //TODO Remove this default DOB
         $dob = "1986-08-05";
         if ($customer->getDob()) {
-            $dob = $customer->getDob();
+            $dob = date("Y-m-d", strtotime($customer->getDob()));
         }
 
         $dataToCustomer = [

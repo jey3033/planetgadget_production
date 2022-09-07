@@ -1,0 +1,67 @@
+<?php
+/**
+ * Copyright © 2020 PT Kemana Teknologi Solusi. All rights reserved.
+ * http://www.kemana.com
+ */
+
+/**
+ * @category Kemana
+ * @package  Kemana_SocialShare
+ * @license  Proprietary
+ *
+ * @author   Aranga Wijesooriya <awijesooriya@kemana.com>
+ */
+
+/**
+ * @var \Kemana\SocialShare\Block\SocialShare $block
+ */
+?>
+<div class="social-share">
+    <div class="title"><span data-bind="i18n: 'Bagikan Artikel ini'"></span></div>
+    <div class="<?= $block->getContainerClass($block->getDisplayType()) ?>">
+        <div class="a2a_kit <?= $block->getDisplayType() ?> <?= $block->getButtonSize() ?> <?= $block->getFloatStyle() ?>">
+            <?php foreach ($block->getEnableService() as $enableService) : ?>
+                <?php if ($block->isImageEnable($enableService)) : ?>
+                    <a class="<?= $block->getCssClass($enableService) ?> <?= $block->getShareCounter() ?>" <?= $block->getWhatsAppLink($enableService) ?>>
+                        <img src="<?= $block->getImageUrl($enableService) ?>"
+                             alt="<?= $enableService ?>">
+                    </a>
+                <?php elseif($enableService == 'google_plus') : ?>
+                    <a class="a2a_button_<?= $enableService ?> <?= $block->getShareCounter() ?>" <?= $block->getGooglePlusLink() ?>
+                       onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,height=600,width=600');return false;"
+                    >
+                        <div class="icon"></div>
+                    </a>
+                <?php else : ?>
+                    <a class="a2a_button_<?= $enableService ?> <?= $block->getShareCounter() ?>">
+                        <div class="icon"></div>
+                    </a>
+                <?php endif; ?>
+            <?php endforeach; ?>
+
+            <?php if ($block->isAddMoreShare()) : ?>
+                <a class="a2a_dd <?= $block->getShareCounter() ?>" href="https://www.addtoany.com/share"></a>
+            <?php endif; ?>
+        </div>
+    </div>
+</div>
+<?php if (!$block->isFloatEnableForPDP()): ?>
+    <script type="text/x-magento-init">
+        {
+            "*": {
+                "Kemana_SocialShare/js/config": {
+                    "buttonColor": "<?= $block->getButtonColor() ?>",
+                    "iconColor": "<?= $block->getIconColor() ?>",
+                    "click": "<?= $block->getMenuType() ?>",
+                    "popUp": "<?= $block->getThankYou() ?>",
+                    "service": "<?= $block->getNumberOfService() ?>",
+                    "disable": "<?= $block->getDisabledServices() ?>"
+                }
+            }
+        }
+
+    </script>
+
+<?php endif; ?>
+
+
