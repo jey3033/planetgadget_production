@@ -10,6 +10,8 @@
 
 & when (@media-common = true) {
     .cms-corporate-order {
+        .lib-title-with-border(@title-text-underline__enable: true);
+
         .corporate-services-container {
             margin-bottom: 40px;
 
@@ -59,6 +61,25 @@
                     .lib-line-height(24);
                     font-weight: @font-weight__bold;
                     text-align: center;
+                }
+            }
+        }
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .cms-corporate-order {
+        .corporate-choose-container {
+            .choose-item {
+                margin-bottom: 26px;
+
+                &:last-child,
+                &:nth-last-child(2) {
+                    margin-bottom: 0;
                 }
             }
         }
