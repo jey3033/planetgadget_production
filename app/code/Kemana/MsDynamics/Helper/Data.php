@@ -435,13 +435,13 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     {
         $xmlOutput = '';
 
-        if (empty($ackCustomerData)) {
+        if (empty($ackProductData)) {
             return $xmlOutput;
         }
 
-        foreach ($ackCustomerData as $ackCustomer) {
+        foreach ($ackProductData as $ackProduct) {
             $xmlOutput .= '<productack>';
-            foreach ($ackCustomer as $nodeName => $nodeValue) {
+            foreach ($ackProduct as $nodeName => $nodeValue) {
                 $xmlOutput .= '<' . $nodeName . '>' . $nodeValue . '</' . $nodeName . '>';
             }
             $xmlOutput .= '</productack>';
