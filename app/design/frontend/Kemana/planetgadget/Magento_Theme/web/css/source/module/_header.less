@@ -27,8 +27,8 @@
 @navigation-wide-submenu-desktop-item__width: 50%;
 
 @header-account-icon: @icon-pg-account;
-@header-account-icon__color: @color-white;
-@header-account-icon__color-hover: @color-kemana-gray2;
+@header-account-icon__color: @kemana-primary-brand-color;
+@header-account-icon__color-hover: @color-pg-red2;
 
 
 
@@ -727,7 +727,7 @@
                 left: unset;
 
                 &:before {
-                    .lib-css (color, @color-white);
+                    .lib-css (color, @kemana-primary-brand-color);
                     .lib-font-size(23);
                     .lib-line-height(23);
                 }
@@ -793,9 +793,9 @@
                             .lib-icon-font(
                                 @icon-pg-club,
                                 @_icon-font: @icon-font,
-                                @_icon-font-color: @color-white,
-                                @_icon-font-size: 24px,
-                                @_icon-font-line-height: 24px,
+                                @_icon-font-color: @kemana-primary-brand-color,
+                                @_icon-font-size: 26px,
+                                @_icon-font-line-height: 26px,
                                 @_icon-font-margin: 0 0 7px 0,
                                 @_icon-font-position: before
                             );
@@ -820,9 +820,9 @@
                             .lib-icon-font(
                                 @icon-pg-track,
                                 @_icon-font: @icon-font,
-                                @_icon-font-color: @color-white,
-                                @_icon-font-size: 24px,
-                                @_icon-font-line-height: 24px,
+                                @_icon-font-color: @kemana-primary-brand-color,
+                                @_icon-font-size: 26px,
+                                @_icon-font-line-height: 26px,
                                 @_icon-font-margin: 0 0 7px 0,
                                 @_icon-font-position: before
                             );
@@ -844,15 +844,15 @@
 
                     a {
                         &:hover {
-                            .lib-css(color, @kemana-secondary-brand-color);
+                            .lib-css(color, @color-pg-red2);
+
                             &:before {
-                                .lib-css(color, @kemana-secondary-brand-color);
+                                .lib-css(color, @color-pg-red2);
                             }
                         }
                     }
                 }
             }
-
         }
 
         .logo {
@@ -1160,7 +1160,7 @@
                     padding: 0 14px;
 
                     a {
-                        .lib-css(color, @color-white);
+                        //.lib-css(color, @color-white);
                         .lib-font-size(10);
                         .lib-css(font-weight, @font-weight__semibold);
                     }
