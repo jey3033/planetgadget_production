@@ -1,8 +1,9 @@
 define([
     'Magento_Ui/js/grid/columns/column',
     'jquery',
+    'uiRegistry',
     'Magento_Ui/js/modal/modal'
-], function (Column, $) {
+], function (Column, $, uiRegistry) {
     'use strict';
 
     return Column.extend({
@@ -21,9 +22,15 @@ define([
         getLabel: function (row) {
             return row[this.index + '_html']
         },
+
+        refreshTable : function (params) {
+            uiRegistry.get('index = customer_listing').source.reload({refresh: true})
+        },
+
         syncCustomerToErp: function (row) {
-            let customerId = this.getCustomerId(row);
-            let url = this.getAjaxUrl(row);
+            const self = this;
+            const customerId = this.getCustomerId(row);
+            const url = this.getAjaxUrl(row);
 
             $.ajax({
                 url: url,
@@ -37,8 +44,7 @@ define([
                 complete: function(response) {
                     if (response.responseJSON.result.result &&
                         response.responseJSON.result.msDynamicCustomerNumber) {
-                        console.log(row);
-                        // TODO change admin customer grid cell values
+                        self.refreshTable();
                     }
                 },
                 error: function (xhr, status, errorThrown) {
