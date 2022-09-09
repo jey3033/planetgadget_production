@@ -312,10 +312,20 @@
             margin-bottom: 50px;
         }
 
+        .column.main {
+            .block:not(.widget) {
+                .block-content {
+                    .box {
+                        margin-bottom: 36px;
+                    }
+                }
+            }
+        }
+
         .sidebar-main {
             position: relative;
             padding-bottom: 20px;
-            margin-top: -76px;
+            margin-top: -96px;
 
             .title {
                 margin-bottom: 0;
@@ -406,6 +416,16 @@
 
             br {
                 display: none;
+            }
+        }
+    }
+
+    .block-dashboard-addresses {
+        .block-title {
+            .action {
+                position: relative;
+                bottom: unset;
+                left: 5px;
             }
         }
     }

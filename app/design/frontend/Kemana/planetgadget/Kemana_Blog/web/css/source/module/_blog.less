@@ -471,7 +471,7 @@
     }
 
     .post-list-wrapper {
-        padding-block: 40px;
+        padding: 40px 10px;
 
         .post-list-inner-container {
             .lib-vendor-prefix-display();
@@ -495,8 +495,18 @@
             .post-list-container {
                 order: 2;
 
+                .row {
+                    margin-inline: 0;
+                }
+
+                .post-list-item {
+                    padding-inline: 0;
+                    margin-bottom: 20px;
+                }
+
                 .post-item-wrapper {
-                    padding: 10px;
+                    padding: 0;
+
                 }
             }
         }
