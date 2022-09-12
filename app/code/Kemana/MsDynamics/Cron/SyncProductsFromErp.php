@@ -33,7 +33,7 @@ class SyncProductsFromErp
     /**
      * @var \Kemana\MsDynamics\Model\Api\Erp\Customer
      */
-    protected $erpCustomer;
+    protected $erpProduct;
 
     /**
      * @var \Magento\Catalog\Api\Data\ProductInterfaceFactory
@@ -77,7 +77,7 @@ class SyncProductsFromErp
      */
     public function __construct(
         \Kemana\MsDynamics\Helper\Data                      $helper,
-        \Kemana\MsDynamics\Model\Api\Erp\Customer           $erpCustomer,
+        \Kemana\MsDynamics\Model\Api\Erp\Customer           $erpProduct,
         \Magento\Catalog\Api\Data\ProductInterfaceFactory   $productFactory, 
         \Magento\Catalog\Api\ProductRepositoryInterface     $productRepository,
         \Magento\CatalogInventory\Api\StockRegistryInterface $stockRegistry,
@@ -87,7 +87,7 @@ class SyncProductsFromErp
     )
     {
         $this->helper = $helper;
-        $this->erpCustomer = $erpCustomer;
+        $this->erpProduct = $erpProduct;
         $this->productFactory = $productFactory;
         $this->productRepository = $productRepository;
         $this->state = $state;
@@ -116,7 +116,7 @@ class SyncProductsFromErp
         $dataToGetProducts = $this->helper->convertArrayToXml($dataToGetProducts);
 
 
-        $getProductsFromErp = $this->erpCustomer->getUnSyncCustomersFromErp($this->helper->getFunctionProductList(),
+        $getProductsFromErp = $this->erpProduct->getUnSyncCustomersFromErp($this->helper->getFunctionProductList(),
             $this->helper->getSoapActionGetProductList(), $dataToGetProducts);
 
         if (!is_array($getProductsFromErp) || !count($getProductsFromErp)) {
@@ -183,7 +183,7 @@ class SyncProductsFromErp
 
         $ackProductData = $this->helper->convertAckProductListToXml($ackProductData);
 
-        $ackProduct = $this->erpCustomer->ackCustomer($this->helper->getFunctionAckProduct(),
+        $ackProduct = $this->erpProduct->ackCustomer($this->helper->getFunctionAckProduct(),
             $this->helper->getSoapActionAckProduct(), $ackProductData);
 
         if ($ackProduct['responseStatus'] == '100') {
