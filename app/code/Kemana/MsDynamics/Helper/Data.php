@@ -272,7 +272,43 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      * @param $postParameters
      * @return string
      */
+    public function getXmlRequestBodyToGetUnSyncProductsFromApi($apiFunction, $soapAction, $postParameters): string
+    {
+        return '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+                <Body>
+                        <' . $soapAction . ' xmlns="' . $this->getApiXmnls() . "/" . $apiFunction . '">
+                            <filter>
+                                ' . $postParameters . '
+                            </filter>
+                        </' . $soapAction . '>
+                </Body>
+        </Envelope>';
+    }
+
+    /**
+     * @param $apiFunction
+     * @param $postParameters
+     * @return string
+     */
     public function getXmlRequestBodyToErpAckListOfCustomers($apiFunction, $soapAction, $postParameters): string
+    {
+        return '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+                <Body>
+                        <' . $soapAction . ' xmlns="' . $this->getApiXmnls() . "/" . $apiFunction . '">
+                            <' . $apiFunction . '_List>
+                                ' . $postParameters . '
+                            </' . $apiFunction . '_List>
+                        </' . $soapAction . '>
+                </Body>
+        </Envelope>';
+    }
+
+    /**
+     * @param $apiFunction
+     * @param $postParameters
+     * @return string
+     */
+    public function getXmlRequestBodyToErpAckListOfProducts($apiFunction, $soapAction, $postParameters): string
     {
         return '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
                 <Body>

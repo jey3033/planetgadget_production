@@ -31,7 +31,7 @@ class SyncProductsFromErp
     protected $helper;
 
     /**
-     * @var \Kemana\MsDynamics\Model\Api\Erp\Customer
+     * @var \Kemana\MsDynamics\Model\Api\Erp\Product
      */
     protected $erpProduct;
 
@@ -67,7 +67,7 @@ class SyncProductsFromErp
 
     /**
      * @param \Kemana\MsDynamics\Helper\Data                      
-     * @param \Kemana\MsDynamics\Model\Api\Erp\Customer           
+     * @param \Kemana\MsDynamics\Model\Api\Erp\Product           
      * @param \Magento\Catalog\Api\Data\ProductInterfaceFactory   
      * @param \Magento\Catalog\Api\ProductRepositoryInterface     
      * @param \Magento\CatalogInventory\Api\StockRegistryInterface 
@@ -77,7 +77,7 @@ class SyncProductsFromErp
      */
     public function __construct(
         \Kemana\MsDynamics\Helper\Data                      $helper,
-        \Kemana\MsDynamics\Model\Api\Erp\Customer           $erpProduct,
+        \Kemana\MsDynamics\Model\Api\Erp\Product            $erpProduct,
         \Magento\Catalog\Api\Data\ProductInterfaceFactory   $productFactory, 
         \Magento\Catalog\Api\ProductRepositoryInterface     $productRepository,
         \Magento\CatalogInventory\Api\StockRegistryInterface $stockRegistry,
@@ -116,7 +116,7 @@ class SyncProductsFromErp
         $dataToGetProducts = $this->helper->convertArrayToXml($dataToGetProducts);
 
 
-        $getProductsFromErp = $this->erpProduct->getUnSyncCustomersFromErp($this->helper->getFunctionProductList(),
+        $getProductsFromErp = $this->erpProduct->getUnSyncProductsFromErp($this->helper->getFunctionProductList(),
             $this->helper->getSoapActionGetProductList(), $dataToGetProducts);
 
         if (!is_array($getProductsFromErp) || !count($getProductsFromErp)) {
@@ -128,7 +128,8 @@ class SyncProductsFromErp
         $ackProductData = [];
 
         foreach ($getProductsFromErp['response'] as $key => $productdata) {
-            if(isset($productdata['ProductNo']) && $productdata['ProductNo']){
+            
+            if(isset($productdata['ProductNo']) && $productdata['ProductNo'] && $productdata['ProductNo'] == '100BB013'){
                 try {
                     $this->helper->log('Started to create the product in Magento for ERP Product : ' . $productdata['ProductNo'], 'info');
 
@@ -179,11 +180,11 @@ class SyncProductsFromErp
             return;
         }
 
-        $this->helper->log('Start Ack call for customers by CRON', 'info');
+        $this->helper->log('Start Ack call for products by CRON', 'info');
 
         $ackProductData = $this->helper->convertAckProductListToXml($ackProductData);
 
-        $ackProduct = $this->erpProduct->ackCustomer($this->helper->getFunctionAckProduct(),
+        $ackProduct = $this->erpProduct->ackProduct($this->helper->getFunctionAckProduct(),
             $this->helper->getSoapActionAckProduct(), $ackProductData);
 
         if ($ackProduct['responseStatus'] == '100') {
