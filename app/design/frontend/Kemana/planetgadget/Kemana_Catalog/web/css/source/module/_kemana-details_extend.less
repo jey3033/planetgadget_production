@@ -23,7 +23,7 @@
     .product-info-main {
         .product-info-price {
             .product-info-stock-sku {
-                margin-bottom: 16px;
+                margin-bottom: 0;
 
                 .sku {
                     .type {
@@ -94,6 +94,16 @@
 
             .price-box {
                 margin-top: 0;
+
+                .minimal-price {
+                    margin-bottom: 20px;
+
+                    .price-label {
+                        display: block !important;
+                        margin-bottom: 6px;
+                    }
+
+                }
             }
         }
 
@@ -380,46 +390,6 @@
                         .lib-css(font-weight, @font-weight__bold);
                         margin-bottom: 7px;
                     }
-
-                    .input-group {
-                        border: 1px solid @color-pg-light-gray;
-                        border-radius: 5px;
-                        height: 40px;
-                        width: 114px;
-                        background: none;
-                        position: relative;
-                        left: 0;
-
-                        input {
-                            height: 38px;
-                            width: 34px;
-                            position: absolute;
-                            left: 40px;
-                            border: none;
-                            padding-inline: 0;
-                            text-align: center;
-                        }
-                        .input-group__addon {
-                            &.increase {
-                                float: right;
-                            }
-
-                            &.decrease {
-                                float: left;
-                            }
-                        }
-
-                        button {
-                            .lib-button-reset();
-                            padding: 15px;
-                            height: 38px;
-                            width: 40px;
-                            line-height: 10px;
-                            border: none;
-                            .lib-css(font-weight, @font-weight__bold);
-                            .lib-font-size(14);
-                        }
-                    }
                 }
             }
         }
@@ -587,6 +557,46 @@
                 }
 
             }
+        }
+    }
+
+    .input-group {
+        border: 1px solid @color-pg-light-gray;
+        border-radius: 5px;
+        height: 40px;
+        width: 114px;
+        background: none;
+        position: relative;
+        left: 0;
+
+        input {
+            height: 38px;
+            width: 34px;
+            position: absolute;
+            left: 40px;
+            border: none;
+            padding-inline: 0;
+            text-align: center;
+        }
+        .input-group__addon {
+            &.increase {
+                float: right;
+            }
+
+            &.decrease {
+                float: left;
+            }
+        }
+
+        button {
+            .lib-button-reset();
+            padding: 15px;
+            height: 38px;
+            width: 40px;
+            line-height: 10px;
+            border: none;
+            .lib-css(font-weight, @font-weight__bold);
+            .lib-font-size(14);
         }
     }
 }
@@ -809,7 +819,7 @@
 
                         .data-block-wrapper-right {
                             float: right;
-                            width: 50%;
+                            width: ~'calc(50% - 10px)';
                             padding: 30px 30px 30px 0;
 
                             .block-warranty {
