@@ -73,8 +73,7 @@ class Api extends \KS\Logistic\Model\Carrier\Jne\Api
         if($order->getInsuranceFee() > 0){
             $this->requestBody['OLSHOP_INS_FLAG'] = 'Y';
         }
-        echo "<pre>";
-        print_r($this->requestBody);die;
+        
         return $this->requestBody;
     }
 }
