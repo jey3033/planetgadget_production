@@ -64,6 +64,43 @@
                 }
             }
         }
+
+        .our-partner-container {
+            ul {
+                li {
+                    &:before {
+                        display: none;
+                    }
+                }
+            }
+
+            .brand-content-wrapper {
+                margin-inline: -8px -9px;
+
+                .brand-container {
+                    .block-item {
+                        padding: 10px 9px 10px 8px;
+
+                        a {
+                            padding: 0;
+                            .lib-css(border, 1px solid @color-pg-light-gray);
+                            border-radius: 5px;
+                        }
+                    }
+                }
+            }
+
+            .block-button-wrapper {
+                text-align: center;
+                margin: 20px auto;
+
+                a {
+                    .lib-button-white();
+                    border-radius: 5px;
+                    text-transform: uppercase;
+                }
+            }
+        }
     }
 }
 
