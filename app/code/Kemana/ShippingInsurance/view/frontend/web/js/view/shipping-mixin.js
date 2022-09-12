@@ -48,7 +48,6 @@ define([
                 var self = this;
                 let totalsValue;    
                 if (totals.totals()) {  
-                    console.log(totals)
                     totalsValue = totals.getSegment('grand_total').value;   
                 }   
 
@@ -65,7 +64,7 @@ define([
 
                 quote.shippingMethod.subscribe(function(value) {
                 if (value) {
-                    if (value.carrier_code == 'jne' || value.carrier_code == 'sicepat') {
+                    if (value.carrier_code == 'jne' || value.carrier_code == 'jnt') {
                             self.isVisibleTemp(true)
                             self.isChecked(true) 
                         }else{

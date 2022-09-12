@@ -32,8 +32,8 @@
                     <label>Title</label>
                     <validate>required-entry</validate>
                 </field>
-                <field id="price" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Price</label>
+                <field id="extra_fee" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Extra Fee</label>
                     <validate>required-entry validate-number</validate>
                 </field>
                 <field id="threshold" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
