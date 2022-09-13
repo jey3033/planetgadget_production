@@ -191,23 +191,6 @@ class SyncCustomersToErp
 
                 $erpCustomerNumber = $createCustomerInErp['response']['CustomerNo'];
 
-                $this->helper->log('Start Ack call for customer ' . $customer->getId() . ' by CRON', 'info');
-
-                $ackCustomerData = [
-                    "MagentoCustomerID" => $customer->getId(),
-                    "CustomerNo" => $createCustomerInErp['response']['CustomerNo']
-                ];
-
-                $ackCustomerData = $this->helper->convertAckCustomerSingleToXml($ackCustomerData);
-
-                $ackCustomer = $this->erpCustomer->ackCustomer($this->helper->getFunctionAckCustomer(),
-                    $this->helper->getSoapActionAckCustomer(), $ackCustomerData);
-
-                if ($ackCustomer['response']['CustomerNo']) {
-                    $this->helper->log('Customer ' . $customer->getId() . " successfully sent to the ERP and AckCustomer call successfully done", 'info');
-                    $singleCustomerFromGridResult = true;
-                }
-
                 if ($customerId) {
                     $this->helper->log('End SYNC button event from customer admin grid for ' . $customer->getId() . '. Sent to ERP', 'info');
                 }

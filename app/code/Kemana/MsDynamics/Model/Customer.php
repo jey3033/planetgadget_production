@@ -89,6 +89,10 @@ class Customer
         $this->searchCriteriaBuilder->setFilterGroups([$filterOr]);
         $searchCriteria = $this->searchCriteriaBuilder->create();
 
+        if (count($this->customerRepository->getList($searchCriteria)->getItems()) > 1) {
+            return 'MULTIPLE';
+        }
+
         if (count($this->customerRepository->getList($searchCriteria)->getItems())) {
             return true;
         }
