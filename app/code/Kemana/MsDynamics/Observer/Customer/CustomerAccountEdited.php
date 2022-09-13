@@ -103,6 +103,11 @@ class CustomerAccountEdited implements \Magento\Framework\Event\ObserverInterfac
         $updateCustomerInErp = $this->erpCustomer->updateCustomerInErp($this->helper->getFunctionUpdateCustomer(),
             $this->helper->getSoapActionUpdateCustomer(), $dataToCustomer);
 
+        if (empty($updateCustomerInErp)) {
+            $this->helper->log('ERP system might be off line', 'error');
+            return;
+        }
+
         if (isset($updateCustomerInErp['response']['CustomerNo'])) {
             //$this->updateCustomerMsDynamicNumber($customer->getId(), $updateCustomerInErp['response']['CustomerNo']);
 

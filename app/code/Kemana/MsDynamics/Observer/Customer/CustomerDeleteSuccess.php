@@ -69,6 +69,11 @@ class CustomerDeleteSuccess implements \Magento\Framework\Event\ObserverInterfac
             $deleteCustomerInErp = $this->erpCustomer->deleteCustomerInErp($this->helper->getFunctionDeleteCustomer(),
                 $this->helper->getSoapActionDeleteCustomer(), $dataToDeleteCustomer);
 
+            if (empty($deleteCustomerInErp)) {
+                $this->helper->log('ERP system might be off line', 'error');
+                return;
+            }
+
             if (isset($deleteCustomerInErp['curlStatus']) == '200') {
 
                 $this->helper->log('Customer ERP Number ' . $erpCustomerNumber . ' deleted successfully in ERP. Magento ID ' . $customerId, 'info');
