@@ -24,5 +24,9 @@
              method="syncCustomersFromErpToMagento">
             <schedule>30 7 * * *</schedule>
         </job>
+        <job name="msDynamicProductsFromErpToMagento" instance="Kemana\MsDynamics\Cron\SyncProductsFromErp"
+             method="syncProductsFromErpToMagento">
+            <schedule>30 7 * * *</schedule>
+        </job>
     </group>
 </config>
