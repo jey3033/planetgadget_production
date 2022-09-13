@@ -19,4 +19,7 @@
         <observer name="kemana_customer_delete"
                   instance="Kemana\MsDynamics\Observer\Customer\CustomerDeleteSuccess"/>
     </event>
+    <event name="checkout_submit_before">
+        <observer name="before_order_place" instance="Kemana\MsDynamics\Observer\Inventory\BeforOrderPlace" />
+    </event>
 </config>

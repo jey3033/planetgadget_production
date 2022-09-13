@@ -41,14 +41,17 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     /**
      * @param \Magento\Framework\App\Helper\Context $context
      * @param \Kemana\MsDynamics\Logger\Logger $logger
+     * @param \Kemana\MsDynamics\Logger\InventoryLogger $InventoryLogger
      */
     public function __construct(
         \Magento\Framework\App\Helper\Context             $context,
         \Kemana\MsDynamics\Logger\Logger                  $logger,
+        \Kemana\MsDynamics\Logger\InventoryLogger         $inventoryLogger,
         \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository
     )
     {
         $this->logger = $logger;
+        $this->inventoryLogger = $inventoryLogger;
         $this->customerRepository = $customerRepository;
         $this->storeScope = \Magento\Store\Model\ScopeInterface::SCOPE_STORE;
 
@@ -79,6 +82,29 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             $this->logger->error($message);
         } elseif ($type == 'notice') {
             $this->logger->notice($message);
+        }
+    }
+
+    /**
+     * @param $message
+     * @param string $type
+     * @param $code
+     * @return void
+     */
+    public function inventorylog($message, string $type = 'info')
+    {
+        if (!$this->isEnableLog()) {
+            return;
+        }
+
+        $message = 'MsDynamicErp : ' . $message;
+
+        if ($type == 'info') {
+            $this->inventoryLogger->info($message);
+        } elseif ($type == 'error') {
+            $this->inventoryLogger->error($message);
+        } elseif ($type == 'notice') {
+            $this->inventoryLogger->notice($message);
         }
     }
 
@@ -328,7 +354,6 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public function convertArrayToXml($pureArray): string
     {
         $xmlOutput = '';
-
         foreach ($pureArray as $nodeName => $nodeValue) {
             if (!$nodeValue) {
                 $xmlOutput .= '<' . $nodeName . '/>';
@@ -339,6 +364,45 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         }
 
         return $xmlOutput;
+    }
+
+    /**
+     * @param $pureArray
+     * @return string
+     */
+    public function convertInventoryArrayToXml($pureArray): string
+    {
+        $xmlOutput = '';
+        foreach ($pureArray as $nodes) {
+            $xmlOutput .= '<filter>';
+            foreach ($nodes as $nodeName => $nodeValue) {
+                
+                if (!$nodeValue) {
+                    $xmlOutput .= '<' . $nodeName . '/>';
+                    continue;
+                }
+                $xmlOutput .= '<' . $nodeName . '>' . $nodeValue . '</' . $nodeName . '>';
+                
+            }
+            $xmlOutput .= '</filter>';
+        }
+        return $xmlOutput;
+    }
+
+    /**
+     * @param $apiFunction
+     * @param $postParameters
+     * @return string
+     */
+    public function getXmlRequestBodyToGetUnSyncInventorysFromApi($apiFunction, $soapAction, $postParameters): string
+    {
+        return '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+                <Body>
+                        <' . $soapAction . ' xmlns="' . $this->getApiXmnls() . "/" . $apiFunction . '">
+                                ' . $postParameters . '
+                        </' . $soapAction . '>
+                </Body>
+        </Envelope>';
     }
 
     /**
@@ -502,4 +566,19 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     {
         return ConfigProvider::ACK_PRODUCT_SOAP_ACTION;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getFunctionInventoryStock()
+    {
+        return ConfigProvider::GET_PRODUCT_INVENTORY_STOCK_ERP;
+    }
+
+    public function getSoapActionGetInventoryStock()
+    {
+        return ConfigProvider::GET_PRODUCT_INVENTORY_STOCK_SOAP_ACTION;
+    }
+
+
 }
