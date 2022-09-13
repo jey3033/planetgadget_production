@@ -1,0 +1,11 @@
+<!-- ko if: isDisplayed() -->
+  <tr class="totals insurance_fee excl">
+        <th class="mark" scope="row">
+            <span class="label" data-bind="text: title"></span>
+        </th>
+        <td class="amount">
+            <span class="price"
+                  data-bind="text: getValue(), attr: {'data-th': title}"></span>
+        </td>
+    </tr>   
+<!-- /ko -->

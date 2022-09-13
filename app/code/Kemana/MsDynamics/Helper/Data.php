@@ -272,7 +272,43 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      * @param $postParameters
      * @return string
      */
+    public function getXmlRequestBodyToGetUnSyncProductsFromApi($apiFunction, $soapAction, $postParameters): string
+    {
+        return '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+                <Body>
+                        <' . $soapAction . ' xmlns="' . $this->getApiXmnls() . "/" . $apiFunction . '">
+                            <filter>
+                                ' . $postParameters . '
+                            </filter>
+                        </' . $soapAction . '>
+                </Body>
+        </Envelope>';
+    }
+
+    /**
+     * @param $apiFunction
+     * @param $postParameters
+     * @return string
+     */
     public function getXmlRequestBodyToErpAckListOfCustomers($apiFunction, $soapAction, $postParameters): string
+    {
+        return '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+                <Body>
+                        <' . $soapAction . ' xmlns="' . $this->getApiXmnls() . "/" . $apiFunction . '">
+                            <' . $apiFunction . '_List>
+                                ' . $postParameters . '
+                            </' . $apiFunction . '_List>
+                        </' . $soapAction . '>
+                </Body>
+        </Envelope>';
+    }
+
+    /**
+     * @param $apiFunction
+     * @param $postParameters
+     * @return string
+     */
+    public function getXmlRequestBodyToErpAckListOfProducts($apiFunction, $soapAction, $postParameters): string
     {
         return '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
                 <Body>
@@ -412,5 +448,58 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         }
 
         return false;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFunctionProductList()
+    {
+        return ConfigProvider::GET_PRODUCT_LIST_IN_ERP;
+    }
+
+    public function getSoapActionGetProductList()
+    {
+        return ConfigProvider::GET_PRODUCT_LIST_SOAP_ACTION;
+    }
+
+    /**
+     * @param $ackProductData
+     * @return string
+     */
+    public function convertAckProductListToXml($ackProductData): string
+    {
+        $xmlOutput = '';
+
+        if (empty($ackProductData)) {
+            return $xmlOutput;
+        }
+
+        foreach ($ackProductData as $ackProduct) {
+            $xmlOutput .= '<productack>';
+            foreach ($ackProduct as $nodeName => $nodeValue) {
+                $xmlOutput .= '<' . $nodeName . '>' . $nodeValue . '</' . $nodeName . '>';
+            }
+            $xmlOutput .= '</productack>';
+
+        }
+
+        return $xmlOutput;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFunctionAckProduct()
+    {
+        return ConfigProvider::ACK_PRODUCT_IN_ERP;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSoapActionAckProduct()
+    {
+        return ConfigProvider::ACK_PRODUCT_SOAP_ACTION;
     }
 }

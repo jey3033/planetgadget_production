@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2017 PT Kemana Teknologi Solusi. All rights reserved.
+ * http://www.kemana.com
+ */
+/**
+ * @category Kemana
+ * @package  Kemana_ShippingInsurance
+ * @license  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ *
+ *
+ * @author   Anupam Tiwari<anupam.tiwari@kemana.com>
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:DataObject/etc/fieldset.xsd">
+    <scope id="global">
+        <fieldset id="sales_convert_quote_address">
+            <field name="insurance_fee">
+                <aspect name="to_order"/>
+            </field>
+            <field name="base_insurance_fee">
+                <aspect name="to_order"/>
+            </field>
+        </fieldset>
+        <fieldset id="sales_convert_quote">
+            <field name="insurance_fee">
+                <aspect name="to_order"/>
+            </field>
+            <field name="base_insurance_fee">
+                <aspect name="to_order"/>
+            </field>
+        </fieldset>
+    </scope>
+</config>
