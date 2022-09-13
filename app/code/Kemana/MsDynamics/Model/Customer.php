@@ -47,8 +47,12 @@ class Customer
      * @return \Magento\Customer\Api\Data\CustomerInterface[]
      * @throws \Magento\Framework\Exception\LocalizedException
      */
-    public function getNoySyncCustomersInPg()
+    public function getNoySyncCustomersInPg($customerId = null)
     {
+        if ($customerId) {
+            return $this->customerRepository->getById($customerId);
+        }
+
         $filterErpCustomerNumber = $this->filterBuilder
             ->setField('ms_dynamic_customer_number')
             ->setConditionType('null')
@@ -84,6 +88,10 @@ class Customer
 
         $this->searchCriteriaBuilder->setFilterGroups([$filterOr]);
         $searchCriteria = $this->searchCriteriaBuilder->create();
+
+        if (count($this->customerRepository->getList($searchCriteria)->getItems()) > 1) {
+            return 'MULTIPLE';
+        }
 
         if (count($this->customerRepository->getList($searchCriteria)->getItems())) {
             return true;
