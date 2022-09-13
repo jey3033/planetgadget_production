@@ -117,6 +117,11 @@ class SyncCustomersFromErp
         $getCustomersFromErp = $this->erpCustomer->getUnSyncCustomersFromErp($this->helper->getFunctionCustomerList(),
             $this->helper->getSoapActionGetCustomerList(), $dataToGetCustomers);
 
+        if (empty($getCustomersFromErp)) {
+            $this->helper->log('ERP system might be off line', 'error');
+            return;
+        }
+
         if (!is_array($getCustomersFromErp) || !count($getCustomersFromErp)) {
             $this->helper->log('No customers received from ERP to register in Magento', 'error');
             return;
@@ -199,7 +204,6 @@ class SyncCustomersFromErp
                     "CustomerNo" => $erpCustomer['CustomerNo']
                 ];
 
-                // TODO un comment this when production
                 if (!$existingCustomer) {
                     $getNewCustomer = $this->magentoCustomer->load($newCustomerId);
                     $getNewCustomer->sendNewAccountEmail();
@@ -210,20 +214,8 @@ class SyncCustomersFromErp
                     $this->helper->log('Successfully updated the customer account in Magento for ERP customer : ' . $erpCustomer['CustomerNo'], 'info');
                 }
 
-                // TODO END
-
                 try {
 
-                    // TODO In ERP side post code is not available. But in Magento post code is required for address
-                    if (!isset($erpCustomer['Postcode']) || !$erpCustomer['Postcode']) {
-                        $erpCustomer['Postcode'] = 10110;
-                    }
-                    // TODO END
-
-                    /*if (!isset($nameArray[1])) {
-                        $this->helper->log('Last name missing for this customer. Aborting the address. Email : ' . $erpCustomer['Email']);
-                        continue;
-                    }*/
                     if (!isset($erpCustomer['Postcode']) || !$erpCustomer['Postcode']) {
                         $this->helper->log('Post code missing for this customer. Aborting the address. Email : ' . $erpCustomer['Email']);
                         continue;
@@ -254,25 +246,6 @@ class SyncCustomersFromErp
 
                     $this->helper->log('Started to update the Magento Customer ID in ERP for ERP customer : ' . $erpCustomer['CustomerNo'], 'info');
 
-                    $dataToCustomer = [
-                        "MagentoCustomerID" => $newCustomerId,
-                        "CustomerNo" => $erpCustomer['CustomerNo'],
-                    ];
-
-                    $dataToCustomer = $this->helper->convertArrayToXml($dataToCustomer);
-
-                    $updateCustomerInErp = $this->erpCustomer->updateCustomerInErp($this->helper->getFunctionUpdateCustomer(),
-                        $this->helper->getSoapActionUpdateCustomer(), $dataToCustomer);
-
-                    if (isset($updateCustomerInErp['response']['CustomerNo'])) {
-
-                        $this->helper->log('Magento customer ID successfully updated for ERP customer in ERP and data collected for Ack call ' . $erpCustomer['CustomerNo'], 'error');
-
-                    } else {
-                        $this->helper->log('ERP Customer ' . $erpCustomer['CustomerNo'] . ' created in Magento. But when updating the
-                        Magento customer number in ERP it failed. See last log message to check the issue.', 'info');
-                    }
-
                 } catch (\Exception $e) {
                     $this->helper->log('Exception : Unable to create the address for EPR customer number ' . $erpCustomer['CustomerNo'] . ' in Magento. Error : ' . $e->getMessage(), 'error');
                 }
@@ -284,8 +257,6 @@ class SyncCustomersFromErp
             $i++;
             // TODO END
         }
-
-        // Ack call
 
         if (empty($ackCustomerData)) {
             return;
@@ -303,7 +274,6 @@ class SyncCustomersFromErp
             $this->helper->log('End to get the not synced customers from ERP and then create in Magento using Cron Job', 'info');
             return $ackCustomerData;
         }
-
     }
 
 }
