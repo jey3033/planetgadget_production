@@ -302,7 +302,8 @@ define([
                     arrows: false,
                     dots: false,
                     slidesToShow: 2,
-                    slidesToScroll: 2
+                    slidesToScroll: 2,
+                    rows: 2
                 }
             },
             {
