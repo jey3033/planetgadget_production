@@ -19,4 +19,20 @@
         <observer name="kemana_customer_delete"
                   instance="Kemana\MsDynamics\Observer\Customer\CustomerDeleteSuccess"/>
     </event>
+    <event name="layout_render_before_magento_reward_customer_info">
+        <observer name="kemana_customer_reward_point_info"
+                  instance="Kemana\MsDynamics\Observer\Customer\CustomerRewardPointInfo"/>
+    </event>
+    <event name="layout_render_before_checkout_cart_index">
+        <observer name="kemana_customer_reward_point_info_cart"
+                  instance="Kemana\MsDynamics\Observer\Customer\CustomerRewardPointInfo"/>
+    </event>
+    <event name="layout_render_before_checkout_index_index">
+        <observer name="kemana_customer_reward_point_info_checkout"
+                  instance="Kemana\MsDynamics\Observer\Customer\CustomerRewardPointInfo"/>
+    </event>
+    <event name="newsletter_subscriber_save_commit_after">
+        <observer name="kemana_newsletter_subscriber_save_commit_after"
+                  instance="Kemana\MsDynamics\Observer\Customer\CustomerSubscribed"/>
+    </event>
 </config>

@@ -94,6 +94,34 @@ class ConfigProvider
     const DELETE_CUSTOMER_IN_ERP_SOAP_ACTION = 'BlockCustomer';
 
     /**
+     * XML Path API function get reward point from ERP
+     */
+    const GET_REWARD_POINT_FROM_ERP = 'customerpoint';
+
+    const GET_REWARD_POINT_SOAP_ACTION = 'Read';
+
+    /**
+     * XML Path API function Earn reward point from Magento
+     */
+    const EARN_REWARD_POINT_FROM_MAGETNO = 'pointearn';
+
+    const EARN_REWARD_POINT_SOAP_ACTION = 'Create';
+
+    /**
+     * XML Path API function Redeem reward point from Magento
+     */
+    const REDEEM_REWARD_POINT_FROM_MAGETNO = 'pointredeem';
+
+    const REDEEM_REWARD_POINT_SOAP_ACTION = 'Create';
+
+    /**
+     * XML Path API function Redeem reward point from Magento
+     */
+    const LAST_UPDATED_POINT_FROM_ERP = 'lastupdatedpoint';
+
+    const LAST_UPDATED_POINT_SOAP_ACTION = 'ReadMultiple';
+
+    /**
      * Main errors from the API
      */
     const ERP_RESPONSES = [
