@@ -84,6 +84,10 @@ class Inventory
         return false;
     }
 
+    /**
+     * @param $productData
+     * @return array
+     */
     public function inventoryApiCall($productData){
 
         $dataToGetStock = [];
@@ -104,6 +108,22 @@ class Inventory
         $getProductsFromErp = $this->getUnSyncInventorysFromErp($this->helper->getFunctionInventoryStock(),
             $this->helper->getSoapActionGetInventoryStock(), $dataToGetStock);
 
+        return $getProductsFromErp;
+
     }
 
+    /**
+     * @param $sku
+     * @param $qty
+     * @return array
+     */
+    public function updateStock($sku,$qty){
+        try{
+            $stockItem = $this->stockRegistry->getStockItemBySku($sku);
+            $stockItem->setQty($qty);
+            $this->stockRegistry->updateStockItemBySku($sku, $stockItem);
+        }catch(Exception $e){
+            throw new \Magento\Framework\Exception\LocalizedException(__($e->getMessage()));
+        }
+    }
 }
