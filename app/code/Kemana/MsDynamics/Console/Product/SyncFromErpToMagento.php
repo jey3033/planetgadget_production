@@ -58,12 +58,6 @@ class SyncFromErpToMagento extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-
-        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-        $Inventory = $objectManager->create(\Kemana\MsDynamics\Model\Api\Erp\Inventory::class);
-        $Inventory->inventoryApiCall(['100BR005']);die;
-
-
         $output->writeln("Started to get the un sync products from MsDynamic ERP and create new product in Magento");
         $output->writeln("Please check var/log/ms_dynamic.log file for see live messages");
         $fullySyncedProducts = $this->syncProductsFromErp->syncProductsFromErpToMagento();
