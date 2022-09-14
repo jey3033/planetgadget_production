@@ -24,7 +24,7 @@
                             <?= $block->getFeaturedBrandTitle(); ?>
                         </h2>
                     </div>
-                    <span><a href="<?= /* @escapeNotVerified */ $block->getUrl('brand/items') ?>">Lihat Semua</a></span>
+                    <span><a href="<?= /* @escapeNotVerified */ $block->getUrl('brand/items') ?>"><?= __('See All') ?></a></span>
                     <div class="block-content-wrapper">
                         <div class="block-content">
                             <div id="{brand-container}-nav" class="left"></div>
@@ -51,6 +51,7 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         <?php endif; ?>

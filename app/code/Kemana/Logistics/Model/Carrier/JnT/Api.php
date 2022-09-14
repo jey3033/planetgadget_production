@@ -64,7 +64,7 @@ class Api extends \KS\Logistic\Model\Carrier\JnT\Api
             'weight' => $packageParams->getWeight(),
             'goodsdesc' => substr($this->getItemDescription($request), 0, 40),
             'servicetype' => 1,
-            'insurance' => null,
+            'insurance' => substr((int) $order->getInsuranceFee(), 0, 8),
             'orderdate' => $order->getCreatedAt(),
             'item_name' => substr(implode(",",$item_name), 0, 50),
             'cod' => null,
@@ -74,8 +74,6 @@ class Api extends \KS\Logistic\Model\Carrier\JnT\Api
             'goodsvalue' => substr((int) $order->getGrandTotal(), 0, 8)
         ];
 
-        echo "<pre>";
-        print_r($params);die;
         $params = ['detail' => [$params]];
         $params = ['detail' => [$params]];
 

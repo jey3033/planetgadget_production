@@ -97,6 +97,11 @@ class CustomerRegisterSuccess implements \Magento\Framework\Event\ObserverInterf
         $createCustomerInErp = $this->erpCustomer->createCustomerInErp($this->helper->getFunctionCreateCustomer(),
             $this->helper->getSoapActionCreateCustomer(), $dataToCustomer);
 
+        if (empty($createCustomerInErp)) {
+            $this->helper->log('ERP system might be off line', 'error');
+            return;
+        }
+
         if ($createCustomerInErp['curlStatus'] == 500 && $this->helper->checkAlreadyExistCustomerError($createCustomerInErp['response'])) {
             $this->helper->log('This customer already exist in ERP. So ERP customer number is updating in Magento', 'info');
 

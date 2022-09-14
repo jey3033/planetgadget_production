@@ -162,11 +162,21 @@ class SyncCustomersToErp
             $createCustomerInErp = $this->erpCustomer->createCustomerInErp($this->helper->getFunctionCreateCustomer(),
                 $this->helper->getSoapActionCreateCustomer(), $dataToCustomer);
 
+            if (empty($createCustomerInErp)) {
+                $this->helper->log('ERP system might be off line', 'error');
+                continue;
+            }
+
             if ($createCustomerInErp['curlStatus'] == 500 && $this->helper->checkAlreadyExistCustomerError($createCustomerInErp['response'])) {
                 $this->helper->log('This customer already exist in ERP. So ERP customer number is updating in Magento', 'info');
 
                 $updateCustomer = $this->erpCustomer->updateCustomerInErp($this->helper->getFunctionUpdateCustomer(),
                     $this->helper->getSoapActionUpdateCustomer(), $dataToCustomer);
+
+                if (empty($updateCustomer)) {
+                    $this->helper->log('ERP system might be off line', 'error');
+                    continue;
+                }
 
                 if (isset($updateCustomer['response']['CustomerNo'])) {
                     $this->helper->updateCustomerMsDynamicNumber($customer->getId(), $updateCustomer['response']['CustomerNo']);
@@ -190,23 +200,6 @@ class SyncCustomersToErp
                 $this->customerRepository->save($getCustomer);
 
                 $erpCustomerNumber = $createCustomerInErp['response']['CustomerNo'];
-
-                $this->helper->log('Start Ack call for customer ' . $customer->getId() . ' by CRON', 'info');
-
-                $ackCustomerData = [
-                    "MagentoCustomerID" => $customer->getId(),
-                    "CustomerNo" => $createCustomerInErp['response']['CustomerNo']
-                ];
-
-                $ackCustomerData = $this->helper->convertAckCustomerSingleToXml($ackCustomerData);
-
-                $ackCustomer = $this->erpCustomer->ackCustomer($this->helper->getFunctionAckCustomer(),
-                    $this->helper->getSoapActionAckCustomer(), $ackCustomerData);
-
-                if ($ackCustomer['response']['CustomerNo']) {
-                    $this->helper->log('Customer ' . $customer->getId() . " successfully sent to the ERP and AckCustomer call successfully done", 'info');
-                    $singleCustomerFromGridResult = true;
-                }
 
                 if ($customerId) {
                     $this->helper->log('End SYNC button event from customer admin grid for ' . $customer->getId() . '. Sent to ERP', 'info');

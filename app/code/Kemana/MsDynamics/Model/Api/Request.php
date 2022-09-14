@@ -60,9 +60,10 @@ class Request
 
     /**
      * @param string $apiFunction
+     * @param string $soapAction
      * @param $postParameters
      * @param string $method
-     * @return array|false
+     * @return array
      */
     public function apiTransport(string $apiFunction, string $soapAction, $postParameters, string $method = 'POST')
     {
@@ -79,7 +80,7 @@ class Request
         if (!$apiFunction) {
             $this->helper->log('The ERP API function is missing for the API call.');
 
-            return false;
+            return [];
         }
 
         try {
@@ -143,13 +144,13 @@ class Request
             $this->helper->log('Error Response : ' . $e->getMessage());
             $this->helper->log('End API Call : ' . $apiFunction, 'info');
 
-            return false;
+            return [];
         }
 
         $this->helper->log('Error Response end of the app/code/Kemana/MsDynamics/Model/Api/Request.php');
         $this->helper->log('End API Call : ' . $apiFunction, 'info');
 
-        return false;
+        return [];
 
     }
 
