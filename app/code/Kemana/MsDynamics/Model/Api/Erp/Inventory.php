@@ -50,25 +50,6 @@ class Inventory
      * @param $soapAction
      * @return false|mixed
      */
-    public function ackInventory($apiFunction, $soapAction, $inventoryData)
-    {
-        $postParameters = $inventoryData;
-
-        $getInventoryFromErp = $this->request->apiTransport($apiFunction, $soapAction,
-            $this->helper->getXmlRequestBodyToErpAckListOfInventorys($apiFunction, $soapAction, $postParameters));
-
-        if (isset($getInventoryFromErp['response'])) {
-            return $getInventoryFromErp;
-        }
-
-        return false;
-    }
-
-    /**
-     * @param $apiFunction
-     * @param $soapAction
-     * @return false|mixed
-     */
 
     public function getUnSyncInventorysFromErp($apiFunction, $soapAction, $inventoryData)
     {
@@ -85,31 +66,21 @@ class Inventory
     }
 
     /**
-     * @param $productData
+     * @param $productSkus
      * @return array
      */
-    public function inventoryApiCall($productData){
-
-        $dataToGetStock = [];
-        
-        foreach ($productData as $key => $product) {
-            $dataToGetStock[] = [
+    public function inventoryApiCall($productSkus){
+            $productSkus = implode("|", $productSkus);
+            $dataToGetStock = [
                 "Field" => "ProductNo",
-                "Criteria" => $product,
+                "Criteria" => $productSkus,
             ];
-        }
 
-        $dataToGetStock[] = [
-            "Field" => "LocationFilter",
-            "Criteria" => "PG-5",
-        ];
-
-        $dataToGetStock = $this->helper->convertInventoryArrayToXml($dataToGetStock);
+        $dataToGetStock = $this->helper->convertArrayToXml($dataToGetStock);
         $getProductsFromErp = $this->getUnSyncInventorysFromErp($this->helper->getFunctionInventoryStock(),
             $this->helper->getSoapActionGetInventoryStock(), $dataToGetStock);
 
         return $getProductsFromErp;
-
     }
 
     /**
@@ -122,6 +93,8 @@ class Inventory
             $stockItem = $this->stockRegistry->getStockItemBySku($sku);
             $stockItem->setQty($qty);
             $this->stockRegistry->updateStockItemBySku($sku, $stockItem);
+            $message = "Updated inventory sku: ".$sku ." and stock: " .$qty;
+            $this->helper->inventorylog($message, 'info');
         }catch(Exception $e){
             throw new \Magento\Framework\Exception\LocalizedException(__($e->getMessage()));
         }

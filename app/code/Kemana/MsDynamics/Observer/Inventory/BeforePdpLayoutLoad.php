@@ -58,11 +58,22 @@ class BeforePdpLayoutLoad implements \Magento\Framework\Event\ObserverInterface
             if($productId){
                 $productsku = $this->_productRepository->getById($productId)->getSku();
                 $this->helper->inventorylog('PDP page API call: ' . $productsku, 'info');
+                
                 $productdata = [];
                 array_push($productdata, $productsku);
 
                 if(!empty($productdata)){
-                    $this->erpInventory->inventoryApiCall($productdata);
+                    $response = $this->erpInventory->inventoryApiCall($productdata);
+
+                    if($response['response'] && isset($response['response']['ProductNo'])){
+                        $this->erpInventory->updateStock($response['response']['ProductNo'],$response['response']['Inventory']);
+                    }elseif($response['response']){
+                        foreach ($response['response'] as $key => $product) {
+                            $this->erpInventory->updateStock($product['ProductNo'],$product['Inventory']);
+                        }
+                    }else{
+                        $this->helper->inventorylog('0 Product stock update');
+                    }
                 }
             }
         }

@@ -367,29 +367,6 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     }
 
     /**
-     * @param $pureArray
-     * @return string
-     */
-    public function convertInventoryArrayToXml($pureArray): string
-    {
-        $xmlOutput = '';
-        foreach ($pureArray as $nodes) {
-            $xmlOutput .= '<filter>';
-            foreach ($nodes as $nodeName => $nodeValue) {
-                
-                if (!$nodeValue) {
-                    $xmlOutput .= '<' . $nodeName . '/>';
-                    continue;
-                }
-                $xmlOutput .= '<' . $nodeName . '>' . $nodeValue . '</' . $nodeName . '>';
-                
-            }
-            $xmlOutput .= '</filter>';
-        }
-        return $xmlOutput;
-    }
-
-    /**
      * @param $apiFunction
      * @param $postParameters
      * @return string
@@ -399,7 +376,9 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         return '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
                 <Body>
                         <' . $soapAction . ' xmlns="' . $this->getApiXmnls() . "/" . $apiFunction . '">
+                            <filter>
                                 ' . $postParameters . '
+                            </filter>
                         </' . $soapAction . '>
                 </Body>
         </Envelope>';
