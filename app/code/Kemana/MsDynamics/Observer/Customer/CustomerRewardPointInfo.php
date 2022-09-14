@@ -30,9 +30,9 @@ class CustomerRewardPointInfo implements \Magento\Framework\Event\ObserverInterf
     protected $erpCustomer;
 
     /**
-     * @var \Magento\Customer\Model\Customer
+     * @var \Magento\Customer\Api\CustomerRepositoryInterface
      */
-    protected $customer;
+    protected $customerRepository;
 
     /**
      * @var \Magento\Customer\Helper\Session\CurrentCustomer
@@ -40,57 +40,31 @@ class CustomerRewardPointInfo implements \Magento\Framework\Event\ObserverInterf
     protected $currentCustomer;
 
     /**
-     * @var \Magento\Reward\Model\RewardFactory
-     */
-    protected $rewardFactory;
-
-    /**
      * @var \Magento\Store\Model\StoreManagerInterface
      */
     protected $storeManager;
 
     /**
-     * @var \Magento\Framework\App\ResponseFactory
-     */
-    protected $_responseFactory;
-
-    /**
-     * @var \Magento\Framework\UrlInterface
-     */
-    protected $_url;
-
-    /**
      * @param \Kemana\MsDynamics\Helper\Data $helper
      * @param \Kemana\MsDynamics\Model\Api\Erp\Customer $erpCustomer
-     * @param \Magento\Customer\Model\Customer $customer
+     * @param \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository
      * @param \Magento\Customer\Helper\Session\CurrentCustomer $currentCustomer
-     * @param \Magento\Reward\Model\RewardFactory $rewardFactory
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
-     * @param \Magento\Framework\App\Response\RedirectInterface $redirect
      * @param \Magento\Framework\App\ResponseFactory $responseFactory
-     * @param \Magento\Framework\UrlInterface $url
      */
     public function __construct(
         \Kemana\MsDynamics\Helper\Data $helper,
         \Kemana\MsDynamics\Model\Api\Erp\Customer $erpCustomer,
-        \Magento\Customer\Model\Customer $customer,
+        \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository,
         \Magento\Customer\Helper\Session\CurrentCustomer $currentCustomer,
-        \Magento\Reward\Model\RewardFactory $rewardFactory,
-        \Magento\Store\Model\StoreManagerInterface $storeManager,
-        \Magento\Framework\App\Response\RedirectInterface $redirect,
-        \Magento\Framework\App\ResponseFactory $responseFactory,
-        \Magento\Framework\UrlInterface $url
+        \Magento\Store\Model\StoreManagerInterface $storeManager
     )
     {
         $this->helper = $helper;
         $this->erpCustomer = $erpCustomer;
-        $this->customer = $customer;
+        $this->customerRepository = $customerRepository;
         $this->currentCustomer = $currentCustomer;
-        $this->rewardFactory = $rewardFactory;
         $this->storeManager = $storeManager;
-        $this->redirect = $redirect;
-        $this->_responseFactory = $responseFactory;
-        $this->_url = $url;
     }
 
     /**
@@ -104,14 +78,14 @@ class CustomerRewardPointInfo implements \Magento\Framework\Event\ObserverInterf
         $this->helper->log('-- Get Reward Point From ERP Start --.', 'info');
 
         $customerId = $this->currentCustomer->getCustomerId();
-        $customer = $this->customer->load($customerId);
-        $erpCustomerNumber = $customer->getMsDynamicCustomerNumber();
+        $customer = $this->customerRepository->getById($customerId);
+        $erpCustomerNumber = $customer->getCustomAttribute('ms_dynamic_customer_number')->getValue();
         $storeId = $this->storeManager->getStore()->getId();
 
-        $reward = $this->getRewardModel()->getCollection()->addFieldToFilter('customer_id', ['eq' => $customerId])->getFirstItem();
+        $reward = $this->helper->getRewardModel()->getCollection()->addFieldToFilter('customer_id', ['eq' => $customerId])->getFirstItem();
         $magentoRewardPointBalance =  $reward->getPointsBalance();
 
-        if ($customer->getMsDynamicCustomerNumber()) {
+        if ($erpCustomerNumber) {
             $dataToGetRewardPoint = [
                 "customer_no" => $erpCustomerNumber
             ];
@@ -123,7 +97,7 @@ class CustomerRewardPointInfo implements \Magento\Framework\Event\ObserverInterf
             if (isset($getRewardPoint['curlStatus']) == '200') {
 
                 if($getRewardPoint['response']['PointBalance'] !== $magentoRewardPointBalance) {
-                    $this->getRewardModel()
+                    $this->helper->getRewardModel()
                         ->setCustomerId($customerId)
                         ->setWebsiteId($this->storeManager->getStore($storeId)->getWebsiteId())
                         ->setPointsDelta($getRewardPoint['response']['PointBalance'])
@@ -136,16 +110,5 @@ class CustomerRewardPointInfo implements \Magento\Framework\Event\ObserverInterf
                 $this->helper->log('-- End Get Reward Point From ERP --', 'info');
             }
         }
-    }
-
-    /**
-     * Get reward model
-     *
-     * @return \Magento\Reward\Model\Reward
-     * @codeCoverageIgnore
-     */
-    protected function getRewardModel()
-    {
-        return $this->rewardFactory->create();
     }
 }

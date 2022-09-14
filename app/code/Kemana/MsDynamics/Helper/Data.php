@@ -256,6 +256,9 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         return ConfigProvider::GET_REWARD_POINT_FROM_ERP;
     }
 
+    /**
+     * @return mixed
+     */
     public function getSoapActionGetRewardPoint()
     {
         return ConfigProvider::GET_REWARD_POINT_SOAP_ACTION;
@@ -269,6 +272,9 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         return ConfigProvider::EARN_REWARD_POINT_FROM_MAGETNO;
     }
 
+    /**
+     * @return mixed
+     */
     public function getSoapActionEarnRewardPoint()
     {
         return ConfigProvider::EARN_REWARD_POINT_SOAP_ACTION;
@@ -282,6 +288,9 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         return ConfigProvider::REDEEM_REWARD_POINT_FROM_MAGETNO;
     }
 
+    /**
+     * @return mixed
+     */
     public function getSoapActionRedeemRewardPoint()
     {
         return ConfigProvider::REDEEM_REWARD_POINT_SOAP_ACTION;
@@ -295,6 +304,9 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         return ConfigProvider::LAST_UPDATED_POINT_FROM_ERP;
     }
 
+    /**
+     * @return mixed
+     */
     public function getSoapActionlastUpdated()
     {
         return ConfigProvider::LAST_UPDATED_POINT_SOAP_ACTION;
@@ -392,6 +404,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 
     /**
      * @param $apiFunction
+     * @param $soapAction
      * @param $postParameters
      * @return string
      */
@@ -408,6 +421,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 
     /**
      * @param $apiFunction
+     * @param $soapAction
      * @param $postParameters
      * @return string
      */
@@ -426,6 +440,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 
     /**
      * @param $apiFunction
+     * @param $soapAction
      * @param $postParameters
      * @return string
      */
@@ -444,6 +459,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 
     /**
      * @param $apiFunction
+     * @param $soapAction
      * @param $postParameters
      * @return string
      */
@@ -642,6 +658,8 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     /**
      * @param $customerId
      * @param $customerNumber
+     * @param \Kemana\MsDynamics\Model\Api\Erp\Customer $customer
+     * @param $pointsDelta
      * @return bool
      */
     public function addCustomerEarnPointToErp($customerId, $customerNumber, $customer, $pointsDelta = 0): bool
@@ -673,12 +691,12 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             }
 
             if ($earnPointToErp['curlStatus'] == 200 && isset($earnPointToErp['response']['CustomerNo'])) {
-                $this->log('Successfully added Earn Point To ERP for customer ' . $customerId . ' Earn point sent to ERP', 'info');
+                $this->log('Successfully added Earn Point To ERP for customer ' . $customerId, 'info');
             }
 
             return true;
         } catch (\Exception $e) {
-            $this->log('Failed to sent Earn point to Erp for Customer ' . $customerId . ' sent/update to ERP. Error :' . $e->getMessage(), 'info');
+            $this->log('Failed to sent Earn point to Erp for Customer ' . $customerId . ' Error :' . $e->getMessage(), 'info');
         }
 
         return false;
@@ -688,13 +706,17 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      * Get reward model
      *
      * @return \Magento\Reward\Model\Reward
-     * @codeCoverageIgnore
      */
-    protected function getRewardModel()
+    public function getRewardModel()
     {
         return $this->rewardFactory->create();
     }
 
+    /**
+     * Get Current date Timestamp
+     *
+     * @return string
+     */
     public function getTimeStamp()
     {
         $dateToTimestamp = $this->dateTime->gmtDate();

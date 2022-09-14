@@ -16,18 +16,20 @@ namespace Kemana\MsDynamics\Observer\Customer;
 
 use Magento\Framework\Event\ObserverInterface;
 
+/**
+ * Class InvitationToCustomer
+ */
 class InvitationToCustomer implements ObserverInterface
 {
-
     /**
      * @var \Magento\Store\Model\StoreManagerInterface
      */
-    protected $_storeManager;
+    protected $storeManager;
 
     /**
      * @var \Magento\Reward\Helper\Data
      */
-    protected $_rewardData;
+    protected $rewardData;
 
     /**
      * @var \Kemana\MsDynamics\Helper\Data
@@ -45,9 +47,9 @@ class InvitationToCustomer implements ObserverInterface
     protected $scopeConfig;
 
     /**
-     * @var CustomerRegistry
+     * @var \Magento\Customer\Api\CustomerRepositoryInterface
      */
-    protected $customerRegistry;
+    protected $customerRepository;
 
     /**
      * @param \Magento\Reward\Helper\Data $rewardData
@@ -55,7 +57,7 @@ class InvitationToCustomer implements ObserverInterface
      * @param \Kemana\MsDynamics\Helper\Data $helper
      * @param \Kemana\MsDynamics\Model\Api\Erp\Customer $erpCustomer
      * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
-     * @param \Magento\Customer\Model\CustomerRegistry $customerRegistry
+     * @param \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository
      */
     public function __construct(
         \Magento\Reward\Helper\Data $rewardData,
@@ -63,14 +65,14 @@ class InvitationToCustomer implements ObserverInterface
         \Kemana\MsDynamics\Helper\Data $helper,
         \Kemana\MsDynamics\Model\Api\Erp\Customer $erpCustomer,
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
-        \Magento\Customer\Model\CustomerRegistry $customerRegistry
+        \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository
     ) {
-        $this->_rewardData = $rewardData;
-        $this->_storeManager = $storeManager;
+        $this->rewardData = $rewardData;
+        $this->storeManager = $storeManager;
         $this->helper = $helper;
         $this->erpCustomer = $erpCustomer;
         $this->scopeConfig = $scopeConfig;
-        $this->customerRegistry = $customerRegistry;
+        $this->customerRepository = $customerRepository;
     }
 
     /**
@@ -88,8 +90,8 @@ class InvitationToCustomer implements ObserverInterface
 
         /* @var $invitation \Magento\Invitation\Model\Invitation */
         $invitation = $observer->getEvent()->getInvitation();
-        $websiteId = $this->_storeManager->getStore($invitation->getStoreId())->getWebsiteId();
-        if (!$this->_rewardData->isEnabledOnFront($websiteId)) {
+        $websiteId = $this->storeManager->getStore($invitation->getStoreId())->getWebsiteId();
+        if (!$this->rewardData->isEnabledOnFront($websiteId)) {
             return $this;
         }
 
@@ -98,10 +100,10 @@ class InvitationToCustomer implements ObserverInterface
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
         );
         if ($point) {
-            $customerModel = $this->customerRegistry->retrieve($invitation->getCustomerId());
-            if ($customerModel->getMsDynamicCustomerNumber()) {
-                $customerNumber = $customerModel->getMsDynamicCustomerNumber();
-                $this->helper->addCustomerEarnPointToErp($invitation->getCustomerId(), $customerNumber, $this->erpCustomer, $point);
+            $customer = $this->customerRepository->getById($invitation->getCustomerId());
+            $erpCustomerNumber = $customer->getCustomAttribute('ms_dynamic_customer_number')->getValue();
+            if ($erpCustomerNumber) {
+                $this->helper->addCustomerEarnPointToErp($invitation->getCustomerId(), $erpCustomerNumber, $this->erpCustomer, $point);
             }
         }
         return $this;

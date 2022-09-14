@@ -17,7 +17,6 @@ declare(strict_types=1);
 namespace Kemana\MsDynamics\Observer\Customer;
 
 use Magento\Framework\Event\ObserverInterface;
-use Magento\Customer\Model\CustomerRegistry;
 use Magento\Framework\Exception\LocalizedException;
 
 /**
@@ -25,28 +24,6 @@ use Magento\Framework\Exception\LocalizedException;
  */
 class SaveRewardPoints implements ObserverInterface
 {
-    /**
-     * Customer converter
-     *
-     * @var CustomerRegistry
-     */
-    protected $customerRegistry;
-
-    /**
-     * @var \Magento\Reward\Model\RewardFactory
-     */
-    protected $_rewardFactory;
-
-    /**
-     * @var \Magento\Store\Model\StoreManagerInterface
-     */
-    protected $_storeManager;
-
-    /**
-     * @var \Magento\Reward\Helper\Data
-     */
-    protected $_rewardData;
-
     /**
      * @var \Kemana\MsDynamics\Helper\Data
      */
@@ -58,31 +35,19 @@ class SaveRewardPoints implements ObserverInterface
     protected $erpCustomer;
 
     /**
-     * @param \Magento\Reward\Helper\Data $rewardData
-     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
-     * @param \Magento\Reward\Model\RewardFactory $rewardFactory
-     * @param CustomerRegistry $customerRegistry
      * @param \Kemana\MsDynamics\Helper\Data $helper
      * @param \Kemana\MsDynamics\Model\Api\Erp\Customer $erpCustomer
      */
     public function __construct(
-        \Magento\Reward\Helper\Data $rewardData,
-        \Magento\Store\Model\StoreManagerInterface $storeManager,
-        \Magento\Reward\Model\RewardFactory $rewardFactory,
-        CustomerRegistry $customerRegistry,
         \Kemana\MsDynamics\Helper\Data $helper,
         \Kemana\MsDynamics\Model\Api\Erp\Customer $erpCustomer
     ) {
-        $this->_rewardData = $rewardData;
-        $this->_storeManager = $storeManager;
-        $this->_rewardFactory = $rewardFactory;
-        $this->customerRegistry = $customerRegistry;
         $this->helper = $helper;
         $this->erpCustomer = $erpCustomer;
     }
 
     /**
-     * Update reward points for customer, send notification
+     * Update reward points for ERP customer
      *
      * @param \Magento\Framework\Event\Observer $observer
      * @return $this|void
@@ -98,12 +63,12 @@ class SaveRewardPoints implements ObserverInterface
         $data = $request->getPost('reward');
         if ($data && !empty($data['points_delta'])) {
             $this->validatePointsDelta((string)$data['points_delta']);
+
             /** @var \Magento\Customer\Api\Data\CustomerInterface $customer */
             $customer = $observer->getEvent()->getCustomer();
-            $customerModel = $this->customerRegistry->retrieve($customer->getId());
-            if ($customerModel->getMsDynamicCustomerNumber()) {
-                $customerNumber = $customerModel->getMsDynamicCustomerNumber();
-                $this->helper->addCustomerEarnPointToErp($customer->getId(), $customerNumber, $this->erpCustomer, $data['points_delta']);
+            $erpCustomerNumber = $customer->getCustomAttribute('ms_dynamic_customer_number')->getValue();
+            if ($erpCustomerNumber) {
+                $this->helper->addCustomerEarnPointToErp($customer->getId(), $erpCustomerNumber, $this->erpCustomer, $data['points_delta']);
             }
         }
 

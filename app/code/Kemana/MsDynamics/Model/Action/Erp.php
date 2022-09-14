@@ -14,6 +14,9 @@
 
 namespace Kemana\MsDynamics\Model\Action;
 
+/**
+ * Class Erp
+ */
 class Erp extends \Magento\Reward\Model\Action\AbstractAction
 {
     /**
