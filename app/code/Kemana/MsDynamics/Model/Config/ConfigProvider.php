@@ -29,6 +29,9 @@ class ConfigProvider
      */
     const XML_PATH_API_URL = 'msdynamic/general/url';
 
+    /**
+     * XML path API URL for Delete
+     */
     const XML_PATH_API_URL_FOR_DELETE = 'msdynamic/general/url_for_delete';
 
     /**
@@ -46,6 +49,9 @@ class ConfigProvider
      */
     const XML_PATH_API_XMLNS = 'msdynamic/general/xmlns';
 
+    /**
+     * XML path XMLNS path for delete
+     */
     const XML_PATH_API_XMLNS_FOR_DELETE = 'msdynamic/general/xmlns_for_delete';
 
     /**
@@ -58,6 +64,9 @@ class ConfigProvider
      */
     const CREATE_CUSTOMER_IN_ERP = 'customercreate';
 
+    /**
+     * XML path Soap action create customer
+     */
     const CREATE_CUSTOMER_SOAP_ACTION = 'Create';
 
     /**
@@ -65,6 +74,9 @@ class ConfigProvider
      */
     const GET_CUSTOMER_LIST_IN_ERP = 'customer';
 
+    /**
+     * XML path SOAP action get customer list
+     */
     const GET_CUSTOMER_LIST_SOAP_ACTION = 'ReadMultiple';
 
     /**
@@ -77,6 +89,9 @@ class ConfigProvider
      */
     const ACK_CUSTOMER_IN_ERP = 'customerack';
 
+    /**
+     * XML path Ack customer SOAP action
+     */
     const ACK_CUSTOMER_SOAP_ACTION = 'CreateMultiple';
 
     /**
@@ -84,13 +99,19 @@ class ConfigProvider
      */
     const UPDATE_CUSTOMER_IN_ERP = 'customerupdate';
 
+    /**
+     * XML path update customer SOAP action
+     */
     const UPDATE_CUSTOMER_SOAP_ACTION = 'Create';
 
     /**
-     * XML Path API function name delete customer
+     * XML path API function name delete customer
      */
     const DELETE_CUSTOMER_IN_ERP = 'BlockCustomer';
 
+    /**
+     * XML path delete customer SOAP action
+     */
     const DELETE_CUSTOMER_IN_ERP_SOAP_ACTION = 'BlockCustomer';
 
     /**
@@ -106,6 +127,9 @@ class ConfigProvider
         '999' => 'Customer ack – update failed',
     ];
 
+    /**
+     * Array to identify the customer aleady exist in ERP message
+     */
     const CUSTOMER_ALREADY_EXIST_MESSAGE_ARRAY = [
         0 => 'Customer',
         1 => 'already',
@@ -131,4 +155,14 @@ class ConfigProvider
      * XML Path API function name Ack product soap action
      */
     const ACK_PRODUCT_SOAP_ACTION = 'CreateMultiple';
+
+    /**
+     * XML Path API function create orders
+     */
+    const CREATE_ORDER_IN_ERP = 'order';
+
+    /**
+     * XML path create order SOAP action
+     */
+    const CREATE_ORDER_SOAP_ACTION = 'Create';
 }

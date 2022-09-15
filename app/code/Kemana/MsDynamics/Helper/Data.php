@@ -502,4 +502,20 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     {
         return ConfigProvider::ACK_PRODUCT_SOAP_ACTION;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getFunctionCreateOrder()
+    {
+        return ConfigProvider::CREATE_ORDER_IN_ERP;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSoapActionCreateOrder()
+    {
+        return ConfigProvider::CREATE_ORDER_SOAP_ACTION;
+    }
 }
