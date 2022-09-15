@@ -70,7 +70,7 @@ class OrderInvoicePay implements \Magento\Framework\Event\ObserverInterface
             return;
         }
 
-        $this->helper->log('Start Invoice success pay event', 'info');
+        $this->helper->log('Start Invoice success pay event to create the order in ERP', 'info');
 
         $order = $observer->getInvoice()->getOrder();
         $orderItems = $observer->getInvoice()->getOrder()->getItems();
@@ -85,6 +85,8 @@ class OrderInvoicePay implements \Magento\Framework\Event\ObserverInterface
             $this->helper->log('This order still not fully paid. Magento order ID' . $order->getIncrementId(), 'info');
             return;
         }
+
+        $this->helper->log('Start to process the Magento order : ' . $order->getIncrementId(), 'info');
 
         $dataToOrder = [
             "OrderNo" => $order->getIncrementId(),
@@ -146,6 +148,8 @@ class OrderInvoicePay implements \Magento\Framework\Event\ObserverInterface
             $this->orderResourceModel->save($order);
 
             $this->helper->log('Successfully updated the is_synced_to_msdynamic_erp attribute for Magento Order ' . $createOrderInErp['response']['OrderNo'], 'info');
+
+            $this->helper->log('End process the Magento order : ' . $order->getIncrementId() . '. Successfully sent to ERP', 'info');
 
         }
     }
