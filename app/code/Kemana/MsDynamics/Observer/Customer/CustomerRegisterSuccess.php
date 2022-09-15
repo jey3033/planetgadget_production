@@ -110,6 +110,7 @@ class CustomerRegisterSuccess implements \Magento\Framework\Event\ObserverInterf
 
             if (isset($updateCustomer['response']['CustomerNo'])) {
                 $this->helper->updateCustomerMsDynamicNumber($customer->getId(), $updateCustomer['response']['CustomerNo']);
+                $this->helper->addCustomerEarnPointToErp($customer->getId(), $createCustomerInErp['response']['CustomerNo'], $this->erpCustomer);
 
                 $this->helper->log('Customer ' . $customer->getId() . " updated successfully in ERP after Successfully Register event. Because this customer already exist in the ERP", 'info');
             }
@@ -118,6 +119,7 @@ class CustomerRegisterSuccess implements \Magento\Framework\Event\ObserverInterf
         if (isset($createCustomerInErp['response']['CustomerNo'])) {
 
             $this->helper->updateCustomerMsDynamicNumber($customer->getId(), $createCustomerInErp['response']['CustomerNo']);
+            $this->helper->addCustomerEarnPointToErp($customer->getId(), $createCustomerInErp['response']['CustomerNo'], $this->erpCustomer);
 
             $this->helper->log('End Customer Register Success Event successfully and customer ' . $customer->getId() . ' sent to ERP', 'info');
 
