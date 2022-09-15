@@ -37,12 +37,16 @@ class Inventory
     public function __construct(
         \Kemana\MsDynamics\Model\Api\Request $request,
         \Kemana\MsDynamics\Helper\Data       $helper,
-        \Magento\CatalogInventory\Api\StockRegistryInterface $stockRegistry
+        \Magento\CatalogInventory\Api\StockRegistryInterface $stockRegistry,
+        \Magento\InventoryApi\Api\Data\SourceItemInterface $sourceItem,
+        \Magento\InventoryApi\Api\SourceItemsSaveInterface $sourceItemSave
     )
     {
         $this->request = $request;
         $this->helper = $helper;
         $this->stockRegistry = $stockRegistry;
+        $this->sourceItem = $sourceItem;
+        $this->sourceItemSave = $sourceItemSave;
     }
 
     /**
@@ -70,29 +74,45 @@ class Inventory
      * @return array
      */
     public function inventoryApiCall($productSkus){
+            $productSkus = array_unique($productSkus);
             $productSkus = implode("|", $productSkus);
             $dataToGetStock = [
                 "Field" => "ProductNo",
                 "Criteria" => $productSkus,
             ];
+        $this->helper->inventorylog("Request: ".json_encode($dataToGetStock), 'info');
 
         $dataToGetStock = $this->helper->convertArrayToXml($dataToGetStock);
-        $getProductsFromErp = $this->getUnSyncInventorysFromErp($this->helper->getFunctionInventoryStock(),
+        $response = $this->getUnSyncInventorysFromErp($this->helper->getFunctionInventoryStock(),
             $this->helper->getSoapActionGetInventoryStock(), $dataToGetStock);
 
-        return $getProductsFromErp;
+        $this->helper->inventorylog("Response: ".json_encode($response), 'info');
+        
+        if($response['response'] && isset($response['response']['ProductNo'])){
+            $this->updateStock($response['response']['ProductNo'],$response['response']['Inventory']);
+        }elseif($response['response']){
+            foreach ($response['response'] as $key => $product) {
+                $this->updateStock($product['ProductNo'],$product['Inventory']);
+            }
+        }else{
+            $this->helper->inventorylog('0 Product stock update');
+        }
     }
 
     /**
      * @param $sku
      * @param $qty
+     * @param $sourceCode
      * @return array
      */
-    public function updateStock($sku,$qty){
+    public function updateStock($sku, $qty, $sourceCode = 'default'){
         try{
-            $stockItem = $this->stockRegistry->getStockItemBySku($sku);
-            $stockItem->setQty($qty);
-            $this->stockRegistry->updateStockItemBySku($sku, $stockItem);
+            $status = $qty > 0 ? 1 : 0;
+            $this->sourceItem->setSku($sku);
+            $this->sourceItem->setSourceCode($sourceCode);
+            $this->sourceItem->setQuantity($qty);
+            $this->sourceItem->setStatus($status);
+            $this->sourceItemSave->execute([$this->sourceItem]);
             $message = "Updated inventory sku: ".$sku ." and stock: " .$qty;
             $this->helper->inventorylog($message, 'info');
         }catch(Exception $e){

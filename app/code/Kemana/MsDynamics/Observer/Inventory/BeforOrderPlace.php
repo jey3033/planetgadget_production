@@ -47,12 +47,10 @@ class BeforOrderPlace implements \Magento\Framework\Event\ObserverInterface
      */
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
-        $order = $observer->getEvent()->getOrder();
+        $quote = $observer->getEvent()->getQuote();
         $productdata = [];
-        foreach ($order->getAllItems() as $item) {
-            if($item->getTypeId() == 'simple'){
-                array_push($productdata, $item->getSku());
-            }
+        foreach ($quote->getAllItems() as $item) {
+            array_push($productdata, $item->getSku());
         }
         $this->helper->inventorylog('Before Order Place API call: ' . json_encode($productdata), 'info');
         if(!empty($productdata)){

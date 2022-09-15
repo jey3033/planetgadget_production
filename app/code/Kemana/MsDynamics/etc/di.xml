@@ -68,7 +68,4 @@
             </argument>
         </arguments>
     </type>
-     <type name="Magento\Checkout\Model\Cart">
-        <plugin name="before_add_to_cart" type="Kemana\MsDynamics\Plugin\Model\BeforeCart"/>
-    </type>
 </config>

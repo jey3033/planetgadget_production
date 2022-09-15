@@ -33,13 +33,15 @@ class BeforePdpLayoutLoad implements \Magento\Framework\Event\ObserverInterface
         \Kemana\MsDynamics\Helper\Data                    $helper,
         \Kemana\MsDynamics\Model\Api\Erp\Inventory        $erpInventory,
         \Magento\Framework\App\Request\Http               $request,
-        \Magento\Catalog\Model\ProductRepository          $productRepository
+        \Magento\Catalog\Model\ProductRepository          $productRepository,
+        \Magento\Checkout\Model\Session                   $session          
     )
     {
         $this->helper = $helper;
         $this->erpInventory = $erpInventory;
         $this->request = $request;
         $this->_productRepository = $productRepository;
+        $this->_session = $session;
     }
 
     /**
@@ -58,23 +60,26 @@ class BeforePdpLayoutLoad implements \Magento\Framework\Event\ObserverInterface
             if($productId){
                 $productsku = $this->_productRepository->getById($productId)->getSku();
                 $this->helper->inventorylog('PDP page API call: ' . $productsku, 'info');
-                
+
                 $productdata = [];
                 array_push($productdata, $productsku);
 
                 if(!empty($productdata)){
-                    $response = $this->erpInventory->inventoryApiCall($productdata);
-
-                    if($response['response'] && isset($response['response']['ProductNo'])){
-                        $this->erpInventory->updateStock($response['response']['ProductNo'],$response['response']['Inventory']);
-                    }elseif($response['response']){
-                        foreach ($response['response'] as $key => $product) {
-                            $this->erpInventory->updateStock($product['ProductNo'],$product['Inventory']);
-                        }
-                    }else{
-                        $this->helper->inventorylog('0 Product stock update');
-                    }
+                    $this->erpInventory->inventoryApiCall($productdata);
                 }
+            }
+        }
+
+        if($this->request->getFullActionName() === 'checkout_cart_index'){
+            $items = $this->_session->getQuote()->getAllItems();
+            $productdata = [];
+            foreach ($items as $key => $item) {
+                    array_push($productdata, $item->getSku());
+            }
+
+            $this->helper->inventorylog('Cart page API call: ' . json_encode($productdata), 'info');
+            if(!empty($productdata)){
+                $this->erpInventory->inventoryApiCall($productdata);
             }
         }
     }

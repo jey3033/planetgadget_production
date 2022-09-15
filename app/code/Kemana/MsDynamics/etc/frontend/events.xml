@@ -30,5 +30,8 @@
     <event name="layout_load_before">
         <observer name="layout_load_before_pdp" instance="Kemana\MsDynamics\Observer\Inventory\BeforePdpLayoutLoad" />
     </event>
+    <event name="checkout_cart_product_add_before">
+        <observer name="checkout_cart_product_add_to_cart_before" instance="Kemana\MsDynamics\Observer\Inventory\BeforeAddToCart" />
+    </event>
     
 </config>
