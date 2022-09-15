@@ -10,10 +10,15 @@
  * @package  Kemana_MsDynamics
  * @license  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  *
- * @author   Jalpa Patel <jalpa@kemana.com>
+ * @author   Achintha Madushan <amadushan@kemana.com>, Jalpa Patel <jalpa@kemana.com>
  */
 -->
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="sales_order_invoice_pay">
+        <observer name="kemana_sales_order_invoice_pay"
+                  instance="Kemana\MsDynamics\Observer\Order\OrderInvoicePay"/>
+    </event>
     <event name="adminhtml_customer_save_after">
         <observer name="kemana_customer_save_after" instance="Kemana\MsDynamics\Observer\Customer\SaveRewardPoints" />
     </event>

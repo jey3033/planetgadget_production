@@ -36,6 +36,9 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     protected $storeScope;
 
+    /**
+     * @var \Magento\Customer\Api\CustomerRepositoryInterface
+     */
     protected $customerRepository;
 
     /**
@@ -412,7 +415,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     {
         return '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
                     <Body>
-                        <' . $soapAction . ' xmlns="' . $this->getApiXmnls() . "/" . $apiFunction . '">                            
+                        <' . $soapAction . ' xmlns="' . $this->getApiXmnls() . "/" . $apiFunction . '">
                             <CustomerNo>' . $postParameters . '</CustomerNo>
                         </' . $soapAction . '>
                     </Body>
@@ -666,12 +669,12 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     {
         $this->log('Start Earn point Event - ' . $customerId );
         try {
-            $reward = $this->getRewardModel()->getCollection()->addFieldToFilter('customer_id', ['eq' => $customerId])->getFirstItem(); 
+            $reward = $this->getRewardModel()->getCollection()->addFieldToFilter('customer_id', ['eq' => $customerId])->getFirstItem();
             if($pointsDelta > 0) {
                 $magentoRewardPointBalance = $pointsDelta;
             } else {
                 $magentoRewardPointBalance = $reward->getPointsBalance();
-            }            
+            }
 
             $dataToErp = [
                 "DocumentNo" => $this->getTimeStamp().'-'.$customerId,
@@ -722,5 +725,21 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         $dateToTimestamp = $this->dateTime->gmtDate();
         $timeStamp = $this->dateTime->gmtTimestamp($dateToTimestamp);
         return $timeStamp;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFunctionCreateOrder()
+    {
+        return ConfigProvider::CREATE_ORDER_IN_ERP;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSoapActionCreateOrder()
+    {
+        return ConfigProvider::CREATE_ORDER_SOAP_ACTION;
     }
 }
