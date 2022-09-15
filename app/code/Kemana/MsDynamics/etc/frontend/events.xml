@@ -33,5 +33,12 @@
     <event name="checkout_cart_product_add_before">
         <observer name="checkout_cart_product_add_to_cart_before" instance="Kemana\MsDynamics\Observer\Inventory\BeforeAddToCart" />
     </event>
-    
+    <event name="checkout_onepage_controller_success_action">
+        <observer name="kemana_checkout_controller_success_action"
+                  instance="Kemana\MsDynamics\Observer\Order\AfterPlaceOrder"/>
+    </event>
+    <event name="magento_invitation_save_commit_after">
+        <observer name="kemana_magento_invitation_save_commit_after" 
+                  instance="Kemana\MsDynamics\Observer\Customer\InvitationToCustomer" />
+    </event>
 </config>

@@ -105,7 +105,7 @@ class SyncCustomersFromErp
             return;
         }
 
-        $this->helper->log('Started to get the not synced customers from ERP and then create in Magento using Cron Job', 'info');
+        $this->helper->log('CUSTOMER : Started to get the not synced customers from ERP and then create in Magento using Cron Job', 'info');
 
         $dataToGetCustomers = [
             "Field" => "Synced",
@@ -118,16 +118,16 @@ class SyncCustomersFromErp
             $this->helper->getSoapActionGetCustomerList(), $dataToGetCustomers);
 
         if (empty($getCustomersFromErp)) {
-            $this->helper->log('ERP system might be off line', 'error');
+            $this->helper->log('CUSTOMER : ERP system might be off line', 'error');
             return;
         }
 
         if (!is_array($getCustomersFromErp) || !count($getCustomersFromErp)) {
-            $this->helper->log('No customers received from ERP to register in Magento', 'error');
+            $this->helper->log('CUSTOMER : No customers received from ERP to register in Magento', 'error');
             return;
         }
 
-        $this->helper->log('Received ' . count($getCustomersFromErp['response']) . ' to register in Magento from ERP', 'info');
+        $this->helper->log('CUSTOMER : Received ' . count($getCustomersFromErp['response']) . ' to register in Magento from ERP', 'info');
 
         $ackCustomerData = [];
         $newCustomerId = 0;
@@ -146,12 +146,12 @@ class SyncCustomersFromErp
                 || (!isset($erpCustomer['PhoneNo']) || !$erpCustomer['PhoneNo'])
                 || (!isset($erpCustomer['DoB']) || !$erpCustomer['DoB'])) {
 
-                $this->helper->log('CustomerNo, Email, Name, PhoneNo or DOB  missing for this customer in ERP API. Cannot create the customer in Magento. ' . json_encode($erpCustomer), 'error');
+                $this->helper->log('CUSTOMER : CustomerNo, Email, Name, PhoneNo or DOB  missing for this customer in ERP API. Cannot create the customer in Magento. ' . json_encode($erpCustomer), 'error');
                 continue;
             }
 
             if (!filter_var($erpCustomer['Email'], FILTER_VALIDATE_EMAIL)) {
-                $this->helper->log('This customers email address "'.$erpCustomer['Email'].'" is not a valid email. Skipping customer ERP number : ' . $erpCustomer['CustomerNo'], 'info');
+                $this->helper->log('CUSTOMER : This customers email address "'.$erpCustomer['Email'].'" is not a valid email. Skipping customer ERP number : ' . $erpCustomer['CustomerNo'], 'info');
                 continue;
             }
 
@@ -162,19 +162,19 @@ class SyncCustomersFromErp
                 $isExistCustomer = $this->customer->checkExistEmailOrPhoneNumber($erpCustomer['Email'], $erpCustomer['PhoneNo']);
 
                 if ($isExistCustomer == 'MULTIPLE') {
-                    $this->helper->log('There are multiple customers in Magento with this email or telephone. Skipping customer ERP number : ' . $erpCustomer['CustomerNo'], 'info');
+                    $this->helper->log('CUSTOMER : There are multiple customers in Magento with this email or telephone. Skipping customer ERP number : ' . $erpCustomer['CustomerNo'], 'info');
                     continue;
                 } else if ($isExistCustomer === true) {
-                    $this->helper->log('Email or PhoneNumber already exist in Magento for this customer. Updated customer in ERP API. Email : ' .
+                    $this->helper->log('CUSTOMER : Email or PhoneNumber already exist in Magento for this customer. Updated customer in ERP API. Email : ' .
                         $erpCustomer['Email'] . ' PhoneNumber : ' . $erpCustomer['PhoneNo'], 'info');
 
                     $existingCustomer = true;
 
                     $customer = $this->customerRepository->get($erpCustomer['Email']);
-                    $this->helper->log('Started to update the customer account in Magento for ERP customer : ' . $erpCustomer['CustomerNo'], 'info');
+                    $this->helper->log('CUSTOMER : Started to update the customer account in Magento for ERP customer : ' . $erpCustomer['CustomerNo'], 'info');
                 } else {
                     $customer = $this->customerFactory->create();
-                    $this->helper->log('Started to create the customer account in Magento for ERP customer : ' . $erpCustomer['CustomerNo'], 'info');
+                    $this->helper->log('CUSTOMER : Started to create the customer account in Magento for ERP customer : ' . $erpCustomer['CustomerNo'], 'info');
                 }
 
                 // Get Website ID
@@ -207,25 +207,25 @@ class SyncCustomersFromErp
                 if (!$existingCustomer) {
                     $getNewCustomer = $this->magentoCustomer->load($newCustomerId);
                     $getNewCustomer->sendNewAccountEmail();
-                    $this->helper->log('Successfully sent the email to the ERP customer : ' . $erpCustomer['CustomerNo'] . ' in Magento', 'info');
+                    $this->helper->log('CUSTOMER : Successfully sent the email to the ERP customer : ' . $erpCustomer['CustomerNo'] . ' in Magento', 'info');
 
-                    $this->helper->log('Successfully created the customer account in Magento for ERP customer : ' . $erpCustomer['CustomerNo'], 'info');
+                    $this->helper->log('CUSTOMER : Successfully created the customer account in Magento for ERP customer : ' . $erpCustomer['CustomerNo'], 'info');
                 } else {
-                    $this->helper->log('Successfully updated the customer account in Magento for ERP customer : ' . $erpCustomer['CustomerNo'], 'info');
+                    $this->helper->log('CUSTOMER : Successfully updated the customer account in Magento for ERP customer : ' . $erpCustomer['CustomerNo'], 'info');
                 }
 
                 try {
 
                     if (!isset($erpCustomer['Postcode']) || !$erpCustomer['Postcode']) {
-                        $this->helper->log('Post code missing for this customer. Aborting the address. Email : ' . $erpCustomer['Email']);
+                        $this->helper->log('CUSTOMER : Post code missing for this customer. Aborting the address. Email : ' . $erpCustomer['Email']);
                         continue;
                     }
                     if (!isset($erpCustomer['Address']) || !$erpCustomer['Address']) {
-                        $this->helper->log('Address missing for this customer. Aborting the address. Email : ' . $erpCustomer['Email']);
+                        $this->helper->log('CUSTOMER : Address missing for this customer. Aborting the address. Email : ' . $erpCustomer['Email']);
                         continue;
                     }
 
-                    $this->helper->log('Started to create the address in Magento for ERP customer : ' . $erpCustomer['CustomerNo'], 'info');
+                    $this->helper->log('CUSTOMER : Started to create the address in Magento for ERP customer : ' . $erpCustomer['CustomerNo'], 'info');
 
                     $address = $this->addressFactory->create();
 
@@ -242,16 +242,16 @@ class SyncCustomersFromErp
 
                     $this->addressRepository->save($address);
 
-                    $this->helper->log('Successfully created the address account in Magento for ERP customer : ' . $erpCustomer['CustomerNo'], 'info');
+                    $this->helper->log('CUSTOMER : Successfully created the address account in Magento for ERP customer : ' . $erpCustomer['CustomerNo'], 'info');
 
-                    $this->helper->log('Started to update the Magento Customer ID in ERP for ERP customer : ' . $erpCustomer['CustomerNo'], 'info');
+                    $this->helper->log('CUSTOMER : Started to update the Magento Customer ID in ERP for ERP customer : ' . $erpCustomer['CustomerNo'], 'info');
 
                 } catch (\Exception $e) {
-                    $this->helper->log('Exception : Unable to create the address for EPR customer number ' . $erpCustomer['CustomerNo'] . ' in Magento. Error : ' . $e->getMessage(), 'error');
+                    $this->helper->log('CUSTOMER : Exception : Unable to create the address for EPR customer number ' . $erpCustomer['CustomerNo'] . ' in Magento. Error : ' . $e->getMessage(), 'error');
                 }
 
             } catch (\Exception $e) {
-                $this->helper->log('Exception : Customer number ' . $erpCustomer['CustomerNo'] . ' failed to register in Magento. Error : ' . $e->getMessage(), 'error');
+                $this->helper->log('CUSTOMER : Exception : Customer number ' . $erpCustomer['CustomerNo'] . ' failed to register in Magento. Error : ' . $e->getMessage(), 'error');
             }
             // TODO Remove this
             $i++;
@@ -262,7 +262,7 @@ class SyncCustomersFromErp
             return;
         }
 
-        $this->helper->log('Start Ack call for customers by CRON', 'info');
+        $this->helper->log('CUSTOMER : Start Ack call for customers by CRON', 'info');
 
         $ackCustomerData = $this->helper->convertAckCustomerListToXml($ackCustomerData);
 
@@ -270,8 +270,8 @@ class SyncCustomersFromErp
             $this->helper->getSoapActionAckCustomer(), $ackCustomerData);
 
         if ($ackCustomer['responseStatus'] == '100') {
-            $this->helper->log('Ack call successfully done for below customers' . $ackCustomerData, 'info');
-            $this->helper->log('End to get the not synced customers from ERP and then create in Magento using Cron Job', 'info');
+            $this->helper->log('CUSTOMER : Ack call successfully done for below customers' . $ackCustomerData, 'info');
+            $this->helper->log('CUSTOMER : End to get the not synced customers from ERP and then create in Magento using Cron Job', 'info');
             return $ackCustomerData;
         }
     }

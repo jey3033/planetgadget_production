@@ -91,7 +91,7 @@ class SyncCustomersToErp
             return;
         }
 
-        $this->helper->log('Start to process not synced customers to the ERP using the CRON JOB', 'info');
+        $this->helper->log('CUSTOMER : Start to process not synced customers to the ERP using the CRON JOB', 'info');
 
         $notSyncCustomers = $this->customer->getNoySyncCustomersInPg($customerId);
 
@@ -101,14 +101,14 @@ class SyncCustomersToErp
             $notSyncCustomers[] = $tmpNotSyncCustomers;
         }
 
-        $this->helper->log('Retrieved ' . count($notSyncCustomers) . ' customers from database to process', 'info');
+        $this->helper->log('CUSTOMER : Retrieved ' . count($notSyncCustomers) . ' customers from database to process', 'info');
 
         foreach ($notSyncCustomers as $customer) {
-            $this->helper->log('Started to process ' . $customer->getId() . " to send to the ERP by CRON JOB", 'info');
+            $this->helper->log('CUSTOMER : Started to process ' . $customer->getId() . " to send to the ERP by CRON JOB", 'info');
 
             // because phonenumber is required in ERP
             if (!$customer->getCustomAttribute('phonenumber')) {
-                $this->helper->log('Skipped customer ' . $customer->getId() . ' due to no telephone number in Magento', 'info');
+                $this->helper->log('CUSTOMER : Skipped customer ' . $customer->getId() . ' due to no telephone number in Magento', 'info');
                 continue;
             }
 
@@ -139,7 +139,7 @@ class SyncCustomersToErp
             }
             // TODO END
 
-            //$this->helper->log('Birthday set as  0000-00-00 in ERP for customer' . $customer->getId() . ' due to no birthday in Magento', 'info');
+            //$this->helper->log('CUSTOMER : Birthday set as  0000-00-00 in ERP for customer' . $customer->getId() . ' due to no birthday in Magento', 'info');
 
             $customerGroup = $this->customerGroupRepository->getById($customer->getGroupId());
 
@@ -158,30 +158,30 @@ class SyncCustomersToErp
 
             $dataToCustomer = $this->helper->convertArrayToXml($dataToCustomer);
 
-            $this->helper->log('Started to send customer ' . $customer->getId() . " to the ERP by CRON JOB", 'info');
+            $this->helper->log('CUSTOMER : Started to send customer ' . $customer->getId() . " to the ERP by CRON JOB", 'info');
             $createCustomerInErp = $this->erpCustomer->createCustomerInErp($this->helper->getFunctionCreateCustomer(),
                 $this->helper->getSoapActionCreateCustomer(), $dataToCustomer);
 
             if (empty($createCustomerInErp)) {
-                $this->helper->log('ERP system might be off line', 'error');
+                $this->helper->log('CUSTOMER : ERP system might be off line', 'error');
                 continue;
             }
 
             if ($createCustomerInErp['curlStatus'] == 500 && $this->helper->checkAlreadyExistCustomerError($createCustomerInErp['response'])) {
-                $this->helper->log('This customer already exist in ERP. So ERP customer number is updating in Magento', 'info');
+                $this->helper->log('CUSTOMER : This customer already exist in ERP. So ERP customer number is updating in Magento', 'info');
 
                 $updateCustomer = $this->erpCustomer->updateCustomerInErp($this->helper->getFunctionUpdateCustomer(),
                     $this->helper->getSoapActionUpdateCustomer(), $dataToCustomer);
 
                 if (empty($updateCustomer)) {
-                    $this->helper->log('ERP system might be off line', 'error');
+                    $this->helper->log('CUSTOMER : ERP system might be off line', 'error');
                     continue;
                 }
 
                 if (isset($updateCustomer['response']['CustomerNo'])) {
                     $this->helper->updateCustomerMsDynamicNumber($customer->getId(), $updateCustomer['response']['CustomerNo']);
 
-                    $this->helper->log('Customer ' . $customer->getId() . " updated successfully in ERP by Cron. Because this customer already exist in ERP", 'info');
+                    $this->helper->log('CUSTOMER : Customer ' . $customer->getId() . " updated successfully in ERP by Cron. Because this customer already exist in ERP", 'info');
                     $singleCustomerFromGridResult = true;
                     $erpCustomerNumber = $updateCustomer['response']['CustomerNo'];
                 }
@@ -190,10 +190,10 @@ class SyncCustomersToErp
             if (isset($createCustomerInErp['response']['CustomerNo'])) {
 
                 if ($customerId) {
-                    $this->helper->log('Customer successfully created from the SYNC button click from admin customer grid', 'info');
+                    $this->helper->log('CUSTOMER : Customer successfully created from the SYNC button click from admin customer grid', 'info');
                 }
 
-                $this->helper->log('Customer successfully created by the CRON', 'info');
+                $this->helper->log('CUSTOMER : Customer successfully created by the CRON', 'info');
 
                 $getCustomer = $this->customerRepository->getById($customer->getId());
                 $getCustomer->setCustomAttribute('ms_dynamic_customer_number', $createCustomerInErp['response']['CustomerNo']);
@@ -202,10 +202,10 @@ class SyncCustomersToErp
                 $erpCustomerNumber = $createCustomerInErp['response']['CustomerNo'];
 
                 if ($customerId) {
-                    $this->helper->log('End SYNC button event from customer admin grid for ' . $customer->getId() . '. Sent to ERP', 'info');
+                    $this->helper->log('CUSTOMER : End SYNC button event from customer admin grid for ' . $customer->getId() . '. Sent to ERP', 'info');
                 }
 
-                $this->helper->log('End Cron job process for customer ' . $customer->getId() . '. sent to ERP by CRON', 'info');
+                $this->helper->log('CUSTOMER : End Cron job process for customer ' . $customer->getId() . '. sent to ERP by CRON', 'info');
 
             }
         }
