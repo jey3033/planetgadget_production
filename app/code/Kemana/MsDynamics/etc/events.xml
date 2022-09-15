@@ -23,10 +23,6 @@
         <observer name="kemana_customer_reward_point_info"
                   instance="Kemana\MsDynamics\Observer\Customer\CustomerRewardPointInfo"/>
     </event>
-    <event name="layout_render_before_checkout_cart_index">
-        <observer name="kemana_customer_reward_point_info_cart"
-                  instance="Kemana\MsDynamics\Observer\Customer\CustomerRewardPointInfo"/>
-    </event>
     <event name="layout_render_before_checkout_index_index">
         <observer name="kemana_customer_reward_point_info_checkout"
                   instance="Kemana\MsDynamics\Observer\Customer\CustomerRewardPointInfo"/>
