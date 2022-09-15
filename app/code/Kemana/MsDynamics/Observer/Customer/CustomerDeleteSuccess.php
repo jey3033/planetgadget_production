@@ -50,7 +50,7 @@ class CustomerDeleteSuccess implements \Magento\Framework\Event\ObserverInterfac
      */
     public function execute(Observer $observer)
     {
-        $this->helper->log('Started the Customer Account Delete Event.', 'info');
+        $this->helper->log('CUSTOMER : Started the Customer Account Delete Event.', 'info');
 
         $customer = $observer->getCustomer();
 
@@ -58,7 +58,7 @@ class CustomerDeleteSuccess implements \Magento\Framework\Event\ObserverInterfac
             $customerId = $customer->getId();
             $erpCustomerNumber = $customer->getMsDynamicCustomerNumber();
 
-            $this->helper->log('Started to delete the customer' . $erpCustomerNumber . ' from ERP', 'info');
+            $this->helper->log('CUSTOMER : Started to delete the customer' . $erpCustomerNumber . ' from ERP', 'info');
 
             $dataToDeleteCustomer = [
                 "customer_no" => $erpCustomerNumber
@@ -70,14 +70,14 @@ class CustomerDeleteSuccess implements \Magento\Framework\Event\ObserverInterfac
                 $this->helper->getSoapActionDeleteCustomer(), $dataToDeleteCustomer);
 
             if (empty($deleteCustomerInErp)) {
-                $this->helper->log('ERP system might be off line', 'error');
+                $this->helper->log('CUSTOMER : ERP system might be off line', 'error');
                 return;
             }
 
             if (isset($deleteCustomerInErp['curlStatus']) == '200') {
 
-                $this->helper->log('Customer ERP Number ' . $erpCustomerNumber . ' deleted successfully in ERP. Magento ID ' . $customerId, 'info');
-                $this->helper->log('Finished the Customer Account Delete Event', 'info');
+                $this->helper->log('CUSTOMER : Customer ERP Number ' . $erpCustomerNumber . ' deleted successfully in ERP. Magento ID ' . $customerId, 'info');
+                $this->helper->log('CUSTOMER : Finished the Customer Account Delete Event', 'info');
             }
         }
     }

@@ -67,13 +67,13 @@ class CustomerAddressSaveAfter implements \Magento\Framework\Event\ObserverInter
             return;
         }
 
-        $this->helper->log('Start Customer Address Save After Event.', 'info');
+        $this->helper->log('CUSTOMER : Start Customer Address Save After Event.', 'info');
 
         $customerAddress = $observer->getEvent()->getCustomerAddress();
 
         if (!$customerAddress->getDefaultShipping()) {
-            $this->helper->log('This is not a default shipping address. So Aborting.', 'info');
-            $this->helper->log('End Customer Address Success.', 'info');
+            $this->helper->log('CUSTOMER : This is not a default shipping address. So Aborting.', 'info');
+            $this->helper->log('CUSTOMER : End Customer Address Success.', 'info');
             return;
         }
 
@@ -93,8 +93,8 @@ class CustomerAddressSaveAfter implements \Magento\Framework\Event\ObserverInter
         $erpCustomerNumber = $getCustomer->getCustomAttribute('ms_dynamic_customer_number');
 
         if (!$erpCustomerNumber) {
-            $this->helper->log('Customer ID ' . $customerAddress->getCustomerId() . ' not have ERP customer number', 'info');
-            $this->helper->log('Start Customer Address Save After Event.', 'info');
+            $this->helper->log('CUSTOMER : Customer ID ' . $customerAddress->getCustomerId() . ' not have ERP customer number', 'info');
+            $this->helper->log('CUSTOMER : Start Customer Address Save After Event.', 'info');
             return;
         }
 
@@ -122,13 +122,13 @@ class CustomerAddressSaveAfter implements \Magento\Framework\Event\ObserverInter
             $this->helper->getSoapActionUpdateCustomer(), $dataToCustomer);
 
         if (empty($updateCustomerInErp)) {
-            $this->helper->log('ERP system might be off line', 'error');
+            $this->helper->log('CUSTOMER : ERP system might be off line', 'error');
             return;
         }
 
         if (isset($updateCustomerInErp['response']['CustomerNo'])) {
-            $this->helper->log('Customer ID ' . $customerAddress->getCustomerId() . ' updated with address', 'info');
-            $this->helper->log('End Customer Address Save After Event.', 'info');
+            $this->helper->log('CUSTOMER : Customer ID ' . $customerAddress->getCustomerId() . ' updated with address', 'info');
+            $this->helper->log('CUSTOMER : End Customer Address Save After Event.', 'info');
         }
 
         return true;
