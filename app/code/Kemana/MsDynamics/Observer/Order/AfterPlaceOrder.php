@@ -25,9 +25,9 @@ class AfterPlaceOrder implements \Magento\Framework\Event\ObserverInterface
     protected $helper;
 
     /**
-     * @var \Kemana\MsDynamics\Model\Api\Erp\Customer
+     * @var \Kemana\MsDynamics\Model\Api\Erp\Reward
      */
-    protected $erpCustomer;
+    protected $erpReward;
 
     /**
      * @var RewardPointCounter
@@ -41,19 +41,19 @@ class AfterPlaceOrder implements \Magento\Framework\Event\ObserverInterface
 
     /**
      * @param \Kemana\MsDynamics\Helper\Data $helper
-     * @param \Kemana\MsDynamics\Model\Api\Erp\Customer $erpCustomer
+     * @param \Kemana\MsDynamics\Model\Api\Erp\Reward $erpReward
      * @param \Magento\Reward\Model\SalesRule\RewardPointCounter $rewardPointCounter
      * @param \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository
      */
     public function __construct(
         \Kemana\MsDynamics\Helper\Data $helper,
-        \Kemana\MsDynamics\Model\Api\Erp\Customer $erpCustomer,
+        \Kemana\MsDynamics\Model\Api\Erp\Reward $erpReward,
         \Magento\Reward\Model\SalesRule\RewardPointCounter $rewardPointCounter,
         \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository
     )
     {
         $this->helper = $helper;
-        $this->erpCustomer = $erpCustomer;
+        $this->erpReward = $erpReward;
         $this->rewardPointCounter = $rewardPointCounter;
         $this->customerRepository = $customerRepository;
     }
@@ -71,7 +71,7 @@ class AfterPlaceOrder implements \Magento\Framework\Event\ObserverInterface
         if (!$this->helper->isEnable()) {
             return;
         }
-        $this->helper->log('Start After Place an Order Event for Redeem Point', 'info');
+        $this->helper->log('REWARD POINT : Start After Place an Order Event for Redeem Point', 'info');
 
         $order = $observer->getEvent()->getOrder();        
         $rewardPoint = 0;
@@ -80,8 +80,8 @@ class AfterPlaceOrder implements \Magento\Framework\Event\ObserverInterface
 
         $erpCustomerNumber = '';
         $customerId = $order->getCustomerId();
-        if ($customerId) {
-            $customer = $this->customerRepository->getById($customerId);
+        $customer = $this->customerRepository->getById($customerId);
+        if ($customerId && $customer->getCustomAttribute('ms_dynamic_customer_number')) {            
             $erpCustomerNumber = $customer->getCustomAttribute('ms_dynamic_customer_number')->getValue();
         }
 
@@ -95,7 +95,7 @@ class AfterPlaceOrder implements \Magento\Framework\Event\ObserverInterface
 
             $dataToOrder = $this->helper->convertArrayToXml($dataToOrder);
 
-            $redeemPointToErp = $this->erpCustomer->redeemRewardPointToErp($this->helper->redeemRewardPointFunction(),
+            $redeemPointToErp = $this->erpReward->redeemRewardPointToErp($this->helper->redeemRewardPointFunction(),
                 $this->helper->getSoapActionRedeemRewardPoint(), $dataToOrder);
 
             if ($redeemPointToErp['curlStatus'] == 500) {
@@ -103,7 +103,7 @@ class AfterPlaceOrder implements \Magento\Framework\Event\ObserverInterface
             }
 
             if ($redeemPointToErp['curlStatus'] == 200 && isset($redeemPointToErp['response']['CustomerNo'])) {
-                $this->helper->log('End After Place an Order Event successfully and customer ' . $customerId . ' redeem point sent to ERP', 'info');
+                $this->helper->log('REWARD POINT : End After Place an Order Event successfully and customer ' . $customerId . ' redeem point sent to ERP', 'info');
             }
             $this->earnPointFromOrder($order, $customerId, $erpCustomerNumber);
         }
@@ -114,12 +114,12 @@ class AfterPlaceOrder implements \Magento\Framework\Event\ObserverInterface
         $appliedRuleIds = array_unique(explode(',', $order->getAppliedRuleIds()));
         $pointsDelta = $this->rewardPointCounter->getPointsForRules($appliedRuleIds);
 
-        $this->helper->log('Start After Place an Order Earn Reward Point for customer ' . $customerId, 'info');
+        $this->helper->log('REWARD POINT : Start After Place an Order Earn Reward Point for customer ' . $customerId, 'info');
         
         if ($pointsDelta && !$order->getCustomerIsGuest()) {
-            $this->helper->addCustomerEarnPointToErp($customerId, $erpCustomerNumber, $this->erpCustomer, (int)$pointsDelta);        
+            $this->erpReward->addCustomerEarnPointToErp($customerId, $erpCustomerNumber, (int)$pointsDelta);        
         }
 
-        $this->helper->log('End After Place an Order Earn Reward Point for customer ' . $customerId, 'info');
+        $this->helper->log('REWARD POINT : End After Place an Order Earn Reward Point for customer ' . $customerId, 'info');
     }
 }

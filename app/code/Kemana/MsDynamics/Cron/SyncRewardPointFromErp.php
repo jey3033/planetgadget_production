@@ -29,9 +29,9 @@ class SyncRewardPointFromErp
     protected $helper;
 
     /**
-     * @var \Kemana\MsDynamics\Model\Api\Erp\Customer
+     * @var \Kemana\MsDynamics\Model\Api\Erp\Reward
      */
-    protected $erpCustomer;
+    protected $erpReward;
 
     /**
      * @var \Kemana\MsDynamics\Model\Customer
@@ -45,19 +45,19 @@ class SyncRewardPointFromErp
 
     /**
      * @param \Kemana\MsDynamics\Helper\Data $helper
-     * @param \Kemana\MsDynamics\Model\Api\Erp\Customer $erpCustomer
+     * @param \Kemana\MsDynamics\Model\Api\Erp\Reward $erpReward
      * @param \Kemana\MsDynamics\Model\Customer $customer
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      */
     public function __construct(
         \Kemana\MsDynamics\Helper\Data $helper,
-        \Kemana\MsDynamics\Model\Api\Erp\Customer $erpCustomer,
+        \Kemana\MsDynamics\Model\Api\Erp\Reward $erpReward,
         \Kemana\MsDynamics\Model\Customer $customer,
         \Magento\Store\Model\StoreManagerInterface $storeManager
     )
     {
         $this->helper = $helper;
-        $this->erpCustomer = $erpCustomer;
+        $this->erpReward = $erpReward;
         $this->customer = $customer;
         $this->storeManager = $storeManager;
     }
@@ -72,49 +72,50 @@ class SyncRewardPointFromErp
         if (!$this->helper->isEnable()) {
             return;
         }
-        $this->helper->log('-- Cron Start to Get Reward Point From ERP --', 'info');
+        $this->helper->log('REWARD POINT : Cron Start to Get Reward Point From ERP', 'info');
         $syncCustomers = $this->customer->getSyncCustomersList();
 
         foreach($syncCustomers as $customer) {
-            $customerId = $customer->getId();
-            $erpCustomerNumber = $customer->getCustomAttribute('ms_dynamic_customer_number')->getValue();
+            $customerId = $customer->getId();            
             $storeId = $this->storeManager->getStore()->getId();
-
-            $reward = $this->helper->getRewardModel()->getCollection()->addFieldToFilter('customer_id', ['eq' => $customerId])->getFirstItem();
+            $reward = $this->erpReward->getRewardModel()->getCollection()->addFieldToFilter('customer_id', ['eq' => $customerId])->getFirstItem();
             $magentoRewardPointBalance = $reward->getPointsBalance();
 
             try {
-                if ($erpCustomerNumber) {
-                    $dataToGetRewardPoint = [
-                        "customer_no" => $erpCustomerNumber
-                    ];
+                if ($customer->getCustomAttribute('ms_dynamic_customer_number')) {
+                    $erpCustomerNumber = $customer->getCustomAttribute('ms_dynamic_customer_number')->getValue();
+                    if($erpCustomerNumber) {                    
+                        $dataToGetRewardPoint = [
+                            "customer_no" => $erpCustomerNumber
+                        ];
 
-                    $dataToGetRewardPoint = $this->helper->convertArrayToXml($dataToGetRewardPoint);
-                    $getRewardPoint = $this->erpCustomer->getRewardPointFromErp($this->helper->getRewardPointFunction(),
-                        $this->helper->getSoapActionGetRewardPoint(), $dataToGetRewardPoint);
+                        $dataToGetRewardPoint = $this->helper->convertArrayToXml($dataToGetRewardPoint);
+                        $getRewardPoint = $this->erpReward->getRewardPointFromErp($this->helper->getRewardPointFunction(),
+                            $this->helper->getSoapActionGetRewardPoint(), $dataToGetRewardPoint);
 
-                    if (empty($getRewardPoint)) {
-                        $this->helper->log('ERP system might be off line', 'error');
-                        return;
-                    }
-
-                    if (isset($getRewardPoint['curlStatus']) == '200') {
-                        if($getRewardPoint['response']['PointBalance'] !== $magentoRewardPointBalance) {
-                            $this->helper->getRewardModel()
-                                ->setCustomerId($customerId)
-                                ->setWebsiteId($this->storeManager->getStore($storeId)->getWebsiteId())
-                                ->setPointsDelta($getRewardPoint['response']['PointBalance'])
-                                ->setAction(\Kemana\MsDynamics\Model\Reward::REWARD_ACTION_FOR_ERP)
-                                ->setActionEntity($customer)
-                                ->updateRewardPoints();
+                        if (empty($getRewardPoint)) {
+                            $this->helper->log('REWARD POINT : ERP system might be off line', 'error');
+                            return;
                         }
 
-                        $this->helper->log('Cron Customer ERP Number ' . $erpCustomerNumber . ' Updated points from ERP. Magento ID ' . $customerId, 'info');
-                        $this->helper->log('-- Cron End to Get Reward Point From ERP --', 'info');
+                        if (isset($getRewardPoint['curlStatus']) == '200') {
+                            if($getRewardPoint['response']['PointBalance'] !== $magentoRewardPointBalance) {
+                                $this->erpReward->getRewardModel()
+                                    ->setCustomerId($customerId)
+                                    ->setWebsiteId($this->storeManager->getStore($storeId)->getWebsiteId())
+                                    ->setPointsDelta($getRewardPoint['response']['PointBalance'])
+                                    ->setAction(\Kemana\MsDynamics\Model\Reward::REWARD_ACTION_FOR_ERP)
+                                    ->setActionEntity($customer)
+                                    ->updateRewardPoints();
+                            }
+
+                            $this->helper->log('REWARD POINT : Cron Customer ERP Number ' . $erpCustomerNumber . ' Updated points from ERP. Magento ID ' . $customerId, 'info');
+                            $this->helper->log('REWARD POINT : Cron End to Get Reward Point From ERP', 'info');
+                        }
                     }
                 }
             } catch (\Exception $e) {
-                $this->helper->log('Exception : Unable to update reward point for EPR customer number ' . $erpCustomerNumber['CustomerNo'] . ' in Magento. Error : ' . $e->getMessage(), 'error');
+                $this->helper->log('REWARD POINT : Exception - Unable to update reward point for EPR customer number ' . $erpCustomerNumber['CustomerNo'] . ' in Magento. Error : ' . $e->getMessage(), 'error');
             }
         }        
     }
