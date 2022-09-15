@@ -16,7 +16,7 @@
         .blog-widget-title {
             display: inline-block;
             .lib-title-with-border(
-                @title-text-underline__enable: false
+                @title-text-underline__enable: true
             );
         }
 
@@ -471,7 +471,7 @@
     }
 
     .post-list-wrapper {
-        padding-block: 40px;
+        padding: 40px 10px;
 
         .post-list-inner-container {
             .lib-vendor-prefix-display();
@@ -495,8 +495,18 @@
             .post-list-container {
                 order: 2;
 
+                .row {
+                    margin-inline: 0;
+                }
+
+                .post-list-item {
+                    padding-inline: 0;
+                    margin-bottom: 20px;
+                }
+
                 .post-item-wrapper {
-                    padding: 10px;
+                    padding: 0;
+
                 }
             }
         }
@@ -532,9 +542,33 @@
         padding-block: 50px;
 
         .post-list-inner-container {
+            .lib-vendor-prefix-display();
+            .lib-vendor-prefix-flex-direction(column);
             max-width: @layout__max-width;
-            padding-inline: @indent__s;
+            padding-inline: 40px;
             margin-inline: auto;
+
+            .post-list-item {
+                margin-bottom: 20px;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+
+            .blog-widget-title {
+                order: 1;
+            }
+
+            span {
+                order: 3;
+                margin-top: 20px;
+                text-align: center;
+            }
+
+            .post-list-container {
+                order: 2;
+            }
         }
     }
 
@@ -557,4 +591,26 @@
 //  _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+    .post-list-wrapper {
+        .post-list-inner-container {
+            display: block;
+            padding-inline: @indent__s;
+
+            .blog-widget-title {
+                order: unset;
+            }
+
+            span {
+                order: unset;
+            }
+
+            .post-list-container {
+                order: unset;
+
+                .post-list-item {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
 }

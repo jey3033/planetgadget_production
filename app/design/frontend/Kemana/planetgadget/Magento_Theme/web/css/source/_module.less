@@ -36,7 +36,7 @@
 @header-icons-color-hover: @kemana-secondary-brand-color;
 
 @header-desktop__height: 80px;
-@header-mobile__height: 50px;
+@header-mobile__height: 48px;
 @header-desktop__padding: 0 @indent__s;
 
 @addto-color: @kemana-primary-brand-color;
@@ -132,8 +132,8 @@
     .page-header {
         .lib-css(background-color, @header__background-color);
         .lib-css(box-shadow, @header__box-shadow);
-        .lib-css(border-bottom, @header-mobile__border-bottom);
-        margin-bottom: @indent__base;
+        //.lib-css(border-bottom, @header-mobile__border-bottom);
+        margin-bottom: 0;
         position: fixed;
         top: 0;
         left: 0;
@@ -429,7 +429,7 @@
     .job-index-detail,
     .catalog-product_compare-index {
         .page-wrapper {
-            .lib-css(margin-top, @header-mobile__height + @indent__base);
+            .lib-css(margin-top, @header-mobile__height);
         }
     }
 
@@ -485,8 +485,8 @@
     // CMS pages only
     .cms-main-container {
         .fixed-width {
-            .lib-css(padding-left, @layout-indent__width);
-            .lib-css(padding-right, @layout-indent__width);
+            .lib-css(padding-left, 40px);
+            .lib-css(padding-right, 40px);
         }
     }
 
@@ -655,6 +655,20 @@
     .account.page-print {
         .page-wrapper {
             margin-top: 100px;
+        }
+    }
+}
+
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+    .cms-main-container {
+        .fixed-width {
+            .lib-css(padding-left, @layout-indent__width);
+            .lib-css(padding-right, @layout-indent__width);
         }
     }
 }

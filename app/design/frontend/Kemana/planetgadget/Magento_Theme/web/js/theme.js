@@ -288,15 +288,16 @@ define([
         slidesToScroll: 1,
         arrows: true,
         dots: false,
+        swipeToSlide: true,
         responsive: [
             {
-                breakpoint: 1023,
+                breakpoint: 1024,
                 settings: {
                     slidesToShow: 3
                 }
             },
             {
-                breakpoint: 767,
+                breakpoint: 768,
                 settings: {
                     arrows: false,
                     dots: false,
@@ -310,6 +311,7 @@ define([
                 settings: "unslick" // destroys slick
             }]
     });
+
     // $(".block .products-grid .product-items").slick({
     //     /**
     //      * normal options...

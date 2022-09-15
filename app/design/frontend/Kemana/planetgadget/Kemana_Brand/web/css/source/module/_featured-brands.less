@@ -42,26 +42,27 @@
         }
     }
 
-    .brand-featured {
+    .block-brand-featured {
         .block-title {
-            strong {
-                span {
-                    span {
-                        display: inline-block;
-                        .lib-css(margin-bottom, 0);
-
-                        &:after {
-                            content: '';
-                            display: block;
-                            margin: auto;
-                            .lib-css(margin-top, -10px);
-                            .lib-css(width, 100%);
-                            .lib-css(height, 10px);
-                            .lib-css(background, @kemana-secondary-brand-color);
-                        }
-                    }
-                }
-            }
+            .lib-title-with-border(@title-text-underline__enable: true);
+            //strong {
+            //    span {
+            //        span {
+            //            display: inline-block;
+            //            .lib-css(margin-bottom, 0);
+            //
+            //            &:after {
+            //                content: '';
+            //                display: block;
+            //                margin: auto;
+            //                .lib-css(margin-top, -10px);
+            //                .lib-css(width, 100%);
+            //                .lib-css(height, 10px);
+            //                .lib-css(background, @kemana-secondary-brand-color);
+            //            }
+            //        }
+            //    }
+            //}
         }
     }
 
@@ -139,7 +140,7 @@
                     padding-left: 0;
 
                     .block-item {
-                        width: ~'calc(100%/6 - 16.66px)';
+                        width: ~'calc(100%/6 - 20px)';
                         .lib-css(padding, @brand-mobile-grid-item__padding);
                         .lib-css(margin, @brand-mobile-grid-item__margin);
                         .lib-vendor-prefix-display();
@@ -155,7 +156,7 @@
 
                         .item-image {
                             .lib-css(width, @brand-mobile-item-logo__width);
-                            .lib-css(height, @brand-item-logo__height) !important;
+                            //.lib-css(height, @brand-item-logo__height) !important;
                             object-fit: contain;
                         }
 
@@ -197,25 +198,9 @@
                     @_line-height: @home-featured-brand-container-title__line-height
                 );
                 .lib-css(text-transform, @home-featured-brand-container-title__text-transform);
-                margin-bottom: 10px;
                 display: inline-block;
 
-                h2 {
-                    span {
-                        display: inline-block;
-                        .lib-css(margin-bottom, 0);
 
-                        &:after {
-                            content: '';
-                            display: block;
-                            margin: auto;
-                            .lib-css(margin-top, -10px);
-                            .lib-css(width, 100%);
-                            .lib-css(height, 10px);
-                            .lib-css(background, @kemana-secondary-brand-color);
-                        }
-                    }
-                }
 
                 //& when (@home-featured-brand-container-title-border = true) {
                 //    &:after {
@@ -445,7 +430,26 @@
 
     .home-featured-brand-container {
         .block-brand-featured {
+            .lib-vendor-prefix-display();
+            .lib-vendor-prefix-flex-direction(column);
+
+            .block-title {
+                order: 1;
+            }
+
+            > span {
+                order: 3;
+                text-align: center;
+                margin-top: 20px;
+
+                a {
+                    margin-left: 0;
+                }
+            }
+
             .block-content-wrapper {
+                order: 2;
+
                 .brand-container {
                     .block-item {
                         width: ~'calc(100%/2 - 5px)';
@@ -502,6 +506,20 @@
 //  _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .home-featured-brand-container {
+        padding-bottom: 50px;
+
+        .block-brand-featured {
+            .block-content-wrapper {
+                margin: -10px;
+                .brand-container {
+                    .block-item {
+                        margin: 10px;
+                    }
+                }
+            }
+        }
+    }
     .brand-container {
         &.block-brand-featured {
             .lib-css(padding-left, @layout-indent__width);

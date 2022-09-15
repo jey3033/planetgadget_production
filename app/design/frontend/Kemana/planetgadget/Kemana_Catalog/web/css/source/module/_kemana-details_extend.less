@@ -23,7 +23,7 @@
     .product-info-main {
         .product-info-price {
             .product-info-stock-sku {
-                margin-bottom: 16px;
+                margin-bottom: 0;
 
                 .sku {
                     .type {
@@ -57,15 +57,29 @@
 
             .product-reviews-summary {
                 margin-top: 0;
-                padding-bottom: 30px;
+                padding-bottom: 26px;
 
                 &.empty {
                     .add {
-                        font-style: italic;
+                        font-style: normal;
                     }
 
                     &:hover {
                         text-decoration: underline;
+                    }
+
+                    .rating-summary {
+                        display: none;
+                    }
+                }
+
+                .reviews-actions {
+                    a {
+                        span {
+                            &:first-child {
+                                margin-right: -3px;
+                            }
+                        }
                     }
                 }
 
@@ -80,6 +94,16 @@
 
             .price-box {
                 margin-top: 0;
+
+                .minimal-price {
+                    margin-bottom: 20px;
+
+                    .price-label {
+                        display: block !important;
+                        margin-bottom: 6px;
+                    }
+
+                }
             }
         }
 
@@ -173,8 +197,8 @@
 
                         .qty {
                             label {
-                                .lib-line-height(13);
-                                margin-bottom: 10px;
+                                .lib-line-height(20);
+                                margin-bottom: 6px;
                                 float: left;
                                 .lib-css(font-weight, @font-weight__bold);
                             }
@@ -343,8 +367,8 @@
             .lib-icon-font(
                 @icon-pg-store,
                 @_icon-font-color: @color-pg-light-gray,
-                @_icon-font-margin: -3px 6px 0 0,
-                @_icon-font-size: 16px
+                @_icon-font-margin: -1px 6px 0 0,
+                @_icon-font-size: 14px
             );
 
             &:before {
@@ -365,46 +389,6 @@
                     label.label {
                         .lib-css(font-weight, @font-weight__bold);
                         margin-bottom: 7px;
-                    }
-
-                    .input-group {
-                        border: 1px solid @color-pg-light-gray;
-                        border-radius: 5px;
-                        height: 40px;
-                        width: 114px;
-                        background: none;
-                        position: relative;
-                        left: 0;
-
-                        input {
-                            height: 38px;
-                            width: 34px;
-                            position: absolute;
-                            left: 40px;
-                            border: none;
-                            padding-inline: 0;
-                            text-align: center;
-                        }
-                        .input-group__addon {
-                            &.increase {
-                                float: right;
-                            }
-
-                            &.decrease {
-                                float: left;
-                            }
-                        }
-
-                        button {
-                            .lib-button-reset();
-                            padding: 15px;
-                            height: 38px;
-                            width: 40px;
-                            line-height: 10px;
-                            border: none;
-                            .lib-css(font-weight, @font-weight__bold);
-                            .lib-font-size(14);
-                        }
                     }
                 }
             }
@@ -573,6 +557,46 @@
                 }
 
             }
+        }
+    }
+
+    .input-group {
+        border: 1px solid @color-pg-light-gray;
+        border-radius: 5px;
+        height: 40px;
+        width: 114px;
+        background: none;
+        position: relative;
+        left: 0;
+
+        input {
+            height: 38px;
+            width: 34px;
+            position: absolute;
+            left: 40px;
+            border: none;
+            padding-inline: 0;
+            text-align: center;
+        }
+        .input-group__addon {
+            &.increase {
+                float: right;
+            }
+
+            &.decrease {
+                float: left;
+            }
+        }
+
+        button {
+            .lib-button-reset();
+            padding: 15px;
+            height: 38px;
+            width: 40px;
+            line-height: 10px;
+            border: none;
+            .lib-css(font-weight, @font-weight__bold);
+            .lib-font-size(14);
         }
     }
 }
@@ -748,7 +772,7 @@
                                 &:after {
                                     content: '';
                                     position: absolute;
-                                    width: 40%;
+                                    width: 47%;
                                     height: 10px;
                                     background: @kemana-secondary-brand-color;
                                     right: 1px;
@@ -795,7 +819,7 @@
 
                         .data-block-wrapper-right {
                             float: right;
-                            width: 50%;
+                            width: ~'calc(50% - 10px)';
                             padding: 30px 30px 30px 0;
 
                             .block-warranty {

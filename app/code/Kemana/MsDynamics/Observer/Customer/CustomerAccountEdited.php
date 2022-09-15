@@ -67,19 +67,19 @@ class CustomerAccountEdited implements \Magento\Framework\Event\ObserverInterfac
             return;
         }
 
-        $this->helper->log('Start Customer Account Edit Event.', 'info');
+        $this->helper->log('CUSTOMER : Start Customer Account Edit Event.', 'info');
 
         $customer = $this->customerRepository->get($observer->getData('email'));
 
         if (!$customer->getCustomAttribute('ms_dynamic_customer_number')) {
-            $this->helper->log('This customer has no ERP customer number. So unable to update in ERP.', 'info');
-            $this->helper->log('End Customer Account Edit Event.', 'info');
+            $this->helper->log('CUSTOMER : This customer has no ERP customer number. So unable to update in ERP.', 'info');
+            $this->helper->log('CUSTOMER : End Customer Account Edit Event.', 'info');
             return;
         }
 
         if ($customer->getDefaultShipping()) {
-            $this->helper->log('This customer has default shipping address. So he was updated while the Address Save After event. Skipped.', 'info');
-            $this->helper->log('End Customer Account Edit Event.', 'info');
+            $this->helper->log('CUSTOMER : This customer has default shipping address. So he was updated while the Address Save After event. Skipped.', 'info');
+            $this->helper->log('CUSTOMER : End Customer Account Edit Event.', 'info');
             return;
         }
 
@@ -103,10 +103,15 @@ class CustomerAccountEdited implements \Magento\Framework\Event\ObserverInterfac
         $updateCustomerInErp = $this->erpCustomer->updateCustomerInErp($this->helper->getFunctionUpdateCustomer(),
             $this->helper->getSoapActionUpdateCustomer(), $dataToCustomer);
 
+        if (empty($updateCustomerInErp)) {
+            $this->helper->log('CUSTOMER : ERP system might be off line', 'error');
+            return;
+        }
+
         if (isset($updateCustomerInErp['response']['CustomerNo'])) {
             //$this->updateCustomerMsDynamicNumber($customer->getId(), $updateCustomerInErp['response']['CustomerNo']);
 
-            $this->helper->log('Customer ' . $customer->getId() . " updated successfully in ERP after Account Edit Success event", 'info');
+            $this->helper->log('CUSTOMER : Customer ' . $customer->getId() . " updated successfully in ERP after Account Edit Success event", 'info');
         }
     }
 }

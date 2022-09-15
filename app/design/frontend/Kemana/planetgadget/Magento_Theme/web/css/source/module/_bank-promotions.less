@@ -80,7 +80,7 @@
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
     .home-bank-and-promotions {
-        padding-block: 40px;
+        padding: 40px 10px;
 
         .banner-inner-container {
             .lib-vendor-prefix-display();
@@ -108,11 +108,15 @@
             }
         }
 
+        .row {
+            margin-inline: 0;
+        }
+
         .image-block {
-            padding-block: 10px;
+            padding: 10px 0;
 
             .image {
-                padding-inline: 10px;
+               // padding-inline: 10px;
             }
         }
     }

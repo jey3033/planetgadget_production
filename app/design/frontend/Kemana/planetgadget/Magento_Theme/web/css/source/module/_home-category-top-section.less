@@ -17,6 +17,7 @@
                 .widget-title {
                     text-transform: none;
                     text-align: left;
+                    .lib-title-with-border(@title-text-underline__enable: true);
                 }
 
                 .category-top-grid {
@@ -36,7 +37,7 @@
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
     .category-top-section {
-        padding-block: 50px 45px;
+        padding-block: 48px 40px;
 
         .block {
             &.widget {
