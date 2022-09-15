@@ -104,9 +104,9 @@ class CustomerRewardPointInfo implements \Magento\Framework\Event\ObserverInterf
                             ->setAction(\Kemana\MsDynamics\Model\Reward::REWARD_ACTION_FOR_ERP)
                             ->setActionEntity($customer)
                             ->updateRewardPoints();
+                        $this->helper->log('REWARD POINT : Customer ERP Number ' . $erpCustomerNumber . ' Updated points from ERP. Magento ID ' . $customerId, 'info');
                     }
-
-                    $this->helper->log('REWARD POINT : Customer ERP Number ' . $erpCustomerNumber . ' Updated points from ERP. Magento ID ' . $customerId, 'info');
+                    
                     $this->helper->log('REWARD POINT : End Get Reward Point From ERP', 'info');
                 }
             }
