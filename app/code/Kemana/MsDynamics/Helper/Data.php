@@ -36,21 +36,25 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     protected $storeScope;
 
-    protected $customerRepository;
+    /**
+     * @var \Magento\Customer\Api\CustomerRepositoryInterface
+     */
+    protected $customerRepository;    
 
     /**
      * @param \Magento\Framework\App\Helper\Context $context
      * @param \Kemana\MsDynamics\Logger\Logger $logger
+     * @param \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository
      */
     public function __construct(
         \Magento\Framework\App\Helper\Context             $context,
         \Kemana\MsDynamics\Logger\Logger                  $logger,
-        \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository
+        \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository        
     )
     {
         $this->logger = $logger;
         $this->customerRepository = $customerRepository;
-        $this->storeScope = \Magento\Store\Model\ScopeInterface::SCOPE_STORE;
+        $this->storeScope = \Magento\Store\Model\ScopeInterface::SCOPE_STORE;        
 
         parent::__construct($context);
     }
@@ -232,6 +236,70 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     }
 
     /**
+     * @return mixed
+     */
+    public function getRewardPointFunction()
+    {
+        return ConfigProvider::GET_REWARD_POINT_FROM_ERP;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSoapActionGetRewardPoint()
+    {
+        return ConfigProvider::GET_REWARD_POINT_SOAP_ACTION;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function earnRewardPointFunction()
+    {
+        return ConfigProvider::EARN_REWARD_POINT_FROM_MAGETNO;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSoapActionEarnRewardPoint()
+    {
+        return ConfigProvider::EARN_REWARD_POINT_SOAP_ACTION;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function redeemRewardPointFunction()
+    {
+        return ConfigProvider::REDEEM_REWARD_POINT_FROM_MAGETNO;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSoapActionRedeemRewardPoint()
+    {
+        return ConfigProvider::REDEEM_REWARD_POINT_SOAP_ACTION;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLastUpdatedPointFunction()
+    {
+        return ConfigProvider::LAST_UPDATED_POINT_FROM_ERP;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSoapActionlastUpdated()
+    {
+        return ConfigProvider::LAST_UPDATED_POINT_SOAP_ACTION;
+    }
+
+    /**
      * @param $apiFunction
      * @param $postParameters
      * @return string
@@ -316,6 +384,77 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
                             <' . $apiFunction . '_List>
                                 ' . $postParameters . '
                             </' . $apiFunction . '_List>
+                        </' . $soapAction . '>
+                </Body>
+        </Envelope>';
+    }
+
+    /**
+     * @param $apiFunction
+     * @param $soapAction
+     * @param $postParameters
+     * @return string
+     */
+    public function getXmlRequestBodyToErpGetRewardPoint($apiFunction, $soapAction, $postParameters): string
+    {
+        return '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+                    <Body>
+                        <' . $soapAction . ' xmlns="' . $this->getApiXmnls() . "/" . $apiFunction . '">
+                            <CustomerNo>' . $postParameters . '</CustomerNo>
+                        </' . $soapAction . '>
+                    </Body>
+                </Envelope>';
+    }
+
+    /**
+     * @param $apiFunction
+     * @param $soapAction
+     * @param $postParameters
+     * @return string
+     */
+    public function getXmlRequestBodyToErpEarnRewardPoint($apiFunction, $soapAction, $postParameters): string
+    {
+        return '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+                <Body>
+                        <' . $soapAction . ' xmlns="' . $this->getApiXmnls() . "/" . $apiFunction . '">
+                            <' . $apiFunction . '>
+                                ' . $postParameters . '
+                            </' . $apiFunction . '>
+                        </' . $soapAction . '>
+                </Body>
+        </Envelope>';
+    }
+
+    /**
+     * @param $apiFunction
+     * @param $soapAction
+     * @param $postParameters
+     * @return string
+     */
+    public function getXmlRequestBodyToErpRedeemRewardPoint($apiFunction, $soapAction, $postParameters): string
+    {
+        return '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+                <Body>
+                        <' . $soapAction . ' xmlns="' . $this->getApiXmnls() . "/" . $apiFunction . '">
+                            <' . $apiFunction . '>
+                                ' . $postParameters . '
+                            </' . $apiFunction . '>
+                        </' . $soapAction . '>
+                </Body>
+        </Envelope>';
+    }
+
+    /**
+     * @param $apiFunction
+     * @param $soapAction
+     * @param $postParameters
+     * @return string
+     */
+    public function getXmlRequestBodyToErpGetLastUpdatedPoint($apiFunction, $soapAction, $postParameters): string
+    {
+        return '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+                <Body>
+                        <' . $soapAction . ' xmlns="' . $this->getApiXmnls() . "/" . $apiFunction . '">
                         </' . $soapAction . '>
                 </Body>
         </Envelope>';

@@ -70,23 +70,23 @@ class OrderInvoicePay implements \Magento\Framework\Event\ObserverInterface
             return;
         }
 
-        $this->helper->log('Start Invoice success pay event to create the order in ERP', 'info');
+        $this->helper->log('Order : Start Invoice success pay event to create the order in ERP', 'info');
 
         $order = $observer->getInvoice()->getOrder();
         $orderItems = $observer->getInvoice()->getOrder()->getItems();
 
         if ($order->getIsSyncedToMsdynamicErp()) {
-            $this->helper->log('This order already synced. Magento order ID' . $order->getIncrementId(), 'info');
+            $this->helper->log('Order : This order already synced. Magento order ID' . $order->getIncrementId(), 'info');
             return;
         }
 
         // Order will be sync when it is get paid total amount
         if ($order->getTotalDue()) {
-            $this->helper->log('This order still not fully paid. Magento order ID' . $order->getIncrementId(), 'info');
+            $this->helper->log('Order : This order still not fully paid. Magento order ID' . $order->getIncrementId(), 'info');
             return;
         }
 
-        $this->helper->log('Start to process the Magento order : ' . $order->getIncrementId(), 'info');
+        $this->helper->log('Order : Start to process the Magento order : ' . $order->getIncrementId(), 'info');
 
         $dataToOrder = [
             "OrderNo" => $order->getIncrementId(),
@@ -137,19 +137,19 @@ class OrderInvoicePay implements \Magento\Framework\Event\ObserverInterface
             $this->helper->getSoapActionCreateOrder(), $dataToOrder);
 
         if (empty($createOrderInErp)) {
-            $this->helper->log('ERP system might be off line', 'error');
+            $this->helper->log('Order : ERP system might be off line', 'error');
         }
 
         if ($createOrderInErp['curlStatus'] == 200 && isset($createOrderInErp['response']['OrderNo'])) {
-            $this->helper->log('Magento Order ' . $createOrderInErp['response']['OrderNo'] . ' successfully sent to ', 'info');
+            $this->helper->log('Order : Magento Order ' . $createOrderInErp['response']['OrderNo'] . ' successfully sent to ', 'info');
 
             $order = $this->orderRepositoryInterface->get($order->getIncrementId());
             $order->setIsSyncedToMsdynamicErp(1);
             $this->orderResourceModel->save($order);
 
-            $this->helper->log('Successfully updated the is_synced_to_msdynamic_erp attribute for Magento Order ' . $createOrderInErp['response']['OrderNo'], 'info');
+            $this->helper->log('Order : Successfully updated the is_synced_to_msdynamic_erp attribute for Magento Order ' . $createOrderInErp['response']['OrderNo'], 'info');
 
-            $this->helper->log('End process the Magento order : ' . $order->getIncrementId() . '. Successfully sent to ERP', 'info');
+            $this->helper->log('Order : End process the Magento order : ' . $order->getIncrementId() . '. Successfully sent to ERP', 'info');
 
         }
     }

@@ -64,6 +64,26 @@ class Customer
     }
 
     /**
+     * @return \Magento\Customer\Api\Data\CustomerInterface[]
+     * @throws \Magento\Framework\Exception\LocalizedException
+     */
+    public function getSyncCustomersList($customerId = null)
+    {   
+        if ($customerId) {
+            return $this->customerRepository->getById($customerId);
+        }
+        
+        $filterErpCustomerNumber = $this->filterBuilder
+            ->setField('ms_dynamic_customer_number')
+            ->setConditionType('notnull')
+            ->create();
+
+        $this->searchCriteriaBuilder->addFilters([$filterErpCustomerNumber]);
+        $searchCriteria = $this->searchCriteriaBuilder->create();
+        return $this->customerRepository->getList($searchCriteria)->getItems();
+    }
+
+    /**
      * @param $email
      * @param $phoneNumber
      * @return bool
