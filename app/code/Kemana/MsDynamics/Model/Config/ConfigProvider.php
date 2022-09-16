@@ -25,6 +25,11 @@ class ConfigProvider
     const XML_PATH_IS_ENABLE = 'msdynamic/general/is_enabled';
 
     /**
+     * XML Path is enabled integrations
+     */
+    const XML_PATH_API_MODE = 'msdynamic/general/api_mode';
+
+    /**
      * XML Path API Url
      */
     const XML_PATH_API_URL = 'msdynamic/general/url';
