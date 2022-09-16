@@ -115,11 +115,14 @@ class OrderInvoicePay implements \Magento\Framework\Event\ObserverInterface
             $dataToItem = [
                 "OrderNo" => $order->getIncrementId(),
                 "LineNo" => $lineNo,
-                "ItemNo" => $lineItem->getProductId(),
-                "Description" => $lineItem->getDescription(),
+                "ItemNo" => $lineItem->getSku(),
                 "Quantity" => $lineItem->getQtyOrdered(),
                 "Price" => floatval($lineItem->getRowTotalInclTax())
             ];
+
+            if ($lineItem->getName()) {
+                $dataToItem['Description'] = $lineItem->getName();
+            }
 
             $dataToItem = $this->helper->convertArrayToXml($dataToItem);
 
