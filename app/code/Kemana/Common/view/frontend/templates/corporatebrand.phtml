@@ -1,4 +1,4 @@
-<!-- 
+<!--
 /**
  * Copyright © 2022 PT Kemana Teknologi Solusi. All rights reserved.
  * http://www.kemana.com
@@ -19,7 +19,7 @@
         $brandFeatured = $block->getFeaturedBrandCollection();
     ?>
         <?php if (count($brandFeatured) > 0): ?>
-            <div class="home-featured-brand-container fixed-width">
+            <div class="corporate-brand-container fixed-width">
                 <div class="block widget block-brand-featured grid">
                     <div class="block-title">
                         <h2 role="heading" aria-level="2">
@@ -48,7 +48,8 @@
                             </ul>
                             <div class="actions-toolbar">
                                 <div class="primary">
-                                    <a class="action view-all primary"><?= $escaper->escapeHtml(__('View All Brands')) ?></a>
+                                    <a id="show-more" class="action view-all primary" href=""><?= $escaper->escapeHtml(__('Show More')) ?></a>
+                                    <a id="show-less" class="action view-less primary" style="display: none" href=""><?= $escaper->escapeHtml(__('Show Less')) ?></a>
                                 </div>
                             </div>
                         </div>

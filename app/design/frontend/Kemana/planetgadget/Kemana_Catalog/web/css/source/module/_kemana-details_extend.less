@@ -23,7 +23,7 @@
     .product-info-main {
         .product-info-price {
             .product-info-stock-sku {
-                margin-bottom: 0;
+                //margin-bottom: 0;
 
                 .sku {
                     .type {
@@ -43,11 +43,11 @@
                     .lib-font-size(12);
                     text-transform: none;
                     font-weight: @font-weight__heavier;
-
                     .lib-icon-font(
                         @icon-pg-stock,
                         @_icon-font-size: 14px,
                         @_icon-font-margin: 0 6px 0 0);
+                    margin-bottom: 0;
 
                     &.unavailable {
                         .lib-css(color, @color-kemana-dark2);
@@ -730,6 +730,42 @@
                         border-radius: 5px;
                         margin-inline: -10px;
                         padding: 25px 10px;
+
+                        .data-block-wrapper-right {
+                            margin-top: 43px;
+
+                            .title {
+                                margin-bottom: 6px;
+                            }
+
+                            .additional-attributes-wrapper {
+                                table.additional-attributes {
+                                    tbody {
+                                        tr {
+                                            display: table-row;
+                                            padding-bottom: 0;
+                                            margin-bottom: 0;
+
+                                            th {
+                                                display: table-cell;
+                                                width: 50%;
+                                                padding: 17px 0 16px;
+                                            }
+
+                                            td {
+                                                display: table-cell;
+                                                width: 50%;
+                                                padding: 17px 0 16px 10px;
+
+                                                &:before {
+                                                    display: none;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
