@@ -25,6 +25,11 @@ class ConfigProvider
     const XML_PATH_IS_ENABLE = 'msdynamic/general/is_enabled';
 
     /**
+     * XML Path is enabled integrations
+     */
+    const XML_PATH_API_MODE = 'msdynamic/general/api_mode';
+
+    /**
      * XML Path API Url
      */
     const XML_PATH_API_URL = 'msdynamic/general/url';
@@ -195,6 +200,16 @@ class ConfigProvider
      * XML Path API function name Ack product soap action
      */
     const ACK_PRODUCT_SOAP_ACTION = 'CreateMultiple';
+
+    /**
+     * XML Path API function name get product list
+     */
+    const GET_PRODUCT_INVENTORY_STOCK_ERP = 'productinventory';
+
+    /**
+     * XML Path API function name get product list soap action
+     */
+    const GET_PRODUCT_INVENTORY_STOCK_SOAP_ACTION = 'ReadMultiple';
 
     /**
      * XML Path API function create orders

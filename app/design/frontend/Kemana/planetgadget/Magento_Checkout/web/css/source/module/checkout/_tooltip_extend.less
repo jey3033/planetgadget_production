@@ -41,7 +41,7 @@
 
         .action-help {
             background: @color-white;
-            padding-inline: 8px 10px;
+            padding-inline: 8px 0;
 
             &:before {
                 width: 13px;
@@ -53,6 +53,7 @@
             .lib-css(border-radius, @checkout-tooltip-content__border-radius);
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
             .lib-line-height(20);
+            top: -35px !important;
         }
     }
 }

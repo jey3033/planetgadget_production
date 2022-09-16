@@ -10,6 +10,7 @@
                   class="psg-tabs" data-bind="mageInit: {'paymentgroup':{}}">
                     <div repeat="foreach: kemanaPaymentGroupsList, item: '$kemanaGroup'"
                       class="psg-tab-item" data-bind="'css' : $kemanaGroup().class_icon, attr: {id: $kemanaGroup().class_icon}">
+                      <!-- ko if: ($kemanaGroup().class_icon == 'group') -->
                          <div class="title field radios">
                               <input type="radio" class="radio"  data-bind="value: $kemanaGroup().class_icon"/>
                               <label class="label">
@@ -19,9 +20,13 @@
                          <div class="content">
                               <each args="data: getRegion($group().displayArea + $kemanaGroup().group_id), as: 'method'" render=""/>
                          </div>
+                        <!-- /ko -->
+                        <!-- ko if: ($kemanaGroup().class_icon == 'without-group') -->
+                            <each args="data: getRegion($group().displayArea + $kemanaGroup().group_id), as: 'method'" render=""/>
+                        <!-- /ko -->
                     </div>
                </div>  
-               <each args="data: getRegion($group().displayArea), as: 'method'" render=""/>
+            <each args="data: getRegion($group().displayArea), as: 'method'" render=""/>
           <!-- /ko -->
      </div>
 </div>
