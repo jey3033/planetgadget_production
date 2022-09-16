@@ -124,6 +124,14 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     /**
      * @return mixed
      */
+    public function isApiMode()
+    {
+        return $this->scopeConfig->getValue(ConfigProvider::XML_PATH_API_MODE, $this->storeScope);
+    }
+
+    /**
+     * @return mixed
+     */
     public function getApiUrl()
     {
         return $this->scopeConfig->getValue(ConfigProvider::XML_PATH_API_URL, $this->storeScope);
