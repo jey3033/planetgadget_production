@@ -197,6 +197,16 @@ class ConfigProvider
     const ACK_PRODUCT_SOAP_ACTION = 'CreateMultiple';
 
     /**
+     * XML Path API function name get product list
+     */
+    const GET_PRODUCT_INVENTORY_STOCK_ERP = 'productinventory';
+
+    /**
+     * XML Path API function name get product list soap action
+     */
+    const GET_PRODUCT_INVENTORY_STOCK_SOAP_ACTION = 'ReadMultiple';
+
+    /**
      * XML Path API function create orders
      */
     const CREATE_ORDER_IN_ERP = 'order';
