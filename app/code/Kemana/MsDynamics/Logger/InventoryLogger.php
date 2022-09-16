@@ -9,7 +9,7 @@
  * @package  Kemana_MsDynamics
  * @license  Proprietary
  *
- * @author   Achintha Madushan <amadushan@kemana.com>
+ * @author   Parth Godhani <pgodhani@kemana.com>
  */
 
 namespace Kemana\MsDynamics\Logger;

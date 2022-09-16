@@ -21,6 +21,7 @@
     </event>
     <event name="checkout_submit_before">
         <observer name="before_order_place" instance="Kemana\MsDynamics\Observer\Inventory\BeforOrderPlace" />
+    </event>
     <event name="layout_render_before_magento_reward_customer_info">
         <observer name="kemana_customer_reward_point_info"
                   instance="Kemana\MsDynamics\Observer\Customer\CustomerRewardPointInfo"/>
