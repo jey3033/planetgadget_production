@@ -4,6 +4,9 @@
 //  * http://www.kemana.com
 //  */
 
+//  Header Top variables
+@header-top-font_color: @kemana-primary-brand-color;
+
 //
 //  Common
 //  _____________________________________________
@@ -111,10 +114,11 @@
             .header-top-wrapper-right {
                 a {
                     .lib-vendor-prefix-display();
-                    .lib-css(color, @color-white);
+                    .lib-css(color, @header-top-font_color);
                     padding-inline: 10px;
-                    .lib-font-size(10);
-                    .lib-line-height(20);
+                    .lib-font-size(12);
+                    .lib-line-height(24);
+                    font-weight: @font-weight__semibold;
                 }
 
                 li {

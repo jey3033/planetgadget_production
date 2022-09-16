@@ -14,8 +14,17 @@
 //  _____________________________________________
 
 & when (@media-common = true) {
-    #kemana-bannerslider-block-before-content-1 {
-        .lib-vendor-prefix-display();
+    .cms-index-index {
+        .columns {
+            .column.main {
+               > div {
+
+                   &:first-child {
+                       .lib-vendor-prefix-display();
+                   }
+               }
+            }
+        }
     }
 
     .home-banner-first-container {
@@ -50,7 +59,7 @@
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
     .home-banner-first-container {
-        padding-block: 40px;
+        padding-block: @block-padding - 10;
 
         .row {
             margin-inline: 0;
@@ -92,7 +101,7 @@
     }
 
     .home-banner-first-container {
-        padding-block: 50px;
+        padding-block: @block-padding;
 
 
     }
