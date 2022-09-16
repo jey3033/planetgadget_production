@@ -27,4 +27,12 @@
         <observer name="kemana_customer_address_save_after"
                   instance="Kemana\MsDynamics\Observer\Customer\CustomerAddressSaveAfter"/>
     </event>
+    <event name="checkout_onepage_controller_success_action">
+        <observer name="kemana_checkout_controller_success_action"
+                  instance="Kemana\MsDynamics\Observer\Order\AfterPlaceOrder"/>
+    </event>
+    <event name="magento_invitation_save_commit_after">
+        <observer name="kemana_magento_invitation_save_commit_after" 
+                  instance="Kemana\MsDynamics\Observer\Customer\InvitationToCustomer" />
+    </event>
 </config>

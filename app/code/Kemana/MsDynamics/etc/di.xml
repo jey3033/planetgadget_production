@@ -46,4 +46,14 @@
             </argument>
         </arguments>
     </type>
+    <type name="Magento\Framework\Console\CommandListInterface">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="msDynamicProductsFromErpToMagento" xsi:type="object">
+                    Kemana\MsDynamics\Console\Product\SyncFromErpToMagento
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <preference for="Magento\Reward\Model\Reward" type="Kemana\MsDynamics\Model\Reward" />
 </config>

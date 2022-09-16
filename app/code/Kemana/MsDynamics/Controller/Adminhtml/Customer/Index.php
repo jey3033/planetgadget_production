@@ -39,24 +39,32 @@ class Index extends \Magento\Backend\App\Action
     protected $helper;
 
     /**
+     * @var \Kemana\MsDynamics\Cron\SyncRewardPointToErp
+     */
+    protected $syncRewardPointToErp;
+
+    /**
      * @param \Magento\Backend\App\Action\Context $context
      * @param \Magento\Framework\View\Result\PageFactory $resultPageFactory
      * @param \Magento\Framework\Serialize\Serializer\Json $jsonSerializer
      * @param \Kemana\MsDynamics\Cron\SyncCustomersToErp $syncCustomersToErp
      * @param \Kemana\MsDynamics\Helper\Data $helper
+     * @param \Kemana\MsDynamics\Cron\SyncRewardPointToErp $syncRewardPointToErp
      */
     public function __construct(
         \Magento\Backend\App\Action\Context        $context,
         \Magento\Framework\View\Result\PageFactory $resultPageFactory,
         \Magento\Framework\Serialize\Serializer\Json $jsonSerializer,
         \Kemana\MsDynamics\Cron\SyncCustomersToErp $syncCustomersToErp,
-        \Kemana\MsDynamics\Helper\Data                    $helper
+        \Kemana\MsDynamics\Helper\Data                    $helper,
+        \Kemana\MsDynamics\Cron\SyncRewardPointToErp $syncRewardPointToErp
     )
     {
         $this->syncCustomersToErp = $syncCustomersToErp;
         $this->resultPageFactory = $resultPageFactory;
         $this->jsonSerializer = $jsonSerializer;
         $this->helper = $helper;
+        $this->syncRewardPointToErp = $syncRewardPointToErp;
 
         parent::__construct($context);
     }
@@ -81,10 +89,11 @@ class Index extends \Magento\Backend\App\Action
             $customerId = $this->getRequest()->getPost('customerId');
 
             $pushCustomer = $this->syncCustomersToErp->syncMissingCustomersFromRealTimeSync($customerId);
+            $this->syncRewardPointToErp->syncRewardPointFromMagentoToErp($customerId);
         }
 
         if ($pushCustomer['result']) {
-            $customerResult = true;
+            $customerResult = true;            
             $this->helper->log('End send customer from click event in Customer admin grid.', 'info');
         }
 

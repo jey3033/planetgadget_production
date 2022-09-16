@@ -45,7 +45,7 @@ class Customer
     /**
      * @param $apiFunction
      * @param $customerIdInErp
-     * @return false|mixed
+     * @return array|mixed
      */
     public function getCustomerInErp($apiFunction, $customerIdInErp = '0')
     {
@@ -64,13 +64,14 @@ class Customer
             }
         }
 
-        return false;
+        return [];
     }
 
     /**
      * @param $apiFunction
+     * @param $soapAction
      * @param $customerData
-     * @return false|mixed
+     * @return array
      */
     public function createCustomerInErp($apiFunction, $soapAction, $customerData)
     {
@@ -79,20 +80,18 @@ class Customer
         $getCustomerFromErp = $this->request->apiTransport($apiFunction, $soapAction,
             $this->helper->getXmlRequestBodyToErp($apiFunction, $soapAction, $postParameters));
 
-        //if ($getCustomerFromErp['responseStatus']) {
         if (isset($getCustomerFromErp['response'])) {
             return $getCustomerFromErp;
         }
-        // }
 
-
-        return false;
+        return [];
     }
 
     /**
      * @param $apiFunction
-     * @param array $customerData
-     * @return false|mixed
+     * @param $soapAction
+     * @param $customerData
+     * @return array
      */
     public function ackCustomer($apiFunction, $soapAction, $customerData)
     {
@@ -105,13 +104,14 @@ class Customer
             return $getCustomerFromErp;
         }
 
-        return false;
+        return [];
     }
 
     /**
      * @param $apiFunction
-     * @param array $customerData
-     * @return false|mixed
+     * @param $soapAction
+     * @param $customerData
+     * @return array
      */
     public function updateCustomerInErp($apiFunction, $soapAction, $customerData)
     {
@@ -124,9 +124,15 @@ class Customer
             return $getCustomerFromErp;
         }
 
-        return false;
+        return [];
     }
 
+    /**
+     * @param $apiFunction
+     * @param $soapAction
+     * @param $customerData
+     * @return array
+     */
     public function getUnSyncCustomersFromErp($apiFunction, $soapAction, $customerData)
     {
         $postParameters = $customerData;
@@ -138,14 +144,15 @@ class Customer
             return $getCustomerFromErp;
         }
 
-        return false;
+        return [];
     }
 
 
     /**
      * @param $apiFunction
-     * @param array $customerData
-     * @return false|mixed
+     * @param $soapAction
+     * @param $customerData
+     * @return array
      */
     public function deleteCustomerInErp($apiFunction, $soapAction, $customerData)
     {
@@ -158,7 +165,6 @@ class Customer
             return $getCustomerFromErp;
         }
 
-        return false;
+        return [];
     }
-
 }
