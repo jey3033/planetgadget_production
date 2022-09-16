@@ -17,9 +17,9 @@ namespace Kemana\MsDynamics\Observer\Customer;
 use Magento\Framework\Event\ObserverInterface;
 
 /**
- * Class InvitationToCustomer
+ * Class ReviewSubmit
  */
-class InvitationToCustomer implements ObserverInterface
+class ReviewSubmit implements ObserverInterface
 {
     /**
      * @var \Magento\Store\Model\StoreManagerInterface
@@ -76,35 +76,39 @@ class InvitationToCustomer implements ObserverInterface
     }
 
     /**
-     * Update points balance after customer registered by invitation
+     * Update points balance after review submit
      *
      * @param \Magento\Framework\Event\Observer $observer
      * @return $this
      * @SuppressWarnings(PHPMD.UnusedLocalVariable)
      */
     public function execute(\Magento\Framework\Event\Observer $observer)
-    {
+    {   
         if (!$this->helper->isEnable()) {
             return;
         }
 
-        /* @var $invitation \Magento\Invitation\Model\Invitation */
-        $invitation = $observer->getEvent()->getInvitation();
-        $websiteId = $this->storeManager->getStore($invitation->getStoreId())->getWebsiteId();
+        /* @var $review \Magento\Review\Model\Review */
+        $review = $observer->getEvent()->getObject();
+        $storeId = $review->getStoreId() ?: $this->storeManager->getStore()->getId();
+        $websiteId = $storeId ? $this->storeManager->getStore($storeId)->getWebsiteId()
+            : $this->storeManager->getStore()->getWebsiteId();
         if (!$this->rewardData->isEnabledOnFront($websiteId)) {
             return $this;
         }
 
         $point = $this->scopeConfig->getValue(
-            'magento_reward/points/invitation_customer',
+            'magento_reward/points/review',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
         );
 
-        $customer = $this->customerRepository->getById($invitation->getCustomerId());
-        if ($point && $customer->getCustomAttribute('ms_dynamic_customer_number')) {            
-            $erpCustomerNumber = $customer->getCustomAttribute('ms_dynamic_customer_number')->getValue();
-            if ($erpCustomerNumber) {
-                $this->erpReward->addCustomerEarnPointToErp($invitation->getCustomerId(), $erpCustomerNumber, $point);
+        if($review->getCustomerId()) {
+            $customer = $this->customerRepository->getById($review->getCustomerId());
+            if ($point && $customer->getCustomAttribute('ms_dynamic_customer_number')) {            
+                $erpCustomerNumber = $customer->getCustomAttribute('ms_dynamic_customer_number')->getValue();
+                if ($erpCustomerNumber) {
+                    $this->erpReward->addCustomerEarnPointToErp($review->getCustomerId(), $erpCustomerNumber, $point);
+                }
             }
         }
         return $this;

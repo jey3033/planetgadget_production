@@ -67,14 +67,21 @@ class SyncRewardPointToErp
      * @throws InputException
      * @throws LocalizedException
      */
-    public function syncRewardPointFromMagentoToErp()
+    public function syncRewardPointFromMagentoToErp($customerId = null)
     {   
         if (!$this->helper->isEnable()) {
             return;                                             
         }                                   
         $this->helper->log('REWARD POINT : Cron Start to Sync Reward Point To ERP', 'info');
 
-        $syncCustomers = $this->customer->getSyncCustomersList();
+        $syncCustomers = $this->customer->getSyncCustomersList($customerId);
+
+        if ($customerId) {
+            $tmpSyncCustomers = $syncCustomers;
+            $syncCustomers = null;
+            $syncCustomers[] = $tmpSyncCustomers;
+        }
+
         foreach($syncCustomers as $customer) {
             $customerId = $customer->getId();
             if ($customer->getCustomAttribute('ms_dynamic_customer_number')) {

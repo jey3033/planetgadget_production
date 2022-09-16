@@ -22,4 +22,7 @@
     <event name="adminhtml_customer_save_after">
         <observer name="kemana_customer_save_after" instance="Kemana\MsDynamics\Observer\Customer\SaveRewardPoints" />
     </event>
+    <event name="review_save_commit_after">
+        <observer name="kemana_review_save_commit_after" instance="Kemana\MsDynamics\Observer\Customer\ReviewSubmit" />
+    </event>
 </config>

@@ -87,6 +87,16 @@ class XmlProcessor
             }
         }
 
+        if ($responseStatus == "200" && $apiFunction == $this->helper->getFunctionInventoryStock()
+            && $soapAction == $this->helper->getSoapActionGetInventoryStock()) {
+            if (isset($responseData['Soap:Body'])) {
+                if (isset($responseData['Soap:Body'][$soapAction . '_Result'][$soapAction . '_Result'][$apiFunction])) {
+                    return $responseData['Soap:Body'][$soapAction . '_Result'][$soapAction . '_Result'][$apiFunction];
+                }
+            }
+        }
+
+
         if ($responseStatus == "200" && $apiFunction == $this->helper->getFunctionProductList()
             && $soapAction == $this->helper->getSoapActionGetProductList()) {
             if (isset($responseData['Soap:Body'])) {
