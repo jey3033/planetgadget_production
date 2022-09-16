@@ -29,9 +29,9 @@
     <!-- ko template: 'Kemana_Snap/payment/messages' --><!-- /ko -->
     <div class="payment-method-content rk1">
         <div class="payment-method-logo-icon">
-            <span data-bind="attr: {'class': 'payment-icon payment_logo_' + getCode()}"></span>
-            <span data-bind="attr: {'class': 'payment-icon payment_logo_1' + getCode()}"></span>
-            <span data-bind="attr: {'class': 'payment-icon payment_logo_2' + getCode()}"></span>
+            <span data-bind="attr: {'class': 'payment-icon payment_logo_' + getCode() + ' paymentextra ' + getCode()}"></span>
+            <span data-bind="attr: {'class': 'payment-icon payment_logo_1' + getCode() + ' paymentextra ' + getCode()}"></span>
+            <span data-bind="attr: {'class': 'payment-icon payment_logo_2' + getCode() + ' paymentextra ' + getCode()}"></span>
         </div>
         <p class="payment-method-message" data-bind="html: getFormMessage()"></p>
         <div class="payment-method-billing-address">
