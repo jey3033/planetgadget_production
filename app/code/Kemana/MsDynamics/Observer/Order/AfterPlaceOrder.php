@@ -80,32 +80,35 @@ class AfterPlaceOrder implements \Magento\Framework\Event\ObserverInterface
 
         $erpCustomerNumber = '';
         $customerId = $order->getCustomerId();
-        $customer = $this->customerRepository->getById($customerId);
-        if ($customerId && $customer->getCustomAttribute('ms_dynamic_customer_number')) {            
-            $erpCustomerNumber = $customer->getCustomAttribute('ms_dynamic_customer_number')->getValue();
-        }
 
-        if ($erpCustomerNumber != '') {
-            $dataToOrder = [
-                "DocumentNo" => $order->getIncrementId(),
-                "CustomerNo" => $erpCustomerNumber,
-                "Description" => 'Redeem point',
-                "Points" => $rewardPoint
-            ];
-
-            $dataToOrder = $this->helper->convertArrayToXml($dataToOrder);
-
-            $redeemPointToErp = $this->erpReward->redeemRewardPointToErp($this->helper->redeemRewardPointFunction(),
-                $this->helper->getSoapActionRedeemRewardPoint(), $dataToOrder);
-
-            if ($redeemPointToErp['curlStatus'] == 500) {
-                $this->helper->log($redeemPointToErp['response'], 'info');
+        if ($customerId) {
+            $customer = $this->customerRepository->getById($customerId);
+            if ($customer->getCustomAttribute('ms_dynamic_customer_number')) {            
+                $erpCustomerNumber = $customer->getCustomAttribute('ms_dynamic_customer_number')->getValue();
             }
 
-            if ($redeemPointToErp['curlStatus'] == 200 && isset($redeemPointToErp['response']['CustomerNo'])) {
-                $this->helper->log('REWARD POINT : End After Place an Order Event successfully and customer ' . $customerId . ' redeem point sent to ERP', 'info');
+            if ($erpCustomerNumber != '') {
+                $dataToOrder = [
+                    "DocumentNo" => $order->getIncrementId(),
+                    "CustomerNo" => $erpCustomerNumber,
+                    "Description" => 'Redeem point',
+                    "Points" => $rewardPoint
+                ];
+
+                $dataToOrder = $this->helper->convertArrayToXml($dataToOrder);
+
+                $redeemPointToErp = $this->erpReward->redeemRewardPointToErp($this->helper->redeemRewardPointFunction(),
+                    $this->helper->getSoapActionRedeemRewardPoint(), $dataToOrder);
+
+                if ($redeemPointToErp['curlStatus'] == 500) {
+                    $this->helper->log($redeemPointToErp['response'], 'info');
+                }
+
+                if ($redeemPointToErp['curlStatus'] == 200 && isset($redeemPointToErp['response']['CustomerNo'])) {
+                    $this->helper->log('REWARD POINT : End After Place an Order Event successfully and customer ' . $customerId . ' redeem point sent to ERP', 'info');
+                }
+                $this->earnPointFromOrder($order, $customerId, $erpCustomerNumber);
             }
-            $this->earnPointFromOrder($order, $customerId, $erpCustomerNumber);
         }
     }
 

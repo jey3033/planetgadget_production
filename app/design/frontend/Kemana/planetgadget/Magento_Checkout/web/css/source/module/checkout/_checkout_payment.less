@@ -187,11 +187,38 @@
 								background-repeat: no-repeat;
 								background-size: cover;	
 							}
+
+							.payment-method-title{
+								span.payment_logo_snap_allbank_cc{
+									display: none;
+								}
+								span.payment_logo_snap_akulaku{
+									display: none;
+								}
+								span.payment_logo_custom{
+									display:none;
+								}
+							}
+						}
+						.psg-tab-item{
+							.payment-method-content{
+								margin: 0 30px;
+								width: 100%;
+							}
 						}
 					}
 					.payment-method-logo-icon{
 						display: flex;
-						flex-wrap: werap;
+						flex-wrap: wrap;
+
+						span.paymentextra:not(.snap_allbank_cc):not(.snap_akulaku) {
+						    display:none !important;
+						}
+						
+						.payment_img_snap_allbank_cc{
+							display: flex;
+							flex-wrap: werap;
+						}
 
 						span{
 							margin-right: 10px;

@@ -88,17 +88,20 @@
         .price-box {
             .weee {
                 margin-bottom: 0;
-                line-height: 16px;
-                height: 16px;
+                //line-height: 38px;
+                //height: 16px;
+                .lib-line-height(@pdp-product-price__font-size + 10);
 
                 span {
-                    line-height: 16px;
-                    height: 16px;
+                    .lib-line-height(@pdp-product-price__font-size + 10);
+                    //line-height: 16px;
+                    //height: 16px;
                 }
             }
 
             .price-wrapper {
                 .price {
+                    display: block;
                     .lib-line-height(@pdp-product-price__font-size + 10);
                 }
             }
@@ -178,6 +181,11 @@
                 .price {
                     .lib-heading(h2);
                 }
+            }
+
+            .price-to,
+            .price-from {
+                .lib-line-height(38);
             }
         }
     }

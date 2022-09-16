@@ -74,40 +74,45 @@ class CustomerRewardPointInfo implements \Magento\Framework\Event\ObserverInterf
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function execute(\Magento\Framework\Event\Observer $observer)
-    {
-        $this->helper->log('REWARD POINT : Get Reward Point From ERP Start', 'info');
-
+    {   
+        if (!$this->helper->isEnable()) {
+            return;
+        }       
         $customerId = $this->currentCustomer->getCustomerId();
-        $customer = $this->customerRepository->getById($customerId);        
-        $storeId = $this->storeManager->getStore()->getId();
-        $reward = $this->erpReward->getRewardModel()->getCollection()->addFieldToFilter('customer_id', ['eq' => $customerId])->getFirstItem();
-        $magentoRewardPointBalance =  $reward->getPointsBalance();
 
-        if ($customer->getCustomAttribute('ms_dynamic_customer_number')) {
-            $erpCustomerNumber = $customer->getCustomAttribute('ms_dynamic_customer_number')->getValue();
-            if ($erpCustomerNumber) {
-                $dataToGetRewardPoint = [
-                    "customer_no" => $erpCustomerNumber
-                ];
+        if($customerId) {
+            $this->helper->log('REWARD POINT : Get Reward Point From ERP Start', 'info');
+            $customer = $this->customerRepository->getById($customerId);        
+            $storeId = $this->storeManager->getStore()->getId();
+            $reward = $this->erpReward->getRewardModel()->getCollection()->addFieldToFilter('customer_id', ['eq' => $customerId])->getFirstItem();
+            $magentoRewardPointBalance =  $reward->getPointsBalance();
 
-                $dataToGetRewardPoint = $this->helper->convertArrayToXml($dataToGetRewardPoint);
-                $getRewardPoint = $this->erpReward->getRewardPointFromErp($this->helper->getRewardPointFunction(),
-                    $this->helper->getSoapActionGetRewardPoint(), $dataToGetRewardPoint);
+            if ($customer->getCustomAttribute('ms_dynamic_customer_number')) {
+                $erpCustomerNumber = $customer->getCustomAttribute('ms_dynamic_customer_number')->getValue();
+                if ($erpCustomerNumber) {
+                    $dataToGetRewardPoint = [
+                        "customer_no" => $erpCustomerNumber
+                    ];
 
-                if (isset($getRewardPoint['curlStatus']) == '200') {
+                    $dataToGetRewardPoint = $this->helper->convertArrayToXml($dataToGetRewardPoint);
+                    $getRewardPoint = $this->erpReward->getRewardPointFromErp($this->helper->getRewardPointFunction(),
+                        $this->helper->getSoapActionGetRewardPoint(), $dataToGetRewardPoint);
 
-                    if($getRewardPoint['response']['PointBalance'] !== $magentoRewardPointBalance) {
-                        $this->erpReward->getRewardModel()
-                            ->setCustomerId($customerId)
-                            ->setWebsiteId($this->storeManager->getStore($storeId)->getWebsiteId())
-                            ->setPointsDelta($getRewardPoint['response']['PointBalance'])
-                            ->setAction(\Kemana\MsDynamics\Model\Reward::REWARD_ACTION_FOR_ERP)
-                            ->setActionEntity($customer)
-                            ->updateRewardPoints();
-                        $this->helper->log('REWARD POINT : Customer ERP Number ' . $erpCustomerNumber . ' Updated points from ERP. Magento ID ' . $customerId, 'info');
+                    if (isset($getRewardPoint['curlStatus']) == '200') {
+
+                        if($getRewardPoint['response']['PointBalance'] !== $magentoRewardPointBalance) {
+                            $this->erpReward->getRewardModel()
+                                ->setCustomerId($customerId)
+                                ->setWebsiteId($this->storeManager->getStore($storeId)->getWebsiteId())
+                                ->setPointsDelta($getRewardPoint['response']['PointBalance'])
+                                ->setAction(\Kemana\MsDynamics\Model\Reward::REWARD_ACTION_FOR_ERP)
+                                ->setActionEntity($customer)
+                                ->updateRewardPoints();
+                            $this->helper->log('REWARD POINT : Customer ERP Number ' . $erpCustomerNumber . ' Updated points from ERP. Magento ID ' . $customerId, 'info');
+                        }
+                        
+                        $this->helper->log('REWARD POINT : End Get Reward Point From ERP', 'info');
                     }
-                    
-                    $this->helper->log('REWARD POINT : End Get Reward Point From ERP', 'info');
                 }
             }
         }
