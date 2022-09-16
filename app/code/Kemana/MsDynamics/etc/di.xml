@@ -56,4 +56,21 @@
         </arguments>
     </type>
     <preference for="Magento\Reward\Model\Reward" type="Kemana\MsDynamics\Model\Reward" />
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="msdynamic_logs_listing_data_source" xsi:type="string">
+                    Kemana\MsDynamics\Model\ResourceModel\ApiTransportLog\Grid\Collection
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Kemana\MsDynamics\Model\ResourceModel\ApiTransportLog\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">api_transport_log</argument>
+            <argument name="resourceModel" xsi:type="string">
+                Kemana\MsDynamics\Model\ResourceModel\ApiTransportLog
+            </argument>
+        </arguments>
+    </virtualType>
 </config>
