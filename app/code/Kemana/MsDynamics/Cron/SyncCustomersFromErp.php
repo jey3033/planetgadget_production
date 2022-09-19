@@ -186,6 +186,7 @@ class SyncCustomersFromErp
 
                 $websiteId = 1;
 
+                $erpCustomer['Name'] = str_replace(array("#", "'", ";", "/", "@"), ' ', $erpCustomer['Name']);
                 $nameArray = explode(" ", trim($erpCustomer['Name']), 2);
                 $lastName = (isset($nameArray[1]) && $nameArray[1] != "") ? $nameArray[1] : $nameArray[0];
 
