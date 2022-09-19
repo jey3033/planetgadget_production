@@ -88,11 +88,13 @@ class Inventory
 
         $this->helper->inventorylog("Response: ".json_encode($response), 'info');
         
-        if($response['response'] && isset($response['response']['ProductNo'])){
+        if(isset($response['response']) && isset($response['response']['ProductNo'])){
             $this->updateStock($response['response']['ProductNo'],$response['response']['Inventory']);
-        }elseif($response['response']){
+        }elseif(isset($response['response']) && is_array($response['response'])){
             foreach ($response['response'] as $key => $product) {
-                $this->updateStock($product['ProductNo'],$product['Inventory']);
+                if(isset($product['ProductNo']) && isset($product['Inventory'])){
+                    $this->updateStock($product['ProductNo'],$product['Inventory']);
+                }
             }
         }else{
             $this->helper->inventorylog('0 Product stock update');
