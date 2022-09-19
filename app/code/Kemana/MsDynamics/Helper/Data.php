@@ -39,7 +39,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     /**
      * @var \Magento\Customer\Api\CustomerRepositoryInterface
      */
-    protected $customerRepository;    
+    protected $customerRepository;
 
     /**
      * @param \Magento\Framework\App\Helper\Context $context
@@ -57,7 +57,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         $this->logger = $logger;
         $this->inventoryLogger = $inventoryLogger;
         $this->customerRepository = $customerRepository;
-        $this->storeScope = \Magento\Store\Model\ScopeInterface::SCOPE_STORE;        
+        $this->storeScope = \Magento\Store\Model\ScopeInterface::SCOPE_STORE;
 
         parent::__construct($context);
     }
@@ -125,6 +125,14 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      * @return mixed
      */
     public function isApiMode()
+    {
+        return $this->scopeConfig->getValue(ConfigProvider::XML_PATH_API_MODE, $this->storeScope);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function isLiveApi()
     {
         return $this->scopeConfig->getValue(ConfigProvider::XML_PATH_API_MODE, $this->storeScope);
     }
