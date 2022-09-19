@@ -132,13 +132,17 @@ class SyncCustomersFromErp
         $ackCustomerData = [];
         $newCustomerId = 0;
 
-        $i = 0;
+        if (!$this->helper->isLiveApi()) {
+            $i = 0;
+        }
+
         foreach ($getCustomersFromErp['response'] as $erpCustomer) {
-            // TODO Remove this
-            if ($i > 5) {
-                break;
+
+            if (!$this->helper->isLiveApi()) {
+                if ($i > 5) {
+                    break;
+                }
             }
-            // TODO END
 
             if ((!isset($erpCustomer['CustomerNo']) || !$erpCustomer['CustomerNo'])
                 || (!isset($erpCustomer['Email']) || !$erpCustomer['Email'])
@@ -253,9 +257,9 @@ class SyncCustomersFromErp
             } catch (\Exception $e) {
                 $this->helper->log('CUSTOMER : Exception : Customer number ' . $erpCustomer['CustomerNo'] . ' failed to register in Magento. Error : ' . $e->getMessage(), 'error');
             }
-            // TODO Remove this
-            $i++;
-            // TODO END
+            if (!$this->helper->isLiveApi()) {
+                $i++;
+            }
         }
 
         if (empty($ackCustomerData)) {
