@@ -120,7 +120,7 @@
 
                     .lib-icon-font(
                         @icon-pg-language,
-                        @_icon-font-color: @color-white,
+                        @_icon-font-color: @header-top-font_color,
                         @_icon-font-size: 16px,
                         @_icon-font-margin: 0 5px 0 0
                     );
@@ -142,7 +142,6 @@
 
                         a {
                             display: inline-block;
-
                             .lib-font-size(10);
                             .lib-line-height(10);
                             padding: 0 5px;
@@ -155,7 +154,7 @@
 
 
                             a {
-                                border-left: 1px solid #AEB4C1;
+                                border-left: 1px solid @header-top-font_color;
                             }
                         }
                     }
@@ -863,10 +862,9 @@
             .language-currency-block {
                 .language {
                     li {
-                        .lib-css(color, @color-white);
-
                         a {
-                            .lib-css(color, @color-white);
+                            .lib-css(color, @header-top-font_color);
+                            font-weight: @font-weight__semibold;
                         }
                     }
                 }
@@ -1074,7 +1072,7 @@
                                             /* Handle */
                                             &::-webkit-scrollbar-thumb {
                                                 background: @color-pg-light-gray4;
-                                                border-radius: 5px;
+                                                border-radius: @common-border-radius;
                                                 width: 5px;
                                                 margin: 0 6px;
                                             }
