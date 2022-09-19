@@ -13,8 +13,10 @@ require([
                 {
                     if($(this).parent().hasClass('active')){
                         $('.summary-totals').show()
+                        $('.opc-block-shipping-information').show()
                     }else{  
                         $('.summary-totals').hide()
+                        $('.opc-block-shipping-information').hide()
                     }
                 }
             })
