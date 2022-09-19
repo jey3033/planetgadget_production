@@ -99,7 +99,7 @@
 
             h2 {
                 .lib-css(color, @color-white);
-                margin-bottom: 10px;
+                margin-bottom: 0;
             }
 
             p {
@@ -137,6 +137,7 @@
                 width: 100%;
                 margin-bottom: 20px;
                 .lib-font-size(14);
+                .lib-line-height(24);
                 font-weight: @font-weight__bold;
             }
 
@@ -144,7 +145,7 @@
                 float: left;
                 .lib-css(color, @color-white);
                 width: 100%;
-                margin-bottom: 20px;
+                margin-bottom: 16px;
 
                 .hours {
                     .lib-css(color, @color-pg-light-gray);
@@ -159,8 +160,8 @@
                     .lib-icon-font(
                         @icon-pg-email,
                         @_icon-font-color: @kemana-secondary-brand-color,
-                        @_icon-font-size: 30px,
-                        @_icon-font-line-height: 30px,
+                        @_icon-font-size: 24px,
+                        @_icon-font-line-height: 24px,
                         @_icon-font-margin: 0 10px 0 0);
 
                     &:hover {
@@ -177,8 +178,8 @@
                     .lib-icon-font(
                         @icon-pg-phone,
                         @_icon-font-color: @kemana-secondary-brand-color,
-                        @_icon-font-size: 30px,
-                        @_icon-font-line-height: 30px,
+                        @_icon-font-size: 24px,
+                        @_icon-font-line-height: 24px,
                         @_icon-font-margin: 0 10px 0 0);
 
                     &:hover {
@@ -193,8 +194,8 @@
                     .lib-icon-font(
                         @icon-pg-livechat,
                         @_icon-font-color: @kemana-secondary-brand-color,
-                        @_icon-font-size: 30px,
-                        @_icon-font-line-height: 30px,
+                        @_icon-font-size: 24px,
+                        @_icon-font-line-height: 24px,
                         @_icon-font-margin: 0 10px 0 0);
 
                     &:hover {
@@ -210,9 +211,12 @@
                     .lib-vendor-prefix-display();
 
                     li {
+                        height: 30px;
+                        width: 40px;
 
                         a {
                             padding-right: 10px;
+                            font-size: 0;
 
                             &:before {
                                 height: 30px;
@@ -635,7 +639,7 @@
 
             .logo {
                 width: 200px;
-                margin-bottom: 30px;
+                margin-bottom: 26px;
 
                 img {
                     margin: 0;

@@ -38,7 +38,7 @@
     }
 
     .order-links {
-        border-radius: 5px;
+        border-radius: @common-border-radius;
         .lib-css(border, 1px solid @color-pg-light-gray);
 
         .item {
@@ -178,7 +178,7 @@
     .order-actions-toolbar {
         .actions {
             .order {
-                border-radius: 5px;
+                border-radius: @common-border-radius;
             }
 
             .return {
@@ -195,7 +195,7 @@
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
     .order-links {
         .item {
-            border-radius: 5px;
+            border-radius: @common-border-radius;
 
             a,
             strong {
@@ -204,7 +204,7 @@
     }
 
     .order-details-items {
-        border-radius: 5px;
+        border-radius: @common-border-radius;
         padding: 20px 10px;
         margin-bottom: 20px;
     }

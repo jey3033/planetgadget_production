@@ -55,7 +55,7 @@
             .lib-vendor-prefix-flex-direction(column);
             .lib-css(background-color, @color-white);
             height: 100%;
-            border-radius: 5px;
+            border-radius: @common-border-radius;
 
             .post-info-wrapper {
                 float: left;
@@ -88,7 +88,7 @@
                 .post-item-wrapper {
                     float: left;
                     .lib-css(background, @panel__background-color);
-                    border-radius: 5px;
+                    border-radius: @common-border-radius;
 
                     .post-image {
 
@@ -246,7 +246,7 @@
                                                     img {
                                                         width: 70px;
                                                         height: 42px;
-                                                        border-radius: 5px;
+                                                        border-radius: @common-border-radius;
                                                     }
                                                 }
 
@@ -277,7 +277,7 @@
             }
 
             &.mpcss {
-                border-radius: 5px;
+                border-radius: @common-border-radius;
                 background: @panel__background-color;
                 padding: 30px;
                 margin-bottom: 20px;
@@ -326,7 +326,7 @@
                             padding: 5px 10px;
                             height: 33px;
                             .lib-line-height(21);
-                            border-radius: 5px;
+                            border-radius: @common-border-radius;
                             margin: 5px;
 
                             &:hover {
@@ -347,7 +347,7 @@
 
         .post-view {
             background: @panel__background-color;
-            border-radius: 5px;
+            border-radius: @common-border-radius;
             padding: 30px;
 
             .post-list-content {
@@ -380,14 +380,14 @@
         .mp-blog-share {
             margin-top: 20px;
             background: @panel__background-color;
-            border-radius: 5px;
+            border-radius: @common-border-radius;
             padding: 30px;
         }
 
         .block-blog-related {
             margin-top: 20px;
             background: @panel__background-color;
-            border-radius: 5px;
+            border-radius: @common-border-radius;
             padding: 30px;
         }
     }

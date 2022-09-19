@@ -54,7 +54,7 @@
 
         .items-in-cart {
             border: 1px solid #AEB4C1;
-            border-radius: 5px;
+            border-radius: @common-border-radius;
 
             &.active{
                 .title span.title:after{
@@ -72,11 +72,11 @@
                     margin-bottom: 0 !important;
                 }
 
-                padding: 10px;  
+                padding: 10px;
                 text-align: center;
                 cursor: pointer;
                 margin-bottom: 0px;
-                
+
                 strong {
                     font-size: 12px !important;
                     .lib-css(font-weight, @sub-heading__font-weight);
