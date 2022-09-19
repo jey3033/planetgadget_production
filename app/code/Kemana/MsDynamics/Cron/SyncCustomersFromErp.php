@@ -186,7 +186,7 @@ class SyncCustomersFromErp
 
                 $websiteId = 1;
 
-                $nameArray = explode(" ", $erpCustomer['Name'], 2);
+                $nameArray = explode(" ", trim($erpCustomer['Name']), 2);
                 $lastName = (isset($nameArray[1]) && $nameArray[1] != "") ? $nameArray[1] : $nameArray[0];
 
                 // Preparing data for new customer
