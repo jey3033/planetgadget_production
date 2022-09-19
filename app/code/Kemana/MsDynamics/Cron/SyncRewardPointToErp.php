@@ -29,9 +29,9 @@ class SyncRewardPointToErp
     protected $helper;
 
     /**
-     * @var \Kemana\MsDynamics\Model\Api\Erp\Customer
+     * @var \Kemana\MsDynamics\Model\Api\Erp\Reward
      */
-    protected $erpCustomer;
+    protected $erpReward;
 
     /**
      * @var \Kemana\MsDynamics\Model\Customer
@@ -45,19 +45,19 @@ class SyncRewardPointToErp
 
     /**
      * @param \Kemana\MsDynamics\Helper\Data $helper
-     * @param \Kemana\MsDynamics\Model\Api\Erp\Customer $erpCustomer
+     * @param \Kemana\MsDynamics\Model\Api\Erp\Reward $erpReward
      * @param \Kemana\MsDynamics\Model\Customer $customer
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      */
     public function __construct(
         \Kemana\MsDynamics\Helper\Data $helper,
-        \Kemana\MsDynamics\Model\Api\Erp\Customer $erpCustomer,
+        \Kemana\MsDynamics\Model\Api\Erp\Reward $erpReward,
         \Kemana\MsDynamics\Model\Customer $customer,
         \Magento\Store\Model\StoreManagerInterface $storeManager
     )
     {
         $this->helper = $helper;
-        $this->erpCustomer = $erpCustomer;
+        $this->erpReward = $erpReward;
         $this->customer = $customer;
         $this->storeManager = $storeManager;
     }
@@ -67,24 +67,34 @@ class SyncRewardPointToErp
      * @throws InputException
      * @throws LocalizedException
      */
-    public function syncRewardPointFromMagentoToErp()
+    public function syncRewardPointFromMagentoToErp($customerId = null)
     {   
         if (!$this->helper->isEnable()) {
             return;                                             
-        }                                               
+        }                                   
+        $this->helper->log('REWARD POINT : Cron Start to Sync Reward Point To ERP', 'info');
 
-        $this->helper->log('-- Cron Start to Sync Reward Point To ERP --.', 'info');
+        $syncCustomers = $this->customer->getSyncCustomersList($customerId);
 
-        $syncCustomers = $this->customer->getSyncCustomersList();
+        if ($customerId) {
+            $tmpSyncCustomers = $syncCustomers;
+            $syncCustomers = null;
+            $syncCustomers[] = $tmpSyncCustomers;
+        }
+
         foreach($syncCustomers as $customer) {
             $customerId = $customer->getId();
-            $erpCustomerNumber = $customer->getCustomAttribute('ms_dynamic_customer_number')->getValue();
-            $storeId = $this->storeManager->getStore()->getId();
+            if ($customer->getCustomAttribute('ms_dynamic_customer_number')) {
+                $erpCustomerNumber = $customer->getCustomAttribute('ms_dynamic_customer_number')->getValue();
+                $storeId = $this->storeManager->getStore()->getId();
 
-            $reward = $this->helper->getRewardModel()->getCollection()->addFieldToFilter('customer_id', ['eq' => $customerId])->getFirstItem();
-            $magentoRewardPointBalance = (int)$reward->getPointsBalance();
-            $this->helper->addCustomerEarnPointToErp($customerId, $erpCustomerNumber, $this->erpCustomer, $magentoRewardPointBalance);
+                $reward = $this->erpReward->getRewardModel()->getCollection()->addFieldToFilter('customer_id', ['eq' => $customerId])->getFirstItem();
+                $magentoRewardPointBalance = (int)$reward->getPointsBalance();
+                if($magentoRewardPointBalance) {
+                    $this->erpReward->addCustomerEarnPointToErp($customerId, $erpCustomerNumber, $magentoRewardPointBalance);
+                }
+            }
         }
-        $this->helper->log('-- Cron End to Sync Reward Point To ERP --', 'info');
+        $this->helper->log('REWARD POINT : Cron End to Sync Reward Point To ERP', 'info');
     }
 }

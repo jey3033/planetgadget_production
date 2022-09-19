@@ -39,38 +39,25 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     /**
      * @var \Magento\Customer\Api\CustomerRepositoryInterface
      */
-    protected $customerRepository;
-
-    /**
-     * @var \Magento\Reward\Model\RewardFactory
-     */
-    protected $rewardFactory;
-
-    /**
-     * @var \Magento\Framework\Stdlib\DateTime\DateTime
-     */
-    protected $dateTime;
+    protected $customerRepository;    
 
     /**
      * @param \Magento\Framework\App\Helper\Context $context
      * @param \Kemana\MsDynamics\Logger\Logger $logger
+     * @param \Kemana\MsDynamics\Logger\InventoryLogger $InventoryLogger
      * @param \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository
-     * @param \Magento\Reward\Model\RewardFactory $rewardFactory
-     * @param \Magento\Framework\Stdlib\DateTime\DateTime $dateTime
      */
     public function __construct(
         \Magento\Framework\App\Helper\Context             $context,
         \Kemana\MsDynamics\Logger\Logger                  $logger,
-        \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository,
-        \Magento\Reward\Model\RewardFactory               $rewardFactory,
-        \Magento\Framework\Stdlib\DateTime\DateTime       $dateTime
+        \Kemana\MsDynamics\Logger\InventoryLogger         $inventoryLogger,
+        \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository
     )
     {
         $this->logger = $logger;
+        $this->inventoryLogger = $inventoryLogger;
         $this->customerRepository = $customerRepository;
-        $this->storeScope = \Magento\Store\Model\ScopeInterface::SCOPE_STORE;
-        $this->rewardFactory = $rewardFactory;
-        $this->dateTime = $dateTime;
+        $this->storeScope = \Magento\Store\Model\ScopeInterface::SCOPE_STORE;        
 
         parent::__construct($context);
     }
@@ -102,6 +89,29 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         }
     }
 
+    /**
+     * @param $message
+     * @param string $type
+     * @param $code
+     * @return void
+     */
+    public function inventorylog($message, string $type = 'info')
+    {
+        if (!$this->isEnableLog()) {
+            return;
+        }
+
+        $message = 'MsDynamicErp : ' . $message;
+
+        if ($type == 'info') {
+            $this->inventoryLogger->info($message);
+        } elseif ($type == 'error') {
+            $this->inventoryLogger->error($message);
+        } elseif ($type == 'notice') {
+            $this->inventoryLogger->notice($message);
+        }
+    }
+
 
     /**
      * @return mixed
@@ -109,6 +119,14 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public function isEnable()
     {
         return $this->scopeConfig->getValue(ConfigProvider::XML_PATH_IS_ENABLE, $this->storeScope);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function isApiMode()
+    {
+        return $this->scopeConfig->getValue(ConfigProvider::XML_PATH_API_MODE, $this->storeScope);
     }
 
     /**
@@ -483,7 +501,6 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public function convertArrayToXml($pureArray): string
     {
         $xmlOutput = '';
-
         foreach ($pureArray as $nodeName => $nodeValue) {
             if (!$nodeValue) {
                 $xmlOutput .= '<' . $nodeName . '/>';
@@ -494,6 +511,24 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         }
 
         return $xmlOutput;
+    }
+
+    /**
+     * @param $apiFunction
+     * @param $postParameters
+     * @return string
+     */
+    public function getXmlRequestBodyToGetUnSyncInventorysFromApi($apiFunction, $soapAction, $postParameters): string
+    {
+        return '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+                <Body>
+                        <' . $soapAction . ' xmlns="' . $this->getApiXmnls() . "/" . $apiFunction . '">
+                            <filter>
+                                ' . $postParameters . '
+                            </filter>
+                        </' . $soapAction . '>
+                </Body>
+        </Envelope>';
     }
 
     /**
@@ -659,72 +694,19 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     }
 
     /**
-     * @param $customerId
-     * @param $customerNumber
-     * @param \Kemana\MsDynamics\Model\Api\Erp\Customer $customer
-     * @param $pointsDelta
-     * @return bool
+     * @return mixed
      */
-    public function addCustomerEarnPointToErp($customerId, $customerNumber, $customer, $pointsDelta = 0): bool
+    public function getFunctionInventoryStock()
     {
-        $this->log('Start Earn point Event - ' . $customerId );
-        try {
-            $reward = $this->getRewardModel()->getCollection()->addFieldToFilter('customer_id', ['eq' => $customerId])->getFirstItem();
-            if($pointsDelta > 0) {
-                $magentoRewardPointBalance = $pointsDelta;
-            } else {
-                $magentoRewardPointBalance = $reward->getPointsBalance();
-            }
-
-            $dataToErp = [
-                "DocumentNo" => $this->getTimeStamp().'-'.$customerId,
-                "CustomerNo" => $customerNumber,
-                "Description" => 'Earn point',
-                "Points" => $magentoRewardPointBalance
-            ];
-
-            $dataToErp = $this->convertArrayToXml($dataToErp);
-
-            $earnPointToErp = $customer->earnRewardPointToErp($this->earnRewardPointFunction(),
-            $this->getSoapActionEarnRewardPoint(), $dataToErp);
-
-            if (empty($earnPointToErp)) {
-                $this->helper->log('ERP system might be off line', 'error');
-                return false;
-            }
-
-            if ($earnPointToErp['curlStatus'] == 200 && isset($earnPointToErp['response']['CustomerNo'])) {
-                $this->log('Successfully added Earn Point To ERP for customer ' . $customerId, 'info');
-            }
-
-            return true;
-        } catch (\Exception $e) {
-            $this->log('Failed to sent Earn point to Erp for Customer ' . $customerId . ' Error :' . $e->getMessage(), 'info');
-        }
-
-        return false;
+        return ConfigProvider::GET_PRODUCT_INVENTORY_STOCK_ERP;
     }
 
     /**
-     * Get reward model
-     *
-     * @return \Magento\Reward\Model\Reward
+     * @return mixed
      */
-    public function getRewardModel()
+    public function getSoapActionGetInventoryStock()
     {
-        return $this->rewardFactory->create();
-    }
-
-    /**
-     * Get Current date Timestamp
-     *
-     * @return string
-     */
-    public function getTimeStamp()
-    {
-        $dateToTimestamp = $this->dateTime->gmtDate();
-        $timeStamp = $this->dateTime->gmtTimestamp($dateToTimestamp);
-        return $timeStamp;
+        return ConfigProvider::GET_PRODUCT_INVENTORY_STOCK_SOAP_ACTION;
     }
 
     /**

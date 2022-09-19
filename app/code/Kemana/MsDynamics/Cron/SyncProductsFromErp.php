@@ -127,9 +127,13 @@ class SyncProductsFromErp
         $this->state->setAreaCode(\Magento\Framework\App\Area::AREA_ADMINHTML);
         $ackProductData = [];
 
+        $count = 0;
         foreach ($getProductsFromErp['response'] as $key => $productdata) {
-            
-            if(isset($productdata['ProductNo']) && $productdata['ProductNo'] && $productdata['ProductNo'] == '100BB013'){
+            if($count > 5 && $this->helper->isApiMode() == 0){
+                break;
+            }
+            $count ++;
+            if(isset($productdata['ProductNo']) && $productdata['ProductNo']){
                 try {
                     $this->helper->log('Started to create the product in Magento for ERP Product : ' . $productdata['ProductNo'], 'info');
 

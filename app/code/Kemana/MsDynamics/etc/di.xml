@@ -28,6 +28,19 @@
             </argument>
         </arguments>
     </type>
+    <type name="Kemana\MsDynamics\Logger\InventoryHandler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <type name="Kemana\MsDynamics\Logger\InventoryLogger">
+        <arguments>
+            <argument name="name" xsi:type="string">InventoryLogger</argument>
+            <argument name="handlers"  xsi:type="array">
+                <item name="system" xsi:type="object">Kemana\MsDynamics\Logger\InventoryHandler</item>
+            </argument>
+        </arguments>
+    </type>
     <type name="Magento\Framework\Console\CommandListInterface">
         <arguments>
             <argument name="commands" xsi:type="array">
@@ -56,4 +69,21 @@
         </arguments>
     </type>
     <preference for="Magento\Reward\Model\Reward" type="Kemana\MsDynamics\Model\Reward" />
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="msdynamic_logs_listing_data_source" xsi:type="string">
+                    Kemana\MsDynamics\Model\ResourceModel\ApiTransportLog\Grid\Collection
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Kemana\MsDynamics\Model\ResourceModel\ApiTransportLog\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">api_transport_log</argument>
+            <argument name="resourceModel" xsi:type="string">
+                Kemana\MsDynamics\Model\ResourceModel\ApiTransportLog
+            </argument>
+        </arguments>
+    </virtualType>
 </config>

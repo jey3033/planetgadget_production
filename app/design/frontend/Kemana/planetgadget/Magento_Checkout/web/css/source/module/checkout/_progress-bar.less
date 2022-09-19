@@ -110,7 +110,6 @@
         }
 
         > span {
-            font: normal normal 600 10px/13px Spartan;
             display: inline-block;
             padding-top: 45px;
             width: 100%;
@@ -119,11 +118,7 @@
             text-transform: uppercase;
             .lib-typography(
                 @_color: @checkout-progress-bar-item__color,
-                @_font-family: false,
-                @_font-size: @checkout-progress-bar__font-size,
-                @_font-style: false,
-                @_font-weight: @checkout-progress-bar__font-weight,
-                @_line-height: false
+                @_font-family: false
             );
 
             &:after { // Item element inner
@@ -250,6 +245,8 @@
         top: 33px;
         span {
             font-size: 8px;
+            font-weight: 600;
+            margin-right: 15px;
         }
         &:first-child {
             &:before {
@@ -300,7 +297,7 @@
     .opc-progress-bar {
         position: fixed;
         right: 0;
-        top: 32px;
+        top: 0;
         z-index: 3;
     }
 
@@ -308,6 +305,8 @@
         .lib-css(width, @checkout-progress-bar-item__width);
 
         > span {
+            font-size: 10px !important;
+            font-weight: 600 !important;
             .lib-css(color, @color-kemana-gray2);
         }
 

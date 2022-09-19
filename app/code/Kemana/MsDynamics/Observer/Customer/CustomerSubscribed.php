@@ -37,9 +37,9 @@ class CustomerSubscribed implements ObserverInterface
     protected $helper;
 
     /**
-     * @var \Kemana\MsDynamics\Model\Api\Erp\Customer
+     * @var \Kemana\MsDynamics\Model\Api\Erp\Reward
      */
-    protected $erpCustomer;
+    protected $erpReward;
 
     /**
      * @var \Magento\Framework\App\Config\ScopeConfigInterface
@@ -55,7 +55,7 @@ class CustomerSubscribed implements ObserverInterface
      * @param \Magento\Reward\Helper\Data $rewardData
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      * @param \Kemana\MsDynamics\Helper\Data $helper
-     * @param \Kemana\MsDynamics\Model\Api\Erp\Customer $erpCustomer
+     * @param \Kemana\MsDynamics\Model\Api\Erp\Reward $erpReward
      * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
      * @param \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository
      */
@@ -63,14 +63,14 @@ class CustomerSubscribed implements ObserverInterface
         \Magento\Reward\Helper\Data $rewardData,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Kemana\MsDynamics\Helper\Data $helper,
-        \Kemana\MsDynamics\Model\Api\Erp\Customer $erpCustomer,
+        \Kemana\MsDynamics\Model\Api\Erp\Reward $erpReward,
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
         \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository
     ) {
         $this->rewardData = $rewardData;
         $this->storeManager = $storeManager;
         $this->helper = $helper;
-        $this->erpCustomer = $erpCustomer;
+        $this->erpReward = $erpReward;
         $this->scopeConfig = $scopeConfig;
         $this->customerRepository = $customerRepository;
     }
@@ -103,11 +103,12 @@ class CustomerSubscribed implements ObserverInterface
             'magento_reward/points/newsletter',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
         );
-        if ($point) {
-            $customer = $this->customerRepository->getById($subscriber->getCustomerId());
+
+        $customer = $this->customerRepository->getById($subscriber->getCustomerId());
+        if ($point && $customer->getCustomAttribute('ms_dynamic_customer_number')) {            
             $erpCustomerNumber = $customer->getCustomAttribute('ms_dynamic_customer_number')->getValue();
             if ($erpCustomerNumber) {
-                $this->helper->addCustomerEarnPointToErp($subscriber->getCustomerId(), $erpCustomerNumber, $this->erpCustomer, $point);
+                $this->erpReward->addCustomerEarnPointToErp($subscriber->getCustomerId(), $erpCustomerNumber, $point);
             }
         }
         return $this;

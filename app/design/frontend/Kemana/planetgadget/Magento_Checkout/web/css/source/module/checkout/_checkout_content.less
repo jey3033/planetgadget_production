@@ -16,6 +16,12 @@
 //  _____________________________________________
 & when (@media-common =true) {
     .checkout-index-index {
+        .authentication-wrapper{
+            display: none;
+        }
+        .header-top-wrapper{
+            display: none;
+        }
         .checkout-container {
             margin-top: 25px;
         }
@@ -52,12 +58,8 @@
                 width: 100% !important;
 
                 .checkout-social-login {
-                    .facebook-login {
-                        max-width: unset !important;
-                        height: 40px;
-                    }
-
-                    .google-login {
+                    .social-btn {
+                        margin-bottom: 0 !important;
                         max-width: unset !important;
                         height: 40px;
                     }
@@ -83,6 +85,12 @@
                     border-bottom: 0;
                     border: 1px solid @color-pg-light-gray2;
                     border-top: 0;
+
+                    .sub-title{
+                        span{
+                            color: @primary__color__dark;
+                        }
+                    }
                 }
             }
             .form-shipping-address {
@@ -280,6 +288,36 @@
                             }
                         }
                     }
+                   
+                    .form-login{
+                        padding-top: 20px;
+
+                        span.note{
+                            font-weight: 600;
+                            color: @primary__color__dark;
+                            width: max-content;
+                        }
+
+                        .actions-toolbar {
+                            margin-bottom: 20px;
+
+                            .action.primary{
+                                background-color: @color-oragne-bd;
+                                border: 1px solid @color-oragne-bd;
+                                color: @primary__color__dark;
+
+                                &:hover {
+                                    background-color: @color-pg-orange;
+                                    border: 1px solid @color-pg-orange;
+                                    color: @primary__color__dark;
+                                }
+                            }
+
+                            .secondary {
+                                display: none !important;
+                            }
+                        }
+                    }
                 }
 
                 .checkout-shipping-method {
@@ -322,6 +360,24 @@
                 .shipping-address-phone{
                     display: flex;
                 }
+            }
+
+            #store-selector {
+                .step-head-title{
+                    span{
+                        text-align: left;
+                        font-size: 20px;
+                        font-weight: bold;
+                    }
+                }
+                
+                .form-login {
+                    .actions-toolbar {
+                        .secondary {
+                            display: none !important;
+                        }
+                    }
+                }
             }            
         }
     }
@@ -344,9 +400,6 @@
             #checkout-step-store-selector{
                 display: contents;
 
-                .no-selected-location{
-                    margin: 20px 20px;
-                }
                 .actions-toolbar{
                     display: grid;
 
@@ -384,7 +437,9 @@
                     }
                 }               
             }
+            
             .step-title{
+                display: none;
                 padding: 20px 20px;
             }
 
@@ -421,6 +476,16 @@
                         }
                     }
                 }
+
+                span.note{
+                    font-weight: 600;
+                    color: @primary__color__dark;
+                    width: max-content;
+                }
+
+                .actions-toolbar{
+                    margin-bottom: 20px;
+                }
             }           
         }
         .selected-store-pickup {
@@ -435,6 +500,14 @@
             }
         }
 
+    }
+
+    .opc-summary-wrapper{
+        .block.summary-totals{
+            tr.totals.shipping.excl td span {
+                color: @color-pg-dark-gray;
+            }
+        }
     }
 }
 
@@ -494,6 +567,14 @@
                 span.note.fieldseperate {
                     width: 100% !important;
                 }
+            }
+            
+            .step-title{
+                padding: 10px 0 !important;
+            }
+
+            .form-login{
+                border-bottom: unset !important;
             }
         }
 
@@ -582,14 +663,26 @@
                     }
                 }
                 .selected-location-details{
-                    margin-left: 10px !important;
+                    margin-left: 5px !important;
                 }               
+            }
+            .step-head-title{
+                padding: 20px 0;
+                margin-bottom: -30px;
+            }
+            .no-selected-location{
+                margin: 20px 0;
             }
             .step-title{
                 padding: 30px 10px !important;
             }
             .checkout-social-container{
                 margin-top: 0 !important;
+            }
+        }
+        .step-content{
+            .primary{
+                margin-bottom: 30px;
             }
         }
     }      
@@ -602,7 +695,7 @@
     .opc-wrapper{
         #store-selector{
             width: 640px;
-            height: 537px;
+            height: 100%;
 
             #checkout-step-store-selector {
                 .actions-toolbar{
@@ -621,7 +714,14 @@
                         width: 325px;
                     }
                 }
-            }                       
+            }
+            .step-head-title{
+                padding: 20px 20px;
+                margin-bottom: -30px;
+            }
+            .no-selected-location{
+                margin: 20px 20px;
+            }         
         }
         .selected-store-pickup {
             .step-content {
@@ -630,6 +730,7 @@
                         >.primary {
                             width: 342px;
                             margin-left: 19px;
+                            margin-bottom: 30px;
 
                             button{
                                 width:342px;
@@ -652,5 +753,12 @@
                 margin-right: unset !important;
             }
         }       
-    }  
+    }
+    .opc-summary-wrapper{
+        .opc-block-summary{
+            .block.items-in-cart{
+                margin-top: -20px;
+            }
+        }
+    }
 }

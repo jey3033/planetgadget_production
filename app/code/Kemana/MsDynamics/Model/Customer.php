@@ -67,8 +67,12 @@ class Customer
      * @return \Magento\Customer\Api\Data\CustomerInterface[]
      * @throws \Magento\Framework\Exception\LocalizedException
      */
-    public function getSyncCustomersList()
-    {
+    public function getSyncCustomersList($customerId = null)
+    {   
+        if ($customerId) {
+            return $this->customerRepository->getById($customerId);
+        }
+        
         $filterErpCustomerNumber = $this->filterBuilder
             ->setField('ms_dynamic_customer_number')
             ->setConditionType('notnull')
