@@ -20,4 +20,7 @@
         <!-- set custom template if not magento_giftregistry_index_items page-->
         <plugin name="cart_item_default_modify" type="Kemana\Checkout\Plugin\Magento\Checkout\Block\Cart\AbstractCart" sortOrder="1" />
     </type>
+    <type name="Magento\Checkout\Block\Checkout\AttributeMerger">
+          <plugin name="add_placeholderto_checkout" type="Kemana\Checkout\Plugin\Magento\Checkout\Block\Checkout\AttributeMerger" sortOrder="10"/>
+     </type>
 </config>
