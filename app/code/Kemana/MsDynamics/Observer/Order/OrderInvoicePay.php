@@ -105,7 +105,7 @@ class OrderInvoicePay implements \Magento\Framework\Event\ObserverInterface
 
         $lineNo = 1;
         foreach ($orderItems as $lineItem) {
-            if ($lineItem->getProductType() != 'simple' || !floatval($lineItem->getRowTotalInclTax())) {
+            if (!$lineItem->getQtyOrdered() || !floatval($lineItem->getRowTotalInclTax())) {
                 $lineNo++;
                 continue;
             }
