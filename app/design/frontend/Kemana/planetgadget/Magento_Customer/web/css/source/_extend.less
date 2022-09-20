@@ -5,6 +5,7 @@
 //  */
 
 @import 'module/_register_extend.less';
+@import 'module/_logout.less';
 
 //
 //  Variables
@@ -54,9 +55,9 @@
             }
         }
 
-        > .legend {
-            display: none;
-        }
+        //> .legend {
+        //    display: none;
+        //}
     }
 
     .login-container {
@@ -206,6 +207,35 @@
             padding: 0;
         }
 
+        .table-wrapper {
+            thead {
+                th {
+                    background-color: transparent;
+                    color: @color-pg-dark-gray;
+                    padding: 10px 15px;
+
+                    &:first-child {
+                        padding-left: 0;
+                    }
+                }
+            }
+
+            tbody {
+                td {
+                    padding: 20px 15px 0 15px;
+                    color: @kemana-primary-brand-color;
+
+                    &:first-child {
+                        padding-left: 0;
+                    }
+
+                    .action {
+                        color: @kemana-primary-brand-color;
+                        font-weight: @font-weight__bold;
+                    }
+                }
+            }
+        }
     }
 
     .form-edit-account {
@@ -259,12 +289,144 @@
 
         .customer-login-wrapper {
             padding-inline: 10px;
-            margin-top: 10px;
+            margin-top: 30px;
         }
 
         .customer-create-wrapper {
             padding-inline: 10px;
             margin-top: 30px;
+        }
+    }
+
+    .account {
+        .page-main {
+            padding-inline: 0;
+        }
+
+        .column.main,
+        .sidebar-additional {
+            .lib-css(background, @panel__background-color);
+            margin-top: 80px;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 50px;
+        }
+
+        .column.main {
+            .block:not(.widget) {
+                .block-content {
+                    .box {
+                        margin-bottom: 36px;
+                    }
+                }
+            }
+        }
+
+        .sidebar-main {
+            position: relative;
+            padding-bottom: 20px;
+            margin-top: -96px;
+
+            .title {
+                margin-bottom: 0;
+            }
+
+            .block.block-collapsible-nav {
+                margin-bottom: 0 !important;
+
+                .block-collapsible-nav-content {
+                    .items {
+                        .lib-vendor-prefix-display();
+                        .lib-vendor-prefix-flex-direction(column);
+                        .lib-css(background, @panel__background-color);
+                        border: 1px solid @border-color__base;
+                        border-radius: 5px;
+
+                        li.nav {
+                            margin-bottom: 0;
+
+                            &:first-child {
+                                padding: 9px 15px 9px;
+                                display: inline-block;
+                                width: 100%;
+                                height: 38px;
+
+                                &:before {
+                                    content: 'Menu';
+                                    position: absolute;
+                                    left: 15px;
+                                    top: 12px;
+
+                                }
+
+                                .lib-icon-font(
+                                    @icon-pg-down,
+                                    @_icon-font-size: 10px,
+                                    @_icon-font-color: @kemana-primary-brand-color,
+                                    @_icon-font-position: after
+                                );
+
+                                &:after {
+                                    position: absolute;
+                                    right: 10px;
+                                }
+
+                                strong {
+                                    display: none;
+                                }
+                            }
+
+                            &.active {
+                                .lib-icon-font(
+                                    @icon-pg-up,
+                                    @_icon-font-size: 10px,
+                                    @_icon-font-color: @kemana-primary-brand-color,
+                                    @_icon-font-position: after
+                                );
+                            }
+
+                            &:last-child {
+                                padding-bottom: 10px;
+                            }
+
+                            a,
+                            strong {
+                                padding: 12px 15px 11px;
+                                display: inline-block;
+                                width: 100%;
+                            }
+
+                            &.current {
+                                strong {
+                                    border-left: 3px solid @kemana-secondary-brand-color;
+                                }
+                            }
+
+                            &.action {
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .page-title-wrapper {
+            padding-top: 30px;
+
+            br {
+                display: none;
+            }
+        }
+    }
+
+    .block-dashboard-addresses {
+        .block-title {
+            .action {
+                position: relative;
+                bottom: unset;
+                left: 5px;
+            }
         }
     }
 }
@@ -292,6 +454,12 @@
                 .primary {
                    margin-right: 0;
                 }
+            }
+        }
+
+        .fieldset {
+            > .field {
+                max-width: 100%;
             }
         }
     }
@@ -347,13 +515,24 @@
                                 }
 
                                 &.current {
-                                    strong {
+                                    a {
+                                        //display: block;
+                                        //padding: 15px 30px;
+                                        //.lib-font-size(14);
+                                        //.lib-line-height(16);
+                                        //width: 100%;
+                                        border-left: 3px solid @color-pg-yellow;
+                                    }
+
+                                    > strong {
                                         display: block;
-                                        padding: 13px 30px;
+                                        padding: 15px 30px;
                                         .lib-font-size(14);
+                                        .lib-line-height(16);
                                         width: 100%;
                                         border-left: 3px solid @color-pg-yellow;
                                     }
+
                                 }
                             }
                         }
@@ -374,11 +553,62 @@
                             &.block-dashboard-addresses {
                                 padding: 0;
                             }
+
+                            &.block-addresses-list {
+                                margin-bottom: 0;
+                            }
                         }
                     }
                 }
             }
         }
+
+        .column.main {
+            .block:not(.widget) {
+                &.block-dashboard-addresses,
+                &.block-dashboard-orders {
+                    padding: 0;
+                }
+
+                &.block-dashboard-orders {
+                    margin-bottom: 0!important;
+
+                    .block-title {
+                        border-bottom: none;
+                        padding-bottom: 0;
+                    }
+                }
+
+                &.block-order-details-view {
+                    margin-bottom: 0!important;
+                }
+            }
+        }
+
+        .form-address-edit {
+            .pinpoint {
+                margin-bottom: 30px;
+
+                button {
+                    .lib-button-white();
+                    .lib-icon-font(
+                        @icon-pg-pinpoint-not-set,
+                        @_icon-font-size: 14px,
+                        @_icon-font-margin: 0 10px 0 0);
+
+                    &:before {
+                        width: 14px;
+                    }
+                }
+            }
+        }
+
+        .table-wrapper {
+            thead {
+                .lib-css(border-bottom, @account-table-border);
+            }
+        }
+
     }
 }
 

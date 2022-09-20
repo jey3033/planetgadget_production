@@ -1,0 +1,271 @@
+// /**
+//  * Copyright © 2020 Kemana. All rights reserved.
+//  * @author Ashan Gunawardena <agunawardena@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+//
+//  Variables
+//  _____________________________________________
+
+@checkout-summary__background-color: @color-white;
+@checkout-summary__padding: 0 @indent__base @indent__base;
+
+@checkout-summary-title__margin: @indent__s;
+@checkout-summary-mark-value__color: @color-kemana-gray2;
+
+@checkout-summary-items__max-height: 370px;
+@checkout-summary-items__padding: 0;
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+
+    //
+    //  Order Summary
+    //  ---------------------------------------------
+
+    .opc-block-summary {
+        .lib-css(background, @checkout-summary__background-color);
+        .lib-css(padding, @checkout-summary__padding);
+        &:extend(.abs-add-box-sizing all);
+        margin: 0 0 @indent__base;
+
+        .summary-totals{
+            > .title {
+                border-bottom: @border-width__base solid @border-color__base;
+                .lib-css(padding, @indent__base 0);
+                .lib-css(font-family, @sub-heading__font-family);
+                .lib-css(font-weight, @sub-heading__font-weight);
+                .lib-font-size(@sub-heading__font-size);
+                .lib-line-height(@sub-heading__font-size + 2);
+                margin-bottom: @indent__base;
+                display: block;
+
+                strong {
+                    .lib-font-size(@sub-heading__font-size) !important;
+                    .lib-css(font-weight, @sub-heading__font-weight);
+
+                }
+            }
+        }
+
+        .items-in-cart {
+            border: 1px solid #AEB4C1;
+            border-radius: @common-border-radius;
+
+            &.active{
+                .title span.title:after{
+                    content: @icon-up-arrow !important;
+                }
+            }
+
+            > .title {
+                span.title:after {
+                    content: @icon-down-arrow;
+                    font-size: 7px;
+                    font-family: 'icons-kemana-theme';
+                    display: inline-block;
+                    padding: 0 10px;
+                    margin-bottom: 0 !important;
+                }
+
+                padding: 10px;
+                text-align: center;
+                cursor: pointer;
+                margin-bottom: 0px;
+
+                strong {
+                    font-size: 12px !important;
+                    .lib-css(font-weight, @sub-heading__font-weight);
+
+                }
+            }
+        }
+
+        .summary-totals {
+            padding-bottom: @indent__xs;
+            margin-bottom: @indent__base;
+        }
+
+        > .title {
+            &:extend(.abs-checkout-title all);
+            display: block;
+        }
+
+        //  Totals table
+        .table-totals {
+            &:extend(.abs-sidebar-totals all);
+
+            .grand {
+                .amount,
+                .mark {
+                    .lib-css(border-top-color, @color-kemana-gray1);
+                }
+            }
+        }
+
+        .mark {
+             .value {
+                .lib-css(color, @checkout-summary-mark-value__color);
+                display: block;
+            }
+        }
+
+        .discount.coupon {
+            display: none;
+        }
+
+        .grand.incl {
+            & + .grand.excl {
+                .mark,
+                .amount {
+                    border-top: 0;
+                    .lib-font-size(14);
+                    padding-top: 0;
+
+                    strong {
+                        font-weight: @font-weight__regular;
+                    }
+                }
+            }
+        }
+
+        .not-calculated {
+            font-style: italic;
+        }
+
+        //
+        //  Items list
+        //  ---------------------------------------------
+
+        //  Block title
+        .items-in-cart {
+            .product {
+                .lib-vendor-prefix-display();
+                .lib-vendor-prefix-flex-wrap();
+                position: relative;
+                vertical-align: top;
+
+                .item-options {
+                    &:extend(.abs-product-options-list all);
+                    &:extend(.abs-add-clearfix all);
+                }
+            }
+        }
+
+        //  Cart items
+        .minicart-items-wrapper {
+            .lib-css(margin, 0 -(@checkout-summary-items__padding) 0 0);
+            //.lib-css(max-height, @checkout-summary-items__max-height);
+            .lib-css(padding, @checkout-summary-items__padding @checkout-summary-items__padding 0 0);
+            border: 0;
+            overflow-x: unset;
+
+            .minicart-items {
+                list-style: none;
+                padding-left: 0;
+                margin-bottom: 0;
+
+                .toggle,
+                .subtitle {
+                    display: none;
+                }
+
+                .item-options {
+                    margin-bottom: 0;
+                }
+            }
+
+            .product-item-details {
+                padding-left: 15px;
+                min-height: 77px;
+                width: ~'calc(100% - 60px)';
+            }
+
+            .product-item-name {
+                margin-top: 0;
+                margin-bottom: @indent__xs;
+                .lib-css(color, @kemana-primary-brand-color);
+                .lib-font-size(@minicart-product-name-size);
+            }
+
+            .product-image-wrapper {
+                display: initial;
+            }
+
+            .details-qty {
+                .lib-font-size(12);
+                .lib-line-height(13);
+                .lib-css(color, @color-kemana-dark1);
+                margin-bottom: @indent__xs;
+            }
+        }
+
+        .column.main & {
+            .product-item {
+                margin: 0;
+                padding-left: 0;
+                margin-top: @indent__base;
+
+                &:first-child {
+                    margin-top: 0;
+                }
+            }
+        }
+
+        .product-item {
+            padding: 0 20px 20px 20px !important;
+            .price {
+                .lib-css(font-family, @product-price__font-family);
+                .lib-font-size(@minicart-price__font-size);
+                .lib-line-height(@minicart-price__font-size + 2);
+                .lib-css(font-weight, @minicart-price__font-weight);
+            }
+
+            .price-including-tax {
+                & + .price-excluding-tax {
+                    margin: 0;
+
+                    .price {
+                        .lib-font-size(10);
+                    }
+                }
+            }
+        }
+
+        .actions-toolbar {
+            position: relative;
+            z-index: 1;
+
+            .secondary {
+                border-top: @border-width__base solid @border-color__base;
+                display: block;
+                float: none;
+                margin: -1px 0 0;
+                padding: 15px 0 0;
+                text-align: left;
+
+                .action {
+                    margin: 0;
+                }
+            }
+        }
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .opc-summary-wrapper {
+        .modal-header {
+            .action-close {
+                display: none;
+            }
+        }
+    }
+}

@@ -1,0 +1,59 @@
+// /**
+//  * Copyright © 2022 Kemana. All rights reserved.
+//  * @author Harshani Karunasekara <hkarunasekara@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+//
+//  Variables
+//  _____________________________________________
+
+@checkout-tooltip-icon__color: @color-pg-light-gray;
+@checkout-tooltip-icon__content: @icon-question-circle;
+@checkout-tooltip-icon__font-size: 13px;
+@checkout-tooltip-icon__hover__color: @color-pg-light-gray;
+
+@checkout-tooltip-content__border-width: 1px;
+@checkout-tooltip-content__border-color: @color-pg-light-gray2;
+@checkout-tooltip-content__border-radius: @common-border-radius;
+@checkout-tooltip-content__width: 286px;
+@checkout-tooltip-content__color: @kemana-primary-brand-color;
+
+@checkout-tooltip-icon-arrow__left: -20px;
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .pg-add-to-gift-list-tooltip {
+        .lib-css(border-top, @checkout-tooltip-content__border-width solid @checkout-tooltip-content__border-color);
+        margin-top: 36px;
+
+        .label {
+            top: -10px;
+            background: @color-white;
+            padding-inline: 10px 12px;
+        }
+    }
+
+    .field-tooltip {
+
+        .action-help {
+            background: @color-white;
+            padding-inline: 8px 0;
+
+            &:before {
+                width: 13px;
+            }
+        }
+
+        .field-tooltip-content {
+            .lib-css(border, @checkout-tooltip-content__border-width solid @checkout-tooltip-content__border-color);
+            .lib-css(border-radius, @checkout-tooltip-content__border-radius);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            .lib-line-height(20);
+            top: -35px !important;
+        }
+    }
+}

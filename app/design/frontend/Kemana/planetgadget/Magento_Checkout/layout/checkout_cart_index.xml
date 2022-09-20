@@ -8,7 +8,7 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceContainer name="cart.summary">
-            <referenceBlock name="checkout.cart.order.actions.gift_options" remove="true"/>
+            <referenceBlock name="checkout.cart.giftcardaccount" remove="true"/>
         </referenceContainer>
         
         <referenceBlock name="checkout.cart.shipping">
@@ -17,7 +17,7 @@
                     <item name="components" xsi:type="array">
                         <item name="block-summary" xsi:type="array">
 
-                            <!-- Remove checkout.cart.shipping in cart page -->
+                            <!-- Remove block-summary in cart page -->
                             <item name="config" xsi:type="array">
                                 <item name="componentDisabled" xsi:type="boolean">true</item>
                             </item>

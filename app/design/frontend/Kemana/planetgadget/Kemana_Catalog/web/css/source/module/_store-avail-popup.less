@@ -1,0 +1,75 @@
+// /**
+//  * Copyright © 2022 Kemana. All rights reserved.
+//  * @author Harshani Karunasekara <hkarunasekara@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .store-availability-container {
+        width: 420px;
+        margin: auto;
+
+        .modal-inner-wrap {
+            width: 100%;
+        }
+
+        .modal-header {
+            padding: 25px 20px 15px;
+
+            .modal-title {
+                .lib-font-size(20);
+                .lib-line-height(30);
+                border-bottom: none;
+                text-transform: none;
+                padding-bottom: 0;
+            }
+        }
+
+        .modal-content {
+            padding: 0 20px 20px;
+            margin-top: 0;
+
+            #popup-modal {
+                border: 1px solid @color-pg-light-gray2;
+                border-radius: @common-border-radius;
+                padding: 16px 19px;
+
+                .store-sku {
+                    display: none;
+                }
+
+                .store-top-line {
+                    font-weight: @font-weight__bold;
+                    padding-bottom: 13px;
+
+                    .store-location-name {
+                    }
+
+                    .store-stock-qty {
+                        .lib-css(color, @color-pg-green);
+                        float: right;
+                    }
+                }
+
+                .store-phone {
+                    font-weight: @font-weight__bold;
+                    padding-top: 13px;
+                    .lib-icon-font(
+                        @icon-pg-phone,
+                        @_icon-font-color: @color-pg-light-gray,
+                        @_icon-font-size: 12px,
+                        @_icon-font-margin: 0 10px 0 0
+                    );
+                }
+            }
+        }
+
+        .modal-footer {
+            display: none;
+        }
+    }
+}

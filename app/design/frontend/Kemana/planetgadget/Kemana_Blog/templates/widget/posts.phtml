@@ -7,8 +7,10 @@ $posts = $block->getCollection();
 ?>
 <div class="post-list-wrapper">
     <div class="post-list-inner-container">
-        <div class="blog-widget-title"><h2>News & <span>Updates</span></h2></div><span><a href="#">Lihat
-                Semua</a></span>
+        <div class="blog-widget-title">
+            <h2><?= $block->escapeHtml(__('News & %1',sprintf('<span>%s</span>','Updates')),['span']) ?></h2>
+        </div>
+        <span><a href="<?= $block->getBlogUrl(''); ?>"><?= $block->escapeHtml(__('See more')) ?></a></span>
         <div class="post-list-container mpcss" id="mpblog-list-container">
             <div class="widget-title">
                 <a href="<?= $block->getBlogUrl(''); ?>"><?= $block->getTitle(); ?></a>
@@ -20,7 +22,7 @@ $posts = $block->getCollection();
                             <?php if ($post->getImage()): ?>
                                 <div class="post-image">
                                     <a href="<?= $post->getUrl() ?>">
-                                        <img class="img-responsive" style="height: 220px"
+                                        <img class="img-responsive"
                                              src="<?= $block->resizeImage($post->getImage(), '400x'); ?>"
                                              alt="<?= $block->escapeHtml($post->getName()); ?>"/>
                                     </a>

@@ -24,13 +24,13 @@
     <div class="field event required">
         <label for="title" class="label"><span><?= $block->escapeHtml(__('Event')) ?></span></label>
         <div class="control">
-            <input type="text" name="title" id="title" placeholder="Enter event name" value="<?= $block->escapeHtmlAttr($block->getEntity()->getTitle()) ?>" title="<?= $block->escapeHtmlAttr(__('Event')) ?>" class="input-text" data-validate="{required:true}" />
+            <input type="text" name="title" id="title" placeholder="<?= $block->escapeHtml(__('Enter event name')) ?>" value="<?= $block->escapeHtmlAttr($block->getEntity()->getTitle()) ?>" title="<?= $block->escapeHtmlAttr(__('Event')) ?>" class="input-text" data-validate="{required:true}" />
         </div>
     </div>
     <div class="field textarea required">
         <label for="message" class="label"><span><?= $block->escapeHtml(__('Message')) ?></span></label>
         <div class="control">
-            <textarea name="message" id="message" cols="5" rows="3" placeholder="Enter message" title="<?= $block->escapeHtmlAttr(__('Message')) ?>" data-validate="{required:true}" ><?= $block->escapeHtml($block->getEntity()->getMessage()) ?></textarea>
+            <textarea name="message" id="message" cols="5" rows="3" placeholder="<?= $block->escapeHtml(__('Enter message')) ?>" title="<?= $block->escapeHtmlAttr(__('Message')) ?>" data-validate="{required:true}" ><?= $block->escapeHtml($block->getEntity()->getMessage()) ?></textarea>
         </div>
     </div>
     <div class="field privacy required">

@@ -1,0 +1,239 @@
+// /**
+//  * Copyright © 2022 Kemana. All rights reserved.
+//  * @author Harshani Karunasekara <hkarunasekara@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .promotion-main-wrapper {
+        .promotions {
+            .promotion-items {
+                display: grid;
+                grid-gap: 20px;
+
+                .promotion-item {
+                    .lib-vendor-prefix-display();
+                    .lib-vendor-prefix-flex-direction(column);
+                    background: @panel__background-color;
+                    border-radius: @common-border-radius;
+
+                    .image {
+                        img {
+                            border-radius: 5px 5px 0 0;
+                        }
+                    }
+
+                    .promotion-description {
+                        padding: 18px 20px;
+
+                        .promotion-description-inner {
+                            .title {
+                                .lib-font-size(14);
+                                .lib-line-height(24);
+                                font-weight: @font-weight__bold;
+                                margin-bottom: 18px;
+                                -webkit-box-orient: vertical;
+                                -webkit-line-clamp: 2;
+                                line-clamp: 2;
+                                display: -webkit-box;
+                                overflow: hidden;
+                            }
+
+                            .short-content {
+                                -webkit-box-orient: vertical;
+                                -webkit-line-clamp: 2;
+                                line-clamp: 2;
+                                display: -webkit-box;
+                                overflow: hidden;
+                                margin-bottom: 0;
+                            }
+
+                            .read-more {
+                                display: none;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .order-products-toolbar {
+                margin-top: 50px;
+
+                .page {
+                    text-align: center;
+                }
+            }
+        }
+    }
+
+    .promotions-index-detail {
+        //Full width Product List Container with background
+        .page-main {
+            position: relative;
+
+            .column.main {
+                .promotion-detail-main-wrapper {
+                    background: @panel__background-color;
+                    border-radius: @common-border-radius;
+                }
+            }
+
+            .promotion-detail {
+                .content {
+                    .promo-banner {
+                        float: left;
+                        margin-bottom: 26px;
+                    }
+
+                    h5 {
+                        margin-top: 6px;
+                    }
+
+                    p {
+                        margin-bottom: 16px;
+                    }
+
+                    a {
+                        .lib-css(font-weight, @font-weight__bold);
+                    }
+                }
+            }
+
+            ol,
+            ul {
+                padding-left: 18px;
+
+                li {
+                    padding-left: 10px;
+                    margin-bottom: 16px;
+                }
+            }
+
+            a.action {
+                margin-top: 6px;
+            }
+        }
+
+        //Full width Product List
+        .block-products-list {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+
+            .product-items {
+                padding-left: 0;
+
+                .product-item {
+                    .product-item-info {
+                        .product-item-name {
+                            a {
+                                font-weight: unset;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .promotions-index-detail {
+        .page-main {
+            padding-inline: 0;
+            padding-bottom: 763px;
+            background-image: linear-gradient(to top, @color-pg-light-gray2, @color-pg-light-gray2 763px, @color-pg-light-gray3 763px);
+
+            .column.main {
+                .promotion-detail-main-wrapper {
+                    padding: 30px 10px;
+                }
+            }
+        }
+
+        .block-products-list {
+            .product-items {
+                .product-item {
+                    .product-item-info {
+                        min-height: 298px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .promotions-index-index,
+    .promotions-index-detail {
+        h1 {
+            .lib-font-size(28);
+            .lib-line-height(38);
+        }
+    }
+
+    .promotion-detail-main-wrapper {
+        p {
+            img {
+                border-radius: @common-border-radius;
+                margin-bottom: 30px;
+            }
+        }
+    }
+
+    .promotion-main-wrapper {
+        .promotions {
+            .promotion-items {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+        }
+    }
+
+    .promotions-index-detail {
+        .breadcrumbs{
+            .lib-css(max-width, @other-pages-max-width);
+        }
+
+        .page-main {
+            max-width: unset;
+            padding-bottom: 494px;
+            background-image: linear-gradient(to top, @color-pg-light-gray2, @color-pg-light-gray2 494px, @color-pg-light-gray3 494px);
+
+            .columns {
+                .lib-css(max-width, @other-pages-max-width);
+                margin-inline: auto;
+
+                .promotion-detail-main-wrapper {
+                    padding: 30px;
+                }
+            }
+
+            .block-products-list {
+                .lib-css(max-width, @layout__max-width - 20px);
+                margin-inline: auto;
+
+                .product-items {
+                    .product-item {
+                        .product-item-info {
+                            min-height: 333px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

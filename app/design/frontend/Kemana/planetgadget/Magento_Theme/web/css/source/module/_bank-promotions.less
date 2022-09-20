@@ -80,7 +80,7 @@
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
     .home-bank-and-promotions {
-        padding-block: 40px;
+        padding: @block-padding -10 @block-padding - 40;
 
         .banner-inner-container {
             .lib-vendor-prefix-display();
@@ -108,11 +108,15 @@
             }
         }
 
+        .row {
+            margin-inline: 0;
+        }
+
         .image-block {
-            padding-block: 10px;
+            padding: 10px 0;
 
             .image {
-                padding-inline: 10px;
+               // padding-inline: 10px;
             }
         }
     }
@@ -124,13 +128,10 @@
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
     .home-bank-and-promotions {
-        padding-block: 50px;
+        padding-block: @block-padding - 3 @block-padding;
 
-        .banner-inner-container {
-            h2 {
-                .lib-font-size(28);
-                .lib-line-height(31);
-            }
+        .image-block {
+            padding: 0 10px;
         }
     }
 }

@@ -60,7 +60,7 @@
             .product-item {
                 .product-item-info {
                     .lib-css( background-color, @color-white);
-                    border-radius: 5px;
+                    border-radius: @common-border-radius;
                     height: 100%;
                     padding: 10px;
                     transition: all .5s ease;
@@ -115,7 +115,11 @@
 
     .product-item {
         .price-box {
-            .lib-line-height(16);
+            .lib-line-height(24);
+
+            .price {
+                .lib-line-height(@product-price__font-size + 10);
+            }
         }
 
         .special-price {

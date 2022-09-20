@@ -34,6 +34,22 @@
             padding-top: 0;
         }
     }
+
+    .pager {
+        .limiter {
+            float: right;
+
+            .limiter-label,
+            .limiter-text {
+                .lib-css(color, @toolbar-sorter-label__color);
+                font-weight: @font-weight__bold;
+            }
+
+            select.limiter-options {
+                background-color: @color-white;
+            }
+        }
+    }
 }
 
 //
@@ -45,7 +61,7 @@
         .toolbar-sorter {
             background-color: @color-white;
             .lib-css(border, 1px solid @color-pg-light-gray);
-            border-radius: 5px;
+            border-radius: @common-border-radius;
 
             .sorter-label {
                 display: none;
@@ -60,6 +76,7 @@
     .toolbar-amount {
         padding: 20px 0 0;
     }
+
 }
 
 //

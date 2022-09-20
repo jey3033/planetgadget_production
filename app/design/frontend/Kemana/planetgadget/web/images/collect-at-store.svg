@@ -1,0 +1,12 @@
+<svg id="Collect_At_Store" data-name="Collect At Store" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="28" height="18" viewBox="0 0 28 18">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_4181" data-name="Rectangle 4181" width="28" height="18" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="Group_7032" data-name="Group 7032" clip-path="url(#clip-path)">
+    <path id="Path_8348" data-name="Path 8348" d="M9.5,1.123h9a2.5,2.5,0,0,1,2.481,2.309A2.492,2.492,0,0,0,18.5,1.123h-9A2.5,2.5,0,0,0,7,3.623a2.5,2.5,0,0,1,2.5-2.5" fill="#e3e3e3"/>
+    <path id="Path_8349" data-name="Path 8349" d="M8.092,4.123A1.483,1.483,0,0,1,8,3.623a1.5,1.5,0,0,1,1.5-1.5h9a1.5,1.5,0,0,1,1.5,1.5,1.46,1.46,0,0,1-.093.5h1.042c.014-.069.014-.142.022-.213A2.469,2.469,0,0,0,21,3.623c0-.065-.014-.126-.019-.19A2.5,2.5,0,0,0,18.5,1.123h-9A2.5,2.5,0,0,0,7,3.623v.012a2.532,2.532,0,0,0,.049.488Z"/>
+    <path id="Path_8350" data-name="Path 8350" d="M6,8.123h.879v8.754H20.892V8.123H22v-4H6Zm7.532,7.754h-1.79V10.495h1.79Zm1-5.382h1.636v5.382H14.532Zm5.36,5.381H17.168V9.495H10.742v6.382H7.879V8.123H19.892ZM7,5.123H21v2H7Z"/>
+  </g>
+</svg>

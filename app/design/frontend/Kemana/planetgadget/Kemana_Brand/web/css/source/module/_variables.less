@@ -9,7 +9,7 @@
 //  _____________________________________________
 
 @home-featured-brand-container__background: transparent;
-@home-featured-brand-container__padding: 50px 0 30px;
+@home-featured-brand-container__padding: @block-padding - 3 0 @block-padding - 20;
 @home-featured-brand-container__margin-bottom: 50px;
 
 @home-featured-brand-container-title__font-family: false;
@@ -26,39 +26,44 @@
 @brand-desktop-grid-item-count: 6;
 
 @brand-mobile-grid-item__padding: 0;
-@brand-mobile-grid-item__margin: 0 20px 20px 0;
+@brand-mobile-grid-item__margin: 0;
 
-@brand-desktop-grid-item__padding: 10px;
-@brand-desktop-grid-item__margin-bottom: 20px;
+@brand-desktop-grid-item__padding: 0;
+@brand-desktop-grid-item__margin-bottom: 0;
 
 @brand-mobile-item-logo__width: 200px;
 @brand-item-logo-container__height: 100px;
 @brand-item-logo__height: @brand-item-logo-container__height;
 @brand-item-logo__border: 0 solid @color-white;
 @brand-item-logo-hover__border: 0 solid @color-kemana-gray1;
+@brand-item-logo__box-shadow: 0 5px 20px rgba(0, 0, 0, 0.13);
 
 @brand-item-logo-container-home-desktop__margin: -11px;
 @brand-item-logo-container-desktop__margin: -10px;
 
-@brand-character-list-item__border: @border-width__base solid @color-kemana-gray1;
+@brand-character-list-item__border: @border-width__base solid @color-pg-light-gray;
+@brand-character-list-item-hover__border: @border-width__base solid @kemana-primary-brand-color;
+@brand-character-sort-item__border: @border-width__base solid @color-pg-light-gray2;
 @brand-character-list-item__background: @color-white;
 @brand-character-list-item__width: 30px;
 @brand-character-list-item__margin: 0 5px;
 @brand-character-list-item__padding: 4px 0;
 
-@brand-character-list-item-disable__background: @color-kemana-gray5;
-@brand-character-list-item-disable__opacity: .3;
+@brand-character-list-item-disable__background: @color-pg-light-gray3;
+@brand-character-list-item-disable__opacity: 1;
+@brand-character-list-item-disable__color: @color-pg-light-gray;
+@brand-character-list-item-disable__border: @border-width__base solid @color-pg-light-gray3;
 
 @brand-character-value__font-family: false;
-@brand-character-value__color: @color-kemana-gray1;
+@brand-character-value__color: @kemana-primary-brand-color;
 @brand-character-value__font-weight: @font-weight__bold;
 @brand-character-value-mobile__font-size: 24px;
 @brand-character-value-mobile__line-height: 33px;
-@brand-character-value-desktop__font-size: 48px;
-@brand-character-value-desktop__line-height: 67px;
+@brand-character-value-desktop__font-size: 28px;
+@brand-character-value-desktop__line-height: 38px;
 
-@brand-character-list-item__color: @color-kemana-dark1;
-@brand-character-list-item__font-weight: @font-weight__regular;
-@brand-character-list-item__font-size: 14px;
-@brand-character-list-item__line-height: 21px;
-@brand-character-list-item__margin-bottom: 16px;
+@brand-character-list-item__color: @kemana-primary-brand-color;
+@brand-character-list-item__font-weight: @font-weight__heavier;
+@brand-character-list-item__font-size: 12px;
+@brand-character-list-item__line-height: 13px;
+@brand-character-list-item__margin-bottom: 0;

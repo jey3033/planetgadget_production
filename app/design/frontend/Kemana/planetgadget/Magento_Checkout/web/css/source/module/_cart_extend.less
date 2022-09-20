@@ -52,14 +52,46 @@
 
                     }
 
+                    .input-text {
+                        height: 40px;
+                        width: 34px;
+                        position: absolute;
+                        left: 40px;
+                        border: none;
+                        padding-inline: 0;
+                    }
+
                     &.qty {
                         .qty-selector {
                             border-radius: 5px;
-                            height: 34px;
+                            height: 40px;
+                            width: 114px;
+                            background: none;
+                            position: absolute;
+                            left: 0;
 
                             .item-main {
                                 height: 32px;
                                 width: 67px;
+                            }
+
+                            button {
+                                .lib-button-reset();
+                                padding: 15px;
+                                height: 38px;
+                                width: 40px;
+                                line-height: 10px;
+                                border: none;
+                                .lib-css(font-weight, @font-weight__bold);
+                                .lib-font-size(14);
+
+                                &.increaseQty {
+                                    float: right;
+                                }
+
+                                &.decreaseQty {
+                                    float: left;
+                                }
                             }
                         }
 

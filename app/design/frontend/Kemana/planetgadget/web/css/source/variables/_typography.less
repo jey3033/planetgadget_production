@@ -59,7 +59,7 @@
 @font-style__emphasis: italic;
 
 //  Line heights
-@line-height__base: 1.67;
+@line-height__base: 1.667;
 @line-height__computed: floor(@font-size__base * @line-height__base);
 @line-height__xl: 1.7;
 @line-height__l: 1.5;
@@ -155,7 +155,7 @@
 @heading__color__base: @kemana-primary-brand-color;
 @heading__font-style__base: false;
 @heading__margin-top__base: 0;
-@heading__margin-bottom__base: @indent__base;
+@heading__margin-bottom__base: @indent__base - 4px;
 
 @h1__font-size: 32px; // 30px
 @h1__font-color: @heading__color__base;
@@ -173,11 +173,12 @@
 @h2__font-family: @heading__font-family__base;
 @h2__font-weight: @heading__font-weight__base;
 @h2__font-style: @heading__font-style__base;
-@h2__line-height: 30px;
+@h2__line-height: 32px;
 @h2__margin-top: @heading__margin-top__base;
 @h2__margin-bottom: @heading__margin-bottom__base;
 @h2__font-size-desktop: 28px; // 40px
-@h2__line-height-desktop: 31px;
+@h2__line-height-desktop: 38px;
+@h2__margin-bottom-desktop: 23px;
 
 @h3__font-size: 20px; // 24px
 @h3__font-color: @heading__color__base;
@@ -204,7 +205,7 @@
 @h5__font-style: @heading__font-style__base;
 @h5__line-height: 24px;
 @h5__margin-top: @heading__margin-top__base;
-@h5__margin-bottom: @heading__margin-bottom__base;
+@h5__margin-bottom: @heading__margin-bottom__base - 4px;
 
 @h6__font-size: 12px; // 16px
 @h6__font-color: @heading__color__base;

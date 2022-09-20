@@ -1,0 +1,59 @@
+// /**
+//  * Copyright © 2022 Kemana. All rights reserved.
+//  * @author Harshani Karunasekara <hkarunasekara@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+//
+//  Variables
+//  _____________________________________________
+
+@faq-collapsible-item-border: @border-width__base solid @color-pg-light-gray;
+@faq-collapsible-item-padding: 18px @indent__base;
+
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .cms-faq {
+        .accordion {
+            .collapsible-item {
+                .title {
+                    .lib-font-size(14);
+
+                    .lib-icon-font(
+                        @icon-pg-plus,
+                        @_icon-font: @icon-font,
+                        @_icon-font-color: @kemana-primary-brand-color,
+                        @_icon-font-size: 16px,
+                        @_icon-font-line-height: 16px,
+                        @_icon-font-position: after
+                    );
+                }
+
+                &.active {
+                    .title {
+                        .lib-icon-font(
+                            @icon-pg-minus,
+                            @_icon-font: @icon-font,
+                            @_icon-font-color: @kemana-primary-brand-color,
+                            @_icon-font-size: 2px,
+                            @_icon-font-line-height: 16px,
+                            @_icon-font-position: after
+                        );
+                    }
+                }
+
+                &:first-child {
+                    border-radius: 5px 5px 0 0;
+                }
+
+                &:last-child {
+                    border-radius: 0 0 5px 5px;
+                }
+            }
+        }
+    }
+}

@@ -31,13 +31,13 @@ class UpgradeSchema implements UpgradeSchemaInterface
         $setup->startSetup();
 
         if (version_compare($context->getVersion(), '1.0.4', '<=')) {
-            
+
             $setup->getConnection()->modifyColumn(
                     $setup->getTable('fme_jobs'),
                     'jobs_publish_date',
                     [
                         'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TIMESTAMP,
-                        'nullable' => false,                        
+                        'nullable' => false,
                         'default' => \Magento\Framework\DB\Ddl\Table::TIMESTAMP_INIT,
                         'comment' => 'Jobs Publish Date',
                     ]
@@ -47,7 +47,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
                     'jobs_applyby_date',
                     [
                         'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TIMESTAMP,
-                        'nullable' => false,                        
+                        'nullable' => false,
                         'default' => \Magento\Framework\DB\Ddl\Table::TIMESTAMP_INIT,
                         'comment' => 'Jobs Apply By Date',
                     ]
@@ -58,7 +58,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 $columns = [
                     'is_archived' => [
                         'type' => \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
-                        'nullable' => false, 
+                        'nullable' => false,
                         'default' => '0',
                         'comment' => 'Is Archived',
                     ]
@@ -75,7 +75,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 $columns = [
                     'is_archived' => [
                         'type' => \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
-                        'nullable' => false, 
+                        'nullable' => false,
                         'default' => '0',
                         'comment' => 'Is Archived',
                     ]
@@ -93,7 +93,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
                     'use_config_email',
                     [
                         'type' => \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
-                        'nullable' => false,                        
+                        'nullable' => false,
                         'default' => 1,
                         'comment' => 'use config email',
                     ]
@@ -103,7 +103,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
                     'notification_email_receiver',
                     [
                         'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
-                        'nullable' => true,                        
+                        'nullable' => true,
                         'default' => '',
                         'comment' => 'Notification Email Receiver',
                     ]
@@ -113,7 +113,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
                     'use_config_template',
                     [
                         'type' => \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
-                        'nullable' => false,                        
+                        'nullable' => false,
                         'default' => 1,
                         'comment' => 'use config Template',
                     ]
@@ -123,7 +123,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
                     'email_notification_temp',
                     [
                         'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
-                        'nullable' => true,                        
+                        'nullable' => true,
                         'default' => '',
                         'comment' => 'email notification template',
                     ]

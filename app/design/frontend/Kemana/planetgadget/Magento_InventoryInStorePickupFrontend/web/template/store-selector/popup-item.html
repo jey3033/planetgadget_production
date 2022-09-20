@@ -1,0 +1,37 @@
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details. 1
+ */
+-->
+<div class="row location">
+    <div class="col col-location-details location-details">
+        <div class="col-location-action-flex">
+            <div class="col col-location-actions">
+                <div class="select-location" ifnot="$parent.isPickupLocationSelected($data)">
+                    <input type="radio" name="selectedlocation" value="location" click="$parent.selectPickupLocation.bind($parent, $data)">
+                </div>
+                <div class="location-selected" if="$parent.isPickupLocationSelected($data)">
+                    <input type="radio" name="selectedlocation" value="location" click="$parent.selectPickupLocation.bind($parent, $data)" checked>
+                </div>
+            </div>
+            <div class="col-location-deatil-grid">
+                <p class="location-name">
+                    <text args="location.name"/>
+                </p>
+                <p class="location-address">
+                    <text args="location.street"/><br/>
+                    <text args="location.city"/>, <span text="location.region"></span> <text args="location.postcode"/><br/>
+                    <text args="location.country"/><br/>
+                    <br/>
+                    <a if="location.telephone" attr="'href': 'tel:' + location.telephone" text="location.telephone"></a>
+                </p>
+                <!-- ko if: location.description -->
+                    <!-- ko with: {locationDescriptionUnsanitizedHtml: location.description} -->
+                        <p class="location-description" html="locationDescriptionUnsanitizedHtml"></p>
+                    <!-- /ko -->
+                <!-- /ko -->
+            </div>
+        </div>
+    </div>    
+</div>

@@ -26,7 +26,7 @@ use Magento\Framework\Setup\SchemaSetupInterface;
 use Magento\Framework\DB\Adapter\AdapterInterface;
 
 class InstallSchema implements InstallSchemaInterface
-{    
+{
     public function install(SchemaSetupInterface $setup, ModuleContextInterface $context)
     {
         $installer = $setup;
@@ -302,7 +302,38 @@ class InstallSchema implements InstallSchemaInterface
         )->setComment(
             'FME Jobs Table'
         );
+
         $installer->getConnection()->createTable($table);
+
+        // Added by Kemana
+
+        /**
+         * Add new column 'fme_jobs' table
+         */
+        if (version_compare($context->getVersion(), '1.1.7', '<')) {
+
+            $setup->getConnection()->addColumn(
+                $setup->getTable('fme_jobs'),
+                'salary_from',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                    'nullable' => true,
+                    'comment' => 'Salary From',
+                ]
+            );
+            $setup->getConnection()->addColumn(
+                $setup->getTable('fme_jobs'),
+                'salary_to',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                    'nullable' => true,
+                    'comment' => 'Salary To',
+                ]
+            );
+        }
+
+        // End - Added by Kemana
+
         /**
          * Create table 'fme_jobs_application'
          */
@@ -421,6 +452,43 @@ class InstallSchema implements InstallSchemaInterface
             ['jobs_id']
         );
         $installer->getConnection()->createTable($table);
+
+        // Added by Kemana
+        /**
+         * Add new column 'fme_jobs_application' table
+         */
+        if (version_compare($context->getVersion(), '1.1.7', '<')) {
+
+            $setup->getConnection()->addColumn(
+                $setup->getTable('fme_jobs_application'),
+                'cover_letter_file',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'nullable' => true,
+                    'comment' => 'Cover Letter File',
+                ]
+            );
+            $setup->getConnection()->addColumn(
+                $setup->getTable('fme_jobs_application'),
+                'id_card_file',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'nullable' => true,
+                    'comment' => 'ID Card File',
+                ]
+            );
+            $setup->getConnection()->addColumn(
+                $setup->getTable('fme_jobs_application'),
+                'education_cert_file',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'nullable' => true,
+                    'comment' => 'ID Education Certificate File',
+                ]
+            );
+        }
+
+        // End - Added by Kemana
         /*
             Multisotre Table ..fme_jobs_store
         */
@@ -444,13 +512,7 @@ class InstallSchema implements InstallSchemaInterface
             255,
             ['nullable' => false, 'primary' => true],
             'Store ID'
-        )->addForeignKey(
-            $installer->getFkName('fme_jobs_store', 'jobs_id', 'fme_jobs', 'jobs_id'),
-            'jobs_id',
-            $installer->getTable('fme_jobs'),
-            'jobs_id',
-            \Magento\Framework\DB\Ddl\Table::ACTION_CASCADE
         );
-        $installer->getConnection()->createTable($table);       
+        $installer->getConnection()->createTable($table);
     }
 }

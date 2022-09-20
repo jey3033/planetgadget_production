@@ -242,7 +242,7 @@
 
         .box-title {
             display: inline-block;
-            margin: 0 0 15px;
+            margin: 0 0 12px;
             .lib-css(font-family, @font-family-name__base);
 
             > span {
@@ -274,6 +274,20 @@
 
                 .name {
                     font-weight: @font-weight__heavier;
+                }
+
+                .map-point-label {
+                    .lib-css(color, @color-pg-light-gray);
+                    .lib-icon-font(
+                        @icon-pg-pinpoint-not-set,
+                        @_icon-font-size: 14px,
+                        @_icon-font-color: @color-pg-light-gray,
+                        @_icon-font-margin: 0 8px 0 0
+                    );
+
+                    &:before {
+                        width: 14px;
+                    }
                 }
             }
 
@@ -397,7 +411,7 @@
 
 @abs-input-qty-custom-cart__width: 69px;
 @abs-input-qty-custom-cart__height: 36px;
-@abs-input-qty-custom-cart__border: @border-width__base solid @border-color__base;
+@abs-input-qty-custom-cart__border: @border-width__base solid @color-pg-light-gray;
 @abs-input-qty-custom-dropdown-cart__height: 160px;
 @abs-input-qty-custom-cart__color: @color-kemana-dark1;
 
@@ -406,9 +420,9 @@
         .lib-css(width, @abs-input-qty-custom-cart__width);
         .lib-css(height, @abs-input-qty-custom-cart__height);
         .lib-css(border, @abs-input-qty-custom-cart__border);
-        background: url(../images/down-arrow.svg) no-repeat;
-        background-size: 11px;
-        background-position: 78% 9px;
+        //background: url(../images/down-arrow.svg) no-repeat;
+        //background-size: 11px;
+        //background-position: 78% 9px;
         cursor: pointer;
         display: inline-block;
         list-style: none;
@@ -652,6 +666,7 @@
                         .action {
                             &.add {
                                 margin-top: 0;
+                                .lib-button-white();
                             }
                         }
 
@@ -674,8 +689,13 @@
         }
 
         .additional {
-            margin-top: 55px;
+            margin-top: 20px;
             position: relative;
+            border-bottom: 1px solid @border-color__base;
+
+            &:last-child {
+                border-bottom: 0;
+            }
         }
 
         .action {
@@ -706,7 +726,7 @@
                     &.remove {
                         &:extend(.abs-action-remove-desktop all);
                         margin-left: 340px;
-                        top: 38px;
+                        top: 10px;
                         font-weight: @font-weight__bold;
                     }
                 }
@@ -1539,8 +1559,8 @@
             @_size: @checkout-tooltip-icon-arrow__font-size,
             @_color: @checkout-tooltip-content__background-color
         );
-        .lib-css(margin-top, @checkout-tooltip-icon-arrow__left);
-        right: @indent__s;
+        .lib-css(margin-top, -11px);
+        right: 89px;
         left: auto;
         top: 0;
     }

@@ -107,7 +107,7 @@ Total:,Total:
 "Payment Method:","Payment Method:"
 "Date & Time:","Date & Time:"
 "Sign In","Sign In"
-"Email Address","kaiser musthappa"
+"Email Address","Email"
 Password,Password
 "Forgot Your Password?","Forgot Your Password?"
 "My billing and shipping address are the same","My billing and shipping address are the same"
@@ -118,10 +118,10 @@ Cancel,Cancel
 "You can create an account after checkout.","You can create an account after checkout."
 "You already have an account with us. Sign in or continue as guest.","You already have an account with us. Sign in or continue as guest."
 Login,Login
-"See Details","See Details"
+"See Details","Details"
 "Options Details","Options Details"
 Remove,Remove
-"Cart Subtotal","Cart Subtotal"
+"Cart Subtotal","Subtotal"
 "Payment Information","Payment Information"
 "No Payment method available.","No Payment method available."
 "You can track your order status by creating an account.","You can track your order status by creating an account."

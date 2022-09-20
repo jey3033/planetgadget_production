@@ -23,7 +23,7 @@
     .product-info-main {
         .product-info-price {
             .product-info-stock-sku {
-                margin-bottom: 16px;
+                //margin-bottom: 0;
 
                 .sku {
                     .type {
@@ -43,11 +43,11 @@
                     .lib-font-size(12);
                     text-transform: none;
                     font-weight: @font-weight__heavier;
-
                     .lib-icon-font(
                         @icon-pg-stock,
                         @_icon-font-size: 14px,
                         @_icon-font-margin: 0 6px 0 0);
+                    margin-bottom: 0;
 
                     &.unavailable {
                         .lib-css(color, @color-kemana-dark2);
@@ -57,15 +57,29 @@
 
             .product-reviews-summary {
                 margin-top: 0;
-                padding-bottom: 30px;
+                padding-bottom: 26px;
 
                 &.empty {
                     .add {
-                        font-style: italic;
+                        font-style: normal;
                     }
 
                     &:hover {
                         text-decoration: underline;
+                    }
+
+                    .rating-summary {
+                        display: none;
+                    }
+                }
+
+                .reviews-actions {
+                    a {
+                        span {
+                            &:first-child {
+                                margin-right: -3px;
+                            }
+                        }
                     }
                 }
 
@@ -80,6 +94,16 @@
 
             .price-box {
                 margin-top: 0;
+
+                .minimal-price {
+                    margin-bottom: 20px;
+
+                    .price-label {
+                        display: block !important;
+                        margin-bottom: 6px;
+                    }
+
+                }
             }
         }
 
@@ -173,8 +197,8 @@
 
                         .qty {
                             label {
-                                .lib-line-height(13);
-                                margin-bottom: 10px;
+                                .lib-line-height(20);
+                                margin-bottom: 6px;
                                 float: left;
                                 .lib-css(font-weight, @font-weight__bold);
                             }
@@ -195,7 +219,7 @@
                                 width: 60px !important;
                                 height: 60px !important;
                                 border: 1px solid @color-pg-light-gray;
-                                border-radius: 5px;
+                                border-radius: @common-border-radius;
                                 padding: 10px;
 
                                 &:hover {
@@ -343,8 +367,8 @@
             .lib-icon-font(
                 @icon-pg-store,
                 @_icon-font-color: @color-pg-light-gray,
-                @_icon-font-margin: -3px 6px 0 0,
-                @_icon-font-size: 16px
+                @_icon-font-margin: -1px 6px 0 0,
+                @_icon-font-size: 14px
             );
 
             &:before {
@@ -353,6 +377,20 @@
 
             a {
                 font-weight: @font-weight__bold;
+            }
+        }
+
+        .box-tocart {
+            .field {
+                &.qty {
+                    .lib-vendor-prefix-display();
+                    .lib-vendor-prefix-flex-direction(column);
+
+                    label.label {
+                        .lib-css(font-weight, @font-weight__bold);
+                        margin-bottom: 7px;
+                    }
+                }
             }
         }
     }
@@ -521,6 +559,46 @@
             }
         }
     }
+
+    .input-group {
+        border: 1px solid @color-pg-light-gray;
+        border-radius: @common-border-radius;
+        height: 40px;
+        width: 114px;
+        background: none;
+        position: relative;
+        left: 0;
+
+        input {
+            height: 38px;
+            width: 34px;
+            position: absolute;
+            left: 40px;
+            border: none;
+            padding-inline: 0;
+            text-align: center;
+        }
+        .input-group__addon {
+            &.increase {
+                float: right;
+            }
+
+            &.decrease {
+                float: left;
+            }
+        }
+
+        button {
+            .lib-button-reset();
+            padding: 15px;
+            height: 38px;
+            width: 40px;
+            line-height: 10px;
+            border: none;
+            .lib-css(font-weight, @font-weight__bold);
+            .lib-font-size(14);
+        }
+    }
 }
 
 //
@@ -539,7 +617,7 @@
             margin-bottom: 30px;
             margin-top: 20px;
             background: @panel__background-color;
-            border-radius: 5px;
+            border-radius: @common-border-radius;
             margin-inline: -10px;
             padding: 30px 10px 40px;
 
@@ -643,15 +721,51 @@
                             margin-inline: -10px;
                             padding: 25px 10px;
                             background: @panel__background-color;
-                            border-radius: 5px;
+                            border-radius: @common-border-radius;
                         }
                     }
 
                     .data-block-wrapper {
                         background: @panel__background-color;
-                        border-radius: 5px;
+                        border-radius: @common-border-radius;
                         margin-inline: -10px;
                         padding: 25px 10px;
+
+                        .data-block-wrapper-right {
+                            margin-top: 43px;
+
+                            .title {
+                                margin-bottom: 6px;
+                            }
+
+                            .additional-attributes-wrapper {
+                                table.additional-attributes {
+                                    tbody {
+                                        tr {
+                                            display: table-row;
+                                            padding-bottom: 0;
+                                            margin-bottom: 0;
+
+                                            th {
+                                                display: table-cell;
+                                                width: 50%;
+                                                padding: 17px 0 16px;
+                                            }
+
+                                            td {
+                                                display: table-cell;
+                                                width: 50%;
+                                                padding: 17px 0 16px 10px;
+
+                                                &:before {
+                                                    display: none;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -694,7 +808,7 @@
                                 &:after {
                                     content: '';
                                     position: absolute;
-                                    width: 40%;
+                                    width: 47%;
                                     height: 10px;
                                     background: @kemana-secondary-brand-color;
                                     right: 1px;
@@ -731,7 +845,7 @@
                         //.lib-vendor-prefix-display();
                         margin-bottom: 30px;
                         background: @color-white;
-                        border-radius: 5px;
+                        border-radius: @common-border-radius;
 
                         .block-description {
                             float: left;
@@ -741,7 +855,7 @@
 
                         .data-block-wrapper-right {
                             float: right;
-                            width: 50%;
+                            width: ~'calc(50% - 10px)';
                             padding: 30px 30px 30px 0;
 
                             .block-warranty {
@@ -754,7 +868,7 @@
                         float: left;
                         width: 100%;
                         background: @color-white;
-                        border-radius: 5px;
+                        border-radius: @common-border-radius;
                         padding: 30px;
                     }
                 }

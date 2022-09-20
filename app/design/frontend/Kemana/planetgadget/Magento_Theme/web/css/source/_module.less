@@ -36,7 +36,7 @@
 @header-icons-color-hover: @kemana-secondary-brand-color;
 
 @header-desktop__height: 80px;
-@header-mobile__height: 50px;
+@header-mobile__height: 48px;
 @header-desktop__padding: 0 @indent__s;
 
 @addto-color: @kemana-primary-brand-color;
@@ -47,7 +47,7 @@
 
 @button__shadow: inset 0 2px 1px rgba(0, 0, 0, .12);
 
-@h1__margin-bottom__desktop: @indent__l;
+@h1__margin-bottom__desktop: @indent__l - 4px ;
 
 //  Footer
 @footer__background-color: @color-pg-black;
@@ -67,6 +67,7 @@
 @import "module/_home-product-list.less";
 @import "module/_home-category-top-section.less";
 @import "module/_home-banner.less";
+@import "module/_pg-mixins.less";
 
 //
 //  Common
@@ -132,8 +133,8 @@
     .page-header {
         .lib-css(background-color, @header__background-color);
         .lib-css(box-shadow, @header__box-shadow);
-        .lib-css(border-bottom, @header-mobile__border-bottom);
-        margin-bottom: @indent__base;
+        //.lib-css(border-bottom, @header-mobile__border-bottom);
+        margin-bottom: 0;
         position: fixed;
         top: 0;
         left: 0;
@@ -412,6 +413,7 @@
     .xendit-checkout-qrcode,
     .ksquickorder-index-index,
     .mpblog-post-index,
+    .mpblog-post-view,
     .tips-post-index,
     .tips-sitemap-index,
     .recipe-post-index,
@@ -420,9 +422,15 @@
     .checkout-onepage-failure,
     .faq-category-view,
     .faq-question-view,
-    .category-page-detail {
+    .category-page-detail,
+    .promotions-index-index,
+    .promotions-index-detail,
+    .brand-items-index,
+    .job-index-index,
+    .job-index-detail,
+    .catalog-product_compare-index {
         .page-wrapper {
-            .lib-css(margin-top, @header-mobile__height + @indent__base);
+            .lib-css(margin-top, @header-mobile__height);
         }
     }
 
@@ -478,8 +486,8 @@
     // CMS pages only
     .cms-main-container {
         .fixed-width {
-            .lib-css(padding-left, @layout-indent__width);
-            .lib-css(padding-right, @layout-indent__width);
+            .lib-css(padding-left, 40px);
+            .lib-css(padding-right, 40px);
         }
     }
 
@@ -534,7 +542,8 @@
         .lib-css(margin-bottom, @indent__base);
 
         .panel.wrapper {
-            .lib-css(background-color, @color-pg-black2);
+            //.lib-css(background-color, @color-pg-black2);
+            .lib-css(background-color, @kemana-secondary-brand-color);
         }
 
         .header.panel {
@@ -583,7 +592,6 @@
             }
 
             .switcher.store {
-                //  display: inline-block;
                 padding-right: 50px;
                 vertical-align: top;
                 display: none;
@@ -624,6 +632,7 @@
     .xendit-checkout-qrcode,
     .ksquickorder-index-index,
     .mpblog-post-index,
+    .mpblog-post-view,
     .tips-post-index,
     .tips-sitemap-index,
     .recipe-post-index,
@@ -632,7 +641,13 @@
     .checkout-onepage-failure,
     .faq-category-view,
     .faq-question-view,
-    .category-page-detail {
+    .category-page-detail,
+    .promotions-index-index,
+    .promotions-index-detail,
+    .brand-items-index,
+    .job-index-index,
+    .job-index-detail,
+    .catalog-product_compare-index {
         .page-wrapper {
             .lib-css(margin-top, @header-desktop__height + 32px);
         }
@@ -642,6 +657,20 @@
     .account.page-print {
         .page-wrapper {
             margin-top: 100px;
+        }
+    }
+}
+
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+    .cms-main-container {
+        .fixed-width {
+            .lib-css(padding-left, @layout-indent__width);
+            .lib-css(padding-right, @layout-indent__width);
         }
     }
 }

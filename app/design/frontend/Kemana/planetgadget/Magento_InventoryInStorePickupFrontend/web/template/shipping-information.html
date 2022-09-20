@@ -1,0 +1,41 @@
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+
+<!-- ko if: (isVisible()) -->
+<div class="shipping-information">
+    <!-- ko if: (!isStorePickup()) -->
+    <div class="ship-to">
+        <div class="shipping-information-title">
+            <span data-bind="i18n: 'Info Pengiriman'"></span>
+            <button class="action action-edit" data-bind="click: back">
+                <span data-bind="i18n: 'Ubah'"></span>
+            </button>
+        </div>
+        <div class="shipping-information-content">
+            <!-- ko foreach: getRegion('ship-to') -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        </div>
+    </div>
+    <!--/ko-->
+    <div class="ship-via">
+        <div class="shipping-information-title">
+            <span data-bind="i18n: 'Info Pengambilan'"></span>
+            <button class="action action-edit" data-bind="click: backToShippingMethod">
+                <span data-bind="i18n: 'Ubah'"></span>
+            </button>
+        </div>
+        <div class="shipping-information-content">
+            <span class="title-value" data-bind="text: getShippingMethodTitle()"></span>
+            <br/>
+            <span class="address-value" data-bind="text: getShippingMethodAddress()"></span>
+            <br/><br/>
+            <span class="telephone-value" data-bind="text: getShippingMethodTelephone()"></span>
+        </div>
+    </div>
+</div>
+<!--/ko-->

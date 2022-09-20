@@ -13,7 +13,12 @@
                     <address>
                         <?= $block->getAddressHtml($block->getAddressById($_pAddsses)) ?>
                         <br/>
-                        <?= $block->getAddressMapPoint($block->getAddressById($_pAddsses)) ?>
+                        <?php
+                            $mapPoint = $block->getAddressMapPoint($block->getAddressById($_pAddsses));
+                        ?>
+                        <span class="map-point-label <?=($mapPoint === 'Already Pinpoint') ? 'active' : ''?>">
+                            <?= $block->escapeHtml(__($mapPoint)) ?>
+                        </span>
                     </address>
                 </div>
                 <div class="box-actions">
@@ -40,7 +45,12 @@
                     <address>
                         <?= $block->getAddressHtml($block->getAddressById($_pAddsses)) ?>
                         <br/>
-                        <?= $block->getAddressMapPoint($block->getAddressById($_pAddsses)) ?>
+                        <?php
+                            $mapPoint = $block->getAddressMapPoint($block->getAddressById($_pAddsses));
+                        ?>
+                        <span class="map-point-label <?=($mapPoint === 'Already Pinpoint') ? 'active' : ''?>">
+                            <?= $block->escapeHtml(__($mapPoint)) ?>
+                        </span>
                     </address>
                 </div>
                 <div class="box-actions">

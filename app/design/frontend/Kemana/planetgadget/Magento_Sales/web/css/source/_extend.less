@@ -1,0 +1,273 @@
+// /**
+//  * Copyright © 2022 Kemana. All rights reserved.
+//  * @author Harshani Karunasekara <hkarunasekara@kemana.com>
+//  * http://www.kemana.com
+//  */
+@import 'module/_order-history_extend.less';
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .page-title-wrapper {
+        .order-status {
+            .label {
+                .lib-font-size(12);
+                color: @kemana-primary-brand-color;
+            }
+
+            .order-status {
+                .lib-font-size(12);
+                color: @kemana-primary-brand-color;
+                font-weight: @font-weight__bold;
+            }
+        }
+
+        .order-date {
+            .label {
+                .lib-font-size(12);
+                color: @kemana-primary-brand-color;
+            }
+
+            date {
+                .lib-font-size(12);
+                color: @kemana-primary-brand-color;
+            }
+        }
+    }
+
+    .order-links {
+        border-radius: @common-border-radius;
+        .lib-css(border, 1px solid @color-pg-light-gray);
+
+        .item {
+            .lib-font-size(12);
+            color: @kemana-primary-brand-color;
+            text-transform: none;
+            border: none;
+
+            a,
+            strong {
+                padding: 10px @indent__base;
+                font-weight: @font-weight__heavier;
+            }
+        }
+    }
+
+    .order-details-items {
+        padding-top: 10px;
+
+        &.invoice,
+        &.shipments {
+            padding-top: 20px;
+        }
+
+        .order-title {
+            .invoice-no,
+            .shipping-no {
+                float: left;
+                .lib-font-size(14);
+                color: @kemana-primary-brand-color;
+                font-weight: @font-weight__bold;
+
+                strong {
+                    font-weight: @font-weight__bold;
+                }
+            }
+
+            .print-invoice {
+                float: right;
+                .lib-icon-font(
+                    @icon-pg-print,
+                    @_icon-font-size: 14px,
+                    @_icon-font-color: @color-pg-light-gray,
+                    @_icon-font-margin: 0 5px 0 0
+                )
+            }
+
+            .order-title-right {
+                float: right;
+
+                .print {
+                    .lib-icon-font(
+                        @icon-pg-print,
+                        @_icon-font-size: 14px,
+                        @_icon-font-color: @color-pg-light-gray,
+                        @_icon-font-margin: 0 5px 0 0
+                    )
+                }
+
+                .track {
+                    .lib-icon-font(
+                        @icon-pg-search,
+                        @_icon-font-size: 14px,
+                        @_icon-font-color: @color-pg-light-gray,
+                        @_icon-font-margin: 0 5px 0 0
+                    )
+                }
+
+                a {
+                    &:not(:last-child) {
+                        border-right: 0;
+                        padding-right: 10px;
+                    }
+                }
+            }
+        }
+
+        .table-wrapper {
+            width: 100%;
+        }
+
+        .table-order-items {
+            .col {
+                &.name {
+                    .item-details {
+                        .product-item-name {
+                            .lib-font-size(12);
+                            color: @kemana-primary-brand-color;
+                        }
+                    }
+                }
+
+                &.price,
+                &.subtotal {
+                    .price-excluding-tax {
+                        .price {
+                            .lib-font-size(12);
+                            color: @kemana-primary-brand-color;
+                            font-weight: @font-weight__heavier;
+                        }
+                    }
+                }
+            }
+
+            tfoot {
+                td {
+                    .lib-font-size(12);
+                    color: @kemana-primary-brand-color;
+                }
+
+                .mark {
+                    .lib-font-size(12);
+                    color: @kemana-primary-brand-color;
+                    font-weight: @font-weight__heavier !important;
+                }
+
+                tr.grand_total {
+                    .mark,
+                    td.amount {
+                        strong {
+                            .lib-font-size(14);
+                            font-weight: @font-weight__bold !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .block-order-details-view {
+        .block-title {
+            border-bottom: 1px solid @color-pg-light-gray2;
+            padding-bottom: 20px;
+        }
+    }
+
+    .order-actions-toolbar {
+        .actions {
+            .order {
+                border-radius: @common-border-radius;
+            }
+
+            .return {
+                display: none;
+            }
+        }
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .order-links {
+        .item {
+            border-radius: @common-border-radius;
+
+            a,
+            strong {
+            }
+        }
+    }
+
+    .order-details-items {
+        border-radius: @common-border-radius;
+        padding: 20px 10px;
+        margin-bottom: 20px;
+    }
+
+    .table-order-items,
+    .order-items {
+        .table:not(.cart) {
+            &:not(.totals) {
+                &:not(.table-comparison) {
+                    tbody {
+                        > tr {
+                            > td {
+                                border-bottom: none;
+
+                                &.name {
+                                    .lib-vendor-prefix-display();
+                                    margin-bottom: @indent__s;
+                                    padding-left: 0;
+
+                                    .item-details {
+                                        padding-left: 90px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .order-links {
+        width: fit-content;
+        border-radius: 5px 5px 0 0;
+        .lib-css(border, @account-table-border);
+        border-bottom: none;
+
+        .item {
+            background: @color-pg-light-gray3;
+
+            a,
+            strong {
+                padding: 13px @indent__base;
+            }
+
+            &:first-child {
+                border-radius: 5px 0 0 0;
+            }
+
+            &:last-child {
+                border-radius: 0 5px 0 0;
+            }
+        }
+    }
+
+    .order-details-items {
+        margin-bottom: 40px;
+        border-radius: 0 5px 5px 5px;
+    }
+}

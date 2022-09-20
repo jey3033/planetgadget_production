@@ -20,7 +20,12 @@
                 <address>
                     <?= $block->getPrimaryBillingAddressHtml() ?>
                     <br>
-                    <?= $block->getPrimaryBillingAddressMapPoint() ?>
+                    <?php
+                        $billingMapPoint = $block->getPrimaryBillingAddressMapPoint();
+                    ?>
+                    <span class="map-point-label <?= ($billingMapPoint === 'Already Pinpoint') ? 'active' : ''?>">
+                        <?= $block->escapeHtml(__($billingMapPoint)) ?>
+                    </span>
                 </address>
             </div>
             <div class="box-actions">
@@ -35,7 +40,12 @@
                 <address>
                     <?= $block->getPrimaryShippingAddressHtml() ?>
                     <br>
-                    <?= $block->getPrimaryShippingAddressMapPoint() ?>
+                    <?php
+                        $shippingMapPoint = $block->getPrimaryShippingAddressMapPoint();
+                    ?>
+                    <span class="map-point-label <?= ($shippingMapPoint === 'Already Pinpoint') ? 'active' : ''?>">
+                        <?= $block->escapeHtml(__($shippingMapPoint)) ?>
+                    </span>
                 </address>
             </div>
             <div class="box-actions">

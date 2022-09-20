@@ -4,197 +4,22 @@
 //  * http://www.kemana.com
 //  */
 
+@brand-item-logo__border: 1px solid @color-pg-light-gray;
+@brand-item-logo-hover__border: 1px solid @color-pg-light-gray;
+@brand-item-logo__box-shadow: 0 5px 20px rgba(0, 0, 0, 0.13);
+
 //
 //  Common
 //  _____________________________________________
 
 & when (@media-common = true) {
     .home-featured-brand-container {
-        .lib-css(background, @home-featured-brand-container__background);
         .lib-css(padding, @home-featured-brand-container__padding);
-    }
-
-    .catalog-category-view {
-        .page-main {
-            .header-cont {
-                display: none;
-            }
-        }
-    }
-
-    .brand-featured,
-    .brand-chared {
-        .block-title {
-            .lib-typography(
-                @_color: false,
-                @_font-family: @home-featured-brand-container-title__font-family,
-                @_font-size: @home-featured-brand-container-title__font-size,
-                @_font-style: false,
-                @_font-weight: @home-featured-brand-container-title__font-weight,
-                @_line-height: 35px
-            );
-            margin-bottom: 25px;
-            text-align: center;
-
-            strong {
-                font-weight: normal;
-            }
-        }
-    }
-
-    .brand-content-wrapper {
-        .brand-container {
-            .lib-vendor-prefix-display();
-            .lib-vendor-prefix-flex-wrap();
-            .lib-css(margin-left, -@indent__xs);
-            .lib-css(margin-right, -@indent__xs);
-            justify-content: center;
-            padding-left: 0;
-            margin-bottom: 24px;
-
-            .block-item {
-                width: calc(~'100%/@{brand-mobile-grid-item-count}');
-                .lib-css(padding, @brand-mobile-grid-item__padding);
-                .lib-css(margin, @brand-mobile-grid-item__margin);
-                .lib-vendor-prefix-display();
-                align-items: center;
-                justify-content: center;
-
-                a {
-                    .lib-css(border, @brand-item-logo__border);
-                    padding: @indent__s;
-
-                    &:hover {
-                        .lib-css(border, @brand-item-logo-hover__border);
-                    }
-                }
-
-                .item-image {
-                    .lib-css(width, @brand-mobile-item-logo__width);
-                    .lib-css(height, @brand-item-logo__height) !important;
-                    object-fit: contain;
-                    border-radius: 5px;
-                }
-
-                .item-name {
-                    .lib-vendor-prefix-display();
-                    justify-content: center;
-                    width: 100%;
-                    text-align: center;
-                    display: none;
-                }
-            }
-        }
-    }
-
-    .home-featured-brand-container {
-        .lib-vendor-prefix-display();
 
         .block-brand-featured {
-            .lib-css(max-width, @layout__max-width);
-            .lib-css(padding-left, 0);
-            .lib-css(padding-right, 0);
-            margin-left: auto;
-            margin-right: auto;
-            margin-bottom: 0;
-
-            .block-content-wrapper {
-                .lib-vendor-prefix-display();
-
-                .brand-container {
-                    padding-left: 0;
-
-                    .block-item {
-                        width: ~'calc(100%/6 - 16.66px)';
-                        .lib-css(padding, @brand-mobile-grid-item__padding);
-                        .lib-css(margin, @brand-mobile-grid-item__margin);
-                        .lib-vendor-prefix-display();
-                        .lib-css(border, @brand-item-logo__border);
-                        align-items: center;
-                        justify-content: center;
-                        float: left;
-
-                        &:hover {
-                            box-shadow: 0 5px 20px #00000021;
-                            .lib-css(border, @brand-item-logo-hover__border);
-                        }
-
-                        .item-image {
-                            .lib-css(width, @brand-mobile-item-logo__width);
-                            .lib-css(height, @brand-item-logo__height) !important;
-                            object-fit: contain;
-                        }
-
-                        .item-name {
-                            .lib-vendor-prefix-display();
-                            justify-content: center;
-                            width: 100%;
-                            text-align: center;
-                            display: none;
-                        }
-
-                        &:nth-child(6n) {
-                            margin-right: 0;
-                        }
-                    }
-
-                }
-                .actions-toolbar {
-                    display: none;
-
-                    .primary {
-                        width: 100%;
-                        a{
-                            margin-left: 42%;
-                            width: 185px;
-                        }
-                    }
-                }
-
-            }
-
             .block-title {
-                .lib-typography(
-                    @_color: @home-featured-brand-container-title__color,
-                    @_font-family: @home-featured-brand-container-title__font-family,
-                    @_font-size: @home-featured-brand-container-title__font-size,
-                    @_font-style: false,
-                    @_font-weight: @home-featured-brand-container-title__font-weight,
-                    @_line-height: @home-featured-brand-container-title__line-height
-                );
-                .lib-css(text-transform, @home-featured-brand-container-title__text-transform);
-                margin-bottom: 10px;
+                .lib-title-with-border(@title-text-underline__enable: true);
                 display: inline-block;
-
-                h2 {
-                    span {
-                        display: inline-block;
-                        .lib-css(margin-bottom, 0);
-
-                        &:after {
-                            content: '';
-                            display: block;
-                            margin: auto;
-                            .lib-css(margin-top, -10px);
-                            .lib-css(width, 100%);
-                            .lib-css(height, 10px);
-                            .lib-css(background, @kemana-secondary-brand-color);
-                        }
-                    }
-                }
-
-                //& when (@home-featured-brand-container-title-border = true) {
-                //    &:after {
-                //        .lib-css(border-bottom, @home-featured-brand-container-title__border-bottom);
-                //        content: '';
-                //        display: block;
-                //        margin: 12px auto 0;
-                //        width: 40px;
-                //        height: 1px;
-                //        line-height: 1px;
-                //        font-size: 1px;
-                //    }
-                //}
             }
 
             span {
@@ -226,17 +51,144 @@
             }
         }
 
-        .block-button-wrapper {
+        .actions-toolbar {
+            display: none;
+        }
+    }
+
+    .block-content-wrapper,
+    .brand-content-wrapper {
+        .brand-container {
+            .lib-vendor-prefix-display();
+            .lib-vendor-prefix-flex-wrap();
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 0;
+
+            .block-item {
+                width: calc(~'100%/6 - 20px');
+                margin: 10px;
+
+                a {
+                    &:hover {
+                        img {
+                            .lib-css(box-shadow, @brand-item-logo__box-shadow);
+                            .lib-css(border, @brand-item-logo-hover__border);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .brand-items-index {
+        .brand-container {
+            .block-item {
+                .item-name {
+                    display: none;
+                }
+            }
+
+            .brand-featured {
+                .block-title {
+                    strong {
+                        span {
+                            span {
+                                display: inline-block;
+                                .lib-css(margin-bottom, 0);
+
+                                &:after {
+                                    content: '';
+                                    display: block;
+                                    margin: auto;
+                                    .lib-css(margin-top, -14px);
+                                    .lib-css(width, 100%);
+                                    .lib-css(height, 10px);
+                                    .lib-css(background, @kemana-secondary-brand-color);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .cms-page-view {
+        .page-main {
+            .block-brand-featured {
+                .block-title {
+
+                }
+
+                ul {
+                    li {
+                        padding-left: 0;
+                        margin: 10px 10px 0;
+
+                        &:before {
+                            display: none;
+                        }
+
+                        a {
+                            display: inline-block;
+                            .lib-css(border, 1px solid @color-pg-light-gray);
+                            border-radius: @common-border-radius;
+                            width: 100%;
+
+                            img {
+                                border-radius: @common-border-radius;
+                            }
+
+                            &:hover {
+
+                            }
+                        }
+                    }
+                }
+
+                .actions-toolbar {
+                    text-align: center;
+                    margin-top: 23px;
+
+                    .primary {
+                        float: none;
+                        .primary {
+                            .lib-button-white();
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .brand-featured,
+    .brand-chared {
+        .block-title {
+            .lib-typography(
+                @_color: false,
+                @_font-family: @home-featured-brand-container-title__font-family,
+                @_font-size: @home-featured-brand-container-title__font-size,
+                @_font-style: false,
+                @_font-weight: @home-featured-brand-container-title__font-weight,
+                @_line-height: 30px
+            );
+            margin-bottom: 30px;
             text-align: center;
 
-            a {
-                .lib-link-as-button();
-                .lib-button-primary();
+            strong {
+                font-weight: @home-featured-brand-container-title__font-weight;
             }
         }
     }
 
     .brand-chared {
+        background: @panel__background-color;
+
+        .block-title {
+            .lib-font-size(20);
+        }
+
         .block-content {
             .block-char {
                 .lib-css(margin-bottom, @indent__base);
@@ -269,6 +221,14 @@
                             .lib-css(background, @brand-character-list-item__background);
                             .lib-css(padding, @brand-character-list-item__padding);
                             display: inline-block;
+                            border-radius: @common-border-radius;
+                            font-weight: @font-weight__bold;
+
+                            &:hover {
+                                text-decoration: none;
+                                .lib-css(color, @brand-character-list-item__color);
+                                .lib-css(border, @brand-character-list-item-hover__border);
+                            }
                         }
 
                         &.disable {
@@ -278,6 +238,8 @@
                             span {
                                 .lib-css(background, @brand-character-list-item-disable__background);
                                 .lib-css(opacity, @brand-character-list-item-disable__opacity);
+                                .lib-css(color, @brand-character-list-item-disable__color);
+                                .lib-css(border, @brand-character-list-item-disable__border);
                             }
                         }
                     }
@@ -285,14 +247,14 @@
             }
 
             .list-char-container {
-                .lib-css(border-top, @brand-character-list-item__border);
+                .lib-css(border-top, @brand-character-sort-item__border);
                 width: 100%;
                 padding-top: 17px;
                 margin-top: @indent__s;
             }
 
             .list-char-item {
-                .lib-css(border-top, @brand-character-list-item__border);
+                .lib-css(border-top, @brand-character-sort-item__border);
                 padding-top: 16px;
                 padding-bottom: 18px;
 
@@ -302,7 +264,7 @@
                 }
 
                 &:last-child {
-                    padding-bottom: 0;
+                    .lib-css(border-bottom, @brand-character-sort-item__border);
 
                     .list-char {
                         padding-bottom: 0;
@@ -334,6 +296,8 @@
                         list-style: none;
                         padding: 0;
                         margin: 0;
+                        align-items: center;
+                        min-height: 38px;
 
                         li {
                             .lib-css(margin-bottom, @brand-character-list-item__margin-bottom);
@@ -346,9 +310,14 @@
                                 @_line-height: @brand-character-list-item__line-height
                             );
                             width: 100%;
+                            padding-block: 15px;
 
                             a {
                                 .lib-css(color, @brand-character-list-item__color);
+
+                                .count-number {
+                                    .lib-css(color, @color-pg-light-gray);
+                                }
                             }
                         }
                     }
@@ -363,23 +332,10 @@
 //  _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
-    .home-featured-brand-container {
-        .block-brand-featured {
-            .block-content-wrapper {
-                .brand-container {
-                    .block-item {
-                        width: ~'calc(100%/2 - 5px)';
-                        margin: 0 10px 10px 0;
 
-                        &:nth-child(2n) {
-                            margin-right: 0;
-                        }
-                    }
-                }
-            }
-        }
-    }
     .brand-chared {
+        padding: 50px 10px;
+
         .block-content {
             .sort-wrapper {
                 .alpha-sort {
@@ -422,29 +378,9 @@
 //  _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
-    .brand-container {
-        &.block-brand-featured {
-            .lib-css(padding-left, @layout-indent__width);
-            .lib-css(padding-right, @layout-indent__width);
-        }
-    }
-
-    .brand-content-wrapper {
-        .brand-container {
-            .lib-css(margin-left, @brand-item-logo-container-desktop__margin);
-            .lib-css(margin-right, @brand-item-logo-container-desktop__margin);
-            margin-bottom: 29px;
-
-            .block-item {
-                width: calc(~'100%/@{brand-tablet-grid-item-count}');
-                .lib-css(height, @brand-item-logo-container__height);
-                .lib-css(padding, @brand-desktop-grid-item__padding);
-                .lib-css(margin-bottom, @brand-desktop-grid-item__margin-bottom);
-            }
-        }
-    }
-
     .home-featured-brand-container {
+        padding-bottom: @block-padding;
+
         .block-brand-featured {
             .block-title {
                 h2 {
@@ -452,17 +388,44 @@
                     .lib-line-height(31);
                 }
             }
+
+            .block-content-wrapper {
+                margin: -10px;
+            }
         }
-        .brand-content-wrapper {
-            .brand-container {
-                .lib-css(margin-left, @brand-item-logo-container-home-desktop__margin);
-                .lib-css(margin-right, @brand-item-logo-container-home-desktop__margin);
+    }
+
+    .brand-items-index {
+        .page-main {
+            max-width: unset;
+            padding-inline: 0;
+
+            .brand-featured {
+                margin-inline: auto;
+                margin-bottom: 40px;
+                max-width: @other-pages-max-width + 4px;
+
+                .block-title {
+                    .lib-line-height(38);
+                    margin-bottom: 15px;
+
+                }
             }
         }
     }
 
     .brand-chared {
+        padding-block: 50px;
+
+        .block-title {
+            max-width: @other-pages-max-width;
+            margin-inline: auto;
+        }
+
         .block-content {
+            max-width: @other-pages-max-width;
+            margin-inline: auto;
+
             .block-char {
                 .lib-css(margin-bottom, @indent__l);
             }
@@ -475,13 +438,10 @@
 
                 .list-char-item {
                     .lib-vendor-prefix-display();
+                    align-items: center;
                     width: 100%;
-                    padding-top: 28px;
-                    padding-bottom: 28px;
-
-                    &:last-child {
-                        padding-bottom: 0;
-                    }
+                    padding-top: 15px;
+                    padding-bottom: 15px;
                 }
 
                 .list-char {
@@ -513,14 +473,6 @@
 //  _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
-    .brand-content-wrapper {
-        .brand-container {
-            .block-item {
-                width: calc(~'100%/@{brand-desktop-grid-item-count}');
-            }
-        }
-    }
-
     .home-featured-brand-container {
         .lib-css(max-width, @layout__max-width);
         margin-left: auto;
