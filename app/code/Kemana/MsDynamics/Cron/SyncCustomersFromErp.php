@@ -132,13 +132,17 @@ class SyncCustomersFromErp
         $ackCustomerData = [];
         $newCustomerId = 0;
 
-        $i = 0;
+        if (!$this->helper->isLiveApi()) {
+            $i = 0;
+        }
+
         foreach ($getCustomersFromErp['response'] as $erpCustomer) {
-            // TODO Remove this
-            if ($i > 5) {
-                break;
+
+            if (!$this->helper->isLiveApi()) {
+                if ($i > 5) {
+                    break;
+                }
             }
-            // TODO END
 
             if ((!isset($erpCustomer['CustomerNo']) || !$erpCustomer['CustomerNo'])
                 || (!isset($erpCustomer['Email']) || !$erpCustomer['Email'])
@@ -182,7 +186,8 @@ class SyncCustomersFromErp
 
                 $websiteId = 1;
 
-                $nameArray = explode(" ", $erpCustomer['Name'], 2);
+                $erpCustomer['Name'] = str_replace(array("#", "'", ";", "/", "@"), ' ', $erpCustomer['Name']);
+                $nameArray = explode(" ", trim($erpCustomer['Name']), 2);
                 $lastName = (isset($nameArray[1]) && $nameArray[1] != "") ? $nameArray[1] : $nameArray[0];
 
                 // Preparing data for new customer
@@ -253,9 +258,9 @@ class SyncCustomersFromErp
             } catch (\Exception $e) {
                 $this->helper->log('CUSTOMER : Exception : Customer number ' . $erpCustomer['CustomerNo'] . ' failed to register in Magento. Error : ' . $e->getMessage(), 'error');
             }
-            // TODO Remove this
-            $i++;
-            // TODO END
+            if (!$this->helper->isLiveApi()) {
+                $i++;
+            }
         }
 
         if (empty($ackCustomerData)) {

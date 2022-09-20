@@ -91,6 +91,29 @@
                             color: @primary__color__dark;
                         }
                     }
+
+                    #checkout-step-shipping_method{
+                        .no-quotes-block {
+                            border: 1px solid #000;
+                            border-radius: 5px;
+                            padding: 5px;
+                            margin: 30px -10px;
+                            padding-bottom: 10px;
+                            padding-left: 10px;
+
+                            &:before {
+                                content: @icon-info;
+                                font-family: 'icons-kemana-theme';
+                                font-size: 20px;
+                                background: black;
+                                color: white;
+                                border-radius: 10px;
+                                margin-right: 10px;
+                                position: relative;
+                                top: 3px;
+                            }
+                        }
+                    }
                 }
             }
             .form-shipping-address {
@@ -125,7 +148,7 @@
 
                 #checkout-shipping-method-load {
                     margin-top: 50px;
-                }                
+                }
 
                 .action-select-store-pickup {
                     background: @color-pg-light-gray2 0% 0% no-repeat padding-box;
@@ -147,7 +170,7 @@
                 .primary {
                     color: @color-pg-dark-gray;
                     background: @color-pg-light-gray2 0% 0% no-repeat padding-box;
-                    border-radius: 5px;
+                    border-radius: @common-border-radius;
                     border: none;
                     float: unset !important;
                 }
@@ -171,9 +194,13 @@
             .button-maps {
                 background: @color-white 0% 0% no-repeat padding-box;
                 border: 1px solid @color-black;
-                border-radius: 5px;
+                border-radius: @common-border-radius;
                 opacity: 1;
                 margin-top: 20px;
+
+                span{
+                    text-transform: capitalize !important;
+                }
 
                 &:before {
                     content: '';
@@ -221,10 +248,32 @@
 
             #shipping-new-address-form {
                 .field .control{
-                    button.button-maps:hover {
-                        background-color: @color-black;
-                        color: @color-white;
+                    button.button-maps{
+                        &:hover {
+                            background-color: @color-black;
+                            color: @color-white;
+                            
+                            &:before{
+                                background: unset;
+                            }
+                        }
+                            background: url(/media/logistic/Pin_white.png) left no-repeat;
+                            background-size: 15px !important;
+                            background-origin: content-box;
                     }
+                }
+                .maps-input-title{
+                    width: max-content;
+                }
+                .admin__control-text.maps-input{
+                    border: none;
+                    background: url(/media/logistic/Pinpoint.png) left no-repeat;
+                    background-size: 15px !important;
+                    display: inline-block;
+                    padding: 20px;
+                    padding-top: 25px !important;
+                    margin-top: 5px;
+
                 }
             }
 
@@ -288,7 +337,7 @@
                             }
                         }
                     }
-                   
+
                     .form-login{
                         padding-top: 20px;
 
@@ -340,14 +389,14 @@
                 .selected-item {
                     background-color: @color-lightyellow-bg;
                     border-color: @color-oragne-bd !important;
-                    border-radius: 5px;
+                    border-radius: @common-border-radius;
                     width: 278px;
                     height: fit-content;
                     line-height: 20px;
                 }
 
                 .not-selected-item {
-                    border-radius: 5px;
+                    border-radius: @common-border-radius;
                     width: 278px;
                     height: fit-content;
                     line-height: 20px;
@@ -370,7 +419,7 @@
                         font-weight: bold;
                     }
                 }
-                
+
                 .form-login {
                     .actions-toolbar {
                         .secondary {
@@ -378,7 +427,7 @@
                         }
                     }
                 }
-            }            
+            }
         }
     }
 
@@ -407,6 +456,11 @@
                         button.button.action{
                             background-color: @color-white;
                             border: 1px solid @primary__color__dark;
+
+                            &:hover{
+                                background-color: @primary__color__dark;
+                                color: @color-white;
+                            }
                         }
                     }
                 }
@@ -435,9 +489,9 @@
                             }
                         }
                     }
-                }               
+                }
             }
-            
+
             .step-title{
                 display: none;
                 padding: 20px 20px;
@@ -486,7 +540,7 @@
                 .actions-toolbar{
                     margin-bottom: 20px;
                 }
-            }           
+            }
         }
         .selected-store-pickup {
             .step-content {
@@ -543,7 +597,7 @@
                 padding: 0 20px 0px;
                 margin: 20px !important;
                 border: 1px solid @color-pg-light-gray2;
-                border-radius: 5px;
+                border-radius: @common-border-radius;
 
                 .summary-totals {
                     display: none;
@@ -568,7 +622,7 @@
                     width: 100% !important;
                 }
             }
-            
+
             .step-title{
                 padding: 10px 0 !important;
             }
@@ -618,6 +672,9 @@
                         width: 100%;
                         margin-left: unset !important;
                     }
+                    .maps-input-title{
+                        width: fit-content !important;
+                    }
                 }
             }
 
@@ -650,7 +707,7 @@
 
         .shipping-address-items{
             margin-left: 0 !important;
-        }        
+        }
     }
 
     .opc-wrapper{
@@ -664,7 +721,7 @@
                 }
                 .selected-location-details{
                     margin-left: 5px !important;
-                }               
+                }
             }
             .step-head-title{
                 padding: 20px 0;
@@ -685,7 +742,7 @@
                 margin-bottom: 30px;
             }
         }
-    }      
+    }
 }
 
 //
@@ -721,7 +778,7 @@
             }
             .no-selected-location{
                 margin: 20px 20px;
-            }         
+            }
         }
         .selected-store-pickup {
             .step-content {
@@ -752,7 +809,7 @@
             .not-selected-item {
                 margin-right: unset !important;
             }
-        }       
+        }
     }
     .opc-summary-wrapper{
         .opc-block-summary{

@@ -51,7 +51,7 @@
     @title__font-color: @kemana-primary-brand-color,
     @title__font-text-transform: none,
     @title__text-align: left,
-    @title__margin-bottom: 27px,
+    @title__margin-bottom: 26px,
     @title-icon__margin-top: -14px,
     @title-icon__width: 100%,
     @title-icon__height: 10px,
@@ -66,10 +66,7 @@
     h1,
     h2 {
         display: inline-block;
-        .lib-font-size(@title__font-size);
-        .lib-line-height(@title__line-height);
         .lib-css(font-weight, @title__font-weight);
-        .lib-css(margin-bottom, @title__margin-bottom);
 
         & when (@title-text-underline__enable = true) {
             span {
