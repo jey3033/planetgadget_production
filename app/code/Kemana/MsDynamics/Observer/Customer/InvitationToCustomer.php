@@ -100,11 +100,13 @@ class InvitationToCustomer implements ObserverInterface
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
         );
 
-        $customer = $this->customerRepository->getById($invitation->getCustomerId());
-        if ($point && $customer->getCustomAttribute('ms_dynamic_customer_number')) {            
-            $erpCustomerNumber = $customer->getCustomAttribute('ms_dynamic_customer_number')->getValue();
-            if ($erpCustomerNumber) {
-                $this->erpReward->addCustomerEarnPointToErp($invitation->getCustomerId(), $erpCustomerNumber, $point);
+        if ($invitation->getCustomerId() && $invitation->getReferralId()) {
+            $customer = $this->customerRepository->getById($invitation->getCustomerId());
+            if ($point && $customer->getCustomAttribute('ms_dynamic_customer_number')) {            
+                $erpCustomerNumber = $customer->getCustomAttribute('ms_dynamic_customer_number')->getValue();
+                if ($erpCustomerNumber) {
+                    $this->erpReward->addCustomerEarnPointToErp($invitation->getCustomerId(), $erpCustomerNumber, $point);
+                }
             }
         }
         return $this;
