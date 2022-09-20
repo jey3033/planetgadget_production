@@ -40,22 +40,30 @@ class Request
     protected $xmlProcessor;
 
     /**
+     * @var \Kemana\MsDynamics\Logger\ApiTransportLogger
+     */
+    protected $apiTransportLogger;
+
+    /**
      * @param \Magento\Framework\HTTP\Client\Curl $curl
      * @param \Kemana\MsDynamics\Helper\Data $helper
      * @param \Magento\Framework\Serialize\Serializer\Json $json
      * @param XmlProcessor $xmlProcessor
+     * @param \Kemana\MsDynamics\Logger\ApiTransportLogger $apiTransportLogger
      */
     public function __construct(
         \Magento\Framework\HTTP\Client\Curl          $curl,
         \Kemana\MsDynamics\Helper\Data               $helper,
         \Magento\Framework\Serialize\Serializer\Json $json,
-        \Kemana\MsDynamics\Model\Api\XmlProcessor    $xmlProcessor
+        \Kemana\MsDynamics\Model\Api\XmlProcessor    $xmlProcessor,
+        \Kemana\MsDynamics\Logger\ApiTransportLogger $apiTransportLogger
     )
     {
         $this->curl = $curl;
         $this->helper = $helper;
         $this->json = $json;
         $this->xmlProcessor = $xmlProcessor;
+        $this->apiTransportLogger = $apiTransportLogger;
     }
 
     /**
@@ -112,6 +120,8 @@ class Request
             $xmlResponseBody = $this->curl->getBody();
 
             $precessedResponse = $this->xmlProcessor->processResponse($this->curl->getBody(), $responseStatus, $apiFunction, $soapAction);
+
+            $this->apiTransportLogger->saveApiTransportLogToDB($apiUrl,$method,$apiFunction,$soapAction,$postParameters,$xmlResponseBody,$responseStatus);
 
             if ($responseStatus == '500') {
                 $this->helper->log('Error Response : ' . $xmlResponseBody);

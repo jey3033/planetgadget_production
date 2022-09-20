@@ -29,6 +29,10 @@
                     <label>Enable</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
+                <field id="api_mode" translate="label" type="select" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>API Mode</label>
+                    <source_model>Kemana\MsDynamics\Model\Config\Source\ApiMode</source_model>
+                </field>
                 <field id="url" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1"
                        showInStore="1" canRestore="1">
                     <label>Api Url - Common</label>

@@ -16,6 +16,12 @@
 //  _____________________________________________
 & when (@media-common =true) {
     .checkout-index-index {
+        .authentication-wrapper{
+            display: none;
+        }
+        .header-top-wrapper{
+            display: none;
+        }
         .checkout-container {
             margin-top: 25px;
         }
@@ -52,12 +58,8 @@
                 width: 100% !important;
 
                 .checkout-social-login {
-                    .facebook-login {
-                        max-width: unset !important;
-                        height: 40px;
-                    }
-
-                    .google-login {
+                    .social-btn {
+                        margin-bottom: 0 !important;
                         max-width: unset !important;
                         height: 40px;
                     }
@@ -83,6 +85,35 @@
                     border-bottom: 0;
                     border: 1px solid @color-pg-light-gray2;
                     border-top: 0;
+
+                    .sub-title{
+                        span{
+                            color: @primary__color__dark;
+                        }
+                    }
+
+                    #checkout-step-shipping_method{
+                        .no-quotes-block {
+                            border: 1px solid #000;
+                            border-radius: 5px;
+                            padding: 5px;
+                            margin: 30px -10px;
+                            padding-bottom: 10px;
+                            padding-left: 10px;
+
+                            &:before {
+                                content: @icon-info;
+                                font-family: 'icons-kemana-theme';
+                                font-size: 20px;
+                                background: black;
+                                color: white;
+                                border-radius: 10px;
+                                margin-right: 10px;
+                                position: relative;
+                                top: 3px;
+                            }
+                        }
+                    }
                 }
             }
             .form-shipping-address {
@@ -117,7 +148,7 @@
 
                 #checkout-shipping-method-load {
                     margin-top: 50px;
-                }                
+                }
 
                 .action-select-store-pickup {
                     background: @color-pg-light-gray2 0% 0% no-repeat padding-box;
@@ -139,7 +170,7 @@
                 .primary {
                     color: @color-pg-dark-gray;
                     background: @color-pg-light-gray2 0% 0% no-repeat padding-box;
-                    border-radius: 5px;
+                    border-radius: @common-border-radius;
                     border: none;
                     float: unset !important;
                 }
@@ -163,9 +194,13 @@
             .button-maps {
                 background: @color-white 0% 0% no-repeat padding-box;
                 border: 1px solid @color-black;
-                border-radius: 5px;
+                border-radius: @common-border-radius;
                 opacity: 1;
                 margin-top: 20px;
+
+                span{
+                    text-transform: capitalize !important;
+                }
 
                 &:before {
                     content: '';
@@ -213,10 +248,32 @@
 
             #shipping-new-address-form {
                 .field .control{
-                    button.button-maps:hover {
-                        background-color: @color-black;
-                        color: @color-white;
+                    button.button-maps{
+                        &:hover {
+                            background-color: @color-black;
+                            color: @color-white;
+                            
+                            &:before{
+                                background: unset;
+                            }
+                        }
+                            background: url(/media/logistic/Pin_white.png) left no-repeat;
+                            background-size: 15px !important;
+                            background-origin: content-box;
                     }
+                }
+                .maps-input-title{
+                    width: max-content;
+                }
+                .admin__control-text.maps-input{
+                    border: none;
+                    background: url(/media/logistic/Pinpoint.png) left no-repeat;
+                    background-size: 15px !important;
+                    display: inline-block;
+                    padding: 20px;
+                    padding-top: 25px !important;
+                    margin-top: 5px;
+
                 }
             }
 
@@ -280,6 +337,36 @@
                             }
                         }
                     }
+
+                    .form-login{
+                        padding-top: 20px;
+
+                        span.note{
+                            font-weight: 600;
+                            color: @primary__color__dark;
+                            width: max-content;
+                        }
+
+                        .actions-toolbar {
+                            margin-bottom: 20px;
+
+                            .action.primary{
+                                background-color: @color-oragne-bd;
+                                border: 1px solid @color-oragne-bd;
+                                color: @primary__color__dark;
+
+                                &:hover {
+                                    background-color: @color-pg-orange;
+                                    border: 1px solid @color-pg-orange;
+                                    color: @primary__color__dark;
+                                }
+                            }
+
+                            .secondary {
+                                display: none !important;
+                            }
+                        }
+                    }
                 }
 
                 .checkout-shipping-method {
@@ -302,14 +389,14 @@
                 .selected-item {
                     background-color: @color-lightyellow-bg;
                     border-color: @color-oragne-bd !important;
-                    border-radius: 5px;
+                    border-radius: @common-border-radius;
                     width: 278px;
                     height: fit-content;
                     line-height: 20px;
                 }
 
                 .not-selected-item {
-                    border-radius: 5px;
+                    border-radius: @common-border-radius;
                     width: 278px;
                     height: fit-content;
                     line-height: 20px;
@@ -322,7 +409,25 @@
                 .shipping-address-phone{
                     display: flex;
                 }
-            }            
+            }
+
+            #store-selector {
+                .step-head-title{
+                    span{
+                        text-align: left;
+                        font-size: 20px;
+                        font-weight: bold;
+                    }
+                }
+
+                .form-login {
+                    .actions-toolbar {
+                        .secondary {
+                            display: none !important;
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -344,9 +449,6 @@
             #checkout-step-store-selector{
                 display: contents;
 
-                .no-selected-location{
-                    margin: 20px 20px;
-                }
                 .actions-toolbar{
                     display: grid;
 
@@ -354,6 +456,11 @@
                         button.button.action{
                             background-color: @color-white;
                             border: 1px solid @primary__color__dark;
+
+                            &:hover{
+                                background-color: @primary__color__dark;
+                                color: @color-white;
+                            }
                         }
                     }
                 }
@@ -382,9 +489,11 @@
                             }
                         }
                     }
-                }               
+                }
             }
+
             .step-title{
+                display: none;
                 padding: 20px 20px;
             }
 
@@ -421,7 +530,17 @@
                         }
                     }
                 }
-            }           
+
+                span.note{
+                    font-weight: 600;
+                    color: @primary__color__dark;
+                    width: max-content;
+                }
+
+                .actions-toolbar{
+                    margin-bottom: 20px;
+                }
+            }
         }
         .selected-store-pickup {
             .step-content {
@@ -435,6 +554,14 @@
             }
         }
 
+    }
+
+    .opc-summary-wrapper{
+        .block.summary-totals{
+            tr.totals.shipping.excl td span {
+                color: @color-pg-dark-gray;
+            }
+        }
     }
 }
 
@@ -470,7 +597,7 @@
                 padding: 0 20px 0px;
                 margin: 20px !important;
                 border: 1px solid @color-pg-light-gray2;
-                border-radius: 5px;
+                border-radius: @common-border-radius;
 
                 .summary-totals {
                     display: none;
@@ -494,6 +621,14 @@
                 span.note.fieldseperate {
                     width: 100% !important;
                 }
+            }
+
+            .step-title{
+                padding: 10px 0 !important;
+            }
+
+            .form-login{
+                border-bottom: unset !important;
             }
         }
 
@@ -537,6 +672,9 @@
                         width: 100%;
                         margin-left: unset !important;
                     }
+                    .maps-input-title{
+                        width: fit-content !important;
+                    }
                 }
             }
 
@@ -569,7 +707,7 @@
 
         .shipping-address-items{
             margin-left: 0 !important;
-        }        
+        }
     }
 
     .opc-wrapper{
@@ -582,8 +720,15 @@
                     }
                 }
                 .selected-location-details{
-                    margin-left: 10px !important;
-                }               
+                    margin-left: 5px !important;
+                }
+            }
+            .step-head-title{
+                padding: 20px 0;
+                margin-bottom: -30px;
+            }
+            .no-selected-location{
+                margin: 20px 0;
             }
             .step-title{
                 padding: 30px 10px !important;
@@ -592,7 +737,12 @@
                 margin-top: 0 !important;
             }
         }
-    }      
+        .step-content{
+            .primary{
+                margin-bottom: 30px;
+            }
+        }
+    }
 }
 
 //
@@ -602,7 +752,7 @@
     .opc-wrapper{
         #store-selector{
             width: 640px;
-            height: 537px;
+            height: 100%;
 
             #checkout-step-store-selector {
                 .actions-toolbar{
@@ -621,7 +771,14 @@
                         width: 325px;
                     }
                 }
-            }                       
+            }
+            .step-head-title{
+                padding: 20px 20px;
+                margin-bottom: -30px;
+            }
+            .no-selected-location{
+                margin: 20px 20px;
+            }
         }
         .selected-store-pickup {
             .step-content {
@@ -630,6 +787,7 @@
                         >.primary {
                             width: 342px;
                             margin-left: 19px;
+                            margin-bottom: 30px;
 
                             button{
                                 width:342px;
@@ -651,6 +809,13 @@
             .not-selected-item {
                 margin-right: unset !important;
             }
-        }       
-    }  
+        }
+    }
+    .opc-summary-wrapper{
+        .opc-block-summary{
+            .block.items-in-cart{
+                margin-top: -20px;
+            }
+        }
+    }
 }

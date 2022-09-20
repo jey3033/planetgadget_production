@@ -12,7 +12,9 @@
  * @author   Parth Godhani <pgodhani@kemana.com>
  */
 -->
-
+<div class="step-head-title" data-role="title">
+    <span data-bind="i18n: 'Ambil Di Toko'">Ambil Di Toko</span>
+</div>
 <ifnot args="isCustomerLoggedIn()">
     <each args="getRegion('before-login-form')">
         <div template=" {name: getTemplate()}"></div>

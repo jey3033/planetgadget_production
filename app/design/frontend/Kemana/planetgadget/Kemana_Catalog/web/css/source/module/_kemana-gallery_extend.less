@@ -43,7 +43,7 @@
             &--vertical {
                 .fotorama__thumb {
                     .lib-css(background-color, @fotorama-gallery-thumb__background-color);
-                    border-radius: 5px;
+                    border-radius: @common-border-radius;
                     min-width: 88px;
 
                 }
@@ -57,7 +57,7 @@
 
                     &:hover {
                         .lib-css(background-color, @panel__background-color);
-                        border-radius: 5px;
+                        border-radius: @common-border-radius;
                     }
 
                     .fotorama__thumb--icon {
@@ -111,7 +111,7 @@
 
             &--horizontal {
                 .fotorama__thumb {
-                    border-radius: 5px;
+                    border-radius: @common-border-radius;
                     .lib-css(background, @panel__background-color);
                 }
             }
@@ -122,7 +122,7 @@
 
                 .fotorama__nav__frame {
                     .lib-css(border, @fotorama-active-border);
-                    border-radius: 5px;
+                    border-radius: @common-border-radius;
                     .lib-css(height, @fotorama-gallery-thumb__height);
                     margin-bottom: 20px;
                     padding: 0;
@@ -147,12 +147,12 @@
     //  Gallery Placeholder
     .gallery-placeholder {
         .fotorama__stage {
-            max-height: 530px;
+            max-height:  ~'calc(100vw - 20px)';
             margin-bottom: 0;
 
             .fotorama__stage__frame {
                 .lib-css(background-color, @color-white);
-                border-radius: 5px;
+                border-radius: @common-border-radius;
                 width: ~'calc(100% - 20px)';
             }
         }
@@ -287,11 +287,11 @@
 
                     .fotorama__nav__frame {
                         margin-right: 10px;
-                        border-radius: 5px;
+                        border-radius: @common-border-radius;
                         min-width: 88px;
 
                         img {
-                            border-radius: 5px;
+                            border-radius: @common-border-radius;
                         }
                     }
                 }

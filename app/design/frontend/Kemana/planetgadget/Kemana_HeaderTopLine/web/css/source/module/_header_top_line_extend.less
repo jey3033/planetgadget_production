@@ -4,6 +4,9 @@
 //  * http://www.kemana.com
 //  */
 
+//  Header Top variables
+@header-top-font_color: @kemana-primary-brand-color;
+
 //
 //  Common
 //  _____________________________________________
@@ -111,10 +114,11 @@
             .header-top-wrapper-right {
                 a {
                     .lib-vendor-prefix-display();
-                    .lib-css(color, @color-white);
+                    .lib-css(color, @header-top-font_color);
                     padding-inline: 10px;
-                    .lib-font-size(10);
-                    .lib-line-height(20);
+                    .lib-font-size(12);
+                    .lib-line-height(24);
+                    font-weight: @font-weight__semibold;
                 }
 
                 li {
@@ -147,7 +151,7 @@
                         .lib-css(border, 1px solid @color-pg-light-gray2);
                         box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
                         padding: @indent__base 0;
-                        border-radius: 5px;
+                        border-radius: @common-border-radius;
                         display: none;
                         min-width: 256px;
 

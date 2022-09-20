@@ -88,17 +88,20 @@
         .price-box {
             .weee {
                 margin-bottom: 0;
-                line-height: 16px;
-                height: 16px;
+                //line-height: 38px;
+                //height: 16px;
+                .lib-line-height(@pdp-product-price__font-size + 10);
 
                 span {
-                    line-height: 16px;
-                    height: 16px;
+                    .lib-line-height(@pdp-product-price__font-size + 10);
+                    //line-height: 16px;
+                    //height: 16px;
                 }
             }
 
             .price-wrapper {
                 .price {
+                    display: block;
                     .lib-line-height(@pdp-product-price__font-size + 10);
                 }
             }
@@ -179,6 +182,11 @@
                     .lib-heading(h2);
                 }
             }
+
+            .price-to,
+            .price-from {
+                .lib-line-height(38);
+            }
         }
     }
 }
@@ -250,7 +258,7 @@
             max-width: 640px;
             padding: 30px 30px 35px;
             background: @color-white;
-            border-radius: 5px;
+            border-radius: @common-border-radius;
             margin-bottom: 30px;
 
             .box-tocart {
@@ -264,7 +272,7 @@
         .product.media {
             width: ~'calc(100% - 660px)';
             margin-bottom: 30px;
-            border-radius: 5px;
+            border-radius: @common-border-radius;
         }
     }
 }

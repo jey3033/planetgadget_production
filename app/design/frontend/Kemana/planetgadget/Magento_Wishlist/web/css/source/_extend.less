@@ -74,11 +74,16 @@
                         }
                         .product-item-actions {
                             width: 100%;
+                            .actions-primary {
+                                .action {
+                                    text-transform: none;
+                                }
+                            }
                         }
 
                         .stock {
                             &.unavailable {
-                                border-radius: 5px;
+                                border-radius: @common-border-radius;
                             }
                         }
                     }
@@ -187,6 +192,20 @@
                 .legend + br {
                     display: none;
                 }
+            }
+        }
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .products-grid {
+        &.wishlist {
+            .product-item-name {
+                .lib-font-size(12);
             }
         }
     }
