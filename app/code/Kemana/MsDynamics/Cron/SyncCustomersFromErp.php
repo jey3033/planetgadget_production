@@ -155,7 +155,7 @@ class SyncCustomersFromErp
             }
 
             if (!filter_var($erpCustomer['Email'], FILTER_VALIDATE_EMAIL)) {
-                $this->helper->log('CUSTOMER : This customers email address "'.$erpCustomer['Email'].'" is not a valid email. Skipping customer ERP number : ' . $erpCustomer['CustomerNo'], 'info');
+                $this->helper->log('CUSTOMER : This customers email address "' . $erpCustomer['Email'] . '" is not a valid email. Skipping customer ERP number : ' . $erpCustomer['CustomerNo'], 'info');
                 continue;
             }
 
@@ -211,7 +211,7 @@ class SyncCustomersFromErp
 
                 if (!$existingCustomer) {
                     $getNewCustomer = $this->magentoCustomer->load($newCustomerId);
-                    $getNewCustomer->sendNewAccountEmail();
+                    //$getNewCustomer->sendNewAccountEmail();
                     $this->helper->log('CUSTOMER : Successfully sent the email to the ERP customer : ' . $erpCustomer['CustomerNo'] . ' in Magento', 'info');
 
                     $this->helper->log('CUSTOMER : Successfully created the customer account in Magento for ERP customer : ' . $erpCustomer['CustomerNo'], 'info');
@@ -220,36 +220,36 @@ class SyncCustomersFromErp
                 }
 
                 try {
-
+                    // In here used a ELSEIF statement because its need to complete the loop to update the limit
                     if (!isset($erpCustomer['Postcode']) || !$erpCustomer['Postcode']) {
+
                         $this->helper->log('CUSTOMER : Post code missing for this customer. Aborting the address. Email : ' . $erpCustomer['Email']);
-                        continue;
-                    }
-                    if (!isset($erpCustomer['Address']) || !$erpCustomer['Address']) {
+                    } elseif (!isset($erpCustomer['Address']) || !$erpCustomer['Address']) {
+
                         $this->helper->log('CUSTOMER : Address missing for this customer. Aborting the address. Email : ' . $erpCustomer['Email']);
-                        continue;
+                    } else {
+
+                        $this->helper->log('CUSTOMER : Started to create the address in Magento for ERP customer : ' . $erpCustomer['CustomerNo'], 'info');
+
+                        $address = $this->addressFactory->create();
+
+                        $address->setFirstname($nameArray[0] ?? "")
+                            ->setLastname($lastName)
+                            ->setCountryId('ID')
+                            ->setCity($erpCustomer['City'] ?? "")
+                            ->setPostcode($erpCustomer['Postcode'])
+                            ->setCustomerId($newCustomerId)
+                            ->setStreet([$erpCustomer['Address']])
+                            ->setTelephone($erpCustomer['PhoneNo'])
+                            ->setIsDefaultBilling(true)
+                            ->setIsDefaultShipping(true);
+
+                        $this->addressRepository->save($address);
+
+                        $this->helper->log('CUSTOMER : Successfully created the address account in Magento for ERP customer : ' . $erpCustomer['CustomerNo'], 'info');
+
+                        $this->helper->log('CUSTOMER : Started to update the Magento Customer ID in ERP for ERP customer : ' . $erpCustomer['CustomerNo'], 'info');
                     }
-
-                    $this->helper->log('CUSTOMER : Started to create the address in Magento for ERP customer : ' . $erpCustomer['CustomerNo'], 'info');
-
-                    $address = $this->addressFactory->create();
-
-                    $address->setFirstname($nameArray[0] ?? "")
-                        ->setLastname($lastName)
-                        ->setCountryId('ID')
-                        ->setCity($erpCustomer['City'] ?? "")
-                        ->setPostcode($erpCustomer['Postcode'])
-                        ->setCustomerId($newCustomerId)
-                        ->setStreet([$erpCustomer['Address']])
-                        ->setTelephone($erpCustomer['PhoneNo'])
-                        ->setIsDefaultBilling(true)
-                        ->setIsDefaultShipping(true);
-
-                    $this->addressRepository->save($address);
-
-                    $this->helper->log('CUSTOMER : Successfully created the address account in Magento for ERP customer : ' . $erpCustomer['CustomerNo'], 'info');
-
-                    $this->helper->log('CUSTOMER : Started to update the Magento Customer ID in ERP for ERP customer : ' . $erpCustomer['CustomerNo'], 'info');
 
                 } catch (\Exception $e) {
                     $this->helper->log('CUSTOMER : Exception : Unable to create the address for EPR customer number ' . $erpCustomer['CustomerNo'] . ' in Magento. Error : ' . $e->getMessage(), 'error');

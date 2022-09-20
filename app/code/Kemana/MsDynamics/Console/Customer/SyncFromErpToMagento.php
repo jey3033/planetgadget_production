@@ -30,14 +30,21 @@ class SyncFromErpToMagento extends Command
     protected $syncCustomersFromErp;
 
     /**
+     * @var \Magento\Framework\App\State 
+     */
+    protected $appState;
+
+    /**
      * @param SyncCustomersFromErp $syncCustomersFromErp
      * @param string|null $name
      */
     public function __construct(
         SyncCustomersFromErp $syncCustomersFromErp,
+        \Magento\Framework\App\State $appState,
         string               $name = null)
     {
         $this->syncCustomersFromErp = $syncCustomersFromErp;
+        $this->appState = $appState;
         parent::__construct($name);
     }
 
@@ -61,6 +68,7 @@ class SyncFromErpToMagento extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $this->appState->setAreaCode(\Magento\Framework\App\Area::AREA_ADMINHTML);
         $output->writeln("Started to get the un sync customers from MsDynamic ERP and create accounts in Magento");
         $output->writeln("Please check var/log/ms_dynamic.log file for see live messages");
         $fullySyncedCustomers = $this->syncCustomersFromErp->syncCustomersFromErpToMagento();
