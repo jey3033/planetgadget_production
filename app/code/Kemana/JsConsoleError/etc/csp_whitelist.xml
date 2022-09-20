@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2022 PT Kemana Teknologi Solusi. All rights reserved.
+ * http://www.kemana.com
+ */
+
+/**
+ * @category Kemana
+ * @package  Kemana_JsConsoleError
+ * @license  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ *
+ * @author   Tushar Korat <tushar@kemana.com>
+ */
+-->
+<csp_whitelist xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Csp/etc/csp_whitelist.xsd">
+    <policies>
+        <policy id="connect-src">
+            <values>
+                <value id="newrelic" type="host">bam.nr-data.net</value>
+            </values>
+        </policy>
+        <policy id="script-src">
+            <values>
+                <value id="newrelicScript" type="host">bam.nr-data.net</value>
+                <value id="newrelicScript2" type="host">*.newrelic.com</value>
+            </values>
+        </policy>
+    </policies>
+</csp_whitelist>
