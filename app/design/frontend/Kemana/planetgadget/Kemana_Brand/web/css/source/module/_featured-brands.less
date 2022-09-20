@@ -70,6 +70,11 @@
                 margin: 10px;
 
                 a {
+                    img {
+                        .lib-css(border-radius, @common-border-radius);
+                        .lib-css(transition, ease .5s, @_prefix: 1);
+                    }
+
                     &:hover {
                         img {
                             .lib-css(box-shadow, @brand-item-logo__box-shadow);
@@ -332,6 +337,16 @@
 //  _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .block-content-wrapper,
+    .brand-content-wrapper {
+        margin-inline: -5px;
+        .brand-container {
+            .block-item {
+                width: calc(~'100%/2 - 10px');
+                margin: 5px;
+            }
+        }
+    }
 
     .brand-chared {
         padding: 50px 10px;

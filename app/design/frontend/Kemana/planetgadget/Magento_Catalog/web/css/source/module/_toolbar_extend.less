@@ -58,10 +58,14 @@
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
     .toolbar-products {
+
+
         .toolbar-sorter {
             background-color: @color-white;
             .lib-css(border, 1px solid @color-pg-light-gray);
             border-radius: @common-border-radius;
+            padding: 4px 0;
+            width: ~'calc(50% - 5px)';
 
             .sorter-label {
                 display: none;
@@ -69,6 +73,9 @@
 
             .sorter-options {
                 width: 100%;
+                background-position: right 15px top 14px;
+                padding: 4px 15px;
+                .lib-line-height(22);
             }
         }
     }
