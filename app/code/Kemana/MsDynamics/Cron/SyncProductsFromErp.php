@@ -129,7 +129,7 @@ class SyncProductsFromErp
 
         $count = 0;
         foreach ($getProductsFromErp['response'] as $key => $productdata) {
-            if($count > 5 && $this->helper->isApiMode() == 0){
+            if($count > 5 && !$this->helper->isApiMode()){
                 break;
             }
             $count ++;
