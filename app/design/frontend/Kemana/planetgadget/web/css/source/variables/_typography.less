@@ -1,0 +1,282 @@
+// /**
+//  * Copyright © 2020 Kemana. All rights reserved.
+//  * @author Ashan Gunawardena <agunawardena@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+//
+//  Typography variables
+//  _____________________________________________
+
+//
+//  Fonts
+//  ---------------------------------------------
+
+//  Path
+@icons__font-path: "@{baseDir}fonts/Kemana-Theme-Icons/Kemana-Theme-Icons";
+
+//  Names
+@icons__font-name: 'icons-kemana-theme'; // ToDo UI: we need to rename (it shouldn't use blank theme name) or move icon fonts to blank theme
+
+//  Font families
+@font-family__sans-serif: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+@font-family__serif: Georgia, 'Times New Roman', Times, serif;
+@font-family__monospace: Menlo, Monaco, Consolas, 'Courier New', monospace;
+
+@font-family__ubuntu: 'Ubuntu';
+@font-family__ubuntu-italy: 'ubuntuitalic';
+@font-family__latolight: 'latolight';
+@font-family__lato-light-italy: 'Lato-LightItalic';
+
+@font-family__saprtan: 'Spartan', sans-serif;
+
+@font-family-name__base: @font-family__saprtan;
+@font-family__base: @font-family-name__base;
+
+//  Sizes
+@root__font-size: 62.5%; // Defines rat@font-family-name__baseio between root font size and base font size, 1rem = 10px
+@font-size-ratio__base: 1.4; // Defines ratio of the root font-size to the base font-size
+
+@font-size-unit: rem; // The unit to which most typography values will be converted by default
+@font-size-unit-ratio: unit(@root__font-size * 16/100); // Ratio of the root font-size to the font-size unit
+@font-size-unit-convert: true; // Controls whether font-size values are converted to the specified font-size unit
+
+@font-size__base: 12px; // Base font size value in <b>px</b>
+@font-size__xl: ceil(1.333 * @font-size__base); // 16px
+@font-size__l: ceil(1.167 * @font-size__base); // 14px
+@font-size__s: ceil(.9167 * @font-size__base); // 11px
+@font-size__xs: floor(.833 * @font-size__base); // 10px
+
+//  Weights
+@font-weight__light: 300;
+@font-weight__regular: 400;
+@font-weight__heavier: 500;
+@font-weight__semibold: 600;
+@font-weight__bold: 700;
+
+//  Styles
+@font-style__base: normal;
+@font-style__emphasis: italic;
+
+//  Line heights
+@line-height__base: 1.667;
+@line-height__computed: floor(@font-size__base * @line-height__base);
+@line-height__xl: 1.7;
+@line-height__l: 1.5;
+@line-height__s: 1.33;
+
+//  Colors
+@text__color: @kemana-primary-brand-color;
+@text__color__intense: @primary__color__darker;
+@text__color__muted: @primary__color__lighter;
+
+//  Letter spacing
+@text__letter__spacing: 0.35px;
+@text__letter__spacing__s: 0.08px;
+@text__letter__spacing__xs: 0.03px;
+
+//
+//  Indents
+//  ---------------------------------------------
+
+@indent__base: 20px; // 20px
+@indent__xl: @indent__base * 2; // 40px
+@indent__l: @indent__base * 1.5; // 30px
+@indent__m: @indent__base * 1.25; // 25px
+@indent__s: 10px; // 10px
+@indent__xs: @indent__base / 4; // 5px
+
+//
+//  Borders
+//  ---------------------------------------------
+
+@border-color__base: @color-pg-light-gray2;
+@border-width__base: 1px;
+
+//
+//  Links
+//  ---------------------------------------------
+
+@link__color: @theme__color__primary;
+@link__text-decoration: none;
+
+@link__visited__color: @link__color;
+@link__visited__text-decoration: none;
+
+@link__hover__color: @theme__color__primary-alt;
+@link__hover__text-decoration: underline;
+
+@link__active__color: @active__color;
+@link__active__text-decoration: underline;
+
+//
+//  Focus
+//  ---------------------------------------------
+
+@focus__color: @kemana-primary-brand-color;
+@focus__box-shadow: 0 0 1px 1px @focus__color;
+
+//
+//  Lists
+//  ---------------------------------------------
+
+@list__color__base: false;
+@list__font-size__base: false;
+@list__margin-top: 0;
+@list__margin-bottom: @indent__m;
+
+@list-item__margin-top: 0;
+@list-item__margin-bottom: @indent__s;
+
+@dl__margin-top: 0;
+@dl__margin-bottom: @indent__base;
+
+@dt__margin-top: 0;
+@dt__margin-bottom: @indent__xs;
+@dt__font-weight: @font-weight__bold;
+
+@dd__margin-top: 0;
+@dd__margin-bottom: @indent__s;
+
+//
+//  Paragraphs
+//  ---------------------------------------------
+
+@p__margin-top: 0;
+@p__margin-bottom: @indent__s;
+
+//
+//  Headings
+//  ---------------------------------------------
+
+@heading__font-family__base: false;
+@heading__font-weight__base: @font-weight__bold;
+@heading__line-height__base: 1.35;
+@heading__color__base: @kemana-primary-brand-color;
+@heading__font-style__base: false;
+@heading__margin-top__base: 0;
+@heading__margin-bottom__base: @indent__base - 4px;
+
+@h1__font-size: 32px; // 30px
+@h1__font-color: @heading__color__base;
+@h1__font-family: @heading__font-family__base;
+@h1__font-weight: @heading__font-weight__base;
+@h1__font-style: @heading__font-style__base;
+@h1__line-height: 40px;
+@h1__margin-top: 0;
+@h1__margin-bottom: @heading__margin-bottom__base;
+@h1__font-size-desktop: 40px; // 40px
+@h1__line-height-desktop: 47px;
+
+@h2__font-size: 24px; // 30px
+@h2__font-color: @heading__color__base;
+@h2__font-family: @heading__font-family__base;
+@h2__font-weight: @heading__font-weight__base;
+@h2__font-style: @heading__font-style__base;
+@h2__line-height: 32px;
+@h2__margin-top: @heading__margin-top__base;
+@h2__margin-bottom: @heading__margin-bottom__base;
+@h2__font-size-desktop: 28px; // 40px
+@h2__line-height-desktop: 38px;
+@h2__margin-bottom-desktop: 23px;
+
+@h3__font-size: 20px; // 24px
+@h3__font-color: @heading__color__base;
+@h3__font-family: @heading__font-family__base;
+@h3__font-weight: @heading__font-weight__base;
+@h3__font-style: @heading__font-style__base;
+@h3__line-height: 30px;
+@h3__margin-top: @heading__margin-top__base;
+@h3__margin-bottom: @heading__margin-bottom__base;
+
+@h4__font-size: 14px; // 24px
+@h4__font-color: @heading__color__base;
+@h4__font-family: @heading__font-family__base;
+@h4__font-weight: @heading__font-weight__base;
+@h4__font-style: @heading__font-style__base;
+@h4__line-height: 22px;
+@h4__margin-top: @heading__margin-top__base;
+@h4__margin-bottom: @heading__margin-bottom__base;
+
+@h5__font-size: 14px; // 20px
+@h5__font-color: @heading__color__base;
+@h5__font-family: @heading__font-family__base;
+@h5__font-weight: @heading__font-weight__base;
+@h5__font-style: @heading__font-style__base;
+@h5__line-height: 24px;
+@h5__margin-top: @heading__margin-top__base;
+@h5__margin-bottom: @heading__margin-bottom__base - 4px;
+
+@h6__font-size: 12px; // 16px
+@h6__font-color: @heading__color__base;
+@h6__font-family: @heading__font-family__base;
+@h6__font-weight: @heading__font-weight__base;
+@h6__font-style: @heading__font-style__base;
+@h6__line-height: 20px;
+@h6__margin-top: @heading__margin-top__base;
+@h6__margin-bottom: @heading__margin-bottom__base;
+
+@heading__small-color: @primary__color;
+@heading__small-line-height: 1;
+@heading__small-size: (@font-size__xs/@font-size__base) * 100%;
+
+//  Code blocks
+@code__background-color: @panel__background-color;
+@code__color: @primary__color__darker;
+@code__font-size: @font-size__s;
+@code__padding: 2px 4px;
+
+@pre__background-color: @panel__background-color;
+@pre__border-color: @border-color__base;
+@pre__border-width: @border-width__base;
+@pre__color: @primary__color__darker;
+
+@kbd__background-color: @panel__background-color;
+@kbd__color: @primary__color__darker;
+
+//  Blockquote
+@blockquote__border-color: @border-color__base;
+@blockquote__border-width: 0;
+@blockquote__content-before: '\2014 \00A0';
+@blockquote__font-size: @font-size__base;
+@blockquote__font-style: @font-style__emphasis;
+@blockquote__margin: 0 0 @indent__base @indent__xl;
+@blockquote__padding: 0;
+
+@blockquote-small__color: @primary__color;
+@blockquote-small__font-size: @font-size__xs;
+
+@cite__font-style: @font-style__base;
+
+//  Misc
+@hr__border-color: @border-color__base;
+@hr__border-style: solid;
+@hr__border-width: @border-width__base;
+
+@mark__color: @primary__color__dark;
+@mark__background-color: @panel__background-color;
+
+@abbr__border-color: @border-color__base;
+
+//  Disable filters output in css
+@disable-filters: false;
+
+//Font Awesome
+@fontawesome-font-family: "fontawesome";
+
+
+.lib-typography(
+    @_font-size: @font-size__base,
+    @_color: @text__color,
+    @_font-family: @font-family__base,
+    @_font-weight: @font-weight__heavier,
+    @_line-height: @line-height__base,
+    @_font-style: @font-style__base
+) {
+    .lib-css(color, @_color);
+    .lib-css(font-family, @_font-family);
+    .lib-css(font-style, @_font-style);
+    .lib-css(font-weight, @_font-weight);
+    .lib-css(line-height, @_line-height);
+    .lib-font-size(@_font-size);
+}

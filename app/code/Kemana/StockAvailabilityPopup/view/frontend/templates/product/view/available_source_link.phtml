@@ -1,0 +1,117 @@
+<?php
+/**
+ * Copyright © 2022 PT Kemana Teknologi Solusi. All rights reserved.
+ * http://www.kemana.com
+ */
+
+/**
+ * @category Kemana
+ * @package  Kemana_StockAvailabilityPopup
+ * @license  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ *
+ * @author   Achintha Madushan <amadushan@kemana.com>
+ */
+
+/** @var \Kemana\StockAvailabilityPopup\Block\Product\View $block */
+
+?>
+<?php if ($block->getProduct()->getTypeId() != 'bundle'): ?>
+    <div id="available-source-message" style="color: red;"></div>
+    <div class="available-source-locations-link">
+        <span>Available at the nearest Planet Gadget Store. </span>
+        <a href="javascript:void(0)" id="show-availability" data-productId="<?= $block->getProduct()->getEntityId() ?>"
+           data-sku="<?= $block->getProduct()->getSku() ?>"
+           data-type="<?= $block->getProduct()->getTypeId() ?>"><?= __('Check Availability') ?></a>
+    </div>
+
+    <div id="popup-modal">
+    </div>
+
+    <script>
+        require(
+            [
+                'jquery',
+                'Magento_Ui/js/modal/modal',
+                'Magento_Catalog/js/product/view/product-ids-resolver'
+            ],
+            function (
+                $,
+                modal,
+                idsResolver
+            ) {
+                var options = {
+                    type: 'popup',
+                    responsive: true,
+                    innerScroll: true,
+                    title: $.mage.__('Check Availability'),
+                    modalClass: 'store-availability-container',
+                    buttons: [{
+                        text: $.mage.__('Close'),
+                        class: '',
+                        click: function () {
+                            this.closeModal();
+                        }
+                    }]
+                };
+
+                var popup = modal(options, $('#popup-modal'));
+
+                // When click show availability link
+                $("#show-availability").on('click', function () {
+
+
+                    var form= $('form#product_addtocart_form'),
+                        validation = true,
+                        getStockUrl = "<?php echo $this->getUrl() . 'stock-data/availability/stock/'?>",
+                        data = {},
+                        productType = $(this).attr("data-type"),
+                        formdata = form.serializeArray();
+                        form.serializeArray().map(function(x){data[x.name] = x.value; })
+                        if (productType == "configurable") {
+                            $.each(data,function(key,value){
+                                if(key.indexOf('super_attribute') != -1 && value == ''){
+                                    $('#available-source-message').html($.mage.__('please select options.'));
+                                    validation = false;
+                                    setTimeout(function(){
+                                        $('#available-source-message').html('');
+                                    }, 2000);
+                                }
+                            })
+                        }
+                        console.log(validation)
+                        if(validation){
+                            $.ajax({
+                                url: getStockUrl,
+                                type: "GET",
+                                data:data,
+                                showLoader: false,
+                                dataType: 'json',
+                                success: function (response) {
+                                    let popUpContent = "";
+                                    if (response.response) {
+                                        $.each(response.locationData,function(sku,items){
+                                            $.each(items,function(key,item){
+                                                let row = "<div class='store-sku'><span>SKU:" + sku + "</span></div>";
+                                                row += "<div class='store-top-line'><span class='store-location-name'>" + item.locationName + "</span><span class='store-stock-qty'> " + Math.floor(item.stockQty) + " unit</span></div>";
+                                                row += "<div class='store-location-address'><span>" + item.street + "&nbsp;" + item.district + "&nbsp;" + item.city + "&nbsp;" + item.region + "&nbsp;" + item.postcode + "</span></div>";
+                                                row += "<div class='store-phone'>" + item.phone + "</div>";
+                                                popUpContent = popUpContent + row;
+                                            });
+                                        });
+                                    } else {
+                                        popUpContent = $.mage.__('No available stores found.');
+                                    }
+                                    $("#popup-modal").html(popUpContent);
+                                    $("#popup-modal").modal("openModal");
+                                },
+                                error: function (xhr, status, errorThrown) {
+                                    let popUpContent = $.mage.__('No available stores found.');
+
+                                }
+                            });
+                        }
+                });
+            }
+        );
+    </script>
+<?php endif ?>

@@ -1,0 +1,46 @@
+<?php
+/**
+ * Copyright © 2022 PT Kemana Teknologi Solusi. All rights reserved.
+ * http://www.kemana.com
+ */
+
+/**
+ * @category Kemana
+ * @package  Kemana_Pcp
+ * @license  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ *
+ * @author   Achintha Madushan <amadushan@kemana.com>
+ */
+
+/** @var \Kemana\Pcp\Block\Category $block */
+
+$subCategories = $block->prepareSubCategoryData();
+?>
+
+<?php if (count($subCategories)): ?>
+<ul class="pcp-sub-categories">
+    <?php foreach ($subCategories as $category): ?>
+    <li class="category-item">
+        <div class="category-item-container ">
+            <div class="category-item-left">
+                <?php if ($category['name']): ?>
+                    <div class="category-name"><?= $category['name'] ?></div>
+                <?php endif; ?>
+
+                <?php if ($category['shortDescription']): ?>
+                    <div class="category-short-description"><?= $category['shortDescription'] ?></div>
+                <?php endif; ?>
+            </div>
+            <div class="category-item-right">
+            <?php if ($category['image']): ?>
+                <div class="category-image">
+                    <image src="<?= rtrim($block->getUrl(), "/") . $category['image'] ?>" alt="<?= $category['name'] ?>"/>
+                </div>
+            <?php endif; ?>
+            </div>
+        </div>
+    </li>
+    <?php endforeach; ?>
+    <?php endif; ?>
+</ul>
+

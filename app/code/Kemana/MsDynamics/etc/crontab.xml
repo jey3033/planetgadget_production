@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2022 PT Kemana Teknologi Solusi. All rights reserved.
+ * http://www.kemana.com
+ */
+
+/**
+ * @category Kemana
+ * @package  Kemana_MsDynamics
+ * @license  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ *
+ * @author   Achintha Madushan <amadushan@kemana.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="default">
+        <job name="msDynamicCustomersFromMagentoToErp" instance="Kemana\MsDynamics\Cron\SyncCustomersToErp"
+             method="syncMissingCustomersFromRealTimeSync">
+            <schedule>30 7 * * *</schedule>
+        </job>
+        <job name="msDynamicCustomersFromErpToMagento" instance="Kemana\MsDynamics\Cron\SyncCustomersFromErp"
+             method="syncCustomersFromErpToMagento">
+            <schedule>30 7 * * *</schedule>
+        </job>
+        <job name="msDynamicProductsFromErpToMagento" instance="Kemana\MsDynamics\Cron\SyncProductsFromErp"
+             method="syncProductsFromErpToMagento">
+            <schedule>30 7 * * *</schedule>
+        </job>
+        <job name="msDynamicGetRewardPointFromErpToMagento" instance="Kemana\MsDynamics\Cron\SyncRewardPointFromErp"
+             method="syncRewardPointFromErpToMagento">
+            <schedule>30 7 * * *</schedule>
+        </job>
+        <job name="msDynamicRewardPointFromMagentoToErp" instance="Kemana\MsDynamics\Cron\SyncRewardPointToErp"
+             method="syncRewardPointFromMagentoToErp">
+            <schedule>30 7 * * *</schedule>
+        </job>
+    </group>
+</config>

@@ -1,0 +1,606 @@
+// /**
+//  * Copyright © 2020 Kemana. All rights reserved.
+//  * @author Parth Godhani <pgodhani@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+
+//
+//  Variables
+//  _____________________________________________
+
+@color-oragne-bd: #FFC619;
+@color-oragne-bd-2: #FF8419;
+@color-gray-border-1: #AEB4C1;
+
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+	.checkout-index-index {
+		.opc-wrapper {
+			.checkout-payment-method {
+				#co-payment-form{
+					hr{
+						display: none;
+					}
+					.legend{
+						display: contents;
+					}
+
+					.payment-group-title{
+						margin-top: 15px;
+						text-transform: capitalize;
+						font-size: 20px;
+					}
+					.payment-methods {
+						.payment-group {
+							label {
+								>span {
+									font-weight: bold;
+								}
+							}
+							.payment-method-group{
+								.payment-method{
+									span{
+										&:hover{
+											cursor: pointer;
+										}
+									}
+								}
+							}
+							.payment-method{
+								img{
+									width: unset !important;
+								}
+								input{
+									float: left;
+								}
+							}
+						}
+					}
+					.payment-option-title{
+						font-weight: bold;
+
+						.action-toggle{
+							span.optional{
+								color: @primary__color__dark;
+								font-weight: normal;
+							}
+						}
+					}
+					.billing-address-user{
+						span{
+							font-weight: bold;
+						}
+					}
+					.billing-address-address{
+						margin-top: -10px;
+					}
+					.psg-tabs {
+						.payment-method {
+							.title{
+								padding: 0 0 0;
+							}
+
+							.payment-icon{
+								width: 74px;
+								height: 39px;
+								border: 1px solid @color-gray-border-1;
+    							border-radius: 5px;
+							}
+							span.payment_logo_snap_bcava {
+								background: url(/media/logo/paymentmethod/default/Payment_BCA_2x.png);
+								background-position: center;
+								background-repeat: no-repeat;
+								background-size: cover;
+							}
+							span.payment-icon.payment_logo_snap_mandiribill{
+								background: url(/media/logo/paymentmethod/default/Payment_Mandiri_2x.png);
+								background-position: center;
+								background-repeat: no-repeat;
+								background-size: cover;
+							}
+							span.payment-icon.payment_logo_snap_permatava{
+								background: url(/media/logo/paymentmethod/default/Payment_Permata_2x.png);
+								background-position: center;
+								background-repeat: no-repeat;
+								background-size: cover;
+							}
+							span.payment-icon.payment_logo_snap_bniva{
+								background: url(/media/logo/paymentmethod/default/Payment_BNI_2x.png);
+								background-position: center;
+								background-repeat: no-repeat;
+								background-size: cover;
+							}
+							span.payment-icon.payment_logo_snap_briva{
+								background: url(/media/logo/paymentmethod/default/Payment_BRI_2x.png);
+								background-position: center;
+								background-repeat: no-repeat;
+								background-size: cover;
+							}
+							span.payment-icon.payment_logo_snap_otherva{
+								background: url(/media/logo/paymentmethod/default/Payment_Alfamart_2x.png);
+								background-position: center;
+								background-repeat: no-repeat;
+								background-size: cover;
+							}
+							span.payment-icon.payment_logo_snap_gopay{
+								background: url(/media/logo/paymentmethod/default/Payment_Gopay.png);
+								background-position: center;
+								background-repeat: no-repeat;
+								background-size: cover;
+							}
+							span.payment-icon.payment_logo_snap_permata_cc{
+								background: url(/media/logo/paymentmethod/default/Payment_Permata_2x_1.png);
+								background-position: center;
+								background-repeat: no-repeat;
+								background-size: cover;
+							}
+							span.payment-icon.payment_logo_snap_mandiri_cc{
+								background: url(/media/logo/paymentmethod/default/Payment_Mandiri_2x_1.png);
+								background-position: center;
+								background-repeat: no-repeat;
+								background-size: cover;
+							}
+							span.payment-icon.payment_logo_snap_bni_cc{
+								background: url(/media/logo/paymentmethod/default/Payment_BNI_2x_1.png);
+								background-position: center;
+								background-repeat: no-repeat;
+								background-size: cover;
+							}
+							span.payment-icon.payment_logo_snap_bri_cc{
+								background: url(/media/logo/paymentmethod/default/Payment_BRI_2x_1.png);
+								background-position: center;
+								background-repeat: no-repeat;
+								background-size: cover;
+							}
+							span.payment-icon.payment_logo_snap_maybank_cc{
+								background: url(/media/logo/paymentmethod/default/Maybank.png);
+								background-position: center;
+								background-repeat: no-repeat;
+								background-size: cover;
+							}
+							span.payment-icon.payment_logo_snap_ocbcnisp_cc{
+								background: url(/media/logo/paymentmethod/default/OCBC.png);
+								background-position: center;
+								background-repeat: no-repeat;
+								background-size: cover;
+							}
+							span.payment-icon.payment_logo_snap_hsbc_cc{
+								background: url(/media/logo/paymentmethod/default/HSBC.png);
+								background-position: center;
+								background-repeat: no-repeat;
+								background-size: cover;
+							}
+							span.payment-icon.payment_logo_snap_citibank_cc{
+								background: url(/media/logo/paymentmethod/default/Citibank.png);
+								background-position: center;
+								background-repeat: no-repeat;
+								background-size: cover;
+							}
+							span.payment-icon.payment_logo_snap_indomaret{
+								background: url(/media/logo/paymentmethod/default/Payment_Indomaret_2x.png);
+								background-position: center;
+								background-repeat: no-repeat;
+								background-size: cover;	
+							}
+
+							.payment-method-title{
+								span.payment_logo_snap_allbank_cc{
+									display: none;
+								}
+								span.payment_logo_snap_akulaku{
+									display: none;
+								}
+								span.payment_logo_custom{
+									display:none;
+								}
+							}
+						}
+						.psg-tab-item{
+							.payment-method-content{
+								margin: 0 30px;
+								width: 100%;
+							}
+						}
+					}
+					.payment-method-logo-icon{
+						display: flex;
+						flex-wrap: wrap;
+
+						span.paymentextra:not(.snap_allbank_cc):not(.snap_akulaku) {
+						    display:none !important;
+						}
+						
+						.payment_img_snap_allbank_cc{
+							display: flex;
+							flex-wrap: werap;
+						}
+
+						span{
+							margin-right: 10px;
+						}
+
+						.payment-icon{
+							width: 74px;
+							height: 39px;
+							border: 1px solid @color-gray-border-1;
+	    					border-radius: 5px;
+	    					display: block;
+	    					margin-bottom: 15px;
+						}
+						span.payment-icon.payment_logo_snap_akulaku{
+							background: url(/media/logo/paymentmethod/default/Payment_Akulaku_2x.png);
+							background-position: center;
+							background-repeat: no-repeat;
+							background-size: cover;
+						}
+						span.payment-icon.payment_logo_1snap_akulaku{
+							display: none;
+						}
+						span.payment-icon.payment_logo_2snap_akulaku{
+							display: none;
+						}
+						span.payment-icon.payment_logo_snap_allbank_cc{
+							background: url(/media/wysiwyg/payment/visa.png);
+							background-position: center;
+							background-repeat: no-repeat;
+							background-size: cover;
+						}
+						span.payment-icon.payment_logo_1snap_allbank_cc{
+							background: url(/media/wysiwyg/payment/mastercard.png);
+							background-position: center;
+							background-repeat: no-repeat;
+							background-size: cover;
+						}
+						span.payment-icon.payment_logo_2snap_allbank_cc{
+							background: url(/media/wysiwyg/payment/Payment_JCB.png);
+							background-position: center;
+							background-repeat: no-repeat;
+							background-size: cover;
+						}
+						span.payment-icon.payment_logo_kredivopayment{
+							background: url(/media/logo/paymentmethod/default/Payment_Kredivo.png);
+							background-position: center;
+							background-repeat: no-repeat;
+							background-size: cover;
+						}
+					}
+				}
+				.checkout-billing-address{
+					margin-left: -25px;
+
+					.billing-address-same-as-shipping-block{
+						display: block !important;
+						margin-left: 20px;
+
+						label{
+							&:hover{
+								cursor: pointer;
+							}
+						}
+
+						span{
+							font-weight: unset !important;
+						}
+					}
+					.field-select-billing {
+						.select {
+							&:hover {
+								cursor: pointer;
+							}
+						}
+					}
+					.fieldset{
+						.actions-toolbar{
+							.primary{
+								display: flex;
+								flex-wrap: wrap;
+								background-color: @color-white;
+
+								button.action.action-update{
+									background-color: @color-white;
+									border: 1px solid @primary__color__dark;
+
+								}
+								button.action.action-cancel{
+									font-weight: bold;
+								}	
+							}
+						}
+					}
+					button.action.action-edit-address{
+						display: none;
+					}
+
+				}
+				.payment-method-content {
+					>.actions-toolbar {
+						padding-left: 0;
+
+						>.primary {
+							.action.primary {
+								&:before {
+									display: none;
+								}
+							}
+						}
+					}
+				}
+				.primary {
+					color: @primary__color__dark;
+					background: @color-oragne-bd 0% 0% no-repeat padding-box;
+
+					&:hover{
+						background-color: @color-oragne-bd-2;
+					}
+				}
+				#reward_placer {
+					.payment-option-title {
+						cursor: pointer;
+
+						&:before {
+							content: "\e976";
+							font-family: 'icons-kemana-theme';
+							margin: -3px 6px 0 0;
+							font-size: 17px;
+							color: @color-kemana-gray1;
+							display: inline-block;
+						}
+					}
+					.payment-option-inner{
+						span.price{
+							font-weight: bold;
+						}
+					}
+					.actions-toolbar {
+						margin-top: unset !important;
+
+						.primary {
+							background: unset !important;
+
+							button.action.action-use{
+								background-color: @color-white;
+								border: 1px solid @primary__color__dark;
+								border-radius: 5px;
+
+								&:hover{
+									background-color: @primary__color__dark;
+									color: @color-white;
+								}
+							}
+						}
+					}
+				}
+				#discount-form{
+					.actions-toolbar {
+						margin-top: unset !important;
+
+						>.primary {
+							margin-left: 10px;
+							background: unset !important;
+
+							.action.action-apply {
+								background-color: @color-white;
+								border: 1px solid @primary__color__dark;
+								border-radius: 5px;
+
+								&:hover{
+									background-color: @primary__color__dark;
+									color: @color-white;
+								}
+							}
+						}
+					}
+				}
+				#giftcardaccount-placer{
+					.payment-option-title {
+						&:before {
+							content: "\e977";
+							font-family: 'icons-kemana-theme';
+							margin: -3px 6px 0 0;
+							font-size: 17px;
+							color: @color-kemana-gray1;
+							display: inline-block;
+						}
+					}
+				}
+				#giftcard-form{
+					.actions-toolbar {
+						margin-top: unset !important;
+						float: right;
+
+						.primary {
+							background: unset !important;
+
+							button{
+								background-color: @color-white;
+								border: 1px solid @primary__color__dark;
+								border-radius: 5px;
+
+								&:hover{
+									background-color: @primary__color__dark !important;
+									color: @color-white;
+								}
+							}
+						}
+						.secondary{
+							background: unset !important;
+
+							button{
+								background-color: @color-white;
+								border: 1px solid @primary__color__dark;
+								border-radius: 5px;
+
+								&:hover{
+									background-color: @primary__color__dark;
+									color: @color-white;
+								}
+							}
+						}
+					}
+				}
+			}
+			.form-giftcard-account{
+				max-width: none;
+			}
+		}
+		.column {
+			&:not(.sidebar-main) {
+				form {
+					.actions-toolbar {
+						margin-top: 15px;
+					}
+				}
+			}
+			&:not(.sidebar-additional) {
+				form {
+					.actions-toolbar {
+						margin-top: 15px;
+					}
+				}
+			}
+		}
+		.modal-inner-wrap{
+			.opc-block-shipping-information{
+				.shipping-information-title{
+					.action-edit{
+						font-weight: bold;
+					}
+				}
+				.shipping-information-content{
+					.shipping-information-username{
+						font-weight: bold;
+					}
+					.shipping-information-phone{
+						display: flex;
+					}
+				}
+				.ship-via{
+					.shipping-information-content{
+						.title-value{
+							font-weight: bold;
+						}
+						.telephone-value{
+							font-size: 10px;
+							font-weight: bold;
+
+							&:before{
+								content: "\e906";
+                                font-family: 'icons-kemana-theme';
+                                font-weight: normal;
+                                margin: -3px 6px 0 0;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+	.checkout-index-index {
+		.opc-wrapper {
+			.checkout-payment-method {
+				margin-top: 20px;
+
+				.placeorder-button {
+					width: 75%;
+					padding: 0;
+					text-align: center;
+				}
+				#co-payment-form{
+					#checkout-payment-method-load{
+						width: 100%;
+					}
+					.payment-option-title{
+						display: flex;
+					}
+					#discount-form{
+						width: 285px;
+					}
+					#giftcard-form{
+						display: flex;
+						flex-wrap: wrap;
+
+						.primary{
+							button{
+								width: 285px;
+							}
+						}
+						.secondary{
+							padding-left: unset !important;
+
+							button{
+								width: 285px;
+							}
+						}						
+					}
+					#reward_placer {
+						.payment-option-content.field.choice{
+							display: flex;
+							flex-wrap: wrap;
+
+						}
+						.actions-toolbar{
+							margin-bottom: 10px;
+
+							.primary{
+								margin-top: 10px;
+
+								button{
+									width: 285px;
+								}
+							}
+						}
+					}
+					.psg-tabs {
+						.payment-method-content {
+							width: 60%;
+						}
+					}
+					.payment-option {
+						.payment-option-content {
+							width: 60%;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+	.checkout-index-index {
+		.opc-wrapper {
+			.checkout-payment-method {
+				width: 640px;
+
+				#co-payment-form{
+					margin-left: 10px
+				}
+				#checkout-step-payment{
+					margin-right: 17px;
+				}
+				#reward_placer {
+					.actions-toolbar{
+						float: right;
+					}
+				}
+			}
+		}
+	}
+}
+

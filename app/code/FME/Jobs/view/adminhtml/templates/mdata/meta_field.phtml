@@ -1,0 +1,45 @@
+<?php
+/**
+ * FME Extensions
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the fmeextensions.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.fmeextensions.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category  FME
+ * @package   FME_Jobs
+ * @copyright Copyright (c) 2019 FME (http://fmeextensions.com/)
+ * @license   https://fmeextensions.com/LICENSE.txt
+ */
+$dataCodeEdit   = $block->getDatCodeEditId();
+$metaId         = $block->getMetaId();
+$metaName       = $block->getMetaName();
+$metaCollection = $block->getMetaCollection();
+
+?>
+<!-- <h5><p style="margin-left: 274px">Please fill in the fields to create the desired <?php //echo __($metaName) ?> data.</p></h5> -->
+
+<div class="admin__fieldset-wrapper-content admin__fieldset">      
+<div class="admin__field  form-control">
+    <label class="admin__field-label">
+        <span>Meta Type</span>
+    </label>
+  <div class="admin__field-control _required">        
+      <!-- <input class="admin__control-text" data-form-part="jobs_mdata_form"   name="latitude" type="hidden" value="<?php //echo $metaId ?>"> -->
+    <select class="admin__control-select" data-bind="" name="type_code" id="type_code" data-form-part="jobs_mdata_form" <?php if($dataCodeEdit):  ?>disabled <?php endif;?>>
+      	
+      	<?php foreach($metaCollection as $mOpt):?>      		
+      	<option data-title="<?php $mOpt['type_name'] ?>" value="<?php echo __($mOpt['id']) ?>" <?php if($mOpt['id'] == $metaId):?> selected <?php endif;?>  <?php if($mOpt['id'] == $dataCodeEdit):?> selected <?php endif;?>><?php echo __($mOpt['type_name']) ?></option>      	    
+        <?php endforeach;?>
+    </select>
+    </div>
+</div>
+
+

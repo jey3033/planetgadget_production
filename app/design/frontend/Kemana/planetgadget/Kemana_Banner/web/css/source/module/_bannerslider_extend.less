@@ -1,0 +1,123 @@
+// /**
+//  * Copyright © 2020 Kemana. All rights reserved.
+//  * @author Harshani Karunasekara <hkarunasekara@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+
+//
+//  Common
+//  _____________________________________________
+& when (@media-common = true) {
+    .carousel-container {
+        margin-top: 0;
+
+        .banner-item {
+            .full-width-banner {
+                .banner-img {
+                    img {
+                        height: auto;
+                    }
+                }
+            }
+
+            .banner-description {
+                .actions-toolbar {
+                    .shop-now {
+                        .lib-icon-font(
+                            @icon-pg-right-thick,
+                            @_icon-font: @icon-font,
+                            @_icon-font-position: after,
+                            @_icon-font-color: @kemana-primary-brand-color,
+                            @_icon-font-size: 10px,
+                            @_icon-font-line-height: 40px);
+                        position: relative;
+                        padding-right: 43px;
+
+                        &:after {
+                            position: absolute;
+                            top: 0;
+                            right: 20px;
+                            padding-left: 10px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .carousel-container {
+        .banner-item {
+            .banner-description {
+                top: 280px;
+
+                .actions-toolbar {
+                    .primary {
+                    }
+                }
+            }
+        }
+
+        .owl-nav {
+            display: none;
+        }
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .carousel-container {
+        .banner-item {
+            .full-width-banner {
+                .lib-vendor-prefix-display();
+                background-color: @color-white;
+                justify-content: center;
+
+                .banner-img {
+                    img {
+                        max-height: 450px;
+                        width: auto;
+                    }
+                }
+
+                .banner-description {
+                    max-width: @layout__max-width;
+                    top: 55%;
+
+                    .actions-toolbar {
+                        padding-left: 120px;
+
+                        .primary {
+                            text-align: left;
+                            border-radius: 20px;
+                        }
+                    }
+                }
+
+                &.main-pcp-slider {
+                    .banner-description {
+                        .actions-toolbar {
+                            margin-right: 200px;
+                            margin-top: 213px;
+
+                            .primary {
+                                text-align: right;
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+}
+

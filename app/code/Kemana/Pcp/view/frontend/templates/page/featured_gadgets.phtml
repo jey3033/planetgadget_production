@@ -1,0 +1,39 @@
+<?php
+/**
+ * Copyright © 2022 PT Kemana Teknologi Solusi. All rights reserved.
+ * http://www.kemana.com
+ */
+
+/**
+ * @category Kemana
+ * @package  Kemana_Pcp
+ * @license  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ *
+ * @author   Achintha Madushan <amadushan@kemana.com>
+ */
+
+/** @var \Kemana\Pcp\Block\Category $block */
+
+$skusToShow = $block->getFeaturedGadgetSkus();
+
+$productsBlock = $this->getLayout()->createBlock('Kemana\AcceleratorBase\Block\Catalog\Product\ProductsList');
+$productsBlock->setWidgetType("customproducts");
+$productsBlock->setCollectionSortBy("name");
+$productsBlock->setCollectionSortOrder("asc");
+$productsBlock->setProductsCount(10);
+$productsBlock->setProductsPerRow(4);
+$productsBlock->setVisibleProductsTablet(4);
+$productsBlock->setVisibleProductsMobile(1);
+$productsBlock->setTemplate("Kemana_AcceleratorBase::product/widget/content/grid.phtml");
+$productsBlock->setConditionsEncoded("^[`1`:^[`type`:`Magento||CatalogWidget||Model||Rule||Condition||Combine`,`aggregator`:`all`,`value`:`1`,`new_child`:``^],`1--1`:^[`type`:`Magento||CatalogWidget||Model||Rule||Condition||Combine`,`aggregator`:`all`,`value`:`1`,`new_child`:``^],`1--1--1`:^[`type`:`Magento||CatalogWidget||Model||Rule||Condition||Product`,`attribute`:`sku`,`operator`:`()`,`value`:`" . $skusToShow . "`^]^]");
+
+?>
+
+<div class="pcp-featured-gadgets-wrapper">
+    <div class="pcp-featured-gadgets-container fixed-width">
+        <div class="widget-title"><h2>Featured <span>Gadgets</span></h2></div>
+        <?= $productsBlock->toHtml(); ?>
+    </div>
+</div>
+
+

@@ -1,0 +1,64 @@
+<!--
+/**
+ * Copyright © 2022 PT Kemana Teknologi Solusi. All rights reserved.
+ * http://www.kemana.com
+ */
+
+/**
+ * @category Kemana
+ * @package  Kemana_Common
+ * @license  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ *
+ *
+ * @author   Parth Godhani <pgodhani@kemana.com>
+ */
+  -->
+
+<?php if ($block->isBrandEnable()): ?>
+    <?php if ($block->isShowFeatured()):
+        $brandFeatured = $block->getFeaturedBrandCollection();
+    ?>
+        <?php if (count($brandFeatured) > 0): ?>
+            <div class="corporate-brand-container fixed-width">
+                <div class="block widget block-brand-featured grid">
+                    <div class="block-title">
+                        <h2 role="heading" aria-level="2">
+                            <?= $block->getFeaturedBrandTitle(); ?>
+                        </h2>
+                    </div>
+                    <div class="block-content-wrapper">
+                        <div class="block-content">
+                            <div id="{brand-container}-nav" class="left"></div>
+                            <ul class="brand-container" id="corporate-brand-container">
+                                <?php foreach ($brandFeatured as $_brand): ?>
+                                    <li class="block-item" id="corporate-block-item">
+                                        <a href="<?= /* @escapeNotVerified */ $block->getCategoryUrl($_brand['category_id']); ?>"
+                                           title="<?= /* @escapeNotVerified */ $_brand['title'] ?>">
+                                            <?php if ($_brand['image']): ?>
+                                                <img class="item-image"
+                                                     id="corporate-item-images"
+                                                     src="<?= /* @escapeNotVerified */ $block->getBrandHelper()->getMediaUrl().'brand/images' . $_brand['image'] ?>"
+                                                     alt="<?= /* @escapeNotVerified */ $_brand['title'] ?>" />
+                                            <?php else: ?>
+                                                <span class="item-name" id="corporate-item-name"><?= /* @escapeNotVerified */ $_brand['title'] ?></span>
+                                            <?php endif; ?>
+                                        </a>
+                                    </li>
+                                <?php endforeach; ?>
+                            </ul>
+                            <div class="actions-toolbar">
+                                <div class="primary">
+                                    <a id="show-more" class="action view-all primary" href=""><?= $escaper->escapeHtml(__('Show More')) ?></a>
+                                    <a id="show-less" class="action view-less primary" style="display: none" href=""><?= $escaper->escapeHtml(__('Show Less')) ?></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
+    <?php endif; ?>
+<?php endif; ?>
+
+
+

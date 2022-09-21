@@ -1,0 +1,37 @@
+// /**
+//  * Copyright © 2020 Kemana. All rights reserved.
+//  * @author Ashan Gunawardena <agunawardena@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+//  New Arrivals variables
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .home-new-arrivals-container {
+        .block.widget {
+            .products-grid {
+                .slick-slider {
+                    .slick-list {
+                        padding: 0 0 0 0 !important;
+                    }
+
+                    .product-item {
+                        padding: 0 15px 0 5px;
+                        margin-bottom: 0;
+                    }
+                }
+            }
+        }
+    }
+}

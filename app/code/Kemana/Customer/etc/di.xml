@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2022 PT Kemana Teknologi Solusi. All rights reserved.
+ * http://www.kemana.com
+ */
+
+/**
+ * @category Kemana
+ * @package  Kemana_Customer
+ * @license  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ *
+ * @author   Kristian Claridad <kclaridad@kemana.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Customer\Controller\Account\CreatePost">
+        <plugin name="kemana_customer_custom_before_create_post_validation" type="Kemana\Customer\Plugin\Customer\Controller\Account\CreatePost" />
+    </type>
+    <type name="Magento\Customer\Controller\Account\EditPost">
+        <plugin name="kemana_customer_custom_before_edit_post_validation" type="Kemana\Customer\Plugin\Customer\Controller\Account\EditPost" />
+    </type>
+    <type name="Kemana\SocialLogin\Controller\Social\AbstractSocial">
+        <plugin name="kemana_customer_social_login_add_phonenumber_param" type="Kemana\Customer\Plugin\SocialLogin\Controller\Social\AbstractSocial" />
+    </type>
+    <preference for="Kemana\SocialLogin\Model\Social" type="Kemana\Customer\Plugin\SocialLogin\SocialLogin\Model\Social" />
+    <preference for="Kemana\SocialLogin\Controller\Social\Login" type="Kemana\Customer\Plugin\SocialLogin\Controller\Social\Login" />
+    <preference for="Magento\Customer\Block\Account\Dashboard\Address" type="Kemana\Customer\Block\Account\Dashboard\Address" />
+    <preference for="Magento\Customer\Block\Address\Book" type="Kemana\Customer\Block\Address\Book" />
+    <preference for="Magento\Customer\Block\Address\Grid" type="Kemana\Customer\Block\Address\Grid" />
+    <preference for="Magento\Framework\View\Element\Html\Date" type="Kemana\Customer\Framework\View\Element\Html\Date" />
+</config>

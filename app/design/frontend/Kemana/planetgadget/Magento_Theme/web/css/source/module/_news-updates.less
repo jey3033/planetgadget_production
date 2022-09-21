@@ -1,0 +1,33 @@
+// /**
+//  * Copyright © 2020 Kemana. All rights reserved.
+//  * @author Harshani Karunasekara <hkarunasekara@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+//  Bank & Promo variables
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .home-news-and-updates {
+        .lib-css(background-color, @color-pg-light-gray2);
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .inner-container {
+        max-width: @layout__max-width;
+        padding-inline: @indent__s;
+        margin-inline: auto;
+    }
+
+    .home-news-and-updates {
+        padding-block: 50px;
+    }
+}

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2021 PT Kemana Teknologi Solusi. All rights reserved.
+ * http://www.kemana.com
+ */
+
+/**
+ * @category Kemana
+ * @package  Kemana_MsDynamic
+ * @license  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ *
+ * @author   Achintha Madushan <amadushan@kemana.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Kemana_MsDynamics::msdynamic" title="Microsoft Dynamic ERP"
+             module="Kemana_MsDynamics" parent="Kemana_Core::menu" sortOrder="210"
+             resource="Kemana_MsDynamics::msdynamic"/>
+        <add id="Kemana_MsDynamics::configuration" title="Configuration" module="Kemana_MsDynamics"
+             sortOrder="220" parent="Kemana_MsDynamics::msdynamic"
+             action="admin/system_config/edit/section/msdynamic" resource="Kemana_MsDynamics::configuration"/>
+        <add id="Kemana_MsDynamics::managemsdynamiclog" title="Manage MsDynamic Log" module="Kemana_MsDynamics"
+             sortOrder="221" parent="Kemana_MsDynamics::msdynamic"
+             action="msdynamic/logs/index" resource="Kemana_MsDynamics::managemsdynamiclog"/>
+    </menu>
+</config>

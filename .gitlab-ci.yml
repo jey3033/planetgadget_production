@@ -1,0 +1,41 @@
+image: git.kemana.com:5151/m2/planet-gadget:latest
+
+stages:
+  - dev
+  
+variables:
+  MYSQL_ROOT_PASSWORD: magento
+  MYSQL_DATABASE: magento
+
+cache:
+  key: composer
+  paths:
+    - /root/.composer/cache
+
+magento2:dev:
+  stage: dev
+  when: manual
+  script:
+    - export ENV="dev"
+    - export SSH_PRIVATE_KEY=$MAGENTO_DEV_PRIVATE_KEY
+    - export SSH_KEY_SCAN=$MAGENTO_DEV_KEY_SCAN
+    - export SSH_STAGING_M2_ENV=$MAGENTO_DEV_M2_ENV
+    - export AUTH_JSON=$AUTH_JSON
+    - echo "$AUTH_JSON" > auth.json
+    - echo "$MAGENTO_DEV_M2_ENV" >> env.php
+    - cp /root/config/bin/confightp.sh .
+    - cp /root/config/deployer/hosts.yml .
+    - cp /root/config/deployer/deploy.php .
+    - cp /root/config/bin/robots.txt .
+    - /bin/bash /root/config/bin/prepare_ssh.sh
+    - /usr/local/bin/dep deploy dev
+  tags:
+    - runner
+#  dependencies:
+#    - magento2:build
+  only:
+    - develop
+  environment:
+    name: dev
+    url: https://pg.kemana.dev/
+#  when: manual //remove this line after testing

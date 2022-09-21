@@ -1,0 +1,370 @@
+<?php
+/**
+ * FME Extensions
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the fmeextensions.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.fmeextensions.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category  FME
+ * @package   FME_Jobs
+ * @copyright Copyright (c) 2019 FME (http://fmeextensions.com/)
+ * @license   https://fmeextensions.com/LICENSE.txt
+ */
+ ?>
+<link href="https://fonts.googleapis.com/css?family=Saira:400,500,600,700,800" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<?php
+      $currdatetime = $block->getCurrDateTime();
+      $arrCurrDateTime = (array)$currdatetime;
+      $arrCurrDateTime = $arrCurrDateTime['date'];
+      $item = $block->getJobDetail();
+      $item = $item->getData();
+      if (empty($item)) {
+        echo'<div class="title">This Job is not found or not valid for selected store view. Please visit job listing for appropriate jobs.</div>';
+      }
+
+?>
+<?php
+    /** @var \Kemana\Jobs\Helper\Data $kemanaJobsHelper */
+    $kemanaJobsHelper = $this->helper(Kemana\Jobs\Helper\Data::class);
+    /** @var \Magento\Framework\Pricing\Helper\Data $priceHelper */
+    $priceHelper = $this->helper('Magento\Framework\Pricing\Helper\Data');
+?>
+<?php if (!empty($item)):?>
+<div id="wrapper">
+    <div class="inner_container">
+        <div class="fme_job_manager">
+            <div class="listing full_page">
+                <div class="block">
+                    <div class="head">
+                        <div class="title">
+                            <h2><?php echo __($item[0]['jobs_title']);?></h2>
+                            <div class="company">
+                                <span><?php echo __($block->getDetailPageDepartment($item[0]['jobs_select_departments'])) ?>,
+                                    <?php echo __($block->getDetailPageDepartment($item[0]['jobs_location'])) ?></span>
+                            </div>
+                            <div class="date">
+                                <span><?php echo $kemanaJobsHelper->getTimeAccordingToTimeZone($item[0]['jobs_publish_date'], 'd M Y G:i:s A')?></span>
+                            </div>
+                            <div class="salary-range">
+                                <?php
+									$showSalaryRange = false;
+									if ($item[0]['salary_from'] > 0 || $item[0]['salary_to'] > 0) {
+										$showSalaryRange = true;
+										$salaryFrom = $priceHelper->currency($item[0]['salary_from'],true,false);
+										$salaryTo = $priceHelper->currency($item[0]['salary_to'],true,false);
+									}
+								?>
+                                <?php if ($showSalaryRange): ?>
+                                <span><?php echo $salaryFrom.' - '. $salaryTo ?></span>
+                                <?php endif;?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="callout_btns clearfix">
+                        <?php if($block->articlesHelper->getJobSharingOptions()): ?>
+                        <div class="social_media_icons"> <span class='st_fblike_hcount'></span><span
+                                class='st_twitter_hcount'></span><span class='st_plusone_hcount'></span><span
+                                class='st_email_hcount'></span><span class='st_sharethis_hcount'></span>
+                        </div>
+                        <?php endif;?>
+                        <div class="primary">
+                            <a href="#slide" class="action login primary" id="click-me">
+                                <span><?php echo __('Apply Now') ?></span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <h3><?php echo __('Jobs Description')?></h3>
+                        <?php $jobDescription = $item[0]['jobs_description'] ?>
+                        <?php $jobDescription = preg_replace('/(<(script|style)\b[^>]*>).*?(<\/\2>)/is', "$1$3", $jobDescription); // remove <style|script tag when page builder using html ?>
+                        <?php $jobDescription = $kemanaJobsHelper->formatJobContentToHtml($jobDescription); // format content when page builder using html
+						?>
+                        <?php echo __($jobDescription)?>
+                        <h3><?php echo __('Skills Required')?></h3>
+                        <?php echo __($item[0]['jobs_required_skills'])?>
+
+                        <h4><?php echo __('Job Details')?></h4>
+                        <table>
+                            <tbody>
+                                <?php if (!empty($item[0]['jobs_select_departments'])): ?>
+                                <tr>
+                                    <th><?php echo __('Department:')?></th>
+                                    <td><?php echo __($block->getDetailPageDepartment($item[0]['jobs_select_departments'])) ?>
+                                    </td>
+                                </tr>
+                                <?php endif; ?>
+
+                                <?php if (!empty($item[0]['jobs_open_positions'])): ?>
+                                <tr>
+                                    <th><?php echo __('Total Positions:')?></th>
+                                    <td><?php echo __($block->getDetailPageDepartment($item[0]['jobs_open_positions'])) ?>
+                                    </td>
+                                </tr>
+                                <?php endif;?>
+                                <?php if (!empty($item[0]['jobs_job_type'])): ?>
+                                <tr>
+                                    <th><?php echo __('Job Shift:')?></th>
+                                    <td><?php echo __($block->getDetailPageDepartment($item[0]['jobs_job_type'])) ?>
+                                    </td>
+                                </tr>
+                                <?php endif;?>
+                                <?php if (!empty($item[0]['jobs_job_type'])): ?>
+                                <tr>
+                                    <th><?php echo __('Job Location:')?></th>
+                                    <td><?php echo __($block->getDetailPageDepartment($item[0]['jobs_location'])) ?>
+                                    </td>
+                                </tr>
+                                <?php endif;?>
+                                <?php if (!empty($item[0]['jobs_gender'])): ?>
+                                <tr>
+                                    <th><?php echo __('Gender:')?></th>
+                                    <td><?php echo __($block->getDetailPageDepartment($item[0]['jobs_gender'])) ?></td>
+                                </tr>
+                                <?php endif; ?>
+                                <?php if (!empty($item[0]['jobs_min_qualification'])): ?>
+                                <tr>
+                                    <th><?php echo __('Minimum Education:')?></th>
+                                    <td><?php echo __($block->getDetailPageDepartment($item[0]['jobs_min_qualification'])) ?>
+                                    </td>
+                                </tr>
+                                <?php endif; ?>
+                                <?php if (!empty($item[0]['jobs_career_level'])): ?>
+                                <tr>
+                                    <th><?php echo __('Career Level:')?></th>
+                                    <td><?php echo __($block->getDetailPageDepartment($item[0]['jobs_career_level'])) ?>
+                                    </td>
+                                </tr>
+                                <?php endif; ?>
+                                <?php if (!empty($item[0]['jobs_min_experience'])): ?>
+                                <tr>
+                                    <th><?php echo __('Minimum Experience:')?></th>
+                                    <td><?php echo __($block->getDetailPageDepartment($item[0]['jobs_min_experience'])) ?>
+                                    </td>
+                                </tr>
+                                <?php endif; ?>
+                                <?php if(!empty($item[0]['jobs_required_travel'])):?>
+                                <tr>
+                                    <th><?php echo __('Required Travel:')?></th>
+
+                                    <td><?php echo __(($item[0]['jobs_required_travel'] == 0) ? 'No' : 'Yes' )?></td>
+                                </tr>
+                                <?php endif; ?>
+                                <?php if (!empty($item[0]['jobs_applyby_date'])): ?>
+                                <tr>
+                                    <th><?php echo __('Apply Before:')?></th>
+                                    <td><?php echo $kemanaJobsHelper->getTimeAccordingToTimeZone($item[0]['jobs_applyby_date'], 'd M Y G:i:s A')?>
+                                    </td>
+                                </tr>
+                                <?php endif; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <script>
+                    require(
+                        [
+                            'jquery',
+                            'Magento_Ui/js/modal/modal'
+                        ],
+                        function(
+                            $,
+                            modal
+                        ) {
+                            var options = {
+                                type: 'popup',
+                                responsive: true,
+                                innerScroll: true,
+                                title: 'Jobs Application',
+                                buttons: [{
+                                    text: $.mage.__('Continue'),
+                                    class: '',
+                                    click: function() {
+                                        this.closeModal();
+                                    }
+                                }]
+                            };
+
+                            var popup = modal(options, $('#events_popup'));
+                            // $("#click-me").on('click', function() {
+                            //     $("#events_popup").modal("openModal");
+                            // });
+
+                        }
+                    );
+                    </script>
+                    <script type="text/javascript">
+                    function myFunction() {
+
+                        var exists = document.getElementById("g-recaptcha-response");
+
+                        if (exists == null) {} else {
+                            var check = document.getElementById("g-recaptcha-response").value;
+                            if (check == '' || check == null) {
+                                document.getElementById("recaptcha").style.border = "1px solid #ea0e0e";
+                                return false;
+                            } else {
+                                document.getElementById("recaptcha").style.border = "none";
+                                return true;
+                            }
+
+                        }
+                    }
+                    </script>
+
+                    <div <?php if ($block->articlesHelper->getPopupEnable()):?> id="events_popup" style="display: none;"
+                        <?php endif; ?> class="events_popup" <?php if(!($block->articlesHelper->getPopupEnable())):?>
+                        <?php endif;?>>
+
+                    </div>
+
+                    <div>
+                    <div id="wrapper">
+                        <div class="inner_container">
+                            <div class="fme_job_manager">
+                                <div class="popup_form">
+                                    <h3 id="slide" class="legend"><span><?= $block->escapeHtml(__('Apply Now')) ?></span></h3>
+                                    <form action=<?php  echo $block->getAddApplicationUrl() ?> method="post"
+                                          enctype="multipart/form-data"
+                                          data-hasrequired="<?php echo __('* Required Fields') ?>"
+                                          data-mage-init='{"validation":{}}'>
+                                        <fieldset class="fieldset with-border">
+                                            <input name="jobs_id" id="jobs_id" class="input_field" type="hidden"
+                                                   value="<?php echo __($item[0]['jobs_id'])?>">
+                                            <input name="jobs_title" id="jobs_title" class="input_field"
+                                                   type="hidden" value="<?php echo __($item[0]['jobs_title'])?>">
+                                            <input name="jobs_job_type" id="jobs_job_type" class="input_field"
+                                                   type="hidden"
+                                                   value="<?php echo __($block->getDetailPageDepartment($item[0]['jobs_job_type'])) ?>">
+                                            <input name="jobs_select_departments" id="jobs_select_departments"
+                                                   class="input_field" type="hidden"
+                                                   value="<?php echo __($block->getDetailPageDepartment($item[0]['jobs_select_departments'])) ?>">
+                                            <input name="jobs_location" id="jobs_location" class="input_field"
+                                                   type="hidden"
+                                                   value="<?php echo __($block->getDetailPageDepartment($item[0]['jobs_location'])) ?>">
+
+                                            <div class="field name required">
+                                                <label class="label" for="name"><span><?= $block->escapeHtml(__('Enter full Name')) ?></span></label>
+                                                <div class="control">
+                                                    <input name="fullname" id="fullname" title="Enter full Name" value=""
+                                                           class="form-control" type="text"
+                                                           placeholder="<?= $block->escapeHtml(__('Enter full name')) ?>"
+                                                           data-validate="{required:true}" aria-required="true">
+                                                </div>
+                                            </div>
+                                            <div class="field email required">
+                                                <label class="label" for="email"><span><?= $block->escapeHtml(__('Email')) ?></span></label>
+                                                <div class="control">
+                                                    <input name="email" id="email" title="Email" value=""
+                                                           class="form-control" type="email" placeholder="<?= $block->escapeHtml(__('Enter email')) ?>"
+                                                           data-validate="{required:true, 'validate-email':true}"
+                                                           aria-required="true">
+                                                </div>
+                                            </div>
+                                            <div class="field dob">
+                                                <label class="label" for="dob"><span><?= $block->escapeHtml(__('Date of Birth (optional)')) ?></span></label>
+                                                <div class="control">
+                                                    <input name="dob" id="dob" title="Dob" value=""
+                                                           class="form-control" type="text"
+                                                           placeholder="<?= $block->escapeHtml(__('Day/Month/Year')) ?>">
+                                                </div>
+                                            </div>
+                                            <script>
+                                                require([
+                                                    "jquery",
+                                                    "mage/calendar"
+                                                ], function($) {
+                                                    $("#dob").calendar({
+                                                        dateFormat: "dd/mm/yyyy",
+                                                        buttonText: "<?php echo __('Select Date') ?>",
+                                                    });
+                                                });
+                                            </script>
+                                            <div class="field telephone required">
+                                                <label class="label" for="telephone"><span><span><?= $block->escapeHtml(__('Telephone')) ?></span></label>
+                                                <div class="control">
+                                                    <input name="telephone" id="telephone" title="Telephone"
+                                                           value="" class="form-control"
+                                                           placeholder="<?= $block->escapeHtml(__('Example: 081234567890')) ?>" type="tel"
+                                                           data-validate="{required:true}" aria-required="true">
+                                                </div>
+                                            </div>
+                                            <div class="field address">
+                                                <label class="label" for="name"><span><?= $block->escapeHtml(__('Address')) ?></span></label>
+                                                <div class="control">
+                                                    <input name="address" id="address" title="Address"
+                                                           placeholder="<?= $block->escapeHtml(__('Enter street name, no. house, etc')) ?>" value=""
+                                                           class="form-control" type="text"
+                                                           data-validate="{required:true}">
+                                                </div>
+                                            </div>
+                                            <div class="field upload-cv">
+                                                <label class="label" for="cvfile"><span><?= $block->escapeHtml(__('Upload CV')) ?></span></label>
+                                                <span class="upload-files"><?= $block->escapeHtml(__('Accepted files: .pdf, .jpg, .png, .doc/docx, .zip, .rar')) ?></span>
+                                                <div class="control">
+                                                    <input name="cvfile" id="cvfile" title="CV File" value=""
+                                                           class="form-control input_field" type="file"
+                                                           data-validate="{required:true}">
+                                                </div>
+                                            </div>
+                                            <div class="field upload-cover-letter">
+                                                <label class="label" for="upload-cover-letter"><span><?= $block->escapeHtml(__('Upload Cover Letter')) ?></span></label>
+                                                <span class="upload-files"><?= $block->escapeHtml(__('Accepted files: .pdf, .jpg, .png, .doc/docx, .zip, .rar')) ?></span>
+                                                <div class="control">
+                                                    <input name="cover_letter_file" id="cover_letter_file"
+                                                           title="Cover Letter File" value=""
+                                                           class="form-control input_field" type="file">
+                                                </div>
+                                            </div>
+                                            <div class="field upload-id-card">
+                                                <label class="label" for="upload-id-card"><span><?= $block->escapeHtml(__('Upload ID Card')) ?></span></label>
+                                                <span class="upload-files"><?= $block->escapeHtml(__('Accepted files: .pdf, .jpg, .png, .doc/docx, .zip, .rar')) ?></span>
+                                                <div class="control">
+                                                    <input name="id_card_file" id="id_card_file"
+                                                           title="ID Card File" value=""
+                                                           class="form-control input_field" type="file">
+                                                </div>
+                                            </div>
+                                            <div class="field upload-education-certificate">
+                                                <label class="label" for="upload-education-certificate"><span><?= $block->escapeHtml(__('Upload Education Certificate')) ?></span></label>
+                                                <span class="upload-files"><?= $block->escapeHtml(__('Accepted files: .pdf, .jpg, .png, .doc/docx, .zip, .rar')) ?></span>
+                                                <div class="control">
+                                                    <input name="education_cert_file" id="education_cert_file"
+                                                           title="Education Certificate File" value=""
+                                                           class="form-control input_field" type="file">
+                                                </div>
+                                            </div>
+                                            <?php if($block->articlesHelper->isJobsCaptchaEnable()): ?>
+                                                <div class="g-recaptcha" name="recaptcha" id="recaptcha"
+                                                     data-sitekey="<?php echo $block->articlesHelper->getJobsCaptchaKey() ?>">
+                                                </div>
+                                            <?php endif; ?>
+                                            <div class="action-toolbar applynow-button">
+                                                <div class="primary">
+                                                    <button type="submit"
+                                                            class="action login primary"><span><?php echo __('SEND APPLICATION')?></span></button>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="footer_bar clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<?php endif; ?>

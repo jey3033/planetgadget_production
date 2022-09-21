@@ -1,0 +1,140 @@
+<?php
+/**
+ * Copyright © 2020 PT Kemana Teknologi Solusi. All rights reserved.
+ * http://www.kemana.com
+ */
+
+/**
+ * @category Kemana
+ * @package  Kemana_Storelocator
+ * @license  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ *
+ *
+ * @author   kemana team <jakartateam@kemana.com>
+ */
+?>
+<?php /** @var \Kemana\Storelocator\Block\Location $block */ ?>
+<?php
+$locations = $block->getLocations();
+
+$currentDate = $block->timezoneInterface->date();
+$currentDay = strtolower($block->timezoneInterface->convertConfigTimeToUtc($currentDate, 'l'));
+$dayNames = $block->dataHelper->getDaysNames();
+$isShowDistance = $block->dataHelper->getShowDistance();
+$isShowDirections = $block->dataHelper->getShowDirection();
+?>
+<div id="<?= $block->getStoresListId(); ?>">
+    <?php foreach ($locations as $location) : ?>
+    <div class="store-items" name="leftLocation" data-mapid="<?= $block->getMapId(); ?>" data-amid="<?= $location->getId(); ?>">
+        <div class="location_header"><?= $this->escapeHtml($location->getName()); ?></div>
+
+        <?php if ($isShowDistance) : ?>
+            <div class="distance-away">
+                <?= __(number_format($location->getDistance(), 1).' km'); ?>
+            </div>
+        <?php endif; ?>
+
+        <div class="location-address">
+            <?= $this->escapeHtml($location->getAddress()).','; ?>
+            <?php if ($this->escapeHtml($location->getState())) : ?>
+                <?= $this->escapeHtml($location->getState()).','; ?>
+            <?php endif; ?>
+            <?= $this->escapeHtml($location->getZip()); ?>
+            <?= $this->escapeHtml($location->getCity()).','; ?>
+            <?php $countyCode = $location->getCountry(); ?>
+            <?= $this->escapeHtml($block->getCountryNameByCode($countyCode)); ?>
+        </div>
+
+        <?php if ($isShowDirections) : ?>
+            <?php $mapUrl = 'http://maps.google.com/maps?z=12&t=m&q='; ?>
+            <?php $latitude = $this->escapeHtml($location->getLat()); ?>
+            <?php $longitude = $this->escapeHtml($location->getLng()); ?>
+            <?php $storeMapUrl = $mapUrl.$latitude.','.$longitude; ?>
+
+            <div class="get-direction">
+                <a href="<?= $storeMapUrl; ?>" target="_blank"><?= __('Get Direction'); ?></a>
+            </div>
+        <?php endif; ?>
+
+            <?php if (trim($location->getPhone())) : ?>
+                <div class="store-phone-number">
+                    <?= $this->escapeHtml($location->getPhone()); ?>
+                </div>
+            <?php endif; ?>
+
+            <?php if ($this->getShowAttributes()) : ?>
+            <?php if (trim($location->getEmail())) : ?>
+                <br/>
+                <?= __('E-mail') ?>: <?= $this->escapeHtml($location->getEmail()); ?>
+            <?php endif; ?>
+            <?php if (trim($location->getWebsite())) : ?>
+                <br/>
+                <?= __('URL') ?>: <?= $this->escapeHtml($location->getWebsite()); ?>
+            <?php endif; ?>
+        <?php endif; ?>
+
+        <?php if ($location->getScheduleArray() != false && $location->getShowSchedule()) :
+            $schedule = $location->getScheduleArray();
+            if (array_key_exists($currentDay, $schedule)) {
+                $scheduleKey = strtolower($dayNames[$currentDay]->getText());
+            } else {
+                // getting day of the week for compatibility with old module versions
+                $scheduleKey = date("N", strtotime($currentDay));
+            }
+            $from = $schedule[$scheduleKey]['from'][0] . ':' . $schedule[$scheduleKey]['from'][1];
+            $to = $schedule[$scheduleKey]['to'][0] . ':' . $schedule[$scheduleKey]['to'][1];
+            $workToday = $block->getWorkingTime($from, $to);
+            $isAvailableForOpen  = ($workToday) ? str_contains($workToday, '-') : false;
+            $workAvailableText = $isAvailableForOpen;
+            ?>
+            <div class="today_schedule">
+                <span>
+                    <?= $workToday ?>
+                    <div class="locator_arrow"></div>
+                </span>
+            </div>
+
+            <div class="all_schedule" id="schedule<?= $location->getId(); ?>">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <?php
+                        $dayCountDivider = 0;
+                        foreach ($schedule as $key => $item) {
+                            
+                            $dayCountDivider++;
+                            $from = $item['from'][0] . ':' . $item['from'][1];
+                            $to = $item['to'][0] . ':' . $item['to'][1];
+                            $workingTime = $block->getWorkingTime($from, $to);
+                            if (array_key_exists($key, $dayNames)) {
+                                $dayName = $dayNames[$key]->getText();
+                            } else {
+                                $dayName = date('l', strtotime("Sunday + $key days"));
+                            }
+                            ?>
+                            
+                            <?php if($workingTime): ?>
+                                <div class="working-hours-item">
+                                    <?= __($dayName); ?>
+                                    <span>
+                                        <?= $workingTime ?>
+                                    </span>
+                                </div>
+                            <?php endif; ?>
+                            <?php
+                            if ($dayCountDivider % 4 == 0) {
+                                echo '</div><div class="col-md-6 col-sm-12">';
+                            }
+                        }
+                        ?>
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
+        </div>
+    <?php endforeach; ?>
+</div>
+<?php if ($block->getPagerHtml()): ?>
+    <div class="store-locator-toolbar toolbar bottom">
+        <?= $block->getPagerHtml(); ?>
+    </div>
+<?php endif ?>

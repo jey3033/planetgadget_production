@@ -1,0 +1,51 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// phpcs:disable Magento2.Files.LineLength.MaxExceeded
+?>
+<?php $entityValues = $block->getEntityValues() ?>
+
+<?php if ($block->getEnabled() && count($entityValues)) :?>
+<form action="<?= $block->escapeUrl($block->getAddUrl()) ?>"
+      method="post"
+      id="add-cart-items-to-gift-registry"
+      class="form giftregistry"
+      data-mage-init='{"validation":{}}'>
+    <div class="field pg-add-to-gift-list-tooltip">
+        <label class="label control _with-tooltip" for="pg-add-to-gift-list-tooltip">
+            <span><?= $block->escapeHtml(__('Add to Gift List')) ?></span>
+
+            <div class="field-tooltip toggle">
+                <span class="field-tooltip-action action-help"
+                    data-bind="mageInit: {'dropdown':{'activeClass': '_active'}}"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false">
+                </span>
+                <div class="field-tooltip-content" data-target="dropdown" aria-hidden="true">
+                    <?= __('The Gift List contains a list of your wish items that can be shared with others to purchase.'); ?>
+                </div>
+            </div>
+        </label>
+    </div>
+    <fieldset class="fieldset">
+        <div class="field giftregistry">
+            <div class="control">
+                <select id="giftregistry_entity" name="entity" title="<?= $block->escapeHtmlAttr(__('Gift Registry')) ?>" data-validate="{required:true}">
+                    <?php foreach ($entityValues as $_entity) :?>
+                        <option value="<?= $block->escapeHtmlAttr($_entity->getValue()) ?>"
+                                title="<?= $block->escapeHtmlAttr($_entity->getTitle()) ?>"><?= $block->escapeHtml($block->truncateString($_entity->getTitle(), 40)) ?>
+                        </option>
+                    <?php endforeach;?>
+                </select>
+            </div>
+        </div>
+        <button type="submit" class="action primary add">
+            <span><?= $block->escapeHtml(__('Add All To Gift Registry')) ?></span>
+        </button>
+    </fieldset>
+</form>
+<?php endif; ?>

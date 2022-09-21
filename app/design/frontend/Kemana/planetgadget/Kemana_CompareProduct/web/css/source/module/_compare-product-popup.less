@@ -1,0 +1,201 @@
+// /**
+//  * Copyright © 2022 Kemana. All rights reserved.
+//  * @author Harshani Karunasekara <hkarunasekara@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+//
+//  Variables
+//  _____________________________________________
+@promotion-popup-desktop__width: 420px;
+
+@promotion-popup-title__font-size: 18px;
+@promotion-popup-title__font-weight: @font-weight__bold;
+@promotion-popup-title__line-height: 24px;
+
+@promotion-popup-img__max-width: 100px;
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .modals-wrapper {
+        .modal-popup {
+            &.promotion-popup {
+                .lib-vendor-prefix-display();
+
+                .modal-inner-wrap {
+                    overflow-y: visible;
+                    height: auto;
+                    border-radius: @common-border-radius;
+                    box-shadow: none;
+
+                    .modal-header {
+                        padding: 0;
+                    }
+
+                    .modal-content {
+                        .lib-css(padding, @indent__l @indent__base);
+                        margin-top: 0;
+
+                        .success_header {
+                            .lib-typography(
+                                @_font-size: @promotion-popup-title__font-size,
+                                @_font-weight: @promotion-popup-title__font-weight,
+                                @_line-height: @promotion-popup-title__line-height
+                            );
+                            .lib-css(margin-bottom, @indent__base);
+                            text-align: center;
+                            width: 100%;
+                        }
+
+                        .error_header,
+                        .product_name,
+                        .p_count_limit,
+                        .p_count_remind,
+                        .p_count_max {
+                            width: 100%;
+                            text-align: center;
+                            .lib-line-height(18);
+                        }
+
+                        .product_img {
+                            .lib-css(max-width, @promotion-popup-img__max-width);
+                            margin: auto;
+                            margin-bottom: 15px;
+
+                            img {
+                                float: none;
+                            }
+                        }
+
+                        .product_name {
+                            .lib-typography(
+                                @_font-weight: @font-weight__bold
+                            );
+                            margin-bottom: @indent__base;
+                        }
+
+                        .p_count_remind {
+                            .compare-products-count {
+                                .lib-typography(
+                                    @_color: @kemana-primary-brand-color,
+                                    @_font-weight: @font-weight__bold
+                                );
+                            }
+                        }
+
+                        .actions-toolbar {
+                            .lib-css(margin-top, @indent__base);
+
+                            > .primary {
+                                .lib-vendor-prefix-display();
+                                .lib-vendor-prefix-flex-wrap(wrap);
+                                justify-content: space-between;
+                                width: 100%;
+
+                                .primary {
+                                    .lib-button-primary(
+                                        @_button-padding: 0 10px
+                                    );
+                                    width: 100%;
+                                    margin: 0;
+                                    float: none;
+                                }
+
+                                .clear-products {
+                                    .lib-button-revert-secondary-color();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .modals-wrapper {
+        .modal-popup {
+            &.promotion-popup {
+                padding-left: @layout__width-xs-indent;
+                padding-right: @layout__width-xs-indent;
+                right: inherit;
+                left: inherit;
+                width: 100%;
+
+                .modal-inner-wrap {
+                    .lib-css(margin, @header-mobile__height*2 auto auto);
+                    top: 0;
+                    transform: none;
+                    width: 100%;
+
+                    &[class] {
+                        overflow: visible;
+                    }
+
+                    .modal-header {
+                        .action-close {
+                            right: -@layout__width-xs-indent;
+                        }
+                    }
+
+                    .actions-toolbar {
+                        .primary {
+                            .action {
+                                &.compare-products {
+                                    margin-bottom: @indent__s;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .modals-wrapper {
+        .modal-popup {
+            &.promotion-popup {
+                .modal-inner-wrap {
+                    .lib-css(margin-top, 221px);
+                    .lib-css(width, @promotion-popup-desktop__width);
+
+                    .modal-content {
+                        .lib-css(padding, @indent__l @indent__l+8px);
+
+                        .actions-toolbar {
+                            > .primary {
+                                justify-content: space-between;
+                                width: inherit;
+
+                                .primary {
+                                    &.compare-products {
+                                        width: 196px;
+                                    }
+
+                                    &.clear-products {
+                                        width: 138px;
+                                        margin-left: 10px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

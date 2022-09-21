@@ -1,0 +1,156 @@
+// /**
+//  * Copyright © 2022 Kemana. All rights reserved.
+//  * @author Harshani Karunasekara <hkarunasekara@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .ui-datepicker {
+        border: none;
+        border-radius: 5px;
+        padding: 20px 16px;
+        background: @panel__background-color;
+        width: 340px;
+        box-shadow: 0 5px 20px #00000021;
+
+        .ui-datepicker-header {
+            padding-block: 0 15px;
+
+            .ui-datepicker-prev,
+            .ui-datepicker-next {
+                top: 0;
+                height: 38px;
+                width: 37px;
+                border-radius: 5px;
+                background: @color-pg-light-gray3;
+
+                &:hover {
+                    background: @color-pg-light-gray2;
+                }
+
+                span {
+                    border: none;
+                    margin-left: -5px;
+                    top: 0;
+                    margin-top: 0;
+
+                    .lib-icon-font(
+                        @icon-pg-down,
+                        @_icon-font-size: 10px,
+                        @_icon-font-line-height: 37px,
+                        @_icon-font-color: @kemana-primary-brand-color);
+                }
+            }
+
+            .ui-datepicker-prev {
+                right: 47px;
+                left: unset;
+
+                span {
+                    .lib-icon-font(
+                        @icon-pg-up,
+                        @_icon-font-size: 10px,
+                        @_icon-font-line-height: 37px,
+                        @_icon-font-color: @kemana-primary-brand-color);
+                }
+            }
+
+            .ui-datepicker-title {
+                margin-inline: 0 150px;
+
+                select {
+                    border: none;
+                    padding: 13px 15px 12px;
+                    height: 38px;
+                    .lib-css(background-color, @color-pg-light-gray3);
+                    .lib-font-size(12);
+                    .lib-line-height(13);
+                    .lib-css(font-weight, @font-weight__bold);
+                    text-transform: uppercase;
+                    position: relative;
+                    //.lib-icon-font(
+                    //    @icon-pg-down,
+                    //    @_icon-font-color: @kemana-primary-brand-color,
+                    //    @_icon-font-position: after
+                    //);
+                }
+            }
+        }
+
+        .ui-datepicker-calendar {
+            border: none;
+
+            th {
+                border: none;
+                padding: 5px;
+                background: transparent;
+                height: 13px;
+                width: 44px;
+                .lib-font-size(12);
+                .lib-line-height(13);
+                .lib-css(font-weight, @font-weight__semibold);
+                .lib-css(color, @color-pg-light-gray);
+            }
+
+            td {
+                border: none;
+                height: 44px;
+                width: 44px;
+                padding: 5px;
+
+                &.ui-state-disabled {
+                    background: transparent;
+
+                    span {
+                        .lib-css(font-weight, @font-weight__bold);
+                        .lib-css(color, @color-pg-light-gray);
+                    }
+                }
+
+                a {
+                    height: 34px;
+                    border-radius: 5px;
+                    text-align: center;
+                    .lib-font-size(12);
+                    .lib-line-height(26);
+                    .lib-css(font-weight, @font-weight__bold);
+
+                    &.ui-state-active {
+                        .lib-css(background, @color-pg-yellow);
+                    }
+                }
+
+                .ui-state-hover {
+                    .lib-css(background, @color-pg-yellow);
+                }
+            }
+        }
+
+        .ui-datepicker-calendar {
+            .ui-datepicker-week-col {
+                display: none;
+            }
+        }
+
+        .ui-datepicker-buttonpane {
+            border-top: none;
+
+            button {
+                .lib-line-height(33);
+                padding: 0 10px;
+                background: transparent;
+                border: none;
+
+                &:hover {
+                    background: @kemana-secondary-brand-color;
+                }
+
+            }
+        }
+
+    }
+}

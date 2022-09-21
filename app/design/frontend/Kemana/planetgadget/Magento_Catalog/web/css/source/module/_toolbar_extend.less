@@ -1,0 +1,90 @@
+// /**
+//  * Copyright © 2022 Kemana. All rights reserved.
+//  * @author Harshani Karunasekara <agunawardena@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+//
+//  Variables
+//  ---------------------------------------------
+
+@toolbar-background: transparent;
+@toolbar-mode-icon-font-size: 24px;
+@toolbar-element-background: @panel__background-color;
+
+@toolbar-product-count__color: @kemana-primary-brand-color;
+@toolbar-product-select__color: @kemana-primary-brand-color;
+@toolbar-sorter-label__color: @color-pg-dark-gray;
+
+//
+//  Common
+//  _____________________________________________
+& when (@media-common = true) {
+    .toolbar-amount {
+        .toolbar-number {
+            font-weight: @font-weight__bold;
+        }
+    }
+
+    .sorter {
+        .sorter-label {
+            .lib-css(color, @toolbar-sorter-label__color);
+            font-weight: @font-weight__bold;
+            .lib-line-height(40);
+            padding-top: 0;
+        }
+    }
+
+    .pager {
+        .limiter {
+            float: right;
+
+            .limiter-label,
+            .limiter-text {
+                .lib-css(color, @toolbar-sorter-label__color);
+                font-weight: @font-weight__bold;
+            }
+
+            select.limiter-options {
+                background-color: @color-white;
+            }
+        }
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .toolbar-products {
+        .toolbar-sorter {
+            background-color: @color-white;
+            .lib-css(border, 1px solid @color-pg-light-gray);
+            border-radius: @common-border-radius;
+
+            .sorter-label {
+                display: none;
+            }
+
+            .sorter-options {
+                width: 100%;
+            }
+        }
+    }
+
+    .toolbar-amount {
+        padding: 20px 0 0;
+    }
+
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .toolbar-amount {
+        padding: 0 10px 0;
+    }
+}

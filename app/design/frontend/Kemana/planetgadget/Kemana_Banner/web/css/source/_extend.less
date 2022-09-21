@@ -1,0 +1,123 @@
+// /**
+//  * Copyright © 2020 Kemana. All rights reserved.
+//  * @author Harshani Karunasekara <hkarunasekara@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+@import 'module/_variables.less';
+@import 'module/_bannerslider_extend.less';
+
+//  Bank & Promo variables
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .cms-index-index {
+        .columns {
+            .column.main {
+               > div {
+
+                   &:first-child {
+                       .lib-vendor-prefix-display();
+                   }
+               }
+            }
+        }
+    }
+
+    .home-banner-first-container {
+        .lib-css(background-color, @color-pg-light-gray2);
+    }
+
+    .carousel-container {
+        margin-bottom: 0;
+
+        .owl-dots {
+            padding-inline: 5px;
+            width: 100%;
+            margin: auto;
+            text-align: left;
+        }
+    }
+
+    .banner-inner-container {
+        .banner-block {
+            .banner-img {
+                img {
+                    border-radius: @common-border-radius;
+                }
+            }
+        }
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .home-banner-first-container {
+        padding-block: @block-padding - 10;
+
+        .row {
+            margin-inline: 0;
+        }
+
+        .banner-block {
+            padding: 10px 0;
+
+            .banner-img {
+                padding-inline: 10px;
+            }
+        }
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .carousel-container {
+        .owl-dots {
+            max-width: @layout__max-width;
+        }
+    }
+
+    .banner-inner-container {
+        max-width: @layout__max-width;
+        padding-inline: 40px;
+        margin-inline: auto;
+
+        .banner-block {
+            margin-bottom: 20px;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    .home-banner-first-container {
+        padding-block: @block-padding;
+
+
+    }
+}
+
+
+//
+//  Desktop Large
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+    .banner-inner-container {
+        padding-inline: @indent__s;
+
+        .banner-block {
+            margin-bottom: 0;
+        }
+    }
+}

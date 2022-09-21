@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <columns name="customer_columns" class="Magento\Customer\Ui\Component\Listing\Columns">
+        <column name="billing_telephone" sortOrder="60" class="Kemana\Customer\Ui\Component\Listing\Column\OrderActions">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Phone</label>
+            </settings>
+        </column>
+        <column name="phonenumber" sortOrder="60" class="Kemana\Customer\Ui\Component\Listing\Column\PhoneNumber">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Mobile Phone Number</label>
+            </settings>
+        </column>
+    </columns>
+</listing>

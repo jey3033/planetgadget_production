@@ -1,0 +1,265 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+use Magento\Customer\Block\Widget\Name;
+?>
+<?php
+/* @var $block \Magento\GiftRegistry\Block\Customer\Address\Edit */
+/** @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer */
+
+/** @var \Magento\Customer\Helper\Address $addressHelper */
+$addressHelper = $block->getData('addressHelper');
+/** @var \Magento\Directory\Helper\Data $directoryHelper */
+$directoryHelper = $block->getData('directoryHelper');
+?>
+<?php
+    $gmapApiKey = $block->getConfig(\KS\Logistic\Helper\Data::GMAP_API_PATH);
+?>
+<fieldset class="fieldset shipping_address">
+    <legend class="legend"><span><?= $block->escapeHtml(__('Shipping Address')) ?></span></legend>
+    <br />
+
+    <?php if ($block->customerHasAddresses()): ?>
+        <div class="field address">
+            <label for="address_type_or_id" class="label">
+                <span>
+                    <?= $block->escapeHtml(
+                        __('Choose a shipping address, or create a new address.')
+                    ) ?>
+                </span>
+            </label>
+            <div class="control"
+                 data-shipping-address="<?= $block->getEntity()->getShippingAddress() ? 'true' : 'false' ?>">
+                <?= $block->getAddressHtmlSelect('address_type_or_id') ?>
+            </div>
+        </div>
+    <?php endif ?>
+
+    <fieldset class="fieldset" id="shipping-new-address-form">
+        <?php if ($block->customerHasAddresses()): ?>
+            <?= /* @noEscape */
+            $secureRenderer->renderTag(
+                'style',
+                [],
+                '#shipping-new-address-form { display: none; }',
+                true
+            );
+            ?>
+        <?php endif ?>
+        <?= $block->getLayout()
+            ->createBlock(Name::class)
+            ->setObject($block->getAddress())
+            ->setFieldNameFormat('address[%s]')
+            ->toHtml()
+        ?>
+        <div class="field address telephone required">
+            <label for="address:telephone" class="label">
+                <span><?= $block->escapeHtml(__('Phone Number')) ?></span>
+            </label>
+            <div class="control">
+                <?php $phoneValidationClass =  $addressHelper->getAttributeValidationClass('telephone'); ?>
+                <input type="text"
+                       name="address[telephone]"
+                       placeholder="Example: 081234567890"
+                       value="<?= $block->escapeHtml($block->getAddress()->getTelephone()) ?>"
+                       title="<?= $block->escapeHtmlAttr(__('Phone Number')) ?>"
+                       class="input-text <?= $block->escapeHtmlAttr($phoneValidationClass) ?>"
+                       id="address:telephone"/>
+            </div>
+        </div>
+        <div class="field address countrydiv required" style="display:none">
+            <label for="address:country_id" class="label"><span><?= $block->escapeHtml(__('Country')) ?></span></label>
+            <div class="control">
+                <?= $block->getCountryHtmlSelect(
+                    $block->getAddress()->getCountryId(),
+                    'address[country_id]',
+                    'address:country_id'
+                ) ?>
+            </div>
+        </div>
+        <?= /* @noEscape */
+        $secureRenderer->renderTag(
+            'style',
+            [],
+            '
+                #address:region_id { display: none; }
+                #address:region { display: none; }
+            ',
+            true
+        ); ?>
+        <div class="field address region required">
+            <label for="address:region" class="label">
+                <span><?= $block->escapeHtml(__('State/Province')) ?></span>
+            </label>
+            <div class="control">
+                <select id="address:region_id"
+                        name="address[region_id]"
+                        title="<?= $block->escapeHtmlAttr(__('State/Province')) ?>"
+                        class="validate-select"
+                        defaultvalue="0">
+                    <option value="">
+                        <?= $block->escapeHtml(__('Please select a region, state or province.')) ?>
+                    </option>
+                </select>
+                <?php $regionValidationClass = $addressHelper->getAttributeValidationClass('region'); ?>
+                <input type="text"
+                       id="address:region"
+                       name="address[region]"
+                       placeholder="Enter region"
+                       value="<?= $block->escapeHtml($block->getAddress()->getRegion()) ?>"
+                       title="<?= $block->escapeHtmlAttr(__('State/Province')) ?>"
+                       class="input-text <?= $block->escapeHtmlAttr($regionValidationClass) ?>"/>
+            </div>
+        </div>
+        <div class="field address city required">
+            <label for="address:city" class="label"><span><?= $block->escapeHtml(__('City')) ?></span></label>
+            <?php $cityValidationClass = $addressHelper->getAttributeValidationClass('city');?>
+            <div class="control">
+                <select id="city_id" name="address[city_id]" title="<?php /* @escapeNotVerified */ echo __('City') ?>" class="validate-select">
+                    <option value=""><?php /* @escapeNotVerified */ echo __('Please Select City.') ?></option>
+                </select>
+                <input type="text"
+                       title="<?= $block->escapeHtmlAttr(__('City')) ?>"
+                       name="address[city]"
+                       placeholder="Enter city"
+                       value="<?= $block->escapeHtml($block->getAddress()->getCity()) ?>"
+                       class="input-text <?= $block->escapeHtmlAttr($cityValidationClass) ?>" id="address:city"/>
+            </div>
+        </div>
+        <div class="field address district required">
+            <label for="address:district" class="label"><span><?= $block->escapeHtml(__('District')) ?></span></label>
+            <?php $districtValidationClass = $addressHelper->getAttributeValidationClass('district');?>
+            <div class="control">
+                <select id="district_id" name="address[district_id]" title="<?php /* @escapeNotVerified */ echo __('District') ?>" class="validate-select">
+                    <option value=""><?php /* @escapeNotVerified */ echo __('Please Select District.') ?></option>
+                </select>
+                <input type="text"
+                       title="<?= $block->escapeHtmlAttr(__('District')) ?>"
+                       name="address[district]"
+                       placeholder="Enter district"
+                       value="<?= $block->escapeHtml($block->getAddress()->getCity()) ?>"
+                       class="input-text <?= $block->escapeHtmlAttr($districtValidationClass) ?>" id="address:district"/>
+            </div>
+        </div>
+        <div class="field address postcode required">
+            <label for="address:postcode" class="label">
+                <span><?= $block->escapeHtml(__('Zip/Postal Code')) ?></span>
+            </label>
+            <div class="control">
+                <?php $zipValidationClass = $addressHelper->getAttributeValidationClass('postcode'); ?>
+                <input type="text"
+                       title="<?= $block->escapeHtmlAttr(__('Zip/Postal Code')) ?>"
+                       name="address[postcode]"
+                       id="address:postcode"
+                       placeholder="Enter postcode"
+                       value="<?= $block->escapeHtml($block->getAddress()->getPostcode()) ?>"
+                       class="input-text validate-zip-international <?= $block->escapeHtmlAttr($zipValidationClass) ?>"
+                       data-validate="{'required':true, 'validate-zip-international':true}"/>
+            </div>
+        </div>
+        <?php $_streetValidationClass = $block->escapeHtmlAttr($addressHelper->getAttributeValidationClass('street'));?>
+        <div class="field address street required">
+            <label for="address:street1" class="label"><span><?= $block->escapeHtml(__('Complete address')) ?></span></label>
+            <div class="control">
+                <input type="text"
+                       title="<?= $block->escapeHtmlAttr(__('Street Address')) ?>"
+                       name="address[street][]"
+                       id="address:street1"
+                       placeholder="Enter street name, no. house, etc"
+                       value="<?= $block->escapeHtml($block->getAddress()->getStreetLine(1)) ?>"
+                       class="input-text <?= /* @noEscape */ $_streetValidationClass ?>" />
+                <div class="nested">
+                    <?php $_streetValidationClass = trim(str_replace('required-entry', '', $_streetValidationClass)); ?>
+                    <?php for ($_i = 2, $_n = $addressHelper->getStreetLines(); $_i <= $_n; $_i++): ?>
+                        <div class="field additional no-label">
+                            <div class="control">
+                                <input type="text"
+                                       title="<?= $block->escapeHtmlAttr(__('Street Address %1', $_i)) ?>"
+                                       name="address[street][]"
+                                       id="address:street<?= /* @noEscape */ $_i ?>"
+                                       value="<?= $block->escapeHtml($block->getAddress()->getStreetLine($_i)) ?>"
+                                       class="input-text <?= /* @noEscape */ $_streetValidationClass ?>"/>
+                            </div>
+                        </div>
+                    <?php endfor; ?>
+                </div>
+            </div>
+        </div>
+        <?php if($gmapApiKey) :?>
+            <div class="field map_point">
+                <label class="label" for="zip"><span><?php /* @escapeNotVerified */ echo __('Map Point (Optional)') ?></span></label>
+                <div class="control">
+                    <input type="text" name="address[map_point]" value="<?php echo $block->getAddress()->getCustomAttribute('map_point') ? $block->getAddress()->getCustomAttribute('map_point')->getValue() : null ?>" title="<?php /* @escapeNotVerified */ echo __('Map Point') ?>" id="map_point" class="input-text <?php /* @escapeNotVerified */ echo $this->helper('Magento\Customer\Helper\Address')->getAttributeValidationClass('map_point') ?>">
+                </div>
+            </div>
+            <div class="pinpoint actions-toolbar">
+                <div class="primary">
+                    <button type="button" class="action save go-popup" title="<?php /* @escapeNotVerified */ echo __('Choose Map Point') ?>">
+                        <span><?php /* @escapeNotVerified */ echo __('Choose Map Point') ?></span>
+                    </button>
+                </div>
+            </div>
+        <?php endif;?>
+    </fieldset>
+</fieldset>
+<?php if($gmapApiKey) :?>
+    <div id="gosend-popup-modal" style="display: none;">  
+        <span class="subtitle"><?= __('Please make sure your pinned point in map match with your address.'); ?></span>
+        <div class="autocompletegosendwrap">
+            <input id="autocompleteGosend" placeholder="<?= __('Find address or location'); ?>" type="text" autocomplete="off" />
+            <i class="fa fa-search"></i>
+        </div>
+        <div id="map-gosend">
+            Powered by Google Map
+        </div>
+
+        <div class="location-name-wrap">
+            <input id="location-name" type="text" autocomplete="off" />
+            <i class="fa fa-map-marker-alt"></i>
+        </div>
+    </div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo $gmapApiKey ?>&libraries=places" type="text/javascript"></script>
+    <script type="text/javascript">
+        require([
+            'jquery',
+            'KS_Logistic/js/popupmaps'
+        ], function ($,openmap) {
+            'use strict';
+            $(".go-popup, #map_point").on('click', function(){
+                openmap({content:$('#gosend-popup-modal'), targetInput: '#map_point', targetMap: 'map-gosend', autocompleteGosend: 'autocompleteGosend', locationName: '#location-name'});
+            });
+
+        });
+    </script>
+<?php endif;?>
+<?php
+    $cityId = $block->getAddress()->getCustomAttribute('city_id');
+    $districtId = $block->getAddress()->getCustomAttribute('district_id');
+    $districtText = $block->getAddress()->getCustomAttribute('district');
+?>
+<script type="text/x-magento-init">
+    {
+        "#address\\:country_id": {
+            "regionUpdater": {
+                "optionalRegionAllowed": <?= ($block->getConfig('general/region/display_all') ? 'true' : 'false') ?>,
+                "regionListId": "#address\\:region_id",
+                "regionInputId": "#address\\:region",
+                "postcodeId": "#address\\:postcode",
+                "regionJson": <?= /* @noEscape */ $directoryHelper->getRegionJson() ?>,
+                "defaultRegion": "<?= /* @noEscape */ $block->getAddress()->getRegionId() ?>",
+                "defaultCityId": "<?php /* @escapeNotVerified */ echo $cityId ? $cityId->getValue():null ?>",
+                "cityJson": <?php /* @escapeNotVerified */ echo $this->helper('KS\Logistic\Helper\Data')->getCitiesJson() ?>,
+                "cityListId": "#city_id",
+                "cityInputId": "#address\\:city",
+                "defaultDistrictId": "<?php /* @escapeNotVerified */ echo $districtId ? $districtId->getValue():null ?>",
+                "districtJson": <?php /* @escapeNotVerified */ echo $this->helper('KS\Logistic\Helper\Data')->getDistrictJson() ?>,
+                "districtListId": "#district_id",
+                "districtInputId": "#address\\:district",
+                "defaultDistrictInput": "<?php /* @escapeNotVerified */ echo $districtText ? $districtText->getValue():null ?>"
+            }
+        }
+    }
+</script>

@@ -1,0 +1,441 @@
+<?php
+/**
+ * FME Extensions
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the fmeextensions.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.fmeextensions.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category  FME
+ * @package   FME_Jobs
+ * @copyright Copyright (c) 2019 FME (http://fmeextensions.com/)
+ * @license   https://fmeextensions.com/LICENSE.txt
+ */ 
+ ?> 
+ <?php if($block->jobHelper->isJobModuleEnable()):?>
+ <?php $currdatetime = $block->getCurrDateTime();
+       $arrCurrDateTime = (array)$currdatetime;
+       $arrCurrDateTime = $arrCurrDateTime['date'];?>
+<?php $jobCollection = $block->getJobsCollection();?>
+<?php $metaCollection = $block->getMetaCollection();?>
+<?php $countShowMore = $block->jobHelper->getNumForShowMore();?>
+
+<link href="https://fonts.googleapis.com/css?family=Saira:400,500,600,700,800" rel="stylesheet">
+<div id="wrapper">
+  <div class="inner_container">
+    <div class="fme_job_manager">
+    <?php if($block->jobHelper->getJobTopBarEnable()):?>
+      <div class="search_filters clearfix">
+        <form id="ajax-contact-top-filters" method="post" action="<?php echo $block->getUrl().'job/index/filters'?>">
+          
+          <div class="jump_menu_container">
+            <section class="container">
+              <div class="dropdown">
+                <select name="dept[1]" class="dropdown-select" required>
+                  <option value=""><?php echo __('Department') ?></option>
+                  <?php foreach($metaCollection as $topMetas):?>
+                    <?php if($topMetas->getTypeCode() == 2):?>
+                  <option name="dept[<?php echo $topMetas->getDataCode() ?>]" value="<?php echo __($topMetas->getDataCode())?>"><?php echo __($topMetas->getDataName())?></option>
+                <?php endif;?>
+                  <?php endforeach;?>
+                </select>
+              </div>
+            </section>
+          </div>
+          <div class="jump_menu_container">
+            <section class="container">
+              <div class="dropdown">
+                <select name="loc[2]" class="dropdown-select" required>
+                  <option value=""><?php echo __('Location') ?></option>
+                  <?php foreach($metaCollection as $topMetas):?>
+                    <?php if($topMetas->getTypeCode() == 1):?>
+                  <option name="loc[<?php echo $topMetas->getDataCode() ?>]" value="<?php echo __($topMetas->getDataCode())?>"><?php echo __($topMetas->getDataName())?></option>
+                <?php endif;?>
+                  <?php endforeach;?>
+                  
+                </select>
+              </div>
+            </section>
+          </div>
+          <div class="jump_menu_container">
+            <section class="container">
+              <div class="dropdown">
+                <select name="typ[3]" class="dropdown-select" required>
+                  <option value=""><?php echo __('Job Type') ?></option>
+                  <?php foreach($metaCollection as $topMetas):?>
+                    <?php if($topMetas->getTypeCode() == 3):?>
+                  <option name="typ[<?php echo $topMetas->getDataCode() ?>]"value="<?php echo __($topMetas->getDataCode())?>"><?php echo __($topMetas->getDataName())?></option>
+                <?php endif;?>
+                  <?php endforeach;?>
+                  
+                </select>
+              </div>
+            </section>
+          </div>
+          <button type="submit"><?php echo __('Search')?></button>
+
+        </form>
+      </div>
+    <?php endif;?>
+
+      <?php if($block->jobHelper->getJobModHeading()): ?>
+      <div class="page_content_top">
+        <h1><?php echo __($block->jobHelper->getJobModHeading());?></h1>
+        <?php if($block->jobHelper->getJobMainDescription()):?>
+        <p><?php echo __($block->jobHelper->getJobMainDescription())?></p>
+      <?php endif;?>
+      </div>
+    <?php endif;?>
+      <!--Columns-->
+    <?php   $tcode = false;?>
+      <?php if($block->jobHelper->getJobSideBarEnable()):?>
+      <aside class="sidebar">
+        
+        <?php $dataHeading = $metaCollection->getData();?>        
+            <?php foreach($metaCollection as $filters):?>
+                  <?php if($filters->getTypeCode()==2):?>          
+                          <?php $tcode = true?>
+                  <?php endif;?>
+            <?php endforeach;?>
+            <!-- form begins -->
+
+      <?php if($tcode==true):?>
+        <form id="ajax-contact" method="post" action="<?php echo $block->getUrl().'job/index/filters'?>">
+          <div class="block">
+          <?php $countDiv = false; ?>
+          <div class="title job"><a role="button" data-toggle="collapse" href="javascript:void(0)" aria-expanded="false" aria-controls="collapseOne" class="collapsed"><?php echo __('Department') ?></a></div>          
+
+          <div class="selection job_department" id="job_department">
+            <ul>
+            <?php $countMetas = 0;?>
+            <?php foreach($metaCollection as $metaInner):?>              
+              <?php if($metaInner->getTypeCode() == 2 && $countMetas< $countShowMore):?>
+              <li>
+                <input id="<?php echo $metaInner->getDataCode() ?>" type="checkbox" name="dept[<?php echo $metaInner->getDataCode() ?>]" value="<?php echo $metaInner->getDataCode() ?>">
+                <label for="<?php echo $metaInner->getDataCode() ?>"><?php echo __($metaInner->getDataName());?></label>
+              </li>
+              <?php   $countMetas = $countMetas+1;?>              
+              <?php endif;?>            
+            <?php endforeach;?>
+            </ul>
+            <ul class="hidden_l">
+            <?php $countMetas = 0;?>
+            <?php foreach($metaCollection as $metaInner):?>              
+              <?php if($metaInner->getTypeCode() == 2 ):?>
+                <?php if($countMetas< $countShowMore):?>
+                      <?php $countMetas = $countMetas+1;?>
+                  <?php continue;?>
+                <?php endif;?>
+                <?php $countDiv = true; ?>
+              <li>
+                <input id="<?php echo $metaInner->getDataCode() ?>" type="checkbox" name="dept[<?php echo $metaInner->getDataCode() ?>]" value="<?php echo $metaInner->getDataCode() ?>">
+                <label for="<?php echo $metaInner->getDataCode() ?>"><?php echo __($metaInner->getDataName());?></label>
+              </li>
+              
+            <?php endif;?>
+            <?php endforeach;?>                
+            </ul>
+          </div>
+
+          <?php if($countDiv):?>
+          <div class="show_more_l"><a href="javascript:void(0)">Show More</a></div>
+        <?php endif;?>
+        </div>
+        <?php endif;?>
+                        <!--id 1 bigins  -->
+<?php   $tcode = false;?>
+      <?php foreach($metaCollection as $filters):?>
+                  <?php if($filters->getTypeCode()==1):?>          
+                          <?php $tcode = true ;?>
+                  <?php endif;?>
+            <?php endforeach;?>
+            
+        <?php if($tcode==true):?>
+          <div class="block">
+          <?php $countDiv = false; ?>
+          <div class="title job1"><a role="button" data-toggle="collapse" href="javascript:void(0)" aria-expanded="false" aria-controls="collapseOne" class="collapsed">
+                                             <?php echo __('Location') ?>   
+                                            </a></div>
+          <div class="selection city_selection" >
+            <ul>
+            <?php $countMetas = 0;?>
+            <?php foreach($metaCollection as $metaInner):?>              
+              <?php if($metaInner->getTypeCode() == 1 && $countMetas<$countShowMore):?>
+              <li>
+                <input id="<?php echo $metaInner->getDataCode() ?>" type="checkbox" name="loc[<?php echo $metaInner->getDataCode() ?>]" value="<?php echo $metaInner->getDataCode() ?>">
+                <label for="<?php echo $metaInner->getDataCode() ?>"><?php echo __($metaInner->getDataName());?></label>
+              </li>
+              <?php   $countMetas = $countMetas+1;?>              
+              <?php endif;?>            
+            <?php endforeach;?>
+            </ul>
+            <ul class="hidden_t">
+            <?php $countMetas = 0;?>
+            <?php foreach($metaCollection as $metaInner):?>              
+              <?php if($metaInner->getTypeCode() == 1 ):?>
+                <?php if($countMetas<$countShowMore):?>
+                      <?php   $countMetas = $countMetas+1;?>
+                  <?php continue;?>
+                <?php endif;?>
+                <?php $countDiv = true; ?>
+              <li>
+                <input id="<?php echo $metaInner->getDataCode() ?>" type="checkbox" name="loc[<?php echo $metaInner->getDataCode() ?>]" value="<?php echo $metaInner->getDataCode() ?>">
+                <label for="<?php echo $metaInner->getDataCode() ?>"><?php echo __($metaInner->getDataName());?></label>
+              </li>
+              
+            <?php endif;?>
+            <?php endforeach;?>                
+            </ul>
+          </div>
+          <?php if($countDiv):?>
+          <div class="show_more_d"><a href="javascript:void(0)">Show More</a></div>
+        <?php endif;?>
+        </div>
+        <?php endif;?>                  
+                        <!-- id 1 ends -->
+                        <!-- id 3 begins -->
+                        <?php   $tcode = false;?>
+        <?php foreach($metaCollection as $filters):?>
+                  <?php if($filters->getTypeCode()==3):?>          
+                          <?php $tcode = true?>
+                  <?php endif;?>
+            <?php endforeach;?>
+            
+        <?php if($tcode==true):?>
+          <div class="block">
+          <?php $countDiv = false; ?>
+          <div class="title job2"><a role="button" data-toggle="collapse" href="javascript:void(0)" aria-expanded="false" aria-controls="collapseOne" class="collapsed">
+                                               <?php echo __('Job Type') ?>
+                                            </a></div>
+          <div class="selection job_type">
+            <ul>
+            <?php $countMetas = 0;?>
+            <?php foreach($metaCollection as $metaInner):?>              
+              <?php if($metaInner->getTypeCode() == 3 && $countMetas<$countShowMore):?>
+              <li>
+                <input id="<?php echo $metaInner->getDataCode() ?>" type="checkbox" name="typ[<?php echo $metaInner->getDataCode() ?>]" value="<?php echo $metaInner->getDataCode() ?>">
+                <label for="<?php echo $metaInner->getDataCode() ?>"><?php echo __($metaInner->getDataName());?></label>
+              </li>
+              <?php   $countMetas = $countMetas+1;?>              
+              <?php endif;?>            
+            <?php endforeach;?>
+            </ul>
+            <ul class="hidden_d">
+            <?php $countMetas = 0;?>
+            <?php foreach($metaCollection as $metaInner):?>              
+              <?php if($metaInner->getTypeCode() == 3 ):?>
+                <?php if($countMetas<$countShowMore):?>
+                      <?php   $countMetas = $countMetas+1;?>
+                  <?php continue;?>
+                <?php endif;?>
+                <?php $countDiv = true; ?>
+              <li>
+                <input id="<?php echo $metaInner->getDataCode() ?>" type="checkbox" name="typ[<?php echo $metaInner->getDataCode() ?>]" value="<?php echo $metaInner->getDataCode() ?>">
+                <label for="<?php echo $metaInner->getDataCode() ?>"><?php echo __($metaInner->getDataName());?></label>
+              </li>
+              
+            <?php endif;?>
+            <?php endforeach;?>                
+            </ul>
+          </div>
+          <?php if($countDiv):?>
+          <div class="show_more_t"><a href="javascript:void(0)">Show More</a></div>
+        <?php endif;?>
+        </div>
+    <div class="field search_filters">
+        <button type="submit"><?php echo __('Search') ?></button>
+        <button   onclick='window.location.reload(true);'?><?php echo __('Reset') ?></button>
+          </div>
+    
+        </form>
+        <!-- end form -->
+        <?php endif;?>                
+                        <!-- id 4 ends -->
+
+      </aside>
+    <?php endif;?>
+    <!-- Listing Begins -->
+ 
+<div id="form-messages">
+    
+
+    <?php if($jobCollection):?>
+      <div class="listing"
+      <?php if(!($block->jobHelper->getJobSideBarEnable())):?>
+        style="width: 100%" <?php endif;?>>
+        <?php foreach($jobCollection as $jobs):?>
+          <?php  $url = $jobs->getJobsUrlKey(); ?>
+        <?php if(strtotime($block->jobHelper->getTimeAccordingToTimeZone($jobs->getJobsPublishDate())) > strtotime($arrCurrDateTime)):?>
+          <?php continue; ?>
+        <?php endif;?>        
+        <?php if(!($block->jobHelper->getJobExpiredStatus())):?>
+        <?php if(strtotime($block->jobHelper->getTimeAccordingToTimeZone($jobs->getJobsApplybyDate())) < strtotime($arrCurrDateTime)):?>          
+          <?php continue; ?>
+        <?php endif;?>
+        <?php endif;?>  
+        <div class="block">
+          <div class="title"> <a href="<?php echo $this->getUrl().$block->jobHelper->getJobFinalDetailIdentifier($url) ?>"><?php echo __($jobs->getJobsTitle());?></a>
+            <div class="date"> <span><?php echo __( $block->jobHelper->getTimeAccordingToTimeZone($jobs->getJobsPublishDate())) ?></span> </div>
+            <?php $department = $block->getDepartmentName($jobs->getJobsSelectDepartments())?>
+            <?php $location = $block->getLocation($jobs->getJobsLocation())?>
+            <div class="company"> <span><?php echo __($department) ?>, <?php echo __($location) ?></span> </div>
+          </div>
+      <?php $string = $jobs->getJobsDescription() ?>   
+      <?php $string = strip_tags($string);
+          if (strlen($string) > 500) {
+            $stringCut = substr($string, 0, 500);   
+            $string = substr($stringCut, 0, strrpos($stringCut, ' ')).'... '; }?>
+          <div class="content">
+            <p><?php echo __($string)?> </p>
+          </div>
+          <div class="footer_bar clearfix">
+            <div class="right_side"><a href="<?php echo $this->getUrl().$block->jobHelper->getJobFinalDetailIdentifier($url) ?>" class="view">View</a> </div>
+          </div>
+        </div>
+        <?php endforeach;?>
+        <?php if ($block->getPagerHtml()): ?>
+        <div class="order-products-toolbar toolbar bottom"><?php echo $block->getPagerHtml(); ?></div>
+    <?php endif; ?>        
+      </div>
+    <?php else:?>
+      
+      <?php echo __('No Jobs right now! keep visiting the page to get in touch');?>
+    <?php endif;?>
+    </div>
+      <!-- Listing Ends -->
+    </div>
+  </div>
+</div>
+
+<!-- Ajax Filters Begin -->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+<script type="text/javascript">
+require([
+                    'jquery',
+                    'mage/template',
+                    'jquery/ui',
+                    'mage/translate'
+
+                ], function($){
+                  $(function() { 
+  var form = $('#ajax-contact');  
+  var formMessages = $('#form-messages');
+  
+  $(form).submit(function(e) {    
+    e.preventDefault(); 
+    
+    var formData = $(form).serialize();   
+    $.ajax({
+      type: 'POST',
+      url: $(form).attr('action'),
+      showLoader: true,
+      data: formData
+    })
+    .done(function(response) {      
+      $(formMessages).html(response);      
+    })
+    .fail(function(data) {      
+      $(formMessages).removeClass('success');
+      $(formMessages).addClass('error');
+
+      if (data.responseText !== '') {
+        $(formMessages).text(data.responseText);
+      } else {
+        $(formMessages).text('Oops! An error occured and your message could not be sent.');
+      }
+    });
+
+  });
+}); //functions end here 
+                
+
+                });//require ends here
+
+</script>
+<script type="text/javascript">
+require([
+                    'jquery',
+                    'mage/template',
+                    'jquery/ui',
+                    'mage/translate'
+                    
+                ], function($){
+                  $(function() { 
+  var form = $('#ajax-contact-top-filters');  
+  var formMessages = $('#form-messages');
+  
+  $(form).submit(function(e) {    
+    e.preventDefault();   
+    var formData = $(form).serialize();   
+    $.ajax({
+      type: 'POST',
+      url: $(form).attr('action'),
+      showLoader: true,
+      data: formData
+    })
+    .done(function(response) {      
+      $(formMessages).html(response);      
+    })
+    .fail(function(data) {      
+      $(formMessages).removeClass('success');
+      $(formMessages).addClass('error');
+
+      if (data.responseText !== '') {
+        $(formMessages).text(data.responseText);
+      } else {
+        $(formMessages).text('Oops! An error occured and your message could not be sent.');
+      }
+    });
+
+  });
+
+});                   
+
+                });
+
+</script>
+
+
+
+<!-- Filters End Here -->
+ 
+<script>
+require([
+                    'jquery',
+                    
+                ], function($){
+                  $(function() { 
+    $(".show_more_l").click(function(){
+        $(".hidden_l").slideToggle();
+    });
+    $(".show_more_d").click(function(){
+        $(".hidden_t").slideToggle();
+    });
+    $(".show_more_t").click(function(){
+        $(".hidden_d").slideToggle();
+    });
+	
+	 $(".job2").click(function(){
+        $(".job_type").slideToggle();
+    });
+   $(".job1").click(function(){
+        $(".city_selection").slideToggle();
+    });
+   $(".job").click(function(){
+        $(".job_department").slideToggle();
+    });
+	});                   
+
+                });
+
+</script>
+<?php else: ?>
+  <?php echo __('Jobs module is off right now, keep visiting the site to stay in touch');?>
+<?php endif;?>

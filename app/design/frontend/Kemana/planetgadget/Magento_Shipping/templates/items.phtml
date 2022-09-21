@@ -1,0 +1,85 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+//phpcs:disable Squiz.ControlStructures.ControlSignature.NewlineAfterOpenBrace
+//phpcs:disable Squiz.WhiteSpace.ScopeClosingBrace.ContentBefore
+//phpcs:disable Magento2.Templates.ThisInTemplate.FoundThis
+//phpcs:disable Magento2.Files.LineLength.MaxExceeded
+?>
+<?php
+/** @var \Kemana\Sales\Helper\Helper\Data $kemanaSalesHelper */
+$kemanaSalesHelper = $this->helper(Kemana\Sales\Helper\Data::class);
+?>
+<?php /** @var  $block \Magento\Shipping\Block\Items */ ?>
+<?php  $_order = $block->getOrder() ?>
+<div class="actions-toolbar">
+    <?php if ($_order->getTracksCollection()->count()) : ?>
+        <?= $block->getChildHtml('track-all-link') ?>
+    <?php endif; ?>
+    <a href="<?= $block->escapeUrl($block->getPrintAllShipmentsUrl($_order)) ?>"
+       class="action print"
+       target="_blank"
+       rel="noopener">
+        <span><?= $block->escapeHtml(__('Print All Shipments')) ?></span>
+    </a>
+</div>
+<?php foreach ($_order->getShipmentsCollection() as $_shipment) : ?>
+    <div class="order-title">
+        <div class="shipping-no"><strong><?= $block->escapeHtml(__('AWB No.')) ?></strong> #<?= $block->escapeHtml($_shipment->getIncrementId()) ?></div>
+        <div class="order-title-right">
+            <a href="<?= $block->escapeUrl($block->getPrintShipmentUrl($_shipment)) ?>"
+               class="action print"
+               target="_blank"
+               rel="noopener">
+                <span><?= $block->escapeHtml(__('Print Shipment')) ?></span>
+            </a>
+            <?php if ($kemanaSalesHelper->isEnabledTrackingModal()) :?>
+                <a href="#" data-role="custom-shipping-tracking"
+                    tracking-hash-url="<?= $block->escapeUrl($this->helper(Magento\Shipping\Helper\Data::class)->getTrackingPopupUrlBySalesModel($_shipment)) ?>"
+                    data-mage-init='{ "Magento_Shipping/js/shipping-tracking": {} }'
+                    title="<?= $block->escapeHtmlAttr(__('Track shipment')) ?>"
+                    class="action track">
+                    <span><?= $block->escapeHtml(__('Track Shipment')) ?></span>
+                </a>
+            <?php else: ?>
+                <a href="#"
+                    data-mage-init='{"popupWindow": {"windowURL":"<?= $block->escapeUrl($this->helper(Magento\Shipping\Helper\Data::class)->getTrackingPopupUrlBySalesModel($_shipment)) ?>","windowName":"trackshipment","width":800,"height":600,"top":0,"left":0,"resizable":1,"scrollbars":1}}'
+                    title="<?= $block->escapeHtml(__('Track shipment')) ?>"
+                    class="action track">
+                    <span><?= $block->escapeHtml(__('Track shipment')) ?></span>
+                </a>
+            <?php endif; ?>
+        </div>
+    </div>
+    <div class="table-wrapper order-items-shipment">
+        <table class="data table table-order-items shipment" id="my-shipment-table-<?= (int) $_shipment->getId() ?>">
+            <caption class="table-caption"><?= $block->escapeHtml(__('Items Shipped')) ?></caption>
+            <thead>
+                <tr>
+                    <th class="col name"><?= $block->escapeHtml(__('Item')) ?></th>
+                    <th class="col sku"><?= $block->escapeHtml(__('SKU')) ?></th>
+                    <th class="col qty"><?= $block->escapeHtml(__('Qty')) ?></th>
+                </tr>
+            </thead>
+            <?php $_items = $_shipment->getAllItems(); ?>
+            <?php foreach ($_items as $_item) : ?>
+                <?php if (!$_item->getOrderItem()->getParentItem()) : ?>
+                    <tbody>
+                        <?= $block->getItemHtml($_item) ?>
+                    </tbody>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        </table>
+    </div>
+    <?= $block->getCommentsHtml($_shipment) ?>
+<?php endforeach; ?>
+
+<script type="text/x-magento-init">
+    {
+        "[data-role=custom-shipping-tracking]": {
+            "Magento_Shipping/js/shipping-tracking": {}
+        }
+    }
+</script>

@@ -1,0 +1,212 @@
+// /**
+//  * Copyright © 2020 Kemana. All rights reserved.
+//  * @author Ashan Gunawardena <agunawardena@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+//
+//  Variables
+//  _____________________________________________
+@product-grid-wishlist-icon: @icon-pg-wishlist-hover;
+@product-grid-wishlist-icon-active: @icon-pg-wishlist-active;
+@product-grid-wishlist-icon-size: 15px;
+@product-grid-wishlist-icon-line-height: 16px;
+@product-grid-wishlist-icon-width: 29px;
+@product-grid-wishlist-icon-height: @product-grid-wishlist-icon-width;
+@product-grid-wishlist-icon-background: @color-white;
+@product-grid-wishlist-icon-background-hover: @color-white;
+@product-grid-wishlist-icon-background-active: @color-white;
+@product-grid-wishlist-icon-color: @color-pg-light-gray;
+@product-grid-wishlist-icon-hover: @kemana-primary-brand-color;
+@product-grid-wishlist-icon-active-color: @color-pg-red;
+@product-grid-wishlist-icon-border-radius: 50%;
+
+@product-grid-wishlist-unavailable-button__color: @color-kemana-gray2;
+@product-grid-wishlist-unavailable-button__background: @color-kemana-gray1;
+@product-grid-wishlist-unavailable-button__border: @border-width__base solid @color-kemana-gray1;
+@product-grid-wishlist-unavailable-button__margin: 0;
+@product-grid-wishlist-unavailable-button__text-transform: uppercase;
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .product-items,
+    .products.list.items,
+    .table-comparison {
+        .action {
+            &.towishlist {
+                &:before {
+                    margin: 8px 0 0 0;
+                    width: 16px;
+                }
+
+                &.active {
+                    &:before {
+                        .lib-css(color, @product-grid-wishlist-icon-active-color);
+                    }
+                }
+            }
+        }
+    }
+
+    .wishlist-index-index {
+        .page-title-wrapper {
+            button {
+                float: right;
+                position: absolute;
+                top: 0;
+                right: 0;
+            }
+        }
+
+        .products-grid {
+            &.wishlist {
+                .product-item {
+                    padding-inline: 10px;
+
+                    .box-tocart {
+                        .field {
+                            &.qty {
+                                display: none;
+                            }
+                        }
+                        .product-item-actions {
+                            width: 100%;
+                            .actions-primary {
+                                .action {
+                                    text-transform: none;
+                                }
+                            }
+                        }
+
+                        .stock {
+                            &.unavailable {
+                                border-radius: @common-border-radius;
+                            }
+                        }
+                    }
+
+                    .product-item-info {
+                        .lib-vendor-prefix-display();
+                        .lib-vendor-prefix-flex-direction();
+                        padding-bottom: 20px;
+
+                        .product-reviews-summary {
+                            order: 2;
+                        }
+
+                        .product-item-name {
+                            display: -webkit-box;
+                        }
+
+                        .price-box {
+                            order: 1;
+                            margin-block: 0;
+
+                            .price-as-configured {
+                                margin-bottom: 0;
+                            }
+                        }
+
+                        .product-item-inner {
+                            order: 3;
+                            margin-top: 10px;
+
+                            .product-item-actions {
+                                .edit {
+                                    display: none;
+                                }
+                            }
+                        }
+
+                        .box-tocart {
+                            bottom: 0;
+
+                            .product-item-actions {
+                                .actions-primary {
+                                    .action {
+                                        &:before {
+                                            content: '+';
+                                            left: 0;
+                                            top: 0;
+                                        }
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .main {
+            .form-wishlist-items {
+                .actions-toolbar {
+                    float: right;
+
+                    .primary {
+                        button {
+                            .lib-button-white();
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .wishlist-index-share {
+        .form {
+            &.share {
+                .fieldset {
+                    margin-top: 0;
+                }
+            }
+        }
+
+    }
+
+    .form{
+        &.share {
+            .fieldset {
+                float: left;
+                width: 100%;
+                border: none;
+                padding: 0;
+                margin-top: 10px;
+
+                .field {
+                    max-width: 340px;
+
+                    > .control {
+                        display: inline-flex;
+                    }
+                }
+
+                .legend {
+                    display: none;
+                }
+
+                .legend + br {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .products-grid {
+        &.wishlist {
+            .product-item-name {
+                .lib-font-size(12);
+            }
+        }
+    }
+}

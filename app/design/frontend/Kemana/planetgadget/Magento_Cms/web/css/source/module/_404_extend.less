@@ -1,0 +1,97 @@
+// /**
+//  * Copyright © 2022 Kemana. All rights reserved.
+//  * @author Harshani Karunasekara <hkarunasekara@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+//
+//  Variables
+//  _____________________________________________
+
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .cms-noroute-index {
+        .page-main {
+            max-width: @other-pages-max-width;
+
+            .page-title-wrapper {
+                h1 {
+                    display: none;
+                }
+            }
+        }
+
+        .column.main {
+            padding-block: 100px;
+            text-align: center;
+
+            .image-div {
+                margin-bottom: 30px;
+            }
+
+            img {
+                max-width: 320px;
+                float: none;
+            }
+
+            p {
+                margin-inline: auto;
+                width: 100%;
+                margin-bottom: 26px;
+
+            }
+
+            .actions-toolbar {
+                .primary {
+                    float: unset;
+
+                    a {
+                        .lib-button-primary();
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .cms-noroute-index {
+        .column.main {
+            h2 {
+                .lib-heading(h2);
+                margin-bottom: 26px;
+            }
+
+            .actions-toolbar {
+                .primary {
+                    width: auto;
+                }
+            }
+        }
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .cms-noroute-index {
+        .column.main {
+            h2 {
+                .lib-font-size(28);
+                .lib-line-height(38);
+                margin-bottom: 22px;
+            }
+        }
+    }
+}

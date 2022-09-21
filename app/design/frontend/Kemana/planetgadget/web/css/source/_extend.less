@@ -1,0 +1,32 @@
+// /**
+//  * Copyright © 2022 Kemana. All rights reserved.
+//  * @author Harshani Karunasekara <hkarunasekara@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+@import '_buttons_extend.less';
+@import '_navigation_extend.less';
+@import '_breadcrumbs_extend.less';
+@import '_forms_extend.less';
+@import '_tables_extend.less';
+@import '_messages_extend.less';
+@import '_calendar.less';
+@import '_typography_extend.less';
+
+//
+//  Input Product Sort
+//  ---------------------------------------------
+
+@abs-input-sort-custom__width: 170px;
+@abs-input-sort-custom__height: 40px;
+@abs-input-sort-custom__border: @border-width__base solid @color-pg-light-gray;
+@abs-input-sort-custom-dropdown__height: 109px;
+@abs-input-sort-custom__color: @kemana-primary-brand-color;
+
+& when (@media-common = true) {
+    .abs-input-sort-custom {
+        background-position: 93% 10px;
+        background-color: @color-white;
+        border-radius: 5px;
+    }
+}

@@ -1,0 +1,17 @@
+<?php
+/** @var \Kemana\HeaderTopLine\Block\View\Element\Template\TopLine $block */
+/** @var $escaper \Magento\Framework\Escaper */
+?>
+<div class="top-wrapper-links">
+    <a class="help-info-toggle" href="javascript:void(0);"><?= /* @noEscape */ $escaper->escapeHtml(__('Help')); ?></a>
+    <div class="help-info-content">
+        <?= $block->getHelpContent();?>
+    </div>
+</div>
+<script type="text/x-magento-init">
+{
+    ".header-top-wrapper": {
+        "topHeader": {}
+    }
+}
+</script>

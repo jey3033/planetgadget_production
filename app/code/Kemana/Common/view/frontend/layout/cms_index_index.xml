@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2022 PT Kemana Teknologi Solusi. All rights reserved.
+ * http://www.kemana.com
+ */
+
+/**
+ * @category Kemana
+ * @package  Kemana_Common
+ * @license  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ *
+ * @author   Achintha Madushan <amadushan@kemana.com>
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="homepage.main.content" remove="true"/>
+
+        <referenceContainer name="content">
+            <container name="pg.homepage.main.content" label="Main_Content" htmlTag="div" htmlClass="cms-main-container"
+                       before="-"/>
+            <container name="homepage.banner.bottom" label="Main_Content_Banner_Bottom" htmlTag="div" htmlClass="cms-main-banner-bottom"
+                       before="pg.homepage.main.content">
+                <block class="Magento\Cms\Block\Block" name="main-banner-bottom-message">
+                    <arguments>
+                        <argument name="block_id" xsi:type="string">main_banner_bottom_message</argument>
+                    </arguments>
+                </block>
+            </container>
+        </referenceContainer>
+
+        <move element="home-page-category-top-section" destination="pg.homepage.main.content" before="-"/>
+        <move element="home-page-new-arrivals" destination="pg.homepage.main.content"
+              after="home-page-category-top-section"/>
+        <move element="kemana_brand_featured" destination="pg.homepage.main.content" after="home-page-new-arrivals"/>
+        <move element="home-page-bestsellers" destination="pg.homepage.main.content" after="kemana_brand_featured"/>
+
+        <referenceContainer name="content">
+            <block class="Magento\Cms\Block\Block" name="recommended-from-seller-home-page">
+                <arguments>
+                    <argument name="block_id" xsi:type="string">recommended_from_seller_home_page</argument>
+                </arguments>
+            </block>
+            <block class="Kemana\Common\Block\Home\Content" name="homepage.bank.promotion" as="homepage_bank_promotion"
+                   template="Kemana_Common::homepage/bank-promotion.phtml"/>
+        </referenceContainer>
+
+        <move element="recommended-from-seller-home-page" destination="pg.homepage.main.content"
+              after="home-page-bestsellers"/>
+        <move element="home-page-recently-viewed-products" destination="pg.homepage.main.content" after="-"/>
+
+        <referenceContainer name="content">
+            <block class="Magento\Cms\Block\Block" name="news.update.block" as="news_update_block"
+                   after="home-page-inner-banner">
+                <arguments>
+                    <argument name="block_id" xsi:type="string">home_page_blog_and_news</argument>
+                </arguments>
+            </block>
+            <block class="Magento\Cms\Block\Block" name="home-page-two-col-banner">
+                <arguments>
+                    <argument name="block_id" xsi:type="string">home-page-inner-banner</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+
+        <move element="news.update.block" destination="pg.homepage.main.content"
+              before="home-page-recently-viewed-products"/>
+        <move element="homepage.bank.promotion" destination="pg.homepage.main.content" before="news.update.block"
+              after="recommended-from-seller-home-page"/>
+        <move element="home-page-two-col-banner" destination="pg.homepage.main.content"
+              after="recommended-from-seller-home-page" before="homepage.bank.promotion"/>
+    </body>
+</page>

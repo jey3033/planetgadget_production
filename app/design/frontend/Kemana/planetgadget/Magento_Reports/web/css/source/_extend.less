@@ -1,0 +1,82 @@
+// /**
+//  * Copyright © 2022 Kemana. All rights reserved.
+//  * @author Harshani Karunasekara <hkarunasekara@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+//
+//  Variables
+//  _____________________________________________
+@block-recently-viewed-bg-color: @color-pg-light-gray3;
+@block-recently-viewed-title__font-size: 24px;
+@block-recently-viewed-title__line-height: 32px;
+@block-recently-viewed-title__font-weight: @font-weight__bold;
+@block-recently-viewed-title__color: @kemana-primary-brand-color;
+
+@block-recently-viewed-title-desktop__padding-top: 50px;
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .recently-viewed-products-container {
+        .lib-css(background-color, @block-recently-viewed-bg-color);
+
+        .block.widget {
+            .block-title {
+                text-transform: none;
+                text-align: left;
+
+                strong {
+                    margin-bottom: 30px;
+                    position: relative;
+                    font-weight: @block-recently-viewed-title__font-weight;
+                }
+            }
+        }
+
+        .product-items {
+            .product-item {
+                .product-item-info {
+                    min-height: auto;
+                    padding: 0;
+
+                    .product-item-details {
+                        display: none;
+                    }
+                }
+            }
+
+            .product-image-wrapper {
+                border-radius: @common-border-radius;
+                .lib-css(background, @panel__background-color);
+
+                .product-image-photo {
+                    margin-block : 0;
+                    left: 50%;
+                    top: 50%;
+                    transform: translate(-50%, -50%);
+                }
+            }
+        }
+
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .recently-viewed-products-container {
+        .block.widget {
+            .block-title {
+                strong {
+                    .lib-font-size(@h2__font-size-desktop);
+                    .lib-line-height(@h2__line-height-desktop);
+                }
+            }
+        }
+    }
+}

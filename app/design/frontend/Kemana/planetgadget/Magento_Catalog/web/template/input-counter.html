@@ -1,0 +1,24 @@
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<div class="input-group">
+    <span class="input-group__addon decrease">
+        <button click="decreaseQty" class="input-group__button input-group__button--decrease">
+            <span class="input-group__icon input-group__icon--decrease">-</span>
+        </button>
+    </span>
+    <input data-bind="value: qty(), attr: {'data-validate': getDataValidator(), 'title': $t('Qty')}"
+           type="number"
+           name="qty"
+           id="qty"
+           maxlength="12"
+           class="input-group__input" />
+    <span class="input-group__addon increase">
+        <button click="increaseQty" class="input-group__button input-group__button--increase">
+            <span class="input-group__icon input-group__icon--increase">+</span>
+        </button>
+    </span>
+</div>

@@ -1,0 +1,61 @@
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .table-wrapper {
+        .table {
+            &:not(.cart) {
+                &:not(.totals) {
+                    &:not(.table-comparison) {
+                        tbody > tr {
+                            > td {
+                                padding-left: 86px;
+
+                                &[data-th] {
+                                    &:before {
+                                        .lib-css(color, @color-pg-dark-gray);
+                                    }
+                                }
+                            }
+                        }
+
+                        tfoot {
+                            th {
+                                width: 50%;
+                            }
+
+                            td {
+                                width: 50%;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .table:not(.cart) {
+                &:not(.totals) {
+                    &:not(.table-comparison) {
+                        &.additional-attributes {
+                            tbody tr {
+                                > td {
+                                    &[data-th] {
+                                        &:before {
+                                            width: 165px;
+                                        }
+                                    }
+
+                                    &:last-child {
+                                        padding-left: 165px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+

@@ -1,0 +1,95 @@
+// /**
+//  * Copyright © 2020 Kemana. All rights reserved.
+//  * @author Ashan Gunawardena <agunawardena@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+//
+//  Color variables
+//  _____________________________________________
+@kemana-primary-brand-color: @color-pg-black;
+@kemana-secondary-brand-color: @color-pg-yellow;
+
+//  Kemana Theme Colors
+@color-kemana-gray1: #B9B9B9;
+@color-kemana-gray2: #818181;
+@color-kemana-gray3: #fafafa;
+@color-kemana-gray4: #f5f5f5;
+@color-kemana-gray5: #ebebeb;
+@color-kemana-gray6: #D1D3D4;
+@color-kemana-gray7: #707070;
+@color-kemana-gray8: #ececec;
+@color-kemana-gray9: #DEDEDE;
+@color-kemana-gray10: #cccccc;
+@color-kemana-gray11: #e4e4e4;
+@color-kemana-gray12: #f9f9f9;
+@color-kemana-gray13: #D6D6D6;
+
+@color-kemana-dark1: #656565;
+@color-kemana-dark2: #454545;
+@color-kemana-dark3: #111111;
+@color-kemana-dark4: #252525;
+
+@color-kemana-yellow: #FED035;
+
+@color-kemana-green: #2B8A0A;
+@color-kemana-green2: #0BB26A;
+@color-kemana-green3: #E5EFE5;
+@color-kemana-green4: #4AAE20;
+
+@color-kemana-red: #F82929;
+@color-kemana-red2: #D40202;
+@color-kemana-red3: #E92424;
+@color-kemana-red4: #F0E6E6;
+
+@color-kemana-blue: #072A48;
+@color-kemana-blue2: #4267B2;
+@color-kemana-blue3: #136AEE;
+
+//  Planet Gadget Theme Colors
+@color-pg-black: #000000;
+@color-pg-yellow: #FFC619;
+@color-pg-yellow2: #FFF9E8;
+
+@color-pg-orange: #FF8419;
+@color-pg-light-yellow: #FFF9E8;
+@color-pg-black2: #1E2127;
+@color-pg-light-black: #474E5C;
+@color-pg-red: #EB1717;
+@color-pg-red2: #C55E0D;
+@color-pg-green: #0E9E52;
+@color-pg-light-green: #EDF7F2;
+@color-pg-dark-gray: #808A9F;
+@color-pg-light-gray: #AEB4C1;
+@color-pg-light-gray2: #E3E3E3;
+@color-pg-light-gray3: #F2F2F2;
+@color-pg-light-gray4: #C1C1C1;
+@color-pg-light-gray5: #F1F1F1;
+@color-pg-white: #FFFFFF;
+
+
+
+//
+//  Color nesting
+//  ---------------------------------------------
+
+@theme__color__primary: @kemana-primary-brand-color;
+@theme__color__primary-alt: @kemana-primary-brand-color;
+@theme__color__secondary: @kemana-primary-brand-color;
+
+@primary__color: @kemana-primary-brand-color;
+@primary__color__dark: darken(@primary__color, 35%); // #000
+@primary__color__darker: darken(@primary__color, 13.5%); // #111
+@primary__color__lighter: lighten(@primary__color, 29%); // #7d7d7d
+@primary__color__light: lighten(@primary__color, 45%); // #a6a6a6
+
+@secondary__color: @kemana-primary-brand-color;
+@secondary__color__light: lighten(@secondary__color, 5%);
+
+@page__background-color: @color-pg-light-gray3;
+@panel__background-color: @color-white;
+
+@active__color: @kemana-primary-brand-color;
+@error__color: @color-kemana-red;
+
+

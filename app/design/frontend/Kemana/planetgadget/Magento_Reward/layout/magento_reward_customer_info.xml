@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="customer_account"/>
+    <body>
+        <referenceBlock name="page.main.title">
+            <action method="setPageTitle">
+                <argument name="title" translate="true" xsi:type="string">Points &#38; Membership</argument>
+            </action>
+        </referenceBlock>
+        <referenceBlock name="customer.reward">
+            <block class="Magento\Framework\View\Element\Template" name="customer.reward.membership" template="Magento_Reward::customer/reward/membership.phtml" after="customer.reward.subscription"/>
+        </referenceBlock>
+    </body>
+</page>
