@@ -41,7 +41,7 @@ define([
 
             if (!this.isStorePickup()) {
 
-                return this._super();
+                return '-';
             }
 
 
@@ -57,7 +57,7 @@ define([
 
             if (!this.isStorePickup()) {
 
-                return this._super();
+                return '-';
             }
 
 
