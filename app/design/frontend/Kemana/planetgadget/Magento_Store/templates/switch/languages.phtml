@@ -10,9 +10,18 @@
 <?php if (count($block->getStores()) > 1) : ?>
     <?php $id = $block->getIdModifier() ? '-' . $block->getIdModifier() : '' ?>
     <?php foreach ($block->getStores() as $_lang): ?>
+       <?php if ($_lang->getId() == $block->getCurrentStoreId()) { ?>
+        <li class="view-<?= $block->escapeHtml($_lang->getCode()) ?> switcher-option active">
+            <a href="<?= $block->escapeUrl($block->getViewModel()->getTargetStoreRedirectUrl($_lang)) ?>">
+                <?= $block->escapeHtml($_lang->getName()) ?>
+            </a>
+        </li>
+    <?php }else{ ?>
         <li class="view-<?= $block->escapeHtml($_lang->getCode()) ?> switcher-option">
             <a href="<?= $block->escapeUrl($block->getViewModel()->getTargetStoreRedirectUrl($_lang)) ?>">
-                <?= $block->escapeHtml($_lang->getName()) ?></a>
+                <?= $block->escapeHtml($_lang->getName()) ?>
+            </a>
         </li>
+   <?php  } ?>
     <?php endforeach; ?>
 <?php endif; ?>

@@ -1,7 +1,7 @@
 define([
     'jquery',
     'utility',
-    'slickpg',
+    'slick',
     'mage/accordion',
     'domReady!'
 ], function ($, utility, slickpg) {
@@ -66,7 +66,7 @@ define([
      */
     function setPLPButton() {
         if (utility.isMobile()) {
-            let content = $('<div class="mobile-filer">Shop By</div>')
+            let content = $('<div class="mobile-filer">Filter</div>')
             $(content).insertBefore('.toolbar-sorter.sorter');
         }
     }
@@ -302,8 +302,7 @@ define([
                     arrows: false,
                     dots: false,
                     slidesToShow: 2,
-                    slidesToScroll: 2,
-                    rows: 2
+                    slidesToScroll: 2
                 }
             },
             {
