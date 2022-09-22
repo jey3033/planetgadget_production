@@ -45,6 +45,26 @@ define([
     }]);
     registry.get(customGroupName, function (customGroup) {
         rendererList.push(
+             {
+                type: 'checkmo',
+                component: 'Magento_OfflinePayments/js/view/payment/method-renderer/checkmo-method',
+                group: customGroup
+            },
+            {
+                type: 'banktransfer',
+                component: 'Magento_OfflinePayments/js/view/payment/method-renderer/banktransfer-method',
+                group: customGroup
+            },
+            {
+                type: 'cashondelivery',
+                component: 'Magento_OfflinePayments/js/view/payment/method-renderer/cashondelivery-method',
+                group: customGroup
+            },
+            {
+                type: 'purchaseorder',
+                component: 'Magento_OfflinePayments/js/view/payment/method-renderer/purchaseorder-method',
+                group: customGroup
+            },
             {
                 type: 'kredivopayment',
                 component: 'Kredivo_Payment/js/view/payment/method-renderer/kredivopayment-method',

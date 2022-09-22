@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="192" viewBox="0 0 240 192">
+  <g id="Payment_Error" data-name="Payment Error" transform="translate(-583 -198)">
+    <rect id="Rectangle_3678" data-name="Rectangle 3678" width="240" height="192" transform="translate(583 198)" fill="none"/>
+    <circle id="Ellipse_396" data-name="Ellipse 396" cx="77" cy="77" r="77" transform="translate(626 204)" fill="#991717"/>
+    <ellipse id="Ellipse_397" data-name="Ellipse 397" cx="70" cy="69.5" rx="70" ry="69.5" transform="translate(633 211)" fill="#eb1717"/>
+    <ellipse id="Ellipse_398" data-name="Ellipse 398" cx="89" cy="6" rx="89" ry="6" transform="translate(614 374)" fill="#e3e3e3"/>
+    <path id="Path_8017" data-name="Path 8017" d="M22.532,117.341c11.2,11.59,10.113-9.806,28.907-47.165S109.673,18.215,97.2,9.219,38.642-12.793,11.685,29.233,11.336,105.751,22.532,117.341Z" transform="translate(658.065 201.6) rotate(14)" fill="#ff4242"/>
+    <line id="Line_403" data-name="Line 403" y2="17" transform="translate(617.952 213.631) rotate(45)" fill="none" stroke="#eb1717" stroke-linecap="round" stroke-width="5"/>
+    <line id="Line_407" data-name="Line 407" y2="17" transform="translate(803.952 337.631) rotate(45)" fill="none" stroke="#eb1717" stroke-linecap="round" stroke-width="5"/>
+    <line id="Line_410" data-name="Line 410" y2="8.4" transform="translate(621.158 334.475) rotate(45)" fill="none" stroke="#aeb4c1" stroke-linecap="round" stroke-width="3"/>
+    <line id="Line_413" data-name="Line 413" y2="9.094" transform="translate(794.558 220.238) rotate(45)" fill="none" stroke="#aeb4c1" stroke-linecap="round" stroke-width="3"/>
+    <line id="Line_404" data-name="Line 404" y2="17" transform="translate(617.952 213.631) rotate(45)" fill="none" stroke="#eb1717" stroke-linecap="round" stroke-width="5"/>
+    <line id="Line_408" data-name="Line 408" y2="17" transform="translate(803.952 337.631) rotate(45)" fill="none" stroke="#eb1717" stroke-linecap="round" stroke-width="5"/>
+    <line id="Line_411" data-name="Line 411" y2="8.4" transform="translate(621.158 334.475) rotate(45)" fill="none" stroke="#aeb4c1" stroke-linecap="round" stroke-width="3"/>
+    <line id="Line_414" data-name="Line 414" y2="9.094" transform="translate(794.558 220.238) rotate(45)" fill="none" stroke="#aeb4c1" stroke-linecap="round" stroke-width="3"/>
+    <line id="Line_405" data-name="Line 405" y2="16.8" transform="translate(617.669 225.51) rotate(135)" fill="none" stroke="#eb1717" stroke-linecap="round" stroke-width="5"/>
+    <line id="Line_406" data-name="Line 406" y2="16.8" transform="translate(803.952 349.227) rotate(135)" fill="none" stroke="#eb1717" stroke-linecap="round" stroke-width="5"/>
+    <line id="Line_409" data-name="Line 409" y2="8.686" transform="translate(621.461 341.023) rotate(135)" fill="none" stroke="#aeb4c1" stroke-linecap="round" stroke-width="3"/>
+    <line id="Line_412" data-name="Line 412" y2="8.686" transform="translate(794.414 226.524) rotate(135)" fill="none" stroke="#aeb4c1" stroke-linecap="round" stroke-width="3"/>
+    <g id="Close_Button" data-name="Close Button" transform="translate(677 255)">
+      <line id="Line_214" data-name="Line 214" x2="52" y2="52" fill="none" stroke="#fff" stroke-width="12"/>
+      <line id="Line_215" data-name="Line 215" x1="52" y2="52" fill="none" stroke="#fff" stroke-width="12"/>
+    </g>
+  </g>
+</svg>
