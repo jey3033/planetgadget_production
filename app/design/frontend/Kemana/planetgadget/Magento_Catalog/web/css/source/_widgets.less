@@ -19,6 +19,8 @@
 @widget-product-item-desktop__padding: 10px;
 @widget-product-item-mobile__padding: 5px;
 
+@page-title__font-size: 2.8rem;
+
 //  Widget Slick Slider
 @widget-slick-slider-arrows__background: transparent;
 @widget-slick-slider-arrows-hover__background: transparent;
@@ -179,6 +181,26 @@
                     .product-item-info {
                         margin-bottom: 0;
                     }
+                }
+            }
+        }
+
+        .home-new-arrivals-container{
+            .block-new-products{
+                .block-title{
+                    strong{
+                        font-size: @page-title__font-size;
+                    }
+                }
+            }
+        }
+
+        .cms-main-container{
+            .product-item{
+                .product-url{
+                    position: absolute;
+                    width: 100%; 
+                    height: 100%;
                 }
             }
         }
