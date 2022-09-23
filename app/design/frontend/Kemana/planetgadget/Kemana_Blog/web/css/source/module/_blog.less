@@ -57,6 +57,14 @@
             height: 100%;
             border-radius: @common-border-radius;
 
+            .post-image {
+                a {
+                    img {
+                        border-radius: @common-border-radius @common-border-radius 0 0;
+                    }
+                }
+            }
+
             .post-info-wrapper {
                 float: left;
                 padding: 18px 20px;
@@ -471,7 +479,7 @@
     }
 
     .post-list-wrapper {
-        padding: 40px 10px;
+        padding: @block-padding 10px;
 
         .post-list-inner-container {
             .lib-vendor-prefix-display();
@@ -481,14 +489,12 @@
                 order: 1;
 
                 h2 {
-                    padding-inline: @indent__s;
                     margin-bottom: 20px;
                 }
             }
 
             span {
                 order: 3;
-                margin-top: 20px;
                 text-align: center;
             }
 

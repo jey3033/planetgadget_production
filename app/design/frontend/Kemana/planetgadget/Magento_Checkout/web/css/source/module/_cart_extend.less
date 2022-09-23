@@ -209,6 +209,17 @@
 
         .checkout-methods-items {
             order: 1;
+
+            // the feature is not used in Phase-1 (CR)
+            .item {
+                & + .item {
+                    margin-top: 0;
+                }
+
+                a.multicheckout {
+                    display: none;
+                }
+            }
         }
 
         .giftcard {
