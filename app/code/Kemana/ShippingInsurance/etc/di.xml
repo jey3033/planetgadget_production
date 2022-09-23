@@ -20,4 +20,5 @@
     <type name="Magento\Quote\Model\ShippingAddressManagement">
         <plugin disabled="false" name="Kemana_ShippingInsurance_Plugin_Magento_Quote_Model_ShippingAddressManagement" sortOrder="10" type="Kemana\ShippingInsurance\Plugin\Magento\Quote\Model\ShippingAddressManagement"/>
     </type>
+    <preference for="Magento\Quote\Model\Cart\CartTotalRepository" type="Kemana\ShippingInsurance\Preference\Model\Cart\CartTotalRepository" />
 </config>

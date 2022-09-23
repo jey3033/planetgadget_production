@@ -64,7 +64,7 @@ define([
 
                 quote.shippingMethod.subscribe(function(value) {
                 if (value) {
-                    if (value.carrier_code == 'jne' || value.carrier_code == 'jnt') {
+                    if (value.carrier_code == 'jne') {
                             self.isVisibleTemp(true)
                             self.isChecked(true) 
                         }else{
