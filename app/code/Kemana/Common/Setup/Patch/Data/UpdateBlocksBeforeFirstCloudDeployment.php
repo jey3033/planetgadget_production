@@ -286,8 +286,7 @@ class UpdateBlocksBeforeFirstCloudDeployment implements DataPatchInterface
                 'content' => '<div class="heading">Contact Us</div>
 <div class="text phone">{{config path="general/store_information/phone"}}</div>
 <div class="text email">{{config path="trans_email/ident_general/email"}}</div>
-<div class="text live-chat">Live Chat</div>
-<div><a href="https://pg.kemana.dev/product.html" target="_blank" rel="noopener">Live Chat</a></div>
+<div class="text live-chat"><a href="https://pg.kemana.dev/product.html" target="_blank" rel="noopener">Live Chat</a></div>
 <div class="time">Operational Hours: <span>09:00 - 21:00</span></div>',
                 'is_active' => 1,
                 'store_id' => HelperData::PG_STORE_VIEW_ENGLISH
