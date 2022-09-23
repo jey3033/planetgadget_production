@@ -134,6 +134,12 @@
                 .language {
                     .lib-vendor-prefix-display();
 
+                    .switcher-option.active {
+                        a {
+                            text-decoration: underline;
+                        }
+                    }
+
                     li {
                         padding: 0;
                         .lib-line-height(16);
@@ -142,8 +148,8 @@
 
                         a {
                             display: inline-block;
-                            .lib-font-size(10);
-                            .lib-line-height(10);
+                            .lib-font-size(12);
+                            .lib-line-height(12);
                             padding: 0 5px;
                             //width: 2ch;
                             //overflow: hidden;

@@ -215,6 +215,8 @@
             max-width: 768px;
             margin: 30px auto 0;
             text-align: center;
+            padding-top: 100px;
+            padding-bottom: 50px;
 
             .image-div {
                 background-size: contain;
@@ -225,25 +227,24 @@
             }
 
             .line-one {
-                .lib-font-size(20);
                 .lib-line-height(30);
                 .lib-css(color, @theme__color__secondary);
-                .lib-css(font-weight, @font-weight__heavier);
+                font-weight: 700;
                 margin-bottom: 20px;
             }
 
             .line-two {
-                .lib-font-size(20);
                 .lib-line-height(30);
                 .lib-css(color, @theme__color__secondary);
                 .lib-css(font-weight, @font-weight__heavier);
-                margin-bottom: 30px;
+                font-size: 12px;
 
                 .order-number {
-                    .lib-css(color, @color-kemana-green2);
+                    color: @primary__color__dark;
+                    font-weight: bold;
 
                     strong {
-                        .lib-css(font-weight, @font-weight__heavier);
+                        font-weight: bold;
                     }
                 }
             }
@@ -270,7 +271,7 @@
                 margin-bottom: 40px;
 
                 a {
-                    .lib-css(font-weight, @font-weight__heavier);
+                    font-weight: 700;
                 }
             }
 
@@ -312,13 +313,17 @@
 
         .checkout-success {
             .image-div {
-                background: url(../images/success-checklist.svg) center no-repeat;
+                background: url(../images/Payment_Success.svg) center no-repeat;
+                width: -webkit-fill-available;
+                background-size: contain;
             }
         }
 
         .checkout-failed {
             .image-div {
-                background: url(../images/transaction-failed.svg) center no-repeat;
+                background: url(../images/Payment_Error.svg) center no-repeat;
+                width: -webkit-fill-available;
+                background-size: contain;
             }
         }
     }
@@ -368,6 +373,16 @@
             padding-right: 0;
         }
     }
+
+    .checkout-onepage-success,
+    .checkout-onepage-failure {
+        .checkout-success,
+        .checkout-failed {
+            .line-one{
+                font-size: 24px;
+            }
+        }
+    }
 }
 
 //
@@ -415,6 +430,13 @@
         .print {
             float: right;
             margin: 22px 0 0;
+        }
+
+        .checkout-success,
+        .checkout-failed {
+            .line-one{
+                font-size: 28px;
+            }
         }
     }
 }

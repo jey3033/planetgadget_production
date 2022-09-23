@@ -27,7 +27,7 @@
         <observer name="kemana_customer_address_save_after"
                   instance="Kemana\MsDynamics\Observer\Customer\CustomerAddressSaveAfter"/>
     </event>
-    <event name="layout_load_before">
+    <event name="controller_action_predispatch">
         <observer name="layout_load_before_pdp" instance="Kemana\MsDynamics\Observer\Inventory\BeforePdpLayoutLoad" />
     </event>
     <event name="checkout_cart_product_add_before">

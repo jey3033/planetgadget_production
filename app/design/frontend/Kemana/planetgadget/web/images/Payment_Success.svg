@@ -1,0 +1,26 @@
+<svg id="Payment_Success" data-name="Payment Success" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="240" height="192" viewBox="0 0 240 192">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_4190" data-name="Rectangle 4190" width="240" height="192" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="Group_7042" data-name="Group 7042" clip-path="url(#clip-path)">
+    <path id="Path_8357" data-name="Path 8357" d="M120,6A77,77,0,1,1,43,83,77,77,0,0,1,120,6" fill="#0c783f"/>
+    <path id="Path_8358" data-name="Path 8358" d="M120,13c38.66,0,70,31.116,70,69.5S158.66,152,120,152,50,120.884,50,82.5,81.34,13,120,13" fill="#0e9e52"/>
+    <path id="Path_8359" data-name="Path 8359" d="M120,176c49.153,0,89,2.686,89,6s-39.847,6-89,6-89-2.686-89-6,39.847-6,89-6" fill="#e3e3e3"/>
+    <path id="Path_8360" data-name="Path 8360" d="M68.54,122.907C76.6,136.862,80.725,115.839,108,84.136s69.074-36.329,59.148-48.075S115.654.536,79.33,34.792s-18.85,74.161-10.79,88.115" fill="#19be67"/>
+    <path id="Path_8361" data-name="Path 8361" d="M152.755,60.281l-45.037,45.038L87.246,84.847" fill="none" stroke="#fff" stroke-linecap="square" stroke-width="12"/>
+    <line id="Line_579" data-name="Line 579" y2="17" transform="translate(29 13)" fill="none" stroke="#0e9e52" stroke-linecap="round" stroke-width="5"/>
+    <line id="Line_580" data-name="Line 580" y2="17" transform="translate(215 137)" fill="none" stroke="#0e9e52" stroke-linecap="round" stroke-width="5"/>
+    <line id="Line_581" data-name="Line 581" y2="8.4" transform="translate(35.04 135.6)" fill="none" stroke="#aeb4c1" stroke-linecap="round" stroke-width="3"/>
+    <line id="Line_582" data-name="Line 582" y2="9.094" transform="translate(208.343 20.906)" fill="none" stroke="#aeb4c1" stroke-linecap="round" stroke-width="3"/>
+    <line id="Line_583" data-name="Line 583" y2="17" transform="translate(29 13)" fill="none" stroke="#0e9e52" stroke-linecap="round" stroke-width="5"/>
+    <line id="Line_584" data-name="Line 584" y2="17" transform="translate(215 137)" fill="none" stroke="#0e9e52" stroke-linecap="round" stroke-width="5"/>
+    <line id="Line_585" data-name="Line 585" y2="8.4" transform="translate(35.04 135.6)" fill="none" stroke="#aeb4c1" stroke-linecap="round" stroke-width="3"/>
+    <line id="Line_586" data-name="Line 586" y2="9.094" transform="translate(208.343 20.906)" fill="none" stroke="#aeb4c1" stroke-linecap="round" stroke-width="3"/>
+    <line id="Line_587" data-name="Line 587" x1="16.8" transform="translate(20.4 21.6)" fill="none" stroke="#0e9e52" stroke-linecap="round" stroke-width="5"/>
+    <line id="Line_588" data-name="Line 588" x1="16.8" transform="translate(206.4 145.2)" fill="none" stroke="#0e9e52" stroke-linecap="round" stroke-width="5"/>
+    <line id="Line_589" data-name="Line 589" x1="8.686" transform="translate(31.2 140.016)" fill="none" stroke="#aeb4c1" stroke-linecap="round" stroke-width="3"/>
+    <line id="Line_590" data-name="Line 590" x1="8.686" transform="translate(204 25.453)" fill="none" stroke="#aeb4c1" stroke-linecap="round" stroke-width="3"/>
+  </g>
+</svg>
