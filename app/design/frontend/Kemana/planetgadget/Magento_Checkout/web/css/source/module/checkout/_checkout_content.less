@@ -782,6 +782,11 @@
                 width: 100% !important;
             }
 
+            .field-tooltip._active {
+                .field-tooltip-content {
+                    margin-top: 64px;
+                }
+            }
         }
 
         .modal-inner-wrap {
@@ -966,6 +971,16 @@
         .opc-block-summary{
             .block.items-in-cart{
                 margin-top: -20px;
+            }
+        }
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1023px){
+    .opc-wrapper{
+        .field-tooltip._active {
+            .field-tooltip-content {
+                margin-top: 64px;
             }
         }
     }
