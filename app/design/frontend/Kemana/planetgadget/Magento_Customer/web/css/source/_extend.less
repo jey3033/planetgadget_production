@@ -222,7 +222,7 @@
 
             tbody {
                 td {
-                    padding: 20px 15px 0 15px;
+                    padding: 15px;
                     color: @kemana-primary-brand-color;
 
                     &:first-child {
@@ -306,7 +306,7 @@
         .column.main,
         .sidebar-additional {
             .lib-css(background, @panel__background-color);
-            margin-top: 80px;
+            margin-top: 60px;
             border-radius: 5px;
             padding: 10px;
             margin-bottom: 50px;
@@ -316,8 +316,16 @@
             .block:not(.widget) {
                 .block-content {
                     .box {
-                        margin-bottom: 36px;
+                        margin-bottom: 33px;
+
+                        &.box-address-shipping {
+                            margin-bottom: 33px;
+                        }
                     }
+                }
+
+                &.block-dashboard-info {
+                    margin-bottom: 50px;
                 }
             }
         }
@@ -325,7 +333,7 @@
         .sidebar-main {
             position: relative;
             padding-bottom: 20px;
-            margin-top: -96px;
+            margin-top: -70px;
 
             .title {
                 margin-bottom: 0;
@@ -420,6 +428,7 @@
         }
     }
 
+
     .block-dashboard-addresses {
         .block-title {
             .action {
@@ -480,6 +489,8 @@
 
         &.page-layout-2columns-left {
             .columns {
+                .lib-vendor-prefix-display();
+
                 .sidebar-main,
                 .sidebar-additional {
                     width: 100%;
@@ -542,6 +553,7 @@
                 .column {
                     &.main {
                         width: ~'calc(100% - 330px)';
+                        margin-left: 20px;
                         border-radius: 5px;
                         padding: 30px;
                         background: @panel__background-color;
@@ -552,6 +564,7 @@
 
                             &.block-dashboard-addresses {
                                 padding: 0;
+                                margin-bottom: 0;
                             }
 
                             &.block-addresses-list {

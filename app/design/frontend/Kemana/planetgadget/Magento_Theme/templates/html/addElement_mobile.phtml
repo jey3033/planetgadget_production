@@ -11,18 +11,23 @@ $_session=$block->getSession();
     <div class="block account-menu">
         <div class="account-menu_content" id="account-menu">
             <ul class="menu-content">
+                <li class="main-item pg-club"><a href="<?= $this->getUrl('planet-gadget-club');  ?>"><?= __('PG Club') ?></a></li>
+                <li class="main-item pg-track"><a href="<?= $this->getUrl('sales/order/history/'); ?>"><?= __('Track') ?></a></li>
                 <?php if (!$_session->isLoggedIn()): ?>
                     <li class="main-item account-login"><a href="<?= $this->getUrl('customer/account/login'); ?>"><?=
                             __('My Account') ?></a></li>
                 <?php elseif ($_session->isLoggedIn()): ?>
-                    <li class="main-item"><a href="<?= $this->getUrl('customer/account/index'); ?>"><?= __('Dashboard') ?></a></li>
-                    <li class="main-item"><a href="<?= $this->getUrl('sales/order/history/'); ?>"><?= __('Order History') ?></a></li>
-                    <li class="main-item"><a href="<?= $this->getUrl('wishlist'); ?>"><?= __('Wishlist ') ?></a></li>
-                    <li class="main-item"><a href="<?= $this->getUrl('customer/address/'); ?>"><?= __('Address Book') ?></a></li>
-                    <li class="main-item"><a href="<?= $this->getUrl('customer/account/logout'); ?>"><?= __('Logout') ?></a></li>
+                    <li class="main-item account-login"><a href="<?= $this->getUrl('customer/account/login'); ?>"><?=
+                            __('My Account') ?></a>
+                    <ul>
+                        <li class="main-item-child"><a href="<?= $this->getUrl('customer/account/index'); ?>"><?= __('Dashboard') ?></a></li>
+                        <li class="main-item-child"><a href="<?= $this->getUrl('sales/order/history/'); ?>"><?= __('Order History') ?></a></li>
+                        <li class="main-item-child"><a href="<?= $this->getUrl('wishlist'); ?>"><?= __('Wishlist ') ?></a></li>
+                        <li class="main-item-child"><a href="<?= $this->getUrl('customer/address/'); ?>"><?= __('Address Book') ?></a></li>
+                        <li class="main-item-child"><a href="<?= $this->getUrl('customer/account/logout'); ?>"><?= __('Logout') ?></a></li>
+                    </ul>
+                    </li>
                 <?php endif; ?>
-                <li class="main-item"><a href="<?= $this->getUrl('*/*/*'); ?>"><?= __('PG Club') ?></a></li>
-                <li class="main-item"><a href="<?= $this->getUrl('*/*/*'); ?>"><?= __('Track') ?></a></li>
             </ul>
             <ul class="menu-content-2">
                 <li class="main-item"><a href="<?= $this->getUrl('*/*/*'); ?>"><?= __('Bank Promo') ?></a></li>
