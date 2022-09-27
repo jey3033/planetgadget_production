@@ -6,14 +6,16 @@
 -->
 <div class="payment-method" data-bind="css: {'_active': (getCode() == isChecked())}">
     <div class="payment-method-title field choice">
-        <input type="radio"
-               name="payment[method]"
-               class="radio"
-               data-bind="attr: {'id': getCode()}, value: getCode(), checked: isChecked, click: beforeselectPaymentMethod, visible: isRadioButtonVisible()"/>
-        <label class="label" data-bind="attr: {'for': getCode()}">
-            <span data-bind="text: getTitle()"></span>
-        </label>
-        <img style="height:20px ;" data-bind="attr: {src: getLogoUrl()}" />
+        <div class="title field radios">
+            <input type="radio"
+                   name="payment[method]"
+                   class="radio"
+                   data-bind="attr: {'id': getCode()}, value: getCode(), checked: isChecked, click: beforeselectPaymentMethod, visible: isRadioButtonVisible()"/>
+            <label class="label" data-bind="attr: {'for': getCode()}">
+                <span data-bind="attr: {'class': 'payment-icon payment-indodana-logo'}"></span>
+                <span data-bind="text: getTitle()"></span>
+            </label>
+        </div>
         <div id="dvmsgIndodana">
             <br>            
             <label id="lblErrMsgIndodana" style="color:red;"></label>           
@@ -25,15 +27,17 @@
     
         <div>              
             <!-- ko foreach: getPaymentOptions()  -->
-            <div class="field choice">
-                <input type="radio"
-                       name="payment[id]"
-                       class="radio"
-                       data-bind="attr: {'id': id}, value: id, click: $parent.onInstallmentClick"/>
-                <label class="label" data-bind="attr: {'for': id}">
-                    <span data-bind="text: paymentType"></span>
-                    <span >cicilan per bulan </span> <span data-bind="text: monthlyInstallment "></span>
-                </label>
+            <div class="field choice" style="padding-bottom: 15px;">
+                <div class="title field radios">
+                    <input type="radio"
+                           name="payment[id]"
+                           class="radio"
+                           data-bind="attr: {'id': id}, value: id, click: $parent.onInstallmentClick"/>
+                    <label class="label" data-bind="attr: {'for': id}">
+                        <span data-bind="text: paymentType"></span>
+                        <span >cicilan per bulan </span> <span data-bind="text: monthlyInstallment "></span>
+                    </label>
+                </div>
             </div>
             <!-- /ko -->         
         </div>
