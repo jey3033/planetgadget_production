@@ -22,7 +22,9 @@
                          </div>
                         <!-- /ko -->
                         <!-- ko if: ($kemanaGroup().class_icon == 'without-group') -->
+                         <div data-bind="attr: {'class': 'without-group'}">
                             <each args="data: getRegion($group().displayArea + $kemanaGroup().group_id), as: 'method'" render=""/>
+                         </div>
                         <!-- /ko -->
                     </div>
                </div>  

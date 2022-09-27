@@ -35,6 +35,16 @@ define([
 
             return locationName;
         },
+        getShippingMethodPrice: function () {
+            var shippingMethod = quote.shippingMethod(),
+                shippingPrice = '';
+
+            if (!this.isStorePickup()) {
+                shippingPrice = '-' + ' Rp ' +quote.shippingMethod().amount;
+            }
+
+            return shippingPrice;
+        },
         getShippingMethodAddress: function () {
             var shippingMethod = quote.shippingMethod(),
                 locationName = '';

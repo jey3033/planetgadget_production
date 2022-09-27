@@ -145,7 +145,7 @@
         .items-in-cart {
             .product {
                 .lib-vendor-prefix-display();
-                .lib-vendor-prefix-flex-wrap();
+                flex-wrap: nowrap;
                 position: relative;
                 vertical-align: top;
 
@@ -196,11 +196,24 @@
                 display: initial;
             }
 
+            .product-item-inner-value{
+                display: flex;
+                flex-wrap: nowrap;
+            }
+
             .details-qty {
                 .lib-font-size(12);
                 .lib-line-height(13);
                 .lib-css(color, @color-kemana-dark1);
+                border-right: 1px solid #AEB4C1;
                 margin-bottom: @indent__xs;
+                padding-right: 5px;
+                display: flex;
+                flex-wrap: nowrap;
+            }
+
+            .subtotal{
+                padding-left: 5px;
             }
         }
 
