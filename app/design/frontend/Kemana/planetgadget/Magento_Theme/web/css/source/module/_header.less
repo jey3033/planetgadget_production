@@ -629,7 +629,7 @@
                                     }
                                 }
 
-                                &:nth-child(2) {
+                                &.pg-club {
                                     a {
                                         .lib-icon-font(
                                             @icon-pg-club,
@@ -637,7 +637,7 @@
                                             @_icon-font-color: @kemana-primary-brand-color,
                                             @_icon-font-size: 20px,
                                             @_icon-font-line-height: 20px,
-                                            @_icon-font-margin: 0 10px 0 0,
+                                            @_icon-font-margin: -3px 10px 0 0,
                                             @_icon-font-position: before
                                         );
                                     }
@@ -645,7 +645,7 @@
                                 }
 
 
-                                &:nth-child(3) {
+                                &.pg-track {
                                     a {
                                         .lib-icon-font(
                                             @icon-pg-track,
@@ -653,7 +653,7 @@
                                             @_icon-font-color: @kemana-primary-brand-color,
                                             @_icon-font-size: 20px,
                                             @_icon-font-line-height: 20px,
-                                            @_icon-font-margin: 0 10px 0 0,
+                                            @_icon-font-margin: -3px 10px 0 0,
                                             @_icon-font-position: before
                                         );
                                     }
@@ -662,6 +662,9 @@
                             }
 
                             .account-login {
+                                width: 100%;
+                                padding-bottom: 9px;
+
                                 .lib-icon-font(
                                     @header-account-icon,
                                     @_icon-font: @icon-font,
@@ -672,8 +675,8 @@
                                     @_icon-font-margin: 0 10px 0 0,
                                     @_icon-font-position: before
                                 );
-                                .lib-vendor-prefix-display();
-                                .lib-vendor-prefix-flex-wrap();
+                                //.lib-vendor-prefix-display();
+                                //.lib-vendor-prefix-flex-wrap();
                                 .lib-font-size(12);
                                 align-items: center;
                                 vertical-align: top;
@@ -681,6 +684,26 @@
 
                                 a {
                                     .lib-css(font-weight, @font-weight__bold);
+                                }
+
+                                ul {
+                                    margin-top: 16px;
+                                    padding-left: 0;
+                                    list-style: none;
+
+                                    li {
+                                        padding-block: 6px 7px;
+                                        margin-bottom: 0;
+
+                                        a {
+                                            .lib-css(color, @theme__color__primary-alt);
+                                            .lib-css(font-weight, @font-weight__heavier);
+
+                                            &:hover {
+                                                text-decoration: none;
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -702,6 +725,7 @@
 
                                 &:last-of-type {
                                     margin-bottom: 0;
+                                    padding-bottom: 0;
                                 }
 
                                 a {

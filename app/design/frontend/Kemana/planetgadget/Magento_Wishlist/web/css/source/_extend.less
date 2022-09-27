@@ -64,8 +64,6 @@
         .products-grid {
             &.wishlist {
                 .product-item {
-                    padding-inline: 10px;
-
                     .box-tocart {
                         .field {
                             &.qty {
@@ -95,6 +93,7 @@
 
                         .product-reviews-summary {
                             order: 2;
+                            margin-top: 8px;
                         }
 
                         .product-item-name {
@@ -122,8 +121,6 @@
                         }
 
                         .box-tocart {
-                            bottom: 0;
-
                             .product-item-actions {
                                 .actions-primary {
                                     .action {
@@ -202,11 +199,79 @@
 //  _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .wishlist-index-index {
+        .main {
+            .form-wishlist-items {
+                .actions-toolbar {
+                    width: 100%;
+                    margin-bottom: 20px;
+                    margin-top: 20px;
+
+                    .tocart {
+                        width: 100%;
+                        margin-bottom: 10px;
+                    }
+
+                    .primary {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+
     .products-grid {
         &.wishlist {
             .product-item-name {
                 .lib-font-size(12);
             }
+
+            .product-items {
+                .product-item {
+                    .product-item-info {
+                        .product-item-inner {
+                            height: 40px;
+                        }
+                        .box-tocart {
+                            position: absolute;
+                            left: 10px;
+                            bottom: 20px;
+                            width: ~'calc(100% - 20px)';
+                        }
+                    }
+                }
+            }
         }
     }
 }
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .wishlist-index-index {
+        .products-grid {
+            &.wishlist {
+                .product-items {
+                    .product-item {
+                        padding-inline: 10px;
+
+                        .product-item-info {
+                            .product-item-inner {
+                                height: 40px;
+                            }
+                            .box-tocart {
+                                position: absolute;
+                                left: 10px;
+                                bottom: 20px;
+                                width: ~'calc(100% - 20px)';
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
