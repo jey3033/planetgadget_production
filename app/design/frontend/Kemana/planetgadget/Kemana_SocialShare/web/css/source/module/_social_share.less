@@ -20,11 +20,11 @@
 
 	.social-share {
 		background-color: @color-white;
-	    padding: 30px;
-	    margin-top: 25px;
+	   // padding: 30px;
+	    margin-top: 0;
 
 	    .title{
-	    	margin-top: 10px;
+	    	margin-top: 0;
 	    	font-weight: bold;
 	    }
 
@@ -33,7 +33,7 @@
 				display: -webkit-flex;
 				display: -ms-flexbox;
 				display: flex;
-				flex-wrap: wrap;
+				//flex-wrap: wrap;
 			}
 
 			.a2a_counter {
@@ -44,11 +44,11 @@
 				margin: 0 4px;
 				padding: 0;
 				text-align: center;
-				
+
 				&:hover {
 					border-color: @primary__color__dark;
 				}
-				
+
 				span {
 					display: none;
 				}
@@ -56,7 +56,7 @@
 				.icon{
 					display: inline-block;
 					text-decoration: none;
-				
+
 					&:before{
 						-webkit-font-smoothing: antialiased;
 						-moz-osx-font-smoothing: grayscale;
@@ -72,7 +72,7 @@
 						text-align: center;
 						font-family: 'icons-kemana-theme';
 					}
-					
+
 					&:hover{
 						&:before{
 							color: @primary__color__dark;
@@ -84,79 +84,79 @@
 			.a2a_button_facebook {
 				.icon{
 					&:before {
-						content: @icon-facebook;	
+						content: @icon-facebook;
 					}
-				}		
+				}
 			}
-			
+
 			.a2a_button_twitter {
 				.icon{
 					&:before {
 						content: @icon-twitter;
 					}
-				}		
+				}
 			}
-			
+
 			.a2a_button_pinterest {
 				.icon{
 					&:before {
-						content: @icon-pinterest-p;	
+						content: @icon-pinterest-p;
 					}
 				}
 			}
-			
+
 			.a2a_button_linkedin {
 				.icon{
 					&:before {
-						content: @icon-linkedin;		
+						content: @icon-linkedin;
 					}
 				}
 			}
-			
+
 			.a2a_button_tumblr {
 				.icon{
-					&:before {	
-						content: @icon-tumblr;	
+					&:before {
+						content: @icon-tumblr;
 					}
-				}		
+				}
 			}
-			
+
 			.a2a_button_email {
 				.icon{
 					&:before {
-						content: @icon-email;		
-					}
-				}	
-			}
-			
-			.a2a_button_google_plus {
-				.icon{
-					&:before {
-						content: @icon-google;		
+						content: @icon-email;
 					}
 				}
 			}
-			
+
+			.a2a_button_google_plus {
+				.icon{
+					&:before {
+						content: @icon-google;
+					}
+				}
+			}
+
 			.a2a_button_instagram {
 				.icon{
 					&:before {
-						content: @icon-instagram;		
+						content: @icon-instagram;
 					}
-				}	
+				}
 			}
-			
+
 			.a2a_button_whatsapp {
 				.icon{
-					&:before {	
+					&:before {
 						content: @icon-whatsapp;
 					}
 				}
 			}
-			
+
 			.a2a_dd {
 				display: inline-block;
 				text-decoration: none;
-				
+
 				&:before {
 					-webkit-font-smoothing: antialiased;
 					-moz-osx-font-smoothing: grayscale;
@@ -173,7 +173,7 @@
 					speak: none;
 					text-align: center;
 				}
-				
+
 				&:hover {
 					&:before {
 						color: @primary__color__dark;
@@ -202,7 +202,7 @@
 //  _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
-	
+
 	.social-share {
 		display: flex;
 
