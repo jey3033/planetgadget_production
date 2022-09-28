@@ -210,9 +210,9 @@
             .lib-css(font-family, @sub-heading__font-family);
             .lib-css(font-weight, @sub-heading__font-weight);
             .lib-css(text-transform, @sub-heading__text-transform);
-            .lib-line-height(@sub-heading__font-size + 2);
+            .lib-line-height(@sub-heading__font-size + 10);
             color: @primary__color;
-            padding-bottom: @indent__base;
+            padding-bottom: @indent__base - 7px;
             margin-bottom: @indent__base;
             border-bottom: @border-width__base solid @color-kemana-gray5;
 
@@ -266,7 +266,7 @@
 
             .box-content {
                 .lib-font-size(@font-size__base);
-                margin-bottom: @indent__base;
+                margin-bottom: @indent__base - 4px;
 
                 &.address-box-content {
                     margin-bottom: @indent__l;
@@ -277,16 +277,21 @@
                 }
 
                 .map-point-label {
-                    .lib-css(color, @color-pg-light-gray);
-                    .lib-icon-font(
-                        @icon-pg-pinpoint-not-set,
-                        @_icon-font-size: 14px,
-                        @_icon-font-color: @color-pg-light-gray,
-                        @_icon-font-margin: 0 8px 0 0
-                    );
+                    margin-top: 6px;
 
-                    &:before {
-                        width: 14px;
+                    &.active {
+                        .lib-css(color, @color-pg-light-gray);
+                        .lib-icon-font(
+                            @icon-pg-pinpoint-not-set,
+                            @_icon-font-size: 14px,
+                            @_icon-font-line-height: 20px,
+                            @_icon-font-color: @color-pg-light-gray,
+                            @_icon-font-margin: 0 8px 0 0
+                        );
+
+                        &:before {
+                            width: 14px;
+                        }
                     }
                 }
             }
@@ -300,7 +305,7 @@
             .box-actions {
                 .lib-css(font-family, @font-family-name__base);
                 .lib-font-size(12);
-                .lib-line-height(13);
+                .lib-line-height(20);
 
                 font-weight: @font-weight__bold;
 
@@ -1387,7 +1392,7 @@
             position: static;
             width: 100%;
             z-index: 0;
-            margin-bottom: 30px;
+            margin-bottom: 0;
         }
     }
 }

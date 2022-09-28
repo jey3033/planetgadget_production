@@ -77,6 +77,9 @@
 & when (@media-common = true) {
     .product-info-main,
     .product-options-bottom {
+        .lib-vendor-prefix-display();
+        .lib-vendor-prefix-flex-direction(column);
+
         .old-price {
             text-decoration: none;
 
@@ -146,6 +149,34 @@
                 .lib-font-size(12);
                 .lib-line-height(20);
                 .lib-css(font-weight, @font-weight__bold);
+            }
+        }
+    }
+
+    ul.prices-tier {
+        padding: 17px 0 0;
+        margin-bottom: 0;
+
+        li {
+            padding-left: 16px;
+            .lib-line-height(20);
+            padding-bottom: 13px;
+            position: relative;
+
+            &:before {
+                display: inline-block;
+                content: '';
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                background: @kemana-primary-brand-color;
+                top: 7px;
+                left: 0;
+                position: absolute;
+            }
+
+            &:last-child {
+                padding-bottom: 6px;
             }
         }
     }

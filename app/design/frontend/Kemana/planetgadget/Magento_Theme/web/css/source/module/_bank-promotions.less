@@ -136,10 +136,24 @@
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
     .home-bank-and-promotions {
+        padding-block: @block-padding - 3 @block-padding - 20;
+
+        .image-block {
+            padding: 0 10px 20px;
+        }
+    }
+}
+
+//
+//  Desktop Large
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+    .home-bank-and-promotions {
         padding-block: @block-padding - 3 @block-padding;
 
         .image-block {
-            padding: 0 10px;
+            padding: 10px;
         }
     }
 }

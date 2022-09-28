@@ -16,12 +16,18 @@
             </button>
         </div>
         <div class="shipping-information-content">
+            <div class="shipping-method-details">
+                <span class="title-value" data-bind="text: getShippingMethodTitle()"></span>
+                <span class="price" data-bind="text: getShippingMethodPrice()"></span>
+                <br/>
+            </div>
             <!-- ko foreach: getRegion('ship-to') -->
             <!-- ko template: getTemplate() --><!-- /ko -->
             <!--/ko-->
         </div>
     </div>
     <!--/ko-->
+    <!-- ko ifnot: (!isStorePickup()) -->
     <div class="ship-via">
         <div class="shipping-information-title">
             <span data-bind="i18n: 'Info Pengambilan'"></span>
@@ -37,5 +43,6 @@
             <span class="telephone-value" data-bind="text: getShippingMethodTelephone()"></span>
         </div>
     </div>
+    <!--/ko-->
 </div>
 <!--/ko-->

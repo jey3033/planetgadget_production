@@ -293,7 +293,8 @@ define([
             {
                 breakpoint: 1024,
                 settings: {
-                    slidesToShow: 3
+                    slidesToShow: 3,
+                    arrows: false
                 }
             },
             {
@@ -378,7 +379,8 @@ define([
             {
                 breakpoint: 1023,
                 settings: {
-                    slidesToShow: 4
+                    slidesToShow: 2,
+                    arrows: false
                 }
             },
             {
@@ -407,20 +409,11 @@ define([
 
 
     /**
-     * 22. Show More / Show less brands
+     * 22. move button in my account wishlist
      */
-    $(document).ready(function () {
-        var size_li = $("#corporate-brand-container li").size();
-        var x = 18;
-        $('#corporate-brand-container li:lt('+x+')').show();
-        $('#show-more').click(function () {
-            var x= (x <= size_li) ? x+5 : size_li;
-            $('#corporate-brand-containe li:lt('+x+')').show();
-        });
-        $('#show-less').click(function () {
-            x=(x-5<0) ? 3 : x-5;
-            $('#corporate-brand-containe li').not(':lt('+x+')').hide();
-        });
-    });
+
+    if (utility.isMobile()) {
+        $('.page-title-wrapper .tocart').prependTo( $('.actions-toolbar') );
+    }
 
 });

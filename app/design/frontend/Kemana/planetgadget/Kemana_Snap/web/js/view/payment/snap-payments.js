@@ -45,6 +45,11 @@ define([
     }]);
     registry.get(customGroupName, function (customGroup) {
         rendererList.push(
+            {
+                type: 'indodanapayment',
+                component: 'Indodana_PayLater/js/view/payment/method-renderer/indodanapayment',
+                group: customGroup
+            },
              {
                 type: 'checkmo',
                 component: 'Magento_OfflinePayments/js/view/payment/method-renderer/checkmo-method',

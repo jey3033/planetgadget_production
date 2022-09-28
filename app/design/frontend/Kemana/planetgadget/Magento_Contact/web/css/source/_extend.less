@@ -197,6 +197,28 @@
 }
 
 //
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+    .contact-index-index {
+
+        .breadcrumbs {
+            width: @other-pages-max-width;
+        }
+
+        .page-main {
+            .page-title-wrapper {
+                .page-title {
+                    .lib-font-size(28);
+                    .lib-line-height(38);
+                }
+            }
+        }
+    }
+}
+
+//
 //  Desktop Large
 //  _____________________________________________
 

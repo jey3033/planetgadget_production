@@ -11,7 +11,7 @@
                     &:not(.table-comparison) {
                         tbody > tr {
                             > td {
-                                padding-left: 86px;
+                                padding-left: 76px;
 
                                 &[data-th] {
                                     &:before {
@@ -22,12 +22,46 @@
                         }
 
                         tfoot {
-                            th {
-                                width: 50%;
-                            }
+                            tr {
+                                th {
+                                    width: 50%;
+                                    padding-block: @indent__s - 3px @indent__s - 4px;
+                                }
 
-                            td {
-                                width: 50%;
+                                td {
+                                    width: 50%;
+                                    padding-block: @indent__s - 3px @indent__s - 4px;
+                                }
+
+                                &:first-child {
+                                    th {
+                                        padding-top: @indent__base - 3px;
+                                    }
+
+                                    td {
+                                        padding-top: @indent__base - 3px;
+                                    }
+                                }
+
+                                &:last-child {
+                                    th {
+                                        padding-block: @indent__base - 3px @indent__base - 4px;
+                                    }
+
+                                    td {
+                                        padding-block: @indent__base - 3px @indent__base - 4px;
+                                    }
+                                }
+
+                                &.shipping {
+                                    th {
+                                        padding-bottom: @indent__base - 6px;
+                                    }
+
+                                    td {
+                                        padding-bottom: @indent__base - 6px;
+                                    }
+                                }
                             }
                         }
                     }
