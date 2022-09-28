@@ -75,6 +75,7 @@ define([
                         self.isVisibleTemp(false)
                         self.isChecked(false); 
                     }
+                                        self.updateTotalsInSummary();
                 });
             },
 

@@ -103,6 +103,16 @@ class SyncRewardPointFromErp
                                 $this->erpReward->getRewardModel()
                                     ->setCustomerId($customerId)
                                     ->setWebsiteId($this->storeManager->getStore($storeId)->getWebsiteId())
+                                    ->setPointsDelta(-$magentoRewardPointBalance)
+                                    ->setAction(\Kemana\MsDynamics\Model\Reward::REWARD_ACTION_FOR_NOT_MATCH_ERP_POINT)
+                                    ->setActionEntity($customer)
+                                    ->updateRewardPoints();
+
+                                $this->helper->log('REWARD POINT : Customer ERP Number ' . $erpCustomerNumber . ' Updated points as it is not Match with ERP Point. Magento ID ' . $customerId, 'info');
+
+                                $this->erpReward->getRewardModel()
+                                    ->setCustomerId($customerId)
+                                    ->setWebsiteId($this->storeManager->getStore($storeId)->getWebsiteId())
                                     ->setPointsDelta($getRewardPoint['response']['PointBalance'])
                                     ->setAction(\Kemana\MsDynamics\Model\Reward::REWARD_ACTION_FOR_ERP)
                                     ->setActionEntity($customer)

@@ -19,6 +19,7 @@ use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\State\InputMismatchException;
 use Magento\Catalog\Model\Product\Type;
 use Magento\Catalog\Model\Product\Attribute\Source\Status;
+use Magento\Store\Model\Store;
 
 /**
  * Class SyncProductsFromErp
@@ -144,9 +145,9 @@ class SyncProductsFromErp
                     $product->setPrice($productdata['Price']);
                     $product->setAttributeSetId(4);
                     $product->setTypeId(Type::TYPE_SIMPLE);
+                    $product->setData('store_id', Store::DEFAULT_STORE_ID);
                     $product->setStatus(Status::STATUS_ENABLED);
                     $product = $this->productRepository->save($product);
-
                     $categoryIds = [];
                     $categoryCollection = $this->categoryFactory->create()->getCollection()
                             ->addAttributeToFilter('name', array('in' => array(

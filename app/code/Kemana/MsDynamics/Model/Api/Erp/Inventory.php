@@ -118,7 +118,7 @@ class Inventory
             $message = "Updated inventory sku: ".$sku ." and stock: " .$qty;
             $this->helper->inventorylog($message, 'info');
         }catch(Exception $e){
-            throw new \Magento\Framework\Exception\LocalizedException(__($e->getMessage()));
+            $this->helper->inventorylog($e->getMessage(), 'error');
         }
     }
 }

@@ -33,3 +33,62 @@
         margin-bottom: 30px;
     }
 }
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .account {
+        &.magento_giftregistry-index-index {
+            .giftregistry {
+                margin-bottom: 15px;
+            }
+
+            .table-giftregistry {
+                thead {
+                    tr {
+                        th {
+                            &.event {
+                                width: 19%;
+                            }
+
+                            &.create {
+                                width: 17%;
+                            }
+
+                            &.message {
+                                width: 25%;
+                            }
+
+                            &.actions {
+                                width: 39%;
+                                text-align: right;
+
+                            }
+                        }
+                    }
+                }
+
+                tbody {
+                    tr {
+                        td {
+                            &.event {
+                            }
+
+                            &.create {
+                            }
+
+                            &.message {
+                            }
+
+                            &.actions {
+                                text-align: right;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

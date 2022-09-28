@@ -35,13 +35,23 @@ define([
 
             return locationName;
         },
+        getShippingMethodPrice: function () {
+            var shippingMethod = quote.shippingMethod(),
+                shippingPrice = '';
+
+            if (!this.isStorePickup()) {
+                shippingPrice = '-' + ' Rp ' +quote.shippingMethod().amount;
+            }
+
+            return shippingPrice;
+        },
         getShippingMethodAddress: function () {
             var shippingMethod = quote.shippingMethod(),
                 locationName = '';
 
             if (!this.isStorePickup()) {
 
-                return this._super();
+                return '-';
             }
 
 
@@ -57,7 +67,7 @@ define([
 
             if (!this.isStorePickup()) {
 
-                return this._super();
+                return '-';
             }
 
 

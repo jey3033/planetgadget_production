@@ -21,3 +21,4 @@
 !/update/.htaccess
 !/README.md
 !/op-exclude.txt
+!/app/etc/config.php

@@ -21,6 +21,8 @@ class Reward extends \Magento\Reward\Model\Reward
 {
     const REWARD_ACTION_FOR_ERP = 13;
 
+    const REWARD_ACTION_FOR_NOT_MATCH_ERP_POINT = 14;
+
     /**
      * Internal constructor
      *
@@ -45,6 +47,7 @@ class Reward extends \Magento\Reward\Model\Reward
                 self::REWARD_ACTION_REVERT => \Magento\Reward\Model\Action\OrderRevert::class,
                 self::REWARD_ACTION_CREDITMEMO_VOID => \Magento\Reward\Model\Action\Creditmemo\VoidAction::class,
                 self::REWARD_ACTION_FOR_ERP => \Kemana\MsDynamics\Model\Action\Erp::class,
+                self::REWARD_ACTION_FOR_NOT_MATCH_ERP_POINT => \Kemana\MsDynamics\Model\Action\NotMatchErp::class,
             ];
     }
 }

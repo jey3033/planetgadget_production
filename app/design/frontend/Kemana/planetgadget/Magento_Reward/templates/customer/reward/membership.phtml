@@ -13,16 +13,16 @@
  * @var \Magento\Framework\View\Element\Template $block
  */
 ?>
-<div class="block block-reward-membership">
+<div class="block block-reward-membership-container">
     <div class="block-title">
         <strong><?= $block->escapeHtml(__('BENEFIT MEMBERSHIP')) ?></strong>
     </div>
     <div class="block-content">
-        <div class="block-reward-gold-membership">
-            <div class="block-header-gold">
+        <div class="block-reward-membership block-reward-gold-membership">
+            <h4 class="block-header block-header-gold">
                 <span><?= $block->escapeHtml(__('Gold Member')) ?></span>
-            </div>
-            <ul clas="gold-membership-ul-wrapper">
+            </h4>
+            <ul class="gold-membership-ul-wrapper">
                 <li><?= $block->escapeHtml(__('Earn points for every purchase')) ?></li>
                 <li><?= $block->escapeHtml(__('Service discount at the nearest Planet Gadget')) ?></li>
                 <li><?= $block->escapeHtml(__('Free parking at the nearest Planet Gadget Store')) ?></li>
@@ -32,11 +32,11 @@
                 <li><?= $block->escapeHtml(__('Exchange member points')) ?></li>
             </ul>
         </div>
-        <div class="block-reward-premium-membership">
-            <div class="block-header-premium">
+        <div class="block-reward-membership block-reward-premium-membership">
+            <h4 class="block-header  block-header-premium">
                 <span><?= $block->escapeHtml(__('Premium Member')) ?></span>
-            </div>
-            <ul clas="gold-membership-ul-wrapper">
+            </h4>
+            <ul class="gold-membership-ul-wrapper">
                 <li><?= $block->escapeHtml(__('Earn points for every purchase')) ?></li>
                 <li><?= $block->escapeHtml(__('Service discount at the nearest Planet Gadget')) ?></li>
                 <li><?= $block->escapeHtml(__('Free parking at the nearest Planet Gadget Store')) ?></li>

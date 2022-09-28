@@ -166,7 +166,7 @@
             .product-section-title {
                 grid-column-start: span 2;
                 .lib-font-size(28);
-                .lib-line-height(31);
+                .lib-line-height(38);
                 border-bottom: none;
                 position: relative;
                 z-index: 0;
@@ -232,7 +232,7 @@
                     .review-item {
                         display: grid;
                         grid-template-columns: 330px auto;
-                        grid-template-rows: 32px 26px auto;
+                        grid-template-rows: 32px minmax(24px , auto)  auto;
                         padding-top: 30px;
 
                         .review-ratings {
