@@ -25,9 +25,11 @@ $loginHelper = $this->helper(Kemana\SocialLogin\Helper\Data::class);
             $('.account-menu_content').mouseover(function () {
                 if($('.account-menu_content .account-detail__content').hasClass('active')){
                     $('.account-menu_content .account-detail__content').removeClass('active');
+                    
                     $('body').removeClass('active');
                 }
                 if(!$('.account-menu_content .account-detail__content').hasClass('active')){
+                    
                     $('body').addClass('active');
                 }
             });
@@ -37,6 +39,7 @@ $loginHelper = $this->helper(Kemana\SocialLogin\Helper\Data::class);
                 // if the target of the click isn't the container nor a descendant of the container
                 if (!accountWrap.is(e.target) && accountWrap.has(e.target).length === 0) {
                     $('.account-menu_content .account-detail__content').removeClass('active');
+                    
                     $('body').removeClass('active');
                 }
             });
