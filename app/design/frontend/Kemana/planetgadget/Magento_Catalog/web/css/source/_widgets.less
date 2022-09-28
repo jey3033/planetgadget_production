@@ -332,6 +332,17 @@
     }
 }
 
+
+@media (min-width: 768px) and (max-width: 1023px){
+    .cms-index-index{
+        .block.widget{
+            .action.tocompare{
+                opacity: 1 !important;
+            }
+        }
+    }
+}
+
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
     .block.widget .products-grid .product-item {
         width: calc(~'100%/@{widget-desktop-grid-product-count}');
