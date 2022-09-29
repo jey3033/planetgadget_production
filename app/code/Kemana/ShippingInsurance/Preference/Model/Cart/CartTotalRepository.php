@@ -119,7 +119,7 @@ class CartTotalRepository implements CartTotalRepositoryInterface
         $quoteTotals->setQuoteCurrencyCode($quote->getQuoteCurrencyCode());
 
         $method = $quote->getShippingAddress()->getShippingMethod();
-        if(strpos($method, "jnt_") === 0){
+        if(isset($method) && strpos($method, "jnt_") === 0){
             $fee = $quote->getSubtotal() * 0.002;
             $quoteTotals->setShippingAmount($quoteTotals->getShippingAmount() + $fee);
             $quoteTotals->setGrandTotal($amount + $fee);
