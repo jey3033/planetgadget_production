@@ -416,4 +416,29 @@ define([
         $('.page-title-wrapper .tocart').prependTo( $('.actions-toolbar') );
     }
 
+    /**
+     * 23. blackout background when hovaring main menu
+     */
+
+    $('.navbar.navbar-default.navigation').mouseover(function () {
+        if($('.category-item.level-top').hasClass('menu-active')){
+            $('body').addClass('active');
+        }
+        if(!$('.category-item.level-top').hasClass('menu-active')){
+            $('body').removeClass('active');
+        }
+    });
+
+    /**
+     * 23. mega menu hide 2nd column if there is no 2nd level menu
+     */
+
+    $('.level1.category-item > a').mouseover(function () {
+        if(!$(this).parent().find(".megamenu-inner").length > 0) {
+            $(".megamenu-wrapper.tabs-menu.vertical").attr('style', 'width: 310px !important');
+        } else {
+            $(".megamenu-wrapper.tabs-menu.vertical").attr('style', 'width: unset');
+        }
+    });
+
 });
