@@ -678,4 +678,13 @@
             .lib-css(padding-right, @layout-indent__width);
         }
     }
+
+    .sorter .qty-selector {
+        background-image: url(../images/down-arrow.svg);
+        background-position: right+10px center;
+    }
+
+    .sorter .qty-selector.dropdown-active {
+        background-image: url(../images/up-arrow.svg);
+    }
 }

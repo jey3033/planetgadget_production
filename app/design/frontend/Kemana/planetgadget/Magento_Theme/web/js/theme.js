@@ -430,7 +430,7 @@ define([
     });
 
     /**
-     * 23. mega menu hide 2nd column if there is no 2nd level menu
+     * 24. mega menu hide 2nd column if there is no 2nd level menu
      */
 
     $('.level1.category-item > a').mouseover(function () {
@@ -438,6 +438,20 @@ define([
             $(".megamenu-wrapper.tabs-menu.vertical").attr('style', 'width: 310px !important');
         } else {
             $(".megamenu-wrapper.tabs-menu.vertical").attr('style', 'width: unset');
+        }
+    });
+
+    /**
+     * 25. mega menu hide 2nd column if there is no 2nd level menu
+     */
+
+    $(".qty-selector").click(function() {
+        if(!$(".sorter-options.qty-selector-dropdown:visible").length > 0) {
+            console.log("on");
+            $(".qty-selector").addClass("dropdown-active");
+        } else {
+            console.log("off");
+            $(".qty-selector").removeClass("dropdown-active");
         }
     });
 
