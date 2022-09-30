@@ -6,7 +6,6 @@
  *
  */
 -->
-
 <div class="shipping-address-item" data-bind="css: isSelected() ? 'selected-item' : 'not-selected-item'">
     <!-- ko text: address().prefix --><!-- /ko --> <span class="username"> <!-- ko text: address().firstname --><!-- /ko --> <!-- ko text: address().middlename --><!-- /ko -->
     <!-- ko text: address().lastname --><!-- /ko --> </span> <!-- ko text: address().suffix --><!-- /ko --><br/>
@@ -33,10 +32,14 @@
     <!-- /ko -->
     
     <!-- ko if: (getMapPoint()) -->
-    <div class="pin-point"><span data-bind="i18n: 'Map Point:'"></span><text args="getMapPoint()"/></div>      
+    <div class="pin-point"><span data-bind="i18n: 'Map Point:'"></span><text args="getMapPoint()"/></div>
+    <div class="set-pin-point"><span data-bind="i18n: 'Sudah Pinpoint'"></span></div>
     <!-- /ko -->
 
-    <br/>
+    <!-- ko ifnot: (getMapPoint()) -->
+    <div class="not-pin-point"><span data-bind="i18n: 'Belum Pinpoint'"></span></div>      
+    <!-- /ko -->
+
     <!-- ko if: (address().isEditable()) -->
     <button type="button"
             class="action edit-address-link"
