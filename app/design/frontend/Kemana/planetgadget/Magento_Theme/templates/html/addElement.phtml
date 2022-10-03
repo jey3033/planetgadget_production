@@ -60,9 +60,11 @@ $_session=$block->getSession();
             $('.account-menu_content').mouseover(function () {
                 if($('.account-menu_content .account-detail__content').hasClass('active')){
                     $('.account-menu_content .account-detail__content').removeClass('active');
+                    $('body').removeClass('active');
                 }
                 if(!$('.account-menu_content .account-detail__content').hasClass('active')){
                     $('.account-menu_content .account-detail__content').addClass('active');
+                    $('body').addClass('active');
                 }
             });
             $(document).mouseout(function (e) {
@@ -71,6 +73,7 @@ $_session=$block->getSession();
                 // if the target of the click isn't the container nor a descendant of the container
                 if (!accountWrap.is(e.target) && accountWrap.has(e.target).length === 0) {
                     $('.account-menu_content .account-detail__content').removeClass('active');
+                    $('body').removeClass('active');
                 }
             });
             if ($( ".magestore-bannerslider-standard" ).length) {
