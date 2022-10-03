@@ -84,7 +84,8 @@ class SyncProductsFromErp
         \Magento\CatalogInventory\Api\StockRegistryInterface $stockRegistry,
         \Magento\Framework\App\State                         $state,
         \Magento\Catalog\Model\CategoryFactory               $categoryFactory,
-        \Magento\Catalog\Api\CategoryLinkManagementInterface $categoryLinkRepository
+        \Magento\Catalog\Api\CategoryLinkManagementInterface $categoryLinkRepository,
+        \Kemana\MsDynamics\Model\Api\Erp\Inventory           $inventory
     )
     {
         $this->helper = $helper;
@@ -94,6 +95,7 @@ class SyncProductsFromErp
         $this->state = $state;
         $this->categoryFactory = $categoryFactory;
         $this->categoryLinkRepository = $categoryLinkRepository;
+        $this->inventory = $inventory;
     }
 
     /**
@@ -165,7 +167,7 @@ class SyncProductsFromErp
                     }
 
                     if($product->getId()){
-
+                        $this->inventory->inventoryApiCall($product->getSku());
                         $this->helper->log('Successfully created the product in Magento for ERP product : ' . $productdata['ProductNo'], 'info');
 
                         $ackProductData[] = [

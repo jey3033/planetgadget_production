@@ -12,8 +12,7 @@
 $viewModel = $block->getViewModel();
 $qtyCount = $viewModel->getQtyCount();
 ?>
-<?php if ($_product->isSaleable()) : ?>
-    <div class="box-tocart">
+    <div class="box-tocart" style="display:none;">
         <div class="fieldset">
             <?php if ($block->shouldRenderQuantity()) : ?>
                 <div class="field qty">
@@ -51,7 +50,7 @@ $qtyCount = $viewModel->getQtyCount();
             </div>
         </div>
     </div>
-<?php endif; ?>
+
 <script type="text/x-magento-init">
     {
         "#product_addtocart_form": {
@@ -59,4 +58,14 @@ $qtyCount = $viewModel->getQtyCount();
         }
     }
 
+</script>
+<script type="text/x-magento-init">
+    {
+        "#product_addtocart_form": {
+            "Kemana_MsDynamics/js/update-stock": {
+                "url" : "<?= $block->escapeJs($block->escapeUrl($block->getBaseUrl().'msdynamic/stock/UpdateStock')) ?>",
+                "productid": <?= $_product->getId() ?>
+            }
+        }
+    }
 </script>
