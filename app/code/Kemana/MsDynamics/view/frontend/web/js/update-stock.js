@@ -61,6 +61,9 @@ define([
                             $(".box-tocart").hide();
                             $(".product.alert.stock").show();
                        }
+                    }else{
+                        $(".box-tocart").hide();
+                        $(".product.alert.stock").show();
                     }
                 }
             });
