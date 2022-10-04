@@ -293,7 +293,8 @@ define([
             {
                 breakpoint: 1024,
                 settings: {
-                    slidesToShow: 3
+                    slidesToShow: 3,
+                    arrows: false
                 }
             },
             {
@@ -378,7 +379,8 @@ define([
             {
                 breakpoint: 1023,
                 settings: {
-                    slidesToShow: 4
+                    slidesToShow: 2,
+                    arrows: false
                 }
             },
             {
@@ -407,20 +409,50 @@ define([
 
 
     /**
-     * 22. Show More / Show less brands
+     * 22. move button in my account wishlist
      */
-    $(document).ready(function () {
-        var size_li = $("#corporate-brand-container li").size();
-        var x = 18;
-        $('#corporate-brand-container li:lt('+x+')').show();
-        $('#show-more').click(function () {
-            var x= (x <= size_li) ? x+5 : size_li;
-            $('#corporate-brand-containe li:lt('+x+')').show();
-        });
-        $('#show-less').click(function () {
-            x=(x-5<0) ? 3 : x-5;
-            $('#corporate-brand-containe li').not(':lt('+x+')').hide();
-        });
+
+    if (utility.isMobile()) {
+        $('.page-title-wrapper .tocart').prependTo( $('.actions-toolbar') );
+    }
+
+    /**
+     * 23. blackout background when hovaring main menu
+     */
+
+    $('.navbar.navbar-default.navigation').mouseover(function () {
+        if($('.category-item.level-top').hasClass('menu-active')){
+            $('body').addClass('active');
+        }
+        if(!$('.category-item.level-top').hasClass('menu-active')){
+            $('body').removeClass('active');
+        }
+    });
+
+    /**
+     * 24. mega menu hide 2nd column if there is no 2nd level menu
+     */
+
+    $('.level1.category-item > a').mouseover(function () {
+        if(!$(this).parent().find(".megamenu-inner").length > 0) {
+            $(".megamenu-wrapper.tabs-menu.vertical").attr('style', 'width: 310px !important');
+        } else {
+            $(".megamenu-wrapper.tabs-menu.vertical").attr('style', 'width: unset');
+        }
+    });
+
+    /**
+     * 25. mega menu hide 2nd column if there is no 2nd level menu
+     */
+
+    $(".qty-selector").click(function() {
+        if(!$(".sorter-options.qty-selector-dropdown:visible").length > 0) {
+            console.log("on");
+            $(".qty-selector").addClass("dropdown-active");
+        } else {
+            console.log("off");
+            $(".qty-selector").removeClass("dropdown-active");
+        }
     });
 
 });

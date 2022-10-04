@@ -97,6 +97,15 @@
     //  Checkbox styles
     .lib-kemana-checkbox();
 
+    //select option styles
+    select{
+        color: black;
+    }
+
+    select option {
+        color: black;
+    }
+
     // Homepage only
     .cms-index-index {
         .page-title-wrapper {
@@ -124,6 +133,11 @@
             margin-left: auto;
             margin-right: auto;
         }
+    }
+
+    // compare product qty gap
+    .counter.qty {
+        margin: 0 0 0 5px;
     }
 
     //
@@ -543,7 +557,7 @@
 
         .panel.wrapper {
             //.lib-css(background-color, @color-pg-black2);
-            .lib-css(background-color, @kemana-secondary-brand-color);
+            .lib-css(background-color, @color-pg-orange2);
         }
 
         .header.panel {
@@ -673,4 +687,28 @@
             .lib-css(padding-right, @layout-indent__width);
         }
     }
+
+    .sorter .qty-selector {
+        background-image: url(../images/down-arrow.svg);
+        background-position: right+10px center;
+    }
+
+    .sorter .qty-selector.dropdown-active {
+        background-image: url(../images/up-arrow.svg);
+    }
+
+    .sorter-options.qty-selector-dropdown {
+        background: var(---ffffff-white) 0% 0% no-repeat padding-box;
+        background: rgba(255, 255, 255, 1) 0% 0% no-repeat padding-box;
+        box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.13);
+        border-radius: 5px;
+        opacity: 1;
+    }
+
+    //mega menu last item red
+    .page-header #megamenu .level1.category-item.last a span {
+        color: @color-pg-red !important;
+    }
+
+
 }

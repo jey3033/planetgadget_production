@@ -111,7 +111,9 @@ class Request
             $this->curl->setCredentials($this->helper->getApiUsername(), $this->helper->getApiPassword());
 
             if ($method == 'POST') {
+                $this->curl->setOption(CURLOPT_POST, true);
                 $this->curl->setOption(CURLOPT_POSTFIELDS, $postParameters);
+                $this->curl->setOption(CURLOPT_RETURNTRANSFER, true);
 
                 $this->curl->post($apiUrl, []);
             }

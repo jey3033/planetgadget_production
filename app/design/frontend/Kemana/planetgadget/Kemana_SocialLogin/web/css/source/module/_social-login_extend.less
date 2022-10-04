@@ -85,6 +85,27 @@
             float: left;
         }
     }
+
+    body.active {
+        height: 100vh;
+        overflow: hidden;
+
+        .page-wrapper{
+            position:relative;
+        }
+    }
+
+    body.active:before {
+        content: "";
+        background-color: rgba(0, 0, 0, 0.7);
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 2;
+        height: 550%;
+    }
 }
 
 //
@@ -144,10 +165,12 @@
 
                 .social-login-title {
                     display: block;
+
                     h2 {
                         .lib-font-size(16);
                         .lib-line-height(22);
                     }
+
                     font-weight: @font-weight__regular;
                 }
 

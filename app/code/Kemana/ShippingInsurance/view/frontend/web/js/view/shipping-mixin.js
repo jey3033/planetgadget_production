@@ -13,8 +13,6 @@ define([
     'mage/translate',
     'Magento_Checkout/js/model/totals',
     'Magento_Ui/js/modal/confirm',
-    'Magento_Checkout/js/model/cart/cache',
-    'Magento_Checkout/js/model/cart/totals-processor/default',
 ], function (
     $,
     _,
@@ -30,8 +28,6 @@ define([
     $t,
     totals,
     confirmation,
-    cartCache,
-    defaultTotal,
 ) {
     'use strict';
     return function (Component) {
@@ -64,7 +60,7 @@ define([
 
                 quote.shippingMethod.subscribe(function(value) {
                 if (value) {
-                    if (value.carrier_code == 'jne' || value.carrier_code == 'jnt') {
+                    if (value.carrier_code == 'jne') {
                             self.isVisibleTemp(true)
                             self.isChecked(true) 
                         }else{
@@ -75,7 +71,7 @@ define([
                         self.isVisibleTemp(false)
                         self.isChecked(false); 
                     }
-                                        self.updateTotalsInSummary();
+                    self.updateTotalsInSummary();
                 });
             },
 
@@ -104,8 +100,6 @@ define([
                         }
                     );
                 }
-                cartCache.set('totals',null);
-                defaultTotal.estimateTotals();
             },
 
             getClassInput: ko.computed(function () {

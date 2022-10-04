@@ -47,23 +47,14 @@ class FixedCalculator extends AbstractCalculator
         $subtotal = $quote->getBaseSubtotal();
         $thresholdValue = $this->scopeConfig->getValue('insurance_fee/general/threshold');
         $extrfee = $this->scopeConfig->getValue('insurance_fee/general/extra_fee');
-        if ((strpos($method, "jnt_") === 0 || strpos($method, "jne_") === 0) && $shippingAddress->getIsInsurance() && $subtotal >= $thresholdValue) {
-            if(strpos($method, "jnt_") === 0){
-                $fee = $quote->getSubtotal() * 0.002;
-            }
-
+        if (strpos($method, "jne_") === 0 && $shippingAddress->getIsInsurance() && $subtotal >= $thresholdValue) {
             if(strpos($method, "jne_") === 0){
                 $fee = $quote->getSubtotal() * 0.002 + $extrfee;
             }
-
             $fee = round($fee);
         }
 
-        if ((strpos($method, "jnt_") === 0 || strpos($method, "jne_") === 0) && $shippingAddress->getExtensionAttributes()->getIsInsurance() && $subtotal >= $thresholdValue) {
-            if(strpos($method, "jnt_") === 0){
-                $fee = $quote->getSubtotal() * 0.002;
-            }
-
+        if (strpos($method, "jne_") === 0 && $shippingAddress->getExtensionAttributes()->getIsInsurance() && $subtotal >= $thresholdValue) {
             if(strpos($method, "jne_") === 0){
                 $fee = $quote->getSubtotal() * 0.002 + $extrfee;
             }
