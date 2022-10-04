@@ -86,12 +86,9 @@
             </argument>
         </arguments>
     </virtualType>
-    <type  name="Magento\Catalog\Controller\Product\View">
-           <plugin name="add_new_item" sortOrder="1"  disabled="false"
-           type="Kemana\MsDynamics\Plugin\Controller\Product\View"/>
-    </type> 
     <type  name="Magento\Checkout\Controller\Cart\Index">
-           <plugin name="add_new_item" sortOrder="1"  disabled="false"
+           <plugin name="cat_page_plugin" sortOrder="1"  disabled="false"
            type="Kemana\MsDynamics\Plugin\Controller\Cart\Index"/>
-    </type> 
+    </type>
+    <preference for="Magento\ProductAlert\Block\Product\View\Stock" type="Kemana\MsDynamics\Preference\Block\Product\View\Stock" />
 </config>

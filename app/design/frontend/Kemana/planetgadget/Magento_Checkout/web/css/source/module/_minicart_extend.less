@@ -114,6 +114,45 @@
         overflow: hidden;
         background-color: rgba(0, 0, 0, 0.4);
     }
+
+    .minicart-wrapper{
+        .ui-widget-content{
+            //display: block !important;
+        }
+        .block-minicart{
+            .product-item-details{
+                .product-item-name{
+                    margin-bottom: 5px;
+                }
+
+                .product-item-pricing{
+                    display: inline-flex;
+                    flex-flow: row-reverse;
+
+                    .details-qty{
+                        margin: -10px 10px 0 0;
+
+                        .label{
+                            display: none;
+                        }
+
+                        .cart-item-qty{
+                            border: 1px solid @color-pg-light-gray;
+                            padding-top: 5px;
+                            padding-left: 21px;
+                            height: 34px;
+                            width: 50px;
+                        }
+
+                        .minicart-update-button{
+                            width: 50px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
 }
 
 //
