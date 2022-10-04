@@ -117,6 +117,24 @@
                                 top: 3px;
                             }
                         }
+
+                        .table-checkout-shipping-method{
+                            .row-error{
+                                .message{
+                                    &.error {
+                                         > * {
+                                            &:first-child {
+                                                &:before {
+                                                    background: unset !important;
+                                                    content: "\e95f";
+                                                    font-family: 'icons-kemana-theme';
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
