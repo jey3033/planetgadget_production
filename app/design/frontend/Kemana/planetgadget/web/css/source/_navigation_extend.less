@@ -5,6 +5,12 @@
 //  */
 
 //
+//  Variables
+//  _____________________________________________
+
+@active-nav-indent: 50px;
+
+//
 //  Common
 //  _____________________________________________
 
@@ -30,19 +36,19 @@
 //  _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .nav-sections-items {
+        background: @color-pg-light-gray3;
+    }
+
+    .nav-sections {
+        width: 100%;
+        left: -100%;
+    }
+
     .nav-open {
         .page-wrapper {
             .header-left {
                 > .nav-toggle {
-                    left: 0;
-                    top: 7px;
-
-                    .lib-icon-font(
-                        @icon-pg-close-button,
-                        @_icon-font-size: 20px,
-                        @_icon-font-color: @color-white
-                    );
-
                     &:after {
                         top: 48px;
                     }

@@ -36,8 +36,8 @@
                     vertical-align: top;
 
                     a {
-                        .lib-css(width, unset);
-                        .lib-css(height, unset);
+                        //.lib-css(width, unset);
+                        //.lib-css(height, unset);
                         display: block;
                         //position: absolute;
                         //left: 0;
@@ -93,9 +93,14 @@
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
     .top-link {
+        margin-left: 12px;
+
         .account-menu {
             ul.menu-content {
                 li.main-item {
+                    height: 48px;
+                    width: 23px;
+
                     &:before {
                         .lib-font-size(23);
                         .lib-line-height(48);
@@ -103,6 +108,8 @@
 
                     a {
                         font-size: 0;
+                        width: 23px;
+                        height: 48px;
                     }
                 }
             }

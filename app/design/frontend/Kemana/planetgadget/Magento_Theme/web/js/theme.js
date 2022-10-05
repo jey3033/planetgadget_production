@@ -4,7 +4,7 @@ define([
     'slick',
     'mage/accordion',
     'domReady!'
-], function ($, utility, slickpg) {
+], function ($, utility, slick) {
     /**
      * add comment here for you function
      * 1.Mobile footer accordion function
@@ -454,5 +454,22 @@ define([
             $(".qty-selector").removeClass("dropdown-active");
         }
     });
+
+    /**
+     * 26. move Page Title in News Details page
+     */
+
+    $('.columns .mp-blog-view .post-view').prepend( $('.page-title-wrapper') );
+
+    /**
+     * 27. move header search in mobile
+     */
+
+    if (utility.isMobile()) {
+        $('.header-left .logo').before( $('.header-right .top-link') );
+        $('.header-left .logo').appendTo( $('.header') );
+        $('.header .block-search').prependTo( $('.header .header-right') );
+    }
+
 
 });
