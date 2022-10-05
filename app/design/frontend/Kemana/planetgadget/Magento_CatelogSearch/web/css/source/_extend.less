@@ -14,7 +14,7 @@
 
 & when (@media-common = true) {
     .block-search {
-        margin-top: 1px;
+        margin-top: 0;
         margin-right: 13px;
         //.lib-css(background, @color-white);
         //border-radius: @common-border-radius;
@@ -66,8 +66,8 @@
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
     .block-search {
         .control {
-            left: -11px;
-            bottom: -70px;
+            left: 0;
+            bottom: -60px;
             .lib-css(background-color, @color-pg-black2);
             width: 100%;
             padding: 10px;
@@ -86,6 +86,9 @@
         }
 
         .action.search {
+            position: relative;
+            left: 0;
+            top: 0;
             .lib-button-icon(
                 @_icon-font-content: @icon-remove,
                 @_icon-font-text-hide: true,
@@ -107,6 +110,8 @@
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
     .block-search {
+        margin-top: 1px;
+
         .label {
             position: absolute;
             right : 0;
