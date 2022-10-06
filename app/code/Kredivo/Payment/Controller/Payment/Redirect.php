@@ -27,22 +27,21 @@ class Redirect extends \Kredivo\Payment\Controller\Payment
                 $shipping_amount     = $order->getShippingAmount();
                 $shipping_tax_amount = $order->getShippingTaxAmount();
                 $tax_amount          = $order->getTaxAmount();
-				
+
                 $item_details = array();
-				
+
                 foreach ($items as $each) {
-					
-					$product    = $each->getProduct();               
+
+					$product    = $each->getProduct();
 					$categories = $product->getCategoryIds();
-					
-					$categoryId   = $categories[0];
+
 					$_objectManager = \Magento\Framework\App\ObjectManager::getInstance();
 
-					foreach ($categories as $category_id) {	
-                        $category = $_objectManager->create('Magento\Catalog\Model\Category')->load($category_id);					
-                        $category_name = $category->getName();						
+					foreach ($categories as $category_id) {
+                        $category = $_objectManager->create('Magento\Catalog\Model\Category')->load($category_id);
+                        $category_name = $category->getName();
 						break;
-					} 
+					}
 
                     $item = array(
                         'name'  	=> $each->getName(),
@@ -99,15 +98,15 @@ class Redirect extends \Kredivo\Payment\Controller\Payment
                         'quantity'      => 1,
                     );
                     $item_details[] = $tax_item;
-                } 
-				
+                }
+
 				$totalPrice = 0;
                 foreach ($item_details as $item) {
                     $totalPrice += $item['price'] * $item['quantity'];
                 }
 
                /*  $current_currency = $this->_storeManager->getStore()->getCurrentCurrencyCode();
-				
+
                 if ($current_currency != 'IDR') {
                     $conversion_func = function ($non_idr_price) {
                         return $non_idr_price * $this->getConversionRate();
@@ -125,27 +124,27 @@ class Redirect extends \Kredivo\Payment\Controller\Payment
 
                 Kredivo_Config::$is_production = $this->getEnvironment();
                 Kredivo_Config::$server_key    = $this->getServerKey();
-        		
+
 				//new json
-				
+
 				// ====================== TRANSACTION DETAIL ======================
 				$params_transaction_details = array(
 					'order_id' => strval($orderId),
 					'amount'   => $this->is_string($totalPrice),
 					'items'    => $item_details,
 				);
-				
+
 				//======================Customer Detail =========================
 				$first_name = '';
 				$last_name  = '';
 				$cust_email = '';
-				
+
 				$cust = \Magento\Framework\App\ObjectManager::getInstance();
 				$customerSession = $cust->get('Magento\Customer\Model\Session');
 			    $order_billing_address       = $order->getBillingAddress();
 				$order_shipping_address      = $order->getShippingAddress();
 
-				 
+
 				if($customerSession->isLoggedIn()) {
 					   $first_name = $customerSession->getCustomer()->getId();  // get Customer Id
 					   $last_name  = $customerSession->getCustomer()->getName();  // get  Full Name
@@ -155,8 +154,8 @@ class Redirect extends \Kredivo\Payment\Controller\Payment
 					  $cust_email  = $order_billing_address->getEmail();
 					  $first_name  = $order_billing_address->getFirstname();
 					  $last_name   = $order_billing_address->getLastname();
-				}  
-				  
+				}
+
 				// ====================== CUSTOMER ======================
               	$params_customer = array(
 				    "first_name"		=> $first_name,
@@ -164,9 +163,9 @@ class Redirect extends \Kredivo\Payment\Controller\Payment
 					"email"				=> $cust_email,
 					"phone"				=> $order_billing_address->getTelephone(),
 				);
-				
+
                 // ====================== BILLING ADDRESS ======================
-		       				
+
 				$params_billing_address = array(
 					"first_name"		=> $order_billing_address->getFirstname(),
 					"last_name"			=> $order_billing_address->getLastname(),
@@ -177,9 +176,9 @@ class Redirect extends \Kredivo\Payment\Controller\Payment
 					"country_code"		=> "IDN",
 					//"country_code"		=> $this->convert_country_code($order_billing_address->getCountry()),
 				);
-				
+
 				// ====================== SHIPPING ADDRESS ======================
-									
+
 				$params_shipping_address = array (
 					"first_name"		=> $order_billing_address->getFirstname(),
 					"last_name"			=> $order_billing_address->getLastname(),
@@ -190,32 +189,32 @@ class Redirect extends \Kredivo\Payment\Controller\Payment
 					"country_code"		=> "IDN",
 					//"country_code"		=> $this->convert_country_code($order_billing_address->getCountry()),
 				);
-		
+
 				$payloads = array(
                     "server_key"        	=> Kredivo_Config::$server_key, //optional
 					"payment_type"      	=> "30_days",
                     "push_uri"          	=> $this->getNotificationUrl(),
-                    "back_to_store_uri" 	=> $this->getResponseUrl(), 
+                    "back_to_store_uri" 	=> $this->getResponseUrl(),
               		"order_status_uri"  	=> $this->getStatusUrl(),
 					"customer_details"  	=> $params_customer,
 					"billing_address"		=> $params_billing_address,
-					"shipping_address"  	=> $params_shipping_address,					
+					"shipping_address"  	=> $params_shipping_address,
 					"transaction_details"	=> $params_transaction_details,
                 );
-		
+
                 //echo "<pre>", print_r($payloads); exit();
-                try {				
+                try {
                     $redirUrl = Kredivo_Api::get_redirection_url($payloads);
-                    $this->_logger->debug('kredivo_debug:' . print_r($payloads, true)); 
-                    $order->setStatus(Order::STATE_PENDING_PAYMENT);	
+                    $this->_logger->debug('kredivo_debug:' . print_r($payloads, true));
+                    $order->setStatus(Order::STATE_PENDING_PAYMENT);
 					$order->save();
-                    $this->_redirect($redirUrl);					
+                    $this->_redirect($redirUrl);
                 } catch (Exception $e) {
                     error_log($e->getMessage());
                     $this->_logger->critical('kredivo_error:' . print_r($e->getMessage(), true));
                 }
-				
-				
+
+
             }
         }
     }
