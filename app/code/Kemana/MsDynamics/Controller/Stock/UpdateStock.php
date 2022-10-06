@@ -20,6 +20,7 @@ use Kemana\StockAvailabilityPopup\Model\Stock\SourceDataForSku;
 use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\App\RequestInterface;
 use Magento\Catalog\Model\ProductRepository;
+use Magento\ConfigurableProduct\Model\Product\Type\Configurable;
 
 /**
  * Class UpdateStock
@@ -66,7 +67,8 @@ class UpdateStock extends \Magento\Framework\App\Action\Action
         \Magento\Framework\App\Request\Http               $request,
         \Magento\Catalog\Model\ProductRepository          $productRepository,
         \Magento\Bundle\Api\ProductLinkManagementInterface $productLinkManagement,
-        \Magento\Framework\Controller\Result\JsonFactory  $resultJsonFactory   
+        \Magento\Framework\Controller\Result\JsonFactory  $resultJsonFactory,
+        \Magento\ConfigurableProduct\Model\ConfigurableAttributeData  $configurableAttributeData
     )
     {
         $this->helper = $helper;
@@ -75,8 +77,47 @@ class UpdateStock extends \Magento\Framework\App\Action\Action
         $this->_productRepository = $productRepository;
         $this->productLinkManagement = $productLinkManagement;
         $this->resultJsonFactory = $resultJsonFactory;
-
+        $this->configurableAttributeData = $configurableAttributeData;
         return parent::__construct($context);
+    }
+
+
+    /**
+     * Get Options for Configurable Product Options
+     *
+     * @param Product $currentProduct
+     * @param array $allowedProducts
+     * @return array
+     */
+    public function getOptions($currentProduct, $allowedProducts)
+    {
+        $options = [];
+        $allowAttributes = $this->getAllowAttributes($currentProduct);
+
+        foreach ($allowedProducts as $product) {
+            $productId = $product->getId();
+            foreach ($allowAttributes as $attribute) {
+                $productAttribute = $attribute->getProductAttribute();
+                $productAttributeId = $productAttribute->getId();
+                $attributeValue = $product->getData($productAttribute->getAttributeCode());
+                $options[$productAttributeId][$attributeValue][] = $productId;
+                $options['index'][$productId][$productAttributeId] = $attributeValue;
+            }
+        }
+        return $options;
+    }
+
+    /**
+     * Get allowed attributes
+     *
+     * @param Product $product
+     * @return array
+     */
+    public function getAllowAttributes($product)
+    {
+        return ($product->getTypeId() == Configurable::TYPE_CODE)
+            ? $product->getTypeInstance()->getConfigurableAttributes($product)
+            : [];
     }
 
     public function execute()
@@ -93,12 +134,14 @@ class UpdateStock extends \Magento\Framework\App\Action\Action
             }
 
             // configuration product logic
+            $childProduct = [];
             if ($product->getTypeId() == "configurable") 
             {
                 $_children = $product->getTypeInstance()->getUsedProducts($product);
                 foreach ($_children as $child){
+                    $childProduct[$child->getSku()] = $child->getId();
                     array_push($productdata, $child->getSku());        
-                }  
+                }    
             }
             
             // bundle product logic
@@ -109,9 +152,49 @@ class UpdateStock extends \Magento\Framework\App\Action\Action
                 }
             }
 
+            // grouped product logic
+            if($product->getTypeId() == 'grouped'){
+                $_children = $product->getTypeInstance(true)->getAssociatedProducts($product);
+                foreach ($_children as $child) {
+                    array_push($productdata, $child->getSku());
+                }
+            }            
+            
             $this->helper->inventorylog('PDP page API call: ' . json_encode($productdata), 'info');
             if(!empty($productdata)){
+                $instockproductids = [];
                 $response = $this->erpInventory->inventoryApiCall($productdata);
+
+                if ($product->getTypeId() == "configurable") 
+                {
+                    foreach ($response['response'] as $key => $inventory) {
+                        if($inventory['Inventory'] > 0){
+                            array_push($instockproductids,$childProduct[$inventory['ProductNo']]);
+                        }
+                    }
+                    $options = $this->getOptions($product, $_children);
+                    $attributesData = $this->configurableAttributeData->getAttributesData($product, $options);
+                    if(isset($attributesData['attributes'])){
+                        foreach ($attributesData['attributes'] as $keyattributes => $attributes) {
+                            foreach ($attributes['options'] as $productoptionkey => $productoption) {
+                                $tem_instock = [];
+                                foreach ($productoption['products'] as $key => $product) {
+                                    if(in_array($product, $instockproductids)){
+                                        array_push($tem_instock,$product);
+                                    }
+                                }
+                                $attributesData['attributes'][$keyattributes]['options'][$productoptionkey]['products'] = $tem_instock;
+                            }                                                            
+                        }
+                    }else{
+                        $attributesData['attributes'] = [];
+                    }
+                    return $resultJson->setData([
+                                                 "apiresponse" => $response,
+                                                 "attributes"  => $attributesData['attributes'],
+                                                 "instock"     => count($instockproductids) > 0 ? true : false
+                                            ]);    
+                }
                 return $resultJson->setData($response);
             }
         }

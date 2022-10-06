@@ -533,7 +533,7 @@
             .product-info-price{
                 .product-info-stock-sku{
                     display: flex;
-                    flex-wrap: norwap;
+                    flex-wrap: nowrap;
 
                     .ns-product-label{
                         //padding-right: 15px;
@@ -550,6 +550,12 @@
 
         .product.media{
             .ns-product-label{
+                display: none;
+            }
+        }
+
+        .product-full-width-section {
+            &#additional {
                 display: none;
             }
         }
@@ -652,6 +658,64 @@
             .product-add-form {
                 .fieldset {
                     margin-bottom: 0;
+                }
+
+                .table-wrapper {
+                    .grouped {
+                        thead  {
+                            tr {
+                                th {
+                                    display: block;
+                                    padding-bottom: 16px;
+                                }
+                            }
+                        }
+
+                        tbody {
+                            tr {
+                                padding-bottom: 15px;
+
+                                &:last-child {
+                                    .lib-css(padding-bottom, @indent__base - 5px);
+                                    .lib-css(border-bottom, @border-width__base solid @color-kemana-gray5);
+                                }
+
+                                td {
+                                    display: table-cell;
+
+                                    &.qty {
+                                        &:before {
+                                            display: none;
+                                        }
+                                        width: 114px;
+                                    }
+
+                                    &.item {
+                                        width: ~'calc(100% - 134px)';
+                                        padding-left: 0;
+
+                                        &:before {
+                                            display: none;
+                                        }
+
+                                        .product-item-name {
+                                            .lib-css(font-weight, @font-weight__heavier);
+                                        }
+
+                                        .price-box {
+                                            .price-wrapper {
+                                                .price {
+                                                    .lib-font-size(14);
+                                                    .lib-line-height(24);
+                                                    margin-bottom: 0;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
 
