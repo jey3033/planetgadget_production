@@ -59,17 +59,17 @@ define([
                     if(response){
                         if($widget.options.producttype == 'simple'){
                            if(response.response.Inventory > 0){
-                                $(".box-tocart").show();
+                                $(".product-add-form").show();
                                 $(".product.alert.stock").hide();
                                 $(".product-info-stock-sku .stock").addClass("available").html("<span>In stock</span>")
                            }else{
-                                $(".box-tocart").hide();
+                                $(".product-add-form").hide();
                                 $(".product.alert.stock").show();
                                 $(".product-info-stock-sku .stock").addClass("unavailable").html("<span>Out of stock</span>")
                            }
                         }
                     }else{
-                        $(".box-tocart").hide();
+                        $(".product-add-form").hide();
                         $(".product.alert.stock").show();
                         $(".product-info-stock-sku .stock").addClass("unavailable").html("<span>Out of stock</span>")
                     }
