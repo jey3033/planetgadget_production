@@ -99,9 +99,11 @@
 
     .post-list-content {
         .post-list-body {
+            .lib-vendor-prefix-display();
+            .lib-vendor-prefix-flex-wrap();
+
             .post-list-item {
                 .post-item-wrapper {
-                    float: left;
                     .lib-css(background, @panel__background-color);
                     border-radius: @common-border-radius;
                     height: 100%;
@@ -593,9 +595,9 @@
 
     .post-list-body {
         .post-list-item {
-            .post-item-wrapper {
-                margin-bottom: 20px;
-            }
+            display: block;
+            margin-bottom: 20px;
+            width: 100%;
         }
     }
 
@@ -734,8 +736,6 @@
 
     .post-list-content {
         .post-list-body {
-            .lib-vendor-prefix-display();
-            .lib-vendor-prefix-flex-wrap();
             margin: -10px -10px 0;
 
             .post-list-item {
