@@ -57,13 +57,16 @@ define([
                        if(response.response.Inventory > 0){
                             $(".box-tocart").show();
                             $(".product.alert.stock").hide();
+                            $(".product-info-stock-sku .stock").addClass("available").html("<span>In stock</span>")
                        }else{
                             $(".box-tocart").hide();
                             $(".product.alert.stock").show();
+                            $(".product-info-stock-sku .stock").addClass("unavailable").html("<span>Out of stock</span>")
                        }
                     }else{
                         $(".box-tocart").hide();
                         $(".product.alert.stock").show();
+                        $(".product-info-stock-sku .stock").addClass("unavailable").html("<span>Out of stock</span>")
                     }
                 }
             });

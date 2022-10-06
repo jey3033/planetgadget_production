@@ -11,7 +11,7 @@ namespace Kemana\MsDynamics\Preference\Block\Product\View;
  * @api
  * @since 100.0.2
  */
-class Stock extends \Magento\ProductAlert\Block\Product\View\Stock
+class Stock extends \Magento\ProductAlert\Block\Product\View
 {
     /**
      * Prepare stock info

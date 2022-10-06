@@ -97,6 +97,15 @@
     //  Checkbox styles
     .lib-kemana-checkbox();
 
+    //select option styles
+    select{
+        color: black;
+    }
+
+    select option {
+        color: black;
+    }
+
     // Homepage only
     .cms-index-index {
         .page-title-wrapper {
@@ -697,8 +706,12 @@
     }
 
     //mega menu last item red
-    .page-header #megamenu .level1.category-item.last a span {
+    .page-header #megamenu .level1.category-item.last > a span {
         color: @color-pg-red !important;
+    }
+
+    #megamenu .category-item span {
+        font-weight: 500;
     }
 
 

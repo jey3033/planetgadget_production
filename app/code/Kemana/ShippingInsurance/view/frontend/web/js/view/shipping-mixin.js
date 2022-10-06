@@ -59,19 +59,18 @@ define([
                 }
 
                 quote.shippingMethod.subscribe(function(value) {
-                if (value) {
-                    if (value.carrier_code == 'jne') {
+                    if (value) {
+                        if (value.carrier_code == 'jne') {
                             self.isVisibleTemp(true)
                             self.isChecked(true) 
                         }else{
                             self.isVisibleTemp(false)
                             self.isChecked(false); 
-                        };
+                        }
                     }else{
                         self.isVisibleTemp(false)
                         self.isChecked(false); 
                     }
-                    self.updateTotalsInSummary();
                 });
             },
 

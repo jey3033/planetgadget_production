@@ -118,7 +118,6 @@ class Inventory
             $searchCriteria = $this->searchCriteriaBuilder->addFilter('enabled', 1)->create();
             $sourceData = $this->sourceRepository->getList($searchCriteria);
             $sourceData = $sourceData->getItems();
-            $qty = 0;
             $status = $qty > 0 ? 1 : 0;
             foreach ($sourceData as $key => $source) {
                 $this->sourceItem->setSku($sku);
