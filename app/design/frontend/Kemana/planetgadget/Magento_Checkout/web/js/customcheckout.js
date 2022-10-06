@@ -8,6 +8,9 @@ require([
         media: '(max-width: 767px)',
         // Switch to Desktop Version
         entry: function () {
+            $('.summary-totals').hide();
+            $('.opc-block-shipping-information').hide();
+
             $(document).on("click",".opc-block-summary .items-in-cart > .title",function(){
                 if($(window).width() < 767)
                 {
