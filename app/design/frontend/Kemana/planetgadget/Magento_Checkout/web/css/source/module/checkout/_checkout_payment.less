@@ -228,6 +228,39 @@
 								margin: unset !important;
 							}
 						}
+
+						.payment-method-billing-address{
+							.billing-address-form{
+								.button-maps{
+									&:hover{
+			                            background-color: @primary__color__dark;
+                            			color: @color-white;
+
+                            			&:before{
+                            				background: unset;
+                            				content: @icon-pg-pinpoint-not-set;
+                            				font-family: 'icons-kemana-theme';
+                            				font-size: 17px;
+                            				padding-right: 5px;
+                            			}
+									}
+								}
+
+								.admin__control-text.maps-input{
+									border: none !important; 
+                    				background: url(/media/logistic/Pinpoint.png) left no-repeat;
+                    				background-size: 15px !important;
+                    				display: inline-block;
+                    				padding: 20px;
+                    				padding-top: 25px !important;
+                    				margin-top: 5px;
+								}
+
+								.field-tooltip-content{
+									top: -35px;
+								}
+							}
+						}
 					}
 					.payment-method-logo-icon{
 						display: flex;
@@ -326,6 +359,11 @@
 								button.action.action-update{
 									background-color: @color-white;
 									border: 1px solid @primary__color__dark;
+
+									&:hover{
+										background-color: @primary__color__dark;
+										color: @color-white;
+									}
 
 								}
 								button.action.action-cancel{
@@ -585,6 +623,14 @@
 					.psg-tabs {
 						.payment-method-content {
 							width: 60%;
+						}
+
+						.payment-method-billing-address{
+							.checkout-billing-address{
+								.fieldset{
+									width: 95%;
+								}
+							}
 						}
 					}
 					.payment-option {
