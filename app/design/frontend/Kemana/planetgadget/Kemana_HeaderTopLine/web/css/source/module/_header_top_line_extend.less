@@ -12,11 +12,16 @@
 //  _____________________________________________
 
 & when (@media-common = true) {
-    .header-top-wrapper {
-        .top-promotion {
+    .page-header {
+        .header-top-wrapper {
             display: none;
+
+            .top-promotion {
+                display: none;
+            }
         }
     }
+
 
     .top-wrapper-links {
         .help-info-content {
@@ -71,7 +76,6 @@
         }
 
         .help-info-content {
-            display: block !important;
             margin-inline: -10px;
             background: @color-white;
             .lib-font-size(10);
@@ -105,10 +109,11 @@
 //  Desktop
 //  _____________________________________________
 
-.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
     .page-header {
         .header-top-wrapper {
-            padding: 6px 10px;
+            .lib-vendor-prefix-display();
+            padding: 4px 10px;
             transition: .3s all ease;
 
             .header-top-wrapper-right {

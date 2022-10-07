@@ -87,6 +87,41 @@ class UpdateBlocksBeforeFirstCloudDeployment implements DataPatchInterface
     public function getBlockData(): array
     {
         return [
+            "checkout-footer" => [
+                'title' => 'Checkout Footer Copyright',
+                'content' => '<div class="copyright">
+<p>© 2020 {{config path="general/store_information/name"}}. All Rights Reserved.</p>
+</div>',
+                'is_active' => 1,
+                'store_id' => 0
+            ],
+            "kemana_contact_map_block" => [
+                'title' => 'Contact Us Address Block',
+                'content' => '<div class="block-title"><strong>{{config path="general/store_information/name"}}</strong></div>
+<p>{{config path="general/store_information/street_line1"}} {{config path="general/store_information/city"}} {{config path="general/store_information/postcode"}}</p>
+<div class="working-hours">
+<div class="title">Working Hours</div>
+<ul>
+<li>Monday - Friday <br>{{config path="general/store_information/hours"}}</li>
+<li>Phone: {{config path="general/store_information/phone"}} <br>Email: <a href="mailto:{{config path="trans_email/ident_general/email"}}">{{config path="trans_email/ident_general/email"}}</a></li>
+</ul>
+</div>',
+                'is_active' => 1,
+                'store_id' => 0
+            ],
+            "email-bottom-content" => [
+                'title' => 'Email Footer Bottom',
+                'content' => '<div class="footer-store-name">{{config path="general/store_information/name"}}</div>
+<div class="footer-store-address">{{config path="general/store_information/street_line1"}}{{config path="general/store_information/street_line2"}}<br>{{config path="general/store_information/country_id"}}</div>
+<ul class="footer-social-icons">
+<li class="facebook"><a href="#" target="_blank" rel="noopener"><img src="{{media url=wysiwyg/email/facebook.png}}" alt=""></a></li>
+<li class="twitter"><a href="#" target="_blank" rel="noopener"><img src="{{media url=wysiwyg/email/twitter.png}}" alt=""></a></li>
+<li class="google"><a href="#" target="_blank" rel="noopener"><img src="{{media url=wysiwyg/email/google.png}}" alt=""></a></li>
+</ul>
+<div class="footer-copyright">© {{config path="general/store_information/name"}} 2021</div>',
+                'is_active' => 1,
+                'store_id' => 0
+            ],
             "footer-address-section" => [
                 'title' => 'Footer Address Section',
                 'content' => '<div class="logo"><img src="{{media url=wysiwyg/footer/Planet_Gadget_Footer_2x.png}}" alt=""></div>
@@ -103,6 +138,7 @@ class UpdateBlocksBeforeFirstCloudDeployment implements DataPatchInterface
                 'content' => '<p class="title" data-role="collapsible">Information</p>
 <ul class="list">
 	<li><a href="{{store url=\'about-us\'}}">About Us</a></li>
+	<!---<li><a href="{{store url=\'customer-service\'}}">Customer Service</a></li>--->
 	<li><a href="{{store url=\'contact\'}}">Contact Us</a></li>
 	<li><a href="{{store url=\'terms-and-conditions\'}}">Privacy and Terms</a></li>
 	<li><a href="{{store url=\'store-locations\'}}">Store Locator</a></li>
@@ -110,11 +146,14 @@ class UpdateBlocksBeforeFirstCloudDeployment implements DataPatchInterface
 	<li><a href="{{store url=\'corporate-order\'}}">Corporate Order</a></li>
 	<li><a href="{{store url=\'blog\'}}">News and Updates</a></li>
 	<li><a href="{{store url=\'trade-in-plus\'}}">Trade in Plus</a></li>
-	<li><a href="{{store url=\'faq\'}}">FAQ</a></li>
+	<!---<li><a href="{{store url=\'faq\'}}">FAQ</a></li>
 	<li><a href="{{store url=\'how-to-order\'}}">How to Order</a></li>
 	<li><a href="{{store url=\'how-to-pay\'}}">How to Pay</a></li>
 	<li><a href="{{store url=\'shipping-information\'}}">Shipping Information</a></li>
-
+	<li><a href="{{store url=\'return-policy\'}}">Return Policy</a></li>
+	<li><a href="{{store url=\'warranty-policy\'}}">Warranty Policy</a></li>
+	<li><a href="#">Lacak Pengiriman</a></li>
+	<li><a href="{{store url=\'bank-promotion\'}}">Bank Promo</a></li>--->
 </ul>',
                 'is_active' => 1,
                 'store_id' => HelperData::PG_STORE_VIEW_ENGLISH
@@ -125,12 +164,12 @@ class UpdateBlocksBeforeFirstCloudDeployment implements DataPatchInterface
 	<p class="title">Delivery Support</p>
 	<ul class="list payment-partners">
 		<li class="gosend"><img src="{{media url=wysiwyg/footer/logos/gosend_2x.png}}" alt="" /></li>
-		<li class="grab"><img src="{{media url=wysiwyg/footer/logos/grab_2x.png}}" alt="" /></li>
+		<!---<li class="grab"><img src="{{media url=wysiwyg/footer/logos/grab_2x.png}}" alt="" /></li>--->
 		<li class="jne"><img src="{{media url=wysiwyg/footer/logos/jne_2x.png}}" alt="" /></li>
 		<li class="jnt"><img src="{{media url=wysiwyg/footer/logos/jnt_2x.png}}" alt="" /></li>
-		<li class="sicepat"><img src="{{media url=wysiwyg/footer/logos/sicepat_2x.png}}" alt="" /></li>
-		<li class="anteraja"><img src="{{media url=wysiwyg/footer/logos/anteraja_2x.png}}" alt="" /></li>
-		<li class="ninja-express"><img src="{{media url=wysiwyg/footer/logos/ninjaexpress_2x.png}}" alt="" /></li>
+		<!---<li class="sicepat"><img src="{{media url=wysiwyg/footer/logos/sicepat_2x.png}}" alt="" /></li>--->
+		<!---<li class="anteraja"><img src="{{media url=wysiwyg/footer/logos/anteraja_2x.png}}" alt="" /></li>--->
+		<!---<li class="ninja-express"><img src="{{media url=wysiwyg/footer/logos/ninjaexpress_2x.png}}" alt="" /></li>--->
 		<li class="home-delivery"><img src="{{media url=wysiwyg/footer/logos/homedelivery_2x.png}}" alt="" /></li>
 	</ul>
 </div>
@@ -147,22 +186,57 @@ class UpdateBlocksBeforeFirstCloudDeployment implements DataPatchInterface
 		<li class="shopeepay"><img src="{{media url=wysiwyg/footer/logos/shopeepay_2x.png}}" alt="" /></li>
 		<li class="akulaku"><img src="{{media url=wysiwyg/footer/logos/akulaku_2x.png}}" alt="" /></li>
 		<li class="kredivo"><img src="{{media url=wysiwyg/footer/logos/kredivo_2x.png}}" alt="" /></li>
-		<li class="home-credit"><img src="{{media url=wysiwyg/footer/logos/home_credit_2x.png}}" alt="" /></li>
+		<!---<li class="home-credit"><img src="{{media url=wysiwyg/footer/logos/home_credit_2x.png}}" alt="" /></li>--->
 		<li class="visa"><img src="{{media url=wysiwyg/footer/logos/visa_2x.png}}" alt="" /></li>
 		<li class="mastercard"><img src="{{media url=wysiwyg/footer/logos/mastercard_2x.png}}" alt="" /></li>
 		<li class="jcb"><img src="{{media url=wysiwyg/footer/logos/jcb_2x.png}}" alt="" /></li>
 		<li class="indodana"><img src="{{media url=wysiwyg/footer/logos/indodana_2x.png}}" alt="" /></li>
-		<li class="indomaret"><img src="{{media url=wysiwyg/footer/logos/indomaret_2x.png}}" alt="" /></li>
+		<!---<li class="indomaret"><img src="{{media url=wysiwyg/footer/logos/indomaret_2x.png}}" alt="" /></li>--->
 		<li class="alfamart"><img src="{{media url=wysiwyg/footer/logos/alfamart_2x.png}}" alt="" /></li>
-		<li class="dandan"><img src="{{media url=wysiwyg/footer/logos/dandan_2x.png}}" alt="" /></li>
+		<!---<li class="dandan"><img src="{{media url=wysiwyg/footer/logos/dandan_2x.png}}" alt="" /></li>--->
 	</ul>
+</div>',
+                'is_active' => 1,
+                'store_id' => HelperData::PG_STORE_VIEW_ENGLISH
+            ],
+            "home-banner-small-hardware" => [
+                'title' => 'Home page small banners - Hardware Theme',
+                'content' => '<div class="home-banner-two-container middle-banner-wrapper">
+<div class="widget block block-static-block">
+<div class="fixed-width">
+<div class="half-width-banner">
+<div class="banner-img"><img class="desktop" src="{{media url=wysiwyg/home-second-banner-hardware-1.jpg}}" alt=""> <img class="mobile" src="{{media url=wysiwyg/home-second-banner-hardware-1.jpg}}" alt=""></div>
+<div class="banner-description color-white left">
+<div class="banner-description-container">
+<div class="banner-logo"><img src="{{media url=wysiwyg/home-second-banner-hardware-1-logo.png}}" alt=""></div>
+<p>The right tool to do the job.</p>
+<div class="actions-toolbar">
+<div class="primary"><a class="action shop-now primary" href="#">SHOP NOW</a></div>
+</div>
+</div>
+</div>
+</div>
+<div class="half-width-banner">
+<div class="banner-img"><img class="desktop" src="{{media url=wysiwyg/home-second-banner-hardware-2.jpg}}" alt=""> <img class="mobile" src="{{media url=wysiwyg/home-second-banner-hardware-2.jpg}}" alt=""></div>
+<div class="banner-description color-black right">
+<div class="banner-description-container">
+<div class="banner-logo"><img src="{{media url=wysiwyg/home-second-banner-hardware-2-logo.png}}" alt=""></div>
+<p>Genuine Power Tools</p>
+<div class="actions-toolbar">
+<div class="primary"><a class="action shop-now primary" href="#">SHOP NOW</a></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>',
                 'is_active' => 1,
                 'store_id' => HelperData::PG_STORE_VIEW_ENGLISH
             ],
             "home-page-new-arrivals" => [
                 'title' => 'Home Page New Arrivals',
-                'content' => '<div class="home-new-arrivals-wrapper"><div class="home-new-arrivals-container fixed-width">{{widget type="Kemana\AcceleratorBase\Block\Catalog\Product\ProductsList" title="New <span>Arrivals</span>" widget_type="newproducts" collection_sort_by="name" collection_sort_order="asc" show_pager="0" products_count="10" template="Kemana_AcceleratorBase::product/widget/content/grid.phtml" products_per_row="4" visible_products="4" visible_products_tablet="3" visible_products_mobile="1" pagination="false" widget_id="9745" conditions_encoded="^[`1`:^[`type`:`Magento||CatalogWidget||Model||Rule||Condition||Combine`,`aggregator`:`all`,`value`:`1`,`new_child`:``^]^]"}}</div></div>',
+                'content' => '<div class="home-new-arrivals-wrapper"><div class="home-new-arrivals-container fixed-width">{{widget type="Magento\Catalog\Block\Product\Widget\NewWidget" title="New <span>Arrivals</span>" display_type="all_products" show_pager="0" products_count="10" template="product/widget/new/content/new_grid.phtml" cache_lifetime="2"}}</div></div>',
                 'is_active' => 1,
                 'store_id' => HelperData::PG_STORE_VIEW_ENGLISH
             ],
@@ -181,7 +255,7 @@ class UpdateBlocksBeforeFirstCloudDeployment implements DataPatchInterface
 		<div class="how-it-works-item">
 		    <span class="icon"><img src="{{media url=wysiwyg/footer/Benefit_Berbelanja_2x.png}}" alt="" /></span>
 		    <h5>Shopping Benefits</h5>
-		    <p>Get Various Promos and Gadget Info</p>
+		    <p>Get Various Promos and Gadget Info</p>    
 		</div>
 	    </div>
 	    <div class="col-md-3 col-6 text-block">
@@ -214,7 +288,7 @@ class UpdateBlocksBeforeFirstCloudDeployment implements DataPatchInterface
                                     <div class="col-md-6 col-12 banner-block">
                                         <div class="banner-img"><a href="https://pg.kemana.dev/category/page/detail/id/28" target="_blank" rel="noopener"><img src="{{media url=wysiwyg/home/banners/Oppo_F17_Pro_2x.png}}" alt="" /></a></div>
                                     </div>
-                                </div>
+                                </div>        
     </div>
 </div>',
                 'is_active' => 1,
@@ -255,6 +329,73 @@ class UpdateBlocksBeforeFirstCloudDeployment implements DataPatchInterface
                 'is_active' => 1,
                 'store_id' => 0
             ],
+            "samsung-block" => [
+                'title' => 'Samsung CMS Block',
+                'content' => '<div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <img src=""/>
+                        <div class="title">
+                            <h1><strong>Refrigators</strong></h1>
+                        </div>
+                        <div class="description">
+                            <span>Keep food fresher longer twice as long or more!</span>
+                        </div>        
+                        <div class="btn shop-now">
+                            <a href="#" class="btn btn-default">Shop Now</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <img src=""/>
+                        <div class="title">
+                            <h1><strong>Oven Microwaves</strong></h1>
+                        </div>
+                        <div class="description">
+                            <span>Rethink how you cook with PowerGrill technology</span>
+                        </div>        
+                        <div class="btn shop-now">
+                            <a href="#" class="btn btn-default">Shop Now</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                        <img src=""/>
+                        <div class="title">
+                            <h1><strong>QLED TV</strong></h1>
+                        </div>
+                        <div class="description">
+                            <span>Television with Quantum Dot technology and 100% color volume</span>
+                        </div>        
+                        <div class="btn shop-now">
+                            <a href="#" class="btn btn-default">Shop Now <i class="fa fa-chevron-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                        <img src=""/>
+                        <div class="title">
+                            <h1><strong>FULL HD TV</strong></h1>
+                        </div>
+                        <div class="description">
+                            <span>Superior colors, brightness level, and slim design</span>
+                        </div>        
+                        <div class="btn shop-now">
+                            <a href="#" class="btn btn-default">Shop Now <i class="fa fa-chevron-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                        <img src=""/>
+                        <div class="title">
+                            <h1><strong>UHD TV</strong></h1>
+                        </div>
+                        <div class="description">
+                            <span>Innovative design with sophisticated 4K UHD technology</span>
+                        </div>        
+                        <div class="btn shop-now">
+                            <a href="#" class="btn btn-default">Shop Now <i class="fa fa-chevron-right"></i></a>
+                        </div>
+                    </div>
+                </div>',
+                'is_active' => 1,
+                'store_id' => 0
+            ],
             "category_top_section" => [
                 'title' => 'Category Top Section',
                 'content' => '<div class="category-top-section fixed-width">{{widget type="Kemana\TopCategories\Block\Widget\CategoryWidget" number_of_categories_to_display="8"}}</div>',
@@ -286,8 +427,7 @@ class UpdateBlocksBeforeFirstCloudDeployment implements DataPatchInterface
                 'content' => '<div class="heading">Contact Us</div>
 <div class="text phone">{{config path="general/store_information/phone"}}</div>
 <div class="text email">{{config path="trans_email/ident_general/email"}}</div>
-<div class="text live-chat">Live Chat</div>
-<div><a href="https://pg.kemana.dev/product.html" target="_blank" rel="noopener">Live Chat</a></div>
+<div class="text live-chat"><a href="https://pg.kemana.dev/product.html" target="_blank" rel="noopener">Live Chat</a></div>
 <div class="time">Operational Hours: <span>09:00 - 21:00</span></div>',
                 'is_active' => 1,
                 'store_id' => HelperData::PG_STORE_VIEW_ENGLISH
@@ -359,7 +499,7 @@ class UpdateBlocksBeforeFirstCloudDeployment implements DataPatchInterface
             ],
             "recommended_from_seller_home_page" => [
                 'title' => 'ID - Recommended From Seller Home Page',
-                'content' => '<div class="home-editors-recommend-wrapper"><div class="home-editors-recommend-container fixed-width">{{widget type="Kemana\AcceleratorBase\Block\Catalog\Product\ProductsList" title="Rekomendasi <span>Editor</span>" widget_type="customproducts" collection_sort_by="name" collection_sort_order="asc" show_pager="0" products_count="6" template="Kemana_AcceleratorBase::product/widget/content/grid.phtml" products_per_row="6" visible_products="6" visible_products_tablet="3" visible_products_mobile="1" pagination="false" widget_id="6039" conditions_encoded="^[`1`:^[`type`:`Magento||CatalogWidget||Model||Rule||Condition||Combine`,`aggregator`:`all`,`value`:`1`,`new_child`:``^],`1--1`:^[`type`:`Magento||CatalogWidget||Model||Rule||Condition||Combine`,`aggregator`:`all`,`value`:`1`,`new_child`:``^],`1--1--1`:^[`type`:`Magento||CatalogWidget||Model||Rule||Condition||Product`,`attribute`:`sku`,`operator`:`()`,`value`:`dum11, dum5, XI-70061, dum21, AS-60036-BL, SS-0258`^]^]"}}</div></div>',
+                'content' => '<div class="home-editors-recommend-wrapper"><div class="home-editors-recommend-container fixed-width">{{widget type="Kemana\AcceleratorBase\Block\Catalog\Product\ProductsList" title="Rekomendasi <span>Editor</span>" widget_type="customproducts" collection_sort_by="name" collection_sort_order="asc" show_pager="0" products_count="6" template="Kemana_AcceleratorBase::product/widget/content/grid.phtml" products_per_row="6" visible_products="6" visible_products_tablet="3" visible_products_mobile="1" pagination="false" widget_id="6039" conditions_encoded="^[`1`:^[`type`:`Magento||CatalogWidget||Model||Rule||Condition||Combine`,`aggregator`:`all`,`value`:`1`,`new_child`:``^],`1--1`:^[`type`:`Magento||CatalogWidget||Model||Rule||Condition||Combine`,`aggregator`:`all`,`value`:`1`,`new_child`:``^],`1--1--1`:^[`type`:`Magento||CatalogWidget||Model||Rule||Condition||Product`,`attribute`:`sku`,`operator`:`()`,`value`:`SAMSUNG Z FOLD 4, SAMSUNG GALAXY A13, XI-70061, XIAOMI POCO C40, AS-60036-BL, SS-0258`^]^]"}}</div></div>',
                 'is_active' => 1,
                 'store_id' => HelperData::PG_STORE_VIEW_INDONESIA
             ],
@@ -446,6 +586,50 @@ class UpdateBlocksBeforeFirstCloudDeployment implements DataPatchInterface
 <li class="whatsapp"><a href="https://wa.me/628113988888" target="_blank" rel="noopener">&nbsp;</a></li>
 </ul>
 </div>',
+                'is_active' => 1,
+                'store_id' => HelperData::PG_STORE_VIEW_ENGLISH
+            ],
+            "header_top_line_notice" => [
+                'title' => 'Header Top Notice',
+                'content' => '<p class="top-notice">NOTICE: Deliveries are applicable only for relevant areas</p>',
+                'is_active' => 1,
+                'store_id' => HelperData::PG_STORE_VIEW_ENGLISH
+            ],
+            "header_top_line_message" => [
+                'title' => 'Header top line message',
+                'content' => '<p class="top-promotion">Free Delivery for purchase above $10.00</p>',
+                'is_active' => 1,
+                'store_id' => HelperData::PG_STORE_VIEW_ENGLISH
+            ],
+            "footer-help-section" => [
+                'title' => 'Footer Help Section',
+                'content' => '<p class="title" data-role="collapsible">Help</p>
+                                <ul class="list">
+                                    <li>
+                                        <a href="{{store url=\'faq\'}}">FAQ</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{store url=\'how-to-order\'}}">How to Order</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{store url=\'how-to-pay\'}}">How to Pay</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{store url=\'shipping-information\'}}">Shipping Information</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{store url=\'return-policy\'}}">Return Policy</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{store url=\'warranty-policy\'}}">Warranty Policy</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Track Order</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Bank Promo</a>
+                                    </li>
+                                </ul>',
                 'is_active' => 1,
                 'store_id' => HelperData::PG_STORE_VIEW_ENGLISH
             ],

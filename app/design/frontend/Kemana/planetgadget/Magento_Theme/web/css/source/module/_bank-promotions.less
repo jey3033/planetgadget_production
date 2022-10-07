@@ -14,7 +14,7 @@
     .home-bank-and-promotions {
         .banner-inner-container {
             .lib-title-with-border(
-                @title-text-underline__enable: false
+                @title-text-underline__enable: true
             );
 
             span {
@@ -44,12 +44,17 @@
                     }
                 }
             }
+
         }
 
         .image-block {
             .image {
                 position: relative;
                 height: 100%;
+
+                img {
+                    border-radius: @common-border-radius;
+                }
 
                 &:after {
                     content: ' ';
@@ -80,16 +85,19 @@
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
     .home-bank-and-promotions {
-        padding: @block-padding -10 @block-padding - 40;
+        padding: @block-padding 10px;
 
         .banner-inner-container {
             .lib-vendor-prefix-display();
             .lib-vendor-prefix-flex-direction(column);
 
             h2 {
-                padding-inline: 10px;
-                margin-bottom: 20px;
+                margin-bottom: 15px;
                 order: 1;
+
+                span {
+                    margin-top: 0;
+                }
             }
 
             div.row {
@@ -128,10 +136,24 @@
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
     .home-bank-and-promotions {
+        padding-block: @block-padding - 3 @block-padding - 20;
+
+        .image-block {
+            padding: 0 10px 20px;
+        }
+    }
+}
+
+//
+//  Desktop Large
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+    .home-bank-and-promotions {
         padding-block: @block-padding - 3 @block-padding;
 
         .image-block {
-            padding: 0 10px;
+            padding: 10px;
         }
     }
 }

@@ -19,6 +19,7 @@ use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\State\InputMismatchException;
 use Magento\Catalog\Model\Product\Type;
 use Magento\Catalog\Model\Product\Attribute\Source\Status;
+use Magento\Store\Model\Store;
 
 /**
  * Class SyncProductsFromErp
@@ -83,7 +84,8 @@ class SyncProductsFromErp
         \Magento\CatalogInventory\Api\StockRegistryInterface $stockRegistry,
         \Magento\Framework\App\State                         $state,
         \Magento\Catalog\Model\CategoryFactory               $categoryFactory,
-        \Magento\Catalog\Api\CategoryLinkManagementInterface $categoryLinkRepository
+        \Magento\Catalog\Api\CategoryLinkManagementInterface $categoryLinkRepository,
+        \Kemana\MsDynamics\Model\Api\Erp\Inventory           $inventory
     )
     {
         $this->helper = $helper;
@@ -93,6 +95,7 @@ class SyncProductsFromErp
         $this->state = $state;
         $this->categoryFactory = $categoryFactory;
         $this->categoryLinkRepository = $categoryLinkRepository;
+        $this->inventory = $inventory;
     }
 
     /**
@@ -129,7 +132,7 @@ class SyncProductsFromErp
 
         $count = 0;
         foreach ($getProductsFromErp['response'] as $key => $productdata) {
-            if($count > 5 && $this->helper->isApiMode() == 0){
+            if($count > 5 && !$this->helper->isApiMode()){
                 break;
             }
             $count ++;
@@ -144,9 +147,9 @@ class SyncProductsFromErp
                     $product->setPrice($productdata['Price']);
                     $product->setAttributeSetId(4);
                     $product->setTypeId(Type::TYPE_SIMPLE);
+                    $product->setData('store_id', Store::DEFAULT_STORE_ID);
                     $product->setStatus(Status::STATUS_ENABLED);
                     $product = $this->productRepository->save($product);
-
                     $categoryIds = [];
                     $categoryCollection = $this->categoryFactory->create()->getCollection()
                             ->addAttributeToFilter('name', array('in' => array(
@@ -164,7 +167,7 @@ class SyncProductsFromErp
                     }
 
                     if($product->getId()){
-
+                        $this->inventory->inventoryApiCall($product->getSku());
                         $this->helper->log('Successfully created the product in Magento for ERP product : ' . $productdata['ProductNo'], 'info');
 
                         $ackProductData[] = [

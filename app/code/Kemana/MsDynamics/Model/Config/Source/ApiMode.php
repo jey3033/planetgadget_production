@@ -6,6 +6,6 @@ class ApiMode implements \Magento\Framework\Option\ArrayInterface
 {   
     public function toOptionArray()
     {
-        return ['Sendbox','Live'];
+        return ['Sandbox','Live'];
     }
 }

@@ -64,7 +64,6 @@
                     height: 100%;
                     padding: 10px;
                     transition: all .5s ease;
-                    min-height: 359px;
 
                     &:hover {
                         box-shadow: 0 5px 20px #00000021;
@@ -81,7 +80,7 @@
                     }
 
                     .product-item-name {
-                        margin: @indent__base - 3px 0 @indent__s - 2px;
+                        margin: @indent__base - 3px 0 @indent__s - 4px;
                     }
 
                     .product-reviews-summary {
@@ -115,15 +114,15 @@
 
     .product-item {
         .price-box {
-            .lib-line-height(24);
+            .lib-line-height(18);
 
             .price {
-                .lib-line-height(@product-price__font-size + 10);
+                .lib-line-height(@product-price__font-size + 4);
             }
         }
 
         .special-price {
-            margin-bottom: 4px;
+            margin-bottom: 0;
         }
 
         .old-price {
@@ -139,9 +138,9 @@
             display: inline-block;
             border-radius: 0 20px 20px 20px;
             height: 16px;
-            width: auto;
             line-height: 16px;
-            padding: 0 10px;
+            padding: 0 5px;
+            width: 38px;
             text-align: center;
             .lib-css(color, @color-white);
             .lib-css(font-weight, @font-weight__bold);
@@ -217,7 +216,17 @@
         .product-items {
             .product-item {
                 margin-bottom: 10px;
+
+                .product-item-info {
+                    min-height: 298px;
+                }
             }
+        }
+    }
+
+    .page-products{
+        .action.tocompare{
+            opacity: 1 !important;
         }
     }
 }
@@ -231,7 +240,19 @@
         .product-items {
             .product-item {
                 margin-bottom: 20px;
+
+                .product-item-info {
+                    min-height: 359px;
+                }
             }
+        }
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1023px){
+    .page-products{
+        .action.tocompare{
+            opacity: 1 !important;
         }
     }
 }

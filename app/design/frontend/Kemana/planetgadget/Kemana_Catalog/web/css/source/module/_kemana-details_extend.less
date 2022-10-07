@@ -41,6 +41,7 @@
                     .lib-css(font-family, @font-family-name__base);
                     .lib-css(color, @kemana-primary-brand-color);
                     .lib-font-size(12);
+                    .lib-line-height(20);
                     text-transform: none;
                     font-weight: @font-weight__heavier;
                     .lib-icon-font(
@@ -312,6 +313,7 @@
 
                 form.compare-form {
                     margin-left: 30px;
+
                     button {
                         .lib-icon-font(
                             @icon-pg-compare,
@@ -335,6 +337,7 @@
 
                         span {
                             .lib-line-height(20);
+                            text-transform: none;
                         }
                     }
                 }
@@ -525,6 +528,37 @@
                 }
             }
         }
+
+        .product-info-main{
+            .product-info-price{
+                .product-info-stock-sku{
+                    display: flex;
+                    flex-wrap: nowrap;
+
+                    .ns-product-label{
+                        //padding-right: 15px;
+                        margin-top: -3px;
+                        margin-left: 0;
+
+                        li{
+                            background-image: linear-gradient(#FF681A, #EB1717) !important;
+                        }
+                    }
+                }
+            }
+        }
+
+        .product.media{
+            .ns-product-label{
+                display: none;
+            }
+        }
+
+        .product-full-width-section {
+            &#additional {
+                display: none;
+            }
+        }
     }
 
     .product {
@@ -624,6 +658,64 @@
             .product-add-form {
                 .fieldset {
                     margin-bottom: 0;
+                }
+
+                .table-wrapper {
+                    .grouped {
+                        thead  {
+                            tr {
+                                th {
+                                    display: block;
+                                    padding-bottom: 16px;
+                                }
+                            }
+                        }
+
+                        tbody {
+                            tr {
+                                padding-bottom: 15px;
+
+                                &:last-child {
+                                    .lib-css(padding-bottom, @indent__base - 5px);
+                                    .lib-css(border-bottom, @border-width__base solid @color-kemana-gray5);
+                                }
+
+                                td {
+                                    display: table-cell;
+
+                                    &.qty {
+                                        &:before {
+                                            display: none;
+                                        }
+                                        width: 114px;
+                                    }
+
+                                    &.item {
+                                        width: ~'calc(100% - 134px)';
+                                        padding-left: 0;
+
+                                        &:before {
+                                            display: none;
+                                        }
+
+                                        .product-item-name {
+                                            .lib-css(font-weight, @font-weight__heavier);
+                                        }
+
+                                        .price-box {
+                                            .price-wrapper {
+                                                .price {
+                                                    .lib-font-size(14);
+                                                    .lib-line-height(24);
+                                                    margin-bottom: 0;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
 
@@ -793,7 +885,7 @@
                         .title {
                             .lib-heading(h2);
                             .lib-font-size(28);
-                            .lib-line-height(30);
+                            .lib-line-height(38);
                             margin-bottom: 30px;
                             position: relative;
                             z-index: 0;

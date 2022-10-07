@@ -27,5 +27,18 @@
                 </argument>
             </arguments>
         </referenceBlock>
+
+        <referenceContainer name="content">
+            <block class="Magento\Cms\Block\Block" name="recent_product" after="-">
+                <arguments>
+                    <argument name="block_id" xsi:type="string">recently_view_products</argument>
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="label" xsi:type="string" translate="true">Recently Product View</item>
+                        </item>
+                    </argument>
+                </arguments>
+            </block>
+        </referenceContainer>
     </body>
 </page>
