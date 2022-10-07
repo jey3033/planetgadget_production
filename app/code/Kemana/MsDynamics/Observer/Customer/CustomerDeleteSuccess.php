@@ -50,6 +50,10 @@ class CustomerDeleteSuccess implements \Magento\Framework\Event\ObserverInterfac
      */
     public function execute(Observer $observer)
     {
+        if (!$this->helper->isEnable()) {
+            return;
+        }
+
         $this->helper->log('CUSTOMER : Started the Customer Account Delete Event.', 'info');
 
         $customer = $observer->getCustomer();
