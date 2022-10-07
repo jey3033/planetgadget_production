@@ -124,6 +124,12 @@ class UpdateStock extends \Magento\Framework\App\Action\Action
     {
         $productId = (int) $this->request->getParam('id');
         $resultJson = $this->resultJsonFactory->create();
+
+        if (!$this->helper->isEnable()) {
+            $response = ["msDynamics" => false];
+            return $resultJson->setData($response);                                    
+        }
+
         if($productId){
             $product = $this->_productRepository->getById($productId);
             
@@ -190,12 +196,16 @@ class UpdateStock extends \Magento\Framework\App\Action\Action
                         $attributesData['attributes'] = [];
                     }
                     return $resultJson->setData([
+                                                 "msDynamics" => true,
                                                  "apiresponse" => $response,
                                                  "attributes"  => $attributesData['attributes'],
                                                  "instock"     => count($instockproductids) > 0 ? true : false
                                             ]);    
                 }
-                return $resultJson->setData($response);
+                return $resultJson->setData([
+                                             "msDynamics" => true,
+                                             "apiresponse" => $response['response'],
+                                        ]);
             }
         }
     }
