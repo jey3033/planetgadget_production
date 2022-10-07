@@ -47,6 +47,9 @@ class BeforOrderPlace implements \Magento\Framework\Event\ObserverInterface
      */
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
+        if (!$this->helper->isEnable()) {
+            return;                                             
+        }
         $quote = $observer->getEvent()->getQuote();
         $productdata = [];
         foreach ($quote->getAllItems() as $item) {

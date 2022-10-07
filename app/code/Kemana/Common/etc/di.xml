@@ -19,4 +19,7 @@
         <plugin name="kemana_common_product_list_after_getCustomProductsCollection"
                 type="Kemana\Common\Plugin\Block\Catalog\Product\ProductsList" sortOrder="10" />
     </type>
+
+    <preference for="Magento\Review\Block\Product\View\ListView" type="Kemana\Common\Block\Product\View\ListView"/>
+    <preference for="Magento\Theme\Block\Html\Pager" type="Kemana\Common\Block\html\Pager"/>
 </config>
