@@ -22,7 +22,10 @@ define([
             url: '',
 
             // option's productid
-            productid: ''
+            productid: '',
+
+            // option's producttype
+            producttype: '',
         },
 
         _init: function () {       
@@ -53,20 +56,27 @@ define([
                   id: $widget.options.productid
                 },
                 success: function(response) {
-                    if(response){
-                       if(response.response.Inventory > 0){
-                            $(".box-tocart").show();
-                            $(".product.alert.stock").hide();
-                            $(".product-info-stock-sku .stock").addClass("available").html("<span>In stock</span>")
-                       }else{
-                            $(".box-tocart").hide();
+                    if(response.msDynamics){
+                        if(response.apiresponse){
+                            if($widget.options.producttype == 'simple'){
+                               if(response.apiresponse.Inventory > 0){
+                                    $(".product-add-form").show();
+                                    $(".product.alert.stock").hide();
+                                    $(".product-info-stock-sku .stock").addClass("available").html("<span>In stock</span>")
+                               }else{
+                                    $(".product-add-form").hide();
+                                    $(".product.alert.stock").show();
+                                    $(".product-info-stock-sku .stock").addClass("unavailable").html("<span>Out of stock</span>")
+                               }
+                            }
+                        }else{
+                            $(".product-add-form").hide();
                             $(".product.alert.stock").show();
                             $(".product-info-stock-sku .stock").addClass("unavailable").html("<span>Out of stock</span>")
-                       }
+                        }
                     }else{
-                        $(".box-tocart").hide();
+                        $(".product-add-form").show();
                         $(".product.alert.stock").show();
-                        $(".product-info-stock-sku .stock").addClass("unavailable").html("<span>Out of stock</span>")
                     }
                 }
             });
