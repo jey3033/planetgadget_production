@@ -40,6 +40,9 @@ class Index {
         \Magento\Checkout\Controller\Cart\Index $subject
     )
     {
+        if (!$this->helper->isEnable()) {
+            return;                                             
+        }
         $items = $this->_session->getQuote()->getAllItems();
         $productdata = [];
         foreach ($items as $key => $item) {
