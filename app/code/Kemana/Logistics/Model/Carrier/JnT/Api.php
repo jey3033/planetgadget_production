@@ -41,7 +41,7 @@ class Api extends \KS\Logistic\Model\Carrier\JnT\Api
         $pickupTime = $this->getPickupDate();
         $pickupTime = date("Y-m-d h:m:s", strtotime($pickupTime));
         $item_name = [];
-        foreach ($shipment->getItemsCollection() as $item) {    
+        foreach ($shipment->getItemsCollection() as $item) {
                 array_push($item_name,$item['name']);
         }
 
@@ -74,7 +74,6 @@ class Api extends \KS\Logistic\Model\Carrier\JnT\Api
             'goodsvalue' => substr((int) $order->getGrandTotal(), 0, 8)
         ];
 
-        $params = ['detail' => [$params]];
         $params = ['detail' => [$params]];
 
         $response = $this->getApiTransport($headers, $url . $path, 'POST', [
