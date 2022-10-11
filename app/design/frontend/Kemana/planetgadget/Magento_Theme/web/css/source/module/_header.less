@@ -583,16 +583,18 @@
                     label {
                         position: relative;
                         left: 0;
-                        top: 13px;
+                        top: 0;
 
                         &:before {
                             .lib-css(color, @color-white);
+                            .lib-line-height(48);
+                            margin-right: 12px;
                         }
                     }
 
                     .action {
                         &.search {
-                            top: -7px;
+                            top: -48px;
                             left: 0px;
 
                             &:before {
@@ -613,6 +615,7 @@
 
                         &:before {
                             margin-left: -3px;
+                            .lib-line-height(48);
                         }
                     }
 
@@ -781,6 +784,7 @@
             }
         }
     }
+
     //.page-header {
     //    .language-currency-wrapper {
     //        .language-currency-block {
