@@ -449,6 +449,7 @@ return [
         'Kemana_Banner' => 1,
         'Kemana_Base' => 1,
         'Kemana_Blog' => 1,
+        'Kemana_BlogArticle' => 1,
         'Kemana_Brand' => 1,
         'Kemana_Catalog' => 1,
         'Kemana_CategoriesEnhanced' => 1,
@@ -459,12 +460,16 @@ return [
         'Kemana_Contact' => 1,
         'Kemana_AjaxLayeredNavigation' => 1,
         'Kemana_Customer' => 1,
+        'Kemana_CustomerMembership' => 1,
         'Kemana_Geoip' => 1,
         'Kemana_GiftRegistry' => 1,
         'Kemana_HeaderTopLine' => 1,
+        'Kemana_Insurance' => 1,
         'Kemana_Jobs' => 1,
+        'Kemana_JsConsoleError' => 1,
         'Kemana_Labelmanager' => 1,
         'Kemana_Logistics' => 1,
+        'Kemana_MsDynamics' => 1,
         'Kemana_PaymentGroupAttribute' => 1,
         'Kemana_PaymentShippingLogo' => 1,
         'Kemana_Pcp' => 1,
@@ -497,7 +502,6 @@ return [
         'Vertex_RequestLogging' => 1,
         'Vertex_AddressValidation' => 1,
         'Vertex_TaxStaging' => 1,
-        'Xtendable_MailAttachment' => 1,
         'Yotpo_Yotpo' => 1
     ]
 ];
