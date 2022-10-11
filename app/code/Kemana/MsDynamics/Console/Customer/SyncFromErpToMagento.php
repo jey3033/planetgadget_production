@@ -30,7 +30,7 @@ class SyncFromErpToMagento extends Command
     protected $syncCustomersFromErp;
 
     /**
-     * @var \Magento\Framework\App\State 
+     * @var \Magento\Framework\App\State
      */
     protected $appState;
 

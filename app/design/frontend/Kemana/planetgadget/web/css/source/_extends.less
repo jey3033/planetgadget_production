@@ -278,14 +278,22 @@
 
                 .map-point-label {
                     margin-top: 6px;
+                    .lib-css(color, @color-pg-light-gray);
+                    .lib-icon-font(
+                        @icon-pg-pinpoint-not-set,
+                        @_icon-font-size: 14px,
+                        @_icon-font-line-height: 20px,
+                        @_icon-font-color: @color-pg-light-gray,
+                        @_icon-font-margin: 0 8px 0 0
+                    );
 
                     &.active {
-                        .lib-css(color, @color-pg-light-gray);
+                        .lib-css(color, @color-pg-green);
                         .lib-icon-font(
-                            @icon-pg-pinpoint-not-set,
+                            @icon-pg-pinpoint,
                             @_icon-font-size: 14px,
                             @_icon-font-line-height: 20px,
-                            @_icon-font-color: @color-pg-light-gray,
+                            @_icon-font-color: @color-pg-green,
                             @_icon-font-margin: 0 8px 0 0
                         );
 

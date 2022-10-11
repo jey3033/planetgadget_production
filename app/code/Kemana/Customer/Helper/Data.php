@@ -16,12 +16,16 @@ namespace Kemana\Customer\Helper;
 
 use Magento\Framework\App\Helper\Context;
 use Magento\Framework\Url\Helper\Data as UrlHelper;
+use Magento\Customer\Api\CustomerRepositoryInterface;
+use Magento\Customer\Model\Session as CustomerSession;
+use Magento\Framework\App\Helper\AbstractHelper;
 
 /**
  * Class Data
  */
 class Data extends \Magento\Framework\App\Helper\AbstractHelper
 {
+    protected $customerRepository;
    
     /**
      * @var Context
@@ -41,9 +45,13 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function __construct(
         Context $context,
-        UrlHelper $urlHelper
+        UrlHelper $urlHelper,
+        CustomerRepositoryInterface $customerRepository,
+        CustomerSession $customerSession
     ) {
         $this->_urlHelper      = $urlHelper;
+        $this->customerRepository = $customerRepository;
+        $this->customerSession = $customerSession;
 
         parent::__construct($context);
     }
@@ -75,5 +83,13 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             \Magento\ProductAlert\Model\Observer::XML_PATH_STOCK_ALLOW,
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
+    }
+
+
+    public function getTelephone()
+    {
+        $customerId  = $this->customerSession->getCustomer()->getId();
+        $customer = $this->customerRepository->getById($customerId);
+        return $customer->getCustomAttribute('phonenumber')->getValue();
     }
 }

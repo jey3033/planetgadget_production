@@ -55,3 +55,22 @@
         }
     }
 }
+
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__s) {
+    .pages {
+        .item {
+            &.pages-item-next {
+                margin: 0 0 0 0;
+            }
+
+            &.pages-item-previous {
+                margin: 0 10px 0 0;
+            }
+        }
+    }
+}

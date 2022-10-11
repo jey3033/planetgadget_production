@@ -25,10 +25,7 @@ use Magento\Store\Model\StoreManagerInterface;
 use Magento\Store\Model\Store;
 
 /**
- * Main contact form block
- *
- * @api
- * @since 100.0.2
+ * Class CorporateFeatureBrand
  */
 class CorporateFeatureBrand extends AbstractBrand
 {

@@ -43,6 +43,16 @@
                         font-weight: @font-weight__bold;
                     }
                 }
+
+                .no-reviews {
+                    margin-top: 15px;
+                    background: @color-pg-light-gray3;
+                    border-radius: @common-border-radius;
+                    padding: 10px 15px 10px;
+                    .lib-font-size(12);
+                    .lib-line-height(20);
+                    font-style: normal;
+                }
             }
 
             .review-items {
@@ -144,6 +154,12 @@
             }
         }
     }
+
+    .review-add {
+        .actions-primary {
+            width: 100%;
+        }
+    }
 }
 
 //
@@ -157,6 +173,8 @@
                 background: @panel__background-color;
                 padding: 30px;
                 border-radius: @common-border-radius;
+                max-width: @pdp-page-max-width;
+                margin: auto;
             }
         }
 
@@ -203,16 +221,6 @@
                     .block-title {
                         margin-bottom: 0;
                         .lib-line-height(22);
-                    }
-
-                    .no-reviews {
-                        margin-top: 20px;
-                        background: @color-pg-light-gray3;
-                        border-radius: @common-border-radius;
-                        padding: 14px 15px 13px;
-                        .lib-font-size(12);
-                        .lib-line-height(13);
-                        font-style: normal;
                     }
                 }
             }

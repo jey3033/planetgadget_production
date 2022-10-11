@@ -189,8 +189,11 @@
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
     .block {
         .products-grid {
+            margin-bottom: 0;
+
             .slick-slider {
-                //margin: 0 !important;
+                margin: -5px!important;
+
 
                 .slick-list {
                     padding: 0!important;
@@ -219,8 +222,67 @@
                 .lib-line-height(38);
             }
         }
+
+        .box-tocart {
+            .actions {
+                margin-top: 27px;
+            }
+        }
+    }
+
+    .fotorama__fullscreen {
+        .fotorama__stage {
+            .fotorama__fullscreen-icon {
+                background: none;
+                background-color: @color-white !important;
+                height: 60px;
+                width: 60px;
+                .lib-icon-font(
+                    @icon-pg-close-button,
+                    @_icon-font-size: 25px,
+                    @_icon-font-line-height: 25px,
+                    @_icon-font-margin: 17px 10px 10px 10px
+                );
+
+                &:before {
+                    right: 0;
+                    position: absolute;
+                    font-weight: @font-weight__regular;
+                }
+
+                &:after {
+                    box-shadow: none;
+                }
+            }
+
+            .fotorama__zoom-in {
+                background: none;
+                height: 45px;
+                width: 45px;
+                .lib-icon-font(
+                    @icon-pg-plus,
+                    @_icon-font-size: 20px,
+                    @_icon-font-line-height: 25px,
+                    @_icon-font-margin: 10px 10px 10px 10px
+                );
+            }
+
+            .fotorama__zoom-out {
+                background-image: none;
+                height: 45px;
+                width: 45px;
+                top: 45px;
+                .lib-icon-font(
+                    @icon-pg-minus,
+                    @_icon-font-size: 2.5px,
+                    @_icon-font-line-height: 25px,
+                    @_icon-font-margin: 10px 10px 10px 10px
+                );
+            }
+        }
     }
 }
+
 
 
 //
@@ -236,7 +298,21 @@
             }
         }
     }
+
+    .catalog-product-view {
+        .page-main {
+            max-width: 100%;
+            padding: 0;
+
+            .product-page-top-section {
+                max-width: @pdp-page-max-width;
+                margin: auto;
+            }
+        }
+    }
+
 }
+
 //
 //  Category page layout
 //  ---------------------------------------------

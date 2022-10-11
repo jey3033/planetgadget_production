@@ -117,6 +117,24 @@
                                 top: 3px;
                             }
                         }
+
+                        .table-checkout-shipping-method{
+                            .row-error{
+                                .message{
+                                    &.error {
+                                         > * {
+                                            &:first-child {
+                                                &:before {
+                                                    background: unset !important;
+                                                    content: "\e95f";
+                                                    font-family: 'icons-kemana-theme';
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -269,7 +287,7 @@
                 .field .control{
                     button.button-maps{
                         &:hover {
-                            background-color: @color-black;
+                            background-color: @primary__color__dark;
                             color: @color-white;
                             
                             &:before{
@@ -355,6 +373,10 @@
                                 width: 50%;
                             }
                         }
+
+                        .selected-location-head-line{
+                            padding-top: 30px;
+                        }
                     }
 
                     .form-login{
@@ -439,11 +461,29 @@
                 .shipping-address-phone{
                     display: flex;
                 }
+                
+                .not-pin-point{
+                    background: url(../images/Pinpoint-Not-Set.svg) left no-repeat;
+                    color: @color-pg-dark-gray;
 
-                .custom-pin-point{
-                    background: url(../images/Pinpoint-Set.svg) left no-repeat;
-                    background-size: cover;
+                    span{
+                        margin-left: 22px;
+                    }
                 }
+
+                .pin-point{
+                    display: none;
+                }
+                
+                .set-pin-point{
+                    background: url(../images/Pinpoint-Set.svg) left no-repeat;
+                    color: @color-pg-green;
+
+                    span{
+                        margin-left: 22px;
+                    }
+                }
+                
             }
 
             #store-selector {
@@ -463,6 +503,10 @@
                     }
                 }
             }
+        }
+
+        .panel.wrapper{
+            display: none;
         }
     }
 
@@ -541,6 +585,17 @@
                             margin: -3px 6px 0 0;
                             color: @color-gray-border-1;
                             font-size: small;
+                        }
+                    }
+                }
+
+                .form-continue{
+                    .actions-toolbar{
+                        .primary{
+                            button[disabled]{
+                                background-color: @color-gray-line1;
+                                color: @color-pg-dark-gray;
+                            }
                         }
                     }
                 }
@@ -626,7 +681,8 @@
             }
             .block.items-in-cart.active{
                 .minicart-items-wrapper{
-                    overflow-y: auto;
+                    overflow-x: hidden;
+                    overflow-y: hidden;
                 }
             }
         }
@@ -817,7 +873,7 @@
 
         .shipping-address-items{
             margin-left: 0 !important;
-            padding-top: 20px;
+            margin-top: 10px !important; 
         }
     }
 
@@ -902,6 +958,14 @@
                     }
                 }
             }
+
+            .checkout-shipping-address{
+                #checkout-step-shipping{
+                    .selected-location-head-line{
+                        padding-left: 21px;
+                    }
+                }
+            }
         }
 
         #store-selector{
@@ -967,6 +1031,7 @@
         }
         .shipping-address-items{
             padding: 30px 0;
+            padding-top: 0;
 
             .shipping-address-item{
                 margin-left: 15px;
@@ -984,7 +1049,7 @@
         #co-shipping-form {
             #shipping-new-address-form {
                 .field-tooltip-content{
-                    top: -42px;
+                    top: -35px;
                 }
             }
         }

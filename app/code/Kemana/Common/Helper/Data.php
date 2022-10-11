@@ -79,7 +79,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     /**
      * @param Context $context
      * @param BlockFactory $blockFactory
-     * @param PageFactory $pageFactory
+     * @param PageFactory $pageFactory 
      * @param StoreManagerInterface $storeManager
      */
     public function __construct(

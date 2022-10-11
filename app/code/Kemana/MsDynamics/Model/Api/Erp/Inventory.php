@@ -39,7 +39,9 @@ class Inventory
         \Kemana\MsDynamics\Helper\Data       $helper,
         \Magento\CatalogInventory\Api\StockRegistryInterface $stockRegistry,
         \Magento\InventoryApi\Api\Data\SourceItemInterface $sourceItem,
-        \Magento\InventoryApi\Api\SourceItemsSaveInterface $sourceItemSave
+        \Magento\InventoryApi\Api\SourceItemsSaveInterface $sourceItemSave,
+        \Magento\Framework\Api\SearchCriteriaBuilder $searchCriteriaBuilder,
+        \Magento\InventoryApi\Api\SourceRepositoryInterface $sourceRepository
     )
     {
         $this->request = $request;
@@ -47,6 +49,8 @@ class Inventory
         $this->stockRegistry = $stockRegistry;
         $this->sourceItem = $sourceItem;
         $this->sourceItemSave = $sourceItemSave;
+        $this->searchCriteriaBuilder = $searchCriteriaBuilder;
+        $this->sourceRepository = $sourceRepository;
     }
 
     /**
@@ -99,6 +103,7 @@ class Inventory
         }else{
             $this->helper->inventorylog('0 Product stock update');
         }
+        return $response;
     }
 
     /**
@@ -109,12 +114,19 @@ class Inventory
      */
     public function updateStock($sku, $qty, $sourceCode = 'default'){
         try{
+
+            $searchCriteria = $this->searchCriteriaBuilder->addFilter('enabled', 1)->create();
+            $sourceData = $this->sourceRepository->getList($searchCriteria);
+            $sourceData = $sourceData->getItems();
             $status = $qty > 0 ? 1 : 0;
-            $this->sourceItem->setSku($sku);
-            $this->sourceItem->setSourceCode($sourceCode);
-            $this->sourceItem->setQuantity($qty);
-            $this->sourceItem->setStatus($status);
-            $this->sourceItemSave->execute([$this->sourceItem]);
+            foreach ($sourceData as $key => $source) {
+                $this->sourceItem->setSku($sku);
+                $this->sourceItem->setSourceCode($source['source_code']);
+                $this->sourceItem->setQuantity($qty);
+                $this->sourceItem->setStatus($status);    
+                $this->sourceItemSave->execute([$this->sourceItem]);
+            }
+
             $message = "Updated inventory sku: ".$sku ." and stock: " .$qty;
             $this->helper->inventorylog($message, 'info');
         }catch(Exception $e){
