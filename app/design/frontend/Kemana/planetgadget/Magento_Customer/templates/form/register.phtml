@@ -164,7 +164,7 @@
         <div class="field confirmation required">
             <label for="password-confirmation" class="label"><span><?= $block->escapeHtml(__('Confirm Password')) ?></span></label>
             <div class="control">
-                <input type="password" name="password_confirmation" title="<?= $block->escapeHtmlAttr(__('Confirm Password')) ?>" id="password-confirmation" class="input-text" data-validate="{required:true, equalTo:'#password'}" data-msg-required="<?= $block->escapeHtml(__('Please enter your password again')) ?>" autocomplete="off">
+                <input type="password" name="password_confirmation" title="<?= $block->escapeHtmlAttr(__('Confirm Password')) ?>" placeholder="<?= $block->escapeHtmlAttr(__('Confirm Password')) ?>"id="password-confirmation" class="input-text" data-validate="{required:true, equalTo:'#password'}" data-msg-required="<?= $block->escapeHtml(__('Please enter your password again')) ?>" autocomplete="off">
             </div>
         </div>
         <?= $block->getChildHtml('form_additional_info') ?>
