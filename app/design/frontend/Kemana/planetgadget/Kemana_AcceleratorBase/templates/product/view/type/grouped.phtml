@@ -34,16 +34,25 @@
                 <?php if ($_product->isSaleable()) : ?>
                 <td data-th="<?= $block->escapeHtml(__('Qty')) ?>" class="col qty">
                     <?php if ($_item->isSaleable()) : ?>
-                    <div class="control qty">
-                        <input type="number"
-                               name="super_group[<?= $block->escapeHtmlAttr($_item->getId()) ?>]"
-                               data-selector="super_group[<?= $block->escapeHtmlAttr($_item->getId()) ?>]"
-                               value="<?= $block->escapeHtmlAttr($_item->getQty() * 1) ?>"
-                               title="<?= $block->escapeHtmlAttr(__('Qty')) ?>"
-                               class="input-text qty"
-                               data-validate="{'validate-grouped-qty':'#super-product-table'}"
-                               data-errors-message-box="#validation-message-box"/>
-
+                    <div id="custom-qty" class="control" data-bind="scope: 'qty-counter'">
+                        <!-- ko template: getTemplate() --><!-- /ko -->
+                        <script type="text/x-magento-init">
+                            {
+                                "#custom-qty": {
+                                    "Magento_Ui/js/core/app": {
+                                        "components": {
+                                            "qty-counter": {
+                                                "component": "qty-counter",
+                                                "config": {
+                                                    "qty": <?php echo $block->getProductDefaultQty() * 1 ?>,
+                                                    "dataValidate": <?php echo json_encode($block->getQuantityValidators()) ?>
+                                                }
+                                            }
+                                         }
+                                    }
+                                }
+                            }
+                        </script>
                     </div>
                 <?php else : ?>
                     <div class="stock unavailable" title="<?= $block->escapeHtmlAttr(__('Availability')) ?>">
