@@ -198,7 +198,7 @@
         .page-title-wrapper {
             .page-title {
                 text-transform: none;
-                margin-bottom: 30px;
+                margin-bottom: 20px;
             }
         }
 
@@ -222,7 +222,7 @@
 
             tbody {
                 td {
-                    padding: 15px;
+                    padding: 18px 15px 0;
                     color: @kemana-primary-brand-color;
 
                     &:first-child {
@@ -325,7 +325,7 @@
                 }
 
                 &.block-dashboard-info {
-                    margin-bottom: 50px;
+                    margin-bottom: 43px;
                 }
             }
         }
@@ -487,6 +487,13 @@
             padding-top: 30px;
         }
 
+        .page-title-wrapper {
+            .page-title {
+                .lib-font-size(28px);
+                .lib-line-height(38px);
+            }
+
+        }
         &.page-layout-2columns-left {
             .columns {
                 .lib-vendor-prefix-display();
@@ -560,11 +567,11 @@
                         margin-bottom: 50px;
 
                         .block:not(.widget) {
-                           margin-bottom: 50px;
+                           margin-bottom: 43px;
 
                             &.block-dashboard-addresses {
                                 padding: 0;
-                                margin-bottom: 0;
+                                //margin-bottom: 0;
                             }
 
                             &.block-addresses-list {
@@ -619,6 +626,29 @@
         .table-wrapper {
             thead {
                 .lib-css(border-bottom, @account-table-border);
+            }
+
+            .col {
+                &.date {
+                    width: 18%;
+                    text-align: left;
+                }
+
+                &.total {
+                    text-align: left;
+                }
+
+                &.actions {
+                    width: 17%;
+                }
+
+                &.ship_to {
+                    -webkit-box-orient: vertical;
+                    -webkit-line-clamp: 1;
+                    line-clamp: 1;
+                    display: -webkit-box;
+                    overflow: hidden;
+                }
             }
         }
 
