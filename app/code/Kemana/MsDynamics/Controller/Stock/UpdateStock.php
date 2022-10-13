@@ -213,7 +213,7 @@ class UpdateStock extends \Magento\Framework\App\Action\Action
                 }
                 return $resultJson->setData([
                                              "msDynamics" => true,
-                                             "apiresponse" => $response['response'],
+                                             "apiresponse" => isset($response['response']) ? $response['response'] : [],
                                              "instock"     => $product->isSalable()
                                         ]);
             }
