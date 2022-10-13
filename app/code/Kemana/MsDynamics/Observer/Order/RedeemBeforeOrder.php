@@ -134,6 +134,11 @@ class RedeemBeforeOrder implements \Magento\Framework\Event\ObserverInterface
                 $redeemPointToErp = $this->erpReward->redeemRewardPointToErp($this->helper->redeemRewardPointFunction(),
                     $this->helper->getSoapActionRedeemRewardPoint(), $dataToOrder);
 
+                if (empty($redeemPointToErp)) {
+                    $this->helper->log('REWARD POINT : ERP system might be off line', 'error');
+                    return;
+                }
+
                 if ($redeemPointToErp['curlStatus'] == 500) {
                     $this->helper->log($redeemPointToErp['response'], 'info');
                     $responseData = $redeemPointToErp['response'];

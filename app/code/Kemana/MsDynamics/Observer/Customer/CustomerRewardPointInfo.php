@@ -97,7 +97,10 @@ class CustomerRewardPointInfo implements \Magento\Framework\Event\ObserverInterf
                     $dataToGetRewardPoint = $this->helper->convertArrayToXml($dataToGetRewardPoint);
                     $getRewardPoint = $this->erpReward->getRewardPointFromErp($this->helper->getRewardPointFunction(),
                         $this->helper->getSoapActionGetRewardPoint(), $dataToGetRewardPoint);
-
+                    if (empty($getRewardPoint)) {
+                        $this->helper->log('CUSTOMER : ERP system might be off line', 'error');
+                        return;
+                    }
                     if (isset($getRewardPoint['curlStatus']) == '200') {
 
                         if($getRewardPoint['response']['PointBalance'] !== $magentoRewardPointBalance) {
