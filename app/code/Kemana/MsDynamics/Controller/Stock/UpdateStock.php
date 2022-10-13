@@ -211,6 +211,7 @@ class UpdateStock extends \Magento\Framework\App\Action\Action
                                                 ]);    
                     }
                 }
+                
                 return $resultJson->setData([
                                              "msDynamics" => true,
                                              "apiresponse" => isset($response['response']) ? $response['response'] : [],
