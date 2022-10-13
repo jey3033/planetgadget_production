@@ -173,7 +173,7 @@ class UpdateStock extends \Magento\Framework\App\Action\Action
 
                 if ($product->getTypeId() == "configurable") 
                 {
-                    if(is_array($response['response']) && count($response['response']) > 0){
+                    if(isset($response['response']) && $response['response'] && count($response['response']) > 0){
                         foreach ($response['response'] as $key => $inventory) {
                             if($inventory['Inventory'] > 0){
                                 array_push($instockproductids,$childProduct[$inventory['ProductNo']]);
