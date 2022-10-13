@@ -565,7 +565,11 @@
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
     .mpblog-post-index,
-    .mpblog-post-view {
+    .mpblog-post-view,
+    .mpblog-category-view,
+    .mpblog-month-view,
+    .mpblog-topic-view,
+    .mpblog-tag-view {
         .page-main {
             .lib-vendor-prefix-display();
             .lib-vendor-prefix-flex-direction(column);
@@ -681,7 +685,11 @@
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
     .mpblog-post-index,
-    .mpblog-post-view {
+    .mpblog-post-view,
+    .mpblog-category-view,
+    .mpblog-month-view,
+    .mpblog-topic-view,
+    .mpblog-tag-view {
         .sidebar {
             width: 330px;
             padding-left: 20px;
