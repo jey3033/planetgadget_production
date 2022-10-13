@@ -330,8 +330,10 @@ define([
                 },
                 success: function(response) {
                     if(response.msDynamics){
-                        if(response.attributes && response.instock){
-                            $widget.options.jsonConfig.attributes = response.attributes
+                        if(response.instock){
+                            if(response.attributes.length > 0){
+                                $widget.options.jsonConfig.attributes = response.attributes
+                            }
                             $widget._swatcherRender($widget);
                             $(".product-add-form").show();
                             $(".product.alert.stock").hide();
