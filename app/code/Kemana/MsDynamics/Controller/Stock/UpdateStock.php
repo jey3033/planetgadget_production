@@ -124,6 +124,12 @@ class UpdateStock extends \Magento\Framework\App\Action\Action
     {
         $productId = (int) $this->request->getParam('id');
         $resultJson = $this->resultJsonFactory->create();
+
+        if (!$this->helper->isEnable()) {
+            $response = ["msDynamics" => false];
+            return $resultJson->setData($response);                                    
+        }
+
         if($productId){
             $product = $this->_productRepository->getById($productId);
             
@@ -167,35 +173,50 @@ class UpdateStock extends \Magento\Framework\App\Action\Action
 
                 if ($product->getTypeId() == "configurable") 
                 {
-                    foreach ($response['response'] as $key => $inventory) {
-                        if($inventory['Inventory'] > 0){
-                            array_push($instockproductids,$childProduct[$inventory['ProductNo']]);
+                    if(isset($response['response']) && $response['response'] && count($response['response']) > 0){
+                        foreach ($response['response'] as $key => $inventory) {
+                            if($inventory['Inventory'] > 0){
+                                array_push($instockproductids,$childProduct[$inventory['ProductNo']]);
+                            }
                         }
-                    }
-                    $options = $this->getOptions($product, $_children);
-                    $attributesData = $this->configurableAttributeData->getAttributesData($product, $options);
-                    if(isset($attributesData['attributes'])){
-                        foreach ($attributesData['attributes'] as $keyattributes => $attributes) {
-                            foreach ($attributes['options'] as $productoptionkey => $productoption) {
-                                $tem_instock = [];
-                                foreach ($productoption['products'] as $key => $product) {
-                                    if(in_array($product, $instockproductids)){
-                                        array_push($tem_instock,$product);
+                        $options = $this->getOptions($product, $_children);
+                        $attributesData = $this->configurableAttributeData->getAttributesData($product, $options);
+                        if(isset($attributesData['attributes'])){
+                            foreach ($attributesData['attributes'] as $keyattributes => $attributes) {
+                                foreach ($attributes['options'] as $productoptionkey => $productoption) {
+                                    $tem_instock = [];
+                                    foreach ($productoption['products'] as $key => $optionproduct) {
+                                        if(in_array($optionproduct, $instockproductids)){
+                                            array_push($tem_instock,$optionproduct);
+                                        }
                                     }
-                                }
-                                $attributesData['attributes'][$keyattributes]['options'][$productoptionkey]['products'] = $tem_instock;
-                            }                                                            
+                                    $attributesData['attributes'][$keyattributes]['options'][$productoptionkey]['products'] = $tem_instock;
+                                }                                                            
+                            }
+                        }else{
+                            $attributesData['attributes'] = [];
                         }
+                        return $resultJson->setData([
+                                                     "msDynamics" => true,
+                                                     "apiresponse" => $response,
+                                                     "attributes"  => $attributesData['attributes'],
+                                                     "instock"     => count($instockproductids) > 0 ? true : false
+                                                ]);    
                     }else{
-                        $attributesData['attributes'] = [];
+                        return $resultJson->setData([
+                                                     "msDynamics" => true,
+                                                     "apiresponse" => $response,
+                                                     "attributes"  => [],
+                                                     "instock"     => $product->isSalable()
+                                                ]);    
                     }
-                    return $resultJson->setData([
-                                                 "apiresponse" => $response,
-                                                 "attributes"  => $attributesData['attributes'],
-                                                 "instock"     => count($instockproductids) > 0 ? true : false
-                                            ]);    
                 }
-                return $resultJson->setData($response);
+                
+                return $resultJson->setData([
+                                             "msDynamics" => true,
+                                             "apiresponse" => isset($response['response']) ? $response['response'] : [],
+                                             "instock"     => $product->isSalable()
+                                        ]);
             }
         }
     }

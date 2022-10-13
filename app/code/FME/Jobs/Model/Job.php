@@ -37,7 +37,7 @@ class Job extends \Magento\Framework\Model\AbstractModel
                            '1' => 'Enable'];
         return $availableOptions;
     }
-    
+
     public function getTypes()
     {
         $select = $this->_getResource()->getConnection()->select()->from($this->_getResource()->getTable('fme_meta_type'), ['id','type_name','type_code']);
@@ -57,7 +57,7 @@ class Job extends \Magento\Framework\Model\AbstractModel
 
     public function getCvDownloadLink($cid)
     {
-        
+
         $select = $this->_getResource()->getConnection()->select()->from($this->_getResource()->getTable('fme_jobs_application'), ['cvfile'])
         ->where('app_id = ?', $cid);
         $data = $this->_getResource()->getConnection()
@@ -71,14 +71,14 @@ class Job extends \Magento\Framework\Model\AbstractModel
         ->where('jobs_id = ?', $cid);
         $data = $this->_getResource()->getConnection()
           ->fetchAll($select);
-        $totalApplicants = count($data);  
+        $totalApplicants = count($data);
         return $totalApplicants;
     }
 
     public function getDepartments()
     {
         $select = $this->_getResource()->getConnection()->select()->from($this->_getResource()->getTable('fme_meta_data'), ['data_code','type_code','data_name'])
-        ->where('type_code = ?', 2);
+        ->where('type_code = ?', 4);
         $data = $this->_getResource()->getConnection()
           ->fetchAll($select);
         return $data;
@@ -96,7 +96,7 @@ class Job extends \Magento\Framework\Model\AbstractModel
     public function getTypesOpt()
     {
         $select = $this->_getResource()->getConnection()->select()->from($this->_getResource()->getTable('fme_meta_data'), ['data_code','type_code','data_name'])
-        ->where('type_code = ?', 3);
+        ->where('type_code = ?', 7);
         $data = $this->_getResource()->getConnection()
           ->fetchAll($select);
         return $data;
@@ -105,7 +105,7 @@ class Job extends \Magento\Framework\Model\AbstractModel
     public function getGender()
     {
         $select = $this->_getResource()->getConnection()->select()->from($this->_getResource()->getTable('fme_meta_data'), ['data_code','type_code','data_name'])
-        ->where('type_code = ?', 4);
+        ->where('type_code = ?', 10);
         $data = $this->_getResource()->getConnection()
           ->fetchAll($select);
         return $data;
@@ -114,7 +114,7 @@ class Job extends \Magento\Framework\Model\AbstractModel
     public function getCareer()
     {
         $select = $this->_getResource()->getConnection()->select()->from($this->_getResource()->getTable('fme_meta_data'), ['data_code','type_code','data_name'])
-        ->where('type_code = ?', 6);
+        ->where('type_code = ?', 16);
         $data = $this->_getResource()->getConnection()
           ->fetchAll($select);
         return $data;
@@ -123,7 +123,7 @@ class Job extends \Magento\Framework\Model\AbstractModel
     public function getExperience()
     {
         $select = $this->_getResource()->getConnection()->select()->from($this->_getResource()->getTable('fme_meta_data'), ['data_code','type_code','data_name'])
-        ->where('type_code = ?', 8);
+        ->where('type_code = ?', 22);
         $data = $this->_getResource()->getConnection()
           ->fetchAll($select);
         return $data;
@@ -131,7 +131,7 @@ class Job extends \Magento\Framework\Model\AbstractModel
     public function getPositions()
     {
         $select = $this->_getResource()->getConnection()->select()->from($this->_getResource()->getTable('fme_meta_data'), ['data_code','type_code','data_name'])
-        ->where('type_code = ?', 5);
+        ->where('type_code = ?', 13);
         $data = $this->_getResource()->getConnection()
           ->fetchAll($select);
         return $data;
@@ -140,7 +140,7 @@ class Job extends \Magento\Framework\Model\AbstractModel
     public function getQualifications()
     {
         $select = $this->_getResource()->getConnection()->select()->from($this->_getResource()->getTable('fme_meta_data'), ['data_code','type_code','data_name'])
-        ->where('type_code = ?', 7);
+        ->where('type_code = ?', 19);
         $data = $this->_getResource()->getConnection()
           ->fetchAll($select);
         return $data;
@@ -152,5 +152,5 @@ class Job extends \Magento\Framework\Model\AbstractModel
          $data = $this->_getResource()->getConnection()
           ->fetchAll($collection);
         return $data;
-    }    
+    }
 }

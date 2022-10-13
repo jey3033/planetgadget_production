@@ -1,7 +1,6 @@
 /**
  * Copyright Â© 2021 PT Kemana Teknologi Solusi. All rights reserved.
  * http://www.kemana.com
- * test
  */
 
 /**
@@ -305,11 +304,6 @@ define([
          * @private
          */
         _init: function () {
-
-            $(".product-add-form").show();
-            $(".product.alert.stock").hide();
-            $(".box-tocart").show();
-
             // Don't render the same set of swatches twice
             if ($(this.element).attr('data-rendered')) {
                 return;
@@ -335,29 +329,41 @@ define([
                   id: $widget.options.jsonConfig.productId
                 },
                 success: function(response) {
-                    if(response.attributes && response.instock){
-                        $widget.options.jsonConfig.attributes = response.attributes
-                        if ($widget.options.jsonConfig !== '' && $widget.options.jsonSwatchConfig !== '') {
-                            // store unsorted attributes
-                            $widget.options.jsonConfig.mappedAttributes = _.clone($widget.options.jsonConfig.attributes);
-                            $widget._sortAttributes();
-                            $widget._RenderControls();
-                            $widget._setPreSelectedGallery();
-                            $($widget.element).trigger('swatch.initialized');
-                        } else {
-                            console.log('SwatchRenderer: No input data received');
+                    if(response.msDynamics){
+                        if(response.instock){
+                            if(response.attributes.length > 0){
+                                $widget.options.jsonConfig.attributes = response.attributes
+                            }
+                            $widget._swatcherRender($widget);
+                            $(".product-add-form").show();
+                            $(".product.alert.stock").hide();
+                            $(".box-tocart").show();
+                            $(".product-info-stock-sku .stock").addClass("available").html("<span>In stock</span>")
+                        }else{
+                            $(".product-add-form").hide();
+                            $(".product.alert.stock").show();
+                            $(".product-info-stock-sku .stock").addClass("unavailable").html("<span>Out of stock</span>")
                         }
-                        $(".product-add-form").show();
-                        $(".product.alert.stock").hide();
-                        $(".box-tocart").show();
-                        $(".product-info-stock-sku .stock").addClass("available").html("<span>In stock</span>")
                     }else{
-                        $(".product-add-form").hide();
+                        $widget._swatcherRender($widget);
+                        $(".product-add-form").show();
                         $(".product.alert.stock").show();
-                        $(".product-info-stock-sku .stock").addClass("unavailable").html("<span>Out of stock</span>")
                     }
                 }
             });
+        },
+
+        _swatcherRender: function($widget){
+            if ($widget.options.jsonConfig !== '' && $widget.options.jsonSwatchConfig !== '') {
+                // store unsorted attributes
+                $widget.options.jsonConfig.mappedAttributes = _.clone($widget.options.jsonConfig.attributes);
+                $widget._sortAttributes();
+                $widget._RenderControls();
+                $widget._setPreSelectedGallery();
+                $($widget.element).trigger('swatch.initialized');
+            } else {
+                console.log('SwatchRenderer: No input data received');
+            }
         },
 
         /**

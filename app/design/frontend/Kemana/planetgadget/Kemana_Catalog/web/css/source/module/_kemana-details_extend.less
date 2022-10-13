@@ -8,7 +8,7 @@
 //  Variables
 //  _____________________________________________
 
-@pdo-page-max-width: 1320px;
+@pdp-page-max-width: 1320px;
 
 @pdp-sub-heading__text-transform: uppercase;
 
@@ -537,8 +537,9 @@
 
                     .ns-product-label{
                         //padding-right: 15px;
-                        margin-top: -3px;
+                        margin-top: -5px;
                         margin-left: 0;
+                        padding-right: 10px;
 
                         li{
                             background-image: linear-gradient(#FF681A, #EB1717) !important;
@@ -873,15 +874,13 @@
     .catalog-product-view {
         .page-main,
         .breadcrumbs {
-            .lib-css(max-width, @pdo-page-max-width);
+            .lib-css(max-width, @pdp-page-max-width);
         }
 
         .product {
             &.info {
                 &.detailed {
                     .data-block {
-                        background: @color-white;
-
                         .title {
                             .lib-heading(h2);
                             .lib-font-size(28);
@@ -976,6 +975,30 @@
 
 
 }
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .catalog-product-view {
+        .block {
+            &.upsell,
+            &.related {
+                padding-block: 50px 10px;
+
+                .block-title,
+                .block-content {
+                    max-width: @pdp-page-max-width;
+                    margin: auto;
+                }
+            }
+
+            &.upsell {
+                background-color: @color-pg-light-gray2;
+            }
+        }
+    }
+}
 
 //
 //  Desktop
@@ -994,6 +1017,4 @@
             }
         }
     }
-
-
 }
