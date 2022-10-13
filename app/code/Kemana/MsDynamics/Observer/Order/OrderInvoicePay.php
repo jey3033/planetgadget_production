@@ -142,6 +142,7 @@ class OrderInvoicePay implements \Magento\Framework\Event\ObserverInterface
 
         if (empty($createOrderInErp)) {
             $this->helper->log('Order : ERP system might be off line', 'error');
+            return;
         }
 
         if ($createOrderInErp['curlStatus'] == 200 && isset($createOrderInErp['response']['OrderNo'])) {
