@@ -1,0 +1,23 @@
+<!--
+/**
+ * Copyright © 2022 PT Kemana Teknologi Solusi. All rights reserved.
+ * http://www.kemana.com
+ */
+
+/**
+ * @category Kemana
+ * @package  Kemana_Common
+ * @license  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ *
+ *
+ * @author   Parth Godhani <pgodhani@kemana.com>
+ */
+  -->
+  
+<div class="rating-summary" if="getValue($row())">
+    <span class="label"></span>
+    <div class="rating-result" data-bind= "attr: {title: getValue($row())}">
+     <span data-bind="style: { width: getValue($row())}">
+     </span>
+    </div>
+</div>
