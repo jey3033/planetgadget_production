@@ -167,7 +167,7 @@ class SyncProductsFromErp
                     }
 
                     if($product->getId()){
-                        $this->inventory->inventoryApiCall($product->getSku());
+                        $this->inventory->inventoryApiCall([$product->getSku()]);
                         $this->helper->log('Successfully created the product in Magento for ERP product : ' . $productdata['ProductNo'], 'info');
 
                         $ackProductData[] = [
