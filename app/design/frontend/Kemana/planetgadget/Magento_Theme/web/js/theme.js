@@ -472,7 +472,15 @@ define([
     }
 
     /**
-    * 28. move header search in mobile
+     * 28. add main-item class to mobile compare
+     */
+
+    if (utility.isMobile()) {
+        $( "ul li.compare" ).addClass( "main-item" );
+    }
+
+    /**
+    * 29. move header search in mobile
     */
 
     $(".action.nav-toggle").click(function () {

@@ -11,7 +11,7 @@
 & when (@media-common = true) {
 
     .post-list-wrapper {
-        .lib-css(background-color, @color-pg-light-gray2);
+        //.lib-css(background-color, @color-pg-light-gray2);
 
         .blog-widget-title {
             display: inline-block;
@@ -565,7 +565,11 @@
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
     .mpblog-post-index,
-    .mpblog-post-view {
+    .mpblog-post-view,
+    .mpblog-category-view,
+    .mpblog-month-view,
+    .mpblog-topic-view,
+    .mpblog-tag-view {
         .page-main {
             .lib-vendor-prefix-display();
             .lib-vendor-prefix-flex-direction(column);
@@ -681,7 +685,11 @@
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
     .mpblog-post-index,
-    .mpblog-post-view {
+    .mpblog-post-view,
+    .mpblog-category-view,
+    .mpblog-month-view,
+    .mpblog-topic-view,
+    .mpblog-tag-view {
         .sidebar {
             width: 330px;
             padding-left: 20px;
@@ -701,7 +709,7 @@
     }
 
     .post-list-wrapper {
-        padding-block: @block-padding - 3 @block-padding;
+        padding-block: @block-padding - 2 @block-padding;
 
         .post-list-inner-container {
             .lib-vendor-prefix-display();

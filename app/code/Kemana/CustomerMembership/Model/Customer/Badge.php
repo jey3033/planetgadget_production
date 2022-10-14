@@ -79,14 +79,6 @@ class Badge extends \Magento\Framework\App\Helper\AbstractHelper
                 return $groupIdsNames[$customer->getGroupId()];
             }
 
-            if ($membershipLevels) {
-                foreach ($membershipLevels as $level) {
-                    if (true) {
-                        return $groupIdsNames[$customer->getGroupId()];
-                    }
-                }
-            }
-
         } catch (\Exception $e) {
             $this->helper->log('Error while processing customer ID : ' . $customerID . ' to show the badge in customer
             dashboard. Error : ' . $e->getMessage());

@@ -8,7 +8,7 @@
 //  Variables
 //  _____________________________________________
 
-@pdo-page-max-width: 1320px;
+@pdp-page-max-width: 1320px;
 
 @pdp-sub-heading__text-transform: uppercase;
 
@@ -153,7 +153,7 @@
                             margin-bottom: 20px;
 
                             .swatch-attribute-selected-option {
-                                display: none;
+                                display: unset !important;
                             }
 
                             .size {
@@ -186,6 +186,7 @@
                                 width: 100%;
                                 float: left;
                                 .lib-line-height(13);
+                                display: contents;
                             }
                         }
                     }
@@ -874,15 +875,13 @@
     .catalog-product-view {
         .page-main,
         .breadcrumbs {
-            .lib-css(max-width, @pdo-page-max-width);
+            .lib-css(max-width, @pdp-page-max-width);
         }
 
         .product {
             &.info {
                 &.detailed {
                     .data-block {
-                        background: @color-white;
-
                         .title {
                             .lib-heading(h2);
                             .lib-font-size(28);
@@ -977,6 +976,30 @@
 
 
 }
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .catalog-product-view {
+        .block {
+            &.upsell,
+            &.related {
+                padding-block: 50px 10px;
+
+                .block-title,
+                .block-content {
+                    max-width: @pdp-page-max-width;
+                    margin: auto;
+                }
+            }
+
+            &.upsell {
+                background-color: @color-pg-light-gray2;
+            }
+        }
+    }
+}
 
 //
 //  Desktop
@@ -995,6 +1018,4 @@
             }
         }
     }
-
-
 }
