@@ -73,29 +73,3 @@ $helper = $this->helper(Kemana\MsDynamics\Helper\Data::class);
     }
 </script>
 <?php endif;?>
-
-<style type="text/css">
-    .stock-loader {
-        position: relative;
-        overflow: hidden;
-        background: #ebebeb;
-        color: #ebebeb !important;
-        pointer-events: none;
-    }
-
-    .stock-loader:before {
-        content: '';
-        display: block;
-        position: absolute;
-        left: -150px;
-        top: 0;
-        height: 100%;
-        width: 20%;
-        background: linear-gradient(to right, transparent 0%, #e4e4e4 50%, transparent 100%);
-        animation: shine 1s cubic-bezier(.4, 0, .2, 1) infinite;
-    }
-
-    .stock-loader #notifiy-me, .stock-loader .notify-text {
-      opacity: 0;
-    }
-</style>
