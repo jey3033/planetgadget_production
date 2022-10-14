@@ -1,0 +1,370 @@
+// /**
+//  * Copyright © 2020 Kemana. All rights reserved.
+//  * @author Ashan Gunawardena <agunawardena@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+//
+//  Email extend styles
+//  _____________________________________________
+
+//  This file should be used for theme-specific styles for emails that extend or modify the styles in _email.less
+//  This will allow you to edit email styles without copying and editing the _email.less file
+
+//  Importing fonts from an external CSS file, rather than embedding @font-face declarations inside the <style> tag,
+//  as the latter will cause font rendering issues if the web fonts are inaccessible.
+
+//@import url("@{baseUrl}css/email-fonts.css");
+
+body {
+    font-family: @email-font-family;
+}
+
+th,
+td {
+    font-family: @email-font-family;
+}
+
+.header {
+    background-color: @email__background-color;
+    padding: @email-body__padding @email-body__padding;
+
+    .logo {
+        img {
+            width: 124px;
+        }
+    }
+}
+
+.main-content {
+    padding: 0 @email-body__padding;
+
+    table {
+        tr {
+            text-align: left;
+        }
+    }
+
+    p {
+        .lib-css(color, @email__font-color);
+        margin-bottom: 20px;
+
+        &.greeting {
+            .lib-css(color, @email__title-color);
+            .lib-css(font-weight, @font-weight__bold);
+        }
+    }
+
+    a {
+        .lib-css(font-weight, @font-weight__bold);
+        .lib-css(color, @kemana-primary-brand-color);
+
+        &:hover,
+        &:focus {
+            .lib-css(color, @kemana-primary-brand-color);
+        }
+    }
+
+    .button {
+        a {
+            .lib-css(font-weight, @font-weight__bold);
+            .lib-css(background-color, @kemana-secondary-brand-color);
+            .lib-css(color, @color-white);
+            text-transform: uppercase;
+
+            &:hover,
+            &:focus {
+                .lib-css(background-color, @kemana-primary-brand-color);
+                .lib-css(color, @color-white);
+                border: 1px solid @kemana-primary-brand-color;
+            }
+        }
+
+        td {
+            background-color: transparent;
+            padding-bottom: @indent__base;
+
+            &:hover {
+                background-color: transparent;
+            }
+        }
+
+        .inner-wrapper {
+            td {
+                padding-bottom: 0;
+            }
+        }
+    }
+
+    .email-intro {
+        text-align: left;
+        margin-bottom: @indent__base;
+        display: block;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        .lib-css(color, @email__title-color);
+        .lib-css(font-family, @email-font-family);
+        .lib-css(font-weight, @font-weight__regular);
+    }
+
+    .email-summary {
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-size: 24px;
+            line-height: 24px;
+            text-align: left;
+            .lib-css(font-weight, @font-weight__bold);
+        }
+    }
+
+    .order-details {
+        h3 {
+            font-size: 16px;
+            line-height: 24px;
+            margin-bottom: 10px;
+            .lib-css(font-weight, @font-weight__bold);
+        }
+
+        .address-details,
+        .method-info {
+            p {
+                text-align: left;
+            }
+        }
+
+        .method-info {
+            padding-bottom: 30px;
+        }
+    }
+
+    .email-items {
+        .lib-css(border, @border-width__base solid @email-items-table__border-color);
+        margin-bottom: 20px;
+
+        thead {
+            th {
+                .lib-css(background, @email-items-table__border-color);
+                .lib-css(padding, @email-items-table-th__padding);
+            }
+        }
+
+        tbody {
+            td {
+                .lib-css(padding, @email-items-table-td__padding);
+                .lib-css(color, @email-items-table-td__color);
+
+                &:first-child {
+                    p {
+                        .lib-css(color, @email-items-table-td-product__color);
+                        text-align: left;
+                    }
+                }
+
+                dl {
+                    padding-left: 0;
+
+                    dt {
+                        .lib-css(font-weight, @font-weight__bold);
+                        .lib-css(color, @email-items-table-td-product__color);
+                        display: inline-block;
+
+                        strong {
+                            .lib-css(font-weight, @font-weight__bold);
+
+                            em {
+                                font-style: normal;
+                            }
+                        }
+                    }
+
+                    dd {
+                        display: inline-block;
+                        padding-left: 2px;
+                        padding-right: 5px;
+                    }
+                }
+            }
+
+            tr {
+                &:first-child {
+                    td {
+                        .lib-css(border-top, @border-width__base solid @email-items-table__border-color);
+                    }
+                }
+            }
+        }
+
+        tfoot {
+            th,
+            td {
+                .lib-css(padding, @email-items-table-td__padding) !important;
+                padding-top: 0 !important;
+                background: transparent;
+            }
+
+            tr {
+                &:first-child {
+                    th,
+                    td {
+                        .lib-css(border-top, @border-width__base solid @email-items-table__border-color);
+                        .lib-css(padding, @email-items-table-td__padding) !important;
+                    }
+                }
+
+                &:last-child {
+                    th,
+                    td {
+                        .lib-css(color, @email-items-table-td-product__color);
+                    }
+                }
+            }
+        }
+    }
+}
+
+.footer {
+    background-color: @email__background-color;
+    padding: @email-footer__padding;
+    padding-top: 0;
+
+    p {
+        .lib-css(color, @email__font-color);
+        margin-bottom: 0;
+    }
+
+    table {
+        width: 100%;
+
+        td {
+            padding-bottom: @email-body__padding;
+            width: 33%;
+
+            p {
+                margin-bottom: 0;
+
+                &.phone {
+                    font-size: @font-size__l;
+
+                    a {
+                        color: inherit;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.footer-bottom {
+    padding: 0 @email-footer__padding @email-footer__padding;
+    background-color: @kemana-primary-brand-color;
+
+    .footer-bottom-wrapper {
+        border-top: @border-width__base solid @email-items-table__border-color;
+        padding-top: 30px;
+    }
+
+    .footer-email-logo {
+        text-align: center;
+
+        img {
+            width: 136px;
+        }
+    }
+    .footer-store-name {
+        .lib-css(font-weight, @font-weight__bold);
+        .lib-css(color, @email__title-color);
+        margin-bottom: 10px;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    .footer-store-address {
+        .lib-css(color, @email__title-color);
+        margin-bottom: 10px;
+        line-height: 24px;
+        text-align: center !important;
+    }
+
+    .footer-social-icons {
+        text-align: center;
+        margin-bottom: 0 !important;
+        padding-left: 0 !important;
+
+        li {
+            text-align: center;
+            margin-right: 4px;
+            display: inline-block;
+            margin-bottom: 0 !important;
+            margin-left: 0 !important;
+
+            &:last-child {
+                margin-right: 0;
+            }
+
+            a {
+                height: 32px;
+                width: 32px;
+                border-radius: 50%;
+                line-height: 32px;
+                display: inline-block;
+
+                span {
+                    width: 1px;
+                    height: 1px;
+                    font-size: 0;
+                }
+            }
+        }
+    }
+
+    .footer-contact-info {
+        margin-top: 20px;
+        .lib-css(color, @email-footer__font-color);
+        font-size: 14px;
+        text-align: center;
+
+        a {
+            .lib-css(font-weight, @font-weight__bold);
+            .lib-css(color, @email-footer-link__font-color);
+
+            &:hover,
+            &:focus {
+                .lib-css(color, @email-footer-link__font-color);
+            }
+        }
+    }
+
+    .footer-copyright {
+        .lib-css(color, @email-footer__font-color);
+        font-size: 12px;
+        margin-top: 10px;
+        text-align: center;
+        background-color: @email-footer-copyright__bg-color;
+        padding: 15px 0;
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xs) {
+    .header,
+    .main-content,
+    .footer {
+        padding: @email-body__padding @indent__s;
+    }
+
+    .footer {
+        td {
+            display: block;
+            width: auto !important;
+        }
+    }
+}
