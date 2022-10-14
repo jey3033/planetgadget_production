@@ -471,5 +471,12 @@ define([
         $('.header .block-search').prependTo( $('.header .header-right') );
     }
 
+    /**
+    * 28. move header search in mobile
+    */
+
+    $(".action.nav-toggle").click(function () {
+        $(".megamenu-wrapper").css("display","none");
+    });
 
 });
