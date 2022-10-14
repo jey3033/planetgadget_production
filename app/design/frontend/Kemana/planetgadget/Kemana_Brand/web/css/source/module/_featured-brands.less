@@ -14,6 +14,7 @@
 
 & when (@media-common = true) {
     .home-featured-brand-container {
+        display: none;
         .lib-css(padding, @home-featured-brand-container__padding);
 
         .block-brand-featured {
@@ -372,8 +373,17 @@
         }
     }
 
+    .brand-content-wrapper {
+        margin-bottom: 45px;
+
+        .brand-container {
+            padding-inline: 5px;
+        }
+    }
+
     .brand-chared {
         padding: 50px 10px;
+        margin-inline: -10px;
 
         .block-content {
             .sort-wrapper {
@@ -410,6 +420,7 @@
             }
         }
     }
+
 }
 
 //

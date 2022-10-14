@@ -115,7 +115,7 @@ class OrderInvoicePay implements \Magento\Framework\Event\ObserverInterface
                 "LineNo" => $lineNo,
                 "ItemNo" => $lineItem->getSku(),
                 "Quantity" => $lineItem->getQtyOrdered(),
-                "Price" => floatval($lineItem->getRowTotalInclTax())
+                "Price" => floatval($lineItem->getPrice())
             ];
 
             if ($lineItem->getName()) {
@@ -142,6 +142,7 @@ class OrderInvoicePay implements \Magento\Framework\Event\ObserverInterface
 
         if (empty($createOrderInErp)) {
             $this->helper->log('Order : ERP system might be off line', 'error');
+            return;
         }
 
         if ($createOrderInErp['curlStatus'] == 200 && isset($createOrderInErp['response']['OrderNo'])) {

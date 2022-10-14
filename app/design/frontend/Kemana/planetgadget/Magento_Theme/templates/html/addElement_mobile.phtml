@@ -11,7 +11,7 @@ $_session=$block->getSession();
     <div class="block account-menu">
         <div class="account-menu_content" id="account-menu">
             <ul class="menu-content">
-                <li class="main-item pg-club"><a href="<?= $this->getUrl('planet-gadget-club');  ?>"><?= __('PG Club') ?></a></li>
+                <li class="main-item pg-club"><a href="<?= $this->getUrl('planet-gadget-club');  ?>"><?= __('Planet Club') ?></a></li>
                 <li class="main-item pg-track"><a href="<?= $this->getUrl('sales/order/history'); ?>"><?= __('Track') ?></a></li>
                 <?php if (!$_session->isLoggedIn()): ?>
                     <li class="main-item account-login"><a href="<?= $this->getUrl('customer/account/login'); ?>"><?=
@@ -30,10 +30,10 @@ $_session=$block->getSession();
                 <?php endif; ?>
             </ul>
             <ul class="menu-content-2">
-                <li class="main-item"><a href="<?= $this->getUrl('*/*/*'); ?>"><?= __('Bank Promo') ?></a></li>
-                <li class="main-item"><a href="<?= $this->getUrl('*/*/*'); ?>"><?= __('Trade-In Plus') ?></a></li>
-                <li class="main-item"><a href="<?= $this->getUrl('*/*/*'); ?>"><?= __('Store Locator') ?></a></li>
-                <li class="main-item"><a href="<?= $this->getUrl('*/*/*'); ?>"><?= __('Track') ?></a></li>
+                <li class="main-item"><a href="<?= $this->getUrl('bank-promotion'); ?>"><?= __('Bank Promo') ?></a></li>
+                <li class="main-item"><a href="<?= $this->getUrl('trade-in-plus'); ?>"><?= __('Trade-In Plus') ?></a></li>
+                <li class="main-item"><a href="<?= $this->getUrl('store-locations'); ?>"><?= __('Store Locator') ?></a></li>
+                <?= $block->getBlockHtml('catalog.compare.link'); ?>
                 <li class="main-item"><?= $block->getBlockHtml('top-line-right'); ?></li>
             </ul>
 

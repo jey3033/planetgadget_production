@@ -317,6 +317,7 @@
 "ORDER HISTORY","RIWAYAT PEMESANAN"
 "View All","Lihat Semua"
 "Order Number","Pesanan"
+"Order","Pesanan"
 "Date","Tanggal"
 "Ship To","Kirim ke"
 "Re-Order","Beli Lagi"
@@ -442,6 +443,7 @@
 "Enter full name","Masukkan nama"
 "Send","Kirim"
 "Example: 081234567890","Contoh: 081234567890"
+"Location", "Domisili", module, Magento_Contact
 "Enter location","Masukkan domisili"
 "Store Locations","Lokasi Toko"
 "Enter your address to see stores near your location","Masukkan alamat untuk mencari toko terdekat"
@@ -518,3 +520,6 @@
 "Find address or location","Cari alamat atau lokasi"
 "DD/MM/YYYY","Hari/Bulan/Tahun"
 "Confirm Password","Konfirmasi Password"
+"You have signed out and will go to our homepage in 5 seconds.","Anda akan kembali ke halaman utama dalam 5 detik."
+"You have logged out","Anda telah Logout"
+"Confirm Password"," Konfirmasi Password"
