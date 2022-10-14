@@ -115,7 +115,7 @@ class OrderInvoicePay implements \Magento\Framework\Event\ObserverInterface
                 "LineNo" => $lineNo,
                 "ItemNo" => $lineItem->getSku(),
                 "Quantity" => $lineItem->getQtyOrdered(),
-                "Price" => floatval($lineItem->getRowTotalInclTax())
+                "Price" => floatval($lineItem->getPrice())
             ];
 
             if ($lineItem->getName()) {
