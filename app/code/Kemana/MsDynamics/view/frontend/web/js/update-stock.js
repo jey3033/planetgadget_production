@@ -57,8 +57,7 @@ define([
                 },
                 success: function(response) {
                     if(response.msDynamics){
-                        if(response.apiresponse){
-                            if($widget.options.producttype == 'simple'){
+                        if(typeof response.apiresponse.Inventory != 'undefined' && $widget.options.producttype == 'simple'){
                                if(response.apiresponse.Inventory > 0){
                                     $(".product-add-form").show();
                                     $(".product.alert.stock").hide();
@@ -68,7 +67,9 @@ define([
                                     $(".product.alert.stock").show();
                                     $(".product-info-stock-sku .stock").addClass("unavailable").html("<span>Out of stock</span>")
                                }
-                            }
+                        }else if(typeof response.apiresponse.Inventory == 'undefined' && response.instock){
+                            $(".product-add-form").show();
+                            $(".product.alert.stock").hide();
                         }else{
                             $(".product-add-form").hide();
                             $(".product.alert.stock").show();
