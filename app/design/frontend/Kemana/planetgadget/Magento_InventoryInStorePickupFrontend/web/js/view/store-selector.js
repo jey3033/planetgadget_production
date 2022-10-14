@@ -151,11 +151,20 @@ define([
                     center: {lat: latitude, lng: longitude},
                     zoom: 20
                 });
-            
+
+            const iconBase = "/media/kemana/kslocator/";
+
+            var icon = {
+                 url: iconBase + 'PGStore2x.png', // url
+                 scaledSize: new google.maps.Size(48, 65), // size
+                 origin: new google.maps.Point(0,0)
+             };
+
             var marker = new google.maps.Marker({
                 position: {lat: latitude, lng: longitude},
                 map: this.gmap,
-                animation: google.maps.Animation.DROP
+                animation: google.maps.Animation.DROP,
+                icon: icon
             });
         },
 

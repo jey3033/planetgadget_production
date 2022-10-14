@@ -15,6 +15,8 @@
 
 @cart-apply-button__height: 40px;
 
+@color-gray-border-1: #AEB4C1;
+
 //
 //  Common
 //  _____________________________________________
@@ -24,6 +26,31 @@
         .page-title-wrapper {
             .page-title {
                 text-transform: none;
+            }
+        }
+
+        .block-viewed-products-grid{
+            padding-top: 30px;
+
+            .product-image-container{
+                width: 100% !important;
+            }
+
+            .action.tocompare{
+                display: block !important;
+                width: 29px !important;
+
+                &:before{
+                    font-size: 15px !important;
+                    line-height: 16px;
+                    color: @color-gray-border-1 !important;
+                }
+
+                &:hover{
+                    &:before{
+                        color: @primary__color__dark !important;
+                    }
+                }
             }
         }
     }
@@ -373,6 +400,12 @@
                 }
             }
         }
+
+        .block-viewed-products-grid{
+            .block-title{
+                font-size: 24px;
+            }
+        }
     }
 
     .cart {
@@ -428,6 +461,18 @@
 
             .page-title {
                 margin-bottom: 40px;
+            }
+        }
+
+        .block-viewed-products-grid{
+            .block-title{
+                font-size: 28px;
+            }
+
+            .block-content{
+                .product-item{
+                    width: 220px !important;
+                }
             }
         }
     }

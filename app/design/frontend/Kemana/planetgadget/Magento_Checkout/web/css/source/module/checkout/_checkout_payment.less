@@ -187,6 +187,22 @@
 								background-repeat: no-repeat;
 								background-size: cover;	
 							}
+							span.payment-icon.payment_logo_snap_alfamart{
+								background: url(../images/Payment_Alfamart.svg);
+								background-position: center;
+								background-repeat: no-repeat;
+								background-size: cover;
+							}
+							span.payment-indodana-logo{
+								width: 74px;
+							    height: 39px;
+							    border: 1px solid #aeb4c1;
+							    border-radius: 5px;
+							    background: url(../images/Indodana-color.png);
+								background-position: center;
+								background-repeat: no-repeat;
+								background-size: contain;
+							}
 
 							.payment-method-title{
 								span.payment_logo_snap_allbank_cc{
@@ -204,6 +220,45 @@
 							.payment-method-content{
 								margin: 0 30px;
 								width: 100%;
+							}
+						}
+
+						.without-group{
+							.payment-method-content{
+								margin: unset !important;
+							}
+						}
+
+						.payment-method-billing-address{
+							.billing-address-form{
+								.button-maps{
+									&:hover{
+			                            background-color: @primary__color__dark;
+                            			color: @color-white;
+
+                            			&:before{
+                            				background: unset;
+                            				content: @icon-pg-pinpoint-not-set;
+                            				font-family: 'icons-kemana-theme';
+                            				font-size: 17px;
+                            				padding-right: 5px;
+                            			}
+									}
+								}
+
+								.admin__control-text.maps-input{
+									border: none !important; 
+                    				background: url(/media/logistic/Pinpoint.png) left no-repeat;
+                    				background-size: 15px !important;
+                    				display: inline-block;
+                    				padding: 20px;
+                    				padding-top: 25px !important;
+                    				margin-top: 5px;
+								}
+
+								.field-tooltip-content{
+									top: -35px;
+								}
 							}
 						}
 					}
@@ -275,7 +330,7 @@
 
 					.billing-address-same-as-shipping-block{
 						display: block !important;
-						margin-left: 20px;
+						margin-left: 25px;
 
 						label{
 							&:hover{
@@ -304,6 +359,11 @@
 								button.action.action-update{
 									background-color: @color-white;
 									border: 1px solid @primary__color__dark;
+
+									&:hover{
+										background-color: @primary__color__dark;
+										color: @color-white;
+									}
 
 								}
 								button.action.action-cancel{
@@ -510,8 +570,6 @@
 	.checkout-index-index {
 		.opc-wrapper {
 			.checkout-payment-method {
-				margin-top: 20px;
-
 				.placeorder-button {
 					width: 75%;
 					padding: 0;
@@ -565,6 +623,14 @@
 					.psg-tabs {
 						.payment-method-content {
 							width: 60%;
+						}
+
+						.payment-method-billing-address{
+							.checkout-billing-address{
+								.fieldset{
+									width: 95%;
+								}
+							}
 						}
 					}
 					.payment-option {

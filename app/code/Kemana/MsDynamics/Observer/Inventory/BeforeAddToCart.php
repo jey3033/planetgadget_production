@@ -51,6 +51,9 @@ class BeforeAddToCart implements \Magento\Framework\Event\ObserverInterface
      */
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
+        if (!$this->helper->isEnable()) {
+            return;                                             
+        }
         $addProduct = $observer->getEvent()->getProduct();
         $requestInfo = $observer->getEvent()->getInfo();
         $productSkus = [];

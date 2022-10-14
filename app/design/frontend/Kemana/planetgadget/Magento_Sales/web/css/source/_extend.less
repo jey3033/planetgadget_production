@@ -3,7 +3,9 @@
 //  * @author Harshani Karunasekara <hkarunasekara@kemana.com>
 //  * http://www.kemana.com
 //  */
+
 @import 'module/_order-history_extend.less';
+@import 'module/_track-order-popup.less';
 
 //
 //  Common
@@ -49,15 +51,13 @@
 
             a,
             strong {
-                padding: 10px @indent__base;
+                padding: 10px 25px 10px 15px;
                 font-weight: @font-weight__heavier;
             }
         }
     }
 
     .order-details-items {
-        padding-top: 10px;
-
         &.invoice,
         &.shipments {
             padding-top: 20px;
@@ -68,6 +68,7 @@
             .shipping-no {
                 float: left;
                 .lib-font-size(14);
+                .lib-line-height(24);
                 color: @kemana-primary-brand-color;
                 font-weight: @font-weight__bold;
 
@@ -78,21 +79,28 @@
 
             .print-invoice {
                 float: right;
+
                 .lib-icon-font(
                     @icon-pg-print,
                     @_icon-font-size: 14px,
+                    @_icon-font-line-height: 16px,
                     @_icon-font-color: @color-pg-light-gray,
                     @_icon-font-margin: 0 5px 0 0
-                )
+                );
+
+                span {
+                    .lib-font-size(10);
+                    .lib-line-height(16);
+                    font-weight: @font-weight__bold;
+                }
             }
 
             .order-title-right {
-                float: right;
-
                 .print {
                     .lib-icon-font(
                         @icon-pg-print,
                         @_icon-font-size: 14px,
+                        @_icon-font-line-height: 16px,
                         @_icon-font-color: @color-pg-light-gray,
                         @_icon-font-margin: 0 5px 0 0
                     )
@@ -102,12 +110,17 @@
                     .lib-icon-font(
                         @icon-pg-search,
                         @_icon-font-size: 14px,
+                        @_icon-font-line-height: 16px,
                         @_icon-font-color: @color-pg-light-gray,
                         @_icon-font-margin: 0 5px 0 0
                     )
                 }
 
                 a {
+                    .lib-font-size(10);
+                    line-height: 16px;
+                    font-weight: @font-weight__bold;
+
                     &:not(:last-child) {
                         border-right: 0;
                         padding-right: 10px;
@@ -118,6 +131,7 @@
 
         .table-wrapper {
             width: 100%;
+            margin-bottom: 5px;
         }
 
         .table-order-items {
@@ -127,6 +141,29 @@
                         .product-item-name {
                             .lib-font-size(12);
                             color: @kemana-primary-brand-color;
+                        }
+
+                       .item-options {
+                            dt {
+                                .lib-font-size(10);
+                                .lib-line-height(16);
+                                font-weight: @font-weight__bold;
+                                color: @color-pg-dark-gray;
+
+                                &:after {
+                                    content: ':';
+                                    .lib-font-size(10);
+                                    .lib-line-height(16);
+                                    font-weight: @font-weight__bold;
+                                }
+                            }
+
+                           dd {
+                               .lib-font-size(10);
+                               .lib-line-height(16);
+                               font-weight: @font-weight__heavier;
+                               color: @color-pg-dark-gray;
+                           }
                         }
                     }
                 }
@@ -160,6 +197,7 @@
                     td.amount {
                         strong {
                             .lib-font-size(14);
+                            .lib-line-height(24);
                             font-weight: @font-weight__bold !important;
                         }
                     }
@@ -205,8 +243,37 @@
 
     .order-details-items {
         border-radius: @common-border-radius;
-        padding: 20px 10px;
+        padding: 10px;
         margin-bottom: 20px;
+
+        .item-options {
+            margin-bottom: 0;
+
+            dt {
+                margin: 0;
+                float: left;
+                padding-right: @indent__xs;
+                color: @color-pg-dark-gray;
+                .lib-font-size(10);
+                .lib-line-height(16);
+                font-weight: @font-weight__bold;
+            }
+
+            dd {
+                margin: 0;
+                color: @color-pg-dark-gray;
+                .lib-font-size(10);
+                .lib-line-height(16);
+                font-weight: @font-weight__heavier;
+            }
+        }
+
+        .order-title {
+            .order-title-right {
+                float: left;
+                margin-block: @indent__s @indent__base - 5px;
+            }
+        }
     }
 
     .table-order-items,
@@ -225,8 +292,12 @@
                                     padding-left: 0;
 
                                     .item-details {
-                                        padding-left: 90px;
+                                        padding-left: 80px;
                                     }
+                                }
+
+                                &.subtotal {
+                                    padding-bottom: @indent__base - 4px;
                                 }
                             }
                         }
@@ -250,6 +321,11 @@
 
         .item {
             background: @color-pg-light-gray3;
+            .lib-css(border-right, @account-table-border);
+
+            &:last-child {
+                border-right: 0;
+            }
 
             a,
             strong {
@@ -267,7 +343,14 @@
     }
 
     .order-details-items {
+        padding-top: 10px;
         margin-bottom: 40px;
         border-radius: 0 5px 5px 5px;
+
+        .order-title {
+            .order-title-right {
+                float:right;
+            }
+        }
     }
 }

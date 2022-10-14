@@ -84,14 +84,30 @@ class SyncRewardPointToErp
 
         foreach($syncCustomers as $customer) {
             $customerId = $customer->getId();
-            if ($customer->getCustomAttribute('ms_dynamic_customer_number')) {
-                $erpCustomerNumber = $customer->getCustomAttribute('ms_dynamic_customer_number')->getValue();
-                $storeId = $this->storeManager->getStore()->getId();
-
+            if ($customerId && $customer->getCustomAttribute('ms_dynamic_customer_number')) {
                 $reward = $this->erpReward->getRewardModel()->getCollection()->addFieldToFilter('customer_id', ['eq' => $customerId])->getFirstItem();
                 $magentoRewardPointBalance = (int)$reward->getPointsBalance();
-                if($magentoRewardPointBalance) {
-                    $this->erpReward->addCustomerEarnPointToErp($customerId, $erpCustomerNumber, $magentoRewardPointBalance);
+
+                $erpCustomerNumber = $customer->getCustomAttribute('ms_dynamic_customer_number')->getValue();
+                $storeId = $this->storeManager->getStore()->getId();
+                if($erpCustomerNumber) {                    
+                    $dataToGetRewardPoint = [
+                        "customer_no" => $erpCustomerNumber
+                    ];
+                    $dataToGetRewardPoint = $this->helper->convertArrayToXml($dataToGetRewardPoint);
+                    $getRewardPoint = $this->erpReward->getRewardPointFromErp($this->helper->getRewardPointFunction(),
+                        $this->helper->getSoapActionGetRewardPoint(), $dataToGetRewardPoint);
+
+                    if (empty($getRewardPoint)) {
+                        $this->helper->log('REWARD POINT : ERP system might be off line', 'error');
+                        return;
+                    }
+
+                    if (isset($getRewardPoint['curlStatus']) == '200') {
+                        if($getRewardPoint['response']['PointBalance'] !== $magentoRewardPointBalance) {
+                            $this->erpReward->addCustomerEarnPointToErp($customerId, $erpCustomerNumber, $magentoRewardPointBalance);
+                        }
+                    }
                 }
             }
         }

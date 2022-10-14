@@ -1,0 +1,161 @@
+// /**
+//  * Copyright © 2022 Kemana. All rights reserved.
+//  * @author Harshani Karunasekara <hkarunasekara@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .account {
+        &.magento_reward-customer-info {
+            .column.main {
+                .block-reward-info,
+                .block-reward-membership-container {
+                    ul {
+                        list-style: none;
+                        padding-left: 0;
+                        margin-bottom: 0;
+
+                        li {
+                            position: relative;
+                            padding-left: 16px;
+
+                            &:before {
+                                position: absolute;
+                                content: '';
+                                width: 6px;
+                                height: 6px;
+                                border-radius: 50%;
+                                top: 6px;
+                                left: 0;
+                                background: @kemana-primary-brand-color;
+                            }
+
+                            &:last-child {
+                                margin-bottom: 0;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .block-reward-info {
+                margin-bottom: 0;
+            }
+
+            .block-reward-membership-container {
+                margin-top: 40px;
+
+                .block-content {
+                    .block-reward-membership {
+                        h4 {
+                            width: 100%;
+                            border-radius: @common-border-radius;
+                            padding: 10px 15px;
+                            .lib-line-height(20px);
+
+                            .lib-icon-font(
+                                @icon-pg-club,
+                                @_icon-font-size: 19px,
+                                @_icon-font-line-height: 20px,
+                                @_icon-font-margin: -3px 10px 0 0
+                            )
+                        }
+
+                        &.block-reward-gold-membership {
+                            h4 {
+                                background-color: @kemana-secondary-brand-color;
+                            }
+                        }
+
+                        &.block-reward-premium-membership {
+                            h4 {
+                                background-color: @kemana-primary-brand-color;
+                                .lib-css(color, @color-white);
+                            }
+                        }
+                    }
+                }
+            }
+
+            .reward-settings {
+                .actions-toolbar {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .account {
+        &.magento_reward-customer-info {
+            .page-main {
+                .columns {
+                    .column {
+                        &.main {
+                            .block:not(.widget) {
+                                margin-bottom: 0;
+                            }
+
+                            .block-reward-history {
+                                margin-top: 33px;
+
+                                .table-wrapper {
+                                    margin-bottom: 30px;
+
+                                    table {
+                                        thead {
+                                            tr {
+                                                th {
+                                                    padding: 10px;
+
+                                                    &.balance {
+                                                        width: 100px;
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                        tbody {
+                                            tr {
+                                                td {
+                                                    padding: 10px;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            .block-reward-membership-container {
+                                .block-content {
+                                    .lib-vendor-prefix-display();
+
+                                    .block-reward-membership {
+                                        width: 50%;
+
+                                        &.block-reward-gold-membership {
+                                            padding-right: 5px;
+                                        }
+
+                                        &.block-reward-premium-membership {
+                                            padding-left: 5px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
