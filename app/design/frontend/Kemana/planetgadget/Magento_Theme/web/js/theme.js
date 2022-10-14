@@ -471,5 +471,12 @@ define([
         $('.header .block-search').prependTo( $('.header .header-right') );
     }
 
+    /**
+     * 28. add main-item class to mobile compare
+     */
+
+    if (utility.isMobile()) {
+        $( "ul li.compare" ).addClass( "main-item" );
+    }
 
 });
