@@ -36,5 +36,9 @@
              method="syncRewardPointFromMagentoToErp">
             <schedule>30 7 * * *</schedule>
         </job>
+        <job name="msDynamicOrdersFromMagentoToErp" instance="Kemana\MsDynamics\Cron\SyncOrdersToErp"
+             method="syncOrdersFromMagentoToErp">
+            <schedule>30 7 * * *</schedule>
+        </job>
     </group>
 </config>
