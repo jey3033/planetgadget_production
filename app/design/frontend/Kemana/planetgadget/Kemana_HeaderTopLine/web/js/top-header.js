@@ -21,6 +21,7 @@ define([
 
             $toggleButton.click(function(event) {
                 $content.slideToggle(600);
+                $('.help-info-toggle').toggleClass("active");
             });
         }
     });

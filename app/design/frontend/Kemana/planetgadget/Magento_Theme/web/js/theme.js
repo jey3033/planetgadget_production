@@ -480,11 +480,18 @@ define([
     }
 
     /**
-    * 29. move header search in mobile
+    * 29. mobile sub menu not opaning fix
     */
 
-    $(".action.nav-toggle").click(function () {
-        $(".megamenu-wrapper").css("display","none");
-    });
+    let globalIsMobileMenuOpen = false;
+
+    if (utility.isMobile()) {
+        $(".action.nav-toggle").click(function () {
+            if (!globalIsMobileMenuOpen) {
+                $(".megamenu-wrapper").css("display", "none");
+                globalIsMobileMenuOpen = true;
+            }
+        });
+    }
 
 });
