@@ -1,0 +1,17 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<?php /* @var $block \Magento\ProductAlert\Block\Product\View */ ?>
+<div class="product alert stock-loader <?= $block->getHtmlClass() ?>">
+    <div class="notify-text"><?= __('Notify me when the product is back in stock') ?></div>
+    <button type="button"
+            onclick="location.href='<?= $block->escapeUrl($block->getSignupUrl()) ?>'"
+            title="<?= $block->escapeHtmlAttr(__($block->getSignupLabel())) ?>"
+            class="action primary notify-button"
+            id="notifiy-me">
+        <span><?= __('Notify Me') ?></span>
+    </button>
+</div>
