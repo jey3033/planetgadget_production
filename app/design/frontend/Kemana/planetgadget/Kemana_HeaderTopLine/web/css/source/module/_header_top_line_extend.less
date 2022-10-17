@@ -73,6 +73,19 @@
             padding-bottom: 16px;
             display: block;
             width: 100%;
+            .lib-icon-font(
+                @icon-pg-down-thick,
+                @_icon-font-margin: 0 0 0 12px,
+                @_icon-font-size: 10px,
+                @_icon-font-position: after);
+
+            &.active {
+                .lib-icon-font(
+                    @icon-pg-up-thick,
+                    @_icon-font-margin: 0 0 0 12px,
+                    @_icon-font-size: 10px,
+                    @_icon-font-position: after);
+            }
         }
 
         .help-info-content {
