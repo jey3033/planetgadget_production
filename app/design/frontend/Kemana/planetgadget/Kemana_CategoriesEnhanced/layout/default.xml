@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2020 PT Kemana Teknologi Solusi. All rights reserved.
+ * http://www.kemana.com
+ */
+
+/**
+ * @category Kemana
+ * @package  Kemana_CategoriesEnhanced
+ * @license  Proprietary
+ *
+ * @author   Harsha Amaraweera <hamaraweera@kemana.com>
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<head>
+		<remove src="Kemana_CategoriesEnhanced::css/megamenu.css"/>
+		<remove src="Kemana_CategoriesEnhanced::css/megamenu-theme.css"/>
+		<link src="Kemana_CategoriesEnhanced::css/megamenu-override.css"/>
+		<link src="Kemana_CategoriesEnhanced::css/megamenu-theme-override.css"/>
+	</head>
+</page>

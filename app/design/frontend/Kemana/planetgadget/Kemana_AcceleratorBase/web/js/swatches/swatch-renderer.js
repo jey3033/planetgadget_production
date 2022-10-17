@@ -321,6 +321,7 @@ define([
         },
 
         _stockAPI: async function($widget){
+            $(".product.alert.stock").addClass("stock-loader");
             await $.ajax({
                 url: window.location.origin+"/msdynamic/stock/updateStock",
                 type: 'POST',
@@ -349,6 +350,7 @@ define([
                         $(".product-add-form").show();
                         $(".product.alert.stock").show();
                     }
+                    $(".product.alert.stock").removeClass("stock-loader");
                 }
             });
         },
