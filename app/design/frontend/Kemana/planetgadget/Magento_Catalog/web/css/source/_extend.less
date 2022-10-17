@@ -281,6 +281,10 @@
             }
         }
     }
+
+    .compare {
+        display: block;
+    }
 }
 
 
@@ -327,6 +331,31 @@
         .page-main-description {
             padding: 0;
         }
+    }
+
+    .stock-loader {
+        position: relative;
+        overflow: hidden;
+        background: @color-kemana-gray5;
+        color: @color-kemana-gray5 !important;
+        pointer-events: none;
+
+        #notifiy-me, 
+        .notify-text{
+            opacity: 0;
+        }
+    }
+
+    .stock-loader:before {
+        content: '';
+        display: block;
+        position: absolute;
+        left: -150px;
+        top: 0;
+        height: 100%;
+        width: 20%;
+        background: linear-gradient(to right, transparent 0%, @color-kemana-gray11 50%, transparent 100%);
+        animation: shine 1s cubic-bezier(.4, 0, .2, 1) infinite;
     }
 
     .product-info-main {

@@ -41,7 +41,7 @@
                 <select name="dept[1]" class="dropdown-select" required>
                   <option value=""><?php echo __('Department') ?></option>
                   <?php foreach($metaCollection as $topMetas):?>
-                    <?php if($topMetas->getTypeCode() == 2):?>
+                    <?php if($topMetas->getTypeCode() == 4):?>
                   <option name="dept[<?php echo $topMetas->getDataCode() ?>]" value="<?php echo __($topMetas->getDataCode())?>"><?php echo __($topMetas->getDataName())?></option>
                 <?php endif;?>
                   <?php endforeach;?>
@@ -70,7 +70,7 @@
                 <select name="typ[3]" class="dropdown-select" required>
                   <option value=""><?php echo __('Job Type') ?></option>
                   <?php foreach($metaCollection as $topMetas):?>
-                    <?php if($topMetas->getTypeCode() == 3):?>
+                    <?php if($topMetas->getTypeCode() == 7):?>
                   <option name="typ[<?php echo $topMetas->getDataCode() ?>]"value="<?php echo __($topMetas->getDataCode())?>"><?php echo __($topMetas->getDataName())?></option>
                 <?php endif;?>
                   <?php endforeach;?>
@@ -100,7 +100,7 @@
         
         <?php $dataHeading = $metaCollection->getData();?>        
             <?php foreach($metaCollection as $filters):?>
-                  <?php if($filters->getTypeCode()==2):?>          
+                  <?php if($filters->getTypeCode()==4):?>          
                           <?php $tcode = true?>
                   <?php endif;?>
             <?php endforeach;?>
@@ -116,7 +116,7 @@
             <ul>
             <?php $countMetas = 0;?>
             <?php foreach($metaCollection as $metaInner):?>              
-              <?php if($metaInner->getTypeCode() == 2 && $countMetas< $countShowMore):?>
+              <?php if($metaInner->getTypeCode() == 4 && $countMetas< $countShowMore):?>
               <li>
                 <input id="<?php echo $metaInner->getDataCode() ?>" type="checkbox" name="dept[<?php echo $metaInner->getDataCode() ?>]" value="<?php echo $metaInner->getDataCode() ?>">
                 <label for="<?php echo $metaInner->getDataCode() ?>"><?php echo __($metaInner->getDataName());?></label>
@@ -128,7 +128,7 @@
             <ul class="hidden_l">
             <?php $countMetas = 0;?>
             <?php foreach($metaCollection as $metaInner):?>              
-              <?php if($metaInner->getTypeCode() == 2 ):?>
+              <?php if($metaInner->getTypeCode() == 4 ):?>
                 <?php if($countMetas< $countShowMore):?>
                       <?php $countMetas = $countMetas+1;?>
                   <?php continue;?>
@@ -203,7 +203,7 @@
                         <!-- id 3 begins -->
                         <?php   $tcode = false;?>
         <?php foreach($metaCollection as $filters):?>
-                  <?php if($filters->getTypeCode()==3):?>          
+                  <?php if($filters->getTypeCode()==7):?>          
                           <?php $tcode = true?>
                   <?php endif;?>
             <?php endforeach;?>
@@ -218,7 +218,7 @@
             <ul>
             <?php $countMetas = 0;?>
             <?php foreach($metaCollection as $metaInner):?>              
-              <?php if($metaInner->getTypeCode() == 3 && $countMetas<$countShowMore):?>
+              <?php if($metaInner->getTypeCode() == 7 && $countMetas<$countShowMore):?>
               <li>
                 <input id="<?php echo $metaInner->getDataCode() ?>" type="checkbox" name="typ[<?php echo $metaInner->getDataCode() ?>]" value="<?php echo $metaInner->getDataCode() ?>">
                 <label for="<?php echo $metaInner->getDataCode() ?>"><?php echo __($metaInner->getDataName());?></label>
@@ -230,7 +230,7 @@
             <ul class="hidden_d">
             <?php $countMetas = 0;?>
             <?php foreach($metaCollection as $metaInner):?>              
-              <?php if($metaInner->getTypeCode() == 3 ):?>
+              <?php if($metaInner->getTypeCode() == 7 ):?>
                 <?php if($countMetas<$countShowMore):?>
                       <?php   $countMetas = $countMetas+1;?>
                   <?php continue;?>
