@@ -479,4 +479,12 @@ define([
         $( "ul li.compare" ).addClass( "main-item" );
     }
 
+    /**
+    * 29. move header search in mobile
+    */
+
+    $(".action.nav-toggle").click(function () {
+        $(".megamenu-wrapper").css("display","none");
+    });
+
 });
