@@ -42,22 +42,38 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     protected $customerRepository;
 
     /**
+     * @var \Magento\Framework\Api\SearchCriteriaBuilder
+     */
+    private $searchCriteriaBuilder;
+
+    /**
+     * @var \Magento\InventoryApi\Api\SourceRepositoryInterface
+     */
+    private $sourceRepository;
+
+    /**
      * @param \Magento\Framework\App\Helper\Context $context
      * @param \Kemana\MsDynamics\Logger\Logger $logger
-     * @param \Kemana\MsDynamics\Logger\InventoryLogger $InventoryLogger
+     * @param \Kemana\MsDynamics\Logger\InventoryLogger $inventoryLogger
      * @param \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository
+     * @param \Magento\Framework\Api\SearchCriteriaBuilder $searchCriteriaBuilder
+     * @param \Magento\InventoryApi\Api\SourceRepositoryInterface $sourceRepository
      */
     public function __construct(
         \Magento\Framework\App\Helper\Context             $context,
         \Kemana\MsDynamics\Logger\Logger                  $logger,
         \Kemana\MsDynamics\Logger\InventoryLogger         $inventoryLogger,
-        \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository
+        \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository,
+        \Magento\Framework\Api\SearchCriteriaBuilder $searchCriteriaBuilder,
+        \Magento\InventoryApi\Api\SourceRepositoryInterface $sourceRepository
     )
     {
         $this->logger = $logger;
         $this->inventoryLogger = $inventoryLogger;
         $this->customerRepository = $customerRepository;
         $this->storeScope = \Magento\Store\Model\ScopeInterface::SCOPE_STORE;
+        $this->searchCriteriaBuilder = $searchCriteriaBuilder;
+        $this->sourceRepository = $sourceRepository;
 
         parent::__construct($context);
     }
@@ -731,5 +747,23 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public function getSoapActionCreateOrder()
     {
         return ConfigProvider::CREATE_ORDER_SOAP_ACTION;
+    }
+
+    /**
+     * @param $sourceLocationName
+     * @return false|int|string|null
+     */
+    public function getSourceLocationCodeByName($sourceLocationName) {
+        $searchCriteria = $this->searchCriteriaBuilder
+            ->addFilter('name', $sourceLocationName)
+            ->create();
+
+        $sourceData = $this->sourceRepository->getList($searchCriteria);
+
+        if (count($sourceData->getItems())) {
+            return array_key_first($sourceData->getItems());
+        }
+
+        return false;
     }
 }
