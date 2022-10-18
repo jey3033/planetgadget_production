@@ -11,6 +11,7 @@
 
 @color-oragne-bd: #FFC619;
 @color-oragne-bd-2: #FF8419;
+@color-gray-border-1: #AEB4C1;
 
 
 //
@@ -70,13 +71,266 @@
 							}
 						}
 					}
+					.billing-address-user{
+						span{
+							font-weight: bold;
+						}
+					}
+					.billing-address-address{
+						margin-top: -10px;
+					}
+					.psg-tabs {
+						.payment-method {
+							.title{
+								padding: 0 0 0;
+							}
+
+							.payment-icon{
+								width: 74px;
+								height: 39px;
+								border: 1px solid @color-gray-border-1;
+    							border-radius: 5px;
+							}
+							span.payment_logo_snap_bcava {
+								background: url(/media/logo/paymentmethod/default/Payment_BCA_2x.png);
+								background-position: center;
+								background-repeat: no-repeat;
+								background-size: cover;
+							}
+							span.payment-icon.payment_logo_snap_mandiribill{
+								background: url(/media/logo/paymentmethod/default/Payment_Mandiri_2x.png);
+								background-position: center;
+								background-repeat: no-repeat;
+								background-size: cover;
+							}
+							span.payment-icon.payment_logo_snap_permatava{
+								background: url(/media/logo/paymentmethod/default/Payment_Permata_2x.png);
+								background-position: center;
+								background-repeat: no-repeat;
+								background-size: cover;
+							}
+							span.payment-icon.payment_logo_snap_bniva{
+								background: url(/media/logo/paymentmethod/default/Payment_BNI_2x.png);
+								background-position: center;
+								background-repeat: no-repeat;
+								background-size: cover;
+							}
+							span.payment-icon.payment_logo_snap_briva{
+								background: url(/media/logo/paymentmethod/default/Payment_BRI_2x.png);
+								background-position: center;
+								background-repeat: no-repeat;
+								background-size: cover;
+							}
+							span.payment-icon.payment_logo_snap_otherva{
+								background: url(/media/logo/paymentmethod/default/Payment_Alfamart_2x.png);
+								background-position: center;
+								background-repeat: no-repeat;
+								background-size: cover;
+							}
+							span.payment-icon.payment_logo_snap_gopay{
+								background: url(/media/logo/paymentmethod/default/Payment_Gopay.png);
+								background-position: center;
+								background-repeat: no-repeat;
+								background-size: cover;
+							}
+							span.payment-icon.payment_logo_snap_permata_cc{
+								background: url(/media/logo/paymentmethod/default/Payment_Permata_2x_1.png);
+								background-position: center;
+								background-repeat: no-repeat;
+								background-size: cover;
+							}
+							span.payment-icon.payment_logo_snap_mandiri_cc{
+								background: url(/media/logo/paymentmethod/default/Payment_Mandiri_2x_1.png);
+								background-position: center;
+								background-repeat: no-repeat;
+								background-size: cover;
+							}
+							span.payment-icon.payment_logo_snap_bni_cc{
+								background: url(/media/logo/paymentmethod/default/Payment_BNI_2x_1.png);
+								background-position: center;
+								background-repeat: no-repeat;
+								background-size: cover;
+							}
+							span.payment-icon.payment_logo_snap_bri_cc{
+								background: url(/media/logo/paymentmethod/default/Payment_BRI_2x_1.png);
+								background-position: center;
+								background-repeat: no-repeat;
+								background-size: cover;
+							}
+							span.payment-icon.payment_logo_snap_maybank_cc{
+								background: url(/media/logo/paymentmethod/default/Maybank.png);
+								background-position: center;
+								background-repeat: no-repeat;
+								background-size: cover;
+							}
+							span.payment-icon.payment_logo_snap_ocbcnisp_cc{
+								background: url(/media/logo/paymentmethod/default/OCBC.png);
+								background-position: center;
+								background-repeat: no-repeat;
+								background-size: cover;
+							}
+							span.payment-icon.payment_logo_snap_hsbc_cc{
+								background: url(/media/logo/paymentmethod/default/HSBC.png);
+								background-position: center;
+								background-repeat: no-repeat;
+								background-size: cover;
+							}
+							span.payment-icon.payment_logo_snap_citibank_cc{
+								background: url(/media/logo/paymentmethod/default/Citibank.png);
+								background-position: center;
+								background-repeat: no-repeat;
+								background-size: cover;
+							}
+							span.payment-icon.payment_logo_snap_indomaret{
+								background: url(/media/logo/paymentmethod/default/Payment_Indomaret_2x.png);
+								background-position: center;
+								background-repeat: no-repeat;
+								background-size: cover;	
+							}
+							span.payment-icon.payment_logo_snap_alfamart{
+								background: url(../images/Payment_Alfamart.svg);
+								background-position: center;
+								background-repeat: no-repeat;
+								background-size: cover;
+							}
+							span.payment-indodana-logo{
+								width: 74px;
+							    height: 39px;
+							    border: 1px solid #aeb4c1;
+							    border-radius: 5px;
+							    background: url(../images/Indodana-color.png);
+								background-position: center;
+								background-repeat: no-repeat;
+								background-size: contain;
+							}
+
+							.payment-method-title{
+								span.payment_logo_snap_allbank_cc{
+									display: none;
+								}
+								span.payment_logo_snap_akulaku{
+									display: none;
+								}
+								span.payment_logo_custom{
+									display:none;
+								}
+							}
+						}
+						.psg-tab-item{
+							.payment-method-content{
+								margin: 0 30px;
+								width: 100%;
+							}
+						}
+
+						.without-group{
+							.payment-method-content{
+								margin: unset !important;
+							}
+						}
+
+						.payment-method-billing-address{
+							.billing-address-form{
+								.button-maps{
+									&:hover{
+			                            background-color: @primary__color__dark;
+                            			color: @color-white;
+
+                            			&:before{
+                            				background: unset;
+                            				content: @icon-pg-pinpoint-not-set;
+                            				font-family: 'icons-kemana-theme';
+                            				font-size: 17px;
+                            				padding-right: 5px;
+                            			}
+									}
+								}
+
+								.admin__control-text.maps-input{
+									border: none !important; 
+                    				background: url(/media/logistic/Pinpoint.png) left no-repeat;
+                    				background-size: 15px !important;
+                    				display: inline-block;
+                    				padding: 20px;
+                    				padding-top: 25px !important;
+                    				margin-top: 5px;
+								}
+
+								.field-tooltip-content{
+									top: -35px;
+								}
+							}
+						}
+					}
+					.payment-method-logo-icon{
+						display: flex;
+						flex-wrap: wrap;
+
+						span.paymentextra:not(.snap_allbank_cc):not(.snap_akulaku) {
+						    display:none !important;
+						}
+						
+						.payment_img_snap_allbank_cc{
+							display: flex;
+							flex-wrap: werap;
+						}
+
+						span{
+							margin-right: 10px;
+						}
+
+						.payment-icon{
+							width: 74px;
+							height: 39px;
+							border: 1px solid @color-gray-border-1;
+	    					border-radius: 5px;
+	    					display: block;
+	    					margin-bottom: 15px;
+						}
+						span.payment-icon.payment_logo_snap_akulaku{
+							background: url(/media/logo/paymentmethod/default/Payment_Akulaku_2x.png);
+							background-position: center;
+							background-repeat: no-repeat;
+							background-size: cover;
+						}
+						span.payment-icon.payment_logo_1snap_akulaku{
+							display: none;
+						}
+						span.payment-icon.payment_logo_2snap_akulaku{
+							display: none;
+						}
+						span.payment-icon.payment_logo_snap_allbank_cc{
+							background: url(/media/wysiwyg/payment/visa.png);
+							background-position: center;
+							background-repeat: no-repeat;
+							background-size: cover;
+						}
+						span.payment-icon.payment_logo_1snap_allbank_cc{
+							background: url(/media/wysiwyg/payment/mastercard.png);
+							background-position: center;
+							background-repeat: no-repeat;
+							background-size: cover;
+						}
+						span.payment-icon.payment_logo_2snap_allbank_cc{
+							background: url(/media/wysiwyg/payment/Payment_JCB.png);
+							background-position: center;
+							background-repeat: no-repeat;
+							background-size: cover;
+						}
+						span.payment-icon.payment_logo_kredivopayment{
+							background: url(/media/logo/paymentmethod/default/Payment_Kredivo.png);
+							background-position: center;
+							background-repeat: no-repeat;
+							background-size: cover;
+						}
+					}
 				}
 				.checkout-billing-address{
 					margin-left: -25px;
 
 					.billing-address-same-as-shipping-block{
 						display: block !important;
-						margin-left: 20px;
+						margin-left: 25px;
 
 						label{
 							&:hover{
@@ -105,6 +359,11 @@
 								button.action.action-update{
 									background-color: @color-white;
 									border: 1px solid @primary__color__dark;
+
+									&:hover{
+										background-color: @primary__color__dark;
+										color: @color-white;
+									}
 
 								}
 								button.action.action-cancel{
@@ -167,6 +426,11 @@
 								background-color: @color-white;
 								border: 1px solid @primary__color__dark;
 								border-radius: 5px;
+
+								&:hover{
+									background-color: @primary__color__dark;
+									color: @color-white;
+								}
 							}
 						}
 					}
@@ -183,6 +447,11 @@
 								background-color: @color-white;
 								border: 1px solid @primary__color__dark;
 								border-radius: 5px;
+
+								&:hover{
+									background-color: @primary__color__dark;
+									color: @color-white;
+								}
 							}
 						}
 					}
@@ -211,6 +480,11 @@
 								background-color: @color-white;
 								border: 1px solid @primary__color__dark;
 								border-radius: 5px;
+
+								&:hover{
+									background-color: @primary__color__dark !important;
+									color: @color-white;
+								}
 							}
 						}
 						.secondary{
@@ -220,6 +494,11 @@
 								background-color: @color-white;
 								border: 1px solid @primary__color__dark;
 								border-radius: 5px;
+
+								&:hover{
+									background-color: @primary__color__dark;
+									color: @color-white;
+								}
 							}
 						}
 					}
@@ -260,6 +539,24 @@
 						display: flex;
 					}
 				}
+				.ship-via{
+					.shipping-information-content{
+						.title-value{
+							font-weight: bold;
+						}
+						.telephone-value{
+							font-size: 10px;
+							font-weight: bold;
+
+							&:before{
+								content: "\e906";
+                                font-family: 'icons-kemana-theme';
+                                font-weight: normal;
+                                margin: -3px 6px 0 0;
+							}
+						}
+					}
+				}
 			}
 		}
 	}
@@ -273,8 +570,6 @@
 	.checkout-index-index {
 		.opc-wrapper {
 			.checkout-payment-method {
-				margin-top: 20px;
-
 				.placeorder-button {
 					width: 75%;
 					padding: 0;
@@ -286,6 +581,9 @@
 					}
 					.payment-option-title{
 						display: flex;
+					}
+					#discount-form{
+						width: 285px;
 					}
 					#giftcard-form{
 						display: flex;
@@ -320,6 +618,24 @@
 									width: 285px;
 								}
 							}
+						}
+					}
+					.psg-tabs {
+						.payment-method-content {
+							width: 60%;
+						}
+
+						.payment-method-billing-address{
+							.checkout-billing-address{
+								.fieldset{
+									width: 95%;
+								}
+							}
+						}
+					}
+					.payment-option {
+						.payment-option-content {
+							width: 60%;
 						}
 					}
 				}

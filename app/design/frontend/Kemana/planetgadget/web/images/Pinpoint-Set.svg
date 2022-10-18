@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="17.174" height="15.5" viewBox="0 0 17.174 15.5">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_4175" data-name="Rectangle 4175" width="17.174" height="15.5" transform="translate(0 0.001)" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="Pinpoint_Set" data-name="Pinpoint Set" transform="translate(0 0)">
+    <g id="Group_7028" data-name="Group 7028" clip-path="url(#clip-path)">
+      <path id="Path_8340" data-name="Path 8340" d="M11.363,7.355c-.556,2.981-3.732,5.607-4.885,6.472C5.212,12.88,1.5,9.818,1.5,6.477A4.984,4.984,0,0,1,6.478,1.5a4.924,4.924,0,0,1,2.612.76L9.2,2.144a1.4,1.4,0,0,1,1.976,0l.526.526A6.47,6.47,0,0,0,0,6.477c0,4.8,5.816,8.732,6.063,8.9a.75.75,0,0,0,.832,0c.229-.153,5.254-3.557,5.969-7.887a1.276,1.276,0,0,1-1.5-.132" fill="#0e9e52"/>
+      <path id="Path_8341" data-name="Path 8341" d="M3.819,6.478A2.659,2.659,0,1,0,6.478,3.819,2.662,2.662,0,0,0,3.819,6.478m3.818,0A1.159,1.159,0,1,1,6.478,5.319,1.16,1.16,0,0,1,7.637,6.478" fill="#0e9e52"/>
+      <path id="Path_8342" data-name="Path 8342" d="M16.5.867a.4.4,0,0,0-.562,0L12.212,4.59,10.474,2.852a.4.4,0,0,0-.561,0l-.562.561a.4.4,0,0,0,0,.562l2.581,2.58a.395.395,0,0,0,.561,0L17.059,1.99a.4.4,0,0,0,0-.562Z" fill="#0e9e52"/>
+    </g>
+  </g>
+</svg>

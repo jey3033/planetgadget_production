@@ -23,7 +23,7 @@
         </catalog>
         <customer>
             <address>
-                <dob_show>opt</dob_show>
+                <dob_show>req</dob_show>
             </address>
         </customer>
     </default>

@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2022 PT Kemana Teknologi Solusi. All rights reserved.
+ * http://www.kemana.com
+ */
+
+/**
+ * @category Kemana
+ * @package  Kemana_AdditionalItems
+ * @license  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ *
+ * @author   Achintha Madushan <amadushan@kemana.com>, Cipto Raharjo <craharjo@kemana.com>
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="sales_order" resource="sales" engine="innodb" comment="Sales Flat Order">
+        <column xsi:type="int" name="is_synced_to_msdynamic_erp" nullable="true" comment="Order sync or not to the Ms Dynamic ERP"/>
+    </table>
+    <table name="sales_order_grid" resource="sales" engine="innodb" comment="Sales Order Grid">
+        <column xsi:type="int" name="is_synced_to_msdynamic_erp" nullable="true" comment="Order sync or not to the Ms Dynamic ERP"/>
+    </table>
+    <table name="api_transport_log" resource="sales" engine="innodb" comment="API Transport Log">
+        <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true" comment="Id"/>
+        <column xsi:type="varchar" name="type" nullable="true" length="255" comment="Type" />
+        <column xsi:type="varchar" name="url" nullable="true" length="255" comment="URL" />
+        <column xsi:type="varchar" name="method" nullable="true" length="25" comment="Method" />
+        <column xsi:type="text" name="api_function" nullable="true" comment="API Function" />
+        <column xsi:type="text" name="soap_action" nullable="true" comment="SOAP Function" />
+        <column xsi:type="text" name="request_body" nullable="true" comment="Request Body" />
+        <column xsi:type="text" name="response_body" nullable="true" comment="Response Body" />
+        <column xsi:type="varchar" name="response_status" nullable="true" length="25" comment="Response Status" />
+        <column xsi:type="boolean" name="status" nullable="true" comment="Status" />
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Updated At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+</schema>

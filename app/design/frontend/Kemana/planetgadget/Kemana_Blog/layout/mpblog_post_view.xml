@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2021 PT Kemana Teknologi Solusi. All rights reserved.
+ * http://www.kemana.com
+ */
+
+/**
+ * @category Kemana
+ * @package  Kemana_Blog
+ * @license  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ *
+ *
+ * @author   parth godhani <pgodhani@kemana.com>
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="mpblog_design"/>
+    <body>
+        <referenceBlock name="head.additional">
+            <block class="Kemana\Blog\Block\Post\View" name="mpblog.post.head" template="post/head.phtml"/>
+        </referenceBlock>
+        <referenceContainer name="content">
+            <block class="Kemana\Blog\Block\Post\View" name="mpblog.post.view" template="post/view.phtml" cacheable="false">
+                <block class="Kemana\Blog\Block\Post\RelatedProduct" name="related.category.products" as="related_products" template="Kemana_Blog::product/list.phtml"/>
+                    <block class="Kemana\SocialShare\Block\SocialShare" name="km.SocialShare" template="Kemana_SocialShare::blog_socialshare.phtml"
+                       after="-">
+                        <arguments>
+                            <argument name="page" xsi:type="string">under_cart</argument>
+                            <argument name="position" xsi:type="string">under_cart</argument>
+                            <argument name="type" xsi:type="string">inline</argument>
+                        </arguments>
+                    </block>
+            </block>
+
+        </referenceContainer>
+    </body>
+</page>

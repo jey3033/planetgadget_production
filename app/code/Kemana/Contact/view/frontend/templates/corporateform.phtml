@@ -1,0 +1,123 @@
+<!--
+/**
+ * Copyright © 2022 PT Kemana Teknologi Solusi. All rights reserved.
+ * http://www.kemana.com
+ */
+
+/**
+ * @category Kemana
+ * @package  Kemana_Conatct
+ * @license  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ *
+ *
+ * @author   Parth Godhani <pgodhani@kemana.com>
+ */
+ -->
+
+<div class="corporate-contact-form">
+   <div class="heading">
+      <h2 class="title"><?= __('Hubungi ') ?><span><?= __('kami') ?></span></h2>
+   </div>
+   <form class="form corporate-contact" id="corporate-form" method="post">
+      <fieldset class="fieldset with-border">
+         <div class="info">
+            <span class="title" data-bind="i18n: 'Kami siap memberikan layanan terbaik untuk Anda'"></span>
+         </div>
+         <div class="fields left-col">
+           <div class="field name required">
+              <label class="label" for="name"><span class="title" data-bind="i18n: 'Nama'"></span></label>
+              <div class="control">
+                 <input name="name"
+                    id="corporatename"
+                    title="Name"
+                    class="form-control"
+                    type="text"
+                    placeholder="Masukkan nama Anda"/>
+              </div>
+           </div>
+           <div class="field email required">
+              <label class="label" for="email"><span class="title" data-bind="i18n: 'Email'"></span></label>
+              <div class="control">
+                 <input name="email"
+                    id="corporateemail"
+                    title="Email"
+                    class="form-control"
+                    type="email"
+                    placeholder="Masukkan email Anda"/>
+              </div>
+           </div>
+           <div class="field telephone required">
+              <label class="label" for="telephone"><span class="title" data-bind="i18n: 'Nomor Telepon'"></span></label>
+              <div class="control">
+                 <input name="telephone"
+                    id="corpoartetelephone"
+                    title="PhoneNumber"
+                    class="form-control"
+                    placeholder="Contoh: 081234567890"
+                    type="tel"/>
+              </div>
+           </div>
+           <div class="field intrested required">
+              <label class="label" for="intrested"><span class="title" data-bind="i18n: 'Saya tertarik menjadi'"></span></label>
+              <select title="Intrested" name="intrested" class="form-control" id="intrested">
+                 <option>Mitra</option>
+              </select>
+           </div>
+        </div>
+        <div class="fields right-col">
+           <div class="field companyname required">
+              <label class="label" for="companyname"><span class="title" data-bind="i18n: 'Nama Perusahaan'"></span></label>
+              <div class="control">
+                 <input name="companyname"
+                    id="corporatecompanyname"
+                    title="CompanyName"
+                    class="form-control"
+                    type="text"
+                    placeholder="Masukkan nama perusahaan"/>
+              </div>
+           </div>
+           <div class="field companyfield required">
+              <label class="label" for="companyfield"><span class="title" data-bind="i18n: 'Bidang Perusahaan'"></span></label>
+              <div class="control">
+                 <select title="CompanyField" name="companyfield" class="form-control" id="companyfield">
+                    <option>-- Pilih bidang perusahaan --</option>
+                 </select>
+              </div>
+           </div>
+           <div class="field job required">
+              <label class="label" for="job"><span class="title" data-bind="i18n: 'Jabatan'"></span></label>
+              <div class="control">
+                 <input name="job"
+                    id="corporatejob"
+                    title="job"
+                    class="form-control"
+                    type="text"
+                    placeholder="Masukkan jabatan"/>
+              </div>
+           </div>
+           <div class="field desired required">
+              <label class="label" for="desired">
+              <span class="title" data-bind="i18n: 'Jabatan'"></span>
+              </label>
+              <div class="control">
+                 <textarea name="desired"
+                    id="corporatedesired"
+                    title="DesiredSolution"
+                    class="form-control"
+                    cols="5"
+                    rows="3"
+                    placeholder="Masukkan solusi yang Anda inginkan"/>
+              </div>
+           </div>
+         </div>
+      </fieldset>
+      <div class="actions-toolbar">
+         <div class="primary">
+            <input type="hidden" name="hideit" id="hideit" value="" />
+            <button type="submit" title="Send" class="corporatebtn">
+            <span class="title" data-bind="i18n: 'KIRIM'"></span>
+            </button>
+         </div>
+      </div>
+   </form>
+</div>

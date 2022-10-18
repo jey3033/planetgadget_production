@@ -26,20 +26,23 @@
                         <!-- /ko -->
                         <!-- ko ifnot: ($data.full_view)-->
                         <dd class="values" data-bind="html: value"></dd>
+                        <br/>
                         <!-- /ko -->
                         <!-- /ko -->
                     </dl>
                 </div>
             </div>
             <!-- /ko -->
-            <div class="details-qty">
-                <span class="label"><!-- ko i18n: 'Qty' --><!-- /ko --></span>
-                <span class="value" data-bind="text: $parent.qty"></span>
+            <div class="product-item-inner-value">
+                <div class="details-qty">
+                    <span class="label"><!-- ko i18n: 'Qty:' --><!-- /ko --></span>
+                    <span class="value" data-bind="text: $parent.qty"></span>
+                </div>
+                <!-- ko foreach: getRegion('after_details') -->
+                <!-- ko template: getTemplate() --><!-- /ko -->
+                <!-- /ko -->
             </div>
         </div>
-        <!-- ko foreach: getRegion('after_details') -->
-        <!-- ko template: getTemplate() --><!-- /ko -->
-        <!-- /ko -->
     </div>
 
 

@@ -1,0 +1,41 @@
+<span class="choose-method-payment-custom" data-bind="i18n: 'Pilih metode pembayaran yang diinginkan:'"></span>
+<br/><br/>
+
+<div if="isPaymentMethodsAvailable()" ifnot="haveFreePayment()"
+     class="items payment-methods test">
+     <div repeat="foreach: paymentGroupsList, item: '$group'"
+         class="payment-group">
+          <!-- ko if: ($group().alias != 'default') -->
+               <div if="kemanaPaymentGroupsList"
+                  class="psg-tabs" data-bind="mageInit: {'paymentgroup':{}}">
+                    <div repeat="foreach: kemanaPaymentGroupsList, item: '$kemanaGroup'"
+                      class="psg-tab-item" data-bind="'css' : $kemanaGroup().class_icon, attr: {id: $kemanaGroup().class_icon}">
+                      <!-- ko if: ($kemanaGroup().class_icon == 'group') -->
+                         <div class="title field radios">
+                              <input type="radio" class="radio"  data-bind="value: $kemanaGroup().class_icon"/>
+                              <label class="label">
+                                   <span data-bind="text: $t($kemanaGroup().title)"></span>
+                              </label>
+                         </div>
+                         <div class="content">
+                              <each args="data: getRegion($group().displayArea + $kemanaGroup().group_id), as: 'method'" render=""/>
+                         </div>
+                        <!-- /ko -->
+                        <!-- ko if: ($kemanaGroup().class_icon == 'without-group') -->
+                         <div data-bind="attr: {'class': 'without-group'}">
+                            <each args="data: getRegion($group().displayArea + $kemanaGroup().group_id), as: 'method'" render=""/>
+                         </div>
+                        <!-- /ko -->
+                    </div>
+               </div>  
+            <each args="data: getRegion($group().displayArea), as: 'method'" render=""/>
+          <!-- /ko -->
+     </div>
+</div>
+
+
+
+<div ifnot="isPaymentMethodsAvailable()" ifnot="haveFreePayment()"
+     class="no-payments-block"
+     translate="'No Payment Methods'">
+</div>

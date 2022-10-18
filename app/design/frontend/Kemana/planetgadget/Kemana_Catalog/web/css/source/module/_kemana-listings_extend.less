@@ -88,7 +88,7 @@
     .toolbar-products {
         .toolbar-sorter {
             &.sorter {
-                padding-left: 10px;
+                padding-left: 0;
                 position: relative;
 
                 .qty-selector {
@@ -124,7 +124,8 @@
             .lib-css(padding, @indent__base);
             width: 25%;
             background-color: @color-white;
-            border-radius: 5px;
+            border-radius: @common-border-radius;
+            margin-bottom: 50px;
         }
 
         .column.main {

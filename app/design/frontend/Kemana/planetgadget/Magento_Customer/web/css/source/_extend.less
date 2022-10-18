@@ -198,7 +198,7 @@
         .page-title-wrapper {
             .page-title {
                 text-transform: none;
-                margin-bottom: 30px;
+                margin-bottom: 20px;
             }
         }
 
@@ -222,7 +222,7 @@
 
             tbody {
                 td {
-                    padding: 20px 15px 0 15px;
+                    padding: 18px 15px 0;
                     color: @kemana-primary-brand-color;
 
                     &:first-child {
@@ -289,7 +289,7 @@
 
         .customer-login-wrapper {
             padding-inline: 10px;
-            margin-top: 10px;
+            margin-top: 30px;
         }
 
         .customer-create-wrapper {
@@ -306,16 +306,34 @@
         .column.main,
         .sidebar-additional {
             .lib-css(background, @panel__background-color);
-            margin-top: 66px;
+            margin-top: 80px;
             border-radius: 5px;
             padding: 10px;
             margin-bottom: 50px;
         }
 
+        .column.main {
+            .block:not(.widget) {
+                .block-content {
+                    .box {
+                        margin-bottom: 33px;
+
+                        &.box-address-shipping {
+                            margin-bottom: 33px;
+                        }
+                    }
+                }
+
+                &.block-dashboard-info {
+                    margin-bottom: 43px;
+                }
+            }
+        }
+
         .sidebar-main {
             position: relative;
             padding-bottom: 20px;
-            margin-top: -76px;
+            margin-top: -70px;
 
             .title {
                 margin-bottom: 0;
@@ -336,10 +354,10 @@
                             margin-bottom: 0;
 
                             &:first-child {
-                                padding: 12px 15px 11px;
+                                padding: 9px 15px 9px;
                                 display: inline-block;
                                 width: 100%;
-                                height: 43px;
+                                height: 38px;
 
                                 &:before {
                                     content: 'Menu';
@@ -409,6 +427,17 @@
             }
         }
     }
+
+
+    .block-dashboard-addresses {
+        .block-title {
+            .action {
+                position: relative;
+                bottom: unset;
+                left: 5px;
+            }
+        }
+    }
 }
 
 //
@@ -458,8 +487,17 @@
             padding-top: 30px;
         }
 
+        .page-title-wrapper {
+            .page-title {
+                .lib-font-size(28px);
+                .lib-line-height(38px);
+            }
+
+        }
         &.page-layout-2columns-left {
             .columns {
+                .lib-vendor-prefix-display();
+
                 .sidebar-main,
                 .sidebar-additional {
                     width: 100%;
@@ -522,16 +560,18 @@
                 .column {
                     &.main {
                         width: ~'calc(100% - 330px)';
+                        margin-left: 20px;
                         border-radius: 5px;
                         padding: 30px;
                         background: @panel__background-color;
                         margin-bottom: 50px;
 
                         .block:not(.widget) {
-                           margin-bottom: 50px;
+                           margin-bottom: 43px;
 
                             &.block-dashboard-addresses {
                                 padding: 0;
+                                //margin-bottom: 0;
                             }
 
                             &.block-addresses-list {
@@ -586,6 +626,29 @@
         .table-wrapper {
             thead {
                 .lib-css(border-bottom, @account-table-border);
+            }
+
+            .col {
+                &.date {
+                    width: 18%;
+                    text-align: left;
+                }
+
+                &.total {
+                    text-align: left;
+                }
+
+                &.actions {
+                    width: 17%;
+                }
+
+                &.ship_to {
+                    -webkit-box-orient: vertical;
+                    -webkit-line-clamp: 1;
+                    line-clamp: 1;
+                    display: -webkit-box;
+                    overflow: hidden;
+                }
             }
         }
 

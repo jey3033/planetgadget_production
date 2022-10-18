@@ -109,23 +109,7 @@ $color = $helper->getBlogConfig('general/font_color');
         </script>
     <?php endif;?>
     <?php if ($helper->getBlogConfig('share/enabled')) : ?>
-        <div class="mp-clear"></div>
-        <script type="text/javascript"
-                src="//s7.addthis.com/js/300/addthis_widget.js#pubid=<?= /* @noEscape */ $block->getPubId() ?>"
-                async="async"></script>
-        <div class="mp-blog-share">
-            <div class="mp-blog-share-container" id="sharing">
-                <div class="share-col-left">
-                    <h6><?= /* @noEscape */ $block->escapeHtml(__('Share this post')) ?></h6>
-                </div>
-                <div class="share-col-right">
-                    <div class="post-sharing-button">
-                        <div class="addthis_inline_share_toolbox"></div>
-                        <!--                    <div class="addthis_sharing_toolbox"></div>-->
-                    </div>
-                </div>
-            </div>
-        </div>
+        <?php echo $block->getChildBlock('km.SocialShare')->toHtml(); ?>
     <?php endif; ?>
     <?php if ($authorName && $helper->showAuthorInfo()) :
         $block->resizeImage($author->getImage(), '135x', \Kemana\Blog\Helper\Image::TEMPLATE_MEDIA_TYPE_AUTH);
@@ -157,12 +141,12 @@ $color = $helper->getBlogConfig('general/font_color');
     <?php $relatedPosts = $_post->getRelatedPostsCollection(); ?>
     <?php if ($relatedPosts && count($relatedPosts)) : ?>
         <div class="block-blog-related topic-list">
-            <h3><?= /* @noEscape */ $block->escapeHtml(__('Related Posts')); ?></h3>
+            <h2><?= $block->escapeHtml(__('Related %1',sprintf('<span>%s</span>','Posts')),['span']) ?></h2>
             <?php if ($block->getRelatedMode()) :?>
                 <div class="owl-carousel owl-theme">
                     <?php foreach ($relatedPosts as $post) : ?>
                         <div class="item post-list-item ">
-                            <div class="post-item-wraper">
+                            <div class="post-item-wrapper">
                                 <div class="post-image">
                                     <?php if ($post->getImage()) : ?>
                                         <a href="<?= /* @noEscape */ $post->getUrl() ?>">
@@ -175,14 +159,17 @@ $color = $helper->getBlogConfig('general/font_color');
                                         </a>
                                     <?php endif; ?>
                                 </div>
-                                <div class="post-info-wraper">
-                                    <h2 class="mp-post-title">
+                                <div class="post-info-wrapper">
+                                    <h4 class="mp-post-title">
                                         <a class="post-link-title"
                                            title="<?= $block->escapeHtml($post->getName()) ?>"
                                            href="<?= /* @noEscape */ $post->getUrl() ?>">
                                             <?= /* @noEscape */ $post->getName(); ?>
                                         </a>
-                                    </h2>
+                                    </h4>
+                                    <div class="post-short-description">
+                                        <p>Setiap konsumen yang melakukan pre-order akan mendapatkan penawaran ...</p>
+                                    </div>
                                     <div class="mp-post-info">
                                         <?= /* @noEscape */ $block->getPostInfo($post); ?>
                                     </div>
@@ -194,9 +181,10 @@ $color = $helper->getBlogConfig('general/font_color');
                 <script>
                     require([
                         'jquery',
+                        'utility',
                         'owlCarousel',
                         'domReady!'
-                    ], function ($) {
+                    ], function ($, utility) {
                         'use strict';
                         try {
                             $(".owl-carousel").owlCarousel({
@@ -204,13 +192,17 @@ $color = $helper->getBlogConfig('general/font_color');
                                 loop: false,
                                 margin: 10,
                                 responsive: {
-                                    600: {
+                                    768: {
                                         items: 3
                                     }
                                 }
                             });
                         } catch (e) {
                             $('.owl-carousel').css('display', 'flex');
+                        }
+
+                        if (utility.isMobile()) {
+                            $('.owl-carousel').owlCarousel('destroy');
                         }
                     });
                 </script>
@@ -252,10 +244,10 @@ $color = $helper->getBlogConfig('general/font_color');
         <?php $relatedBlock = $block->getChildBlock('related_products'); ?>
         <?php if ($relatedBlock->hasProduct()) : ?>
             <div class="block-blog-related products-same-post page-products mpcss">
-                <h2><?= /* @noEscape */ ($helper->getBlogConfig('product_post/post_detail/title')) ?: $block->escapeHtml(__('Related Products')) ?></h2>
+                <h2><?= /* @noEscape */ ($helper->getBlogConfig('product_post/post_detail/title')) ?: $block->escapeHtml(__('Related %1',sprintf('<span>%s</span>','Products')),['span']) ?></h2>
                 <div class="related-content-container">
                     <?= $relatedBlock->toHtml(); ?>
-                </div>
+                </div>f
             </div>
         <?php endif; ?>
     <?php endif; ?>

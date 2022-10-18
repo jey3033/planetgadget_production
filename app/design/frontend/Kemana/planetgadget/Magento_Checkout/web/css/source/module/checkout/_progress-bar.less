@@ -32,7 +32,7 @@
 @checkout-progress-bar-item-element-inner__active__font-size: 28px;
 @checkout-progress-bar-item-element-inner__active__line-height: 1;
 
-@checkout-progress-bar-item-element-inner-order-icon-width: 30px;
+@checkout-progress-bar-item-element-inner-order-icon-width: 27px;
 @checkout-progress-bar-item-element-inner-order-icon-height: 26px;
 
 @checkout-progress-bar-item-element-inner-order-icon: @icon-checkout-shipping;
@@ -88,7 +88,7 @@
                 background: @checkout-progress-bar-item-element-inner__background-color;
                 top: 25px;
                 content: '';
-                width: 66px;
+                width: 68px;
                 height: 6px;
                 right: 0%;
                 position: absolute;
@@ -101,7 +101,7 @@
                     background: @checkout-progress-bar-item-element-inner__background-color 0% 0% no-repeat padding-box;
                     top: 25px;
                     content: '';
-                    width: 66px;
+                    width: 68px;
                     height: 6px;
                     left: 0%;
                     position: absolute;
@@ -110,7 +110,6 @@
         }
 
         > span {
-            font: normal normal 600 10px/13px Spartan;
             display: inline-block;
             padding-top: 45px;
             width: 100%;
@@ -119,11 +118,7 @@
             text-transform: uppercase;
             .lib-typography(
                 @_color: @checkout-progress-bar-item__color,
-                @_font-family: false,
-                @_font-size: @checkout-progress-bar__font-size,
-                @_font-style: false,
-                @_font-weight: @checkout-progress-bar__font-weight,
-                @_line-height: false
+                @_font-family: false
             );
 
             &:after { // Item element inner
@@ -249,11 +244,18 @@
     .opc-progress-bar-item {
         top: 33px;
         span {
-            font-size: 8px;
+            font-size: 6px;
+            font-weight: 600;
+            margin-right: 20px;
         }
         &:first-child {
             &:before {
                 display: none;
+            }
+            &:after {
+                top: -20px !important;
+                width: 31px !important;
+                height: 4px !important;
             }
         }
 
@@ -300,14 +302,16 @@
     .opc-progress-bar {
         position: fixed;
         right: 0;
-        top: 32px;
-        z-index: 3;
+        top: 0;
+        z-index: 300;
     }
 
     .opc-progress-bar-item {
         .lib-css(width, @checkout-progress-bar-item__width);
 
         > span {
+            font-size: 10px !important;
+            font-weight: 600 !important;
             .lib-css(color, @color-kemana-gray2);
         }
 

@@ -29,32 +29,48 @@ class Index extends \Magento\Framework\App\Action\Action
     protected $customer;
     protected $helper;
     protected $syncCustomersToErp;
+    protected $syncCustomersFromErp;
+    protected $syncOrdersToErp;
 
     public function __construct(
-        \Magento\Framework\App\Action\Context      $context,
-        \Magento\Framework\View\Result\PageFactory $pageFactory,
-        \Kemana\MsDynamics\Model\Api\Erp\Customer  $customer,
-        \Kemana\MsDynamics\Helper\Data             $helper,
-        \Kemana\MsDynamics\Cron\SyncCustomersToErp $syncCustomersToErp
+        \Magento\Framework\App\Action\Context        $context,
+        \Magento\Framework\View\Result\PageFactory   $pageFactory,
+        \Kemana\MsDynamics\Model\Api\Erp\Customer    $customer,
+        \Kemana\MsDynamics\Helper\Data               $helper,
+        \Kemana\MsDynamics\Cron\SyncCustomersToErp   $syncCustomersToErp,
+        \Kemana\MsDynamics\Cron\SyncCustomersFromErp $syncCustomersFromErp,
+        \Kemana\MsDynamics\Cron\SyncOrdersToErp $syncOrdersToErp
     )
     {
         $this->customer = $customer;
         $this->_pageFactory = $pageFactory;
         $this->helper = $helper;
         $this->syncCustomersToErp = $syncCustomersToErp;
+        $this->syncCustomersFromErp = $syncCustomersFromErp;
+        $this->syncOrdersToErp = $syncOrdersToErp;
 
         return parent::__construct($context);
     }
 
     public function execute()
     {
+
+        /*$syncOrdersToErp = $this->syncOrdersToErp->syncOrdersFromMagentoToErp();
+
+        exit;
+
+        $d = 0;
+        $this->syncCustomersFromErp->syncCustomersFromErpToMagento();
+        echo "Donee";
+        exit;
+
         $this->syncCustomersToErp->syncMissingCustomersFromRealTimeSync();
         echo "Done";
-        exit;
+        exit;*/
         // Get Customer By ID
-        $customerInErp = $this->customer->getCustomerInErp($this->helper->getFunctionGetCustomer(), '60215644000');
-        echo "done";
-        exit;
+        /* $customerInErp = $this->customer->getCustomerInErp($this->helper->getFunctionGetCustomer(), '60215644000');
+         echo "done";
+         exit;*/
         //json_decode($customerInErp['return_value'])[1][0]
 
         //Create a customer

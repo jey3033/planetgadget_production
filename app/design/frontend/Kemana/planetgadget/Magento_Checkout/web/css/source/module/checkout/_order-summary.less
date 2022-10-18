@@ -54,7 +54,7 @@
 
         .items-in-cart {
             border: 1px solid #AEB4C1;
-            border-radius: 5px;
+            border-radius: @common-border-radius;
 
             &.active{
                 .title span.title:after{
@@ -72,11 +72,11 @@
                     margin-bottom: 0 !important;
                 }
 
-                padding: 10px;  
+                padding: 10px;
                 text-align: center;
                 cursor: pointer;
                 margin-bottom: 0px;
-                
+
                 strong {
                     font-size: 12px !important;
                     .lib-css(font-weight, @sub-heading__font-weight);
@@ -144,8 +144,9 @@
         //  Block title
         .items-in-cart {
             .product {
-                .lib-vendor-prefix-display();
-                .lib-vendor-prefix-flex-wrap();
+                //.lib-vendor-prefix-display();
+                display: inline-flex;
+                flex-wrap: nowrap;
                 position: relative;
                 vertical-align: top;
 
@@ -163,6 +164,7 @@
             .lib-css(padding, @checkout-summary-items__padding @checkout-summary-items__padding 0 0);
             border: 0;
             overflow-x: unset;
+            padding-top: 10px;
 
             .minicart-items {
                 list-style: none;
@@ -196,11 +198,25 @@
                 display: initial;
             }
 
+            .product-item-inner-value{
+                display: flex;
+                flex-wrap: nowrap;
+            }
+
             .details-qty {
                 .lib-font-size(12);
                 .lib-line-height(13);
                 .lib-css(color, @color-kemana-dark1);
+                border-right: 1px solid #AEB4C1;
                 margin-bottom: @indent__xs;
+                padding-right: 10px;
+                display: flex;
+                flex-wrap: nowrap;
+                padding-top: 2px;
+            }
+
+            .subtotal{
+                padding-left: 10px;
             }
         }
 
@@ -208,7 +224,6 @@
             .product-item {
                 margin: 0;
                 padding-left: 0;
-                margin-top: @indent__base;
 
                 &:first-child {
                     margin-top: 0;
@@ -250,6 +265,31 @@
 
                 .action {
                     margin: 0;
+                }
+            }
+        }
+    }
+}
+
+
+//
+//  Mobile
+//  _____________________________________________
+.media-width(@extremum, @break) when (@extremum ='max') and (@break =@screen__m) {
+    .opc-block-summary {
+        .items-in-cart {
+            .product {
+                margin-left: -15px;
+            }
+        }
+
+        .summary-totals{
+            .title{
+                border-bottom: 1px solid @color-pg-light-gray2;
+                padding: 0;
+                
+                .title{
+                    display: none;
                 }
             }
         }

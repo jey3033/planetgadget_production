@@ -29,6 +29,57 @@
                 .lib-line-height(38px);
             }
         }
+
+        .category-detail-recommendation-sensei {
+            display: none;
+        }
+
+        .category-detail-featured-gadgets{
+            .home-new-arrivals-wrapper{
+                background-color: @color-pg-light-gray3;
+
+                .block-new-products{
+                    .products-grid{
+                        .slick-arrow{
+                            display: none !important;
+                        }
+
+                        .product-item{
+                            .product-item-details{
+                                .items-sold{
+                                    display: none;
+                                }
+
+                                .product-reviews-summary{
+                                    display: unset !important;
+
+                                    .reviews-actions{
+                                        display: none;
+                                    }
+                                }
+
+                                .action.tocompare{
+                                    display: block !important;
+                                    width: 29px;
+
+                                    &:before{
+                                        font-size: 15px;
+                                        line-height: 16px;
+                                        color: @color-gray-border-1;
+                                    }
+
+                                    &:hover{
+                                        &:before{
+                                            color: @primary__color__dark;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 

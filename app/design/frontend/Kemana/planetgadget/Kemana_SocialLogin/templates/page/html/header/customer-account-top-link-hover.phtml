@@ -1,0 +1,52 @@
+<?php
+$loginHelper = $this->helper(Kemana\SocialLogin\Helper\Data::class);
+?>
+<?php if ($loginHelper->getPopupLogin() === 'hover_login'): ?>
+    <div class="account-detail__content social-login-accordion">
+        <ul class="list-info">
+            <li><?= $block->getChildHtml('social.login.hover') ?></li>
+        </ul>
+    </div>
+<?php elseif ($loginHelper->getPopupLogin() === 'none'): ?>
+    <div class="account-detail__content">
+        <ul class="list-info">
+            <li><a class="customer-login-link" href="<?= $this->getUrl('customer/account/login'); ?>"><?= __('Login') ?></a></li>
+            <li><a class="customer-register-link" href="<?= $this->getUrl('customer/account/create'); ?>"><?= __('Register ') ?></a></li>
+        </ul>
+    </div>
+<?php endif; ?>
+
+
+
+<script type="text/javascript">
+    require(["jquery","matchMedia"],function ($) {
+        $(document).ready(function () {
+
+            $('.account-menu_content').mouseover(function () {
+                if($('.account-menu_content .account-detail__content').hasClass('active')){
+                    $('.account-menu_content .account-detail__content').removeClass('active');
+                    
+                    $('body').removeClass('active');
+                }
+                if(!$('.account-menu_content .account-detail__content').hasClass('active')){
+                    
+                    $('body').addClass('active');
+                }
+            });
+            $(document).mouseout(function (e) {
+                let accountWrap = $('.account-menu_content');
+
+                // if the target of the click isn't the container nor a descendant of the container
+                if (!accountWrap.is(e.target) && accountWrap.has(e.target).length === 0) {
+                    $('.account-menu_content .account-detail__content').removeClass('active');
+                    
+                    $('body').removeClass('active');
+                }
+            });
+
+        });
+    });
+</script>
+<?php // @codingStandardsIgnoreEnd ?>
+
+

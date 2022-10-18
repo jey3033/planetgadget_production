@@ -37,8 +37,26 @@
         }
 
         .product-items {
+            .product-item {
+                .product-item-info {
+                    padding: 0;
+
+                    .product-item-details {
+                        display: none;
+                    }
+                }
+            }
+
             .product-image-wrapper {
-                border-radius: 5px;
+                border-radius: @common-border-radius;
+                .lib-css(background, @panel__background-color);
+
+                .product-image-photo {
+                    margin-block : 0;
+                    left: 50%;
+                    top: 50%;
+                    transform: translate(-50%, -50%);
+                }
             }
         }
 
@@ -56,6 +74,14 @@
                 strong {
                     .lib-font-size(@h2__font-size-desktop);
                     .lib-line-height(@h2__line-height-desktop);
+                }
+            }
+        }
+
+        .product-items {
+            .product-item {
+                .product-item-info {
+                    min-height: auto;
                 }
             }
         }

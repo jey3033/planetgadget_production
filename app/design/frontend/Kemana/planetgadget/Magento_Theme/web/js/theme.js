@@ -1,10 +1,10 @@
 define([
     'jquery',
     'utility',
-    'slickpg',
+    'slick',
     'mage/accordion',
     'domReady!'
-], function ($, utility, slickpg) {
+], function ($, utility, slick) {
     /**
      * add comment here for you function
      * 1.Mobile footer accordion function
@@ -66,7 +66,7 @@ define([
      */
     function setPLPButton() {
         if (utility.isMobile()) {
-            let content = $('<div class="mobile-filer">Shop By</div>')
+            let content = $('<div class="mobile-filer">Filter</div>')
             $(content).insertBefore('.toolbar-sorter.sorter');
         }
     }
@@ -288,21 +288,22 @@ define([
         slidesToScroll: 1,
         arrows: true,
         dots: false,
+        swipeToSlide: true,
         responsive: [
             {
-                breakpoint: 1023,
+                breakpoint: 1024,
                 settings: {
-                    slidesToShow: 3
+                    slidesToShow: 3,
+                    arrows: false
                 }
             },
             {
-                breakpoint: 767,
+                breakpoint: 768,
                 settings: {
                     arrows: false,
                     dots: false,
                     slidesToShow: 2,
-                    slidesToScroll: 2,
-                    rows: 2
+                    slidesToScroll: 2
                 }
             },
             {
@@ -310,6 +311,7 @@ define([
                 settings: "unslick" // destroys slick
             }]
     });
+
     // $(".block .products-grid .product-items").slick({
     //     /**
     //      * normal options...
@@ -377,7 +379,8 @@ define([
             {
                 breakpoint: 1023,
                 settings: {
-                    slidesToShow: 4
+                    slidesToShow: 2,
+                    arrows: false
                 }
             },
             {
@@ -404,5 +407,91 @@ define([
 
     $( ".product-section-title" ).wrapInner( "<span></span>");
 
+
+    /**
+     * 22. move button in my account wishlist
+     */
+
+    if (utility.isMobile()) {
+        $('.page-title-wrapper .tocart').prependTo( $('.actions-toolbar') );
+    }
+
+    /**
+     * 23. blackout background when hovaring main menu
+     */
+
+    $('.navbar.navbar-default.navigation').mouseover(function () {
+        if($('.category-item.level-top').hasClass('menu-active')){
+            $('body').addClass('active');
+        }
+        if(!$('.category-item.level-top').hasClass('menu-active')){
+            $('body').removeClass('active');
+        }
+    });
+
+    /**
+     * 24. mega menu hide 2nd column if there is no 2nd level menu
+     */
+
+    $('.level1.category-item > a').mouseover(function () {
+        if(!$(this).parent().find(".megamenu-inner").length > 0) {
+            $(".megamenu-wrapper.tabs-menu.vertical").attr('style', 'width: 310px !important');
+        } else {
+            $(".megamenu-wrapper.tabs-menu.vertical").attr('style', 'width: unset');
+        }
+    });
+
+    /**
+     * 25. mega menu hide 2nd column if there is no 2nd level menu
+     */
+
+    $(".qty-selector").click(function() {
+        if(!$(".sorter-options.qty-selector-dropdown:visible").length > 0) {
+            console.log("on");
+            $(".qty-selector").addClass("dropdown-active");
+        } else {
+            console.log("off");
+            $(".qty-selector").removeClass("dropdown-active");
+        }
+    });
+
+    /**
+     * 26. move Page Title in News Details page
+     */
+
+    $('.columns .mp-blog-view .post-view').prepend( $('.page-title-wrapper') );
+
+    /**
+     * 27. move header search in mobile
+     */
+
+    if (utility.isMobile()) {
+        $('.header-left .logo').before( $('.header-right .top-link') );
+        $('.header-left .logo').appendTo( $('.header') );
+        $('.header .block-search').prependTo( $('.header .header-right') );
+    }
+
+    /**
+     * 28. add main-item class to mobile compare
+     */
+
+    if (utility.isMobile()) {
+        $( "ul li.compare" ).addClass( "main-item" );
+    }
+
+    /**
+    * 29. mobile sub menu not opaning fix
+    */
+
+    let globalIsMobileMenuOpen = false;
+
+    if (utility.isMobile()) {
+        $(".action.nav-toggle").click(function () {
+            if (!globalIsMobileMenuOpen) {
+                $(".megamenu-wrapper").css("display", "none");
+                globalIsMobileMenuOpen = true;
+            }
+        });
+    }
 
 });

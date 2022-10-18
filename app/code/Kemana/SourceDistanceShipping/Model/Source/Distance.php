@@ -92,9 +92,7 @@ class Distance
         // Check the response element one by one and access correct value
         if ($response && $response['responseStatus'] && (isset($response['response']['status']) && $response['response']['status'] == 'OK')) {
 
-            if (isset($response['response']['rows']) && isset($response['response']['rows'][0]) &&
-                isset($response['response']['rows'][0]['elements']) && $response['response']['rows'][0]['elements'][0]['distance']
-            ) {
+            if (isset($response['response']['rows'][0]['elements'][0]['distance']['value'])) {
                 return $response['response']['rows'][0]['elements'][0]['distance']['value'];
             }
 

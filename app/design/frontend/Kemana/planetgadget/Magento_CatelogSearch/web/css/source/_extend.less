@@ -14,18 +14,18 @@
 
 & when (@media-common = true) {
     .block-search {
-        margin-top: 1px;
+        margin-top: 0;
         margin-right: 13px;
         //.lib-css(background, @color-white);
-        //border-radius: 5px;
+        //border-radius: @common-border-radius;
         //height: 40px;
         padding-block: 10px;
 
         .label {
             .lib-icon-font(
                 @_icon-font-content: @icon-pg-search,
-                @_icon-font-size: 20px,
-                @_icon-font-line-height: 20px,
+                @_icon-font-size: 22px,
+                @_icon-font-line-height: 22px,
                 @_icon-font-color: @kemana-primary-brand-color,
                 @_icon-font-color-hover: @color-kemana-gray2,
                 @_icon-font-color-active: @header-icons-color-hover,
@@ -55,6 +55,7 @@
             font-style: normal;
             .lib-css(font-family, @font-family-name__base);
         }
+
     }
 }
 
@@ -65,8 +66,8 @@
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
     .block-search {
         .control {
-            left: -11px;
-            bottom: -70px;
+            left: 0;
+            bottom: -60px;
             .lib-css(background-color, @color-pg-black2);
             width: 100%;
             padding: 10px;
@@ -77,7 +78,7 @@
 
             input {
                 background: @color-white;
-                border-radius: 5px;
+                border-radius: @common-border-radius;
                 padding: 10px 15px;
                 line-height: 20px;
                 height: 40px;
@@ -85,13 +86,21 @@
         }
 
         .action.search {
+            position: relative;
+            left: 0;
+            top: 0;
             .lib-button-icon(
-                @_icon-font-content: @icon-remove,
+                @_icon-font-content: @icon-pg-close-button,
                 @_icon-font-text-hide: true,
-                @_icon-font-size: 52px,
-                @_icon-font-line-height: 21px,
+                @_icon-font-size: 18px,
+                @_icon-font-line-height: 48px,
+                @_icon-font-margin: 0 2px,
                 @_icon-font-color: @kemana-primary-brand-color
             );
+        }
+
+        .nested {
+            display: none;
         }
     }
 }
@@ -102,6 +111,9 @@
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
     .block-search {
+        margin-top: 1px;
+        max-width: 530px;
+
         .label {
             position: absolute;
             right : 0;
@@ -112,13 +124,18 @@
             padding: 0;
 
             .input-text {
-                width: 530px;
-                border-radius: 5px;
+                width: 100%;
+                border-radius: @common-border-radius;
                 background: @color-white;
                 line-height: 20px;
                 height: 40px;
                 padding: 10px 15px;
+                opacity: 1;
             }
+        }
+
+        .nested {
+            display: none;
         }
     }
 }
@@ -137,7 +154,8 @@
 
             .lib-icon-font(
                 @_icon-font-content: @icon-pg-close-button,
-                @_icon-font-size: 16px
+                @_icon-font-size: 18px,
+                @_icon-font-margin: 2px 2px 0 0
                 );
         }
     }
@@ -151,10 +169,5 @@
     .block-search {
         width: 530px;
         max-width: none;
-
-        input {
-            opacity: 1;
-
-        }
     }
 }

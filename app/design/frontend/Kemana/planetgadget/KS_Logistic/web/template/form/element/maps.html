@@ -1,0 +1,66 @@
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<div class="maps-input-title">
+    <span class="subtitle" data-bind="i18n: 'Wajib diisi bila Anda memilih Gosend sebagai kurir pengiriman'"></span>
+</div>
+
+<button type="button"
+        css="buttonClasses"
+        disable="disabled"
+        attr="'data-index': index"
+        data-bind="
+        event: {click: openMap}
+        ">
+    <span text="buttonLabel"/>
+</button>
+
+<input class="admin__control-text maps-input" type="text"
+    data-bind="
+        event: {change: userChanges, click: openMap},
+        value: value,
+        hasFocus: focused,
+        valueUpdate: valueUpdate,
+        attr: {
+            name: inputName,
+            placeholder: placeholder,
+            'aria-describedby': noticeId,
+            id: uid,
+            disabled: disabled,
+            maxlength: 255
+    }"/>
+
+<div attr="{'id': modalMapId}" style="display:none">
+    <div class="modalMapTitle">  
+        <span class="subtitle" data-bind="i18n: 'Please make sure your pinned point in map match with your address.'"></span>
+    </div>
+
+    <div class="autocompletegosendwrap">
+        <input data-bind="attr: {id: autocompleteName}" placeholder="Find address or location" type="text" autocomplete="off" />
+        <label class="label"></label>
+        <i class="fa fa-search"></i>
+    </div>
+    
+    <div data-bind="attr: {id: mapId}" style="width: 100%; height: 300px"></div>
+
+    <div class="location-name-wrap">
+        <input type="text" autocomplete="off"
+            data-bind="
+                event: {change: userChanges},
+                value: value,
+                hasFocus: focused,
+                valueUpdate: valueUpdate,
+                attr: {
+                name: inputName,
+                placeholder: placeholder,
+                'aria-describedby': noticeId,
+                id: uid,
+                disabled: disabled,
+                maxlength: 255
+            }"/>
+        <i class="fa fa-map-marker-alt"></i>
+    </div>
+</div>

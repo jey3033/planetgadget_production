@@ -36,7 +36,7 @@
 @header-icons-color-hover: @kemana-secondary-brand-color;
 
 @header-desktop__height: 80px;
-@header-mobile__height: 50px;
+@header-mobile__height: 48px;
 @header-desktop__padding: 0 @indent__s;
 
 @addto-color: @kemana-primary-brand-color;
@@ -67,6 +67,7 @@
 @import "module/_home-product-list.less";
 @import "module/_home-category-top-section.less";
 @import "module/_home-banner.less";
+@import "module/_pg-mixins.less";
 
 //
 //  Common
@@ -95,6 +96,15 @@
 
     //  Checkbox styles
     .lib-kemana-checkbox();
+
+    //select option styles
+    select{
+        color: black;
+    }
+
+    select option {
+        color: black;
+    }
 
     // Homepage only
     .cms-index-index {
@@ -125,6 +135,11 @@
         }
     }
 
+    // compare product qty gap
+    .counter.qty {
+        margin: 0 0 0 5px;
+    }
+
     //
     //  Header
     //  ---------------------------------------------
@@ -132,8 +147,8 @@
     .page-header {
         .lib-css(background-color, @header__background-color);
         .lib-css(box-shadow, @header__box-shadow);
-        .lib-css(border-bottom, @header-mobile__border-bottom);
-        margin-bottom: @indent__base;
+        //.lib-css(border-bottom, @header-mobile__border-bottom);
+        margin-bottom: 0;
         position: fixed;
         top: 0;
         left: 0;
@@ -413,6 +428,10 @@
     .ksquickorder-index-index,
     .mpblog-post-index,
     .mpblog-post-view,
+    .mpblog-category-view,
+    .mpblog-month-view,
+    .mpblog-topic-view,
+    .mpblog-tag-view,
     .tips-post-index,
     .tips-sitemap-index,
     .recipe-post-index,
@@ -427,9 +446,10 @@
     .brand-items-index,
     .job-index-index,
     .job-index-detail,
-    .catalog-product_compare-index {
+    .catalog-product_compare-index,
+    .magento_giftregistry-view-index {
         .page-wrapper {
-            .lib-css(margin-top, @header-mobile__height + @indent__base);
+            .lib-css(margin-top, @header-mobile__height);
         }
     }
 
@@ -485,8 +505,8 @@
     // CMS pages only
     .cms-main-container {
         .fixed-width {
-            .lib-css(padding-left, @layout-indent__width);
-            .lib-css(padding-right, @layout-indent__width);
+            .lib-css(padding-left, 40px);
+            .lib-css(padding-right, 40px);
         }
     }
 
@@ -541,7 +561,8 @@
         .lib-css(margin-bottom, @indent__base);
 
         .panel.wrapper {
-            .lib-css(background-color, @color-pg-black2);
+            //.lib-css(background-color, @color-pg-black2);
+            .lib-css(background-color, @color-pg-orange2);
         }
 
         .header.panel {
@@ -631,6 +652,10 @@
     .ksquickorder-index-index,
     .mpblog-post-index,
     .mpblog-post-view,
+    .mpblog-category-view,
+    .mpblog-month-view,
+    .mpblog-topic-view,
+    .mpblog-tag-view,
     .tips-post-index,
     .tips-sitemap-index,
     .recipe-post-index,
@@ -645,7 +670,8 @@
     .brand-items-index,
     .job-index-index,
     .job-index-detail,
-    .catalog-product_compare-index {
+    .catalog-product_compare-index,
+    .magento_giftregistry-view-index {
         .page-wrapper {
             .lib-css(margin-top, @header-desktop__height + 32px);
         }
@@ -657,4 +683,57 @@
             margin-top: 100px;
         }
     }
+}
+
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+    .cms-main-container {
+        .fixed-width {
+            .lib-css(padding-left, @layout-indent__width);
+            .lib-css(padding-right, @layout-indent__width);
+        }
+    }
+
+    .sorter .qty-selector {
+        background-image: url(../images/down-arrow.svg);
+        background-position: right+10px center;
+    }
+
+    .sorter .qty-selector.dropdown-active {
+        background-image: url(../images/up-arrow.svg);
+    }
+
+    .sorter-options.qty-selector-dropdown {
+        background: var(---ffffff-white) 0% 0% no-repeat padding-box;
+        background: rgba(255, 255, 255, 1) 0% 0% no-repeat padding-box;
+        box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.13);
+        border-radius: 5px;
+        opacity: 1;
+    }
+
+    //mega menu last item red
+    .page-header #megamenu .level1.category-item.last > a span {
+        color: @color-pg-red !important;
+    }
+
+    #megamenu .category-item span {
+        font-weight: 500;
+    }
+
+    #megamenu .level2.category-item > a span {
+        font-size: 14px;
+        font-weight: bold;
+        text-decoration: underline;
+    }
+
+    #megamenu .level3.category-item > a:hover span {
+        text-decoration: underline;
+    }
+
+
+
 }

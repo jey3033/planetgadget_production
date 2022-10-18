@@ -20,11 +20,11 @@
             <div class="home-featured-brand-container fixed-width">
                 <div class="block widget block-brand-featured grid">
                     <div class="block-title">
-                        <h2 role="heading" aria-level="2">
+                        <h2>
                             <?= $block->getFeaturedBrandTitle(); ?>
                         </h2>
                     </div>
-                    <span><a href="<?= /* @escapeNotVerified */ $block->getUrl('brand/items') ?>">Lihat Semua</a></span>
+                    <span><a href="<?= /* @escapeNotVerified */ $block->getUrl('brand/items') ?>"><?= __('See All') ?></a></span>
                     <div class="block-content-wrapper">
                         <div class="block-content">
                             <div id="{brand-container}-nav" class="left"></div>
@@ -51,6 +51,7 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         <?php endif; ?>

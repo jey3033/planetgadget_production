@@ -1,0 +1,222 @@
+// /**
+//  * Copyright © 2022 Kemana. All rights reserved.
+//  * @author Ashan Gunawardena <agunawardena@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+
+//
+//  Variables
+//  _____________________________________________
+
+@color-gray-primary: #909090;
+
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+
+	.social-share {
+		background-color: @color-white;
+	   // padding: 30px;
+	    margin-top: 0;
+
+	    .title{
+	    	margin-top: 0;
+	    	font-weight: bold;
+	    }
+
+		.mp_social_share_inline_under_cart {
+			.a2a_kit {
+				display: -webkit-flex;
+				display: -ms-flexbox;
+				display: flex;
+				//flex-wrap: wrap;
+			}
+
+			.a2a_counter {
+				border: 1.5px solid @color-pg-light-gray;
+				width: 30px;
+				height: 30px;
+				border-radius: 50%;
+				margin: 0 5px;
+				padding: 0;
+				text-align: center;
+
+				&:hover {
+					border-color: @primary__color__dark;
+				}
+
+				span {
+					display: none;
+				}
+
+				.icon{
+					display: inline-block;
+					text-decoration: none;
+
+					&:before{
+						-webkit-font-smoothing: antialiased;
+						-moz-osx-font-smoothing: grayscale;
+						font-size: 15px;
+						line-height: 28px;
+						color: @color-pg-light-gray;
+						margin: 0;
+						vertical-align: top;
+						display: inline-block;
+						font-weight: normal;
+						overflow: hidden;
+						speak: none;
+						text-align: center;
+						font-family: 'icons-kemana-theme';
+					}
+
+					&:hover{
+						&:before{
+							color: @primary__color__dark;
+						}
+					}
+				}
+			}
+
+			.a2a_button_facebook {
+				.icon{
+					&:before {
+						content: @icon-facebook;
+					}
+				}
+			}
+
+			.a2a_button_twitter {
+				.icon{
+					&:before {
+						content: @icon-twitter;
+                        font-size: 13px;
+					}
+				}
+			}
+
+			.a2a_button_pinterest {
+				.icon{
+					&:before {
+						content: @icon-pinterest-p;
+					}
+				}
+			}
+
+			.a2a_button_linkedin {
+				.icon{
+					&:before {
+						content: @icon-linkedin;
+					}
+				}
+			}
+
+			.a2a_button_tumblr {
+				.icon{
+					&:before {
+						content: @icon-tumblr;
+					}
+				}
+			}
+
+			.a2a_button_email {
+				.icon{
+					&:before {
+						content: @icon-pg-email;
+                        font-size: 20px;
+					}
+				}
+			}
+
+			.a2a_button_google_plus {
+				.icon{
+					&:before {
+						content: @icon-google;
+					}
+				}
+			}
+
+			.a2a_button_instagram {
+				.icon{
+					&:before {
+						content: @icon-instagram;
+					}
+				}
+			}
+
+			.a2a_button_whatsapp {
+				.icon{
+					&:before {
+						content: @icon-whatsapp;
+					}
+				}
+			}
+
+			.a2a_dd {
+				display: inline-block;
+				text-decoration: none;
+
+				&:before {
+					-webkit-font-smoothing: antialiased;
+					-moz-osx-font-smoothing: grayscale;
+					font-size: 21px;
+					line-height: 29px;
+					color: @color-gray-primary;
+					content: @icon-expand;
+					font-family: 'icons-kemana-theme';
+					margin: 0;
+					vertical-align: top;
+					display: inline-block;
+					font-weight: normal;
+					overflow: hidden;
+					speak: none;
+					text-align: center;
+				}
+
+				&:hover {
+					&:before {
+						color: @primary__color__dark;
+					}
+				}
+			}
+		}
+	}
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+	.social-share {
+		.mp_social_share_inline_under_cart {
+			margin-left: -10px;
+			margin-top: 10px;
+		}
+	}
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+
+	.social-share {
+		display: flex;
+
+		.mp_social_share_inline_under_cart {
+			margin-left: 10px;
+		}
+	}
+}
+
+//
+//  Desktop Large
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+}

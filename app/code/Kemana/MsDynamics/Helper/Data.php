@@ -36,19 +36,26 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     protected $storeScope;
 
+    /**
+     * @var \Magento\Customer\Api\CustomerRepositoryInterface
+     */
     protected $customerRepository;
 
     /**
      * @param \Magento\Framework\App\Helper\Context $context
      * @param \Kemana\MsDynamics\Logger\Logger $logger
+     * @param \Kemana\MsDynamics\Logger\InventoryLogger $InventoryLogger
+     * @param \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository
      */
     public function __construct(
         \Magento\Framework\App\Helper\Context             $context,
         \Kemana\MsDynamics\Logger\Logger                  $logger,
+        \Kemana\MsDynamics\Logger\InventoryLogger         $inventoryLogger,
         \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository
     )
     {
         $this->logger = $logger;
+        $this->inventoryLogger = $inventoryLogger;
         $this->customerRepository = $customerRepository;
         $this->storeScope = \Magento\Store\Model\ScopeInterface::SCOPE_STORE;
 
@@ -82,6 +89,29 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         }
     }
 
+    /**
+     * @param $message
+     * @param string $type
+     * @param $code
+     * @return void
+     */
+    public function inventorylog($message, string $type = 'info')
+    {
+        if (!$this->isEnableLog()) {
+            return;
+        }
+
+        $message = 'MsDynamicErp : ' . $message;
+
+        if ($type == 'info') {
+            $this->inventoryLogger->info($message);
+        } elseif ($type == 'error') {
+            $this->inventoryLogger->error($message);
+        } elseif ($type == 'notice') {
+            $this->inventoryLogger->notice($message);
+        }
+    }
+
 
     /**
      * @return mixed
@@ -94,9 +124,33 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     /**
      * @return mixed
      */
+    public function isApiMode()
+    {
+        return $this->scopeConfig->getValue(ConfigProvider::XML_PATH_API_MODE, $this->storeScope);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function isLiveApi()
+    {
+        return $this->scopeConfig->getValue(ConfigProvider::XML_PATH_API_MODE, $this->storeScope);
+    }
+
+    /**
+     * @return mixed
+     */
     public function getApiUrl()
     {
         return $this->scopeConfig->getValue(ConfigProvider::XML_PATH_API_URL, $this->storeScope);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getApiUrlForDelete()
+    {
+        return $this->scopeConfig->getValue(ConfigProvider::XML_PATH_API_URL_FOR_DELETE, $this->storeScope);
     }
 
     /**
@@ -121,6 +175,14 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public function getApiXmnls()
     {
         return $this->scopeConfig->getValue(ConfigProvider::XML_PATH_API_XMLNS, $this->storeScope);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getApiXmnlsForDelete()
+    {
+        return $this->scopeConfig->getValue(ConfigProvider::XML_PATH_API_XMLNS_FOR_DELETE, $this->storeScope);
     }
 
     /**
@@ -202,9 +264,81 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     /**
      * @return mixed
      */
+    public function getSoapActionDeleteCustomer()
+    {
+        return ConfigProvider::DELETE_CUSTOMER_IN_ERP_SOAP_ACTION;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getMsDynamicErpResponses()
     {
         return ConfigProvider::ERP_RESPONSES;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRewardPointFunction()
+    {
+        return ConfigProvider::GET_REWARD_POINT_FROM_ERP;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSoapActionGetRewardPoint()
+    {
+        return ConfigProvider::GET_REWARD_POINT_SOAP_ACTION;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function earnRewardPointFunction()
+    {
+        return ConfigProvider::EARN_REWARD_POINT_FROM_MAGETNO;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSoapActionEarnRewardPoint()
+    {
+        return ConfigProvider::EARN_REWARD_POINT_SOAP_ACTION;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function redeemRewardPointFunction()
+    {
+        return ConfigProvider::REDEEM_REWARD_POINT_FROM_MAGETNO;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSoapActionRedeemRewardPoint()
+    {
+        return ConfigProvider::REDEEM_REWARD_POINT_SOAP_ACTION;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLastUpdatedPointFunction()
+    {
+        return ConfigProvider::LAST_UPDATED_POINT_FROM_ERP;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSoapActionlastUpdated()
+    {
+        return ConfigProvider::LAST_UPDATED_POINT_SOAP_ACTION;
     }
 
     /**
@@ -226,13 +360,155 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     }
 
     /**
+     * @param $apiFunction
+     * @param $postParameters
+     * @return string
+     */
+    public function getXmlRequestBodyToGetUnSyncCustomersFromApi($apiFunction, $soapAction, $postParameters): string
+    {
+        return '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+                <Body>
+                        <' . $soapAction . ' xmlns="' . $this->getApiXmnls() . "/" . $apiFunction . '">
+                            <filter>
+                                ' . $postParameters . '
+                            </filter>
+                        </' . $soapAction . '>
+                </Body>
+        </Envelope>';
+    }
+
+    /**
+     * @param $apiFunction
+     * @param $postParameters
+     * @return string
+     */
+    public function getXmlRequestBodyToGetUnSyncProductsFromApi($apiFunction, $soapAction, $postParameters): string
+    {
+        return '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+                <Body>
+                        <' . $soapAction . ' xmlns="' . $this->getApiXmnls() . "/" . $apiFunction . '">
+                            <filter>
+                                ' . $postParameters . '
+                            </filter>
+                        </' . $soapAction . '>
+                </Body>
+        </Envelope>';
+    }
+
+    /**
+     * @param $apiFunction
+     * @param $postParameters
+     * @return string
+     */
+    public function getXmlRequestBodyToErpAckListOfCustomers($apiFunction, $soapAction, $postParameters): string
+    {
+        return '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+                <Body>
+                        <' . $soapAction . ' xmlns="' . $this->getApiXmnls() . "/" . $apiFunction . '">
+                            <' . $apiFunction . '_List>
+                                ' . $postParameters . '
+                            </' . $apiFunction . '_List>
+                        </' . $soapAction . '>
+                </Body>
+        </Envelope>';
+    }
+
+    /**
+     * @param $apiFunction
+     * @param $postParameters
+     * @return string
+     */
+    public function getXmlRequestBodyToErpAckListOfProducts($apiFunction, $soapAction, $postParameters): string
+    {
+        return '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+                <Body>
+                        <' . $soapAction . ' xmlns="' . $this->getApiXmnls() . "/" . $apiFunction . '">
+                            <' . $apiFunction . '_List>
+                                ' . $postParameters . '
+                            </' . $apiFunction . '_List>
+                        </' . $soapAction . '>
+                </Body>
+        </Envelope>';
+    }
+
+    /**
+     * @param $apiFunction
+     * @param $soapAction
+     * @param $postParameters
+     * @return string
+     */
+    public function getXmlRequestBodyToErpGetRewardPoint($apiFunction, $soapAction, $postParameters): string
+    {
+        return '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+                    <Body>
+                        <' . $soapAction . ' xmlns="' . $this->getApiXmnls() . "/" . $apiFunction . '">
+                            <CustomerNo>' . $postParameters . '</CustomerNo>
+                        </' . $soapAction . '>
+                    </Body>
+                </Envelope>';
+    }
+
+    /**
+     * @param $apiFunction
+     * @param $soapAction
+     * @param $postParameters
+     * @return string
+     */
+    public function getXmlRequestBodyToErpEarnRewardPoint($apiFunction, $soapAction, $postParameters): string
+    {
+        return '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+                <Body>
+                        <' . $soapAction . ' xmlns="' . $this->getApiXmnls() . "/" . $apiFunction . '">
+                            <' . $apiFunction . '>
+                                ' . $postParameters . '
+                            </' . $apiFunction . '>
+                        </' . $soapAction . '>
+                </Body>
+        </Envelope>';
+    }
+
+    /**
+     * @param $apiFunction
+     * @param $soapAction
+     * @param $postParameters
+     * @return string
+     */
+    public function getXmlRequestBodyToErpRedeemRewardPoint($apiFunction, $soapAction, $postParameters): string
+    {
+        return '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+                <Body>
+                        <' . $soapAction . ' xmlns="' . $this->getApiXmnls() . "/" . $apiFunction . '">
+                            <' . $apiFunction . '>
+                                ' . $postParameters . '
+                            </' . $apiFunction . '>
+                        </' . $soapAction . '>
+                </Body>
+        </Envelope>';
+    }
+
+    /**
+     * @param $apiFunction
+     * @param $soapAction
+     * @param $postParameters
+     * @return string
+     */
+    public function getXmlRequestBodyToErpGetLastUpdatedPoint($apiFunction, $soapAction, $postParameters): string
+    {
+        return '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+                <Body>
+                        <' . $soapAction . ' xmlns="' . $this->getApiXmnls() . "/" . $apiFunction . '">
+                        </' . $soapAction . '>
+                </Body>
+        </Envelope>';
+    }
+
+    /**
      * @param $pureArray
      * @return string
      */
     public function convertArrayToXml($pureArray): string
     {
         $xmlOutput = '';
-
         foreach ($pureArray as $nodeName => $nodeValue) {
             if (!$nodeValue) {
                 $xmlOutput .= '<' . $nodeName . '/>';
@@ -243,6 +519,84 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         }
 
         return $xmlOutput;
+    }
+
+    /**
+     * @param $apiFunction
+     * @param $postParameters
+     * @return string
+     */
+    public function getXmlRequestBodyToGetUnSyncInventorysFromApi($apiFunction, $soapAction, $postParameters): string
+    {
+        return '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+                <Body>
+                        <' . $soapAction . ' xmlns="' . $this->getApiXmnls() . "/" . $apiFunction . '">
+                            <filter>
+                                ' . $postParameters . '
+                            </filter>
+                        </' . $soapAction . '>
+                </Body>
+        </Envelope>';
+    }
+
+    /**
+     * @param $ackCustomerData
+     * @return string
+     */
+    public function convertAckCustomerListToXml($ackCustomerData): string
+    {
+        $xmlOutput = '';
+
+        if (empty($ackCustomerData)) {
+            return $xmlOutput;
+        }
+
+        foreach ($ackCustomerData as $ackCustomer) {
+            $xmlOutput .= '<customerack>';
+            foreach ($ackCustomer as $nodeName => $nodeValue) {
+                $xmlOutput .= '<' . $nodeName . '>' . $nodeValue . '</' . $nodeName . '>';
+            }
+            $xmlOutput .= '</customerack>';
+
+        }
+
+        return $xmlOutput;
+    }
+
+    /**
+     * @param $ackCustomerData
+     * @return string
+     */
+    public function convertAckCustomerSingleToXml($ackCustomerData): string
+    {
+        $xmlOutput = '';
+
+        if (empty($ackCustomerData)) {
+            return $xmlOutput;
+        }
+        $xmlOutput .= '<customerack>';
+        foreach ($ackCustomerData as $nodeName => $nodeValue) {
+            $xmlOutput .= '<' . $nodeName . '>' . $nodeValue . '</' . $nodeName . '>';
+        }
+        $xmlOutput .= '</customerack>';
+
+        return $xmlOutput;
+    }
+
+    /**
+     * @param $apiFunction
+     * @param $postParameters
+     * @return string
+     */
+    public function getXmlRequestBodyToDeleteCustomer($apiFunction, $soapAction, $postParameters): string
+    {
+        return '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+                <Body>
+                       <' . $soapAction . ' xmlns="' . $this->getApiXmnlsForDelete() . '">
+                           ' . $postParameters . '
+                       </' . $soapAction . '>
+                </Body>
+        </Envelope>';
     }
 
     /**
@@ -284,13 +638,98 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             $getCustomer->setCustomAttribute('ms_dynamic_customer_number', $customerNumber);
             $this->customerRepository->save($getCustomer);
 
-            $this->helper->log('Successfully updated the MsDynamicCustomerNumber in Magento for customer ' . $customerId, 'info');
+            $this->log('Successfully updated the MsDynamicCustomerNumber in Magento for customer ' . $customerId, 'info');
 
             return true;
         } catch (\Exception $e) {
-            $this->helper->log('End Customer Register Success Event - Failed to update Customer Number in Magento for Customer ' . $customerId . ' sent/update to ERP. Error :' . $e->getMessage(), 'info');
+            $this->log('End Customer Register Success Event - Failed to update Customer Number in Magento for Customer ' . $customerId . ' sent/update to ERP. Error :' . $e->getMessage(), 'info');
         }
 
         return false;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFunctionProductList()
+    {
+        return ConfigProvider::GET_PRODUCT_LIST_IN_ERP;
+    }
+
+    public function getSoapActionGetProductList()
+    {
+        return ConfigProvider::GET_PRODUCT_LIST_SOAP_ACTION;
+    }
+
+    /**
+     * @param $ackProductData
+     * @return string
+     */
+    public function convertAckProductListToXml($ackProductData): string
+    {
+        $xmlOutput = '';
+
+        if (empty($ackProductData)) {
+            return $xmlOutput;
+        }
+
+        foreach ($ackProductData as $ackProduct) {
+            $xmlOutput .= '<productack>';
+            foreach ($ackProduct as $nodeName => $nodeValue) {
+                $xmlOutput .= '<' . $nodeName . '>' . $nodeValue . '</' . $nodeName . '>';
+            }
+            $xmlOutput .= '</productack>';
+
+        }
+
+        return $xmlOutput;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFunctionAckProduct()
+    {
+        return ConfigProvider::ACK_PRODUCT_IN_ERP;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSoapActionAckProduct()
+    {
+        return ConfigProvider::ACK_PRODUCT_SOAP_ACTION;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFunctionInventoryStock()
+    {
+        return ConfigProvider::GET_PRODUCT_INVENTORY_STOCK_ERP;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSoapActionGetInventoryStock()
+    {
+        return ConfigProvider::GET_PRODUCT_INVENTORY_STOCK_SOAP_ACTION;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFunctionCreateOrder()
+    {
+        return ConfigProvider::CREATE_ORDER_IN_ERP;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSoapActionCreateOrder()
+    {
+        return ConfigProvider::CREATE_ORDER_SOAP_ACTION;
     }
 }

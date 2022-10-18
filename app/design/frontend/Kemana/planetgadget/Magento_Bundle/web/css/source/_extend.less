@@ -13,14 +13,22 @@
 //  _____________________________________________
 
 & when (@media-common = true) {
+    .bundle-actions {
+        margin-top: 10px;
+    }
+
     .bundle-options-container {
-        margin-bottom: 0;
+        .lib-vendor-prefix-display();
+        .lib-css(background, @panel__background-color);
+        //padding: 30px;
+        border-radius: @common-border-radius;
+        margin-bottom: 30px;
 
         .product-add-form {
             //.lib-vendor-prefix-display();
             //.lib-css(background, @panel__background-color);
             //padding: 30px;
-            //border-radius: 5px;
+            //border-radius: @common-border-radius;
         }
 
         .legend {
@@ -118,10 +126,7 @@
                     order: 1;
 
                     .price {
-                        display: block;
-                        .lib-font-size(28);
-                        .lib-line-height(31);
-                        margin-bottom: 30px;
+                        .lib-heading(h2);
                     }
                 }
             }
@@ -157,12 +162,12 @@
 
         .bundle-options-wrapper {
             width: ~'calc(50% + 10px)';
-            padding-right: 30px;
+            padding: 30px;
 
             .legend {
                 &.title {
                     .lib-font-size(28);
-                    .lib-line-height(31);
+                    .lib-line-height(38);
                     padding-bottom: 0;
                 }
             }
@@ -171,11 +176,23 @@
         .block-bundle-summary {
             width: ~'calc(50% - 10px)';
             margin-top: 50px;
+            padding: 30px 30px 30px 0;
 
             > .title {
                 strong {
                     .lib-font-size(20);
                     .lib-line-height(22);
+                }
+            }
+
+            .product-details {
+                .price-box {
+                    .price {
+                        display: block;
+                        .lib-font-size(28);
+                        .lib-line-height(38);
+                        margin-bottom: 26px;
+                    }
                 }
             }
         }
