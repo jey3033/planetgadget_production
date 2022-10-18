@@ -6,7 +6,7 @@
  */
 -->
 <config>
-    <skin>pg</skin>
+    <skin>planetgadget</skin>
     <report>
         <!--
             "action" can be set to "print" to show exception on screen and "email"

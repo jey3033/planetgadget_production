@@ -1,0 +1,166 @@
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+@font-face {
+    font-family: spartan-bold;
+    src: url(../css/fonts/spartan/Spartan-Bold.woff2) format("woff2"),
+    url(../css/fonts/spartan/Spartan-Bold.woff) format("woff");
+    font-style: normal;
+}
+
+@font-face {
+    font-family: spartan-medium;
+    src: url(../css/fonts/spartan/Spartan-Medium.woff2) format("woff2"),
+    url(../css/fonts/spartan/Spartan-Medium.woff) format("woff");
+    font-style: normal;
+}
+
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    color: #ffffff;
+    font-family: Spartan-medium;
+    font-size: 14px;
+    line-height: 16px;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+}
+main {
+    display: block;
+}
+img {
+    border: 0;
+}
+a {
+    color: #ffffff;
+    text-decoration: underline;
+}
+a:hover {
+    text-decoration: none;
+}
+.maintenance-container {
+    background-image: url(../images/under-maintenance.png);
+    width: 100%;
+    height: 100vh;
+    height: calc(100vh - 53px);
+    background-size: cover;
+    position: relative;
+}
+
+.maintenance {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+.maintenance .logo {
+    text-align: center;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+.maintenance .logo img {
+    width: 200px;
+}
+
+.maintenance h1 {
+    font-family: Spartan-bold;
+    font-size: 28px;
+    line-height: 38px;
+    color: #ffffff;
+    text-align: center;
+    font-weight: 700;
+    margin-top: 26px;
+}
+
+.maintenance p {
+    font-size: 12px;
+    line-height: 20px;
+    color: #ffffff;
+    text-align: center;
+    font-weight: 500;
+    margin-top: 23px;
+    margin-bottom: 0;
+}
+.maintenance .contact-details {
+    font-size: 12px;
+    line-height: 20px;
+    margin-top: 13px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.maintenance .contact-details a {
+    color: #FFC619;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.maintenance .contact-details a:hover {
+    text-decoration: underline;
+}
+
+.maintenance-footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: #1E2127;
+    text-align: center;
+    padding: 17px 0 16px;
+    color: #ffffff;
+    font-size: 12px;
+    line-height: 20px;
+    font-weight: 500;
+}
+
+@media screen and (max-width: 767px) {
+    .maintenance-container {
+        padding: 0 10px;
+        height: calc(100vh - 73px);
+        background-size: auto 134%;
+        background-position: -120px 0;
+    }
+
+    .maintenance {
+        left: 0;
+        -webkit-transform: translate(0%, -50%);
+        transform: translate(0%, -50%);
+    }
+
+    .maintenance h1 {
+        font-size: 21px;
+        line-height: 28px;
+        margin-top: 30px;
+    }
+
+    .maintenance p {
+        margin-top: 30px;
+    }
+
+    .maintenance .contact-details {
+        margin-top: 20px;
+    }
+
+    .maintenance .contact-details .contact-links {
+        width: 220px;
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    .maintenance .logo img {
+        width: 200px;
+    }
+
+    .maintenance-footer .footer-text {
+        width: 270px;
+        text-align: center;
+        margin: 0 auto;
+    }
+}
