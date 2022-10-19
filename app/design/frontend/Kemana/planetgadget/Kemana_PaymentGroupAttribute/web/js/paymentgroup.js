@@ -25,7 +25,7 @@ define([
             });
             
             $(document).on("click",".without-group .radios",function() {
-                $('.psg-tab-item .title input').prop("checked", false);
+                $('.psg-tab-item.group .title input').prop("checked", false);
                 $('.psg-tab-item .content').hide();
                 $(this).prop("checked", false);
             });
