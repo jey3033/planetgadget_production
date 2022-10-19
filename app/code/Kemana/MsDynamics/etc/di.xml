@@ -100,4 +100,11 @@
            type="Kemana\MsDynamics\Plugin\Controller\Cart\Index"/>
     </type>
     <preference for="Magento\ProductAlert\Block\Product\View\Stock" type="Kemana\MsDynamics\Preference\Block\Product\View\Stock" />
+    <virtualType name="Magento\Sales\Model\ResourceModel\Order\Grid" type="Magento\Sales\Model\ResourceModel\Grid">
+        <arguments>
+            <argument name="columns" xsi:type="array">
+                <item name="is_synced_to_msdynamic_erp" xsi:type="string">sales_order.is_synced_to_msdynamic_erp</item>
+            </argument>
+        </arguments>
+    </virtualType>
 </config>
