@@ -471,5 +471,27 @@ define([
         $('.header .block-search').prependTo( $('.header .header-right') );
     }
 
+    /**
+     * 28. add main-item class to mobile compare
+     */
+
+    if (utility.isMobile()) {
+        $( "ul li.compare" ).addClass( "main-item" );
+    }
+
+    /**
+    * 29. mobile sub menu not opaning fix
+    */
+
+    let globalIsMobileMenuOpen = false;
+
+    if (utility.isMobile()) {
+        $(".action.nav-toggle").click(function () {
+            if (!globalIsMobileMenuOpen) {
+                $(".megamenu-wrapper").css("display", "none");
+                globalIsMobileMenuOpen = true;
+            }
+        });
+    }
 
 });

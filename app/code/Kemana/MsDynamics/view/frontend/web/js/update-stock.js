@@ -34,6 +34,7 @@ define([
             
             if($widget.options.productid){
                 $widget._callAPI($widget);
+                $(".product.alert.stock").addClass("stock-loader");
             }
         },
 
@@ -79,6 +80,7 @@ define([
                         $(".product-add-form").show();
                         $(".product.alert.stock").show();
                     }
+                    $(".product.alert.stock").removeClass("stock-loader");
                 }
             });
         }

@@ -100,6 +100,11 @@ class OrderInvoicePay implements \Magento\Framework\Event\ObserverInterface
             $dataToOrder['DiscountAmount'] = floatval($order->getDiscountAmount());
         }
 
+        $getSourceLocationName = false;
+        if ($order->getShippingMethod() == 'instore_pickup') {
+            $getSourceLocationName = $this->helper->getSourceLocationCodeByName($order->getShippingAddress()->getFirstname());
+        }
+
         $dataToOrder = $this->helper->convertArrayToXml($dataToOrder);
 
         $dataToOrderLineItems = "<SalesOrderLine>";
@@ -115,11 +120,15 @@ class OrderInvoicePay implements \Magento\Framework\Event\ObserverInterface
                 "LineNo" => $lineNo,
                 "ItemNo" => $lineItem->getSku(),
                 "Quantity" => $lineItem->getQtyOrdered(),
-                "Price" => floatval($lineItem->getRowTotalInclTax())
+                "Price" => floatval($lineItem->getPrice())
             ];
 
             if ($lineItem->getName()) {
                 $dataToItem['Description'] = $lineItem->getName();
+            }
+
+            if ($getSourceLocationName) {
+                $dataToItem['LocationCode'] = $getSourceLocationName;
             }
 
             $dataToItem = $this->helper->convertArrayToXml($dataToItem);

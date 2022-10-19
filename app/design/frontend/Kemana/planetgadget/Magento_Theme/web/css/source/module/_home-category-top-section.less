@@ -24,6 +24,12 @@
                     .category-top-items {
                         margin-bottom: 0;
                         padding-left: 0;
+
+                        .slick-slide {
+                            > div {
+                                .lib-vendor-prefix-display();
+                            }
+                        }
                     }
                 }
             }
@@ -63,7 +69,7 @@
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
     .category-top-section {
-        .lib-css(padding-block, @block-padding - 3  @block-padding - 10);
+        .lib-css(padding-block, @block-padding - 2  @block-padding - 10);
 
         .block {
             &.widget {

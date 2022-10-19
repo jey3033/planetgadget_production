@@ -30,6 +30,7 @@ class Index extends \Magento\Framework\App\Action\Action
     protected $helper;
     protected $syncCustomersToErp;
     protected $syncCustomersFromErp;
+    protected $syncOrdersToErp;
 
     public function __construct(
         \Magento\Framework\App\Action\Context        $context,
@@ -37,7 +38,8 @@ class Index extends \Magento\Framework\App\Action\Action
         \Kemana\MsDynamics\Model\Api\Erp\Customer    $customer,
         \Kemana\MsDynamics\Helper\Data               $helper,
         \Kemana\MsDynamics\Cron\SyncCustomersToErp   $syncCustomersToErp,
-        \Kemana\MsDynamics\Cron\SyncCustomersFromErp $syncCustomersFromErp
+        \Kemana\MsDynamics\Cron\SyncCustomersFromErp $syncCustomersFromErp,
+        \Kemana\MsDynamics\Cron\SyncOrdersToErp $syncOrdersToErp
     )
     {
         $this->customer = $customer;
@@ -45,12 +47,18 @@ class Index extends \Magento\Framework\App\Action\Action
         $this->helper = $helper;
         $this->syncCustomersToErp = $syncCustomersToErp;
         $this->syncCustomersFromErp = $syncCustomersFromErp;
+        $this->syncOrdersToErp = $syncOrdersToErp;
 
         return parent::__construct($context);
     }
 
     public function execute()
     {
+
+        /*$syncOrdersToErp = $this->syncOrdersToErp->syncOrdersFromMagentoToErp();
+
+        exit;
+
         $d = 0;
         $this->syncCustomersFromErp->syncCustomersFromErpToMagento();
         echo "Donee";
@@ -58,7 +66,7 @@ class Index extends \Magento\Framework\App\Action\Action
 
         $this->syncCustomersToErp->syncMissingCustomersFromRealTimeSync();
         echo "Done";
-        exit;
+        exit;*/
         // Get Customer By ID
         /* $customerInErp = $this->customer->getCustomerInErp($this->helper->getFunctionGetCustomer(), '60215644000');
          echo "done";
