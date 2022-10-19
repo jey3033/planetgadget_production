@@ -18,7 +18,7 @@
     <column name="synced_with_erp" sortOrder="90" class="Kemana\MsDynamics\Ui\Component\Listing\Column\PushToErpColumnInCustomer">
         <argument name="data" xsi:type="array">
             <item name="config" xsi:type="array">
-                <item name="component" xsi:type="string">Kemana_MsDynamics/js/grid/columns/push_from_order_grid</item>
+                <item name="component" xsi:type="string">Kemana_MsDynamics/js/grid/columns/push_from_customer_grid</item>
                 <item name="indexField" xsi:type="string">entity_id</item>
                 <item name="sortable" xsi:type="boolean">false</item>
                 <item name="label" xsi:type="string" translate="true">Synced to ERP</item>
