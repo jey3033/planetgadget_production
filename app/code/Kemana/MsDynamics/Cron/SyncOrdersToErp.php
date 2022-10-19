@@ -114,7 +114,12 @@ class SyncOrdersToErp
             ];
 
             if (floatval($order->getDiscountAmount())) {
-                $dataToOrder['DiscountAmount'] = floatval($order->getDiscountAmount());
+                $dataToOrder['DiscountAmount'] = abs(floatval($order->getDiscountAmount()));
+            }
+
+            $getSourceLocationName = false;
+            if ($order->getShippingMethod() == 'instore_pickup') {
+                $getSourceLocationName = $this->helper->getSourceLocationCodeByName($order->getShippingAddress()->getFirstname());
             }
 
             $dataToOrder = $this->helper->convertArrayToXml($dataToOrder);
@@ -137,6 +142,10 @@ class SyncOrdersToErp
 
                 if ($lineItem->getName()) {
                     $dataToItem['Description'] = $lineItem->getName();
+                }
+
+                if ($getSourceLocationName) {
+                    $dataToItem['LocationCode'] = $getSourceLocationName;
                 }
 
                 $dataToItem = $this->helper->convertArrayToXml($dataToItem);
@@ -174,7 +183,5 @@ class SyncOrdersToErp
 
             }
         }
-
     }
-
 }
