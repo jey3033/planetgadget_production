@@ -97,7 +97,7 @@ class OrderInvoicePay implements \Magento\Framework\Event\ObserverInterface
         ];
 
         if (floatval($order->getDiscountAmount())) {
-            $dataToOrder['DiscountAmount'] = floatval($order->getDiscountAmount());
+            $dataToOrder['DiscountAmount'] = abs(floatval($order->getDiscountAmount()));
         }
 
         $getSourceLocationName = false;
