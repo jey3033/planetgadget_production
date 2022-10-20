@@ -6,12 +6,12 @@
 
 /**
  * @category Kemana
- * @package  Kemana_Kredivo
+ * @package  Kemana_CmsBlock
  * @license  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  *
- * @author   Achintha Madushan <amadushan@kemana.com>
+ * @author   Tushar Korat <tushar@kemana.com>
  */
 
 use \Magento\Framework\Component\ComponentRegistrar;
 
-ComponentRegistrar::register(ComponentRegistrar::MODULE, 'Kemana_Kredivo', __DIR__);
+ComponentRegistrar::register(ComponentRegistrar::MODULE, 'Kemana_CmsBlock', __DIR__);
