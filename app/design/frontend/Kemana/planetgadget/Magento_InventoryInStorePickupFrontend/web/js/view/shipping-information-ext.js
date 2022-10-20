@@ -4,13 +4,15 @@
  */
 
 define([
-    'Magento_Checkout/js/model/quote'
-], function (quote) {
+    'Magento_Checkout/js/model/quote',
+    'Magento_InventoryInStorePickupFrontend/js/model/pickup-locations-service'
+], function (quote,pickupLocationsService) {
     'use strict';
 
     var storePickupShippingInformation = {
         defaults: {
-            template: 'Magento_InventoryInStorePickupFrontend/shipping-information'
+            template: 'Magento_InventoryInStorePickupFrontend/shipping-information',
+            selectedLocation: pickupLocationsService.selectedLocation
         },
 
         /**
@@ -73,6 +75,23 @@ define([
 
             if (quote.shippingAddress().firstname !== undefined) {
                 locationName = quote.shippingAddress().telephone;
+            }
+
+            return locationName;
+        },
+
+        getShippingMethodFrontendDescription: function () {
+            var shippingMethod = quote.shippingMethod(),
+                locationName = '';
+
+            if (!this.isStorePickup()) {
+
+                return '-';
+            }
+
+
+            if (quote.shippingAddress().firstname !== undefined) {
+                locationName = quote.shippingAddress().frontend_description;
             }
 
             return locationName;
