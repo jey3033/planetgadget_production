@@ -211,7 +211,7 @@ class SyncCustomersFromErp
 
                 if (!$existingCustomer) {
                     $getNewCustomer = $this->magentoCustomer->load($newCustomerId);
-                    //$getNewCustomer->sendNewAccountEmail();
+                    $getNewCustomer->sendNewAccountEmail();
                     $this->helper->log('CUSTOMER : Successfully sent the email to the ERP customer : ' . $erpCustomer['CustomerNo'] . ' in Magento', 'info');
 
                     $this->helper->log('CUSTOMER : Successfully created the customer account in Magento for ERP customer : ' . $erpCustomer['CustomerNo'], 'info');
