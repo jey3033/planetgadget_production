@@ -41,8 +41,10 @@ define([
             var shippingMethod = quote.shippingMethod(),
                 shippingPrice = '';
 
-            if (!this.isStorePickup()) {
-                shippingPrice = '-' + ' Rp ' +quote.shippingMethod().amount;
+            if (typeof quote.shippingMethod().amount != 'undefined' && !this.isStorePickup()) {
+                shippingPrice = '-' + ' Rp ' + quote.shippingMethod().amount;
+            }else{
+                shippingPrice = 'Rp 0';
             }
 
             return shippingPrice;
@@ -57,7 +59,7 @@ define([
             }
 
 
-            if (quote.shippingAddress().firstname !== undefined) {
+            if (typeof quote.shippingAddress().firstname !== undefined) {
                 locationName = quote.shippingAddress().street;
             }
 
@@ -73,7 +75,7 @@ define([
             }
 
 
-            if (quote.shippingAddress().firstname !== undefined) {
+            if (typeof quote.shippingAddress().firstname !== undefined) {
                 locationName = quote.shippingAddress().telephone;
             }
 
@@ -90,7 +92,7 @@ define([
             }
 
 
-            if (quote.shippingAddress().firstname !== undefined) {
+            if (typeof quote.shippingAddress().frontend_description !== undefined) {
                 locationName = quote.shippingAddress().frontend_description;
             }
 
