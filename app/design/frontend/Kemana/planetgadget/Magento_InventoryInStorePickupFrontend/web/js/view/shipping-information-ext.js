@@ -59,7 +59,7 @@ define([
             }
 
 
-            if (quote.shippingAddress().firstname !== undefined) {
+            if (typeof quote.shippingAddress().firstname !== undefined) {
                 locationName = quote.shippingAddress().street;
             }
 
@@ -75,7 +75,7 @@ define([
             }
 
 
-            if (quote.shippingAddress().firstname !== undefined) {
+            if (typeof quote.shippingAddress().firstname !== undefined) {
                 locationName = quote.shippingAddress().telephone;
             }
 
@@ -92,7 +92,7 @@ define([
             }
 
 
-            if (quote.shippingAddress().firstname !== undefined) {
+            if (typeof quote.shippingAddress().frontend_description !== undefined) {
                 locationName = quote.shippingAddress().frontend_description;
             }
 
