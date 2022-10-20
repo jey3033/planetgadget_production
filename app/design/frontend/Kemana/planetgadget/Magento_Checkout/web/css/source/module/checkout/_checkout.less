@@ -221,17 +221,16 @@
             .image-div {
                 background-size: contain;
                 width: 150px;
-                height: 150px;
+                height: 200px;
                 display: inline-block;
                 margin-bottom: 30px;
-                height: 200px;
             }
 
             .line-one {
                 .lib-line-height(30);
                 .lib-css(color, @theme__color__secondary);
                 font-weight: 700;
-                margin-bottom: 20px;
+                //margin-bottom: 20px;
             }
 
             .line-two {
@@ -387,7 +386,10 @@
         .checkout-success,
         .checkout-failed {
             .line-one{
-                font-size: 24px;
+                h1 {
+                    font-size: 24px;
+                    .lib-line-height(38);
+                }
             }
         }
     }
@@ -443,7 +445,10 @@
         .checkout-success,
         .checkout-failed {
             .line-one{
-                font-size: 28px;
+                h1 {
+                    font-size: 28px;
+                    .lib-line-height(38);
+                }
             }
         }
     }
