@@ -41,8 +41,10 @@ define([
             var shippingMethod = quote.shippingMethod(),
                 shippingPrice = '';
 
-            if (!this.isStorePickup()) {
-                shippingPrice = '-' + ' Rp ' +quote.shippingMethod().amount;
+            if (typeof quote.shippingMethod().amount != 'undefined' && !this.isStorePickup()) {
+                shippingPrice = '-' + ' Rp ' + quote.shippingMethod().amount;
+            }else{
+                shippingPrice = 'Rp 0';
             }
 
             return shippingPrice;
