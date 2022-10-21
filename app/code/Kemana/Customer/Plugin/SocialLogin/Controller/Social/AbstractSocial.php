@@ -30,7 +30,7 @@ class AbstractSocial
      * @param $type
      * @return bool|Customer|mixed
      */
-    
+
     public function aroundCreateCustomerProcess(\Kemana\SocialLogin\Controller\Social\AbstractSocial $subject, callable $proceed, $userProfile, $websiteId = null, $type)
     {
         $name = explode(' ', $userProfile->displayName ?: __('New User'));
@@ -47,6 +47,13 @@ class AbstractSocial
             ],
             $this->getUserData($userProfile)
         );
+
+        if (!$user['phonenumber']) {
+            $user['phonenumber'] = '0000000000'.$user['email'];
+        }
+
+        $user['dob'] = '01/10/1900';
+
         return $subject->createCustomer($user, $websiteId, $type);
     }
 
