@@ -113,4 +113,55 @@ class Grid extends \Magento\Customer\Block\Address\Grid
             return null;
         }
     }
+
+    /**
+     * Get customer addresses collection.
+     *
+     * Filters collection by customer id
+     *
+     * @return \Magento\Customer\Model\ResourceModel\Address\Collection
+     * @throws NoSuchEntityException
+     */
+
+    public function getAdditionalAddress(): \Magento\Customer\Model\ResourceModel\Address\Collection
+    {
+        if (null === $this->addressCollection) {
+            if (null === $this->getCustomer()) {
+                throw new NoSuchEntityException(__('Customer not logged in'));
+            }
+            /** @var \Magento\Customer\Model\ResourceModel\Address\Collection $collection */
+            $collection = $this->addressCollectionFactory->create();
+            $collection->setOrder('entity_id', 'desc');
+            $collection->addFieldToFilter(
+                'entity_id',
+                ['nin' => [$this->getDefaultBilling(), $this->getDefaultShipping()]]
+            );
+            $collection->setCustomerFilter([$this->getCustomer()->getId()]);
+            return $collection;
+        }
+        return $this->addressCollection;
+    }
+
+    /**
+     * Get current additional customer addresses
+     *
+     * Return array of address interfaces if customer has additional addresses and false in other cases
+     *
+     * @return \Magento\Customer\Api\Data\AddressInterface[]
+     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws NoSuchEntityException
+     * @since 102.0.1
+     */
+    public function getAdditionalAddresses(): array
+    {
+        $additional = [];
+        $addresses = $this->getAdditionalAddress();
+        $primaryAddressIds = [$this->getDefaultBilling(), $this->getDefaultShipping()];
+        foreach ($addresses as $address) {
+            if (!in_array((int)$address->getId(), $primaryAddressIds, true)) {
+                $additional[] = $address->getDataModel();
+            }
+        }
+        return $additional;
+    }
 }
