@@ -261,7 +261,7 @@ class Social extends \Kemana\SocialLogin\Model\Social
      */
     public function createCustomerSocial($data, $store)
     {
-        
+
         /**
          * @var CustomerInterface $customer
          */
@@ -273,7 +273,8 @@ class Social extends \Kemana\SocialLogin\Model\Social
             ->setStoreId($store->getId())
             ->setWebsiteId($store->getWebsiteId())
             ->setCreatedIn($store->getName())
-            ->setCustomAttribute('phonenumber', $phonenumber);
+            ->setCustomAttribute('phonenumber', $phonenumber)
+            ->setDob($data['dob']);
 
         $websiteId = $store->getWebsiteId();
 
@@ -314,7 +315,7 @@ class Social extends \Kemana\SocialLogin\Model\Social
             throw $e;
         }
 
-        
+
         /**
          * @var Customer $customer
          */
@@ -497,7 +498,7 @@ class Social extends \Kemana\SocialLogin\Model\Social
         if ($phonenumber) {
             $newphonenumber = $phonenumber;
             $pnFirstDigit = substr($phonenumber, 0, 1); // get first digit in phonenumber
-            
+
             if($pnFirstDigit == 0){
                 $ptn = "/^0/";  // Regex first digit if 0
                 $rpltxt = "62";  // Replacement string
