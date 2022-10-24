@@ -24,6 +24,18 @@
         <?php if ($_gender->isEnabled()) : ?>
             <?= $_gender->setGender($block->getCustomer()->getGender())->toHtml() ?>
         <?php endif ?>
+        <?php $_phonenumber = $block->getLayout()->createBlock(\Kemana\Customer\Block\Widget\Phonenumber::class) ?>
+        <?php if ($_phonenumber->isEnabled()) : ?>
+            <?php
+
+            if ($customerPhoneNumber = $block->getCustomer()->getCustomAttribute('phonenumber')) {
+                $customerPhoneNumberValue = $customerPhoneNumber->getValue();
+            } else {
+                $customerPhoneNumberValue = '-';
+            }
+            echo $_phonenumber->setPhonenumber($customerPhoneNumberValue)->toHtml();
+            ?>
+        <?php endif ?>
         <div class="field choice checkbox">
             <input type="checkbox" name="change_email" id="change-email" data-role="change-email" value="1" title="<?= $block->escapeHtmlAttr(__('Change Email')) ?>" class="checkbox" />
             <label class="label" for="change-email"><span><?= $block->escapeHtml(__('Change Email / Mobile Number')) ?></span></label>
@@ -42,18 +54,6 @@
                 <input type="email" name="email" id="email" autocomplete="email" data-input="change-email" value="<?= $block->escapeHtmlAttr($block->getCustomer()->getEmail()) ?>" title="<?= $block->escapeHtmlAttr(__('Email')) ?>" class="input-text" data-validate="{required:true, 'validate-email':true}" />
             </div>
         </div>
-        <?php $_phonenumber = $block->getLayout()->createBlock(\Kemana\Customer\Block\Widget\Phonenumber::class) ?>
-        <?php if ($_phonenumber->isEnabled()) : ?>
-            <?php
-
-                if ($customerPhoneNumber = $block->getCustomer()->getCustomAttribute('phonenumber')) {
-                    $customerPhoneNumberValue = $customerPhoneNumber->getValue();
-                } else {
-                    $customerPhoneNumberValue = '-';
-                }
-                echo $_phonenumber->setPhonenumber($customerPhoneNumberValue)->toHtml();
-            ?>
-        <?php endif ?>
         <div class="field password current required">
             <label class="label" for="current-password"><span><?= $block->escapeHtml(__('Current Password')) ?></span></label>
             <div class="control">
