@@ -94,17 +94,17 @@ abstract class Payment extends \Magento\Framework\App\Action\Action
 
     protected function getResponseUrl()
     {
-        return $this->_url->getUrl('kredivo/payment/response', ['_secure' => false]);
+        return $this->_scopeConfig->getValue('web/secure/base_url').'kredivo/payment/response';
     }
 
     protected function getNotificationUrl()
     {
-        return $this->_url->getUrl('kredivo/payment/notification', ['_secure' => false]);
+        return $this->_scopeConfig->getValue('web/secure/base_url').'kredivo/payment/notification';
     }
-	
+
 	protected function getStatusUrl()
     {
-        return $this->_url->getUrl('kredivo/payment/status', ['_secure' => false]);
+        return $this->_scopeConfig->getValue('web/secure/base_url').'kredivo/payment/status';
     }
 
     protected function getCheckoutSuccessUrl()
