@@ -41,6 +41,10 @@
             <span class="address-value" data-bind="text: getShippingMethodAddress()"></span>
             <br/><br/>
             <span class="telephone-value" data-bind="text: getShippingMethodTelephone()"></span>
+            <br/>
+            <!-- ko with: {locationDescriptionUnsanitizedHtml: selectedLocation().description} -->
+                <p class="location-description" html="locationDescriptionUnsanitizedHtml"></p>
+            <!-- /ko -->
         </div>
     </div>
     <!--/ko-->

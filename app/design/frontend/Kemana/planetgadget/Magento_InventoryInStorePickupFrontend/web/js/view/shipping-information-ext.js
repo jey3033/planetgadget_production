@@ -4,13 +4,15 @@
  */
 
 define([
-    'Magento_Checkout/js/model/quote'
-], function (quote) {
+    'Magento_Checkout/js/model/quote',
+    'Magento_InventoryInStorePickupFrontend/js/model/pickup-locations-service'
+], function (quote,pickupLocationsService) {
     'use strict';
 
     var storePickupShippingInformation = {
         defaults: {
-            template: 'Magento_InventoryInStorePickupFrontend/shipping-information'
+            template: 'Magento_InventoryInStorePickupFrontend/shipping-information',
+            selectedLocation: pickupLocationsService.selectedLocation
         },
 
         /**
@@ -39,8 +41,10 @@ define([
             var shippingMethod = quote.shippingMethod(),
                 shippingPrice = '';
 
-            if (!this.isStorePickup()) {
-                shippingPrice = '-' + ' Rp ' +quote.shippingMethod().amount;
+            if (typeof quote.shippingMethod().amount != 'undefined' && !this.isStorePickup()) {
+                shippingPrice = '-' + ' Rp ' + quote.shippingMethod().amount;
+            }else{
+                shippingPrice = 'Rp 0';
             }
 
             return shippingPrice;
@@ -55,7 +59,7 @@ define([
             }
 
 
-            if (quote.shippingAddress().firstname !== undefined) {
+            if (typeof quote.shippingAddress().firstname !== undefined) {
                 locationName = quote.shippingAddress().street;
             }
 
@@ -71,8 +75,25 @@ define([
             }
 
 
-            if (quote.shippingAddress().firstname !== undefined) {
+            if (typeof quote.shippingAddress().firstname !== undefined) {
                 locationName = quote.shippingAddress().telephone;
+            }
+
+            return locationName;
+        },
+
+        getShippingMethodFrontendDescription: function () {
+            var shippingMethod = quote.shippingMethod(),
+                locationName = '';
+
+            if (!this.isStorePickup()) {
+
+                return '-';
+            }
+
+
+            if (typeof quote.shippingAddress().frontend_description !== undefined) {
+                locationName = quote.shippingAddress().frontend_description;
             }
 
             return locationName;

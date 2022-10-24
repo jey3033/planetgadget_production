@@ -153,7 +153,9 @@
                             margin-bottom: 20px;
 
                             .swatch-attribute-selected-option {
-                                display: unset !important;
+                                display: inline-block;
+                                .lib-css(color, @kemana-primary-brand-color);
+                                padding-left: 10px; 
                             }
 
                             .size {
@@ -172,12 +174,12 @@
                             .color {
                                 position: relative;
 
-                                .mage-error {
-                                    .lib-font-size(14);
-                                    position: absolute;
-                                    top: -7px;
-                                    left: 48px;
-                                    font-style: italic;
+                                div.mage-error {
+                                    .lib-font-size(10);
+                                    position: relative;
+                                    top: 0;
+                                    left: 0;
+                                    font-style: normal;
                                 }
                             }
 

@@ -30,8 +30,12 @@
                         </div>
                         <div class="col-md-6 col-sm-12 menu-items accordion-item">
                             <div data-content-type="html" data-appearance="default" data-element="main" data-decoded="true" role="tablist">
-                            <p class="title" data-role="collapsible">Privacy Policy</p>
-                            <?= $block->getChildHtml('footer_links') ?>
+                            <p class="title" data-role="collapsible"><?php echo __("Privacy Policy"); ?></p>
+                            <?php /* $block->getChildHtml('footer_links') */ ?>
+                            <?php echo $block->getLayout()
+                                    ->createBlock('Magento\Cms\Block\Block')
+                                    ->setBlockId('footer-privacy-policy')
+                                    ->toHtml(); ?>
                             </div>
                         </div>
                     </div>
