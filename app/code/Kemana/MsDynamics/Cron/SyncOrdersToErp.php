@@ -1,7 +1,22 @@
 <?php
+/**
+ * Copyright © 2022 PT Kemana Teknologi Solusi. All rights reserved.
+ * http://www.kemana.com
+ */
+
+/**
+ * @category Kemana
+ * @package  Kemana_MsDynamics
+ * @license  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ *
+ * @author   Achintha Madushan <amadushan@kemana.com>
+ */
 
 namespace Kemana\MsDynamics\Cron;
 
+/**
+ * Class SyncOrdersToErp
+ */
 class SyncOrdersToErp
 {
     /**
@@ -65,6 +80,8 @@ class SyncOrdersToErp
      * @throws \Magento\Framework\Exception\AlreadyExistsException
      */
     public function syncOrdersFromMagentoToErp($orderId = 0) {
+        $singleOrderFromGridResult = false;
+
         if (!$this->helper->isEnable()) {
             return;
         }
@@ -114,7 +131,12 @@ class SyncOrdersToErp
             ];
 
             if (floatval($order->getDiscountAmount())) {
-                $dataToOrder['DiscountAmount'] = floatval($order->getDiscountAmount());
+                $dataToOrder['DiscountAmount'] = abs(floatval($order->getDiscountAmount()));
+            }
+
+            $getSourceLocationName = false;
+            if ($order->getShippingMethod() == 'instore_pickup') {
+                $getSourceLocationName = $this->helper->getSourceLocationCodeByName($order->getShippingAddress()->getFirstname());
             }
 
             $dataToOrder = $this->helper->convertArrayToXml($dataToOrder);
@@ -137,6 +159,10 @@ class SyncOrdersToErp
 
                 if ($lineItem->getName()) {
                     $dataToItem['Description'] = $lineItem->getName();
+                }
+
+                if ($getSourceLocationName) {
+                    $dataToItem['LocationCode'] = $getSourceLocationName;
                 }
 
                 $dataToItem = $this->helper->convertArrayToXml($dataToItem);
@@ -168,6 +194,8 @@ class SyncOrdersToErp
                 $order->setIsSyncedToMsdynamicErp(1);
                 $this->orderResourceModel->save($order);
 
+                $singleOrderFromGridResult = true;
+
                 $this->helper->log('Order Cron or From Grid : Successfully updated the is_synced_to_msdynamic_erp attribute for Magento Order ' . $createOrderInErp['response']['OrderNo'], 'info');
 
                 $this->helper->log('Order Cron or From Grid : End process the Magento order : ' . $order->getIncrementId() . '. Successfully sent to ERP', 'info');
@@ -175,6 +203,16 @@ class SyncOrdersToErp
             }
         }
 
-    }
+        if ($orderId) {
+            if ($singleOrderFromGridResult) {
+                return [
+                    'result' => true
+                ];
+            }
 
+            return [
+                'result' => false
+            ];
+        }
+    }
 }
