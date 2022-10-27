@@ -62,7 +62,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     }
 
     /**
-     * @return float
+     * @return float|int
      * @throws \Magento\Framework\Exception\LocalizedException
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
@@ -79,17 +79,18 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         if ($shippingMethod) {
             $code = explode('_', $shippingMethod);
 
-            if (isset($code[0]) && $code[0] == 'jne') {
+            if (isset($code[0]) && ($code[0] == 'jne' || $code[0] == 'jnt')) {
                 $shippingMethodCode = $code[0];
             }
         }
 
         if ($shippingMethodCode && $shippingMethodCode == "jne") {
             return $insurance + (float)$this->getInsuranceFixedAdminExtraFee();
+        }else if ($shippingMethodCode && $shippingMethodCode == "jnt") {
+            return $insurance;
+        } else {
+            return 0;
         }
-
-        return $insurance;
-
     }
 
     /**
