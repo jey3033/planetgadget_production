@@ -69,6 +69,7 @@ class Order
       //calculate the insurance and admin shipping fee
       $insuranceFee = $this->insuranceHelper->getInsuranceFeeForAnOrder();
       $shippingAmount = $shippingAmount + $insuranceFee;
+      $this->amount = $this->amount - $insuranceFee;
       // End
 
     return [
