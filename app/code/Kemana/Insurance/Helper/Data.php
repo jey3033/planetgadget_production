@@ -42,20 +42,28 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     protected $quote;
 
     /**
+     * @var \Magento\Sales\Api\OrderRepositoryInterface
+     */
+    protected $orderRepositoryInterface;
+
+    /**
      * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
      * @param \Magento\Checkout\Model\Session $checkoutSession
      * @param \Magento\Quote\Model\Quote $quote
+     * @param \Magento\Sales\Api\OrderRepositoryInterface $orderRepositoryInterface
      * @param Context $context
      */
     public function __construct(
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
         \Magento\Checkout\Model\Session $checkoutSession,
         \Magento\Quote\Model\Quote $quote,
+        \Magento\Sales\Api\OrderRepositoryInterface $orderRepositoryInterface,
         Context $context
     ) {
         $this->scopeConfig = $scopeConfig;
         $this->checkoutSession = $checkoutSession;
         $this->quote = $quote;
+        $this->orderRepositoryInterface = $orderRepositoryInterface;
         $this->context = $context;
 
         parent::__construct($context);
@@ -66,12 +74,17 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      * @throws \Magento\Framework\Exception\LocalizedException
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    public function getInsuranceFeeForAnOrder() {
-        $quote  = $this->checkoutSession->getQuote();
+    public function getInsuranceFeeForAnOrder($merchantOrderId = null) {
+        if ($merchantOrderId) {
+            $order = $this->orderRepositoryInterface->get($merchantOrderId);
+            $subTotal = (float)$order->getSubtotal();
+            $shippingMethod = $order->getShippingMethod();
+        } else {
+            $quote  = $this->checkoutSession->getQuote();
+            $subTotal = (float)$quote->getSubtotal();
+            $shippingMethod = $quote->getShippingAddress()->getShippingMethod();
+        }
 
-        $subTotal = (float)$quote->getSubtotal();
-
-        $shippingMethod = $quote->getShippingAddress()->getShippingMethod();
         $shippingMethodCode = null;
 
         $insurance = (float)$subTotal * 0.002;
