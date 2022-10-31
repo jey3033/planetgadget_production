@@ -142,7 +142,7 @@ class Transaction extends AbstractHelper implements IndodanaInterface
         ->init($product, 'product_thumbnail_image')->getUrl();
 
       $products[] = [
-        'id'        => $product->getId(),
+        'id'        => $orderItem->getId(),
         'name'      => $product->getName(),
         'price'     => round((float) $product->getFinalPrice(),2),
         'url'       => $product->getProductUrl(),

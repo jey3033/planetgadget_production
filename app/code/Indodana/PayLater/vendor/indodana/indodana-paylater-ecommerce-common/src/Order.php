@@ -74,7 +74,7 @@ class Order
       $insuranceFee = $this->insuranceHelper->getInsuranceFeeForAnOrder($this->merchantOrderId);
       $shippingAmount = $shippingAmount + $insuranceFee;
       // Add the fee to the Total in the API request body
-      $this->amount = $this->amount + $insuranceFee;
+      //$this->amount = $this->amount + $insuranceFee;
       // End
 
     return [
