@@ -22,6 +22,7 @@ class Order
 
   private $amount;
   private $items;
+  private $merchantOrderId = null;
 
   protected $insuranceHelper;
 
@@ -40,6 +41,9 @@ class Order
     $validationResult = RespectValidationHelper::validate($validator, $input);
 
     $this->insuranceHelper = $this->getInsuranceHelperObject();
+    if (isset($input['merchantOrderId'])) {
+        $this->merchantOrderId = $input['merchantOrderId'];
+    }
 
     if (!$validationResult->isSuccess()) {
       throw new IndodanaCommonException($validationResult->printErrorMessages());
@@ -67,9 +71,10 @@ class Order
   {
       // Start @author   Achintha Madushan <amadushan@kemana.com> - Kemana Team
       //calculate the insurance and admin shipping fee
-      $insuranceFee = $this->insuranceHelper->getInsuranceFeeForAnOrder();
+      $insuranceFee = $this->insuranceHelper->getInsuranceFeeForAnOrder($this->merchantOrderId);
       $shippingAmount = $shippingAmount + $insuranceFee;
-      $this->amount = $this->amount - $insuranceFee;
+      // Add the fee to the Total in the API request body
+      $this->amount = $this->amount + $insuranceFee;
       // End
 
     return [

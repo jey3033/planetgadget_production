@@ -33,7 +33,8 @@ class SalesQuoteAddressCollectTotals implements ObserverInterface
 
 	public function execute(EventObserver $observer)
     {
-        if($this->getConfigValue("active")){
+        if($this->getConfigValue("active") &&
+            $observer->getQuote()->getPayment()->getMethod() != 'indodanapayment'){
 
             $quote  = $observer->getQuote();
             $total  = $observer->getTotal();
