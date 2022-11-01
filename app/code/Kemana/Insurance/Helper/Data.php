@@ -47,23 +47,32 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     protected $orderRepositoryInterface;
 
     /**
+     * @var \Kemana\Insurance\Logger\Logger
+     */
+    protected $logger;
+
+    /**
      * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
      * @param \Magento\Checkout\Model\Session $checkoutSession
      * @param \Magento\Quote\Model\Quote $quote
      * @param \Magento\Sales\Api\OrderRepositoryInterface $orderRepositoryInterface
+     * @param \Kemana\Insurance\Logger\Logger $logger
      * @param Context $context
      */
     public function __construct(
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
-        \Magento\Checkout\Model\Session $checkoutSession,
-        \Magento\Quote\Model\Quote $quote,
-        \Magento\Sales\Api\OrderRepositoryInterface $orderRepositoryInterface,
-        Context $context
-    ) {
+        \Magento\Checkout\Model\Session                    $checkoutSession,
+        \Magento\Quote\Model\Quote                         $quote,
+        \Magento\Sales\Api\OrderRepositoryInterface        $orderRepositoryInterface,
+        \Kemana\Insurance\Logger\Logger                    $logger,
+        Context                                            $context
+    )
+    {
         $this->scopeConfig = $scopeConfig;
         $this->checkoutSession = $checkoutSession;
         $this->quote = $quote;
         $this->orderRepositoryInterface = $orderRepositoryInterface;
+        $this->logger = $logger;
         $this->context = $context;
 
         parent::__construct($context);
@@ -74,23 +83,38 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      * @throws \Magento\Framework\Exception\LocalizedException
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    public function getInsuranceFeeForAnOrder($merchantOrderId = null) {
+    public function getInsuranceFeeForAnOrder($merchantOrderId = null)
+    {
+        if (!$this->getInsuranceIsEnable()) {
+            return 0;
+        }
+
+        $this->log('Hit the function getInsuranceFeeForAnOrder()');
         if ($merchantOrderId) {
+            $this->log('Merchant Order ID ' . $merchantOrderId . ' load details from order repository');
             $order = $this->orderRepositoryInterface->get($merchantOrderId);
             $subTotal = (float)$order->getSubtotal();
             $shippingMethod = $order->getShippingMethod();
         } else {
-            $quote  = $this->checkoutSession->getQuote();
+            $this->log('No order ID and getting details from quote');
+            $quote = $this->checkoutSession->getQuote();
             $subTotal = (float)$quote->getSubtotal();
             $shippingMethod = $quote->getShippingAddress()->getShippingMethod();
         }
+
+        $this->log('Order Sub total is ' . $subTotal);
+        $this->log('Shipping method is ' . $shippingMethod);
 
         $shippingMethodCode = null;
 
         $insurance = (float)$subTotal * 0.002;
 
+        $this->log('Calculated Insurance fee (without admin fee) is ' . $insurance);
+
         if ($shippingMethod) {
             $code = explode('_', $shippingMethod);
+
+            $this->log('Shipping method array after exploding by _ ' . implode(" ", $code));
 
             if (isset($code[0]) && ($code[0] == 'jne' || $code[0] == 'jnt')) {
                 $shippingMethodCode = $code[0];
@@ -98,10 +122,14 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         }
 
         if ($shippingMethodCode && $shippingMethodCode == "jne") {
-            return $insurance + (float)$this->getInsuranceFixedAdminExtraFee();
-        }else if ($shippingMethodCode && $shippingMethodCode == "jnt") {
+            $insurance = $insurance + (float)$this->getInsuranceFixedAdminExtraFee();
+            $this->log('Shipping Method code is ' . $shippingMethodCode . ' and total insurance fee and admin fee is ' . $insurance);
+            return $insurance;
+        } else if ($shippingMethodCode && $shippingMethodCode == "jnt") {
+            $this->log('Shipping Method code is ' . $shippingMethodCode . ' and total insurance fee (no admin fee) is ' . $insurance);
             return $insurance;
         } else {
+            $this->log('Shipping Method code not equal to jne or j&t and insurance fee is 0');
             return 0;
         }
     }
@@ -109,14 +137,34 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     /**
      * @return mixed
      */
-    public function getInsuranceIsEnable() {
+    public function getInsuranceIsEnable()
+    {
         return $this->scopeConfig->getValue('insurance_fee/general/active');
     }
 
     /**
      * @return mixed
      */
-    public function getInsuranceFixedAdminExtraFee() {
+    public function getInsuranceFixedAdminExtraFee()
+    {
         return $this->scopeConfig->getValue('insurance_fee/general/extra_fee');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getInsuranceLogIsEnable()
+    {
+        return $this->scopeConfig->getValue('insurance_fee/general/log');
+    }
+
+    /**
+     * @param $message
+     * @return void
+     */
+    public function log($message) {
+        if ($this->getInsuranceLogIsEnable()) {
+            $this->logger->info($message);
+        }
     }
 }
