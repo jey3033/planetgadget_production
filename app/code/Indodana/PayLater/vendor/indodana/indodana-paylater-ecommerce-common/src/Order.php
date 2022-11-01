@@ -73,8 +73,9 @@ class Order
       //calculate the insurance and admin shipping fee
       $insuranceFee = $this->insuranceHelper->getInsuranceFeeForAnOrder($this->merchantOrderId);
       $shippingAmount = $shippingAmount + $insuranceFee;
-      // Add the fee to the Total in the API request body
-      //$this->amount = $this->amount + $insuranceFee;
+      // Deduct insurance fee calculated in here because insurance will be calculated using an observer
+      // Kemana\Insurance\Observer\SalesQuoteAddressCollectTotals
+      $this->amount = $this->amount - $insuranceFee;
       // End
 
     return [
