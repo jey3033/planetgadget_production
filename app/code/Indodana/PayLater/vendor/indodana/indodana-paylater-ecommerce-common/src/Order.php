@@ -22,6 +22,9 @@ class Order
 
   private $amount;
   private $items;
+  private $merchantOrderId = null;
+
+  protected $insuranceHelper;
 
   public function __construct(array $input = [], Seller $seller)
   {
@@ -36,6 +39,11 @@ class Order
       ->key('insuranceFeeAmount', Validator::numberType(), false);
 
     $validationResult = RespectValidationHelper::validate($validator, $input);
+
+    $this->insuranceHelper = $this->getInsuranceHelperObject();
+    if (isset($input['merchantOrderId'])) {
+        $this->merchantOrderId = $input['merchantOrderId'];
+    }
 
     if (!$validationResult->isSuccess()) {
       throw new IndodanaCommonException($validationResult->printErrorMessages());
@@ -61,6 +69,15 @@ class Order
 
   private function getShippingFee($shippingAmount)
   {
+      // Start @author   Achintha Madushan <amadushan@kemana.com> - Kemana Team
+      //calculate the insurance and admin shipping fee
+      $insuranceFee = $this->insuranceHelper->getInsuranceFeeForAnOrder($this->merchantOrderId);
+      $shippingAmount = $shippingAmount + $insuranceFee;
+      // Deduct insurance fee calculated in here because insurance will be calculated using an observer
+      // Kemana\Insurance\Observer\SalesQuoteAddressCollectTotals
+      //$this->amount = $this->amount - $insuranceFee;
+      // End
+
     return [
       'id' => self::SHIPPING_FEE_ITEM_ID,
       'url' => '',
@@ -181,4 +198,14 @@ class Order
   {
     return $this->items;
   }
+
+    /**
+     * @return mixed
+     * @author   Achintha Madushan <amadushan@kemana.com> - Kemana Team
+     */
+    public function getInsuranceHelperObject()
+    {
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        return $objectManager->create(\Kemana\Insurance\Helper\Data::class);
+    }
 }
