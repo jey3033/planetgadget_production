@@ -24,6 +24,8 @@ class Order
   private $items;
   private $merchantOrderId = null;
 
+  protected $products = null;
+
   protected $insuranceHelper;
 
   public function __construct(array $input = [], Seller $seller)
@@ -41,6 +43,7 @@ class Order
     $validationResult = RespectValidationHelper::validate($validator, $input);
 
     $this->insuranceHelper = $this->getInsuranceHelperObject();
+    $this->products = $input['products'];
     if (isset($input['merchantOrderId'])) {
         $this->merchantOrderId = $input['merchantOrderId'];
     }
@@ -71,11 +74,17 @@ class Order
   {
       // Start @author   Achintha Madushan <amadushan@kemana.com> - Kemana Team
       //calculate the insurance and admin shipping fee
-      $insuranceFee = $this->insuranceHelper->getInsuranceFeeForAnOrder($this->merchantOrderId);
+      $getInsuranceData = $this->insuranceHelper->getInsuranceFeeForAnOrder($this->merchantOrderId);
+      $insuranceFee = $getInsuranceData['insurance'];
       $shippingAmount = $shippingAmount + $insuranceFee;
-      // Deduct insurance fee calculated in here because insurance will be calculated using an observer
-      // Kemana\Insurance\Observer\SalesQuoteAddressCollectTotals
-      $this->amount = $this->amount - $insuranceFee;
+
+      if ($insuranceFee) {
+          $total = $getInsuranceData['subTotal'] + $shippingAmount;
+
+          if ($total != $this->amount ) {
+              $this->amount = $this->amount - $insuranceFee;
+          }
+      }
       // End
 
     return [
