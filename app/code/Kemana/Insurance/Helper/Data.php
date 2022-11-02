@@ -51,6 +51,10 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     protected $logger;
 
+    protected $request;
+
+    protected $orderFactory;
+
     /**
      * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
      * @param \Magento\Checkout\Model\Session $checkoutSession
@@ -65,6 +69,8 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         \Magento\Quote\Model\Quote                         $quote,
         \Magento\Sales\Api\OrderRepositoryInterface        $orderRepositoryInterface,
         \Kemana\Insurance\Logger\Logger                    $logger,
+        \Magento\Framework\App\Request\Http $request,
+        \Magento\Sales\Model\OrderFactory $orderFactory,
         Context                                            $context
     )
     {
@@ -73,7 +79,9 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         $this->quote = $quote;
         $this->orderRepositoryInterface = $orderRepositoryInterface;
         $this->logger = $logger;
+        $this->request = $request;
         $this->context = $context;
+        $this->orderFactory = $orderFactory;
 
         parent::__construct($context);
     }
@@ -92,9 +100,10 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         $this->log('Hit the function getInsuranceFeeForAnOrder()');
         if ($merchantOrderId) {
             $this->log('Merchant Order ID ' . $merchantOrderId . ' load details from order repository');
-            $order = $this->orderRepositoryInterface->get($merchantOrderId);
+            $order = $this->orderFactory->create()->loadByIncrementId($merchantOrderId);
             $subTotal = (float)$order->getSubtotal();
             $shippingMethod = $order->getShippingMethod();
+
         } else {
             $this->log('No order ID and getting details from quote');
             $quote = $this->checkoutSession->getQuote();
