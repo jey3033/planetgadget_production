@@ -94,7 +94,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public function getInsuranceFeeForAnOrder($merchantOrderId = null)
     {
         if (!$this->getInsuranceIsEnable()) {
-            return 0;
+            return ['insurance' => 0, "subTotal" => 0];
         }
 
         $this->log('Hit the function getInsuranceFeeForAnOrder()');
@@ -133,13 +133,13 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         if ($shippingMethodCode && $shippingMethodCode == "jne") {
             $insurance = $insurance + (float)$this->getInsuranceFixedAdminExtraFee();
             $this->log('Shipping Method code is ' . $shippingMethodCode . ' and total insurance fee and admin fee is ' . $insurance);
-            return $insurance;
+            return ['insurance' => $insurance, "subTotal" => $subTotal];
         } else if ($shippingMethodCode && $shippingMethodCode == "jnt") {
             $this->log('Shipping Method code is ' . $shippingMethodCode . ' and total insurance fee (no admin fee) is ' . $insurance);
-            return $insurance;
+            return ['insurance' => $insurance, "subTotal" => $subTotal];
         } else {
             $this->log('Shipping Method code not equal to jne or j&t and insurance fee is 0');
-            return 0;
+            return ['insurance' => 0, "subTotal" => $subTotal];
         }
     }
 
