@@ -75,7 +75,7 @@ class Order
       $shippingAmount = $shippingAmount + $insuranceFee;
       // Deduct insurance fee calculated in here because insurance will be calculated using an observer
       // Kemana\Insurance\Observer\SalesQuoteAddressCollectTotals
-      //$this->amount = $this->amount - $insuranceFee;
+      $this->amount = $this->amount - $insuranceFee;
       // End
 
     return [
