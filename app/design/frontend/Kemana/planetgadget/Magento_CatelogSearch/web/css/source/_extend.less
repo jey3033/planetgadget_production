@@ -171,3 +171,49 @@
         max-width: none;
     }
 }
+
+/* Tablet device */
+@media (min-width: @screen__m) and (max-width: 1023px) {
+    .block-search {
+        .control {
+            left: 0;
+            bottom: -60px;
+            .lib-css(background-color, @color-pg-black2);
+            width: 100%;
+            padding: 10px;
+            margin: 0;
+            z-index: 999;
+            pointer-events: none;
+            transition: .3s all ease;
+            opacity: 0;
+            border: 0;
+            position: absolute;
+
+            input {
+                background: @color-white;
+                border-radius: @common-border-radius;
+                padding: 10px 15px;
+                line-height: 20px;
+                height: 40px;
+            }
+        }
+
+        .action.search {
+            position: relative;
+            left: 0;
+            top: 0;
+            .lib-button-icon(
+                @_icon-font-content: @icon-pg-close-button,
+                @_icon-font-text-hide: true,
+                @_icon-font-size: 18px,
+                @_icon-font-line-height: 48px,
+                @_icon-font-margin: 0 2px,
+                @_icon-font-color: @kemana-primary-brand-color
+            );
+        }
+
+        .nested {
+            display: none;
+        }
+    }
+}
