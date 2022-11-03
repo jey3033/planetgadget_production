@@ -9,7 +9,10 @@
                     <h2>Don't miss the latest info!</h2>
                     <p>Enter your email and get the latest Planet Gadget updates & promotions</p>
                 </div>
-                <div class="col-md-5 col-sm-12 newsletter-form"><?= $block->getChildHtml('subscribe') ?></div>
+                <div class="col-md-5 col-sm-12 newsletter-form">
+                    <!-- <?= $block->getChildHtml('subscribe') ?>  -->
+                    <?php echo $block->getLayout()->createBlock("Magento\Newsletter\Block\Subscribe")->setTemplate('Magento_Newsletter::subscribe.phtml')->toHtml(); ?>
+                </div>
             </div>
         </div>
     </div>
