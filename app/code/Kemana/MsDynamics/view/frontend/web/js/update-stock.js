@@ -58,17 +58,23 @@ define([
                 },
                 success: function(response) {
                     if(response.msDynamics){
-                        if($widget.options.producttype == 'simple'){
-                               if(response.instock){
+                        if(typeof response.apiresponse.totalStock != 'undefined' && $widget.options.producttype == 'simple'){
+                                let instock = false;
+                                $.each(response.apiresponse.totalStock,function(sku,qty){
+                                    if(qty > 0){
+                                        instock = true;
+                                    }
+                                })
+                                if(instock){
                                     $(".product-add-form").show();
                                     $(".product.alert.stock").hide();
                                     $(".product-info-stock-sku .stock").addClass("available").html("<span>In stock</span>")
-                               }else{
+                                }else{
                                     $(".product-add-form").hide();
                                     $(".product.alert.stock").show();
                                     $(".product-info-stock-sku .stock").addClass("unavailable").html("<span>Out of stock</span>")
-                               }
-                        }else if(response.instock){
+                                }
+                        }else if((typeof response.apiresponse.totalStock == 'undefined' || response.apiresponse.totalStock == null) && response.instock){
                             $(".product-add-form").show();
                             $(".product.alert.stock").hide();
                         }else{

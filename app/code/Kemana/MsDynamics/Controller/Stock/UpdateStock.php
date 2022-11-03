@@ -173,7 +173,7 @@ class UpdateStock extends \Magento\Framework\App\Action\Action
                     
                 if ($product->getTypeId() == "configurable") 
                 {
-                    if($response['curlStatus'] != 500 && isset($response['totalStock']) && $response['response'] && count($response['totalStock']) > 0){
+                    if($response['curlStatus'] != 500 && isset($response['totalStock']) && count($response['totalStock']) > 0){
                         foreach ($response['totalStock'] as $sku => $qty) {
                             if($qty > 0){
                                 array_push($instockproductids,$childProduct[$sku]);
@@ -214,7 +214,7 @@ class UpdateStock extends \Magento\Framework\App\Action\Action
                 
                 return $resultJson->setData([
                                              "msDynamics" => true,
-                                             "apiresponse" => isset($response['response']) ? $response['response'] : [],
+                                             "apiresponse" => $response,
                                              "instock"     => $product->isSalable()
                                         ]);
             }

@@ -83,7 +83,7 @@ class Inventory
             $sources = implode("|", $sources);
 
             $dataToGetStock = [
-                "productFilter" => "VV-0094-WH",
+                "productFilter" => $productSkus,
                 "locationFilter" => $sources
             ];
         $this->helper->inventorylog("Request: ".json_encode($dataToGetStock), 'info');
