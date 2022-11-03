@@ -170,13 +170,13 @@ class UpdateStock extends \Magento\Framework\App\Action\Action
             if(!empty($productdata)){
                 $instockproductids = [];
                 $response = $this->erpInventory->inventoryApiCall($productdata);
-
+                    
                 if ($product->getTypeId() == "configurable") 
                 {
-                    if(isset($response['response']) && $response['response'] && count($response['response']) > 0){
-                        foreach ($response['response'] as $key => $inventory) {
-                            if($inventory['Inventory'] > 0){
-                                array_push($instockproductids,$childProduct[$inventory['ProductNo']]);
+                    if($response['curlStatus'] != 500 && isset($response['totalStock']) && $response['response'] && count($response['totalStock']) > 0){
+                        foreach ($response['totalStock'] as $sku => $qty) {
+                            if($qty > 0){
+                                array_push($instockproductids,$childProduct[$sku]);
                             }
                         }
                         $options = $this->getOptions($product, $_children);

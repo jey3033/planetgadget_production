@@ -62,14 +62,12 @@ class Inventory
     public function getUnSyncInventorysFromErp($apiFunction, $soapAction, $inventoryData)
     {
         $postParameters = $inventoryData;
-
         $getInventoryFromErp = $this->request->apiTransport($apiFunction, $soapAction,
             $this->helper->getXmlRequestBodyToGetUnSyncInventorysFromApi($apiFunction, $soapAction, $postParameters));
 
         if (isset($getInventoryFromErp['response'])) {
             return $getInventoryFromErp;
         }
-
         return false;
     }
 
@@ -80,9 +78,13 @@ class Inventory
     public function inventoryApiCall($productSkus){
             $productSkus = array_unique($productSkus);
             $productSkus = implode("|", $productSkus);
+
+            $sources = $this->getSources();   
+            $sources = implode("|", $sources);
+
             $dataToGetStock = [
-                "Field" => "ProductNo",
-                "Criteria" => $productSkus,
+                "productFilter" => "VV-0094-WH",
+                "locationFilter" => $sources
             ];
         $this->helper->inventorylog("Request: ".json_encode($dataToGetStock), 'info');
 
@@ -91,21 +93,36 @@ class Inventory
             $this->helper->getSoapActionGetInventoryStock(), $dataToGetStock);
 
         $this->helper->inventorylog("Response: ".json_encode($response), 'info');
-        
-        if(isset($response['response']) && isset($response['response']['ProductNo'])){
-            $this->updateStock($response['response']['ProductNo'],$response['response']['Inventory']);
-        }elseif(isset($response['response']) && is_array($response['response'])){
-            foreach ($response['response'] as $key => $product) {
-                if(isset($product['ProductNo']) && isset($product['Inventory'])){
-                    $this->updateStock($product['ProductNo'],$product['Inventory']);
+
+        $totalStock = [];
+        if(isset($response['response'])){
+            $inventorysources = explode(";",$response['response']);
+            foreach ($inventorysources as $key => $inventorysource) {
+                $stockarray = explode(",",$inventorysource);
+                if(isset($totalStock[$stockarray[0]])){
+                    $totalStock[$stockarray[0]] = $totalStock[$stockarray[0]] + $stockarray[2];
+                }else{
+                    $totalStock[$stockarray[0]] = $stockarray[2];
                 }
+                $this->updateStock($stockarray[0],$stockarray[2],$stockarray[1]);
             }
         }else{
             $this->helper->inventorylog('0 Product stock update');
         }
+        $response['totalStock'] = $totalStock;
         return $response;
     }
 
+    public function getSources(){
+        $searchCriteria = $this->searchCriteriaBuilder->addFilter('enabled', 1)->create();
+        $sourceData = $this->sourceRepository->getList($searchCriteria);
+        $sourceData = $sourceData->getItems();
+        $sources = [];
+        foreach ($sourceData as $key => $source) {
+            array_push($sources,$source['source_code']);
+        }
+        return array_unique($sources);
+    }
     /**
      * @param $sku
      * @param $qty
@@ -114,20 +131,14 @@ class Inventory
      */
     public function updateStock($sku, $qty, $sourceCode = 'default'){
         try{
-
-            $searchCriteria = $this->searchCriteriaBuilder->addFilter('enabled', 1)->create();
-            $sourceData = $this->sourceRepository->getList($searchCriteria);
-            $sourceData = $sourceData->getItems();
             $status = $qty > 0 ? 1 : 0;
-            foreach ($sourceData as $key => $source) {
-                $this->sourceItem->setSku($sku);
-                $this->sourceItem->setSourceCode($source['source_code']);
-                $this->sourceItem->setQuantity($qty);
-                $this->sourceItem->setStatus($status);    
-                $this->sourceItemSave->execute([$this->sourceItem]);
-            }
+            $this->sourceItem->setSku($sku);
+            $this->sourceItem->setSourceCode($sourceCode);
+            $this->sourceItem->setQuantity($qty);
+            $this->sourceItem->setStatus($status);    
+            $this->sourceItemSave->execute([$this->sourceItem]);
 
-            $message = "Updated inventory sku: ".$sku ." and stock: " .$qty;
+            $message = "Updated inventory sku: ".$sku ." source: ".$sourceCode." and stock: " .$qty;
             $this->helper->inventorylog($message, 'info');
         }catch(Exception $e){
             $this->helper->inventorylog($e->getMessage(), 'error');

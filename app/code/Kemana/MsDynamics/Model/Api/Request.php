@@ -77,7 +77,7 @@ class Request
     {
         $apiUrl = $this->helper->getApiUrl() . '/' . $apiFunction;
 
-        if ($soapAction == $this->helper->getSoapActionDeleteCustomer()) {
+        if ($soapAction == $this->helper->getSoapActionDeleteCustomer() || $soapAction == $this->helper->getSoapActionGetInventoryStock()) {
             $apiUrl = $this->helper->getApiUrlForDelete();
         }
 
@@ -151,6 +151,8 @@ class Request
             }
 
         } catch (\Exception $e) {
+            echo $e;
+            die;
             $this->helper->log($e->getMessage());
 
             $this->helper->log('Error Response : ' . $e->getMessage());

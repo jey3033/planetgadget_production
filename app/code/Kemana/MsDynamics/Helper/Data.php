@@ -546,10 +546,8 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     {
         return '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
                 <Body>
-                        <' . $soapAction . ' xmlns="' . $this->getApiXmnls() . "/" . $apiFunction . '">
-                            <filter>
+                        <' . $soapAction . ' xmlns="' . $this->getApiXmnlsForDelete() . '">
                                 ' . $postParameters . '
-                            </filter>
                         </' . $soapAction . '>
                 </Body>
         </Envelope>';

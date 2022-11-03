@@ -58,8 +58,8 @@ define([
                 },
                 success: function(response) {
                     if(response.msDynamics){
-                        if(typeof response.apiresponse.Inventory != 'undefined' && $widget.options.producttype == 'simple'){
-                               if(response.apiresponse.Inventory > 0){
+                        if($widget.options.producttype == 'simple'){
+                               if(response.instock){
                                     $(".product-add-form").show();
                                     $(".product.alert.stock").hide();
                                     $(".product-info-stock-sku .stock").addClass("available").html("<span>In stock</span>")
@@ -68,7 +68,7 @@ define([
                                     $(".product.alert.stock").show();
                                     $(".product-info-stock-sku .stock").addClass("unavailable").html("<span>Out of stock</span>")
                                }
-                        }else if(typeof response.apiresponse.Inventory == 'undefined' && response.instock){
+                        }else if(response.instock){
                             $(".product-add-form").show();
                             $(".product.alert.stock").hide();
                         }else{
