@@ -172,6 +172,11 @@
                         opacity: 1;
                     }
                 }
+
+                &.slick-disabled {
+                    visibility: hidden;
+                    pointer-events: none;
+                }
             }
         }
     }
@@ -360,18 +365,6 @@
     .block.widget .products-grid .product-item {
         width: 24.439%;
     }
-
-    .block {
-        .products-grid {
-            .slick-slider {
-                .slick-track {
-                    .lib-vendor-prefix-display();
-                    justify-content: center;
-                }
-            }
-        }
-    }
-
 }
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xxl) {

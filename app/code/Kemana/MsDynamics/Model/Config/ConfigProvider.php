@@ -209,7 +209,7 @@ class ConfigProvider
     /**
      * XML Path API function name get product list soap action
      */
-    const GET_PRODUCT_INVENTORY_STOCK_SOAP_ACTION = 'ReadMultiple';
+    const GET_PRODUCT_INVENTORY_STOCK_SOAP_ACTION = 'ProductInventory';
 
     /**
      * XML Path API function create orders

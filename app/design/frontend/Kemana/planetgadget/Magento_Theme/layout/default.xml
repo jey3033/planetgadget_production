@@ -29,5 +29,12 @@
                 </arguments>
             </block>
         </container>
+        <container name="black.overlay.two" htmlTag="div" htmlClass="black-overlay-two">
+            <block class="Magento\Framework\View\Element\Text">
+                <arguments>
+                    <argument name="text" xsi:type="string"><![CDATA[&nbsp;]]></argument>
+                </arguments>
+            </block>
+        </container>
     </body>
 </page>

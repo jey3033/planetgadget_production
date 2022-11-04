@@ -100,7 +100,7 @@ class SourceLocation
             }
         }
 
-        if (count($orderItemData) > 1) {
+        if (count($orderItemData) > 1 && count($sourcesForItems) > 1) {
             // Get locations common to all items
             $locationsIncludesAllItems = array_intersect(...$sourcesForItems);
 

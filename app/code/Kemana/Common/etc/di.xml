@@ -21,5 +21,5 @@
     </type>
 
     <preference for="Magento\Review\Block\Product\View\ListView" type="Kemana\Common\Block\Product\View\ListView"/>
-    <preference for="Magento\Theme\Block\Html\Pager" type="Kemana\Common\Block\html\Pager"/>
+    <preference for="Magento\Wishlist\Block\Customer\Wishlist" type="Kemana\Common\Block\Customer\Wishlist"/>
 </config>
