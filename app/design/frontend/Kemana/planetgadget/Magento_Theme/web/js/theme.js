@@ -293,7 +293,7 @@ define([
             {
                 breakpoint: 1024,
                 settings: {
-                    slidesToShow: 3,
+                    slidesToShow: 2,
                     arrows: false
                 }
             },
@@ -471,7 +471,7 @@ define([
      * 27. move header search in mobile
      */
 
-    if (utility.isMobile()) {
+    if (utility.isMobile() || utility.isTablet()) {
         $('.header-left .logo').before( $('.header-right .top-link') );
         $('.header-left .logo').appendTo( $('.header') );
         $('.header .block-search').prependTo( $('.header .header-right') );
@@ -499,5 +499,16 @@ define([
             }
         });
     }
+
+    $doc.on('click', '.select-location input', function () {
+        $('.select-location input').parent().closest('.row.location').removeClass('check');
+
+        if( $('.select-location input').is(':checked') ){
+            $(this).parent().closest('.row.location').addClass('check');
+        } else {
+            $(this).parent().closest('.row.location').removeClass('check');
+        }
+    });
+
 
 });

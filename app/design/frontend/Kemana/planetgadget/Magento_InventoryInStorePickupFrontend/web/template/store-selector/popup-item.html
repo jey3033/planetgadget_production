@@ -8,8 +8,9 @@
     <div class="col col-location-details location-details">
         <div class="col-location-action-flex">
             <div class="col col-location-actions">
-                <div class="select-location" ifnot="$parent.isPickupLocationSelected($data)">
+                <div class="select-location radios" ifnot="$parent.isPickupLocationSelected($data)">
                     <input type="radio" name="selectedlocation" value="location" click="$parent.selectPickupLocation.bind($parent, $data)">
+                    <label></label>
                 </div>
                 <div class="location-selected" if="$parent.isPickupLocationSelected($data)">
                     <input type="radio" name="selectedlocation" value="location" click="$parent.selectPickupLocation.bind($parent, $data)" checked>
@@ -33,5 +34,5 @@
                 <!-- /ko -->
             </div>
         </div>
-    </div>    
+    </div>
 </div>
