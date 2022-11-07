@@ -637,6 +637,31 @@
             .lib-font-size(14);
         }
     }
+
+    .catalog-product-view {
+        .page-main.page-main-details{
+            #reviews{
+                .product-section-title{
+                    z-index: 1;
+
+                    span{
+                        position: relative;
+
+                        &:after{
+                            content: '';
+                            position: absolute;
+                            width: 48%;
+                            height: 10px;
+                            background: @kemana-secondary-brand-color !important;
+                            right: 0px;
+                            margin-top: 20px;
+                            z-index: -1;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 //
@@ -864,6 +889,40 @@
                         }
                     }
                 }
+            }
+        }
+
+        .page-main.page-main-details{
+            padding-left: unset !important;
+            padding-right: unset !important;
+
+            #reviews{
+                background-color: @color-white;
+                padding-left: 10px;
+                padding-right: 10px;
+
+                .product-section-title{
+                    border-bottom: unset !important;
+                    margin-bottom: unset !important;
+                    padding-bottom: unset !important;
+                }
+
+                #customer-reviews{
+                    display: none;
+                }
+
+                #product-review-container{
+                    width: 100% !important;
+                    
+                    #customer-reviews{
+                        display: unset !important;
+                    }                    
+                }
+            }
+
+            .block.upsell{
+                padding-left: 10px;
+                padding-right: 10px;
             }
         }
     }
