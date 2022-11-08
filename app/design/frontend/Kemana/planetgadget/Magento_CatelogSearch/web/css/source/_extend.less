@@ -7,6 +7,25 @@
 //
 //  Variables
 //  _____________________________________________
+// /**
+//  * Copyright © 2022 Kemana. All rights reserved.
+//  * @author Harshani Karunasekara <hkarunasekara@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+//
+//  Variables
+//  _____________________________________________
+
+@autocomplete__background-color: @color-white;
+@autocomplete__border: @border-width__base solid @color-white;
+@autocomplete-item__border: @border-width__base solid @color-gray90;
+@autocomplete-item__hover__color: @color-pg-light-gray2;
+@autocomplete-item-amount__color: @kemana-primary-brand-color;
+
+@autocomplete-input-text__color: @color-white;
+
+@autocomplete-input__border-bottom: @border-width__base solid @color-kemana-gray2;
 
 //
 //  Common
@@ -36,7 +55,7 @@
 
         input {
             .lib-css(background, @color-white);
-            .lib-css(border, @border-width__base solid @color-white);
+            .lib-css(border,none);
             .lib-css(color, @kemana-primary-brand-color);
             font-size: 12px;
             padding-left: 15px;
@@ -56,6 +75,20 @@
             .lib-css(font-family, @font-family-name__base);
         }
 
+    }
+
+    .search-autocomplete {
+        margin-top: -5px;
+        padding-block: 4px 10px;
+        border-radius: 0 0 @common-border-radius @common-border-radius;
+        box-shadow: none;
+        border: none;
+
+        ul {
+            li {
+                .lib-css(padding, @indent__s - 3 15px @indent__s - 4);
+            }
+        }
     }
 }
 
@@ -155,7 +188,7 @@
             .lib-icon-font(
                 @_icon-font-content: @icon-pg-close-button,
                 @_icon-font-size: 18px,
-                @_icon-font-margin: 2px 2px 0 0
+                @_icon-font-margin: 0 2px 0 0
                 );
         }
     }
