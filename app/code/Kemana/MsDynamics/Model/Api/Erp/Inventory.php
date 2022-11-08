@@ -62,13 +62,9 @@ class Inventory
     public function getUnSyncInventorysFromErp($apiFunction, $soapAction, $inventoryData)
     {
         $postParameters = $inventoryData;
-        $getInventoryFromErp = $this->request->apiTransport($apiFunction, $soapAction,
+        return $this->request->apiTransport($apiFunction, $soapAction,
             $this->helper->getXmlRequestBodyToGetUnSyncInventorysFromApi($apiFunction, $soapAction, $postParameters));
-
-        if (isset($getInventoryFromErp['response'])) {
-            return $getInventoryFromErp;
-        }
-        return false;
+        
     }
 
     /**
@@ -99,12 +95,14 @@ class Inventory
             $inventorysources = explode(";",$response['response']);
             foreach ($inventorysources as $key => $inventorysource) {
                 $stockarray = explode(",",$inventorysource);
-                if(isset($totalStock[$stockarray[0]])){
-                    $totalStock[$stockarray[0]] = $totalStock[$stockarray[0]] + $stockarray[2];
-                }else{
-                    $totalStock[$stockarray[0]] = $stockarray[2];
+                if(isset($stockarray[0]) && isset($stockarray[1]) && isset($stockarray[2])){
+                    if(isset($totalStock[$stockarray[0]])){
+                        $totalStock[$stockarray[0]] = $totalStock[$stockarray[0]] + $stockarray[2];
+                    }else{
+                        $totalStock[$stockarray[0]] = $stockarray[2];
+                    }
+                    $this->updateStock($stockarray[0],$stockarray[2],$stockarray[1]);
                 }
-                $this->updateStock($stockarray[0],$stockarray[2],$stockarray[1]);
             }
         }else{
             $this->helper->inventorylog('0 Product stock update');
