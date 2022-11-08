@@ -25,7 +25,6 @@ class Wishlist extends \Magento\Wishlist\Block\Customer\Wishlist
 {
     protected function _prepareLayout()
     {
-        parent::_prepareLayout();
         $this->pageConfig->getTitle()->set(__('My Wish List'));
         $this->getChildBlock('wishlist_item_pager')
             ->setUseContainer(
