@@ -288,21 +288,38 @@
 
         .checkout-failed {
             .line-one {
-                .lib-font-size(20);
-                .lib-line-height(23);
-                margin-bottom: 10px;
+                .lib-font-size(28);
+                .lib-line-height(38);
+                .lib-css(font-weight, @font-weight__bold);
+                margin-bottom: 30px;
             }
 
             .line-two {
-                .lib-font-size(16);
-                .lib-line-height(18);
+                .lib-font-size(12);
+                .lib-line-height(20);
+                .lib-css(font-weight, @font-weight__heavier);
+                margin-bottom: 30px;
             }
 
-            .line-three {
-                .lib-font-size(16);
-                .lib-line-height(22);
-                .lib-css(font-weight, @font-weight__regular);
+            .line-four {
+                .lib-font-size(12);
+                .lib-line-height(20);
+                .lib-css(font-weight, @font-weight__heavier);
                 margin-bottom: 40px;
+
+                a {
+                    .lib-css(font-weight, @font-weight__semibold);
+                }
+            }
+
+            .actions-toolbar {
+                margin-bottom: 30px;
+
+                a {
+                    .lib-button-curved();
+                    .lib-css(border-radius, @button__border-radius);
+                    text-transform: uppercase;
+                }
             }
         }
 
@@ -389,6 +406,23 @@
                 h1 {
                     font-size: 24px;
                     .lib-line-height(38);
+                }
+            }
+        }
+    }
+
+    .checkout-onepage-failure {
+        .checkout-failed {
+            .line-one {
+                .lib-font-size(24);
+                .lib-line-height(32);
+            }
+
+            .actions-toolbar {
+                .primary {
+                    .action {
+                        width: 100%;
+                    }
                 }
             }
         }

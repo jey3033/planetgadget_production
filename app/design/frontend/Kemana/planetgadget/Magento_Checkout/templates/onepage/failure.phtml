@@ -1,0 +1,21 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var $block \Magento\Checkout\Block\Onepage\Failure */
+?>
+<div class="checkout-failed">
+    <div class="image-div"></div>
+    <p class="line-one"><?= $block->escapeHtml(__('Your Payment Failed')) ?></p>
+    <p class="line-two"><?= $block->escapeHtml(__('You can repeat the order by clicking the button below.')) ?></p>
+    <div class="actions-toolbar ">
+        <div class="primary"><?= $block->escapeHtml(
+                __('<a class="action" href="%1">continue shopping</a>', $block->escapeUrl($block->getContinueShoppingUrl())),
+                ['a']
+            ) ?>
+        </div>
+    </div>
+    <p class="line-four"><a href="/contact"><?= $block->escapeHtml(__('Contact us')) ?></a> <?= $block->escapeHtml(__('if you need help.')) ?></p>
+</div>
