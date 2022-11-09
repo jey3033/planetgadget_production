@@ -43,12 +43,12 @@ class Toolbar extends \Magento\Catalog\Block\Product\ProductList\Toolbar
                     $this->getCurrentOrder(),
                     $this->getCurrentDirection()
                 );
-            }else if (($this->getCurrentOrder()) == 'high_to_low') {
+            }else if (($this->getCurrentOrder()) == 'Highest') {
                 $this->_collection->addAttributeToSort(
                     'price', 'desc',
                     $this->getCurrentDirectionReverse()
                 );
-            }else if (($this->getCurrentOrder()) == 'low_to_high') {
+            }else if (($this->getCurrentOrder()) == 'Lowest') {
                 $this->_collection->addAttributeToSort(
                     'price', 'asc',
                     $this->getCurrentDirection()
