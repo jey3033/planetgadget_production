@@ -308,7 +308,11 @@ define([
             if ($(this.element).attr('data-rendered')) {
                 return;
             }
-            this._stockAPI(this)
+            if($('body').hasClass('catalog-product-view')){
+                this._stockAPI(this)
+            }else{
+                this._swatcherRender(this);
+            }
             $(this.element).attr('data-rendered', true);
 
             if (_.isEmpty(this.options.jsonConfig.images)) {
