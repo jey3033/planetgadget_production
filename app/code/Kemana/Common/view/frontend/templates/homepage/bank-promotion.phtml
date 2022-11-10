@@ -15,10 +15,11 @@
 $bankPromotions =  $block->getLatestBankPromotions();
 /** @var \Kemana\Promotion\Helper\Data $kemanaPromotionHelper */
 $kemanaPromotionHelper = $this->helper(Kemana\Promotion\Helper\Data::class);
+$title = __('Bank & Partner <span>Promo</span>');
 ?>
 <div class="home-bank-and-promotions">
-    <div class="banner-inner-container">
-        <h2><?= $block->escapeHtml(__('Bank & Partner %1',sprintf('<span>%s</span>','Promo')),['span']) ?></h2>
+    <div class="banner-inner-container widget-title block-title">
+        <h2><?= /* @escapeNotVerified */ $title ?></h2>
         <span><a href="<?= $kemanaPromotionHelper->getLandingPageFrontName()?>"><?= $block->escapeHtml(__('See more')) ?></a></span>
         <div class="row">
         <?php if (!empty($bankPromotions)): ?>
