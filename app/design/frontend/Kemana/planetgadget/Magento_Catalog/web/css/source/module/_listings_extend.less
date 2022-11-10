@@ -99,6 +99,20 @@
                         .action {
                             &.tocompare {
                                 opacity: 1;
+                                display: unset;
+                                width: 29px;
+                                .lib-line-height(29);
+
+                                &:before {
+                                    .lib-font-size(18);
+                                    .lib-css(color, @color-pg-light-gray);
+                                }
+
+                                &:hover {
+                                    &:before {
+                                        .lib-css(color, @kemana-primary-brand-color);
+                                    }
+                                }
                             }
                         }
 
@@ -129,7 +143,7 @@
             margin-left: 0;
             text-decoration: none;
             display: inline-block;
-            
+
             .price {
                 text-decoration: line-through;
             }
@@ -162,39 +176,39 @@
             }
         }
 
-        .tocompare {
-            .lib-icon-font(
-                @icon-pg-compare,
-                @_icon-font: @icon-font,
-                @_icon-font-color: @product-grid-wishlist-icon-color,
-                @_icon-font-color-hover: @product-grid-wishlist-icon-hover,
-                @_icon-font-size: @product-compare__font-size,
-                @_icon-font-line-height: @product-compare__line-height,
-                @_icon-font-margin: 2px 0 0 0
-            );
-
-            width: 29px;
-            height: 29px;
-            border-radius: 50%;
-            background: @color-white !important;
-            padding: 0;
-            text-align: center;
-            position: absolute;
-            right: 10px;
-            top: 48px;
-            z-index: 2;
-            text-decoration: none;
-            opacity: 0;
-            .lib-css(box-shadow, @common__box-shadow);
-            .lib-vendor-prefix-display(flex);
-            .lib-css(justify-content, center, 1);
-            .lib-css(align-items, center, 1);
-
-            img,
-            span {
-                display: none;
-            }
-        }
+        //.tocompare {
+        //    .lib-icon-font(
+        //        @icon-pg-compare,
+        //        @_icon-font: @icon-font,
+        //        @_icon-font-color: @product-grid-wishlist-icon-color,
+        //        @_icon-font-color-hover: @product-grid-wishlist-icon-hover,
+        //        @_icon-font-size: @product-compare__font-size,
+        //        @_icon-font-line-height: @product-compare__line-height,
+        //        @_icon-font-margin: 2px 0 0 0
+        //    );
+        //
+        //    width: 29px;
+        //    height: 29px;
+        //    border-radius: 50%;
+        //    background: @color-white !important;
+        //    padding: 0;
+        //    text-align: center;
+        //    position: absolute;
+        //    right: 10px;
+        //    top: 48px;
+        //    z-index: 2;
+        //    text-decoration: none;
+        //    //opacity: 0;
+        //    .lib-css(box-shadow, @common__box-shadow);
+        //    .lib-vendor-prefix-display(flex);
+        //    .lib-css(justify-content, center, 1);
+        //    .lib-css(align-items, center, 1);
+        //
+        //    img,
+        //    span {
+        //        display: none;
+        //    }
+        //}
     }
 
     .product-item-name {
@@ -224,12 +238,6 @@
             }
         }
     }
-
-    .page-products{
-        .action.tocompare{
-            opacity: 1 !important;
-        }
-    }
 }
 
 //
@@ -248,12 +256,10 @@
             }
         }
     }
-}
 
-@media (min-width: 768px) and (max-width: 1023px){
-    .page-products{
-        .action.tocompare{
-            opacity: 1 !important;
+    .product-item {
+        .tocompare {
+            opacity: 0;
         }
     }
 }

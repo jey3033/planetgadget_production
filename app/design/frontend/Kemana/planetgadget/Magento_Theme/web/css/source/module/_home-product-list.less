@@ -86,7 +86,9 @@
     .pcp-featured-gadgets-container {
         padding: @block-padding - 2 0 @block-padding - 5 !important;
 
-        .widget-title {
+
+        .widget-title,
+        .block-title {
             h2 {
                 padding-inline: 10px;
             }
@@ -112,12 +114,42 @@
                             margin: 0;
                             padding: 5px;
 
+
                             .product-item-info {
                                 .lib-css(background-color, @color-white);
                                 padding-inline: 10px;
                                 border-radius: @common-border-radius;
                                 height: 298px;
 
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+//
+//  Tablet
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .home-new-arrivals-container,
+    .home-best-seller-container,
+    .home-editors-recommend-container,
+    .pcp-featured-gadgets-container {
+        padding: 50px 0;
+
+        .block {
+            &.widget {
+                .products-grid {
+                    .product-items {
+                        .product-item {
+                            .product-item-info {
+                                height: auto;
+                                min-height: 467px;
                             }
                         }
                     }
@@ -131,7 +163,7 @@
 //  Desktop
 //  _____________________________________________
 
-.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
     .home-new-arrivals-container,
     .home-best-seller-container,
     .home-editors-recommend-container,

@@ -105,6 +105,8 @@
                     .lib-css(border-top-color, @color-kemana-gray1);
                 }
             }
+
+
         }
 
         .mark {
@@ -269,6 +271,40 @@
             }
         }
     }
+
+    .rewardpoints {
+        button.action-remove {
+              float: right;
+              .lib-button-reset();
+              position: relative;
+              display: block;
+              width: 10px;
+              height: 10px;
+
+              &:before,
+              &:after {
+                  content: "";
+                  position: absolute;
+                  top: 9px;
+                  left: 0;
+                  right: 0;
+                  height: 2px;
+                  background: @kemana-primary-brand-color;
+              }
+
+              &:before {
+                  transform: rotate(45deg);
+              }
+
+              &:after {
+                  transform: rotate(-45deg);
+              }
+
+              span {
+                  display: none;
+              }
+          }
+}
 }
 
 
@@ -287,7 +323,7 @@
             .title{
                 border-bottom: 1px solid @color-pg-light-gray2;
                 padding: 0;
-                
+
                 .title{
                     display: none;
                 }

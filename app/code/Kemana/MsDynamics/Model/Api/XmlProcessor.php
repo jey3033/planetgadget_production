@@ -90,8 +90,8 @@ class XmlProcessor
         if ($responseStatus == "200" && $apiFunction == $this->helper->getFunctionInventoryStock()
             && $soapAction == $this->helper->getSoapActionGetInventoryStock()) {
             if (isset($responseData['Soap:Body'])) {
-                if (isset($responseData['Soap:Body'][$soapAction . '_Result'][$soapAction . '_Result'][$apiFunction])) {
-                    return $responseData['Soap:Body'][$soapAction . '_Result'][$soapAction . '_Result'][$apiFunction];
+                if (isset($responseData['Soap:Body'][$soapAction . '_Result'])) {
+                    return $responseData['Soap:Body'][$soapAction . '_Result']['return_value'];
                 }
             }
         }

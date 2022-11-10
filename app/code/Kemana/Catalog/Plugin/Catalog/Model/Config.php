@@ -19,7 +19,7 @@ namespace Kemana\Catalog\Plugin\Catalog\Model;
  */
 class Config
 {
-    
+
     /**
      * Retrieve Attributes Used for Sort by as array
      *
@@ -29,8 +29,8 @@ class Config
     {
         return [
             'position' => __('Position'),
-            'low_to_high' => __('Price : Lowest'),
-            'high_to_low' => __('Price : Highest'),
+            'Lowest' => __('Price : Lowest'),
+            'Highest' => __('Price : Highest'),
         ];
     }
 

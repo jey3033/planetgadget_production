@@ -29,13 +29,13 @@
     .block.newsletter {
         form {
             border-radius: 20px;
-            .lib-css(background, @footer-subscribe-input-background__color);
+            //.lib-css(background, @footer-subscribe-input-background__color);
             max-width: 400px;
+            position: relative;
         }
 
         input {
             font-style: normal;
-            border-radius: 20px;
 
             &::placeholder {
                 font-style: normal;
@@ -52,6 +52,10 @@
         }
 
         .actions {
+            position: absolute;
+            top: 0;
+            width: auto;
+
             .action.subscribe {
                 border-radius: 20px;
 
@@ -73,6 +77,43 @@
                         right: 0;
                     }
                 }
+            }
+        }
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .block {
+        &.newsletter {
+            input {
+                border-radius: 20px;
+            }
+
+            .actions {
+                right: 0;
+            }
+        }
+    }
+}
+
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .block {
+        &.newsletter {
+            input {
+                border-radius: 20px 0 0 20px;
+            }
+
+            .actions {
+                left: 330px;
             }
         }
     }

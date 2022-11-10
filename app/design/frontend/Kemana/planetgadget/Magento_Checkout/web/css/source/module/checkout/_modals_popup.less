@@ -202,7 +202,8 @@
                             margin: 0;
                             border-radius: 5px;
 
-                            &:hover{
+                            &:hover,
+                            &.check {
                                 background: @color-lightyellow-bg;
                                 border-color: @color-orange-border;
                             }
@@ -222,9 +223,27 @@
                         .col {
                             flex-grow: unset;
 
+                            &.col-location-actions {
+                                padding: 0;
+
+                                .select-location {
+                                    input {
+                                        + label:before {
+                                            top: 0;
+                                        }
+
+                                        + label:after {
+                                            top: 5px !important;
+                                        }
+                                    }
+                                }
+                            }
+
                             .location-address{
                                 color: @primary__color__dark;
                             }
+
+                            .lib-kemana-radio-button();
                         }
                         .location-details{
                             border-bottom: 1px solid @color-gray-border-1;
@@ -233,6 +252,8 @@
                             display: flex;
 
                             .col-location-deatil-grid{
+                                padding-left: 30px;
+
                                 .location-name{
                                     font-size: 12px;
                                     font-weight: bold;
@@ -413,7 +434,7 @@
             .modal-content{
                 .autocompletegosendwrap{
                     .label{
-                        
+
                     }
                 }
             }
@@ -479,7 +500,7 @@
             .modal-content{
                 .autocompletegosendwrap{
                     .label{
-                        
+
                     }
                 }
             }
