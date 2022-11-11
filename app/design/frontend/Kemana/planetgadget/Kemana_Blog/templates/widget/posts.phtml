@@ -4,11 +4,12 @@
 /** @var \Kemana\Blog\Block\Widget\Posts $block */
 
 $posts = $block->getCollection();
+$title = __('News & <span>Updates</span>');
 ?>
 <div class="post-list-wrapper">
     <div class="post-list-inner-container">
-        <div class="blog-widget-title">
-            <h2><?= $block->escapeHtml(__('News & %1',sprintf('<span>%s</span>','Updates')),['span']) ?></h2>
+        <div class="blog-widget-title widget-title block-title">
+            <h2><?= /* @escapeNotVerified */ $title ?></h2>
         </div>
         <span><a href="<?= $block->getBlogUrl(''); ?>"><?= $block->escapeHtml(__('See more')) ?></a></span>
         <div class="post-list-container mpcss" id="mpblog-list-container">
