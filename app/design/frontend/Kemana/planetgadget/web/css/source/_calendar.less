@@ -9,6 +9,16 @@
 //  _____________________________________________
 
 & when (@media-common = true) {
+
+    .ui-datepicker .ui-datepicker-calendar .ui-datepicker-today {
+        background: transparent;
+    }
+
+    .ui-datepicker .ui-datepicker-title .ui-datepicker-month,
+    .ui-datepicker .ui-datepicker-title .ui-datepicker-year {
+        width: auto;
+    }
+
     .ui-datepicker {
         border: none;
         border-radius: 5px;
@@ -61,10 +71,11 @@
 
             .ui-datepicker-title {
                 margin-inline: 0 150px;
+                display: flex;
 
                 select {
                     border: none;
-                    padding: 13px 15px 12px;
+                    padding: 0 32px 0 15px;
                     height: 38px;
                     .lib-css(background-color, @color-pg-light-gray3);
                     .lib-font-size(12);
