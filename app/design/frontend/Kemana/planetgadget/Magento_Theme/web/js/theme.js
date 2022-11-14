@@ -183,7 +183,10 @@ define([
             $(this).toggleClass('active');
         }
     });
-    setMyAccountMobileNav();
+
+    if($('body').hasClass("account")) {
+        setMyAccountMobileNav();
+    }
 
     /**
      * 13.My account mobile view order drop down
