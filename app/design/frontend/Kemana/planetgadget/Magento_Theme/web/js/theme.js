@@ -503,6 +503,10 @@ define([
         });
     }
 
+    /**
+     * 30. Checkout Select location popup BG color change
+     */
+
     $doc.on('click', '.select-location input', function () {
         $('.select-location input').parent().closest('.row.location').removeClass('check');
 
@@ -512,6 +516,36 @@ define([
             $(this).parent().closest('.row.location').removeClass('check');
         }
     });
+
+    /**
+     * 31. corporate-order page brands show hide
+     */
+
+    $('#corporate-brand-container li:gt(17)').hide();
+    $('#show-more').click(function() {
+        $('#corporate-brand-container li:gt(17)').show();
+        $(this).parent('.primary').addClass('show-items');
+        $(this).parent('.primary').removeClass('hide-items');
+    });
+
+    $('#show-less').click(function() {
+        $('#corporate-brand-container li:gt(17)').hide();
+        $(this).parent('.primary').removeClass('show-items');
+        $(this).parent('.primary').addClass('hide-items');
+    });
+
+    if (utility.isMobile()) {
+        $('#corporate-brand-container li:gt(6)').hide();
+
+        $('#show-more').click(function() {
+            $('#corporate-brand-container li:gt(6)').show();
+        });
+
+        $('#show-less').click(function() {
+            $('#corporate-brand-container li:gt(6)').hide();
+        });
+
+    }
 
 
 });

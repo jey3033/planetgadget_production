@@ -15,14 +15,13 @@
 <?php if ($block->isBrandEnable()): ?>
     <?php if ($block->isShowFeatured()):
         $brandFeatured = $block->getFeaturedBrandCollection();
+        $title = __('Brand <span>Recommendation</span>');
     ?>
         <?php if (count($brandFeatured) > 0): ?>
             <div class="home-featured-brand-container fixed-width">
                 <div class="block widget block-brand-featured grid">
-                    <div class="block-title">
-                        <h2>
-                            <?= $block->getFeaturedBrandTitle(); ?>
-                        </h2>
+                    <div class="widget-title block-title">
+                        <h2><?= /* @escapeNotVerified */ $title ?></h2>
                     </div>
                     <span><a href="<?= /* @escapeNotVerified */ $block->getUrl('brand/items') ?>"><?= __('See All') ?></a></span>
                     <div class="block-content-wrapper">
