@@ -181,6 +181,7 @@
                 width: 145px;
                 padding-inline: 20px;
                 margin-block: 10px 0;
+                text-transform: none;
             }
         }
     }
@@ -200,6 +201,10 @@
                 text-transform: none;
                 margin-bottom: 20px;
             }
+        }
+
+        .membership-batch-area {
+            display: none;
         }
 
         .account-content-container {
@@ -274,6 +279,18 @@
 
             > span {
                 display: block;
+            }
+        }
+    }
+
+    .sales-order-history {
+        .table-order-items {
+            &.history {
+                .col {
+                    &.actions {
+                        width: 20%;
+                    }
+                }
             }
         }
     }

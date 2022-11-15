@@ -44,8 +44,8 @@
                 <field id="url_for_delete" translate="label" type="text" sortOrder="35" showInDefault="1"
                        showInWebsite="1"
                        showInStore="1" canRestore="1">
-                    <label>Api Url - For Delete</label>
-                    <comment>Without backslash for end</comment>
+                    <label>Api Url</label>
+                    <comment>for inventory api and delete customer</comment>
                     <depends>
                         <field id="is_enabled">1</field>
                     </depends>
@@ -66,7 +66,7 @@
                 </field>
                 <field id="xmlns" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1"
                        showInStore="1" canRestore="1">
-                    <label>XMLNS URN in XML Request Body</label>
+                    <label>XMLNS URN in XML Request Body - Common</label>
                     <comment>Without backslash for end</comment>
                     <depends>
                         <field id="is_enabled">1</field>
@@ -75,8 +75,8 @@
                 <field id="xmlns_for_delete" translate="label" type="text" sortOrder="60" showInDefault="1"
                        showInWebsite="1"
                        showInStore="1" canRestore="1">
-                    <label>XMLNS URN in XML Request Body - For Delete</label>
-                    <comment>Without backslash for end</comment>
+                    <label>XMLNS URN in XML Request Body</label>
+                    <comment>for inventory api and delete customer</comment>
                     <depends>
                         <field id="is_enabled">1</field>
                     </depends>

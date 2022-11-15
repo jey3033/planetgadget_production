@@ -183,7 +183,10 @@ define([
             $(this).toggleClass('active');
         }
     });
-    setMyAccountMobileNav();
+
+    if($('body').hasClass("account")) {
+        setMyAccountMobileNav();
+    }
 
     /**
      * 13.My account mobile view order drop down
@@ -293,7 +296,7 @@ define([
             {
                 breakpoint: 1024,
                 settings: {
-                    slidesToShow: 3,
+                    slidesToShow: 2,
                     arrows: false
                 }
             },
@@ -417,7 +420,7 @@ define([
     }
 
     /**
-     * 23. blackout background when hovaring main menu
+     * 23. overlay background when hovaring main menu and search popup is open
      */
 
     $('.navbar.navbar-default.navigation').mouseover(function () {
@@ -428,6 +431,14 @@ define([
             $('body').removeClass('active');
         }
     });
+
+    $("#search").focusin(
+        function(){
+            $('body').addClass('active2');
+        }).focusout(
+        function(){
+            $('body').removeClass('active2');
+        });
 
     /**
      * 24. mega menu hide 2nd column if there is no 2nd level menu
@@ -442,15 +453,13 @@ define([
     });
 
     /**
-     * 25. mega menu hide 2nd column if there is no 2nd level menu
+     * 25. PLP sorter dropdown on/off state
      */
 
     $(".qty-selector").click(function() {
         if(!$(".sorter-options.qty-selector-dropdown:visible").length > 0) {
-            console.log("on");
             $(".qty-selector").addClass("dropdown-active");
         } else {
-            console.log("off");
             $(".qty-selector").removeClass("dropdown-active");
         }
     });
@@ -465,7 +474,7 @@ define([
      * 27. move header search in mobile
      */
 
-    if (utility.isMobile()) {
+    if (utility.isMobile() || utility.isTablet()) {
         $('.header-left .logo').before( $('.header-right .top-link') );
         $('.header-left .logo').appendTo( $('.header') );
         $('.header .block-search').prependTo( $('.header .header-right') );
@@ -493,5 +502,50 @@ define([
             }
         });
     }
+
+    /**
+     * 30. Checkout Select location popup BG color change
+     */
+
+    $doc.on('click', '.select-location input', function () {
+        $('.select-location input').parent().closest('.row.location').removeClass('check');
+
+        if( $('.select-location input').is(':checked') ){
+            $(this).parent().closest('.row.location').addClass('check');
+        } else {
+            $(this).parent().closest('.row.location').removeClass('check');
+        }
+    });
+
+    /**
+     * 31. corporate-order page brands show hide
+     */
+
+    $('#corporate-brand-container li:gt(17)').hide();
+    $('#show-more').click(function() {
+        $('#corporate-brand-container li:gt(17)').show();
+        $(this).parent('.primary').addClass('show-items');
+        $(this).parent('.primary').removeClass('hide-items');
+    });
+
+    $('#show-less').click(function() {
+        $('#corporate-brand-container li:gt(17)').hide();
+        $(this).parent('.primary').removeClass('show-items');
+        $(this).parent('.primary').addClass('hide-items');
+    });
+
+    if (utility.isMobile()) {
+        $('#corporate-brand-container li:gt(6)').hide();
+
+        $('#show-more').click(function() {
+            $('#corporate-brand-container li:gt(6)').show();
+        });
+
+        $('#show-less').click(function() {
+            $('#corporate-brand-container li:gt(6)').hide();
+        });
+
+    }
+
 
 });

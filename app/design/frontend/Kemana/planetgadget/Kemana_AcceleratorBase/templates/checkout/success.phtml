@@ -1,0 +1,42 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+?>
+<?php
+/** @var \Kemana\AcceleratorBase\Helper\Data $kemanaAcceleratorBaseHelper */
+$kemanaAcceleratorBaseHelper = $this->helper(Kemana\AcceleratorBase\Helper\Data::class);
+?>
+<?php /** @var $block \Magento\Checkout\Block\Onepage\Success */ ?>
+<div class="checkout-success">
+    <?php if ($block->getOrderId()) : ?>
+        <div class="image-div"></div>
+        <div class="line-one">
+            <h1><?= $block->escapeHtml(__('Your Order Has Been Placed Successfully!')) ?></h1>
+            <h4><?= $block->escapeHtml(__('Please Finish Payment Process If You Haven\'t Paid')) ?></h4>
+        </div>
+        <?php if ($block->getCanViewOrder()) : ?>
+            <p class="line-two"><?= $block->escapeHtml(__('Order  %1', sprintf('<a href="%s" class="order-number">#<strong>%s</strong></a>', $block->escapeUrl($block->getViewOrderUrl()), $block->getOrderId())), ['a', 'strong']) ?></p>
+        <?php else : ?>
+            <p class="line-three"><?= $block->escapeHtml(__('Order <span>#</span><span>%1</span>', $block->getOrderId()), ['span']) ?></p>
+        <?php endif; ?>
+        <p class="line-four"><?= $block->escapeHtml(__('A confirmation email will be sent to %1 once your order has been processed.', $kemanaAcceleratorBaseHelper->getEmail())) ?></p>
+        <p class="line-five"><?= $block->escapeHtml(__('If you have any questions please contact us.')) ?><a
+                href="<?= $block->getUrl('contact') ?>"><?= $block->escapeHtml(__(' Click here ')) ?></a></p>
+    <?php endif; ?>
+
+    <?= $block->getAdditionalInfoHtml() ?>
+
+    <?php if ($block->getOrderId()) : ?>
+        <?php if ($block->getCanViewOrder()) : ?>
+            <div class="actions-toolbar">
+                <div class="primary">
+                    <a class="action primary continue" href="<?= $block->escapeUrl($block->getContinueUrl()) ?>"><span><?= $block->escapeHtml(__('Back to Homepage')) ?></span></a>
+                </div>
+            </div>
+        <?php endif; ?>
+    <?php endif; ?>
+</div>
+

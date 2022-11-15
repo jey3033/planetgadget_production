@@ -1,0 +1,30 @@
+<?php
+/**
+ * Copyright © 2022 PT Kemana Teknologi Solusi. All rights reserved.
+ * http://www.kemana.com
+ */
+
+/**
+ * @category Kemana
+ * @package  Kemana_Common
+ * @license  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ *
+ *
+ * @author   Parth Godhani <pgodhani@kemana.com>
+ */
+
+/** @var $block Magento\Framework\View\Element\Template */
+?>
+<li class="item link compare" data-bind="scope: 'compareProducts'" data-role="compare-products-link">
+    <a class="action compare no-display" title="<?= $block->escapeHtmlAttr(__('Compare Products')) ?>"
+       data-bind="attr: {'href': compareProducts().listUrl}, css: {'no-display': !compareProducts().count}"
+    >
+        <?= $block->escapeHtml(__('Compare Products')) ?>
+        <?= $block->escapeHtml(__('(')) ?>
+        <span class="counter qty" data-bind="text: compareProducts().countCaption"></span>
+        <?= $block->escapeHtml(__(')')) ?>
+    </a>
+</li>
+<script type="text/x-magento-init">
+{"[data-role=compare-products-link]": {"Magento_Ui/js/core/app": <?= /* @noEscape */ $block->getJsLayout() ?>}}
+</script>

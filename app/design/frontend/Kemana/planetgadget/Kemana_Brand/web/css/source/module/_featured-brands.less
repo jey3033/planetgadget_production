@@ -73,12 +73,14 @@
                     img {
                         .lib-css(border-radius, @common-border-radius);
                         .lib-css(transition, ease .5s, @_prefix: 1);
+                        .lib-css(filter, grayscale(100%), @_prefix: 1);
                     }
 
                     &:hover {
                         img {
                             .lib-css(box-shadow, @brand-item-logo__box-shadow);
                             .lib-css(border, @brand-item-logo-hover__border);
+                            .lib-css(filter, grayscale(0), @_prefix: 1);
                         }
                     }
                 }

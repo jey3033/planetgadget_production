@@ -39,6 +39,10 @@
                     <label>Threshold</label>
                     <validate>required-entry validate-number</validate>
                 </field>
+                <field id="log" translate="label" type="select" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Log</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
             </group>
         </section>
     </system>

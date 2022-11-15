@@ -6,10 +6,13 @@
 <!--                    <h2>OUTFIT OFFERS</h2>-->
 <!--                </div>-->
                 <div class="col-md-5 offset-md-1 col-sm-12 newsletter-description">
-                    <h2>Don't miss the latest info!</h2>
-                    <p>Enter your email and get the latest Planet Gadget updates & promotions</p>
+                    <h2><?php echo __("Don't miss the latest info!"); ?></h2>
+                    <p><?php echo __("Enter your email and get the latest Planet Gadget updates & promotions"); ?></p>
                 </div>
-                <div class="col-md-5 col-sm-12 newsletter-form"><?= $block->getChildHtml('subscribe') ?></div>
+                <div class="col-md-5 col-sm-12 newsletter-form">
+                    <!-- <?= $block->getChildHtml('subscribe') ?>  -->
+                    <?php echo $block->getLayout()->createBlock("Magento\Newsletter\Block\Subscribe")->setTemplate('Magento_Newsletter::subscribe.phtml')->toHtml(); ?>
+                </div>
             </div>
         </div>
     </div>
@@ -30,8 +33,12 @@
                         </div>
                         <div class="col-md-6 col-sm-12 menu-items accordion-item">
                             <div data-content-type="html" data-appearance="default" data-element="main" data-decoded="true" role="tablist">
-                            <p class="title" data-role="collapsible">Privacy Policy</p>
-                            <?= $block->getChildHtml('footer_links') ?>
+                            <p class="title" data-role="collapsible"><?php echo __("Privacy Policy"); ?></p>
+                            <?php /* $block->getChildHtml('footer_links') */ ?>
+                            <?php echo $block->getLayout()
+                                    ->createBlock('Magento\Cms\Block\Block')
+                                    ->setBlockId('footer-privacy-policy')
+                                    ->toHtml(); ?>
                             </div>
                         </div>
                     </div>

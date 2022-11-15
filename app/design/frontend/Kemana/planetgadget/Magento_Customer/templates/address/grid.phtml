@@ -10,23 +10,26 @@ $customerAddressView = $block->getData('customer_address');
 
             <div class="table-wrapper additional-addresses">
                 <?php foreach ($_pAddsses as $address) : ?>
-                <div class="box box-content address-box-content">
-                    <address>
-                        <?= $this->getLayout()->getBlock('address_book')->getAddressHtml($address) ?>
-                        <br/>
-                        <?php
-                            $mapPoint = $block->getAddressMapPoint($block->getAddressById($address->getId()));
-                        ?>
-                        <span class="map-point-label <?=($mapPoint === 'Already Pinpoint') ? 'active' : ''?>">
-                            <?= $block->escapeHtml(__($mapPoint)) ?>
-                        </span>
-                    </address>
-                    <div class="box-actions">
-                        <a class="action edit" href="<?= $block->escapeUrl($block->getUrl('customer/address/edit', ['id' => $address->getId()])) ?>"><span><?= $block->escapeHtml(__('Edit')) ?></span></a>
-                        <a class="action edit" href="<?= $block->escapeUrl($block->getUrl('customer/address/edit', ['id' => $address->getId()])) ?>"><span><?= $block->escapeHtml(__('Make default address')) ?></span></a>
-                        <a class="action delete" href="#" role="delete-address" data-address="<?= $block->escapeHtmlAttr($address->getId()) ?>"><span><?= $block->escapeHtml(__('Remove')) ?></span></a>
+                <?php if (!$address->isDefaultShipping() && !$address->isDefaultBilling()): ?>
+                        
+                    <div class="box box-content address-box-content">
+                        <address>
+                            <?= $this->getLayout()->getBlock('address_book')->getAddressHtml($address) ?>
+                            <br/>
+                            <?php
+                                $mapPoint = $block->getAddressMapPoint($block->getAddressById($address->getId()));
+                            ?>
+                            <span class="map-point-label <?=($mapPoint === 'Already Pinpoint') ? 'active' : ''?>">
+                                <?= $block->escapeHtml(__($mapPoint)) ?>
+                            </span>
+                        </address>
+                        <div class="box-actions">
+                            <a class="action edit" href="<?= $block->escapeUrl($block->getUrl('customer/address/edit', ['id' => $address->getId()])) ?>"><span><?= $block->escapeHtml(__('Edit')) ?></span></a>
+                            <a class="action edit" href="<?= $block->escapeUrl($block->getUrl('customer/address/edit', ['id' => $address->getId()])) ?>"><span><?= $block->escapeHtml(__('Make default address')) ?></span></a>
+                            <a class="action delete" href="#" role="delete-address" data-address="<?= $block->escapeHtmlAttr($address->getId()) ?>"><span><?= $block->escapeHtml(__('Remove')) ?></span></a>
+                        </div>
                     </div>
-                </div>
+                    <?php endif ?>
                 <?php endforeach; ?>
             </div>
 

@@ -112,6 +112,11 @@ class SyncCustomersToErp
                 continue;
             }
 
+            if ($customer->getCustomAttribute('phonenumber') && $customer->getCustomAttribute('phonenumber')->getValue() == '62000000000'.$customer->getEmail()) {
+                $this->helper->log('CUSTOMER : Skipped customer ' . $customer->getId() . ' due to telephone number equal to 62000000000'.$customer->getEmail().'. This customer can be came with social login.', 'info');
+                continue;
+            }
+
             $address = "";
             $address2 = "";
             $city = "";
@@ -198,6 +203,7 @@ class SyncCustomersToErp
                 $getCustomer = $this->customerRepository->getById($customer->getId());
                 $getCustomer->setCustomAttribute('ms_dynamic_customer_number', $createCustomerInErp['response']['CustomerNo']);
                 $this->customerRepository->save($getCustomer);
+                $singleCustomerFromGridResult = true;
 
                 $erpCustomerNumber = $createCustomerInErp['response']['CustomerNo'];
 
