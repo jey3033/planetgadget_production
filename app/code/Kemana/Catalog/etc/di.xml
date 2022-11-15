@@ -15,6 +15,7 @@
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <preference for="Magento\Catalog\Block\Product\ProductList\Toolbar" type="Kemana\Catalog\Block\Product\ProductList\Toolbar" />
+    <preference for="Magento\Catalog\CustomerData\CompareProducts" type="Kemana\Catalog\CustomerData\CompareProducts" />
     <type name="Magento\Catalog\Model\Config">
         <!-- Custom sort options to $options -->
         <plugin name="kemana_catalog_custom_sort_order" type="Kemana\Catalog\Plugin\Catalog\Model\Config" />
