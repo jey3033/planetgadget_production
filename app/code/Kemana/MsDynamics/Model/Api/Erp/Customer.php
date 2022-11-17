@@ -59,8 +59,9 @@ class Customer
             $this->helper->getXmlRequestBodyToErp($apiFunction, $postParameters));
 
         if ($getCustomerFromErp['responseStatus']) {
-            if (isset(json_decode($getCustomerFromErp['response'])[1])) {
-                return json_decode($getCustomerFromErp['response']);
+            $responseToReturn = json_decode($getCustomerFromErp['response']);
+            if (isset($responseToReturn[1])) {
+                return $responseToReturn;
             }
         }
 
