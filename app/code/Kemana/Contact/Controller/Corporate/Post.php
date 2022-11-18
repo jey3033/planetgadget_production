@@ -19,50 +19,90 @@ use Magento\Framework\Translate\Inline\StateInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\Framework\Exception\LocalizedException;
 
+
+/**
+ *  Corporate form post data
+ */
 class Post extends \Magento\Framework\App\Action\Action
 {
 
-	protected $_pageFactory;
+	/**
+	* @var \Magento\Framework\Controller\Result\RedirectFactory
+	*/
+	protected $resultRedirectFactory;
+
+	/**
+	* @var TransportBuilder
+	*/
+	protected $transportBuilder;
+
 	/**
 	* @var \Magento\Framework\App\Config\ScopeConfigInterface
 	*/
 	protected $scopeConfig;
 
 	/**
+	* @var StoreManagerInterface
+	*/
+	protected $storeManager;
+
+	/**
+	* @var StateInterface
+	*/
+	protected $inlineTranslation;
+
+	/**
 	* Recipient email config path
 	*/
 	const XML_PATH_EMAIL_RECIPIENT = 'kemana_acceleratorbase/kemana_corporateinfo/recipient_email';
+
+	/**
+	* Recipient email template config path
+	*/
 	const XML_PATH_EMAIL_TEMPLATE = 'kemana_acceleratorbase/kemana_corporateinfo/corporate_email_template';
 
 	public function __construct(
 		\Magento\Framework\App\Action\Context $context,
-		\Magento\Framework\View\Result\PageFactory $pageFactory,
 		\Magento\Framework\Controller\Result\RedirectFactory $resultRedirectFactory,
 		\Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
 		TransportBuilder $transportBuilder,
         StoreManagerInterface $storeManager,
         StateInterface $state
 	)
-	{
-		$this->_pageFactory = $pageFactory;
+	{ 
 		$this->resultRedirectFactory = $resultRedirectFactory;
+        $this->scopeConfig = $scopeConfig;
 		$this->transportBuilder = $transportBuilder;
         $this->storeManager = $storeManager;
         $this->inlineTranslation = $state;
-        $this->scopeConfig = $scopeConfig;
 		return parent::__construct($context);
 	}
 
+	/**
+     * Return email recipient address
+     *
+     * @return string
+     */
 	public function getReceipentEmail() {
      	$storeScope = \Magento\Store\Model\ScopeInterface::SCOPE_STORE;
     	return $this->scopeConfig->getValue(self::XML_PATH_EMAIL_RECIPIENT, $storeScope);
     }
 
+    /**
+     * Return email template identifier
+     *
+     * @return string
+     */
     public function getEmailTemplate() {
      	$storeScope = \Magento\Store\Model\ScopeInterface::SCOPE_STORE;
     	return $this->scopeConfig->getValue(self::XML_PATH_EMAIL_TEMPLATE, $storeScope);
     }
 
+    /**
+     * Post user corporate form
+     *
+     * @return Redirect
+     */
 	public function execute()
     {
         if (!$this->getRequest()->isPost()) {
@@ -126,6 +166,10 @@ class Post extends \Magento\Framework\App\Action\Action
         return $request->getParams();
     }
 
+    /**
+     * @param array $post Post data from corporate form
+     * @return void
+     */
     public function sendEmail($templateVars)
     {
         try {
