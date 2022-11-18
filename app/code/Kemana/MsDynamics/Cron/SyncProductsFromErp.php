@@ -140,6 +140,12 @@ class SyncProductsFromErp
                 try {
                     $this->helper->log('Started to create the product in Magento for ERP Product : ' . $productdata['ProductNo'], 'info');
 
+                    // validataion for product api json
+                    if(!array_key_exists("ProductNo",$productdata) || !array_key_exists("Description",$productdata) || !array_key_exists("GrossWeight",$productdata) || !array_key_exists("Price",$productdata) || !array_key_exists("ItemCategory",$productdata)){
+                        $this->helper->log('Invalid parameter for this product : ' . $productdata['ProductNo'], 'error');
+                        continue;
+                    }
+
                     $product = $this->productFactory->create();
                     $product->setSku($productdata['ProductNo']);
                     $product->setName($productdata['Description']);
