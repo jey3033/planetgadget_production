@@ -61,6 +61,14 @@ class Post extends \Magento\Framework\App\Action\Action
 	*/
 	const XML_PATH_EMAIL_TEMPLATE = 'kemana_acceleratorbase/kemana_corporateinfo/corporate_email_template';
 
+	/**
+     * @param \Magento\Framework\App\Action\Context $context
+     * @param \Magento\Framework\Controller\Result\RedirectFactory $resultRedirectFactory
+     * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
+     * @param TransportBuilder $transportBuilder
+     * @param StoreManagerInterface $storeManager
+     * @param StateInterface $state
+     */
 	public function __construct(
 		\Magento\Framework\App\Action\Context $context,
 		\Magento\Framework\Controller\Result\RedirectFactory $resultRedirectFactory,
