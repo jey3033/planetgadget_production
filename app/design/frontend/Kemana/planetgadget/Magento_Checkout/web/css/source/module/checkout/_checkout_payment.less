@@ -193,31 +193,18 @@
 								background-repeat: no-repeat;
 								background-size: cover;
 							}
-							span.payment-indodana-logo{
-								width: 74px;
-							    height: 39px;
-							    border: 1px solid #aeb4c1;
-							    border-radius: 5px;
-							    background: url(../images/Indodana-color.png);
-								background-position: center;
-								background-repeat: no-repeat;
-								background-size: contain;
-							}
-							span.payment-icon.payment_logo_custom{
-								background: url(/media/logo/paymentmethod/default/Payment_Kredivo.png);
-								background-position: center;
-								background-repeat: no-repeat;
-								background-size: cover;
-							}
-							span.payment-icon.payment_logo_snap_akulaku{
-								background: url(/media/logo/paymentmethod/default/Payment_Akulaku_2x.png);
-								background-position: center;
-								background-repeat: no-repeat;
-								background-size: cover;
-							}
 
 							.payment-method-title{
 								span.payment_logo_snap_allbank_cc{
+									display: none;
+								}
+								span.payment-icon.payment_logo_snap_akulaku{
+									display: none;
+								}
+								span.payment-icon.payment_logo_custom{
+									display: none;
+								}
+								span.payment-indodana-logo{
 									display: none;
 								}
 							}
@@ -294,7 +281,10 @@
 	    					margin-bottom: 15px;
 						}
 						span.payment-icon.payment_logo_snap_akulaku{
-							display: none;
+							background: url(/media/logo/paymentmethod/default/Payment_Akulaku_2x.png);
+							background-position: center;
+							background-repeat: no-repeat;
+							background-size: cover;
 						}
 						span.payment-icon.payment_logo_1snap_akulaku{
 							display: none;
@@ -321,7 +311,20 @@
 							background-size: cover;
 						}
 						span.payment-icon.payment_logo_kredivopayment{
-							display: none;
+							background: url(/media/logo/paymentmethod/default/Payment_Kredivo.png);
+							background-position: center;
+							background-repeat: no-repeat;
+							background-size: cover;
+						}
+						span.payment-indodana-logo{
+							width: 74px;
+							height: 39px;
+							border: 1px solid #aeb4c1;
+							border-radius: 5px;
+							background: url(../images/Indodana-color.png);
+							background-position: center;
+							background-repeat: no-repeat;
+							background-size: contain;
 						}
 					}
 				}
@@ -329,7 +332,7 @@
 					margin-left: -25px;
 
 					.billing-address-same-as-shipping-block{
-						display: block !important;
+						display: block;
 						margin-left: 25px;
 
 						label{

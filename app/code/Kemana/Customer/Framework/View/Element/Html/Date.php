@@ -29,10 +29,13 @@ class Date extends \Magento\Framework\View\Element\Html\Date
         $firstDay = $this->getFirstDay();
 
         $html .= '<script type="text/javascript">
-            require(["jquery", "mage/calendar"], function($){
+            require(["jquery", "mage/translate", "mage/calendar"], function($, $t){
                     $("#' .
             $this->getId() .
             '").calendar({
+                showButtonPanel: true,
+                closeText: $t("Close"),
+
                 '.($this->getName() == 'dob' ? 'autoComplete: false' : '').',
                         showsTime: ' .
             ($this->getTimeFormat() ? 'true' : 'false') .
@@ -62,8 +65,8 @@ class Date extends \Magento\Framework\View\Element\Html\Date
             ($changeYear === null ? '' : ', changeYear: ' . $changeYear) .
             ($showOn ? ', showOn: "' . $showOn . '"' : '') .
             ($firstDay ? ', firstDay: ' . $firstDay : '') .
-            '})
-            });
+            '});
+            })
             </script>';
 
         return $html;
