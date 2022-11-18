@@ -151,8 +151,6 @@ class Request
             }
 
         } catch (\Exception $e) {
-            echo $e;
-            die;
             $this->helper->log($e->getMessage());
 
             $this->helper->log('Error Response : ' . $e->getMessage());

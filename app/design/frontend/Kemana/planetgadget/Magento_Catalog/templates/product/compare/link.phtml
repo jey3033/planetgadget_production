@@ -21,7 +21,12 @@
     >
         <?= $block->escapeHtml(__('Compare Products')) ?>
         <?= $block->escapeHtml(__('(')) ?>
-        <span class="counter qty" data-bind="text: compareProducts().countCaption"></span>
+        <!-- ko ifnot: (!compareProducts().count) -->
+            <span class="counter qty" data-bind="text: compareProducts().countCaption"></span>
+        <!--/ko-->
+        <!-- ko if: (!compareProducts().count) -->
+            <span class="counter qty">0</span>
+        <!--/ko-->
         <?= $block->escapeHtml(__(')')) ?>
     </a>
 </li>

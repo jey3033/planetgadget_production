@@ -63,7 +63,45 @@
             }
         }
 
+        .kemana-recently-viewed-grid{
+            .block-title{
+                display: none;
+            }
+
+            .recent-viewed-block-title.block-title{
+                display: flex;
+                flex-wrap: nowrap;
+
+                .labelviewed{
+                    &:after{
+                        content: '';
+                        display: block;
+                        margin: auto;
+                        margin-top: -14px;
+                        width: 100%;
+                        height: 10px;
+                        background: @color-pg-yellow;
+                    }
+                }
+            }
+        }
+
     }
+}
+
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .recently-viewed-products-container {
+        .kemana-recently-viewed-grid{
+            .recent-viewed-block-title.block-title{
+                font-size: 24px !important;
+            }
+        }
+    }   
 }
 
 //
