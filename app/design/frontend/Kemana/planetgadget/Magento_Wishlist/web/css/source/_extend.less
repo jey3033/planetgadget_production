@@ -37,7 +37,10 @@
     .table-comparison {
         .action {
             &.towishlist {
-                box-shadow: @common__box-shadow;
+                .lib-css(box-shadow, @common__box-shadow);
+                .lib-vendor-prefix-display(flex);
+                .lib-css(justify-content, center, 1);
+                .lib-css(align-items, center, 1);
 
                 &:before {
                     margin: 0;

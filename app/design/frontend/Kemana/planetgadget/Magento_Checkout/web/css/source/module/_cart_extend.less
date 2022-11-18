@@ -421,6 +421,13 @@
                         .lib-css(color, @color-pg-dark-gray);
                     }
                 }
+                &.qty .control.qty {
+                    height: 40px;
+
+                    label {
+                        position: relative;
+                    }
+                }
             }
 
             .item-actions {
@@ -485,7 +492,10 @@
 
             .item {
                 .col {
-                    padding: 20px;
+                    //padding: 20px;
+                    padding: 20px 10px;
+                    width: auto !important;
+                    min-width: 110px;
 
                     &.item {
                         padding: 20px 20px 0 0;
