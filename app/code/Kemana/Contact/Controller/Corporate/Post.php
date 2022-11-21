@@ -191,6 +191,7 @@ class Post extends \Magento\Framework\App\Action\Action
                 'area' => \Magento\Framework\App\Area::AREA_FRONTEND,
                 'store' => $storeId
             ];
+            print_r($templateVars);die;
             $transport = $this->transportBuilder->setTemplateIdentifier($this->getEmailTemplate(), $storeScope)
                 ->setTemplateOptions($templateOptions)
                 ->setTemplateVars($templateVars)
