@@ -12,8 +12,9 @@
                     <input type="radio" name="selectedlocation" value="location" click="$parent.selectPickupLocation.bind($parent, $data)">
                     <label></label>
                 </div>
-                <div class="location-selected" if="$parent.isPickupLocationSelected($data)">
+                <div class="location-selected select-location radios" if="$parent.isPickupLocationSelected($data)">
                     <input type="radio" name="selectedlocation" value="location" click="$parent.selectPickupLocation.bind($parent, $data)" checked>
+                    <label></label>
                 </div>
             </div>
             <div class="col-location-deatil-grid">
