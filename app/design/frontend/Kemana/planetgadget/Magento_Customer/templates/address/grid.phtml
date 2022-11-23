@@ -29,12 +29,12 @@ $customerAddressView = $block->getData('customer_address');
                             <a class="action delete" href="#" role="delete-address" data-address="<?= $block->escapeHtmlAttr($address->getId()) ?>"><span><?= $block->escapeHtml(__('Remove')) ?></span></a>
                         </div>
                     </div>
+                    <?php else : ?>
+                        <p class="empty"><?= $block->escapeHtml(__('You have no other address entries in your address book.')) ?></p>
                     <?php endif ?>
                 <?php endforeach; ?>
             </div>
 
-        <?php else : ?>
-            <p class="empty"><?= $block->escapeHtml(__('You have no other address entries in your address book.')) ?></p>
         <?php endif ?>
     </div>
     <div class="actions-toolbar">

@@ -1,0 +1,47 @@
+<!--
+/**
+ * Copyright © 2022 PT Kemana Teknologi Solusi. All rights reserved.
+ * http://www.kemana.com
+ */
+
+/**
+ * @category Kemana
+ * @package  Kemana_Contact
+ * @license  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ *
+ *
+ * @author   Parth Godhani <pgodhani@kemana.com>
+ */
+-->
+<!--@subject {{trans "Corporate Form"}} @-->
+{{template config_path="design/email/header_template"}}
+
+<table class="message-details">
+    <tr>
+        <td><strong>{{trans "Name"}}</strong></td>
+        <td>{{var name}}</td>
+    </tr>
+    <tr>
+        <td><strong>{{trans "Email"}}</strong></td>
+        <td>{{var email}}</td>
+    </tr>
+    <tr>
+        <td><strong>{{trans "Phone"}}</strong></td>
+        <td>{{var telephone}}</td>
+    </tr>
+    <tr>
+        <td><strong>{{trans "Company Name"}}</strong></td>
+        <td>{{var companyname}}</td>
+    </tr>
+    <tr>
+        <td><strong>{{trans "Company Field"}}</strong></td>
+        <td>{{var companyfield}}</td>
+    </tr>
+    <tr>
+        <td><strong>{{trans "Job"}}</strong></td>
+        <td>{{var job}}</td>
+    </tr>
+</table>
+<p>{{var desired}}</p>
+
+{{template config_path="design/email/footer_template"}}
