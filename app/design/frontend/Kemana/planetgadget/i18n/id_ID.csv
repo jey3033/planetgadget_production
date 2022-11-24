@@ -561,6 +561,7 @@
 "Recently","Terakhir"
 "Viewed","Dilihat"
 "Thank you for your interest in the solutions we offer. We will contact you within 1x24 hours","Terima kasih atas ketertarikan Anda terhadap solusi yang kami tawarkan. Kami akan menghubungi Anda dalam waktu 1x24 jam"
+<<<<<<< HEAD
 "Partner","Mitra"
 "Customer","Pelanggan"
 "-- Select the company field --","-- Pilih bidang perusahaan --"
@@ -579,3 +580,7 @@
 "Retail","Ritel"
 "Technology","Teknologi"
 "Telecommunication","Telekomunikasi"
+"Pick Up Date","Tanggal Pengambilan"
+"Pick Up Time","Waktu Pengambilan"
+"-- Select Pick Up Time --","-- Pilih Waktu Pengambilan --"
+"Available","Tersedia"
