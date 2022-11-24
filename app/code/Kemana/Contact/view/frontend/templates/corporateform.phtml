@@ -62,7 +62,8 @@
            <div class="field intrested required">
               <label class="label" for="intrested"><span class="title"><?= $block->escapeHtml(__('Saya tertarik menjadi')) ?></span></label>
               <select title="Intrested" name="intrested" class="form-control" id="intrested">
-                 <option>Mitra</option>
+                 <option><?= $block->escapeHtml(__('Partner'))?></option>
+                 <option><?= $block->escapeHtml(__('Customer'))?></option>
               </select>
            </div>
         </div>
@@ -82,7 +83,7 @@
               <label class="label" for="companyfield"><span class="title"><?= $block->escapeHtml(__('Bidang Perusahaan')) ?></span></label>
               <div class="control">
                  <select title="CompanyField" name="companyfield" class="form-control" id="companyfield">
-                    <option value=""><?= $block->escapeHtml(__('-- Pilih bidang perusahaan --'))?></option>
+                     <option value=""><?= $block->escapeHtml(__('-- Select the company field --'))?></option>
                      <option value="Distribusi"><?= $block->escapeHtml(__('Distribution'))?></option>
                      <option value="Infrastruktur"><?= $block->escapeHtml(__('Infrastructure'))?></option>
                      <option value="Jasa keuangan"><?= $block->escapeHtml(__('Financial services'))?></option>
