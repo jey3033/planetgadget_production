@@ -46,7 +46,7 @@ class AddHtmlToOrderShippingView implements ObserverInterface
                 $formattedDate = $this->timezone->formatDateTime(
                     $order->getDeliveryDate(),
                     \IntlDateFormatter::MEDIUM,
-                    \IntlDateFormatter::MEDIUM,
+                    \IntlDateFormatter::NONE,
                     null,
                     $this->timezone->getConfigTimezone(
                         ScopeInterface::SCOPE_STORE,
