@@ -656,7 +656,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 
             return true;
         } catch (\Exception $e) {
-            $this->log('End Customer Register Success Event - Failed to update Customer Number in Magento for Customer ' . $customerId . ' sent/update to ERP. Error :' . $e->getMessage(), 'info');
+            $this->log('Failed to update Customer Number in Magento for Customer ' . $customerId . ' sent/update to ERP. Error :' . $e->getMessage(), 'info');
         }
 
         return false;
