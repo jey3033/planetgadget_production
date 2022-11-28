@@ -107,6 +107,10 @@ class OrderInvoicePay implements \Magento\Framework\Event\ObserverInterface
 
         $dataToOrder = $this->helper->convertArrayToXml($dataToOrder);
 
+        if (!floatval($order->getDiscountAmount())) {
+            $dataToOrder .= "<DiscountAmount>0</DiscountAmount>";
+        }
+
         $dataToOrderLineItems = "<SalesOrderLine>";
 
         $lineNo = 1;
