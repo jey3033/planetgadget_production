@@ -42,9 +42,7 @@ class SalesModelServiceQuoteSubmitBefore implements ObserverInterface
         $order = $observer->getOrder();
         /** @var \Magento\Quote\Model\Quote $quote */
         $quote = $this->quoteRepository->get($order->getQuoteId());
-        if (!$this->validator->validate($quote->getDeliveryDate())) {
-            throw new \Exception(__('Invalid Pickup Date'));
-        }
+        
         $order->setDeliveryDate($quote->getDeliveryDate());
         $order->setDeliveryTime($quote->getDeliveryTime());
 
