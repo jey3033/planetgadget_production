@@ -126,8 +126,9 @@ class SyncProductsFromErp
             $this->helper->log('No product received from ERP to create product in Magento', 'error');
             return;
         }
-
-        $this->state->setAreaCode(\Magento\Framework\App\Area::AREA_ADMINHTML);
+        if(!$this->state->getAreaCode()){
+            $this->state->setAreaCode(\Magento\Framework\App\Area::AREA_ADMINHTML);
+        }
         $ackProductData = [];
 
         $count = 0;
