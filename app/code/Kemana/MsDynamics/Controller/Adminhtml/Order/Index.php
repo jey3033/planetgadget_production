@@ -77,7 +77,7 @@ class Index extends \Magento\Backend\App\Action
 
             $orderId = $this->getRequest()->getPost('orderId');
 
-            $pushOrder = $this->syncOrdersToErp->syncOrdersFromMagentoToErp($orderId);
+            $pushOrder = $this->syncOrdersToErp->syncOrdersFromMagentoToErp(0, $orderId);
         }
 
         if ($pushOrder['result']) {

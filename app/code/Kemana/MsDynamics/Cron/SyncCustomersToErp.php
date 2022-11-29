@@ -82,7 +82,7 @@ class SyncCustomersToErp
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      * @throws \Magento\Framework\Exception\State\InputMismatchException
      */
-    public function syncMissingCustomersFromRealTimeSync($customerId = null)
+    public function syncMissingCustomersFromRealTimeSync($cronObject, $customerId = null)
     {
         $singleCustomerFromGridResult = false;
         $erpCustomerNumber = 0;
