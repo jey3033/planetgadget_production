@@ -79,7 +79,7 @@ class SyncOrdersToErp
      * @return void
      * @throws \Magento\Framework\Exception\AlreadyExistsException
      */
-    public function syncOrdersFromMagentoToErp($orderId = 0) {
+    public function syncOrdersFromMagentoToErp($cronObject, $orderId = 0) {
         $singleOrderFromGridResult = false;
 
         if (!$this->helper->isEnable()) {

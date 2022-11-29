@@ -66,7 +66,7 @@ class SyncFromMagentoToErp extends Command
         $output->writeln("Started to get the customers from Magento who does not have MsDynamicErpCustomerNumber and then
         push to the ERP and update the MsDynamicErpCustomerNumber in Magento");
         $output->writeln("Please check var/log/ms_dynamic.log file for see live messages");
-        $this->syncCustomersToErp->syncMissingCustomersFromRealTimeSync();
+        $this->syncCustomersToErp->syncMissingCustomersFromRealTimeSync(0);
         $output->writeln("Finished the process. See the logs for more information");
 
     }

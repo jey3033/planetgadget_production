@@ -88,12 +88,12 @@ class Index extends \Magento\Backend\App\Action
 
             $customerId = $this->getRequest()->getPost('customerId');
 
-            $pushCustomer = $this->syncCustomersToErp->syncMissingCustomersFromRealTimeSync($customerId);
-            $this->syncRewardPointToErp->syncRewardPointFromMagentoToErp($customerId);
+            $pushCustomer = $this->syncCustomersToErp->syncMissingCustomersFromRealTimeSync(0, $customerId);
+            $this->syncRewardPointToErp->syncRewardPointFromMagentoToErp(0, $customerId);
         }
 
         if ($pushCustomer['result']) {
-            $customerResult = true;            
+            $customerResult = true;
             $this->helper->log('End send customer from click event in Customer admin grid.', 'info');
         }
 
