@@ -11,9 +11,9 @@ define([
             this._super();
             var disabled = window.checkoutConfig.shipping.delivery_date.disabled;
             var noday = window.checkoutConfig.shipping.delivery_date.noday;
-            var format = window.checkoutConfig.shipping.delivery_date.format;
+            var format = null;
             if(!format) {
-                format = 'yy-mm-dd';
+                format = 'dd-mm-yy';
             }
             var disabledDay = disabled.split(",").map(function(item) {
                 return parseInt(item, 10);
@@ -26,6 +26,11 @@ define([
                     if(noday) {
                         var options = {
                             minDate: 0,
+                            showButtonPanel: true,
+                            closeText: 'Clear',
+                            clearBtn: true,
+                            changeMonth: true,
+                            monthNamesShort: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
                             dateFormat:format
                         };
                     } else {

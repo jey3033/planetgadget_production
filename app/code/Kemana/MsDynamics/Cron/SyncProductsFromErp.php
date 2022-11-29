@@ -129,84 +129,90 @@ class SyncProductsFromErp
         if(!$this->state->getAreaCode()){
             $this->state->setAreaCode(\Magento\Framework\App\Area::AREA_ADMINHTML);
         }
-        $ackProductData = [];
+        $productsFromErp = array_chunk($getProductsFromErp['response'],1000);
+        $arrayCount = 0;
+        foreach ($productsFromErp as $arraykey => $productsArray) {
+            $arrayCount = $arraykey + 1;
+            $this->helper->log($arrayCount.'th 1000 product createing.....', 'info');
+            $ackProductData = [];
+            $count = 0;
+            foreach ($productsArray as $key => $productdata) {
+                if($count > 5 && !$this->helper->isApiMode()){
+                    break;
+                }
+                $count ++;
+                if(isset($productdata['ProductNo']) && $productdata['ProductNo']){
+                    try {
+                        $this->helper->log('Started to create the product in Magento for ERP Product : ' . $productdata['ProductNo'], 'info');
 
-        $count = 0;
-        foreach ($getProductsFromErp['response'] as $key => $productdata) {
-            if($count > 5 && !$this->helper->isApiMode()){
-                break;
-            }
-            $count ++;
-            if(isset($productdata['ProductNo']) && $productdata['ProductNo']){
-                try {
-                    $this->helper->log('Started to create the product in Magento for ERP Product : ' . $productdata['ProductNo'], 'info');
+                        // validataion for product api json
+                        if(!array_key_exists("ProductNo",$productdata) || !array_key_exists("GrossWeight",$productdata) || !array_key_exists("Price",$productdata) || !array_key_exists("ItemCategory",$productdata)){
+                            $this->helper->log('Invalid parameter for this product : ' . $productdata['ProductNo'], 'error');
+                            continue;
+                        }
+                        
+                        $name = isset($productdata['Description']) ? $productdata['Description'] : $productdata['ProductNo'];
+                        $product = $this->productFactory->create();
+                        $product->setSku($productdata['ProductNo']);
+                        $product->setName($name);
+                        $product->setWeight($productdata['GrossWeight']);
+                        $product->setPrice($productdata['Price']);
+                        $product->setAttributeSetId(4);
+                        $product->setTypeId(Type::TYPE_SIMPLE);
+                        $product->setData('store_id', Store::DEFAULT_STORE_ID);
+                        $product->setStatus(Status::STATUS_ENABLED);
+                        $product = $this->productRepository->save($product);
+                        $categoryIds = [];
+                        $categoryCollection = $this->categoryFactory->create()->getCollection()
+                                ->addAttributeToFilter('name', array('in' => array(
+                                    $productdata['ItemCategory'], 
+                                    ucfirst($productdata['ItemCategory']),
+                                    strtoupper($productdata['ItemCategory']),
+                                    strtolower($productdata['ItemCategory'])
+                                )))->getFirstItem();
+                        $catId = !empty($categoryCollection) ? $categoryCollection->getId() : 0;   
+                        if($catId){
+                            $categoryIds[] = $catId;
+                        }
+                        if(!empty($categoryIds)){
+                            $this->categoryLinkRepository->assignProductToCategories($product->getSku(), $categoryIds);
+                        }
 
-                    // validataion for product api json
-                    if(!array_key_exists("ProductNo",$productdata) || !array_key_exists("GrossWeight",$productdata) || !array_key_exists("Price",$productdata) || !array_key_exists("ItemCategory",$productdata)){
-                        $this->helper->log('Invalid parameter for this product : ' . $productdata['ProductNo'], 'error');
-                        continue;
-                    }
-                    
-                    $name = isset($productdata['Description']) ? $productdata['Description'] : $productdata['ProductNo'];
-                    $product = $this->productFactory->create();
-                    $product->setSku($productdata['ProductNo']);
-                    $product->setName($name);
-                    $product->setWeight($productdata['GrossWeight']);
-                    $product->setPrice($productdata['Price']);
-                    $product->setAttributeSetId(4);
-                    $product->setTypeId(Type::TYPE_SIMPLE);
-                    $product->setData('store_id', Store::DEFAULT_STORE_ID);
-                    $product->setStatus(Status::STATUS_ENABLED);
-                    $product = $this->productRepository->save($product);
-                    $categoryIds = [];
-                    $categoryCollection = $this->categoryFactory->create()->getCollection()
-                            ->addAttributeToFilter('name', array('in' => array(
-                                $productdata['ItemCategory'], 
-                                ucfirst($productdata['ItemCategory']),
-                                strtoupper($productdata['ItemCategory']),
-                                strtolower($productdata['ItemCategory'])
-                            )))->getFirstItem();
-                    $catId = !empty($categoryCollection) ? $categoryCollection->getId() : 0;   
-                    if($catId){
-                        $categoryIds[] = $catId;
-                    }
-                    if(!empty($categoryIds)){
-                        $this->categoryLinkRepository->assignProductToCategories($product->getSku(), $categoryIds);
-                    }
+                        if($product->getId()){
+                            $this->inventory->inventoryApiCall([$product->getSku()]);
+                            $this->helper->log('Successfully created the product in Magento for ERP product : ' . $productdata['ProductNo'], 'info');
 
-                    if($product->getId()){
-                        $this->inventory->inventoryApiCall([$product->getSku()]);
-                        $this->helper->log('Successfully created the product in Magento for ERP product : ' . $productdata['ProductNo'], 'info');
-
-                        $ackProductData[] = [
-                                        "ProductNo" => $productdata['ProductNo'],
-                                        "MagentoProductID" => $product->getId(),
-                                    ];
+                            $ackProductData[] = [
+                                            "ProductNo" => $productdata['ProductNo'],
+                                            "MagentoProductID" => $product->getId(),
+                                        ];
+                        }
+                    } catch (Exception $e) {
+                        $this->helper->log('Unable to create the product for EPR product ' . $productdata['ProductNo'] . ' in Magento. Error : ' . $e->getMessage(), 'error');
                     }
-                } catch (Exception $e) {
-                    $this->helper->log('Unable to create the product for EPR product ' . $productdata['ProductNo'] . ' in Magento. Error : ' . $e->getMessage(), 'error');
                 }
             }
+
+            // Ack call
+
+            if (empty($ackProductData)) {
+                return;
+            }
+
+            $this->helper->log('Start Ack call for products by CRON', 'info');
+
+            $ackProductData = $this->helper->convertAckProductListToXml($ackProductData);
+
+            $ackProduct = $this->erpProduct->ackProduct($this->helper->getFunctionAckProduct(),
+                $this->helper->getSoapActionAckProduct(), $ackProductData);
+
+            if ($ackProduct['responseStatus'] == '100') {
+                $this->helper->log('Ack call successfully done for below product' . $ackProductData, 'info');
+                $this->helper->log('End to get the not synced products from ERP and then create in Magento using Cron Job', 'info');
+                echo $ackProductData;
+            }
         }
-
-        // Ack call
-
-        if (empty($ackProductData)) {
-            return;
-        }
-
-        $this->helper->log('Start Ack call for products by CRON', 'info');
-
-        $ackProductData = $this->helper->convertAckProductListToXml($ackProductData);
-
-        $ackProduct = $this->erpProduct->ackProduct($this->helper->getFunctionAckProduct(),
-            $this->helper->getSoapActionAckProduct(), $ackProductData);
-
-        if ($ackProduct['responseStatus'] == '100') {
-            $this->helper->log('Ack call successfully done for below product' . $ackProductData, 'info');
-            $this->helper->log('End to get the not synced products from ERP and then create in Magento using Cron Job', 'info');
-            return $ackProductData;
-        }
+        return true;
     }
 
 }
