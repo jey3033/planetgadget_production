@@ -110,7 +110,11 @@ function (
                 } else {
                     this.saveInAddressBook(1);
                 }
-                this.isAddressDetailsVisible(true);
+                if (checkoutData.getSelectedShippingRate() == "instore_pickup"){ 
+                    this.isAddressSameAsShipping(false);
+                }else{
+                    this.isAddressDetailsVisible(true);
+                }
             }, this);
 
             return this;
@@ -195,6 +199,9 @@ function (
                 }
             }
             setBillingAddressAction(globalMessageList);
+            if (checkoutData.getSelectedShippingRate() == "instore_pickup"){ 
+                this.isAddressDetailsVisible(true);
+            }
             this.updateAddresses();
         },
 
