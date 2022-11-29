@@ -178,7 +178,7 @@
                                         overflow: hidden;
                                         speak: none;
                                         text-align: center;
-                                        padding: 0;                                        
+                                        padding: 0;
                                         margin-right: 10px;
                                     }
                                 }
@@ -233,7 +233,7 @@
 
                     .table-checkout-shipping-method{
                         margin-top: -20px;
-                        
+
                         .shipping-logo-image{
                             width: 75px;
                         }
@@ -349,7 +349,7 @@
                         &:hover {
                             background-color: @primary__color__dark;
                             color: @color-white;
-                            
+
                             &:before{
                                 background: unset;
                             }
@@ -521,7 +521,7 @@
                 .shipping-address-phone{
                     display: flex;
                 }
-                
+
                 .not-pin-point{
                     background: url(../images/Pinpoint-Not-Set.svg) left no-repeat;
                     color: @color-pg-dark-gray;
@@ -534,7 +534,7 @@
                 .pin-point{
                     display: none;
                 }
-                
+
                 .set-pin-point{
                     background: url(../images/Pinpoint-Set.svg) left no-repeat;
                     color: @color-pg-green;
@@ -543,7 +543,7 @@
                         margin-left: 22px;
                     }
                 }
-                
+
             }
 
             #store-selector {
@@ -567,6 +567,33 @@
 
         .panel.wrapper{
             display: none;
+        }
+
+        .ui-datepicker {
+            .ui-datepicker-title {
+                position: relative;
+
+                .ui-datepicker-month {
+                    min-width: 180px;
+                }
+            }
+            .ui-datepicker-year {
+                position: absolute;
+                .lib-font-size(12);
+                .lib-line-height(13);
+                .lib-css(font-weight, @font-weight__bold);
+                right: 10px;
+                top: 13px;
+            }
+
+            .ui-datepicker-buttonpane {
+                .lib-vendor-prefix-display();
+                justify-content: space-between;
+
+                .ui-datepicker-close {
+                    order: -1;
+                }
+            }
         }
     }
 
@@ -637,7 +664,7 @@
                             flex-wrap: nowrap;
                             font-size: 10px;
                             font-weight: bold;
-                                    
+
                             &:before{
                             content: '\e933';
                             font-family: 'icons-kemana-theme';
@@ -655,6 +682,48 @@
                             button[disabled]{
                                 background-color: @color-gray-line1;
                                 color: @color-pg-dark-gray;
+                            }
+                        }
+                    }
+
+                    .field[name~="delivery_date.delivery_date"] {
+                        .control {
+                            .lib-icon-font(
+                                @icon-pg-calendar,
+                                @_icon-font-color: @color-pg-light-gray,
+                                @_icon-font-size: @icon-calendar__font-size,
+                                @_icon-font-position: before
+                            );
+
+                            &:before {
+                                position: absolute;
+                                right: 10px;
+                                z-index: 0;
+                                top: 5px;
+                            }
+
+                            position: relative;
+                            display: block;
+
+                            input {
+                                z-index: 10;
+                                position: relative;
+                                background: none;
+                                cursor: pointer;
+                            }
+                        }
+                    }
+
+                    .field[name~="delivery_date.delivery_time"] {
+                        select {
+                            .lib-line-height(20);
+
+                            option {
+                                .lib-css(color, @kemana-primary-brand-color);
+                                .lib-font-size(12);
+                                .lib-line-height(20);
+                                .lib-css(font-weight, @font-weight__heavier);
+                                padding: 2px 0;
                             }
                         }
                     }
@@ -939,7 +1008,7 @@
 
         .shipping-address-items{
             margin-left: 0 !important;
-            margin-top: 10px !important; 
+            margin-top: 10px !important;
         }
     }
 
@@ -998,7 +1067,7 @@
                     .shipping-information-title{
                         border-bottom: 1px solid @color-gray-line1 !important;
                     }
-                }                
+                }
             }
         }
     }
