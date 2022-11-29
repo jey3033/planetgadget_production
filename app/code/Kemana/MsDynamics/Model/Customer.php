@@ -49,7 +49,7 @@ class Customer
      */
     public function getNoySyncCustomersInPg($customerId = null)
     {
-        if ($customerId) {
+        if ($customerId && is_numeric($customerId)) {
             return $this->customerRepository->getById($customerId);
         }
 
@@ -68,11 +68,11 @@ class Customer
      * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function getSyncCustomersList($customerId = null)
-    {   
+    {
         if ($customerId) {
             return $this->customerRepository->getById($customerId);
         }
-        
+
         $filterErpCustomerNumber = $this->filterBuilder
             ->setField('ms_dynamic_customer_number')
             ->setConditionType('notnull')

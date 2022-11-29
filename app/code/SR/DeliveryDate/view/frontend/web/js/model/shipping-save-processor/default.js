@@ -47,6 +47,9 @@ define(
                     }
                 };
 
+                window.checkoutConfig.quoteData.delivery_date = $('[name="delivery_date"]').val();
+                window.checkoutConfig.quoteData.delivery_time = $('[name="delivery_time"]').val();
+
                 fullScreenLoader.startLoader();
 
                 return storage.post(
