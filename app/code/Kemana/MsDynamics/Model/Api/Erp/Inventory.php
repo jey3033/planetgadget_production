@@ -75,8 +75,8 @@ class Inventory
             $productSkus = array_unique($productSkus);
             $productSkus = implode("|", $productSkus);
 
-            $sources = $this->getSources();   
-            $sources = implode("|", $sources);
+            $storeSources = $this->getSources();   
+            $sources = implode("|", $storeSources);
 
             $dataToGetStock = [
                 "productFilter" => $productSkus,
@@ -92,6 +92,7 @@ class Inventory
 
         $totalStock = [];
         if(isset($response['response'])){
+            $inventoryData = [];
             $inventorysources = explode(";",$response['response']);
             foreach ($inventorysources as $key => $inventorysource) {
                 $stockarray = explode(",",$inventorysource);
@@ -101,7 +102,14 @@ class Inventory
                     }else{
                         $totalStock[$stockarray[0]] = $stockarray[2];
                     }
+                    $inventoryData[$stockarray[0]][$stockarray[1]] = $stockarray[2];
                     $this->updateStock($stockarray[0],$stockarray[2],$stockarray[1]);
+                }
+            }
+            foreach ($inventoryData as $sku => $inventory) {
+                foreach ($storeSources as $sources) {
+                    $qty = isset($inventoryData[$sku][$sources]) ? $inventoryData[$sku][$sources] : 0;
+                    $this->updateStock($sku,$qty,$sources);   
                 }
             }
         }else{

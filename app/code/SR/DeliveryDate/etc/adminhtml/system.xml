@@ -21,7 +21,7 @@
                 </field>
                 <field id="hourMax" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Pickup Hour End:</label>
-                    <comment>Should be 22=>7PM, 23=>8PM because Minutes cover 1hr </comment>
+                    <comment>Should be 22=>10PM, 23=>11PM because Minutes cover 1hr </comment>
                 </field>
                 <field id="required_delivery_date" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Required Pickup Date</label>

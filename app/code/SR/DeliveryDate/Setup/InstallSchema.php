@@ -24,7 +24,7 @@ class InstallSchema implements InstallSchemaInterface
             $installer->getTable('quote'),
             'delivery_date',
             [
-                'type' => 'datetime',
+                'type' => 'date',
                 'nullable' => false,
                 'comment' => 'Delivery Date',
             ]
@@ -44,7 +44,7 @@ class InstallSchema implements InstallSchemaInterface
             $installer->getTable('sales_order'),
             'delivery_date',
             [
-                'type' => 'datetime',
+                'type' => 'date',
                 'nullable' => false,
                 'comment' => 'Delivery Date',
             ]
@@ -64,7 +64,7 @@ class InstallSchema implements InstallSchemaInterface
             $installer->getTable('sales_order_grid'),
             'delivery_date',
             [
-                'type' => 'datetime',
+                'type' => 'date',
                 'nullable' => false,
                 'comment' => 'Delivery Date',
             ]
