@@ -71,7 +71,7 @@ class SyncFromMagentoToErp extends Command
         $this->appState->setAreaCode(\Magento\Framework\App\Area::AREA_ADMINHTML);
         $output->writeln("Started to push the not sync orders from Magento to ERP");
         $output->writeln("Please check var/log/ms_dynamic.log file for see live messages");
-        $this->syncOrdersToErp->syncOrdersFromMagentoToErp();
+        $this->syncOrdersToErp->syncOrdersFromMagentoToErp(0);
         $output->writeln("Finished the process. See the logs for more information");
     }
 }

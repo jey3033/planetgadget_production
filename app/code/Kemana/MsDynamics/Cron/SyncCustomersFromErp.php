@@ -227,6 +227,12 @@ class SyncCustomersFromErp
                     } elseif (!isset($erpCustomer['Address']) || !$erpCustomer['Address']) {
 
                         $this->helper->log('CUSTOMER : Address missing for this customer. Aborting the address. Email : ' . $erpCustomer['Email']);
+                    } elseif (!isset($erpCustomer['District']) || !$erpCustomer['District']) {
+                        // The purpose of this ELSEIF statement is permanently avoid the address creation for customer from ERP. Because in ERP side District is not available
+                        $this->helper->log('CUSTOMER : District missing for this customer. Aborting the address. Email : ' . $erpCustomer['Email']);
+                    } elseif (!isset($erpCustomer['DistrictId']) || !$erpCustomer['DistrictId']) {
+                        // The purpose of this ELSEIF statement is permanently avoid the address creation for customer from ERP. Because in ERP side DistrictId is not available
+                        $this->helper->log('CUSTOMER : DistrictId missing for this customer. Aborting the address. Email : ' . $erpCustomer['Email']);
                     } else {
 
                         $this->helper->log('CUSTOMER : Started to create the address in Magento for ERP customer : ' . $erpCustomer['CustomerNo'], 'info');

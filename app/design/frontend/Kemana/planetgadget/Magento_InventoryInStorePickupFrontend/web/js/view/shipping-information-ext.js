@@ -99,6 +99,14 @@ define([
             return locationName;
         },
 
+        getShippingMethodDate: function() {
+            return window.checkoutConfig.quoteData.delivery_date;
+        },
+
+        getShippingMethodTime: function() {
+            return window.checkoutConfig.quoteData.delivery_time;
+        },
+
         /**
          * Get is store pickup delivery method selected.
          *

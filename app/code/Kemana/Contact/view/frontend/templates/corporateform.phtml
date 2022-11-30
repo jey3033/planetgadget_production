@@ -6,7 +6,7 @@
 
 /**
  * @category Kemana
- * @package  Kemana_Common
+ * @package  Kemana_Contact
  * @license  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  *
  *
@@ -20,7 +20,7 @@
    <div class="heading">
       <h2 class="title"><?= $block->escapeHtml(__('Hubungi ')) ?><span><?= $block->escapeHtml(__('Kami')) ?></span></h2>
    </div>
-   <form class="form corporate-contact" id="corporate-form" method="post">
+   <form class="form corporate-contact" id="corporate-form" method="post" action="contact/corporate/post">
       <fieldset class="fieldset with-border">
          <div class="info">
             <span class="title"><?= $block->escapeHtml(__('Kami siap memberikan layanan terbaik untuk Anda')) ?></span>
@@ -62,7 +62,8 @@
            <div class="field intrested required">
               <label class="label" for="intrested"><span class="title"><?= $block->escapeHtml(__('Saya tertarik menjadi')) ?></span></label>
               <select title="Intrested" name="intrested" class="form-control" id="intrested">
-                 <option>Mitra</option>
+                 <option><?= $block->escapeHtml(__('Partner'))?></option>
+                 <option><?= $block->escapeHtml(__('Customer'))?></option>
               </select>
            </div>
         </div>
@@ -82,7 +83,22 @@
               <label class="label" for="companyfield"><span class="title"><?= $block->escapeHtml(__('Bidang Perusahaan')) ?></span></label>
               <div class="control">
                  <select title="CompanyField" name="companyfield" class="form-control" id="companyfield">
-                    <option>-- Pilih bidang perusahaan --</option>
+                     <option value=""><?= $block->escapeHtml(__('-- Select the company field --'))?></option>
+                     <option value="Distribusi"><?= $block->escapeHtml(__('Distribution'))?></option>
+                     <option value="Infrastruktur"><?= $block->escapeHtml(__('Infrastructure'))?></option>
+                     <option value="Jasa keuangan"><?= $block->escapeHtml(__('Financial services'))?></option>
+                     <option value="Kesehatan"><?= $block->escapeHtml(__('Health'))?></option>
+                     <option value="Konstruksi"><?= $block->escapeHtml(__('Construction'))?></option>
+                     <option value="Manufaktur"><?= $block->escapeHtml(__('Manufacture'))?></option>
+                     <option value="Pariwisata"><?= $block->escapeHtml(__('Tourist'))?></option>
+                     <option value="Pemerintahan"><?= $block->escapeHtml(__('Government'))?></option>
+                     <option value="Pendidikan"><?= $block->escapeHtml(__('Education'))?></option>
+                     <option value="Pertambangan"><?= $block->escapeHtml(__('Mining'))?></option>
+                     <option value="Pertanian"><?= $block->escapeHtml(__('Agriculture'))?></option>
+                     <option value="Perdagangan"><?= $block->escapeHtml(__('Trading'))?></option>
+                     <option value="Ritel"><?= $block->escapeHtml(__('Retail'))?></option>
+                     <option value="Teknologi"><?= $block->escapeHtml(__('Technology'))?></option>
+                     <option value="Telekomunikasi"><?= $block->escapeHtml(__('Telecommunication'))?></option>
                  </select>
               </div>
            </div>

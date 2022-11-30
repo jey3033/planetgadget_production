@@ -45,6 +45,12 @@
             <!-- ko with: {locationDescriptionUnsanitizedHtml: selectedLocation().description} -->
                 <p class="location-description" html="locationDescriptionUnsanitizedHtml"></p>
             <!-- /ko -->
+            <span class="date-title" data-bind="i18n: 'Pick Up Date'"></span><br/>
+            <span class="date-value" data-bind="text: getShippingMethodDate()"></span>
+            <br/>
+            <br/>
+            <span class="time-title" data-bind="i18n: 'Pick Up Time'"></span><br/>
+            <span class="time-value" data-bind="text: getShippingMethodTime()"></span>
         </div>
     </div>
     <!--/ko-->

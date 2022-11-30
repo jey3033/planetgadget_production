@@ -1,0 +1,21 @@
+<div id="delivery-date">
+    <strong><?= __('Pick Up Date') ?>:</strong>
+    <br/>
+    <span class="price"><?= $block->getDeliveryDate() ?></span>
+</div>
+<div id="delivery-time">
+    <strong><?= __('Pick Up Time') ?>:</strong>
+    <br/>
+    <span class="price"><?= $block->getDeliveryTime() ?></span>
+</div>
+<script type="text/javascript">
+    require(
+        ['jquery'],
+        function($) {
+            var element = $('#delivery-date').detach();
+            $('.box-order-shipping-method').append(element);
+            var element = $('#delivery-time').detach();
+            $('.box-order-shipping-method').append(element);
+        }
+    );
+</script>
