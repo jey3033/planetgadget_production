@@ -468,7 +468,8 @@
 //  Mobile
 //  _____________________________________________
 
-.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+// tab-fix .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+& when (@media-common = true) {
     .page-header {
         .header {
             &.content {
@@ -482,7 +483,8 @@
 //  Desktop
 //  _____________________________________________
 
-.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+// tab-fix .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
     // Homepage only
     .cms-index-index {
         .page-header {

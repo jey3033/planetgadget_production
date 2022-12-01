@@ -1,0 +1,461 @@
+// /**
+//  * Copyright © 2020 Kemana. All rights reserved.
+//  * @author Ashan Gunawardena <agunawardena@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .social-login-popup {
+        display: none;
+    }
+
+    .top-link {
+        position: relative;
+
+        .account-menu {
+            margin-bottom: 0;
+
+            .menu-content {
+                margin-bottom: 0;
+                padding: 0;
+
+                .main-item {
+                    content: '';
+                    cursor: pointer;
+                    display: block;
+                    font-size: 0;
+                    margin: 0;
+                    background: transparent;
+                    .lib-css(width, @top-header-icon__font-size);
+                    .lib-css(height, @top-header-icon__line-height);
+                    .lib-icon-font(
+                        @header-account-icon,
+                        @_icon-font: @icon-font,
+                        @_icon-font-color: @header-account-icon__color,
+                        @_icon-font-color-hover: @header-account-icon__color-hover,
+                        @_icon-font-size: @top-header-icon__font-size,
+                        @_icon-font-line-height: @top-header-icon__line-height,
+                        @_icon-font-margin: 0,
+                        @_icon-font-position: before
+                    );
+                    vertical-align: top;
+
+                    a {
+                        .lib-css(width, @top-header-icon__font-size);
+                        .lib-css(height, @top-header-icon__line-height);
+                        display: inline-block;
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+                    }
+                }
+            }
+        }
+    }
+
+    .account-detail__content {
+        .lib-css(background, @header-dropdown__background);
+        .lib-css(border, @header-dropdown__border);
+        box-shadow: 0 1px 10px rgba(0, 0, 0, 0.16);
+        position: absolute;
+        top: 35px;
+        right: 0;
+        opacity: 0;
+        pointer-events: none;
+        padding: 14px 20px;
+        transition: .3s all ease;
+        width: 188px;
+        z-index: 9;
+
+        &.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .list-info {
+            list-style: none;
+            margin: 0;
+            padding-left: 0;
+
+            li {
+                margin-bottom: 2px;
+
+                a {
+                    .lib-css(font-weight, @font-weight__heavier);
+                    display: block;
+                    padding: 4px 0;
+                }
+            }
+        }
+    }
+
+    .page-header {
+        .account-detail__content {
+            &.social-login-accordion {
+                .lib-css(width, @social-login-header-container__width);
+                .lib-css(padding, @social-login-header-container__padding);
+                right: -@indent__base;
+
+                .social-login-title {
+                    display: none;
+                }
+
+                .social-login-customer-authentication {
+                    margin-bottom: 0;
+                }
+
+                .fieldset {
+                    &.login {
+                        margin-bottom: 0;
+
+                        .actions-toolbar {
+                            .primary,
+                            .secondary {
+                                width: 100%;
+                            }
+
+                            .action {
+                                &.login {
+                                    .lib-button-primary(
+                                        @_button-font-size: @social-login-header-login-button__font-size,
+                                        @_button-font-weight: @social-login-header-login-button__font-weight,
+                                        @_button-line-height: @social-login-header-login-button__line-height,
+                                        @_button-padding: @social-login-header-login-button__padding
+                                    );
+                                }
+
+                                &.create {
+                                    .lib-font-size(@social-login-header-login-signup__font-size);
+                                    .lib-line-height(@social-login-header-login-signup__line-height);
+                                    display: inline-block;
+                                    padding-bottom: 0;
+                                }
+                            }
+
+                            .login-inline-message {
+                                display: inline-block;
+                                .lib-font-size(@social-login-header-login-signup__font-size);
+                                .lib-line-height(@social-login-header-login-signup__line-height);
+                            }
+                        }
+                    }
+                }
+
+                .list-info {
+                    li {
+                        a {
+                            .lib-css(padding, @social-login-header-login-a-tags__padding);
+                            .lib-font-size(@social-login-header-login-signup__font-size);
+                            .lib-line-height(@social-login-header-login-signup__line-height);
+
+                            &.remind {
+                                .lib-css(padding, @social-login-header-login-a-remind__padding);
+                            }
+                        }
+                    }
+                }
+
+                .account-social-login {
+                    .lib-css(border-top, @social-login-button-top__border);
+                    margin-top: 16px;
+                    margin-bottom: 0;
+                    padding-top: @indent__base;
+                    float: left;
+                    width: 100%;
+
+                    .btn-social {
+                        &.btn-facebook,
+                        &.btn-google {
+                            .lib-css(padding, @social-login-button__padding);
+                            .lib-css(height, @social-login-button__height);
+                            .lib-css(line-height, @social-login-button__height);
+                            .lib-font-size(@social-login-header-social-button__font-size);
+                        }
+                    }
+
+                    .facebook-login {
+                        width: 100%;
+                        padding-right: 0;
+                        margin-bottom: @indent__s;
+                    }
+
+                    .google-login {
+                        width: 100%;
+                        padding-left: 0;
+                    }
+                }
+
+                .remember-me-container {
+                    width: 100%;
+                    display: inline-block;
+
+                    .field {
+                        &.persistent {
+                            width: 50%;
+                            float: left;
+                        }
+                    }
+
+                    .forget-password {
+                        position: static;
+                        float: right;
+                        width: 50%;
+                        text-align: right;
+                    }
+                }
+            }
+        }
+    }
+
+    .account-social-login-title {
+        display: inline-block;
+        width: 100%;
+        .lib-line-height(24);
+        .lib-css(margin-bottom, @indent__l);
+        .lib-css(color, @social-login-title__color);
+        .lib-css(font-weight, @social-login-header-login-button__font-weight);
+
+        &:after {
+            .lib-css(background, @social-login-title-line__background);
+            content: '';
+            width: ~'calc(100% - @{social-login-title-line__width})';
+            height: 1px;
+            float: right;
+            margin-top: 12px;
+        }
+    }
+
+    .account-social-login {
+        margin-bottom: @indent__base;
+        display: inline-block;
+        width: 100%;
+
+        .facebook-login {
+            padding-right: @indent__xs;
+            width: 50%;
+            float: left;
+        }
+
+        .google-login {
+            padding-left: @indent__xs;
+            width: 50%;
+            float: right;
+        }
+
+        .btn-social {
+            .lib-button(
+                @_button-padding: @social-login-button__padding,
+                @_button-color: @social-login-button-text__color,
+                @_button-background: @social-login-button__background,
+                @_button-border: @social-login-button__border,
+                @_button-background-hover: @social-login-button__background-hover,
+                @_button-color-hover: @social-login-button-text__color,
+                @_button-border-hover: @social-login-button__border,
+                @_button-background-active: @social-login-button__background-hover,
+                @_button-border-active: @social-login-button__border
+            );
+            .lib-css(border-radius, @button__border-radius);
+            .lib-css(height, @social-login-button__height);
+            .lib-css(line-height, @social-login-button__height);
+            width: 100%;
+            text-align: center;
+            text-decoration: none;
+
+            &.btn-facebook {
+                .lib-icon-font(
+                    @social-login-facebook-button__icon,
+                    @_icon-font-size: 12px,
+                    @_icon-font-line-height: 13px,
+                    @_icon-font-color: @social-login-facebook-button__color,
+                    @_icon-font-margin: 0 8px 0 0,
+                    @_icon-font-position: before
+                );
+            }
+
+            &.btn-google {
+                &:before {
+                    content: '';
+                    width: 14px;
+                    height: 14px;
+                    background: url(../images/google-icon.svg) center no-repeat;
+                    background-size: contain;
+                    display: inline-block;
+                    margin: 0 8px -2px 0;
+                }
+            }
+        }
+    }
+
+    .checkout-index-index {
+        .opc-wrapper {
+            .checkout-social-container {
+                margin-top: @indent__base;
+
+                .block-title {
+                    display: none;
+                }
+
+                .checkout-social-login {
+                    .facebook-login {
+                        width: 100%;
+                        padding-right: 0;
+                        margin-bottom: @indent__s;
+                    }
+
+                    .google-login {
+                        width: 100%;
+                        padding-left: 0;
+                        float: left;
+                    }
+                }
+            }
+        }
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .page-header {
+        .account-detail__content {
+            display: none;
+
+            &.social-login-accordion {
+                right: -35px;
+                top: 35px;
+            }
+        }
+    }
+
+    .account-social-login {
+        margin-bottom: @indent__xl;
+        display: inline-block;
+        width: 100%;
+
+        .facebook-login {
+            padding-right: 0;
+            width: 100%;
+            margin-bottom: @indent__s;
+        }
+
+        .google-login {
+            padding-left: 0;
+            width: 100%;
+        }
+    }
+
+    .checkout-index-index {
+        .opc-wrapper {
+            .form-login {
+                .lib-css(padding-bottom, @indent__base);
+                .lib-css(border-bottom, @social-login-button__border);
+            }
+        }
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+// tab-fix .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m)
+& when (@media-common = true) {
+    .checkout-index-index {
+        .opc-wrapper {
+            .form-login {
+                .lib-css(border-bottom, @social-login-button__border);
+                max-width: 350px;
+                float: left;
+                padding-bottom: @indent__base;
+            }
+
+            .checkout-social-container {
+                max-width: 350px;
+                display: inline-block;
+                margin-top: @indent__base;
+                width: 100%;
+
+                .checkout-social-login {
+                    .facebook-login {
+                        width: 100%;
+                    }
+
+                    .google-login {
+                        width: 100%;
+                        padding-left: 0;
+                    }
+                }
+            }
+        }
+    }
+
+    .top-link {
+        .account-menu {
+            .menu-content {
+                .main-item {
+                    .lib-css(width, @top-header-icon-desktop__font-size);
+                    .lib-css(height, @minicart-header-icon-desktop__line-height);
+                    .lib-icon-font-size(
+                        @_icon-font-size: @top-header-icon-desktop__font-size,
+                        @_icon-font-line-height: @minicart-header-icon-desktop__line-height,
+                        @_icon-font-position: before
+                    );
+                    position: relative;
+
+                    a {
+                        .lib-css(width, @top-header-icon-desktop__font-size);
+                        .lib-css(height, @minicart-header-icon-desktop__line-height);
+                        display: inline-block;
+                        position: absolute;
+                        left: 0;
+                    }
+                }
+            }
+        }
+    }
+
+    .account-detail__content {
+        top: 57px;
+    }
+}
+
+//
+//  Desktop Large
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+    .checkout-index-index {
+        .opc-wrapper {
+            .form-login {
+                .lib-css(border-right, @social-login-button__border);
+                max-width: 394px;
+                float: left;
+                padding-right: 44px;
+                border-bottom: 0;
+            }
+
+            .checkout-social-container {
+                .lib-css(padding-left, @indent__base);
+                .lib-css(margin-top, @indent__xl);
+                width: ~'calc(100% - 394px)';
+                display: inline-block;
+
+                .checkout-social-login {
+                    .facebook-login {
+                        .lib-css(max-width, @checkout-social-button-desktop__width);
+                    }
+
+                    .google-login {
+                        .lib-css(max-width, @checkout-social-button-desktop__width);
+                    }
+                }
+            }
+        }
+    }
+}

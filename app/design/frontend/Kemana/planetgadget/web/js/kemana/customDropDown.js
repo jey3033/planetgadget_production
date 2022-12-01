@@ -23,7 +23,7 @@ define([
 
         _create: function () {
             let self = this;
-            if(this.options.responsive && utility.isMobile()){
+            if(this.options.responsive && $(document.body).width() < 1024){
                 self.element.hide();
             }
             if (self.element.find('.item-main').text() == "") {
@@ -46,7 +46,7 @@ define([
                 }
             });
 
-            self.element.find('button').on('click', function () {                
+            self.element.find('button').on('click', function () {
                 var $this = $(this);
                 var ctrl = ($(this).attr('id').replace('-upt','')).replace('-dec','');
                 var currentQty = $("#cart-"+ctrl+"-qty").val();
@@ -61,7 +61,7 @@ define([
                 }
                 self._updateSideBar();
 
-                    
+
             });
         },
         _updateSideBar: function () {

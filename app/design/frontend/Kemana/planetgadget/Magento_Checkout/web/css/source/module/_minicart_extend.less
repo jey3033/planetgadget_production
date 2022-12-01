@@ -176,7 +176,8 @@
 //  Mobile
 //  _____________________________________________
 
-.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+// tab-fix .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+& when (@media-common = true) {
     .minicart-wrapper {
         .action {
             &.showcart {
@@ -193,7 +194,8 @@
 //  Desktop
 //  _____________________________________________
 
-.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+// tab-fix .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+& when (@media-common = true) {
     .minicart-wrapper {
         height: 43px;
         line-height: 12px;

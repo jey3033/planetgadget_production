@@ -10,12 +10,8 @@
 
 & when (@media-common = true) {
 
-}
-//
-//  Mobile
-//  _____________________________________________
 
-.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+
     .page-header {
         #megamenu {
             .megamenu-wrapper{
@@ -33,6 +29,32 @@
             }
         }
     }
+
+
+
+}
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__l) {
+    //.page-header {
+    //    #megamenu {
+    //        .megamenu-wrapper{
+    //            &.tabs-menu {
+    //                &.vertical {
+    //                    ul.level0 {
+    //                        li.level1 {
+    //                            .megamenu-inner {
+    //                                display: none !important;
+    //                            }
+    //                        }
+    //                    }
+    //                }
+    //            }
+    //        }
+    //    }
+    //}
 }
 //
 //  Desktop

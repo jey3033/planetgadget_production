@@ -35,7 +35,8 @@
 //  Mobile
 //  _____________________________________________
 
-.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+// tab-fix .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m)
+& when (@media-common = true) {
     .nav-sections-items {
         background: @color-pg-light-gray3;
     }
