@@ -91,8 +91,7 @@
 //  Mobile
 //  _____________________________________________
 
-// tab-fix .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m)
-& when (@media-common = true) {
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
     .top-link {
         margin-left: 12px;
 
@@ -121,8 +120,8 @@
 //
 //  Desktop
 //  _____________________________________________
-// tab-fix .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m)
-& when (@media-common = true) {
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
     .page-header {
         .account-detail__content {
             z-index: 9999 !important;
@@ -308,5 +307,3 @@
     //    }
     //}
 }
-
-

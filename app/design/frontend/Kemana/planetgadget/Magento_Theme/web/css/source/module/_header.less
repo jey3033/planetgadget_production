@@ -557,8 +557,7 @@
 //  Mobile
 //  _____________________________________________
 
-// tab-fix .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
-& when (@media-common = true) {
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
     .page-header {
         .header {
             &.content {
@@ -1232,11 +1231,29 @@
 }
 
 
+//
+//  Desktop XExtra Large
+//  _____________________________________________
 
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xxl) {
+    .page-header {
+        .header-left {
+            width: 35%;
+        }
+
+        .block-search {
+            width: 41%;
+        }
+
+        .header-right {
+            width: 24%;
+
+        }
+    }
+}
 
 /* Tablet device */
-// tab-fix @media (min-width: @screen__m) and (max-width: 1023px) {
-.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+@media (min-width: @screen__m) and (max-width: 1023px) {
     .page-header {
         .header {
             &.content {
@@ -1534,31 +1551,6 @@
             &:after {
                 background: none;
             }
-        }
-    }
-}
-
-
-
-
-//
-//  Desktop XExtra Large
-//  _____________________________________________
-
-//tab-fix location change
-.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xxl) {
-    .page-header {
-        .header-left {
-            width: 35%;
-        }
-
-        .block-search {
-            width: 41%;
-        }
-
-        .header-right {
-            width: 24%;
-
         }
     }
 }
