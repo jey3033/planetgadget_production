@@ -129,11 +129,11 @@ class SyncProductsFromErp
         if(!$this->state->getAreaCode()){
             $this->state->setAreaCode(\Magento\Framework\App\Area::AREA_ADMINHTML);
         }
-        $productsFromErp = array_chunk($getProductsFromErp['response'],100);
+        $productsFromErp = array_chunk($getProductsFromErp['response'],50);
         $arrayCount = 0;
         foreach ($productsFromErp as $arraykey => $productsArray) {
             $arrayCount = $arraykey + 1;
-            $this->helper->log($arrayCount.'th 100 product createing.....', 'info');
+            $this->helper->log($arrayCount.'th 50 product createing.....', 'info');
             $ackProductData = [];
             $count = 0;
             foreach ($productsArray as $key => $productdata) {
