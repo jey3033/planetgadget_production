@@ -109,7 +109,7 @@
                 <?php endif;?>
             </div>
             <?php endif;?>
-            <!--Columns-->
+            
             <?php   $tcode = false;?>
             <?php if ($block->jobHelper->getJobSideBarEnable()):?>
             <div class="page_content_bottom">
@@ -121,9 +121,7 @@
                     <?php $tcode = true?>
                     <?php endif;?>
                     <?php endforeach;?>
-                    <!-- form begins -->
-
-                    <!--id 1 bigins  -->
+              
                     <?php   $tcode = false;?>
                     <?php foreach ($metaCollection as $filters):?>
                     <?php if ($filters->getTypeCode()==1):?>
@@ -232,8 +230,7 @@
                             <?php endif;?>
                         </div>
                         <?php endif;?>
-                        <!-- id 1 ends -->
-                        <!-- id 3 begins -->
+
                         <?php   $tcode = false;?>
                         <?php foreach ($metaCollection as $filters):?>
                         <?php if ($filters->getTypeCode()==3):?>
@@ -294,12 +291,12 @@
                             <button onclick='window.location.reload(true);' ?><?= $block->escapeHtml(__('Reset Filter')) ?></button>
                         </div>
                     </form>
-                    <!-- end form -->
+                    
                     <?php endif;?>
-                    <!-- id 4 ends -->
+                    
                 </aside>
                 <?php endif;?>
-                <!-- Listing Begins -->
+                
 
                 <div id="form-messages">
                     <?php if (count($jobCollection) !== 0):?>
@@ -331,9 +328,9 @@
                                     </div>
                                 </div>
                                 <?php $string = $jobs->getJobsDescription() ?>
-                                <?php $string = preg_replace('/(<(script|style)\b[^>]*>).*?(<\/\2>)/is', "$1$3", $string); // remove <style|script tag when page builder using html ?>
-                                <?php $string = $kemanaJobsHelper->formatJobContentToHtml($string); // format content when page builder using html
-                                    $string = $block->stripTags($string); // remove all html tags
+                                <?php $string = preg_replace('/(<(script|style)\b[^>]*>).*?(<\/\2>)/is', "$1$3", $string); ?>
+                                <?php $string = $kemanaJobsHelper->formatJobContentToHtml($string);
+                                    $string = $block->stripTags($string);
                                     if (strlen($string) > 500) {
                                         $stringCut = substr($string, 0, 500);
                                         $string = substr($stringCut, 0, strrpos($stringCut, ' ')).'... ';
@@ -368,14 +365,13 @@
                     <?php echo __('No Jobs right now! keep visiting the page to get in touch');?>
                     <?php endif;?>
                 </div>
-                <!-- Listing Ends -->
+                
             </div>
         </div>
     </div>
 </div>
 
-<!-- Ajax Filters Begin -->
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+
 <script type="text/javascript">
 	require([
 		'jquery',
@@ -414,8 +410,8 @@
 						}
 					});
 			});
-		}); //functions end here
-	}); //require ends here
+		});
+	});
 </script>
 <script type="text/javascript">
 require([
@@ -458,7 +454,7 @@ require([
 });
 </script>
 
-<!-- Filters End Here -->
+
 
 <script>
 	require([
