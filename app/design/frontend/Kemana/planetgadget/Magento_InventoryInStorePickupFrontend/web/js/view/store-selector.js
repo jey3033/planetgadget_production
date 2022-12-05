@@ -54,7 +54,7 @@ define([
                 nearbySearchLimit: '${ $.parentName }:nearbySearchLimit'
             },
             gmap: null,
-            selectedlocation:null
+            selectedlocation:null,
         },
 
         /**
@@ -63,10 +63,10 @@ define([
          * @return {exports}
          */
         initialize: function () {
+        
             var updateNearbyLocations, country;
 
             this._super();
-
             updateNearbyLocations = _.debounce(function (searchQuery) {
                 country = quote.shippingAddress() && quote.shippingAddress().countryId ?
                     quote.shippingAddress().countryId : this.defaultCountryId;
@@ -200,6 +200,70 @@ define([
                 this.selectedlocation = location;
             }
             return selected;
+        },
+
+        /**
+         * @param {Object} location
+         * @returns {*|Boolean}
+         */
+        getDistance: function(location) {
+            if (navigator.geolocation) {
+               var showlocation =  navigator.geolocation.getCurrentPosition(showPosition);
+            } else { 
+                console.log("Geolocation is not supported by this browser.");
+            }
+            function showPosition(position) {
+                let currentLatituede = position.coords.latitude,
+                    currentLongitude = position.coords.longitude;
+                var localStoreData = localStorage.getItem("store-distances");
+                localStoreData = JSON.parse(localStoreData)
+                if(localStoreData != null && localStoreData.currentPosition.latituede === currentLatituede && localStoreData.currentPosition.longitude === currentLongitude){
+                    if(localStoreData.stores){
+                        let setlocation = false;
+                        $.each(localStoreData.stores,function(key,value){
+                            if(value.locationCode === location.pickup_location_code){
+                                var elem = $('.location-distance-'+location.pickup_location_code); 
+                                elem.text(value.distance);
+                                setlocation = true;
+                                return false;
+                            }
+                        })
+                        if(setlocation){
+                            return true;
+                        }
+                    }
+                } else {
+                    let currentPosition = {"latituede": currentLatituede, "longitude": currentLongitude};
+                    localStorage.setItem("store-distances", JSON.stringify({"currentPosition" : currentPosition}));
+                }
+
+                var origin = new google.maps.LatLng(currentLatituede, currentLongitude);
+                var destination = new google.maps.LatLng(location.latitude, location.longitude);
+                var service = new google.maps.DistanceMatrixService();
+                var km = service.getDistanceMatrix(
+                  {
+                    origins: [origin],
+                    destinations: [destination],
+                    travelMode: 'DRIVING',
+                  }, callback);
+
+                function callback(response, status) {
+                    let distace = response.rows[0].elements[0].distance.text;
+                    var localStoreData = localStorage.getItem("store-distances");
+                    localStoreData = JSON.parse(localStoreData)
+                    var store = {"locationCode": location.pickup_location_code, "distance": distace}
+                    if(localStoreData.stores){
+                        localStoreData.stores.push(store)
+                    }else{
+                        localStoreData['stores'] = [];
+                        localStoreData.stores.push(store)
+                    }
+                    localStorage.setItem("store-distances", JSON.stringify(localStoreData));
+                    var elem = $('.location-distance-'+location.pickup_location_code); 
+                    elem.text(distace);
+                }
+                return true;
+            }
         },
 
         /**

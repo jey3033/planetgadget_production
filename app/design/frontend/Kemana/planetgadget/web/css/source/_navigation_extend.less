@@ -35,10 +35,11 @@
 //  Mobile
 //  _____________________________________________
 
-.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
-    .nav-sections-items {
-        background: @color-pg-light-gray3;
-    }
+// tab-fix .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m)
+& when (@media-common = true) {
+    //.nav-sections-items {
+    //    background: @color-pg-light-gray3;
+    //}
 
     .nav-sections {
         width: 100%;
