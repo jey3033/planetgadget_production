@@ -9,7 +9,7 @@ define([
 
         _create:function(){
           let self = this;
-          if(catutility.isMobile()||catutility.isTablet()){
+          if($(document.body).width() < 1024){
               self._setupMenu();
               self._bindevent();
           }

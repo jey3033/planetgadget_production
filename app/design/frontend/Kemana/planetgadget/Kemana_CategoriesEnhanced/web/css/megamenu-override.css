@@ -79,7 +79,8 @@ body .navbar-default {
 }
 
 /* Megamenu desctop */
-@media only screen and (min-width: 1023px) {
+/* tab-fix @media only screen and (min-width: 1023px) {*/
+@media only screen and (min-width: 1024px) {
   .megamenu-wrapper {
     color: #222;
     display: none;
@@ -268,7 +269,8 @@ body .navbar-default {
 
 /*Tabs menu Vertical*/
 
-@media only screen and (min-width: 1023px) {
+/* tab-fix @media only screen and (min-width: 1023px) {*/
+@media only screen and (min-width: 1024px) {
   .megamenu .megamenu-wrapper.tabs-menu {
     padding-top: 16px;
   }
@@ -700,8 +702,8 @@ body .navbar-default {
 .megamenu-wrapper>.left-image{float: left;width: 40%; margin-right:15px}
 /*.megamenu-wrapper .megamenu-center-block{float: left;}*/
 
-
-@media (min-width: 768px) {
+/* tab-fix @media (min-width: 768px) {*/
+@media only screen and (max-width: 1023px) {
     .page-header #megamenu .megamenu-wrapper {
         width: 100% !important;
     }
