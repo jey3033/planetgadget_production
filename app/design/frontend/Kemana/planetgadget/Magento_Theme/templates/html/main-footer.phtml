@@ -2,15 +2,12 @@
     <div class="footer-top-content">
         <div class="footer-section">
             <div class="row">
-<!--                <div class="col-md-3 col-sm-12 newsletter-title">-->
-<!--                    <h2>OUTFIT OFFERS</h2>-->
-<!--                </div>-->
+
                 <div class="col-md-5 offset-md-1 col-sm-12 newsletter-description">
                     <h2><?php echo __("Don't miss the latest info!"); ?></h2>
                     <p><?php echo __("Enter your email and get the latest Planet Gadget updates & promotions"); ?></p>
                 </div>
                 <div class="col-md-5 col-sm-12 newsletter-form">
-                    <!-- <?= $block->getChildHtml('subscribe') ?>  -->
                     <?php echo $block->getLayout()->createBlock("Magento\Newsletter\Block\Subscribe")->setTemplate('Magento_Newsletter::subscribe.phtml')->toHtml(); ?>
                 </div>
             </div>
@@ -23,9 +20,7 @@
                     <?= $block->getChildHtml('footer-address-section') ?>
                     <?= $block->getChildHtml('footer-social-icon-section') ?>
                 </div>
-<!--                <div class="col-md-3 col-sm-12 social-icon-section">-->
-<!--                    -->
-<!--                </div>-->
+
                 <div class="col-md-4 col-sm-12 menu-section">
                     <div class="row">
                         <div class="col-md-6 col-sm-12 menu-items accordion-item">
