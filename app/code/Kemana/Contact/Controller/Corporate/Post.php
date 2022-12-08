@@ -93,7 +93,11 @@ class Post extends \Magento\Framework\App\Action\Action
      */
 	public function getReceipentEmail() {
      	$storeScope = \Magento\Store\Model\ScopeInterface::SCOPE_STORE;
-    	return $this->scopeConfig->getValue(self::XML_PATH_EMAIL_RECIPIENT, $storeScope);
+        $receipentEmail = $this->scopeConfig->getValue(self::XML_PATH_EMAIL_RECIPIENT, $storeScope);
+        if (false === \strpos($receipentEmail, '@')) {
+            throw new LocalizedException(__('Receipent email address is invalid. please configure it.'));
+        }
+    	return $receipentEmail;
     }
 
     /**
@@ -103,7 +107,11 @@ class Post extends \Magento\Framework\App\Action\Action
      */
     public function getEmailTemplate() {
      	$storeScope = \Magento\Store\Model\ScopeInterface::SCOPE_STORE;
-    	return $this->scopeConfig->getValue(self::XML_PATH_EMAIL_TEMPLATE, $storeScope);
+        $emailTemplate = $this->scopeConfig->getValue(self::XML_PATH_EMAIL_TEMPLATE, $storeScope);
+        if (trim($emailTemplate) === '') {
+            throw new LocalizedException(__('please configure emailTemplate.'));
+        }
+    	return $emailTemplate;
     }
 
     /**
