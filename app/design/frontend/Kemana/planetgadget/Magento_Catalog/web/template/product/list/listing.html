@@ -4,21 +4,19 @@
  * See COPYING.txt for license details.
  */
 -->
-<div if="hasData()"
-     class="block" css="additionalClasses">
+<div if="hasData()" class="block" css="additionalClasses">
     <div class="block-title">
-        <strong role="heading"
-                aria-level="2"
-                text="label"/>
+        <strong role="heading" aria-level="2" text="label"/>
     </div>
     <div class="recent-viewed-block-title block-title">
-        <strong class="labelrecent" role="heading" aria-level="2" text="recentlabel"/>&nbsp;<strong class="labelviewed" role="heading" aria-level="2" text="viewedlabel"/>
+        <strong class="labelrecent" role="heading" aria-level="2" text="recentlabel"/>&nbsp
+        <strong class="labelviewed" role="heading" aria-level="2" text="viewedlabel"/>
     </div>
     <div class="block-content">
         <div css="'products-' + displayMode">
             <ol class="product-items">
                 <li class="product-item" repeat="foreach: filteredRows, item: '$row'">
-                    <a class="product-url" attr="href: $row().url"> 
+                    <a class="product-url" attr="href: $row().url">
                         <div class="product-item-info">
                             <fastForEach args="data: getRegion('general-area'), as: '$col'" >
                                 <render args="$col.getBody()"/>
