@@ -40,7 +40,7 @@
                     ?>
                     <tr>
                         <td data-th="<?= $block->escapeHtmlAttr(__('Order')) ?>" class="col id"><?= $block->escapeHtml($_order->getRealOrderId()) ?></td>
-                        <td data-th="<?= $block->escapeHtmlAttr(__('Date')) ?>" class="col date"><?= /* @noEscape */ $kemanaAcceleratorBaseHelper->formatDate($_order->getCreatedAt(), "d M Y") ?></td>
+                        <td data-th="<?= $block->escapeHtmlAttr(__('Date')) ?>" class="col date"><?= /* @noEscape */ $kemanaAcceleratorBaseHelper->formatDate(strtotime($_order->getCreatedAt()), "d M Y") ?></td>
                         <td data-th="<?= $block->escapeHtmlAttr(__('Ship To')) ?>" class="col ship_to"><?= $block->escapeHtml($shipTo) ?></td>
                         <?php $extra = $block->getChildBlock('extra.container'); ?>
                         <?php if ($extra) : ?>

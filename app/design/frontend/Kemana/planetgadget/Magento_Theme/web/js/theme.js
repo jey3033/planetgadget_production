@@ -494,7 +494,8 @@ define([
 
     let globalIsMobileMenuOpen = false;
 
-    if (utility.isMobile()) {
+    // if (utility.isMobile()) {
+    if ($(document.body).width() < 1024) {
         $(".action.nav-toggle").click(function () {
             if (!globalIsMobileMenuOpen) {
                 $(".megamenu-wrapper").css("display", "none");

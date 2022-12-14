@@ -18,8 +18,9 @@
                 </div>
             </div>
             <div class="col-location-deatil-grid">
-                <p class="location-name">
-                    <text args="location.name"/>
+                <p class="location-name" >
+                    <text args="location.name"/><br/>
+                    <span data-bind="text: $parent.getDistance($data), attr: {class: 'store-distance location-distance-' + $data.pickup_location_code }"></span>
                 </p>
                 <p class="location-address">
                     <text args="location.street"/><br/>
