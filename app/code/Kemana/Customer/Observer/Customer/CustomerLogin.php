@@ -126,7 +126,7 @@ class CustomerLogin implements ObserverInterface
         $metadata = $this->cookieMetadataFactory
             ->createPublicCookieMetadata()
             ->setDuration(604800) // 7 Days
-            //->setSecure(true)
+            ->setSecure(true)
             ->setPath('/')
             ->setHttpOnly(false); // Can be access via Javascript
 
