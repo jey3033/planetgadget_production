@@ -17,4 +17,10 @@
     <event name="controller_action_predispatch">
         <observer name="restrict_website" instance="Kemana\Customer\Observer\RestrictSiteIfEmptyPhoneNumber" />
     </event>
+    <event name="customer_login">
+        <observer name="kemana_customer_login" instance="Kemana\Customer\Observer\Customer\CustomerLogin" />
+    </event>
+    <event name="customer_account_edited">
+        <observer name="kemana_customer_account_edited_tp" instance="Kemana\Customer\Observer\Customer\CustomerLogin"/>
+    </event>
 </config>
