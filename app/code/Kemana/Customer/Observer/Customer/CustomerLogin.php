@@ -98,25 +98,24 @@ class CustomerLogin implements ObserverInterface
         }
 
         if ($telephone && $telephone == self::DEFAULT_TP_PREFIX . $email) {
+            if ($this->cookieManager->getCookie(self::COOKIE_NAME_IS_TP_NUMBER_VALID)) {
+                $this->deleteCookie(self::COOKIE_NAME_IS_TP_NUMBER_VALID);
+            }
+
             $this->setPublicCookie(self::COOKIE_NAME_IS_TP_NUMBER_VALID, 'FALSE');
+
         } else {
+            if ($this->cookieManager->getCookie(self::COOKIE_NAME_IS_TP_NUMBER_VALID)) {
+                $this->deleteCookie(self::COOKIE_NAME_IS_TP_NUMBER_VALID);
+            }
             $this->setPublicCookie(self::COOKIE_NAME_IS_TP_NUMBER_VALID, 'TRUE');
         }
     }
 
     /**
      * @param $cookieName
-     * @return string|null
-     */
-    public function getCookie($cookieName)
-    {
-        return $this->cookieManager->getCookie($cookieName);
-    }
-
-    /**
-     * @param $cookieName
      * @param $value
-     * @return void
+     * @return bool
      * @throws \Magento\Framework\Exception\InputException
      * @throws \Magento\Framework\Stdlib\Cookie\CookieSizeLimitReachedException
      * @throws \Magento\Framework\Stdlib\Cookie\FailureToSendException
@@ -127,7 +126,7 @@ class CustomerLogin implements ObserverInterface
         $metadata = $this->cookieMetadataFactory
             ->createPublicCookieMetadata()
             ->setDuration(604800) // 7 Days
-            ->setSecure(true)
+            //->setSecure(true)
             ->setPath('/')
             ->setHttpOnly(false); // Can be access via Javascript
 
@@ -136,5 +135,23 @@ class CustomerLogin implements ObserverInterface
             $value,
             $metadata
         );
+
+        return true;
+    }
+
+    /**
+     * @param $cookieName
+     * @return bool
+     * @throws \Magento\Framework\Exception\InputException
+     * @throws \Magento\Framework\Stdlib\Cookie\FailureToSendException
+     */
+    public function deleteCookie($cookieName)
+    {
+        $metadata = $this->cookieMetadataFactory->createPublicCookieMetadata();
+        $metadata->setPath('/');
+
+        $this->cookieManager->deleteCookie($cookieName, $metadata);
+
+        return true;
     }
 }
