@@ -126,7 +126,10 @@
         <?php endif ?>
         });
 
-        $('#phonenumber').attr('readonly', true);
+        if ($('#phonenumber').val() != '62000000000<?= $block->getCustomer()->getEmail() ?>') {
+            $('#phonenumber').attr('readonly', true);
+        }
+
 
     });
 </script>
