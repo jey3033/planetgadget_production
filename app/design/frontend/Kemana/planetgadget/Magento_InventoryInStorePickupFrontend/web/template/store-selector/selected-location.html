@@ -16,8 +16,10 @@
     <br>
     <p class="location-name">
         <text args="selectedLocation().name"/>
-        <span class="store-distance">
-            <span class="location-distance" data-bind="text: getDistance(selectedLocation()), attr: {class: 'location-distance-' + selectedLocation().pickup_location_code }"></span>
+        <span class="store-distance" if="selectedLocation().latitude && selectedLocation().longitude">
+            (
+                <span data-bind="text: getDistance(selectedLocation()), attr: {class: 'location-distance-' + selectedLocation().pickup_location_code }"></span>
+            )
         </span>
     </p>
     <p class="location-address">
