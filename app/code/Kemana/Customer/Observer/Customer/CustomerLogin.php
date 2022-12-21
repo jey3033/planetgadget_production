@@ -22,16 +22,6 @@ use Magento\Framework\Event\ObserverInterface;
 class CustomerLogin implements ObserverInterface
 {
     /**
-     * @var \Magento\Framework\Stdlib\CookieManagerInterface
-     */
-    protected $cookieManager;
-
-    /**
-     * @var \Magento\Framework\Stdlib\Cookie\CookieMetadataFactory
-     */
-    protected $cookieMetadataFactory;
-
-    /**
      * @var \Magento\Customer\Api\CustomerRepositoryInterface
      */
     protected $customerRepository;
@@ -42,32 +32,23 @@ class CustomerLogin implements ObserverInterface
     protected $storeManager;
 
     /**
-     * Default TP number prefix
+     * @type Session
      */
-    const DEFAULT_TP_PREFIX = '62000000000';
+    protected $_customerSession;
 
     /**
-     * Cookie name for TP number
-     */
-    const COOKIE_NAME_IS_TP_NUMBER_VALID = 'COOKIE_IS_TP_NUMBER_VALID';
-
-    /**
-     * @param \Magento\Framework\Stdlib\CookieManagerInterface $cookieManager
-     * @param \Magento\Framework\Stdlib\Cookie\CookieMetadataFactory $cookieMetadataFactory
      * @param \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      */
     public function __construct(
-        \Magento\Framework\Stdlib\CookieManagerInterface       $cookieManager,
-        \Magento\Framework\Stdlib\Cookie\CookieMetadataFactory $cookieMetadataFactory,
         \Magento\Customer\Api\CustomerRepositoryInterface      $customerRepository,
-        \Magento\Store\Model\StoreManagerInterface             $storeManager
+        \Magento\Store\Model\StoreManagerInterface             $storeManager,
+        \Magento\Customer\Model\Session                        $customerSession
     )
     {
-        $this->cookieManager = $cookieManager;
-        $this->cookieMetadataFactory = $cookieMetadataFactory;
         $this->customerRepository = $customerRepository;
         $this->storeManager = $storeManager;
+        $this->_customerSession = $customerSession;
     }
 
     /**
@@ -76,8 +57,6 @@ class CustomerLogin implements ObserverInterface
      * @throws \Magento\Framework\Exception\InputException
      * @throws \Magento\Framework\Exception\LocalizedException
      * @throws \Magento\Framework\Exception\NoSuchEntityException
-     * @throws \Magento\Framework\Stdlib\Cookie\CookieSizeLimitReachedException
-     * @throws \Magento\Framework\Stdlib\Cookie\FailureToSendException
      */
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
@@ -97,61 +76,6 @@ class CustomerLogin implements ObserverInterface
             $telephone = $customer->getPhonenumber();
         }
 
-        if ($telephone && $telephone == self::DEFAULT_TP_PREFIX . $email) {
-            if ($this->cookieManager->getCookie(self::COOKIE_NAME_IS_TP_NUMBER_VALID)) {
-                $this->deleteCookie(self::COOKIE_NAME_IS_TP_NUMBER_VALID);
-            }
-
-            $this->setPublicCookie(self::COOKIE_NAME_IS_TP_NUMBER_VALID, 'FALSE');
-
-        } else {
-            if ($this->cookieManager->getCookie(self::COOKIE_NAME_IS_TP_NUMBER_VALID)) {
-                $this->deleteCookie(self::COOKIE_NAME_IS_TP_NUMBER_VALID);
-            }
-            $this->setPublicCookie(self::COOKIE_NAME_IS_TP_NUMBER_VALID, 'TRUE');
-        }
-    }
-
-    /**
-     * @param $cookieName
-     * @param $value
-     * @return bool
-     * @throws \Magento\Framework\Exception\InputException
-     * @throws \Magento\Framework\Stdlib\Cookie\CookieSizeLimitReachedException
-     * @throws \Magento\Framework\Stdlib\Cookie\FailureToSendException
-     */
-    public function setPublicCookie($cookieName, $value)
-    {
-
-        $metadata = $this->cookieMetadataFactory
-            ->createPublicCookieMetadata()
-            ->setDuration(604800) // 7 Days
-            ->setSecure(true)
-            ->setPath('/')
-            ->setHttpOnly(false); // Can be access via Javascript
-
-        $this->cookieManager->setPublicCookie(
-            $cookieName,
-            $value,
-            $metadata
-        );
-
-        return true;
-    }
-
-    /**
-     * @param $cookieName
-     * @return bool
-     * @throws \Magento\Framework\Exception\InputException
-     * @throws \Magento\Framework\Stdlib\Cookie\FailureToSendException
-     */
-    public function deleteCookie($cookieName)
-    {
-        $metadata = $this->cookieMetadataFactory->createPublicCookieMetadata();
-        $metadata->setPath('/');
-
-        $this->cookieManager->deleteCookie($cookieName, $metadata);
-
-        return true;
+        $this->_customerSession->setPhonenumber($telephone);
     }
 }
