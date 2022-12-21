@@ -103,6 +103,7 @@ class RestrictSiteIfEmptyPhoneNumber implements ObserverInterface
             } else {
                 $customerPhoneNumberValue = '-';
             }
+            $this->_customerSession->setPhonenumber($customerPhoneNumberValue);
             if ($customerPhoneNumberValue === '-'){
                 if (!in_array($actionFullName, $allowedRoutes)){
                     $this->_response->setRedirect($this->_urlFactory->create()->getUrl('customer/account/edit'));
