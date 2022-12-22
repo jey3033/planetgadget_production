@@ -19,6 +19,7 @@ use Magento\Framework\Url\Helper\Data as UrlHelper;
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Customer\Model\Session as CustomerSession;
 use Magento\Framework\App\Helper\AbstractHelper;
+use Magento\Framework\Message\ManagerInterface;
 
 /**
  * Class Data
@@ -38,6 +39,11 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     protected $_urlHelper;
 
     /**
+     * @type ManagerInterface
+     */
+    protected $messageManager;
+
+    /**
      * @param Context $context
      * @param UrlHelper $_urlHelper
      * @param PageFactory $pageFactory
@@ -47,11 +53,13 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         Context $context,
         UrlHelper $urlHelper,
         CustomerRepositoryInterface $customerRepository,
-        CustomerSession $customerSession
+        CustomerSession $customerSession,
+        ManagerInterface $messageManager
     ) {
         $this->_urlHelper      = $urlHelper;
         $this->customerRepository = $customerRepository;
         $this->customerSession = $customerSession;
+        $this->messageManager       = $messageManager;
 
         parent::__construct($context);
     }
@@ -91,5 +99,13 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         $customerId  = $this->customerSession->getCustomer()->getId();
         $customer = $this->customerRepository->getById($customerId);
         return $customer->getCustomAttribute('phonenumber')->getValue();
+    }
+
+    public function setErrorMessage()
+    {
+        $customerPhoneNumberValue = $this->getTelephone();
+        if (str_contains($customerPhoneNumberValue, '62000000000')){
+            $this->messageManager->addError(__('Please Fill up Your Mobile Phone Number'));
+        }
     }
 }
