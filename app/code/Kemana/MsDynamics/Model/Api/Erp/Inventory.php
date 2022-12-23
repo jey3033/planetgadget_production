@@ -72,8 +72,8 @@ class Inventory
      * @return array
      */
     public function inventoryApiCall($productSkus){
-            $productSkus = array_unique($productSkus);
-            $productSkus = implode("|", $productSkus);
+            $productSkusArray = array_unique($productSkus);
+            $productSkus = implode("|", $productSkusArray);
 
             $storeSources = $this->getSources();   
             $sources = implode("|", $storeSources);
@@ -91,8 +91,8 @@ class Inventory
         $this->helper->inventorylog("Response: ".json_encode($response), 'info');
 
         $totalStock = [];
+        $inventoryData = [];
         if(isset($response['response'])){
-            $inventoryData = [];
             $inventorysources = explode(";",$response['response']);
             foreach ($inventorysources as $key => $inventorysource) {
                 $stockarray = explode(",",$inventorysource);
@@ -103,17 +103,16 @@ class Inventory
                         $totalStock[$stockarray[0]] = $stockarray[2];
                     }
                     $inventoryData[$stockarray[0]][$stockarray[1]] = $stockarray[2];
-                    $this->updateStock($stockarray[0],$stockarray[2],$stockarray[1]);
-                }
-            }
-            foreach ($inventoryData as $sku => $inventory) {
-                foreach ($storeSources as $sources) {
-                    $qty = isset($inventoryData[$sku][$sources]) ? $inventoryData[$sku][$sources] : 0;
-                    $this->updateStock($sku,$qty,$sources);   
                 }
             }
         }else{
-            $this->helper->inventorylog('0 Product stock update');
+            $this->helper->inventorylog('No response.');
+        }
+        foreach ($productSkusArray as $sku) {
+            foreach ($storeSources as $sources) {
+                $qty = isset($inventoryData[$sku][$sources]) ? $inventoryData[$sku][$sources] : 0;
+                $this->updateStock($sku,$qty,$sources);   
+            }
         }
         $response['totalStock'] = $totalStock;
         return $response;
