@@ -69,14 +69,18 @@ class UpdateProductWeight extends Command
         $collections = $this->collectionFactory->create();
         foreach ($collections as $product) {
             try {
-                $id = $product->getId(); 
-                $product = $this->product->load($id);
-                if($product->getWeight() > 0){
-                    $output->writeln($id." already product weight is greater than 0.");        
+                if($product->getTypeId() != "configurable"){
+                    $id = $product->getId(); 
+                    $product = $this->product->load($id);
+                    if($product->getWeight() > 0){
+                        $output->writeln($id." already product weight is greater than 0.");        
+                    }else{
+                        $product->setWeight(0.5);
+                        $product->save();
+                        $output->writeln("updated product id: ". $id ." and weight: 0.5.");
+                    }
                 }else{
-                    $product->setWeight(0.5);
-                    $product->save();
-                    $output->writeln("updated product id: ". $id ." and weight: 0.5.");
+                    $output->writeln("product type is configure.");
                 }
             } catch (Exception $e) {
                 $output->writeln($e->getMessage());                
