@@ -152,10 +152,11 @@ class SyncProductsFromErp
                         }
                         
                         $name = isset($productdata['Description']) ? $productdata['Description'] : $productdata['ProductNo'];
+                        $weight = ($productdata['GrossWeight'] > 0) ? $productdata['GrossWeight'] : 0.5;
                         $product = $this->productFactory->create();
                         $product->setSku($productdata['ProductNo']);
                         $product->setName($name);
-                        $product->setWeight($productdata['GrossWeight']);
+                        $product->setWeight($weight);
                         $product->setPrice($productdata['Price']);
                         $product->setAttributeSetId(4);
                         $product->setTypeId(Type::TYPE_SIMPLE);
