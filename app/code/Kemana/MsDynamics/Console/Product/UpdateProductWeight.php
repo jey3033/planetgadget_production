@@ -19,7 +19,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Magento\Framework\App\State;
 use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory;
-use Magento\Catalog\Model\Product;
+use Magento\Catalog\Model\ProductFactory;
 
 /**
  * Class SyncFromErpToMagento
@@ -38,7 +38,7 @@ class UpdateProductWeight extends Command
     public function __construct(
         State               $state,
         CollectionFactory   $collectionFactory,
-        Product             $product,
+        ProductFactory      $product,
         string              $name = null)
     {
         $this->state = $state;
@@ -69,8 +69,8 @@ class UpdateProductWeight extends Command
         $collections = $this->collectionFactory->create();
         foreach ($collections as $product) {
             try {
-                $id = $product->getId(); 
-                $product = $this->product->load($id);
+                $id = $product->getId();
+                $product = $this->product->create()->load((Int)$id);
                 if($product->getWeight() > 0){
                     $output->writeln($id." already product weight is greater than 0.");        
                 }else{
@@ -78,7 +78,7 @@ class UpdateProductWeight extends Command
                     $product->save();
                     $output->writeln("updated product id: ". $id ." and weight: 0.5.");
                 }
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 $output->writeln($e->getMessage());                
             }
         }
