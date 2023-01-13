@@ -212,6 +212,22 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     /**
      * @return mixed
      */
+    public function getOfflineTimeFrom()
+    {
+        return $this->scopeConfig->getValue(ConfigProvider::XMP_PATH_IS_OFFLINE_TIME_FROM, $this->storeScope);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOfflineTimeTo()
+    {
+        return $this->scopeConfig->getValue(ConfigProvider::XMP_PATH_IS_OFFLINE_TIME_TO, $this->storeScope);
+    }
+
+    /**
+     * @return mixed
+     */
     public function getFunctionCreateCustomer()
     {
         return ConfigProvider::CREATE_CUSTOMER_IN_ERP;

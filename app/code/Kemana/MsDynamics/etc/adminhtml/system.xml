@@ -90,6 +90,16 @@
                         <field id="is_enabled">1</field>
                     </depends>
                 </field>
+                <field id="offline_time_from" translate="offline time from" type="time" sortOrder="4" showInDefault="1"
+                       showInWebsite="1"
+                       showInStore="1">
+                    <label>ERP Offline Time From</label>
+                </field>
+                <field id="offline_time_to" translate="offline time to" type="time" sortOrder="5" showInDefault="1"
+                       showInWebsite="1"
+                       showInStore="1">
+                    <label>ERP Offline Time to</label>
+                </field>
             </group>
         </section>
     </system>

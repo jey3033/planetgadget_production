@@ -65,6 +65,16 @@ class ConfigProvider
     const XMP_PATH_IS_LOG_ENABLE = 'msdynamic/general/enable_log';
 
     /**
+     * XML Path is offline time from
+     */
+    const XMP_PATH_IS_OFFLINE_TIME_FROM = 'msdynamic/general/offline_time_from';
+
+    /**
+     * XML Path is offline time to
+     */
+    const XMP_PATH_IS_OFFLINE_TIME_TO = 'msdynamic/general/offline_time_to';
+
+    /**
      * XML Path API function name insert new customer
      */
     const CREATE_CUSTOMER_IN_ERP = 'customercreate';
