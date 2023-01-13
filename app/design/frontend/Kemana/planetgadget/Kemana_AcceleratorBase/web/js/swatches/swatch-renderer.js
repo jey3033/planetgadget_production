@@ -336,7 +336,7 @@ define([
                 success: function(response) {
                     if(response.msDynamics){
                         if(response.instock){
-                            if(response.attributes.length > 0){
+                            if(Object.keys(response.attributes).length > 0){
                                 $widget.options.jsonConfig.attributes = response.attributes
                             }
                             $widget._swatcherRender($widget);

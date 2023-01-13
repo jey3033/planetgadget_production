@@ -92,7 +92,7 @@ class Inventory
 
         $totalStock = [];
         $inventoryData = [];
-        if(isset($response['response'])){
+        if(isset($response['curlStatus']) && $response['curlStatus'] != 500 && isset($response['response'])){
             $inventorysources = explode(";",$response['response']);
             foreach ($inventorysources as $key => $inventorysource) {
                 $stockarray = explode(",",$inventorysource);
@@ -105,15 +105,16 @@ class Inventory
                     $inventoryData[$stockarray[0]][$stockarray[1]] = $stockarray[2];
                 }
             }
+            foreach ($productSkusArray as $sku) {
+                foreach ($storeSources as $sources) {
+                    $qty = isset($inventoryData[$sku][$sources]) ? $inventoryData[$sku][$sources] : 0;
+                    $this->updateStock($sku,$qty,$sources);   
+                }
+            }
         }else{
             $this->helper->inventorylog('No response.');
         }
-        foreach ($productSkusArray as $sku) {
-            foreach ($storeSources as $sources) {
-                $qty = isset($inventoryData[$sku][$sources]) ? $inventoryData[$sku][$sources] : 0;
-                $this->updateStock($sku,$qty,$sources);   
-            }
-        }
+        
         $response['totalStock'] = $totalStock;
         return $response;
     }
