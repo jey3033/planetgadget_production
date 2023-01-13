@@ -6,14 +6,14 @@
 
 /**
  * @category Kemana
- * @package  Kemana_MsDynamics
+ * @package  Kemana_InventorySyncCron
  * @license  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  *
  * @author   Parth Godhani <pgodhani@kemana.com>
  */
 
 
-namespace Kemana\MsDynamics\Controller\Stock;
+namespace Kemana\InventorySyncCron\Helper;
 
 use Magento\Framework\Controller\Result\JsonFactory;
 use Kemana\StockAvailabilityPopup\Model\Stock\SourceDataForSku;
@@ -23,9 +23,9 @@ use Magento\Catalog\Model\ProductRepository;
 use Magento\ConfigurableProduct\Model\Product\Type\Configurable;
 
 /**
- * Class UpdateStock
+ * Class Data
  */
-class UpdateStock extends \Magento\Framework\App\Action\Action
+class Data extends \Magento\Framework\App\Helper\AbstractHelper
 {
 
     /**
@@ -61,7 +61,7 @@ class UpdateStock extends \Magento\Framework\App\Action\Action
      * @param \Magento\Bundle\Api\ProductLinkManagementInterface $productLinkManagement       
      */
     public function __construct(
-        \Magento\Framework\App\Action\Context             $context,
+        \Magento\Framework\App\Helper\Context             $context,
         \Kemana\MsDynamics\Helper\Data                    $helper,
         \Kemana\MsDynamics\Model\Api\Erp\Inventory        $erpInventory,
         \Magento\Framework\App\Request\Http               $request,
@@ -120,9 +120,9 @@ class UpdateStock extends \Magento\Framework\App\Action\Action
             : [];
     }
 
-    public function execute()
+    public function updateProductStock($id)
     {
-        $productId = (int) $this->request->getParam('id');
+        $productId = $id;
         $resultJson = $this->resultJsonFactory->create();
 
         if (!$this->helper->isEnable()) {
@@ -173,7 +173,7 @@ class UpdateStock extends \Magento\Framework\App\Action\Action
                     
                 if ($product->getTypeId() == "configurable") 
                 {
-                    if(isset($response['curlStatus']) && $response['curlStatus'] != 500 && isset($response['totalStock']) && count($response['totalStock']) > 0){
+                    if($response['curlStatus'] != 500 && isset($response['totalStock']) && count($response['totalStock']) > 0){
                         foreach ($response['totalStock'] as $sku => $qty) {
                             if($qty > 0){
                                 array_push($instockproductids,$childProduct[$sku]);
