@@ -782,14 +782,21 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     }
 
     public function isErpInOfflineMode() {
-        $offLineFrom = str_replace(',', ':', $this->getOfflineTimeFrom());
-        $offlLineTo = str_replace(',', ':', $this->getOfflineTimeTo());
+        $offLineFrom = strtotime(str_replace(',', ':', $this->getOfflineTimeFrom()));
+        $offlLineTo = strtotime(str_replace(',', ':', $this->getOfflineTimeTo()));
+//strtotime();
 
+        //date('H:i:s',strtotime(str_replace(',', ':', $this->getOfflineTimeFrom())))
         $timeZone = ConfigProvider::TIMEZONE_ERP_LOCATION;
 
         $date = new \DateTime("now", new \DateTimeZone($timeZone));
         $currentTime = $date->format('H:i:s');
 
+        if(time() >= $offLineFrom && time() <= $offlLineTo) {
+            return true;
+        }
+
+        return false;
 
     }
 }
