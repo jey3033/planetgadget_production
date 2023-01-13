@@ -780,4 +780,16 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 
         return false;
     }
+
+    public function isErpInOfflineMode() {
+        $offLineFrom = str_replace(',', ':', $this->getOfflineTimeFrom());
+        $offlLineTo = str_replace(',', ':', $this->getOfflineTimeTo());
+
+        $timeZone = ConfigProvider::TIMEZONE_ERP_LOCATION;
+
+        $date = new \DateTime("now", new \DateTimeZone($timeZone));
+        $currentTime = $date->format('H:i:s');
+
+
+    }
 }

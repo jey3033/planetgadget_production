@@ -230,4 +230,9 @@ class ConfigProvider
      * XML path create order SOAP action
      */
     const CREATE_ORDER_SOAP_ACTION = 'Create';
+
+    /**
+     * XML path for ERP system location
+     */
+    const TIMEZONE_ERP_LOCATION = 'Asia/Jakarta';
 }
