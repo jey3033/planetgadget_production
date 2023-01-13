@@ -60,7 +60,6 @@ define([
                     if(response.msDynamics){
                         if(typeof response.apiresponse.totalStock != 'undefined' && $widget.options.producttype == 'simple'){
                                 let instock = false;
-                                console.log(Object.keys(response.apiresponse.totalStock).length)
                                 if(typeof response.apiresponse.totalStock != undefined && Object.keys(response.apiresponse.totalStock).length > 0){
                                     $.each(response.apiresponse.totalStock,function(sku,qty){
                                         if(qty > 0){
