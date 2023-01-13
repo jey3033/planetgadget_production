@@ -60,11 +60,16 @@ define([
                     if(response.msDynamics){
                         if(typeof response.apiresponse.totalStock != 'undefined' && $widget.options.producttype == 'simple'){
                                 let instock = false;
-                                $.each(response.apiresponse.totalStock,function(sku,qty){
-                                    if(qty > 0){
-                                        instock = true;
-                                    }
-                                })
+                                console.log(Object.keys(response.apiresponse.totalStock).length)
+                                if(typeof response.apiresponse.totalStock != undefined && Object.keys(response.apiresponse.totalStock).length > 0){
+                                    $.each(response.apiresponse.totalStock,function(sku,qty){
+                                        if(qty > 0){
+                                            instock = true;
+                                        }
+                                    })
+                                }else{
+                                    instock = response.instock
+                                }
                                 if(instock){
                                     $(".product-add-form").show();
                                     $(".product.alert.stock").hide();
