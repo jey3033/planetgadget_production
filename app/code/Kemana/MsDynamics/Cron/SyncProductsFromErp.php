@@ -67,6 +67,21 @@ class SyncProductsFromErp
     protected $categoryLinkRepository;
 
     /**
+     * @var \Kemana\MsDynamics\Model\Product\Validator
+     */
+    protected $validator;
+
+    /**
+     * @var ProductUrlPathGenerator
+     */
+    private $productUrlPathGenerator;
+
+    /**
+     * @var StoreManagerInterface
+     */
+    private $storeManager;
+
+    /**
      * @param \Kemana\MsDynamics\Helper\Data                      
      * @param \Kemana\MsDynamics\Model\Api\Erp\Product           
      * @param \Magento\Catalog\Api\Data\ProductInterfaceFactory   
@@ -75,6 +90,9 @@ class SyncProductsFromErp
      * @param \Magento\Framework\App\State                         
      * @param \Magento\Catalog\Model\CategoryFactory               
      * @param \Magento\Catalog\Api\CategoryLinkManagementInterface 
+     * @param \Kemana\MsDynamics\Model\Product\Validator
+     * @param ProductUrlPathGenerator
+     * @param StoreManagerInterface
      */
     public function __construct(
         \Kemana\MsDynamics\Helper\Data                      $helper,
@@ -85,7 +103,10 @@ class SyncProductsFromErp
         \Magento\Framework\App\State                         $state,
         \Magento\Catalog\Model\CategoryFactory               $categoryFactory,
         \Magento\Catalog\Api\CategoryLinkManagementInterface $categoryLinkRepository,
-        \Kemana\MsDynamics\Model\Api\Erp\Inventory           $inventory
+        \Kemana\MsDynamics\Model\Api\Erp\Inventory           $inventory,
+        \Kemana\MsDynamics\Model\Product\Validator           $validator,
+        \Magento\CatalogUrlRewrite\Model\ProductUrlPathGenerator $productUrlPathGenerator,
+        \Magento\Store\Model\StoreManagerInterface $storeManager
     )
     {
         $this->helper = $helper;
@@ -96,6 +117,9 @@ class SyncProductsFromErp
         $this->categoryFactory = $categoryFactory;
         $this->categoryLinkRepository = $categoryLinkRepository;
         $this->inventory = $inventory;
+        $this->validator = $validator;
+        $this->productUrlPathGenerator = $productUrlPathGenerator;
+        $this->storeManager = $storeManager;
     }
 
     /**
@@ -162,6 +186,18 @@ class SyncProductsFromErp
                         $product->setTypeId(Type::TYPE_SIMPLE);
                         $product->setData('store_id', Store::DEFAULT_STORE_ID);
                         $product->setStatus(Status::STATUS_ENABLED);
+
+                        if (!$product->getUrlKey()) {
+                            $urlKey = $this->productUrlPathGenerator->getUrlKey($product);
+                            $product->setUrlKey($urlKey);
+                        }
+                        //Get All Store and set on Product
+                        $productData['website_ids'] = array_keys($this->storeManager->getWebsites());
+                        $product->addData($productData);
+
+                        //Add Validator here
+                        $this->validator->validateUrlKeyConflicts($product);
+                        
                         $product = $this->productRepository->save($product);
                         $categoryIds = [];
                         $categoryCollection = $this->categoryFactory->create()->getCollection()

@@ -16,7 +16,7 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
 	<group id="default">
 		<job instance="Kemana\InventorySyncCron\Cron\InventorySync" method="execute" name="inventory_sync_cron">
-			<schedule>30 7 * * *</schedule>
+			<schedule>0 8 * * *</schedule>
 		</job>
 	</group>
 </config>
