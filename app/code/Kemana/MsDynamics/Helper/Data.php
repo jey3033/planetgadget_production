@@ -782,17 +782,35 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     }
 
     public function isErpInOfflineMode() {
-        $offLineFrom = strtotime(str_replace(',', ':', $this->getOfflineTimeFrom()));
-        $offlLineTo = strtotime(str_replace(',', ':', $this->getOfflineTimeTo()));
-//strtotime();
+        // Get times from Admin Configs and replace the ',' with ':' and then convert it to the timestamp
+        $offLineFrom = str_replace(',', ':', $this->getOfflineTimeFrom());
+        $offLineTo = str_replace(',', ':', $this->getOfflineTimeTo());
 
-        //date('H:i:s',strtotime(str_replace(',', ':', $this->getOfflineTimeFrom())))
+        /*$offLineFrom = \DateTime::createFromFormat("H:i:s", $offLineFrom);
+        $offLineTo = \DateTime::createFromFormat("H:i:s", $offLineTo);*/
+
+        $offLineFrom = date('h:i:s A', strtotime($offLineFrom));
+        $offLineTo = date('h:i:s A', strtotime($offLineTo));
+
+        $offLineFrom = strtotime($offLineFrom);
+        $offLineTo = strtotime($offLineTo);
+
+        /*$offLineFrom = \DateTime::createFromFormat('h:i:s A', $offLineFrom);
+        $offLineTo = \DateTime::createFromFormat('h:i:s A', $offLineTo);*/
+
+        /*$offLineFrom = \DateTime::createFromFormat("h:i:s A", $offLineFrom);
+        $offLineTo = \DateTime::createFromFormat("h:i:s A", $offLineTo);*/
+
         $timeZone = ConfigProvider::TIMEZONE_ERP_LOCATION;
 
+        // Convert current time using the provided timezone
         $date = new \DateTime("now", new \DateTimeZone($timeZone));
-        $currentTime = $date->format('H:i:s');
+        $currentTime = $date->format('h:i:s A');
+        $currentTimeToTimeStamp = \DateTime::createFromFormat('h:i:s A', $currentTime);
 
-        if(time() >= $offLineFrom && time() <= $offlLineTo) {
+        $currentTimeToTimeStamp = strtotime($currentTime);
+
+        if($currentTimeToTimeStamp >= $offLineFrom && $currentTimeToTimeStamp <= $offLineTo) {
             return true;
         }
 
