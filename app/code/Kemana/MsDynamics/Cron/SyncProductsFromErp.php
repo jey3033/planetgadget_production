@@ -186,6 +186,18 @@ class SyncProductsFromErp
                         $product->setTypeId(Type::TYPE_SIMPLE);
                         $product->setData('store_id', Store::DEFAULT_STORE_ID);
                         $product->setStatus(Status::STATUS_ENABLED);
+
+                        if (!$product->getUrlKey()) {
+                            $urlKey = $this->productUrlPathGenerator->getUrlKey($product);
+                            $product->setUrlKey($urlKey);
+                        }
+                        //Get All Store and set on Product
+                        $productData['website_ids'] = array_keys($this->storeManager->getWebsites());
+                        $product->addData($productData);
+
+                        //Add Validator here
+                        $this->validator->validateUrlKeyConflicts($product);
+                        
                         $product = $this->productRepository->save($product);
                         $categoryIds = [];
                         $categoryCollection = $this->categoryFactory->create()->getCollection()
