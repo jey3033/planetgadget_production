@@ -232,7 +232,7 @@ class ConfigProvider
     const CREATE_ORDER_SOAP_ACTION = 'Create';
 
     /**
-     * XML path for ERP system location
+     * XML path global timezone from general admin configurations
      */
-    const TIMEZONE_ERP_LOCATION = 'Asia/Jakarta';
+    const XMP_PATH_GLOBAL_TIMEZONE = 'general/locale/timezone';
 }

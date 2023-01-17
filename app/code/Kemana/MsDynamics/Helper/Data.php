@@ -781,40 +781,46 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         return false;
     }
 
-    public function isErpInOfflineMode() {
+    /**
+     * Check the ERP offliine time period
+     *
+     * @return bool
+     * @throws \Exception
+     */
+    public function isErpInOffline(): bool
+    {
+        if (!$this->getOfflineTimeFrom() || !$this->getOfflineTimeTo()) {
+            return false;
+        }
+
         // Get times from Admin Configs and replace the ',' with ':' and then convert it to the timestamp
         $offLineFrom = str_replace(',', ':', $this->getOfflineTimeFrom());
         $offLineTo = str_replace(',', ':', $this->getOfflineTimeTo());
 
-        /*$offLineFrom = \DateTime::createFromFormat("H:i:s", $offLineFrom);
-        $offLineTo = \DateTime::createFromFormat("H:i:s", $offLineTo);*/
-
         $offLineFrom = date('h:i:s A', strtotime($offLineFrom));
         $offLineTo = date('h:i:s A', strtotime($offLineTo));
 
-        $offLineFrom = strtotime($offLineFrom);
-        $offLineTo = strtotime($offLineTo);
-
-        /*$offLineFrom = \DateTime::createFromFormat('h:i:s A', $offLineFrom);
-        $offLineTo = \DateTime::createFromFormat('h:i:s A', $offLineTo);*/
-
-        /*$offLineFrom = \DateTime::createFromFormat("h:i:s A", $offLineFrom);
-        $offLineTo = \DateTime::createFromFormat("h:i:s A", $offLineTo);*/
-
-        $timeZone = ConfigProvider::TIMEZONE_ERP_LOCATION;
+        // Getting the selected timezone from the general admin configurations
+        $timeZone = $this->getGlobalTimeZone();
 
         // Convert current time using the provided timezone
         $date = new \DateTime("now", new \DateTimeZone($timeZone));
         $currentTime = $date->format('h:i:s A');
-        $currentTimeToTimeStamp = \DateTime::createFromFormat('h:i:s A', $currentTime);
 
-        $currentTimeToTimeStamp = strtotime($currentTime);
+        $offLineFrom = \DateTime::createFromFormat('!H:i:s A', $offLineFrom);
+        $offLineTo = \DateTime::createFromFormat('!H:i:s A', $offLineTo);
+        $currentTime = \DateTime::createFromFormat('!H:i:s A', $currentTime);
 
-        if($currentTimeToTimeStamp >= $offLineFrom && $currentTimeToTimeStamp <= $offLineTo) {
-            return true;
+        if ($offLineFrom > $offLineTo) {
+            $offLineTo->modify('+1 day');
         }
 
-        return false;
+        return ($offLineFrom <= $currentTime && $currentTime <= $offLineTo) ||
+            ($offLineFrom <= $currentTime->modify('+1 day') && $currentTime <= $offLineTo);
 
+    }
+
+    public function getGlobalTimeZone() {
+        return $this->scopeConfig->getValue(ConfigProvider::XMP_PATH_GLOBAL_TIMEZONE, $this->storeScope);
     }
 }
