@@ -52,17 +52,8 @@ class Index extends \Magento\Framework\App\Action\Action
         return parent::__construct($context);
     }
 
-    public function isBetween($from, $till, $input) {
-        $f = \DateTime::createFromFormat('!H:i:s A', $from);
-        $t = \DateTime::createFromFormat('!H:i:s A', $till);
-        $i = \DateTime::createFromFormat('!H:i:s A', $input);
-        if ($f > $t) $t->modify('+1 day');
-        return ($f <= $i && $i <= $t) || ($f <= $i->modify('+1 day') && $i <= $t);
-    }
-
     public function execute()
     {
-        //$this->isBetween('23:00','07:00','22:00');
         //$this->helper->isErpInOffline();
         /*$syncOrdersToErp = $this->syncOrdersToErp->syncOrdersFromMagentoToErp();
 
