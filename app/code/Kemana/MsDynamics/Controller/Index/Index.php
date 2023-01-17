@@ -54,7 +54,7 @@ class Index extends \Magento\Framework\App\Action\Action
 
     public function execute()
     {
-
+        //$this->helper->isErpInOffline();
         /*$syncOrdersToErp = $this->syncOrdersToErp->syncOrdersFromMagentoToErp();
 
         exit;

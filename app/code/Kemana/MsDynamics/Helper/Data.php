@@ -212,6 +212,22 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     /**
      * @return mixed
      */
+    public function getOfflineTimeFrom()
+    {
+        return $this->scopeConfig->getValue(ConfigProvider::XMP_PATH_IS_OFFLINE_TIME_FROM, $this->storeScope);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOfflineTimeTo()
+    {
+        return $this->scopeConfig->getValue(ConfigProvider::XMP_PATH_IS_OFFLINE_TIME_TO, $this->storeScope);
+    }
+
+    /**
+     * @return mixed
+     */
     public function getFunctionCreateCustomer()
     {
         return ConfigProvider::CREATE_CUSTOMER_IN_ERP;
@@ -763,5 +779,48 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         }
 
         return false;
+    }
+
+    /**
+     * Check the ERP offliine time period
+     *
+     * @return bool
+     * @throws \Exception
+     */
+    public function isErpInOffline(): bool
+    {
+        if (!$this->getOfflineTimeFrom() || !$this->getOfflineTimeTo()) {
+            return false;
+        }
+
+        // Get times from Admin Configs and replace the ',' with ':' and then convert it to the timestamp
+        $offLineFrom = str_replace(',', ':', $this->getOfflineTimeFrom());
+        $offLineTo = str_replace(',', ':', $this->getOfflineTimeTo());
+
+        $offLineFrom = date('h:i:s A', strtotime($offLineFrom));
+        $offLineTo = date('h:i:s A', strtotime($offLineTo));
+
+        // Getting the selected timezone from the general admin configurations
+        $timeZone = $this->getGlobalTimeZone();
+
+        // Convert current time using the provided timezone
+        $date = new \DateTime("now", new \DateTimeZone($timeZone));
+        $currentTime = $date->format('h:i:s A');
+
+        $offLineFrom = \DateTime::createFromFormat('!H:i:s A', $offLineFrom);
+        $offLineTo = \DateTime::createFromFormat('!H:i:s A', $offLineTo);
+        $currentTime = \DateTime::createFromFormat('!H:i:s A', $currentTime);
+
+        if ($offLineFrom > $offLineTo) {
+            $offLineTo->modify('+1 day');
+        }
+
+        return ($offLineFrom <= $currentTime && $currentTime <= $offLineTo) ||
+            ($offLineFrom <= $currentTime->modify('+1 day') && $currentTime <= $offLineTo);
+
+    }
+
+    public function getGlobalTimeZone() {
+        return $this->scopeConfig->getValue(ConfigProvider::XMP_PATH_GLOBAL_TIMEZONE, $this->storeScope);
     }
 }
