@@ -820,6 +820,9 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 
     }
 
+    /**
+     * @return mixed
+     */
     public function getGlobalTimeZone() {
         return $this->scopeConfig->getValue(ConfigProvider::XMP_PATH_GLOBAL_TIMEZONE, $this->storeScope);
     }
