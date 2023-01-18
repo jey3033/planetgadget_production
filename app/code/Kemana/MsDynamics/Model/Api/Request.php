@@ -78,7 +78,7 @@ class Request
     {
         $apiUrl = $this->helper->getApiUrl() . '/' . $apiFunction;
 
-        if ($this->helper->isErpInOfflinePeriod()) {
+        if ($this->helper->isErpInOffline()) {
             $this->helper->log('The ERP system is currently offline. Date & Time : ' . date('Y:m:d H:i:s'));
             $this->helper->log('API URL : ' . $apiUrl . 'Function :' . $apiFunction . '. SOAP Action :' . $soapAction);
 
