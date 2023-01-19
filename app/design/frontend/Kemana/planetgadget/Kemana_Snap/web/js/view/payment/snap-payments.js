@@ -81,6 +81,11 @@ define([
                 group: customGroup
             },
             {
+                type: 'snap_shopeepay',
+                component: 'Kemana_Snap/js/view/payment/method-renderer/snap-method',
+                group: customGroup
+            },
+            {
                 type: 'snap_telkomsel_cash',
                 component: 'Kemana_Snap/js/view/payment/method-renderer/snap-method',
                 group: customGroup

@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2022 PT Kemana Teknologi Solusi. All rights reserved.
+ * http://www.kemana.com
+ */
+
+/**
+ * @category Kemana
+ * @package  Kemana_BrandError
+ * @license  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ *
+ * @author   Parth Godhani <pgodhani@kemana.com>
+ */ 
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="brandImageUploaderNew" type="Kemana\BrandError\Rewrite\Model\Uploader">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="const">Kemana\BrandError\Rewrite\Model\Uploader::IMAGE_TMP_PATH</argument>
+            <argument name="basePath" xsi:type="const">Kemana\BrandError\Rewrite\Model\Uploader::IMAGE_PATH</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="jpg" xsi:type="string">jpg</item>
+                <item name="jpeg" xsi:type="string">jpeg</item>
+                <item name="gif" xsi:type="string">gif</item>
+                <item name="png" xsi:type="string">png</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Kemana\Brand\Controller\Adminhtml\Items\Upload">
+        <arguments>
+            <argument name="uploader" xsi:type="object">brandImageUploaderNew</argument>
+        </arguments>
+    </type>
+    <type name="Kemana\Brand\Controller\Adminhtml\Items\Save">
+        <arguments>
+            <argument name="uploader" xsi:type="object">brandImageUploaderNew</argument>
+        </arguments>
+    </type>
+</config>

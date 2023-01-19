@@ -66,7 +66,6 @@ class Product
      * @param $soapAction
      * @return false|mixed
      */
-
     public function getUnSyncProductsFromErp($apiFunction, $soapAction, $productData)
     {
         $postParameters = $productData;
