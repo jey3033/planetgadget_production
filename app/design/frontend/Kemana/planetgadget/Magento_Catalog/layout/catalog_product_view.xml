@@ -20,12 +20,11 @@
 
         <referenceContainer name="content">
             <container name="product.page.top.section" label="Product Page Top Section" htmlTag="div" htmlClass="product-page-top-section" />
-            <container name="product.page.top.section-two" label="Product Page Top Section Two" htmlTag="div" htmlClass="product-page-top-section-two" />
         </referenceContainer>
 
         <move element="product.info.main" destination="product.page.top.section" />
         <move element="product.info.media" destination="product.page.top.section" />
-        <move element="product.info.details" destination="product.page.top.section-two" />
+        <move element="product.info.details" destination="product.page.top.section" />
 
     </body>
 </page>
