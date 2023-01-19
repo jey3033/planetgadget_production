@@ -72,10 +72,18 @@ class Request
      * @param $postParameters
      * @param string $method
      * @return array
+     * @throws \Exception
      */
     public function apiTransport(string $apiFunction, string $soapAction, $postParameters, string $method = 'POST')
     {
         $apiUrl = $this->helper->getApiUrl() . '/' . $apiFunction;
+
+        if ($this->helper->isErpInOffline()) {
+            $this->helper->log('The ERP system is currently offline. Date & Time : ' . date('Y:m:d H:i:s'));
+            $this->helper->log('API URL : ' . $apiUrl . 'Function :' . $apiFunction . '. SOAP Action :' . $soapAction);
+
+            return [];
+        }
 
         if ($soapAction == $this->helper->getSoapActionDeleteCustomer() || $soapAction == $this->helper->getSoapActionGetInventoryStock()) {
             $apiUrl = $this->helper->getApiUrlForDelete();
@@ -123,7 +131,8 @@ class Request
 
             $precessedResponse = $this->xmlProcessor->processResponse($this->curl->getBody(), $responseStatus, $apiFunction, $soapAction);
 
-            $this->apiTransportLogger->saveApiTransportLogToDB($apiUrl,$method,$apiFunction,$soapAction,$postParameters,$xmlResponseBody,$responseStatus);
+            $this->apiTransportLogger->saveApiTransportLogToDB($apiUrl, $method, $apiFunction, $soapAction,
+                $postParameters, $xmlResponseBody, $responseStatus);
 
             if ($responseStatus == '500') {
                 $this->helper->log('Error Response : ' . $xmlResponseBody);
