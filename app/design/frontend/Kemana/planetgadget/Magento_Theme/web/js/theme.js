@@ -285,35 +285,81 @@ define([
     /**
      * 18.Product Widget slider
      */
-    $('.block .products-grid .product-items').slick({
-        infinite: false,
-        slidesToShow: 6,
-        slidesToScroll: 1,
-        arrows: true,
-        dots: false,
-        swipeToSlide: true,
-        responsive: [
-            {
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 2,
-                    arrows: false
-                }
-            },
-            {
-                breakpoint: 768,
-                settings: {
-                    arrows: false,
-                    dots: false,
-                    slidesToShow: 2,
-                    slidesToScroll: 2
-                }
-            },
-            {
-                breakpoint: 300,
-                settings: "unslick" // destroys slick
-            }]
-    });
+    if ($(".products-related")[0] || $(".products-upsell")[0]){
+        $('.block .products-grid .product-items').slick({
+            infinite: false,
+            slidesToShow: 6,
+            slidesToScroll: 1,
+            arrows: false,
+            dots: false,
+            swipeToSlide: true,
+            fade: false,
+            swipe: false,
+            accessibility: false,
+            draggable: false,
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 4,
+                        accesibility: false,
+                        draggable: false,
+                        swipe: false,
+                        touchMove: false,
+                        dots: false,
+                        arrows: false
+                    }
+                },
+                {
+                    breakpoint: 768,
+                    settings: {
+                        accesibility: false,
+                        draggable: false,
+                        swipe: false,
+                        touchMove: false,
+                        arrows: false,
+                        dots: false,
+                        slidesToShow: 4,
+                        slidesToScroll: 2
+                    }
+                },
+                {
+                    breakpoint: 300,
+                    settings: "unslick" // destroys slick
+                }]
+        });
+     } else {
+
+        $('.block .products-grid .product-items').slick({
+            infinite: false,
+            slidesToShow: 6,
+            slidesToScroll: 1,
+            arrows: true,
+            dots: false,
+            swipeToSlide: true,
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 2,
+                        arrows: false
+                    }
+                },
+                {
+                    breakpoint: 768,
+                    settings: {
+                        arrows: false,
+                        dots: false,
+                        slidesToShow: 2,
+                        slidesToScroll: 2
+                    }
+                },
+                {
+                    breakpoint: 300,
+                    settings: "unslick" // destroys slick
+                }]
+        });
+    }
 
     // $(".block .products-grid .product-items").slick({
     //     /**
