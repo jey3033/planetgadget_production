@@ -65,6 +65,16 @@ class ConfigProvider
     const XMP_PATH_IS_LOG_ENABLE = 'msdynamic/general/enable_log';
 
     /**
+     * XML Path is offline time from
+     */
+    const XMP_PATH_IS_OFFLINE_TIME_FROM = 'msdynamic/general/offline_time_from';
+
+    /**
+     * XML Path is offline time to
+     */
+    const XMP_PATH_IS_OFFLINE_TIME_TO = 'msdynamic/general/offline_time_to';
+
+    /**
      * XML Path API function name insert new customer
      */
     const CREATE_CUSTOMER_IN_ERP = 'customercreate';
@@ -220,4 +230,9 @@ class ConfigProvider
      * XML path create order SOAP action
      */
     const CREATE_ORDER_SOAP_ACTION = 'Create';
+
+    /**
+     * XML path global timezone from general admin configurations
+     */
+    const XMP_PATH_GLOBAL_TIMEZONE = 'general/locale/timezone';
 }

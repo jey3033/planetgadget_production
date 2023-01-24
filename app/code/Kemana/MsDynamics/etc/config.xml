@@ -25,6 +25,8 @@
                 <xmlns>urn:microsoft-dynamics-schemas/codeunit/Kemana</xmlns>
                 <xmlns_for_delete>urn:microsoft-dynamics-schemas/codeunit/Kemana</xmlns_for_delete>
                 <enable_log>1</enable_log>
+                <offline_time_from>23,00,00</offline_time_from>
+                <offline_time_to>7,00,00</offline_time_to>
             </general>
         </msdynamic>
     </default>

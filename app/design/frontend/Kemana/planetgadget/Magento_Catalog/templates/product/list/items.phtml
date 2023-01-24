@@ -348,3 +348,14 @@ $_item = null;
             </script>
         <?php endif;?>
         <?php endif;?>
+
+<script>
+require([
+    'jquery'
+    ], function ($) {
+        'use strict';
+        $(window).resize(function() {
+            location.reload();
+        });
+    });
+</script>
