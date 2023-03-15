@@ -12,9 +12,21 @@
  * @author   Aranga Wijesooriya <awijesooriya@kemana.com>
  */
 ?>
+<style>
+    .social-login-title > .span-login-title{
+        margin-bottom: 23px;
+        font-size: 1.6rem;
+        line-height: 2.2rem;
+        color: #000;
+        font-weight: 700;
+        display: block;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+    }
+</style>
 <div class="social-login block-container authentication">
     <div class="social-login-title">
-        <h2 class="login-title"><?= $escaper->escapeHtml(__('Login to Planet Gadget')) ?></h2>
+        <span class="login-title"><?= $escaper->escapeHtml(__('Login to Planet Gadget')) ?></span>
     </div>
     <div class="block social-login-customer-authentication col-mp mp-12" id="social-login-authentication">
         <!--<div class="block-title">
