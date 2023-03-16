@@ -1,0 +1,24 @@
+<?php
+
+
+$topics = $block->getTopicList();
+if ($topics && $topics->getSize()):
+    ?>
+    <div class="mp-sidebar mpcss">
+        <div class="block-title col-xs-12 sidebar-categories">
+            <span class="block-mp-sidebar-heading blog-sidebar-heading"><?= $block->escapeHtml(__('Topics')) ?></span>
+        </div>
+        <div class="mpcss-content-wrapper menu-categories">
+            <ul class="block-content menu-categories">
+                <?php foreach ($topics as $topic): ?>
+                    <li class="category-item">
+                        <a class="list-categories" href="<?= $block->getTopicUrl($topic) ?>">
+                            <i class="fa fa-folder-open" aria-hidden="true">&nbsp;</i>
+                            <?= ucfirst($topic->getName()) ?>
+                        </a>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    </div>
+<?php endif; ?>
