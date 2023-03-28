@@ -111,6 +111,8 @@ $color = $helper->getBlogConfig('general/font_color');
     <?php if ($helper->getBlogConfig('share/enabled')) : ?>
         <?php echo $block->getChildBlock('km.SocialShare')->toHtml(); ?>
     <?php endif; ?>
+    <div style="margin-top:20px;border-radius:5px;background:#fff;padding: 23px 30px;">
+    <?php echo $block->getChildBlock('kemana.locator.center')->toHtml(); ?>
     <?php if ($authorName && $helper->showAuthorInfo()) :
         $block->resizeImage($author->getImage(), '135x', \Kemana\Blog\Helper\Image::TEMPLATE_MEDIA_TYPE_AUTH);
         ?>
