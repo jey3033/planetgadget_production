@@ -384,6 +384,9 @@ $color = $helper->getBlogConfig('general/font_color');
         $logo = $helper->getSeoConfig('snippet/upload_image_id');
         $logo = $logo ? $helper->getImageHelper()->getMediaUrl($logo) : $block->getDefaultImageUrl();
         ?>
+        <script>
+            document.title = document.getElementsByClassName('base')[0].innerHTML;
+        </script>
         <script type="application/ld+json">
             {
                 "@context": "http://schema.org",
