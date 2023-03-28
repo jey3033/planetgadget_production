@@ -113,6 +113,7 @@ $color = $helper->getBlogConfig('general/font_color');
     <?php endif; ?>
     <div style="margin-top:20px;border-radius:5px;background:#fff;padding: 23px 30px;">
     <?php echo $block->getChildBlock('kemana.locator.center')->toHtml(); ?>
+    </div>
     <?php if ($authorName && $helper->showAuthorInfo()) :
         $block->resizeImage($author->getImage(), '135x', \Kemana\Blog\Helper\Image::TEMPLATE_MEDIA_TYPE_AUTH);
         ?>
