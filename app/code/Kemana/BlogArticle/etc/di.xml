@@ -19,4 +19,5 @@
         <plugin name="kemana_blog_post_list_getPostInfo"
                 type="Kemana\BlogArticle\Plugin\Block\Blog\Frontend" sortOrder="10" />
     </type>
+    <preference for="Magento\Sitemap\Model\Sitemap" type="Kemana\BlogArticle\Model\Sitemap"/>
 </config>
