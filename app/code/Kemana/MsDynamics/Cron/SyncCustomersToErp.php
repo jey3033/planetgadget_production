@@ -158,8 +158,8 @@ class SyncCustomersToErp
                 "Address" => $address,
                 "Address2" => $address2,
                 "City" => $city,
-                "Postcode" => $postCode,
-                "MobilePhoneNo" => $customer->getCustomAttribute('phonenumber')->getValue()
+                "Postcode" => $postCode
+                // "MobilePhoneNo" => $customer->getCustomAttribute('phonenumber')->getValue()
             ];
 
             $dataToCustomer = $this->helper->convertArrayToXml($dataToCustomer);
