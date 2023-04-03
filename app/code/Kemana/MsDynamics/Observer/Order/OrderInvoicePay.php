@@ -123,7 +123,7 @@ class OrderInvoicePay implements \Magento\Framework\Event\ObserverInterface
                 "OrderNo" => $order->getIncrementId(),
                 "LineNo" => $lineNo,
                 "ItemNo" => $lineItem->getSku(),
-                "Quantity" => $lineItem->getQtyOrdered(),
+                "Quantity" => intval($lineItem->getQtyOrdered()),
                 "Price" => floatval($lineItem->getPrice())
             ];
 
