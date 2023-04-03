@@ -151,7 +151,7 @@ class SyncCustomersToErp
             $dataToCustomer = [
                 "MagentoCustomerID" => $customer->getId(),
                 "CustomerNo" => $customer->getCustomAttribute('phonenumber')->getValue(),
-                "Name" => $customer->getFirstname(),
+                "Name" => $customer->getFirstname()." ".$customer->getLastname(),
                 "Name2" => $customer->getLastname(),
                 "DoB" => $dob,
                 "Email" => $customer->getEmail(),
