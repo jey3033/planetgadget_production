@@ -1,0 +1,25 @@
+<?php
+/**
+ * Kemana_Banner
+ * @author Gayan Thrimanne<gthrimanne@kemana.com>
+ * @see README.md
+ *
+ */
+
+/** @var $block \Kemana\Banner\Block\Adminhtml\Banner\Edit\Form */
+?>
+<div class="entry-edit form-inline" id="kemana-bannerslider">
+    <?= $block->getFormHtml(); ?>
+</div>
+<?= $block->getChildHtml('form_after'); ?>
+
+<script type="text/x-magento-init">
+    {
+        "#kemana-bannerslider": {
+            "Kemana_Banner/js/view/bannerslider":{
+                "templateHtml": "<?= $block->escapeJs($block->getTemplateHtml()); ?>",
+                "imgUrls": "<?= $block->escapeJs($block->getImageUrls()); ?>"
+            }
+        }
+    }
+</script>

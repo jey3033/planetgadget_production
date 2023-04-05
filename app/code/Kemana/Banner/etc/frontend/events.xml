@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Kemana_Banner
+ * @author Gayan Thrimanne<gthrimanne@kemana.com>
+ * @see README.md
+ *
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="core_layout_render_element">
+        <observer name="bannerslider.addblock" instance="Kemana\Banner\Observer\AddBlock"/>
+    </event>
+</config>

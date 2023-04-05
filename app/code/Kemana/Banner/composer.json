@@ -1,0 +1,29 @@
+{
+    "name": "kemana/module-banner",
+    "description": "Magento 2 Banner Slider extension",
+    "require": {
+        "php": "~7.3.0||~7.4.0",
+        "magento/framework": "*",
+        "magento/module-backend": "*",
+        "kemana/module-core": "*"
+    },
+    "type": "magento2-module",
+    "version": "2.43.1",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Gayan Thrimanne",
+            "email": "gthrimanne@kemana.com",
+            "homepage": "https://kemana.com/",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Kemana\\Banner\\": ""
+        }
+    }
+}

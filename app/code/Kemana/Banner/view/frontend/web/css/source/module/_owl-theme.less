@@ -1,0 +1,174 @@
+// /**
+//  * Copyright © 2020 Kemana. All rights reserved.
+//  * @author Ashan Gunawardena <agunawardena@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+//
+//  Common
+//  _____________________________________________
+& when (@media-common = true) {
+    .owl-theme {
+        .owl-nav {
+            text-align: center;
+            -webkit-tap-highlight-color: transparent;
+
+            .owl-prev {
+                .lib-css(width, @kemana-banner-arrow__width);
+                .lib-css(height, @kemana-banner-arrow__width);
+                .lib-css(margin, @kemana-banner-arrow__margin);
+                .lib-css(border-radius, @kemana-banner-arrow__border-radius);
+                .lib-css(background, @kemana-banner-arrow_background-color);
+                padding: 0;
+                display: inline-block;
+                cursor: pointer;
+                top: 50%;
+                transform: translateY(-50%);
+                border: 0;
+                bottom: inherit;
+                box-shadow: none;
+                opacity: .5;
+                transition: opacity 500ms ease;
+
+                span {
+                    display: none;
+                }
+
+                .lib-icon-font(
+                    @kemana-banner-arrow-icon-prev,
+                    @_icon-font-size: @kemana-banner-arrow-size,
+                    @_icon-font-line-height: @kemana-banner-arrow__width,
+                    @_icon-font-text-hide: true,
+                    @_icon-font-vertical-align: top,
+                    @_icon-font-color: @kemana-banner-arrow-icon__color,
+                    @_icon-font-color-hover: @kemana-banner-arrow-icon-hover__color,
+                    @_icon-font-color-active: @kemana-banner-arrow-icon-hover__color
+                );
+
+                &:hover {
+                    .lib-css(background, @kemana-banner-arrow-active__background-color);
+                    text-decoration: none;
+                    opacity: 1;
+                }
+            }
+
+            .owl-next {
+                .lib-css(width, @kemana-banner-arrow__width);
+                .lib-css(height, @kemana-banner-arrow__width);
+                .lib-css(margin, @kemana-banner-arrow__margin);
+                .lib-css(border-radius, @kemana-banner-arrow__border-radius);
+                .lib-css(background, @kemana-banner-arrow_background-color);
+                padding: 0;
+                display: inline-block;
+                cursor: pointer;
+                top: 50%;
+                transform: translateY(-50%);
+                border: 0;
+                bottom: inherit;
+                box-shadow: none;
+                opacity: .5;
+                transition: opacity 500ms ease;
+
+                span {
+                    display: none;
+                }
+
+                .lib-icon-font(
+                    @kemana-banner-arrow-icon-next,
+                    @_icon-font-size: @kemana-banner-arrow-size,
+                    @_icon-font-line-height: @kemana-banner-arrow__width,
+                    @_icon-font-text-hide: true,
+                    @_icon-font-vertical-align: top,
+                    @_icon-font-color: @kemana-banner-arrow-icon__color,
+                    @_icon-font-color-hover: @kemana-banner-arrow-icon-hover__color,
+                    @_icon-font-color-active: @kemana-banner-arrow-icon-hover__color
+                );
+
+                &:hover {
+                    .lib-css(background, @kemana-banner-arrow-active__background-color);
+                    text-decoration: none;
+                    opacity: 1;
+                }
+            }
+
+            .disabled {
+                opacity: 0.5;
+                cursor: default;
+            }
+
+            &.disabled + .owl-dots {
+                margin-top: 10px;
+            }
+        }
+
+        .owl-dots {
+            text-align: center;
+            -webkit-tap-highlight-color: transparent;
+
+            .owl-dot {
+                display: inline-block;
+                .lib-css(width, @kemana-banner-dot__width);
+                .lib-css(height, @kemana-banner-dot__height);
+                .lib-css(margin, @kemana-banner-dot__margin);
+                .lib-css(border-radius, @kemana-banner-dot__border-radius);
+                .lib-css(background, @kemana-banner-dot__background-color);
+                -webkit-backface-visibility: visible;
+                transition: opacity 500ms ease;
+
+                &.active,
+                &:hover {
+                    .lib-css(background, @kemana-banner-dot-active__background-color);
+                }
+            }
+        }
+    }
+}
+
+//
+//  Desktop Large
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+    .owl-carousel {
+        .owl-nav {
+            button {
+                &.owl-next {
+                    right: 6%;
+                }
+
+                &.owl-prev {
+                    left: 6%;
+                }
+            }
+
+            .owl-next,
+            .owl-prev {
+                margin: 0;
+            }
+        }
+    }
+}
+
+//
+//  Desktop Extra Large
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xl) {
+    .carousel-container {
+        .owl-carousel {
+            .owl-nav {
+                & when (@kemana-banner-nav-max-width = true) {
+                    button {
+                        &.owl-prev {
+                            left: @layout-indent__width;
+                        }
+
+                        &.owl-next {
+                            right: @layout-indent__width;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

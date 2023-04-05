@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Kemana_Banner
+ * @author Gayan Thrimanne<gthrimanne@kemana.com>
+ * @see README.md
+ *
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="editor"/>
+    <body>
+        <referenceContainer name="content">
+            <block class="Kemana\Banner\Block\Adminhtml\Banner\Edit" name="kemana_banner_banner_edit"/>
+        </referenceContainer>
+        <referenceContainer name="left">
+            <block class="Kemana\Banner\Block\Adminhtml\Banner\Edit\Tabs" name="kemana_banner_banner_tabs">
+                <block class="Kemana\Banner\Block\Adminhtml\Banner\Edit\Tab\Banner" name="kemana_banner_banner_edit_tab_banner"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">banner</argument>
+                    <argument name="block" xsi:type="string">kemana_banner_banner_edit_tab_banner</argument>
+                </action>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

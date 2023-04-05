@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Kemana_Banner
+ * @author Gayan Thrimanne<gthrimanne@kemana.com>
+ * @see README.md
+ *
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Kemana_Banner::bannerslider" title="Banner Sliders" module="Kemana_Banner" sortOrder="100" resource="Kemana_Banner::bannerslider" parent="Kemana_Core::menu"/>
+        <add id="Kemana_Banner::banner" title="Manage Banners" module="Kemana_Banner" sortOrder="20" parent="Kemana_Banner::bannerslider" action="bannerslider/banner/index" resource="Kemana_Banner::banner"/>
+        <add id="Kemana_Banner::slider" title="Manage Display" module="Kemana_Banner" sortOrder="30" parent="Kemana_Banner::bannerslider" action="bannerslider/slider/index" resource="Kemana_Banner::slider"/>
+        <add id="Kemana_Banner::configuration" title="Configuration" module="Kemana_Banner" sortOrder="70" parent="Kemana_Banner::bannerslider" action="adminhtml/system_config/edit/section/bannerslider" resource="Kemana_Banner::configuration"/>
+    </menu>
+</config>

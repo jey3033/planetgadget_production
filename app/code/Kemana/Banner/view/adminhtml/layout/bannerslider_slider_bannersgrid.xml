@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Kemana_Banner
+ * @author Gayan Thrimanne<gthrimanne@kemana.com>
+ * @see README.md
+ *
+ */
+-->
+<layout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <container name="root" label="Root">
+        <block class="Kemana\Banner\Block\Adminhtml\Slider\Edit\Tab\Banner" name="slider.edit.tab.banner"/>
+    </container>
+</layout>

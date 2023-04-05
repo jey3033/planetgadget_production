@@ -1,0 +1,87 @@
+{
+    "kemana_bannerslider_banner": {
+        "column": {
+            "banner_id": true,
+            "name": true,
+            "status": true,
+            "type": true,
+            "content": true,
+            "image": true,
+            "from_date": true,
+            "to_date": true,
+            "url_banner": true,
+            "title": true,
+            "newtab": true,
+            "created_at": true,
+            "updated_at": true,
+            "image_mobile": true,
+            "from_date": true,
+            "to_date": true
+        },
+        "index": {
+            "KEMANA_BANNERSLIDER_BANNER_NAME_IMAGE_URL_BANNER": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "kemana_bannerslider_slider": {
+        "column": {
+            "slider_id": true,
+            "name": true,
+            "status": true,
+            "location": true,
+            "store_ids": true,
+            "customer_group_ids": true,
+            "priority": true,
+            "effect": true,
+            "autoWidth": true,
+            "autoHeight": true,
+            "design": true,
+            "loop": true,
+            "lazyLoad": true,
+            "center": true,
+            "autoplay": true,
+            "autoplayTimeout": true,
+            "nav": true,
+            "dots": true,
+            "is_responsive": true,
+            "responsive_items": true,
+            "from_date": true,
+            "to_date": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "kemana_bannerslider_banner_slider": {
+        "column": {
+            "slider_id": true,
+            "banner_id": true,
+            "position": true
+        },
+        "index": {
+            "KEMANA_BANNERSLIDER_BANNER_SLIDER_BANNER_ID": true,
+            "KEMANA_BANNERSLIDER_BANNER_SLIDER_SLIDER_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_2BFCFA89C436DBCF6C68EB8F4C27D914": true,
+            "FK_B277A264AB6A5F8B463D75EF74CE7A96": true,
+            "KEMANA_BANNERSLIDER_BANNER_SLIDER_SLIDER_ID_BANNER_ID": true
+        }
+    },
+    "kemana_bannerslider_slider_cron": {
+        "column": {
+            "entity_id": true,
+            "slider_id": true,
+            "from_to": true,
+            "scheduled_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

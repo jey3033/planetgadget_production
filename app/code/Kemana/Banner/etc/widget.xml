@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Kemana_Banner
+ * @author Gayan Thrimanne<gthrimanne@kemana.com>
+ * @see README.md
+ *
+ */
+-->
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget class="Kemana\Banner\Block\Widget" id="kemana_banner_widget">
+        <label translate="true">Kemana Banner Slider</label>
+        <description translate="true">Banner Slider list</description>
+        <parameters>
+            <parameter name="slider_id" xsi:type="select" required="true" visible="true" source_model="Kemana\Banner\Model\Config\Source\Sliders">
+                <label translate="true">Select Slider</label>
+            </parameter>
+        </parameters>
+    </widget>
+</widgets>

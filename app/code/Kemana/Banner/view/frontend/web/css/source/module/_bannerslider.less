@@ -1,0 +1,770 @@
+// /**
+//  * Copyright © 2020 Kemana. All rights reserved.
+//  * @author Ashan Gunawardena <agunawardena@kemana.com>
+//  * http://www.kemana.com
+//  */
+
+//
+//  Common
+//  _____________________________________________
+& when (@media-common = true) {
+    .carousel-container {
+        margin-top: -@indent__base;
+        margin-bottom: @home-carousel-container__margin-bottom;
+        display: inline-block;
+        width: 100%;
+        position: relative;
+
+        &:hover {
+            & when (@kemana-banner-dots-nav-display-hover = true) {
+                .owl-dots,
+                .owl-nav {
+                    opacity: 1;
+                }
+            }
+        }
+
+        .owl-dots {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+
+            & when (@kemana-banner-dots-nav-display-hover = true) {
+                opacity: 0;
+            }
+        }
+
+        .owl-nav {
+            & when (@kemana-banner-dots-nav-display-hover = true) {
+                opacity: 0;
+            }
+
+            button {
+                position: absolute;
+                background: transparent;
+            }
+
+            .owl-prev {
+                left: 1px;
+            }
+
+            .owl-next {
+                right: 1px;
+            }
+        }
+
+        .owl-item {
+            img {
+                transform-style: unset;
+            }
+
+            &:hover {
+                .banner-title {
+                    opacity: 1;
+                }
+            }
+        }
+
+        .item-video {
+            height: 340px;
+        }
+
+        .img-responsive {
+            &.mobile {
+                display: none;
+            }
+        }
+
+        .banner-item {
+            .banner-description {
+                margin: 0;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                text-align: center;
+
+                h1  {
+                    margin-bottom: @indent__base;
+                }
+
+                h2,
+                h3,
+                h4,
+                h5,
+                h6 {
+                    margin-bottom: @indent__base;
+                }
+
+                p {
+                    margin-bottom: @indent__base;
+                }
+
+                &.color-white {
+                    h1,
+                    h2,
+                    h3,
+                    h4,
+                    h5,
+                    h6,
+                    p {
+                        .lib-css(color, @kemana-banner-white-text__color);
+                    }
+                }
+
+                &.color-black {
+                    h1,
+                    h2,
+                    h3,
+                    h4,
+                    h5,
+                    h6,
+                    p {
+                        .lib-css(color, @kemana-banner-black-text__color);
+                    }
+                }
+
+                &.center {
+                    .banner-description-container {
+                        position: absolute;
+                        top: 45%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                    }
+
+                    h1,
+                    h2,
+                    h3,
+                    h4,
+                    h5,
+                    h6,
+                    p {
+                        text-align: center;
+                    }
+
+                    .actions-toolbar {
+                        .primary {
+                            text-align: center;
+                        }
+                    }
+                }
+
+                &.left {
+                    .banner-description-container {
+                        position: absolute;
+                        top: 45%;
+                        transform: translateY(-50%);
+                        left: 10%;
+                    }
+
+                    h1,
+                    h2,
+                    h3,
+                    h4,
+                    h5,
+                    h6,
+                    p {
+                        text-align: left;
+                    }
+
+                    .actions-toolbar {
+                        .primary {
+                            text-align: left;
+                        }
+                    }
+                }
+
+                &.right {
+                    .banner-description-container {
+                        position: absolute;
+                        top: 45%;
+                        transform: translateY(-50%);
+                        right: 10%;
+                    }
+
+                    h1,
+                    h2,
+                    h3,
+                    h4,
+                    h5,
+                    h6,
+                    p {
+                        text-align: right;
+                    }
+
+                    .actions-toolbar {
+                        .primary {
+                            text-align: right;
+                        }
+                    }
+                }
+            }
+
+            .actions-toolbar {
+                .primary {
+                    width: 100%;
+                    float: none;
+
+                    .action {
+                        float: none;
+                        display: inline-block;
+                        width: auto;
+                    }
+                }
+            }
+        }
+
+        .banner-img {
+            .desktop {
+                display: none;
+            }
+        }
+    }
+
+    .home-banner-first-container {
+        .banner-right {
+            text-align: center;
+        }
+
+        .banner-description {
+            h1  {
+                margin-top: @indent__base;
+                margin-bottom: @indent__base;
+            }
+
+            p {
+                margin-bottom: @indent__base;
+            }
+        }
+
+        .actions-toolbar {
+            .primary {
+                width: 100%;
+                .lib-vendor-prefix-display();
+
+                .action {
+                    .lib-button-primary(
+                        @_button-padding: 0 @indent__s
+                    );
+                    width: 50%;
+                    margin-bottom: 0;
+
+                    &.shop-men {
+                        margin-right: @indent__s;
+                    }
+                }
+            }
+        }
+
+        &.middle-banner-wrapper {
+            .lib-css(margin-bottom, @home-banner-middle-container__margin-bottom);
+        }
+    }
+
+    .home-banner-second-container,
+    .home-banner-two-container {
+        position: relative;
+        width: 100%;
+        display: inline-block;
+        margin-bottom: -6px;
+
+        &.middle-banner-wrapper {
+            .lib-css(margin-bottom, @home-banner-middle-container__margin-bottom);
+        }
+    }
+
+    .full-width-banner {
+        .banner-img {
+            .desktop {
+                display: none;
+            }
+        }
+
+        .banner-description {
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+
+            &.color-blue {
+                h1,
+                h2,
+                h3,
+                h4,
+                h5,
+                p {
+                    .lib-css(color, @home-banner-blue-text__color);
+                }
+            }
+
+            &.color-white {
+                h1,
+                h2,
+                h3,
+                h4,
+                h5,
+                p {
+                    .lib-css(color, @home-banner-white-text__color);
+                }
+            }
+        }
+
+        .actions-toolbar {
+            .primary {
+                width: 100%;
+
+                .action {
+                    float: none;
+                    display: inline-block;
+                    width: auto;
+                }
+            }
+        }
+    }
+
+    .home-banner-two-container {
+        .fixed-width {
+            .lib-vendor-prefix-display();
+            .lib-vendor-prefix-flex-wrap();
+        }
+    }
+
+    .full-width-banner {
+        .banner-description {
+            p {
+                margin-bottom: @indent__base;
+            }
+        }
+    }
+
+    .half-width-banner {
+        display: inline-block;
+        position: relative;
+        width: 100%;
+        margin-bottom: 20px;
+
+        .banner-img {
+            .desktop {
+                display: none;
+            }
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        .banner-description {
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6 {
+                width: 100%;
+                .lib-vendor-prefix-display();
+                margin-bottom: @indent__s;
+            }
+
+            p {
+                .lib-typography(
+                    @_font-size: 10px,
+                    @_font-weight: @font-weight__bold,
+                    @_line-height: 14px
+                );
+                margin-bottom: 13px;
+            }
+
+            .banner-logo {
+                width: 100%;
+                .lib-vendor-prefix-display();
+                margin-bottom: 11px;
+
+                img {
+                    width: 70%;
+                }
+            }
+
+            &.color-white {
+                h1,
+                h2,
+                h3,
+                h4,
+                h5,
+                p {
+                    .lib-css(color, @home-banner-white-text__color);
+                }
+            }
+
+            &.color-black {
+                h1,
+                h2,
+                h3,
+                h4,
+                h5,
+                h6,
+                p {
+                    .lib-css(color, @kemana-banner-black-text__color);
+                }
+            }
+
+            &.center {
+                .banner-description-container {
+                    position: absolute;
+                    top: 45%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                }
+
+                h1,
+                h2,
+                h3,
+                h4,
+                h5,
+                h6,
+                p {
+                    text-align: center;
+                }
+
+                .actions-toolbar {
+                    .primary {
+                        text-align: center;
+                    }
+                }
+            }
+
+            &.left {
+                .banner-description-container {
+                    position: absolute;
+                    top: 45%;
+                    transform: translateY(-50%);
+                    left: 8%;
+                }
+
+                h1,
+                h2,
+                h3,
+                h4,
+                h5,
+                h6,
+                p {
+                    text-align: left;
+                }
+
+                .actions-toolbar {
+                    .primary {
+                        text-align: left;
+                    }
+                }
+            }
+
+            &.right {
+                .banner-description-container {
+                    position: absolute;
+                    top: 45%;
+                    transform: translateY(-50%);
+                    right: 8%;
+                }
+
+                h1,
+                h2,
+                h3,
+                h4,
+                h5,
+                h6,
+                p {
+                    //text-align: right;
+                }
+
+                .actions-toolbar {
+                    .primary {
+                        text-align: left;
+                    }
+                }
+            }
+
+            .actions-toolbar {
+                display: inline-block;
+            }
+        }
+
+        .primary {
+            &.shop-now {
+                .lib-button-primary(
+                    @_button-color: @kemana-banner_white_button-color,
+                    @_button-font-weight: @kemana-banner_white_button-font-weight,
+                    @_button-padding: @kemana-banner_white_button-padding,
+                    @_button-background: @kemana-banner_white_button-background,
+                    @_button-border: @kemana-banner_white_button-border,
+                    @_button-color-hover: @kemana-banner_white_button-color-hover,
+                    @_button-background-hover: @kemana-banner_white_button-background-hover,
+                    @_button-border-hover: @kemana-banner_white_button-border-hover,
+                    @_button-color-active: @kemana-banner_white_button-color-hover,
+                    @_button-background-active: @kemana-banner_white_button-background-hover,
+                    @_button-border-active: @kemana-banner_white_button-border-hover
+                );
+                .lib-button-l(
+                    @_button-l-font-size: 11px,
+                    @_button-l-height: 27px,
+                    @_button-l-padding: 0 13px
+                );
+            }
+        }
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    #banner-slider-carousel {
+        .img-responsive {
+            &.desktop {
+                display: none;
+            }
+
+            &.mobile {
+                display: block;
+            }
+        }
+    }
+
+    .full-width-banner,
+    .half-width-banner {
+        .banner-description {
+            width: 90%;
+        }
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .carousel-container {
+        margin-top: @home-carousel-container-desktop__margin-top;
+
+        .banner-item {
+            .banner-description {
+                .lib-css(width, @layout__max-width);
+
+                &.center,
+                &.right,
+                &.left {
+                    .banner-description-container {
+                        .lib-css(min-width, @kemana-banner-banner-description__min-width);
+                        .lib-css(width, @kemana-banner-banner-description__width);
+                    }
+                }
+
+                &.left {
+                    .banner-description-container {
+                        left: 225px;
+                    }
+                }
+
+                &.right {
+                    .banner-description-container {
+                        right: 225px;
+                    }
+                }
+            }
+        }
+
+        .banner-img {
+            .desktop {
+                display: block;
+            }
+
+            .mobile {
+                display: none;
+            }
+        }
+    }
+
+    .full-width-banner,
+    .half-width-banner {
+        &.main-home-slider {
+            .banner-img {
+                .mobile {
+                    display: none;
+                }
+
+                .desktop {
+                    display: block;
+                }
+            }
+        }
+    }
+
+    .half-width-banner {
+        width: 50%;
+        margin-bottom: 0;
+
+        &:nth-child(1) {
+            padding-right: @indent__s;
+        }
+
+        &:nth-child(2) {
+            padding-left: @indent__s;
+        }
+
+        .banner-description {
+            .banner-logo {
+                img {
+                    width: auto;
+                }
+            }
+        }
+    }
+}
+
+//
+//  Desktop Large
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+    .carousel-container {
+        .banner-item {
+            .banner-description {
+                &.left {
+                    .banner-description-container {
+                        left: 10%;
+                    }
+                }
+
+                &.right {
+                    .banner-description-container {
+                        right: 10%;
+                    }
+                }
+            }
+        }
+
+        .owl-carousel {
+            .owl-nav {
+                & when (@kemana-banner-nav-max-width = true) {
+                    .lib-css(width, @layout__max-width);
+                    position: absolute;
+                    top: 45%;
+                    transform: translateY(-50%);
+                    left: 50%;
+                    transform: translateX(-50%);
+
+                    button {
+                        &.owl-prev {
+                            top: 0;
+                            transform: none;
+                        }
+
+                        &.owl-next {
+                            top: 0;
+                            transform: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .home-banner-first-container {
+        .row {
+            align-items: center;
+        }
+
+        .banner-right {
+            padding-left: @indent__l;
+            text-align: right;
+        }
+
+        .banner-description {
+            h1  {
+                margin-top: 0;
+                margin-bottom: @indent__l;
+            }
+
+            p {
+                margin-bottom: 50px;
+            }
+        }
+
+        .actions-toolbar {
+            .primary {
+                float: right;
+                width: 100%;
+                text-align: right;
+                display: inline-block;
+
+                .action {
+                    width: 100%;
+                    max-width: 156px;
+                    float: none;
+                    text-align: center;
+
+                    &.shop-men {
+                        margin-right: 27px;
+                    }
+                }
+            }
+        }
+    }
+
+    .full-width-banner,
+    .half-width-banner {
+        .banner-img {
+            .desktop {
+                display: block;
+            }
+
+            .mobile {
+                display: none;
+            }
+        }
+    }
+
+    .full-width-banner {
+        .banner-description {
+            h1 {
+                margin-bottom: @indent__l;
+            }
+        }
+    }
+
+    .half-width-banner {
+        .banner-description {
+            p {
+                .lib-typography(
+                    @_font-size: 15px,
+                    @_font-weight: @font-weight__bold,
+                    @_line-height: 20px
+                );
+                margin-bottom: 27px;
+            }
+
+            .banner-logo {
+                margin-bottom: 17px;
+            }
+
+            &.right {
+                .banner-description-container {
+                    right: 12%;
+                }
+            }
+        }
+
+        .primary {
+            &.shop-now {
+                .lib-button-l(
+                    @_button-l-font-size: 15px,
+                    @_button-l-height: 44px,
+                    @_button-l-padding: 0 22px
+                );
+            }
+        }
+    }
+}
