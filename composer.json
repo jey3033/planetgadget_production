@@ -41,10 +41,6 @@
             "type": "git",
             "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_whatsappchat.git"
         },
-        "kemana-banner": {
-            "type": "git",
-            "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_banner.git"
-        },
         "kemana-labelmanager": {
             "type": "git",
             "url": "https://git.kemana.com/kemana-dev/accelerator-features/kemana_labelmanager.git"
@@ -118,7 +114,6 @@
         "kemana/kemana_storelocator": "2.43.2",
         "kemana/module-accelerator-base": "dev-release-Staging-243",
         "kemana/module-ajax-layered-navigation": "dev-release-Staging-243",
-        "kemana/module-banner": "2.43.1",
         "kemana/module-blog": "2.43.0",
         "kemana/module-categoriesenhanced": "2.43.1",
         "kemana/module-compare-product": "2.43.0",
