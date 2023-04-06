@@ -157,8 +157,8 @@ class SyncOrdersToErp
                     "OrderNo" => $order->getIncrementId(),
                     "LineNo" => $lineNo,
                     "ItemNo" => $lineItem->getSku(),
-                    "Quantity" => intval($lineItem->getQtyOrdered()),
-                    "Price" => floatval($lineItem->getPrice())
+                    "Quantity" => $lineItem->getQtyOrdered(),
+                    "Price" => intval($lineItem->getPrice())
                 ];
 
                 if ($lineItem->getName()) {
@@ -175,7 +175,7 @@ class SyncOrdersToErp
                 $dataToOrderLineItems .= "</Order_Line>";
 
                 $lineNo++;
-                $orderItemTotal = $orderItemTotal + floatval($lineItem->getRowTotalInclTax());
+                $orderItemTotal = $orderItemTotal + intval($lineItem->getRowTotalInclTax());
             }
 
             $dataToOrderLineItems .= "</SalesOrderLine>";
