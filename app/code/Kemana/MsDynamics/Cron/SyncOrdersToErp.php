@@ -182,7 +182,7 @@ class SyncOrdersToErp
 
             $dataToOrder .= $dataToOrderLineItems;
 
-            $this->helper->log('Order Cron or From Grid : Order Total : ' . floatval($order->getGrandTotal()) . ' and Order Line Items Total :' . $orderItemTotal, 'error');
+            $this->helper->log('Order Cron or From Grid : Order Total : ' . intval($order->getGrandTotal()) . ' and Order Line Items Total :' . $orderItemTotal, 'error');
 
             $createOrderInErp = $this->erpOrder->createOrderInErp($this->helper->getFunctionCreateOrder(),
                 $this->helper->getSoapActionCreateOrder(), $dataToOrder);
