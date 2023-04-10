@@ -542,6 +542,13 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     {
         $xmlOutput = '';
         foreach ($pureArray as $nodeName => $nodeValue) {
+            if ($nodeName == "MagentoCustomerID") {
+                $value = $nodeValue;
+                if (!$nodeValue) {
+                    $value = 0;
+                }
+                $xmlOutput .= "<{$nodeName}>{$value}</{$nodeName}>";
+            }else 
             if (!$nodeValue) {
                 $xmlOutput .= '<' . $nodeName . '/>';
                 continue;
