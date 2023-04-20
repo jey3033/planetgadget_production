@@ -177,7 +177,7 @@
         <?php /* Extensions placeholder */ ?>
         <?= $block->getChildHtml('customer.form.register.newsletter') ?>
     <?php endif ?>
-    <div class="actions-toolbar">
+    <div class="actions-toolbar" style="margin-top: 10px;">
         <div class="primary">
             <button type="submit" class="action submit primary" title="<?= $block->escapeHtmlAttr(__('Create an Account')) ?>"><span><?= $block->escapeHtml(__('Create an Account')) ?></span></button>
         </div>
@@ -200,7 +200,28 @@ require([
         if ($(".switcher-option.active").hasClass('view-ID')) {
             $("#dob").attr("placeholder", "Hari/Bulan/Tahun");
         }
-        
+        if($('#email_address').val()){
+            if($(".social-login-authentication-channel")){
+                $(".social-login-authentication-channel").remove();
+            }
+            $('.account-social-login-title').css('display','none');
+            $('.columns').css('padding-bottom', '40px');
+            $('.column').addClass('row');
+            $('.row').removeClass('column');
+            $('.row').css('justify-content', 'center');
+            $('.row').css('background', 'white');
+            $('.row').css('padding-top', '35px');
+            $('.customer-form-before').css('border-right', 'black solid 1px');
+            $('.customer-form-before').css('margin-top', '15px');
+            $('.customer-form-before').css('margin-bottom', '15px');
+            $('.customer-form-before').css('padding', '5px 50px 5px 5px');
+            // $('#form-validate').css('background', 'white');
+            $('#form-validate').css('margin-left', '50px');
+            $('#form-validate').css('padding', '5px');
+            $('#form-validate').css('margin-top', '15px');
+            $('#form-validate').css('margin-bottom', '15px');
+            $('.message').css("width", "380px");
+        }
       });
 
 
