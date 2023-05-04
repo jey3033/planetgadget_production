@@ -8,7 +8,7 @@
  * available through the world-wide-web at this URL:
  * https://www.mageplaza.com/LICENSE.txt
  *
- * DISCLAIMER
+ * DISCLAIMER test magento cloud
  *
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
