@@ -139,8 +139,7 @@
         "laminas/laminas-log": "^2.15",
         "laminas/laminas-mime": "^2.9",
         "magento/composer-root-update-plugin": "~1.1",
-        "magento/ece-tools": "2002.1.10",
-        "magento/magento-cloud-metapackage": "2.4.3"
+        "magento/ece-tools": "2002.1.10"
     },
     "suggest": {
         "ext-pcntl": "Need for run processes in parallel mode"
