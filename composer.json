@@ -6,7 +6,13 @@
     "license": "OSL-3.0",
     "config": {
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "magento/magento-composer-installer": false,
+            "laminas/laminas-dependency-plugin": false,
+            "magento/inventory-composer-installer": false,
+            "magento/composer-root-update-plugin": false
+        }
     },
     "repositories": {
         "repo": {
@@ -134,7 +140,7 @@
         "laminas/laminas-mime": "^2.9",
         "magento/composer-root-update-plugin": "~1.1",
         "magento/ece-tools": "2002.1.10",
-        "magento/magento-cloud-metapackage": ">=2.4.3 <2.4.4"
+        "magento/magento-cloud-metapackage": "2.4.3"
     },
     "suggest": {
         "ext-pcntl": "Need for run processes in parallel mode"
