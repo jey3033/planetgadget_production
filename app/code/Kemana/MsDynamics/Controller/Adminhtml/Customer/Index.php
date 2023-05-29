@@ -89,7 +89,9 @@ class Index extends \Magento\Backend\App\Action
             $customerId = $this->getRequest()->getPost('customerId');
 
             $pushCustomer = $this->syncCustomersToErp->syncMissingCustomersFromRealTimeSync(0, $customerId);
-            $this->syncRewardPointToErp->syncRewardPointFromMagentoToErp(0, $customerId);
+            if ($pushCustomer) {
+                $this->syncRewardPointToErp->syncRewardPointFromMagentoToErp(0, $customerId);
+            }
         }
 
         if ($pushCustomer['result']) {
