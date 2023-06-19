@@ -64,6 +64,9 @@ $postsRecent = $block->getRecentPost();
                             <span class="create-at">
                                 <?= $post->getPublishDate() ? $kemanaBlogArticleHelper->getTimeAccordingToTimeZone($post->getPublishDate(), 'd M Y') : ''; ?>
                             </span>
+                            <span class="create-at">
+                                <?= $_post->getViewTraffic() ? $_post->getViewTraffic() : '0'; ?>
+                            </span>
                         </div>
                         <div class="mp-clear"></div>
                     </div>
