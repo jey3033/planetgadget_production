@@ -33,6 +33,7 @@ $postsRecent = $block->getRecentPost();
                                 <?= $post->getPublishDate() ? $kemanaBlogArticleHelper->getTimeAccordingToTimeZone($post->getPublishDate(), 'd M Y') : ''; ?>
                             </span>
                             <span class="create-at">
+                            <i class="mp-blog-icon mp-blog-traffic" aria-hidden="true"></i>
                                 <?= $post->getViewTraffic() ? $post->getViewTraffic() : '0'; ?>
                             </span>
                         </div>
@@ -65,6 +66,7 @@ $postsRecent = $block->getRecentPost();
                                 <?= $post->getPublishDate() ? $kemanaBlogArticleHelper->getTimeAccordingToTimeZone($post->getPublishDate(), 'd M Y') : ''; ?>
                             </span>
                             <span class="create-at">
+                            <i class="mp-blog-icon mp-blog-traffic" aria-hidden="true"></i>
                                 <?= $post->getViewTraffic() ? $post->getViewTraffic() : '0'; ?>
                             </span>
                         </div>
