@@ -55,6 +55,12 @@ $color = $helper->getBlogConfig('general/font_color');
                             <?= /* @noEscape */ __($categoryHtml); ?>
                         </span>
                     <?php endif; ?>
+                    <?php if ($tagHtml = $block->getTagList($_post)) : ?>
+                        <span class ="line">|</span>
+                        <span>tag : 
+                            <?= /* @noEscape */ __($tagHtml); ?>
+                        </span>
+                    <?php endif; ?>
                     <?php if ($_post->getViewTraffic()) : ?>
                         <span class ="line">|</span>
                         <span><i class="mp-blog-icon mp-blog-traffic" aria-hidden="true">
