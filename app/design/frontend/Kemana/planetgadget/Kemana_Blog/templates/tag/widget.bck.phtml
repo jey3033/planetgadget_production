@@ -1,0 +1,21 @@
+<?php
+
+
+/** @var \Kemana\Blog\Model\ResourceModel\Tag\Collection $tags */
+$tags = $block->getTagList();
+
+if ($tags && $tags->getSize()): ?>
+    <div class="mp-sidebar mpcss" style="display: none;">
+        <div class="block-title col-xs-12 sidebar-tags">
+            <span class="block-mp-sidebar-heading blog-sidebar-heading"><?= $block->escapeHtml(__('Tags')) ?></span>
+        </div>
+        <div class="mpcss-content-wrapper tags-lists">
+            <?php foreach ($tags->setPageSize(10)->setCurPage(1)->load() as $tag): ?>
+                <a class="label label-default tags-list"
+                   href="<?= $block->getTagUrl($tag) ?>">
+                    <?= $tag->getName(); ?>
+                </a>
+            <?php endforeach; ?>
+        </div>
+    </div>
+<?php endif; ?>
