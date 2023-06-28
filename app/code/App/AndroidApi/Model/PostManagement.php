@@ -96,22 +96,18 @@ class PostManagement extends \Magento\Framework\Model\AbstractModel implements P
         $collection->addAttributeToSelect('*');
 		$collection->setVisibility($this->_productVisibility->getVisibleInSiteIds());
 		if (strtoupper($mode) == 'NEW') {
-			$collection->setOrder('created_on');
-			$collection->setCurPage($page)->setPageSize($count);
+			$collection->setOrder('created_at');
 		}
 		if (strtoupper($mode) == 'BEST') {
+			$this->_bestSellersCollectionFactory = ObjectManager::getInstance()->get(BestSellersCollectionFactory::class);
 			$productIds = [];
         	$bestSellers = $this->_bestSellersCollectionFactory->create()->setPeriod('month');
 			foreach ($bestSellers as $product) {
 				$productIds[] = $product->getProductId();
 			}
-			$collection = $this->_productCollectionFactory->create()->addIdFilter($productIds);
-			$collection->addMinimalPrice()
-				->addFinalPrice()
-				->addTaxPercents()
-				->addAttributeToSelect('*')
-				->addStoreFilter($this->getStoreId())->setPageSize($count)->setCurPage($page);
+			$collection->addIdFilter($productIds);
 		}
+		$collection->setCurPage($page)->setPageSize($count);
 		// $this->_productRepositoryFactory = ObjectManager::getInstance()->get(ProductRepositoryInterfaceFactory::class);
 		$result = [];
 		$i = 0;
