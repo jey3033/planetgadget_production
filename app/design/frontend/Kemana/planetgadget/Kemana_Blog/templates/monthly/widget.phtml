@@ -8,7 +8,7 @@ $dateArrayUnique = $block->getDateArrayUnique();
 $dateLabel = $block->getDateLabel();
 
 if ($block->isEnable() && $dateArrayUnique): ?>
-    <div class="mp-sidebar mpcss">
+    <div class="mp-sidebar mpcss" style="display: none;">
         <div class="block-title sidebar-archives">
             <span class="block-mp-sidebar-heading blog-sidebar-heading"><?= $block->escapeHtml(__('Monthly Archive')) ?></span>
         </div>
