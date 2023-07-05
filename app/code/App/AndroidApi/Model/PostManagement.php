@@ -7,6 +7,7 @@ use Magento\Catalog\Block\Product\Image;
 use Magento\Catalog\Model\Product\Image\UrlBuilder;
 use Magento\Catalog\Model\Product\Visibility;
 use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory;
+use Magento\Catalog\Model\Product;
 use Magento\Framework\DataObject;
 use Magento\Framework\App\ObjectManager;
 use PhpParser\Node\Expr\Cast\Object_;
@@ -56,6 +57,11 @@ class PostManagement extends \Magento\Framework\Model\AbstractModel implements P
 	 * @var ImageHelper 
 	 */
 	protected $imageHelper;
+
+	/**
+	 * @var Product
+	 */
+	protected $productRepo;
 
 	/** 
 	 * @return mixed
@@ -108,19 +114,28 @@ class PostManagement extends \Magento\Framework\Model\AbstractModel implements P
 			$collection->addIdFilter($productIds);
 		}
 		$collection->setCurPage($page)->setPageSize($count);
-		// $this->_productRepositoryFactory = ObjectManager::getInstance()->get(ProductRepositoryInterfaceFactory::class);
+		$this->productRepo = ObjectManager::getInstance()->create(Product::class);
 		$result = [];
 		$i = 0;
 
 		foreach ($collection as $item) {
+			// $result[$i] = $item;
 			$result[$i]['id'] = $item->getId();
 			$result[$i]['name'] = $item->getName();
 			$result[$i]['url'] = 'products/' . $item->getUrlKey();
 			//get image
-			// $result[$i]['images'] = $this->imageHelper->init($item, 'product_thumbnail_image')->getUrl();
 			// $result[$i]['images'] = array($images);
+			$product = $this->productRepo->load($item->getId());        
+			$images = $product->getMediaGalleryImages();
+			$j = 0;
+			foreach ($images as $key) {
+				$result[$i]['images'][$j] = $key->getUrl();
+				$j++;
+			}
 			$i++;
+			// var_dump($item);
 		}
+		// die();
 
 		return array($result);
 	}
