@@ -181,8 +181,8 @@ class Promotion extends \Magento\Framework\View\Element\Template
             ->create();
 
         $sortOrder = $this->sortOrderBuilder
-            ->setField('sort_order')
-            ->setDirection('ASC')
+            ->setField('updated_at')
+            ->setDirection('DESC')
             ->create();
 
         $this->searchCriteriaBuilder->setSortOrders([$sortOrder]);
