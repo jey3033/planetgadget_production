@@ -131,7 +131,7 @@ class Content extends \Magento\Framework\View\Element\Template
             ->create();
 
         $sortOrder = $this->sortOrderBuilder
-            ->setField('created_at')
+            ->setField('updated_at')
             ->setDirection('DESC')
             ->create();
 
