@@ -185,8 +185,8 @@ class Promotion extends \Magento\Framework\View\Element\Template
             ->setDirection('DESC')
             ->create();
 
-        $this->searchCriteriaBuilder->setSortOrders([$sortOrder]);
         $this->searchCriteriaBuilder->setFilterGroups([$filterGroupStatus]);
+        $this->searchCriteriaBuilder->setSortOrders([$sortOrder]);
 
         $this->searchCriteriaBuilder->setPageSize($limit);
         $this->searchCriteriaBuilder->setCurrentPage($page);
