@@ -1,0 +1,50 @@
+<div class="footer-middle">
+    <div class="footer-top-content">
+        <div class="footer-section">
+            <div class="row">
+
+                <div class="col-md-5 offset-md-1 col-sm-12 newsletter-description">
+                    <span id="newsletter-title"><?php echo __("Don't miss the latest info!"); ?></span>
+                    <p><?php echo __("Enter your email and get the latest Planet Gadget updates & promotions"); ?></p>
+                </div>
+                <div class="col-md-5 col-sm-12 newsletter-form">
+                    <?php echo $block->getLayout()->createBlock("Magento\Newsletter\Block\Subscribe")->setTemplate('Magento_Newsletter::subscribe.phtml')->toHtml(); ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-main-content">
+        <div class="footer-section">
+            <div class="row">
+                <div class="col-md-3 offset-md-1 col-sm-12 address-section">
+                    <?= $block->getChildHtml('footer-address-section') ?>
+                    <?= $block->getChildHtml('footer-social-icon-section') ?>
+                </div>
+
+                <div class="col-md-4 col-sm-12 menu-section">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12 menu-items accordion-item">
+                            <?= $block->getChildHtml('footer-information-links-section') ?>
+                        </div>
+                        <div class="col-md-6 col-sm-12 menu-items accordion-item">
+                            <div data-content-type="html" data-appearance="default" data-element="main" data-decoded="true" role="tablist">
+                            <p class="title" data-role="collapsible"><?php echo __("Privacy Policy"); ?></p>
+                            <?php /* $block->getChildHtml('footer_links') */ ?>
+                            <?php echo $block->getLayout()
+                                    ->createBlock('Magento\Cms\Block\Block')
+                                    ->setBlockId('footer-privacy-policy')
+                                    ->toHtml(); ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-12 section-icons">
+                    <?= $block->getChildHtml('footer-icons-section') ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="footer-section"><?= $block->getChildHtml('copyright') ?></div>
+    </div>
+</div>

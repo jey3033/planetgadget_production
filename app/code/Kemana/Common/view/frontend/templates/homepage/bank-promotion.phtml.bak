@@ -1,0 +1,43 @@
+<?php
+/**
+ * Copyright © 2022 PT Kemana Teknologi Solusi. All rights reserved.
+ * http://www.kemana.com
+ */
+
+/**
+ * @category Kemana
+ * @package  Kemana_Common
+ * @license  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ *
+ * @author   Achintha Madushan <amadushan@kemana.com>
+ */
+
+$bankPromotions =  $block->getLatestBankPromotions();
+/** @var \Kemana\Promotion\Helper\Data $kemanaPromotionHelper */
+$kemanaPromotionHelper = $this->helper(Kemana\Promotion\Helper\Data::class);
+$title = __('Bank & Partner <span>Promo</span>');
+?>
+<div class="home-bank-and-promotions">
+    <div class="banner-inner-container widget-title block-title">
+        <h2><?= /* @escapeNotVerified */ $title ?></h2>
+        <span><a href="<?= $kemanaPromotionHelper->getLandingPageFrontName()?>"><?= $block->escapeHtml(__('See more')) ?></a></span>
+        <div class="row">
+        <?php if (!empty($bankPromotions)): ?>
+            <?php foreach ($bankPromotions as $bankPromotion): ?>
+            <div class="col-md-4 col-12 image-block">
+                <?php if ($bankPromotion->getLandingImage()): ?>
+                    <a href="<?= $bankPromotion->getIdentifier() ?>"><div class="image">
+                        <img src="<?= $block->getMediaFolderUrl().$bankPromotion->getLandingImage() ?>">
+                    </div></a>
+                <?php endif; ?>
+                <?php if ($bankPromotion->getLandingImageMobile()): ?>
+                    <a href="<?= $bankPromotion->getIdentifier() ?>"><div class="image-mobile" style="display: none">
+                        <img src="<?= $block->getMediaFolderUrl().$bankPromotion->getLandingImageMobile() ?>">
+                    </div></a>
+                <?php endif; ?>
+            </div>
+            <?php endforeach; ?>
+        <?php endif; ?>
+        </div>
+    </div>
+</div>

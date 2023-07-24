@@ -12,4 +12,16 @@
 			<resource ref="anonymous"/>
 		</resources>
 	</route>
+	<route method="GET" url="/V1/api/product/:id" >
+		<service class="App\AndroidApi\Api\PostManagementInterface" method="getDetailProduct"/>
+		<resources>
+			<resource ref="anonymous"/>
+		</resources>
+	</route>
+	<route method="POST" url="/V1/api/registercustomer">
+		<service class="App\AndroidApi\Api\PostManagementInterface" method="registerCustomer"/>
+		<resources>
+			<resource ref="anonymous"/>
+		</resources>
+	</route>
 </routes>

@@ -1,0 +1,58 @@
+<?php
+/**
+ * @category Kemana
+ * @package  Kemana_Brand
+ * @license  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ *
+ *
+ * @author   Taqin Jusuf <muttaqiin@kemana.com>
+ */
+/**
+ * @var $block \Kemana\Brand\Block\Home\Brand
+ * @var $escaper \Magento\Framework\Escaper
+ */
+?>
+<?php if ($block->isBrandEnable()): ?>
+    <?php if ($block->isShowFeatured()):
+        $brandFeatured = $block->getFeaturedBrandCollection();
+        $title = __('Brand <span>Recommendation</span>');
+    ?>
+        <?php if (count($brandFeatured) > 0): ?>
+            <div class="home-featured-brand-container full-container" style="max-width: unset;">
+                <div class="block widget block-brand-featured grid">
+                    <div class="widget-title block-title">
+                        <h2><?= /* @escapeNotVerified */ $title ?></h2>
+                    </div>
+                    <span><a href="<?= /* @escapeNotVerified */ $block->getUrl('brand/items') ?>"><?= __('See All') ?></a></span>
+                    <div class="block-content-wrapper">
+                        <div class="block-content">
+                            <div id="{brand-container}-nav" class="left"></div>
+                            <ul class="brand-container" id="brand-container">
+                                <?php foreach ($brandFeatured as $_brand): ?>
+                                    <li class="block-item">
+                                        <a href="<?= /* @escapeNotVerified */ $block->getCategoryUrl($_brand['category_id']); ?>"
+                                           title="<?= /* @escapeNotVerified */ $_brand['title'] ?>">
+                                            <?php if ($_brand['image']): ?>
+                                                <img class="item-image"
+                                                     src="<?= /* @escapeNotVerified */ $block->getBrandHelper()->getMediaUrl().'brand/images' . $_brand['image'] ?>"
+                                                     alt="<?= /* @escapeNotVerified */ $_brand['title'] ?>" />
+                                            <?php else: ?>
+                                                <span class="item-name"><?= /* @escapeNotVerified */ $_brand['title'] ?></span>
+                                            <?php endif; ?>
+                                        </a>
+                                    </li>
+                                <?php endforeach; ?>
+                            </ul>
+                            <div class="actions-toolbar">
+                                <div class="primary">
+                                    <a class="action view-all primary" href="<?= /* @escapeNotVerified */ $block->getUrl('brand/items') ?>"><?= $escaper->escapeHtml(__('View All Brands')) ?></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        <?php endif; ?>
+    <?php endif; ?>
+<?php endif; ?>

@@ -1,0 +1,98 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Magento\Catalog\Block\Product\View\Details $block */
+
+/** @var $viewModel \Kemana\Catalog\ViewModel\Product\View */
+
+$viewModel = $block->getViewModel();
+
+?>
+<?php if ($detailedInfoGroup = $block->getGroupSortedChildNames('detailed_info', 'getChildHtml')) :?>
+    <div class="product info detailed">
+        <?php $layout = $block->getLayout(); ?>
+        <div class="product data items">
+            <div class="data-block-wrapper">
+                <?php foreach ($detailedInfoGroup as $name) :?>
+                <?php
+                if ($name == 'related.post.tab') {
+                    continue;
+                }
+                $html = $layout->renderElement($name);
+                if (!trim($html)) {
+                    continue;
+                }
+                $alias = $layout->getElementAlias($name);
+                $label = $block->getChildData($alias, 'title');
+                ?>
+                <?php
+                if ($alias == 'reviews') continue;
+                if ($alias == 'additional'){
+                    echo '<div class="data-block-wrapper-right">';
+                }
+                ?>
+                <div class="data-block block-<?= $block->escapeHtmlAttr($alias) ?>">
+                    <div class="data item title"
+                         data-role="collapsible" id="tab-label-<?= $block->escapeHtmlAttr($alias) ?>">
+                        <a class="data switch"
+                           tabindex="-1"
+                           data-toggle="trigger"
+                           href="#<?= $block->escapeUrl($alias) ?>"
+                           id="tab-label-<?= $block->escapeHtmlAttr($alias) ?>-title">
+                            <?= /* @noEscape */ $label ?>
+                        </a>
+                    </div>
+                    <div class="data item content"
+                         aria-labelledby="tab-label-<?= $block->escapeHtmlAttr($alias) ?>-title" id="<?= $block->escapeHtmlAttr($alias) ?>" data-role="content">
+                        <?= /* @noEscape */ $html ?>
+                    </div>
+                </div>
+
+                <?php if ($alias == 'additional') : ?>
+                <div class="data-block block-warranty">
+                    <div class="data item content"
+                         aria-labelledby="tab-label-<?= $block->escapeHtmlAttr('warranty') ?>-title" id="<?= $block->escapeHtmlAttr('warranty') ?>" data-role="content">
+                        <div class="data item title"
+                             data-role="collapsible" id="tab-label-warranty">
+                            <a class="data switch"
+                               tabindex="-1"
+                               data-toggle="trigger"
+                               href="#<?= $block->escapeUrl('warranty') ?>"
+                               id="tab-label-<?= $block->escapeHtmlAttr('warranty') ?>-title">
+                                <?= /* @noEscape */ __('Warranty') ?>
+                            </a>
+                        </div>
+                        <?= /* @noEscape */ $viewModel->getWarrantyForCurrentProduct(); ?>
+                    </div>
+                </div>
+            </div><!-- end div data-block-wrapper-right-->
+            <?php endif;?>
+            <?php endforeach;?>
+        </div>
+        <?php
+        $reviews_html = $layout->renderElement('reviews.tab');
+        $reviews_alias = $layout->getElementAlias('reviews.tab');
+        $reviews_label = $block->getChildData($reviews_alias, 'title');
+        ?>
+        <div class="data-block block-<?= $block->escapeHtmlAttr($reviews_alias) ?>">
+            <div class="data item title"
+                 data-role="collapsible" id="tab-label-<?= $block->escapeHtmlAttr($reviews_alias) ?>">
+                <a class="data switch"
+                   tabindex="-1"
+                   data-toggle="trigger"
+                   href="#<?= $block->escapeUrl($reviews_alias) ?>"
+                   id="tab-label-<?= $block->escapeHtmlAttr($reviews_alias) ?>-title">
+                    <?= /* @noEscape */ $reviews_label ?>
+                </a>
+            </div>
+            <div class="data item content"
+                 aria-labelledby="tab-label-<?= $block->escapeHtmlAttr($reviews_alias) ?>-title" id="<?= $block->escapeHtmlAttr($reviews_alias) ?>" data-role="content">
+                <?= /* @noEscape */ $reviews_html ?>
+            </div>
+        </div>
+    </div>
+    </div>
+<?php endif; ?>
