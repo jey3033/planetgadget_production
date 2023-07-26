@@ -110,6 +110,10 @@
         var dataForm = $('#form-validate');
         var ignore = <?= /* @noEscape */ $_dob->isEnabled() ? '\'input[id$="full"]\'' : 'null' ?>;
 
+        if($('#dob').val()){
+            $('#dob').attr('disabled', 'true');
+        }
+
         dataForm.mage('validation', {
         <?php if ($_dob->isEnabled()) : ?>
             errorPlacement: function(error, element) {
