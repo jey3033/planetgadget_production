@@ -78,23 +78,18 @@
                                 class='st_email_hcount'></span><span class='st_sharethis_hcount'></span>
                         </div>
                         <?php endif;?>
-                        <div class="primary">
-                            <a href="#slide" class="action login primary" id="click-me">
-                                <span><?php echo __('Apply Now') ?></span>
-                            </a>
-                        </div>
                     </div>
                     <div class="content">
-                        <h3><?php echo __('Jobs Description')?></h3>
+                        <h3><?php echo __('Skills Required')?></h3>
                         <?php $jobDescription = $item[0]['jobs_description'] ?>
                         <?php $jobDescription = preg_replace('/(<(script|style)\b[^>]*>).*?(<\/\2>)/is', "$1$3", $jobDescription); // remove <style|script tag when page builder using html ?>
                         <?php $jobDescription = $kemanaJobsHelper->formatJobContentToHtml($jobDescription); // format content when page builder using html
 						?>
                         <?php echo __($jobDescription)?>
-                        <h3><?php echo __('Skills Required')?></h3>
+                        <h3><?php echo __('Jobs Description')?></h3>
                         <?php echo __($item[0]['jobs_required_skills'])?>
 
-                        <h4><?php echo __('Job Details')?></h4>
+                        <h4 style="padding-top: 10px;"><?php echo __('Job Details')?></h4>
                         <table>
                             <tbody>
                                 <?php if (!empty($item[0]['jobs_select_departments'])): ?>
