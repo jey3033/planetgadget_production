@@ -143,6 +143,132 @@ $color = $helper->getBlogConfig('general/font_color');
     <?php if ($helper->getBlogConfig('share/enabled')) : ?>
         <?php echo $block->getChildBlock('km.SocialShare')->toHtml(); ?>
     <?php endif; ?>
+    <?php $typeComment = $block->helperComment('type'); ?>
+    <?php if (((int)$typeComment !== Type::DISABLE) && $_post->getAllowComment()) : ?>
+        <div class="block-blog-related blog-comment">
+            <h2><?= /* @noEscape */ $block->escapeHtml(__('Comments')) ?></h2>
+            <?php if ((int)$typeComment === Type::DISQUS) : ?>
+                <div class="related-content-container box-collateral box-reviews" id="post-reviews">
+                    <div id="disqus_thread"></div>
+                    <script type="text/javascript">
+                        var disqus_shortname = '<?= $block->helperComment('disqus'); ?>';
+
+                        /* * * DON'T EDIT BELOW THIS LINE * * */
+                        (function () {
+                            var dsq = document.createElement('script');
+                            dsq.type = 'text/javascript';
+                            dsq.async = true;
+                            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                        })();
+                    </script>
+                </div>
+            <?php elseif ($typeComment == Type::FACEBOOK) : ?>
+                <div class="related-content-container box-collateral box-reviews
+                <?= /* @noEscape */ $helper->getBlogConfig('comment/facebook_colorscheme') ?>"
+                     id="post-reviews">
+                    <div id="fb-root"></div>
+                    <script>(function (d, s, id) {
+                            var js, fjs = d.getElementsByTagName(s)[0];
+                            if (d.getElementById(id)) return;
+                            js = d.createElement(s);
+                            js.id = id;
+                            js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.5&appId=<?=
+                                /* @noEscape */ $block->getDecrypt($block->helperComment('facebook_appid')) ?>";
+                            fjs.parentNode.insertBefore(js, fjs);
+                        }(document, 'script', 'facebook-jssdk'));
+                    </script>
+                    <div class="fb-comments" data-href="<?= /* @noEscape */ $_post->getUrl() ?>"
+                         data-numposts="<?= /* @noEscape */ $block->helperComment('facebook_number_comment') ?>"
+                         data-width="100%"
+                         data-colorscheme="<?= /* @noEscape */ $block->helperComment('facebook_colorscheme') ?>"
+                         data-order-by="<?= /* @noEscape */ $block->helperComment('facebook_order_by') ?>">
+                    </div>
+                </div>
+            <?php elseif ($typeComment == Type::DEFAULT_COMMENT) : ?>
+                <div class="related-content-container default-cmt">
+                    <?php if (!$block->isLoggedIn()) : ?>
+                        <div class="primary comment-login-container default-cmt__cmt-login">
+                            <button class="action comment-login primary default-cmt__cmt-login__btn-login"><?= /* @noEscape */ $block->escapeHtml(__('Login')) ?></button>
+                        </div>
+                    <?php endif; ?>
+                    <div class="related-content-items">
+                        <div class="default-cmt__content">
+                            <div class="default-cmt__content__cmt-block">
+                                <?php if (!$block->isLoggedIn()) : ?>
+                                    <form id="default-cmt__content__cmt-block__guest-form"
+                                          data-mage-init='{"validation":{}}'>
+                                        <fieldset class="fieldset">
+                                        <div class="field required">
+                                            <label class="label" for="default-cmt__content__cmt-block__guest-box__name-input">Name</label>
+                                            <input id="default-cmt__content__cmt-block__guest-box__name-input"
+                                                   type="text"
+                                                   name="default-cmt__content__cmt-block__guest-box__name-input"
+                                                   placeholder="<?= /* @noEscape */ $block->escapeHtml(__('Your display name')) ?>"
+                                                   data-validate="{required:true}">
+                                        </div>
+                                        <div class="field required">
+                                            <label class="label" for="default-cmt__content__cmt-block__guest-box__email-input">Email</label>
+                                            <input id="default-cmt__content__cmt-block__guest-box__email-input"
+                                                   type="text"
+                                                   name="default-cmt__content__cmt-block__guest-box__email-input"
+                                                   placeholder="<?= /* @noEscape */ $block->escapeHtml(__('Your email')) ?> "
+                                                   data-validate="{required:true, 'validate-email':true}">
+                                        </div>
+                                        </fieldset>
+                                    </form>
+                                <?php endif; ?>
+                                <fieldset class="fieldset">
+                                    <div class="field">
+                                        <label class="label" for="mp-guest-cmt-commentbox">Comment</label>
+                                        <textarea class="default-cmt__content__cmt-block__cmt-box__cmt-input"
+                                                  maxlength="255"
+                                                  placeholder="<?= /* @noEscape */ $block->escapeHtml(__('Type comments here...')) ?>"></textarea>
+                                    </div>
+                                    <div class="field">
+                                        <div class="default-cmt_loading" style="display: none">
+                                            <img
+                                              src="<?= /* @noEscape */ $block->getViewFileUrl('images/loader-1.gif') ?>"
+                                                 alt="Loading...">
+                                        </div>
+                                        <button class="default-cmt__content__cmt-block__cmt-box__cmt-btn__btn-submit
+                                         primary btn-primary">
+                                            <?= /* @noEscape */ $block->escapeHtml(__('Comment')) ?>
+                                        </button>
+                                    </div>
+
+                                </fieldset>
+                            </div>
+                            <div class="default-cmt__content__cmt-content">
+                                <?php
+                                $comments = $block->getPostComments($_post->getId());
+                                $block->getCommentsTree($comments, 0);
+                                ?>
+                                <?= $block->getCommentsHtml() ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    //get login url, text of button like, reply
+                    var loginUrl = '<?= /* @noEscape */ $block->getLoginUrl(); ?>',
+                        like = '<?= /* @noEscape */ $block->escapeHtml(__('Like')) ?>',
+                        reply = '<?= /* @noEscape */ $block->escapeHtml(__('Reply')) ?>',
+                        isLogged = '<?= /* @noEscape */ $isLogged ?>',
+                        likedColor = '<?= /* @noEscape */ $color?>',
+                        messengerBox = {
+                            cmt_warning: '<?= /* @noEscape */
+                                $block->getMessagesHtml('adderror', 'Please write the comment.')?>',
+                            exist_email_warning: '<?= /* @noEscape */$block->getMessagesHtml('adderror', 'This email is exist. Please <a href="' . $block->getLoginUrl() . '"> Login </a> as our customer.')?>',
+                            login_warning: '<?= /* @noEscape */ $block->getMessagesHtml('adderror', 'You are not logged in. Please <a href="' . $block->getLoginUrl() . '"> Login </a> or <a href="' . $block->getRegisterUrl() . '"> Signup </a> to like or send a reply.</div>')?>',
+                            comment_approve: '<?= /* @noEscape */ $block->getMessagesHtml('addsuccess', 'Your comment has been sent successfully. Please wait admin approve !')?>'
+                        };
+
+                    require(['comment']);
+                </script>
+            <?php endif; ?>
+        </div>
+    <?php endif; ?>
     <div style="margin-top:20px;border-radius:5px;background:#fff;padding: 23px 30px;">
     <?php echo $block->getChildBlock('kemana.locator.center')->toHtml(); ?>
     </div>
@@ -285,132 +411,6 @@ $color = $helper->getBlogConfig('general/font_color');
                 </div>f
             </div>
         <?php endif; ?>
-    <?php endif; ?>
-    <?php $typeComment = $block->helperComment('type'); ?>
-    <?php if (((int)$typeComment !== Type::DISABLE) && $_post->getAllowComment()) : ?>
-        <div class="block-blog-related blog-comment">
-            <h2><?= /* @noEscape */ $block->escapeHtml(__('Comments')) ?></h2>
-            <?php if ((int)$typeComment === Type::DISQUS) : ?>
-                <div class="related-content-container box-collateral box-reviews" id="post-reviews">
-                    <div id="disqus_thread"></div>
-                    <script type="text/javascript">
-                        var disqus_shortname = '<?= $block->helperComment('disqus'); ?>';
-
-                        /* * * DON'T EDIT BELOW THIS LINE * * */
-                        (function () {
-                            var dsq = document.createElement('script');
-                            dsq.type = 'text/javascript';
-                            dsq.async = true;
-                            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                        })();
-                    </script>
-                </div>
-            <?php elseif ($typeComment == Type::FACEBOOK) : ?>
-                <div class="related-content-container box-collateral box-reviews
-                <?= /* @noEscape */ $helper->getBlogConfig('comment/facebook_colorscheme') ?>"
-                     id="post-reviews">
-                    <div id="fb-root"></div>
-                    <script>(function (d, s, id) {
-                            var js, fjs = d.getElementsByTagName(s)[0];
-                            if (d.getElementById(id)) return;
-                            js = d.createElement(s);
-                            js.id = id;
-                            js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.5&appId=<?=
-                                /* @noEscape */ $block->getDecrypt($block->helperComment('facebook_appid')) ?>";
-                            fjs.parentNode.insertBefore(js, fjs);
-                        }(document, 'script', 'facebook-jssdk'));
-                    </script>
-                    <div class="fb-comments" data-href="<?= /* @noEscape */ $_post->getUrl() ?>"
-                         data-numposts="<?= /* @noEscape */ $block->helperComment('facebook_number_comment') ?>"
-                         data-width="100%"
-                         data-colorscheme="<?= /* @noEscape */ $block->helperComment('facebook_colorscheme') ?>"
-                         data-order-by="<?= /* @noEscape */ $block->helperComment('facebook_order_by') ?>">
-                    </div>
-                </div>
-            <?php elseif ($typeComment == Type::DEFAULT_COMMENT) : ?>
-                <div class="related-content-container default-cmt">
-                    <?php if (!$block->isLoggedIn()) : ?>
-                        <div class="primary comment-login-container default-cmt__cmt-login">
-                            <button class="action comment-login primary default-cmt__cmt-login__btn-login"><?= /* @noEscape */ $block->escapeHtml(__('Login')) ?></button>
-                        </div>
-                    <?php endif; ?>
-                    <div class="related-content-items">
-                        <div class="default-cmt__content">
-                            <div class="default-cmt__content__cmt-block">
-                                <?php if (!$block->isLoggedIn()) : ?>
-                                    <form id="default-cmt__content__cmt-block__guest-form"
-                                          data-mage-init='{"validation":{}}'>
-                                        <fieldset class="fieldset">
-                                        <div class="field required">
-                                            <label class="label" for="default-cmt__content__cmt-block__guest-box__name-input">Name</label>
-                                            <input id="default-cmt__content__cmt-block__guest-box__name-input"
-                                                   type="text"
-                                                   name="default-cmt__content__cmt-block__guest-box__name-input"
-                                                   placeholder="<?= /* @noEscape */ $block->escapeHtml(__('Your display name')) ?>"
-                                                   data-validate="{required:true}">
-                                        </div>
-                                        <div class="field required">
-                                            <label class="label" for="default-cmt__content__cmt-block__guest-box__email-input">Email</label>
-                                            <input id="default-cmt__content__cmt-block__guest-box__email-input"
-                                                   type="text"
-                                                   name="default-cmt__content__cmt-block__guest-box__email-input"
-                                                   placeholder="<?= /* @noEscape */ $block->escapeHtml(__('Your email')) ?> "
-                                                   data-validate="{required:true, 'validate-email':true}">
-                                        </div>
-                                        </fieldset>
-                                    </form>
-                                <?php endif; ?>
-                                <fieldset class="fieldset">
-                                    <div class="field">
-                                        <label class="label" for="mp-guest-cmt-commentbox">Comment</label>
-                                        <textarea class="default-cmt__content__cmt-block__cmt-box__cmt-input"
-                                                  maxlength="255"
-                                                  placeholder="<?= /* @noEscape */ $block->escapeHtml(__('Type comments here...')) ?>"></textarea>
-                                    </div>
-                                    <div class="field">
-                                        <div class="default-cmt_loading" style="display: none">
-                                            <img
-                                              src="<?= /* @noEscape */ $block->getViewFileUrl('images/loader-1.gif') ?>"
-                                                 alt="Loading...">
-                                        </div>
-                                        <button class="default-cmt__content__cmt-block__cmt-box__cmt-btn__btn-submit
-                                         primary btn-primary">
-                                            <?= /* @noEscape */ $block->escapeHtml(__('Comment')) ?>
-                                        </button>
-                                    </div>
-
-                                </fieldset>
-                            </div>
-                            <div class="default-cmt__content__cmt-content">
-                                <?php
-                                $comments = $block->getPostComments($_post->getId());
-                                $block->getCommentsTree($comments, 0);
-                                ?>
-                                <?= $block->getCommentsHtml() ?>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <script>
-                    //get login url, text of button like, reply
-                    var loginUrl = '<?= /* @noEscape */ $block->getLoginUrl(); ?>',
-                        like = '<?= /* @noEscape */ $block->escapeHtml(__('Like')) ?>',
-                        reply = '<?= /* @noEscape */ $block->escapeHtml(__('Reply')) ?>',
-                        isLogged = '<?= /* @noEscape */ $isLogged ?>',
-                        likedColor = '<?= /* @noEscape */ $color?>',
-                        messengerBox = {
-                            cmt_warning: '<?= /* @noEscape */
-                                $block->getMessagesHtml('adderror', 'Please write the comment.')?>',
-                            exist_email_warning: '<?= /* @noEscape */$block->getMessagesHtml('adderror', 'This email is exist. Please <a href="' . $block->getLoginUrl() . '"> Login </a> as our customer.')?>',
-                            login_warning: '<?= /* @noEscape */ $block->getMessagesHtml('adderror', 'You are not logged in. Please <a href="' . $block->getLoginUrl() . '"> Login </a> or <a href="' . $block->getRegisterUrl() . '"> Signup </a> to like or send a reply.</div>')?>',
-                            comment_approve: '<?= /* @noEscape */ $block->getMessagesHtml('addsuccess', 'Your comment has been sent successfully. Please wait admin approve !')?>'
-                        };
-
-                    require(['comment']);
-                </script>
-            <?php endif; ?>
-        </div>
     <?php endif; ?>
     <?php if ($helper->getSeoConfig('snippet/enabled')) : ?>
         <?php
