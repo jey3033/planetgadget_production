@@ -77,8 +77,8 @@ class PostManagement extends \Magento\Framework\Model\AbstractModel implements P
 	*/
 	public function getPost()
 	{
-		// $blogDataHelper = ObjectManager::getInstance()->get(Data::class);
-		$urlSuffix = $this->blogDataHelper->getUrlSuffix();
+		$this->blogDataHelper = ObjectManager::getInstance()->get(Data::class);
+		$urlSuffix = "";
 		$postCollection = $this->blogDataHelper->postFactory->create()->getCollection()->addFieldToFilter('enabled', 1);
 		$currentStoreId = $this->getStoreId();
 		$postCollection = $this->blogDataHelper->addStoreFilter($postCollection, $currentStoreId);
@@ -87,6 +87,7 @@ class PostManagement extends \Magento\Framework\Model\AbstractModel implements P
 
 		foreach ($postCollection as $item) {
 			$post[$i]['name'] = $item->getName();
+			$post[$i]['image'] = $item->getImage();
 			$post[$i]['url'] = 'blog/post/' . $item->getUrlKey() . $urlSuffix;
 			$i++;
 		}
@@ -205,8 +206,11 @@ class PostManagement extends \Magento\Framework\Model\AbstractModel implements P
 			$objectManager->get('\Magento\Customer\Api\CustomerRepositoryInterface')->save($customer, $hashedPassword);
 		 
 			$customer = $objectManager->get('\Magento\Customer\Model\CustomerFactory')->create();
-			$customer->setWebsiteId($websiteId)->loadByEmail($email);
-			return $customer;
+			$data = $customer->setWebsiteId($websiteId)->loadByEmail($email);
+			return json_encode([
+				'status' => "success",
+				'id' => $customer->getID()
+			]);
 		} catch (Exception $e) {
 			echo $e->getMessage();
 		}
