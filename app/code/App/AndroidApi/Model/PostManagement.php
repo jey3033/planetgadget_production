@@ -170,6 +170,7 @@ class PostManagement extends \Magento\Framework\Model\AbstractModel implements P
 		$arr['option'] = $prodopt;
 		$images = $product->getMediaGalleryEntries();
 		$i=0;
+		$arr['images'][$i] = '-';
 		foreach ($images as $key) {
 			$arr['images'][$i] = $key->getFile();
 			$i++;
