@@ -11,6 +11,13 @@ interface PostManagementInterface {
 	public function getPost();
 
 	/**
+	 * @param string $id
+	 * @return mixed
+	 */
+	
+	public function getDetailPost($id);
+
+	/**
 	 * @return mixed
 	 */
 	public function getProduct();
@@ -23,7 +30,6 @@ interface PostManagementInterface {
 	public function getDetailProduct($id);
 
 	/**
-	 * test 1
 	 * 
 	 * @return mixed
 	 */

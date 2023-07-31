@@ -95,6 +95,31 @@ class PostManagement extends \Magento\Framework\Model\AbstractModel implements P
 		return array($post);
 	}
 
+	/** 
+	 * @inheritdoc
+	*/
+	public function getDetailPost($id)
+	{
+		$this->blogDataHelper = ObjectManager::getInstance()->get(Data::class);
+		$urlSuffix = "";
+		$postCollection = $this->blogDataHelper->postFactory->create()->getCollection()->addFieldToFilter('enabled', 1);
+		$currentStoreId = $this->getStoreId();
+		$postCollection = $this->blogDataHelper->addStoreFilter($postCollection, $currentStoreId);
+		$postCollection = $postCollection->addFieldToFilter('url_key', array("like" => "%$id"));
+		$post = [];
+		$i = 0;
+
+		foreach ($postCollection as $item) {
+			$post[$i]['name'] = $item->getName();
+			$post[$i]['image'] = $item->getImage();
+			$post[$i]['url'] = 'blog/post/' . $item->getUrlKey() . $urlSuffix;
+			$i++;
+		}
+
+		return array($post);
+		// return $id;
+	}
+
 	/**
 	 * 
 	 * @return mixed
@@ -110,7 +135,7 @@ class PostManagement extends \Magento\Framework\Model\AbstractModel implements P
 		$this->imageHelper = ObjectManager::getInstance()->get(ImageHelper::class);
 		$collection = $this->_productCollectionFactory->create();
         $collection->addAttributeToSelect('*');
-		$collection->setVisibility($this->_productVisibility->getVisibleInSiteIds());
+		// $collection->setVisibility($this->_productVisibility->getVisibleInSiteIds());
 		if (strtoupper($mode) == 'NEW') {
 			$collection->setOrder('created_at');
 		}
@@ -138,7 +163,7 @@ class PostManagement extends \Magento\Framework\Model\AbstractModel implements P
 			$images = $product->getMediaGalleryImages();
 			$j = 0;
 			foreach ($images as $key) {
-				$result[$i]['images'][$j] = $key->getUrl();
+				$result[$i]['image'][$j] = $key->getUrl();
 				$j++;
 			}
 			$i++;
@@ -170,7 +195,6 @@ class PostManagement extends \Magento\Framework\Model\AbstractModel implements P
 		$arr['option'] = $prodopt;
 		$images = $product->getMediaGalleryEntries();
 		$i=0;
-		$arr['images'][$i] = '-';
 		foreach ($images as $key) {
 			$arr['images'][$i] = $key->getFile();
 			$i++;
@@ -183,6 +207,8 @@ class PostManagement extends \Magento\Framework\Model\AbstractModel implements P
 	 * @inheritDoc
 	 */
 	public function registerCustomer() {
+		// require 'app/bootstrap.php';
+		// $bootstrap = Bootstrap::create(BP, $_SERVER);
 		$objectManager = ObjectManager::getInstance();
 		$storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
 		$storeId = $storeManager->getStore()->getId();
