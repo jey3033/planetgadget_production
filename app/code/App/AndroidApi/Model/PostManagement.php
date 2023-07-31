@@ -166,8 +166,7 @@ class PostManagement extends \Magento\Framework\Model\AbstractModel implements P
 		// var_dump($prodopt);die();
 		$i = 0;
 		$productTypeInstance = ObjectManager::getInstance()->get('Magento\ConfigurableProduct\Model\Product\Type\Configurable');
-		$prodopt = $productTypeInstance->getConfigurableAttributesAsArray
-		($product);
+		$prodopt = $productTypeInstance->getConfigurableAttributesAsArray($product);
 		$arr['option'] = $prodopt;
 		$images = $product->getMediaGalleryEntries();
 		$i=0;
