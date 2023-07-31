@@ -183,8 +183,6 @@ class PostManagement extends \Magento\Framework\Model\AbstractModel implements P
 	 * @inheritDoc
 	 */
 	public function registerCustomer() {
-		// require 'app/bootstrap.php';
-		// $bootstrap = Bootstrap::create(BP, $_SERVER);
 		$objectManager = ObjectManager::getInstance();
 		$storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
 		$storeId = $storeManager->getStore()->getId();
