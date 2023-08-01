@@ -8,7 +8,6 @@
 //  Variables
 //  _____________________________________________
 
-
 //
 //  Common
 //  _____________________________________________
@@ -45,7 +44,7 @@
                     margin-bottom: 0;
 
                     &:after {
-                        content: '';
+                        content: "";
                         height: 10px;
                         display: block;
                         margin-top: -10px;
@@ -53,7 +52,6 @@
                         background: @color-pg-yellow;
                     }
                 }
-
             }
 
             .pg-member-block {
@@ -68,7 +66,7 @@
                         @_icon-font-size: 19px,
                         @_icon-font-line-height: 20px,
                         @_icon-font-margin: -3px 10px 0 0
-                    )
+                    );
                 }
 
                 &.pg-gold-member-block {
@@ -86,8 +84,10 @@
             }
         }
 
+        // test 1
         .pg-club-membership-banner {
-            background: url("../images/membership-banner-2x.png") center no-repeat;
+            background: url("../images/membership-banner-2x.png") center
+                no-repeat;
             background-size: cover;
             margin-top: 50px;
             text-align: center;
@@ -114,7 +114,11 @@
 //  Mobile
 //  _____________________________________________
 
-.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+.media-width(@extremum, @break)
+    when
+    (@extremum = "max")
+    and
+    (@break = @screen__m) {
     .cms-planet-gadget-club {
         .pg-club-banner {
             margin-bottom: 30px;
@@ -134,7 +138,11 @@
 //  Desktop
 //  _____________________________________________
 
-.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+.media-width(@extremum, @break)
+    when
+    (@extremum = "min")
+    and
+    (@break = @screen__m) {
     .cms-planet-gadget-club {
         .pg-club-banner {
             margin-bottom: 40px;
