@@ -105,7 +105,7 @@ class PostManagement extends \Magento\Framework\Model\AbstractModel implements P
 		$postCollection = $this->blogDataHelper->postFactory->create()->getCollection()->addFieldToFilter('enabled', 1);
 		$currentStoreId = $this->getStoreId();
 		$postCollection = $this->blogDataHelper->addStoreFilter($postCollection, $currentStoreId);
-		$postCollection = $postCollection->addFieldToFilter('url_key', array("like" => "%$id"));
+		$postCollection = $postCollection->addFieldToFilter('url_key', array("like" => "%$id%"));
 		$post = [];
 		$i = 0;
 
