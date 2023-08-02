@@ -83,27 +83,25 @@
                 }
             }
         }
+    }
+    // test 1
+    .pg-club-membership-banner {
+        background: url("../images/membership-banner-2x.png") center no-repeat;
+        background-size: cover;
+        margin-top: 50px;
+        text-align: center;
+        border-radius: @common-border-radius;
+        padding: 50px;
 
-        // test 1
-        .pg-club-membership-banner {
-            background: url("../images/membership-banner-2x.png") center
-                no-repeat;
-            background-size: cover;
-            margin-top: 50px;
-            text-align: center;
-            border-radius: @common-border-radius;
-            padding: 50px;
+        h2 {
+            .lib-css(color, @color-white);
+            margin-bottom: 30px;
 
-            h2 {
-                .lib-css(color, @color-white);
-                margin-bottom: 30px;
+            span {
+                .lib-css(color, @kemana-secondary-brand-color);
 
-                span {
-                    .lib-css(color, @kemana-secondary-brand-color);
-
-                    &:after {
-                        display: none !important;
-                    }
+                &:after {
+                    display: none !important;
                 }
             }
         }
