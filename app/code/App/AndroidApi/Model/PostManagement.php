@@ -103,16 +103,17 @@ class PostManagement extends \Magento\Framework\Model\AbstractModel implements P
 		$this->blogDataHelper = ObjectManager::getInstance()->get(Data::class);
 		$urlSuffix = "";
 		$postCollection = $this->blogDataHelper->postFactory->create()->getCollection()->addFieldToFilter('enabled', 1);
+		$postCollection = $postCollection->addFieldToFilter('url_key', array("like" => "%$id%"));
 		$currentStoreId = $this->getStoreId();
 		$postCollection = $this->blogDataHelper->addStoreFilter($postCollection, $currentStoreId);
-		$postCollection = $postCollection->addFieldToFilter('url_key', array("like" => "%$id%"));
 		$post = [];
 		$i = 0;
 
 		foreach ($postCollection as $item) {
 			$post[$i]['name'] = $item->getName();
 			$post[$i]['image'] = $item->getImage();
-			$post[$i]['url'] = 'blog/post/' . $item->getUrlKey() . $urlSuffix;
+			$post[$i]['content'] = $item->getPostContent();
+			// $post[$i]['url'] = 'blog/post/' . $item->getUrlKey() . $urlSuffix;
 			$i++;
 		}
 
@@ -149,24 +150,26 @@ class PostManagement extends \Magento\Framework\Model\AbstractModel implements P
 			$collection->addIdFilter($productIds);
 		}
 		$collection->setCurPage($page)->setPageSize($count);
-		$this->productRepo = ObjectManager::getInstance()->create(Product::class);
+		$this->productRepo = ObjectManager::getInstance()->create(\Magento\Catalog\Model\ProductRepository::class);
 		$result = [];
 		$i = 0;
 
 		foreach ($collection as $item) {
-			$result[$i]['id'] = $item->getId();
-			$result[$i]['name'] = $item->getName();
-			$result[$i]['url'] = 'product/' . $item->getSKU();
-			$result[$i]['price'] = round((float) $item->getFinalPrice(),2);
-			//get image
-			$product = $this->productRepo->load($item->getId());        
-			$images = $product->getMediaGalleryImages();
-			$j = 0;
-			foreach ($images as $key) {
-				$result[$i]['image'][$j] = $key->getUrl();
-				$j++;
+			if (round((float) $item->getFinalPrice(),2) != 0) {
+				$result[$i]['id'] = $item->getId();
+				$result[$i]['name'] = $item->getName();
+				$result[$i]['url'] = 'product/' . $item->getSKU();
+				$result[$i]['price'] = round((float) $item->getFinalPrice(),2);
+				//get image
+				$product = $this->productRepo->get($item->getSKU());    
+				$images = $product->getMediaGalleryEntries();
+				$j = 0;
+				foreach ($images as $key) {
+					$result[$i]['image'][$j] = $key->getFile();
+					$j++;
+				}
+				$i++;
 			}
-			$i++;
 		}
 
 		return array($result);
