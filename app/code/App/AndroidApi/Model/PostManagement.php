@@ -164,7 +164,7 @@ class PostManagement extends \Magento\Framework\Model\AbstractModel implements P
 				$product = $this->productRepo->get($item->getSKU());    
 				$images = $product->getMediaGalleryEntries();
 				$j = 0;
-				$result[$i]['images'][$j] = 'https://mcstaging.planetgadget.store/media/catalog/product/placeholder/default/small_3.png';
+				$result[$i]['image'][$j] = 'https://mcstaging.planetgadget.store/media/catalog/product/placeholder/default/small_3.png';
 				foreach ($images as $key) {
 					$result[$i]['image'][$j] = $key->getFile();
 					$j++;
@@ -199,9 +199,9 @@ class PostManagement extends \Magento\Framework\Model\AbstractModel implements P
 		$arr['option'] = $prodopt;
 		$images = $product->getMediaGalleryEntries();
 		$i=0;
-		$arr['images'][$i] = 'https://mcstaging.planetgadget.store/media/catalog/product/placeholder/default/small_3.png';
+		$arr['image'][$i] = 'https://mcstaging.planetgadget.store/media/catalog/product/placeholder/default/small_3.png';
 		foreach ($images as $key) {
-			$arr['images'][$i] = $key->getFile();
+			$arr['image'][$i] = $key->getFile();
 			$i++;
 		}
 
