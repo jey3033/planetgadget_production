@@ -88,7 +88,7 @@ class PostManagement extends \Magento\Framework\Model\AbstractModel implements P
 		foreach ($postCollection as $item) {
 			$post[$i]['name'] = $item->getName();
 			$post[$i]['image'] = $item->getImage();
-			$post[$i]['url'] = 'blog/post/' . $item->getUrlKey() . $urlSuffix;
+			$post[$i]['url'] = 'post/' . $item->getUrlKey() . $urlSuffix;
 			$i++;
 		}
 
@@ -113,6 +113,10 @@ class PostManagement extends \Magento\Framework\Model\AbstractModel implements P
 			$post[$i]['name'] = $item->getName();
 			$post[$i]['image'] = $item->getImage();
 			$post[$i]['content'] = $item->getPostContent();
+			$author = $this->blogDataHelper->getAuthorByPost($item);
+			$tagList = $this->blogDataHelper->getTagList($item);
+			$post[$i]['author'] = $author->getName();
+			$post[$i]['tag'] = $tagList;
 			// $post[$i]['url'] = 'blog/post/' . $item->getUrlKey() . $urlSuffix;
 			$i++;
 		}
@@ -136,7 +140,7 @@ class PostManagement extends \Magento\Framework\Model\AbstractModel implements P
 		$this->imageHelper = ObjectManager::getInstance()->get(ImageHelper::class);
 		$collection = $this->_productCollectionFactory->create();
         $collection->addAttributeToSelect('*');
-		// $collection->setVisibility($this->_productVisibility->getVisibleInSiteIds());
+		$collection->setVisibility($this->_productVisibility->getVisibleInSiteIds());
 		if (strtoupper($mode) == 'NEW') {
 			$collection->setOrder('created_at');
 		}
@@ -162,11 +166,11 @@ class PostManagement extends \Magento\Framework\Model\AbstractModel implements P
 				$result[$i]['price'] = round((float) $item->getFinalPrice(),2);
 				//get image
 				$product = $this->productRepo->get($item->getSKU());    
-				$images = $product->getMediaGalleryEntries();
+				$images = $product->getMediaGalleryImages();
 				$j = 0;
 				$result[$i]['image'][$j] = 'https://mcstaging.planetgadget.store/media/catalog/product/placeholder/default/small_3.png';
 				foreach ($images as $key) {
-					$result[$i]['image'][$j] = $key->getFile();
+					$result[$i]['image'][$j] = $key->getUrl();
 					$j++;
 				}
 				$i++;
@@ -197,11 +201,11 @@ class PostManagement extends \Magento\Framework\Model\AbstractModel implements P
 		$productTypeInstance = ObjectManager::getInstance()->get('Magento\ConfigurableProduct\Model\Product\Type\Configurable');
 		$prodopt = $productTypeInstance->getConfigurableAttributesAsArray($product);
 		$arr['option'] = $prodopt;
-		$images = $product->getMediaGalleryEntries();
+		$images = $product->getMediaGalleryImages();
 		$i=0;
 		$arr['image'][$i] = 'https://mcstaging.planetgadget.store/media/catalog/product/placeholder/default/small_3.png';
 		foreach ($images as $key) {
-			$arr['image'][$i] = $key->getFile();
+			$arr['images'][$i] = $key->getUrl();
 			$i++;
 		}
 
