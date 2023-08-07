@@ -18,6 +18,12 @@ interface PostManagementInterface {
 	public function getDetailPost($id);
 
 	/**
+	 * test 1
+	 * @return mixed
+	 */
+	public function getBrand();
+
+	/**
 	 * @return mixed
 	 */
 	public function getProduct();
@@ -34,4 +40,10 @@ interface PostManagementInterface {
 	 * @return mixed
 	 */
 	public function registerCustomer();
+
+	/**
+	 * 
+	 * @return mixed
+	 */
+	public function loginCustomer();
 }

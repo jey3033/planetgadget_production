@@ -6,6 +6,12 @@
 			<resource ref="anonymous"/>
 		</resources>
 	</route>
+	<route method="GET" url="/V1/api/post/:id" >
+		<service class="App\AndroidApi\Api\PostManagementInterface" method="getDetailPost"/>
+		<resources>
+			<resource ref="anonymous"/>
+		</resources>
+	</route>
 	<route method="GET" url="/V1/api/getproduct">
 		<service class="App\AndroidApi\Api\PostManagementInterface" method="getProduct"/>
 		<resources>
@@ -20,6 +26,18 @@
 	</route>
 	<route method="POST" url="/V1/api/registercustomer">
 		<service class="App\AndroidApi\Api\PostManagementInterface" method="registerCustomer"/>
+		<resources>
+			<resource ref="anonymous"/>
+		</resources>
+	</route>
+	<route method="POST" url="/V1/api/logincustomer">
+		<service class="App\AndroidApi\Api\PostManagementInterface" method="loginCustomer"/>
+		<resources>
+			<resource ref="anonymous"/>
+		</resources>
+	</route>
+	<route method="GET" url="/V1/api/getbrand">
+		<service class="App\AndroidApi\Api\PostManagementInterface" method="getBrand"/>
 		<resources>
 			<resource ref="anonymous"/>
 		</resources>

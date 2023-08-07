@@ -126,6 +126,26 @@ class PostManagement extends \Magento\Framework\Model\AbstractModel implements P
 	}
 
 	/**
+	 * test 1
+	 * @inheritDoc
+	 */
+	public function getBrand()
+	{
+		$brandHelper = ObjectManager::getInstance()->get('Kemana\Brand\Block\Home\Brand');
+		$brands = $brandHelper->getFeaturedBrandCollection();
+		
+		$result = [];
+		$i = 0;
+		
+		foreach ($brands as $brand) {
+			$result[$i] = $brand;
+			$i++;
+		}
+
+		return array($result);
+	}
+
+	/**
 	 * 
 	 * @return mixed
 	 */
@@ -168,7 +188,7 @@ class PostManagement extends \Magento\Framework\Model\AbstractModel implements P
 				$product = $this->productRepo->get($item->getSKU());    
 				$images = $product->getMediaGalleryImages();
 				$j = 0;
-				$result[$i]['image'][$j] = 'https://www.planetgadget.store/media/catalog/product/placeholder/default/small_3.png';
+				$result[$i]['image'][$j] = 'https://mcstaging.planetgadget.store/media/catalog/product/placeholder/default/small_3.png';
 				foreach ($images as $key) {
 					$result[$i]['image'][$j] = $key->getUrl();
 					$j++;
@@ -203,7 +223,7 @@ class PostManagement extends \Magento\Framework\Model\AbstractModel implements P
 		$arr['option'] = $prodopt;
 		$images = $product->getMediaGalleryImages();
 		$i=0;
-		$arr['image'][$i] = 'https://www.planetgadget.store/media/catalog/product/placeholder/default/small_3.png';
+		$arr['image'][$i] = 'https://mcstaging.planetgadget.store/media/catalog/product/placeholder/default/small_3.png';
 		foreach ($images as $key) {
 			$arr['images'][$i] = $key->getUrl();
 			$i++;
@@ -247,5 +267,19 @@ class PostManagement extends \Magento\Framework\Model\AbstractModel implements P
 		} catch (Exception $e) {
 			echo $e->getMessage();
 		}
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function loginCustomer() {
+		$email = $_POST['username'];
+		$password = $_POST['password'];
+
+		return $email.$password;
+		// json_encode([
+		// 	'status' => "success",
+		// 	'id' => $email.$password
+		// ]);
 	}
 }	
