@@ -270,11 +270,12 @@ class PostManagement extends \Magento\Framework\Model\AbstractModel implements P
 	}
 
 	/**
+	 * 
 	 * @inheritDoc
 	 */
 	public function loginCustomer() {
-		$email = $_POST['username'];
-		$password = $_POST['password'];
+		$email = $_REQUEST['username'];
+		$password = $_REQUEST['password'];
 
 		return $email.$password;
 		// json_encode([
