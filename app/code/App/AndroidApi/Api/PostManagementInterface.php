@@ -42,8 +42,8 @@ interface PostManagementInterface {
 	public function registerCustomer();
 
 	/**
-	 * 
+	 * @api
 	 * @return mixed
 	 */
-	public function loginCustomer();
+	public function rewardInfo();
 }
