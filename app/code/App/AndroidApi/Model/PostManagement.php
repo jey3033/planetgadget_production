@@ -182,7 +182,7 @@ class PostManagement extends \Magento\Framework\Model\AbstractModel implements P
 			if (round((float) $item->getFinalPrice(),2) != 0) {
 				$result[$i]['id'] = $item->getId();
 				$result[$i]['name'] = $item->getName();
-				$result[$i]['url'] = 'product/' . $item->getSKU();
+				$result[$i]['sku'] = $item->getSKU();
 				$result[$i]['price'] = round((float) $item->getFinalPrice(),2);
 				//get image
 				$product = $this->productRepo->get($item->getSKU());    
@@ -273,14 +273,19 @@ class PostManagement extends \Magento\Framework\Model\AbstractModel implements P
 	 * 
 	 * @inheritDoc
 	 */
-	public function loginCustomer() {
-		$email = $_REQUEST['username'];
-		$password = $_REQUEST['password'];
+	public function rewardInfo()
+	{
+		// $post = $this->getRequest()->getPostValue();
+		$id = $_POST['id'];
+		$objManager = ObjectManager::getInstance();
+		$pointHelper = $objManager->get("\Magento\Reward\Block\Customer\Reward\History");
+		$history = $pointHelper->getHistory();
+		$total = 0;
 
-		return $email.$password;
-		// json_encode([
-		// 	'status' => "success",
-		// 	'id' => $email.$password
-		// ]);
+		foreach ($history as $key) {
+			$total = $pointHelper->getPointsDelta($key);
+		}
+
+		return $total;
 	}
 }	
