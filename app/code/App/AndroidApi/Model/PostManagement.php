@@ -283,7 +283,7 @@ class PostManagement extends \Magento\Framework\Model\AbstractModel implements P
 		$total = 0;
 
 		foreach ($history as $key) {
-			$total = $pointHelper->getPointsDelta($key);
+			$total = $pointHelper->getPointsBalance($key);
 		}
 
 		return $total;
