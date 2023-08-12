@@ -223,7 +223,7 @@ class PostManagement extends \Magento\Framework\Model\AbstractModel implements P
 		$arr['option'] = $prodopt;
 		$images = $product->getMediaGalleryImages();
 		$i=0;
-		$arr['image'][$i] = 'https://mcstaging.planetgadget.store/media/catalog/product/placeholder/default/small_3.png';
+		$arr['images'][$i] = 'https://mcstaging.planetgadget.store/media/catalog/product/placeholder/default/small_3.png';
 		foreach ($images as $key) {
 			$arr['images'][$i] = $key->getUrl();
 			$i++;
