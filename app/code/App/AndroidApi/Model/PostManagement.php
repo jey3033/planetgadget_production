@@ -288,4 +288,143 @@ class PostManagement extends \Magento\Framework\Model\AbstractModel implements P
 
 		return $total;
 	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function getProvince() {
+		$arr = [
+			[
+				"id" => "3301",
+				"value" => "Nusa Tenggara Barat (NTB)"
+			],
+			[
+				"id" => "3304",
+				"value" => "Maluku"
+			],
+			[
+				"id" => "3307",
+				"value" => "Kalimantan Selatan"
+			],
+			[
+				"id" => "3310",
+				"value" => "Kalimantan Tengah"
+			],
+			[
+				"id" => "3313",
+				"value" => "Nusa Tenggara Barat (NTB)"
+			],
+			[
+				"id" => "3316",
+				"value" => "Bengkulu"
+			],
+			[
+				"id" => "3319",
+				"value" => "Kalimantan Timur"
+			],
+			[
+				"id" => "3322",
+				"value" => "Kepulauan Riau"
+			],
+			[
+				"id" => "3325",
+				"value" => "Nanggroe Aceh Darussalam (NAD)"
+			],
+			[
+				"id" => "3328",
+				"value" => "DKI Jakarta"
+			],
+			[
+				"id" => "3331",
+				"value" => "Banten"
+			],
+			[
+				"id" => "3334",
+				"value" => "Jawa Tengah"
+			],
+			[
+				"id" => "3340",
+				"value" => "Papua"
+			],
+			[
+				"id" => "3343",
+				"value" => "Bali"
+			],
+			[
+				"id" => "3349",
+				"value" => "Jawa Timur"
+			],
+			[
+				"id" => "3352",
+				"value" => "DI Yogyakarta"
+			],
+			[
+				"id" => "3355",
+				"value" => "Sulawesi Tenggara"
+			],
+			[
+				"id" => "3358",
+				"value" => "Nusa Tenggara Timur (NTT)"
+			],
+			[
+				"id" => "3361",
+				"value" => "Sulawesi Utara"
+			],
+			[
+				"id" => "3364",
+				"value" => "Sumatera Utara"
+			],
+			[
+				"id" => "3367",
+				"value" => "Sumatera Barat"
+			],
+			[
+				"id" => "3370",
+				"value" => "Bangka Belitung"
+			],
+			[
+				"id" => "3373",
+				"value" => "Riau"
+			],
+			[
+				"id" => "3376",
+				"value" => "Sumatera Selatan"
+			],
+			[
+				"id" => "3379",
+				"value" => "Sulawesi Tengah"
+			],
+			[
+				"id" => "3382",
+				"value" => "Kalimantan Barat"
+			],
+			[
+				"id" => "3385",
+				"value" => "Papua Barat"
+			],
+			[
+				"id" => "3388",
+				"value" => "Lampung"
+			],
+			[
+				"id" => "3391",
+				"value" => "Kalimantan Utara"
+
+			],
+			[
+				"id" => "3394",
+				"value" => "Maluku Utara"
+			],
+			[
+				"id" => "3397",
+				"value" => "Sulawesi Selatan"
+			],
+			[
+				"id" => "3400",
+				"value" => "Sulawesi Barat"
+			],
+		];
+
+		return $arr;
+	}
 }	
