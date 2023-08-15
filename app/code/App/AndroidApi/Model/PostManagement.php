@@ -215,7 +215,7 @@ class PostManagement extends \Magento\Framework\Model\AbstractModel implements P
 		$arr['name'] = $product->getName();
 		$arr['description'] = strip_tags($product->getDescription());
 		$pos = strpos($arr['description'],'}');
-		$arr['description'] = substr($arr['description'],$pos);
+		$arr['description'] = substr($arr['description'],$pos+1);
 		$arr['price'] = round((float) $product->getFinalPrice(),2);
         // $arr['url'] = $product->getProductUrl();
         $arr['type'] = $product->getTypeId();
