@@ -435,35 +435,35 @@ class PostManagement extends \Magento\Framework\Model\AbstractModel implements P
 	}
 
 	function getColorHex($label){
-		if ($label == "Hitam") return "#000000";
-		if ($label == "Putih") return "#ffffff";
-		if ($label == "Hijau") return "#00ff00";
-		if ($label == "Ungu") return "#800080";
-		if ($label == "Merah") return "#ff0000";
-		if ($label == "Kuning") return "#ffff00";
-		if ($label == "Biru") return "#0000ff";
-		if ($label == "Beige") return "#f5f5dc";
-		if ($label == "Silver") return "#c0c0c0";
-		if ($label == "Pink") return "#ffc0cb";
-		if ($label == "Abu-abu") return "#808080";
-		if ($label == "Orange") return "#ffa500";
-		if ($label == "Gold") return "#ffd700";
-		if ($label == "Navy Blue") return "#000080";
-		if ($label == "Bronze") return "#cd7f32";
-		if ($label == "Copper") return "#b87333";
-		if ($label == "Coklat") return "#d2691e";
-		if ($label == "Titanium") return "#878681";
-		if ($label == "Starlight") return "#f8f9ec";
-		if ($label == "Midnight") return "#302e41";
-		if ($label == "Sierra Blue") return "#bfdaf7";
-		if ($label == "Graphite") return "#41424c";
-		if ($label == "Aurora") return "#b2f3ac";
-		if ($label == "Moonlight") return "#fff8de";
-		if ($label == "Violet") return "#ee82ee";
-		if ($label == "Rainbow") return "no color";
-		if ($label == "Cinnamon ") return "#c58c66";
-		if ($label == "Champagne") return "#f7e7ce";
-		if ($label == "Teal") return "#008080";
-		if ($label == "Army") return "#615e3e";
+		if ($label == "Hitam") return "000000";
+		if ($label == "Putih") return "ffffff";
+		if ($label == "Hijau") return "00ff00";
+		if ($label == "Ungu") return "800080";
+		if ($label == "Merah") return "ff0000";
+		if ($label == "Kuning") return "ffff00";
+		if ($label == "Biru") return "0000ff";
+		if ($label == "Beige") return "f5f5dc";
+		if ($label == "Silver") return "c0c0c0";
+		if ($label == "Pink") return "ffc0cb";
+		if ($label == "Abu-abu") return "808080";
+		if ($label == "Orange") return "ffa500";
+		if ($label == "Gold") return "ffd700";
+		if ($label == "Navy Blue") return "000080";
+		if ($label == "Bronze") return "cd7f32";
+		if ($label == "Copper") return "b87333";
+		if ($label == "Coklat") return "d2691e";
+		if ($label == "Titanium") return "878681";
+		if ($label == "Starlight") return "f8f9ec";
+		if ($label == "Midnight") return "302e41";
+		if ($label == "Sierra Blue") return "bfdaf7";
+		if ($label == "Graphite") return "41424c";
+		if ($label == "Aurora") return "b2f3ac";
+		if ($label == "Moonlight") return "fff8de";
+		if ($label == "Violet") return "ee82ee";
+		if ($label == "Rainbow") return "000000";
+		if ($label == "Cinnamon ") return "c58c66";
+		if ($label == "Champagne") return "f7e7ce";
+		if ($label == "Teal") return "008080";
+		if ($label == "Army") return "615e3e";
 	}
 }	
