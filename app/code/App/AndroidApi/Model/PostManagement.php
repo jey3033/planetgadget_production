@@ -231,8 +231,8 @@ class PostManagement extends \Magento\Framework\Model\AbstractModel implements P
 			$arr['images'][$i] = $key->getUrl();
 			$i++;
 		}
-		for ($i=0; $i < count($arr['option']['277']['values']); $i++) { 
-			$arr['option']['277']['values'][$i]['hex'] = $this->getColorHex($arr['option']['277']['values'][$i]['label']);
+		for ($i=0; $i < count($arr['option']['279']['values']); $i++) { 
+			$arr['option']['279']['values'][$i]['hex'] = $this->getColorHex($arr['option']['279']['values'][$i]['label']);
 		}
 
 		return array($arr);
