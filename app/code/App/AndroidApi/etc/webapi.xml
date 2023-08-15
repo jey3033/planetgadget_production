@@ -42,4 +42,10 @@
 			<resource ref="anonymous"/>
 		</resources>
 	</route>
+	<route method="GET" url="/V1/api/getprovince">
+		<service class="App\AndroidApi\Api\PostManagementInterface" method="getProvince"/>
+		<resources>
+			<resource ref="anonymous"/>
+		</resources>
+	</route>
 </routes>

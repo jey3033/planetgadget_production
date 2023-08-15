@@ -46,4 +46,10 @@ interface PostManagementInterface {
 	 * @return mixed
 	 */
 	public function rewardInfo();
+
+	/**
+	 * @api
+	 * @return mixed
+	 */
+	public function getProvince();
 }
