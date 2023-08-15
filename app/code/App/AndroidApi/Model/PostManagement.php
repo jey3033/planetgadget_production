@@ -15,6 +15,7 @@ use PhpParser\Node\Expr\Cast\Object_;
 use Magento\Sales\Model\ResourceModel\Report\Bestsellers\CollectionFactory as BestSellersCollectionFactory;
 use Magento\Catalog\Helper\Image as ImageHelper;
 use Magento\Framework\App\RequestInterface;
+use Magento\Eav\Model\Entity\Attribute\Option;
 
 /**
  * Class PostManagement
@@ -213,6 +214,8 @@ class PostManagement extends \Magento\Framework\Model\AbstractModel implements P
 		$id = $product->getId();
 		$arr['name'] = $product->getName();
 		$arr['description'] = strip_tags($product->getDescription());
+		$pos = strpos($arr['description'],'}');
+		$arr['description'] = substr($arr['description'],$pos);
 		$arr['price'] = round((float) $product->getFinalPrice(),2);
         // $arr['url'] = $product->getProductUrl();
         $arr['type'] = $product->getTypeId();
@@ -227,6 +230,9 @@ class PostManagement extends \Magento\Framework\Model\AbstractModel implements P
 		foreach ($images as $key) {
 			$arr['images'][$i] = $key->getUrl();
 			$i++;
+		}
+		for ($i=0; $i < count($arr['option']['277']['values']); $i++) { 
+			$arr['option']['277']['values'][$i]['hex'] = $this->getColorHex($arr['option']['277']['values'][$i]['label']);
 		}
 
 		return array($arr);
@@ -283,10 +289,10 @@ class PostManagement extends \Magento\Framework\Model\AbstractModel implements P
 		$total = 0;
 
 		foreach ($history as $key) {
-			$total = $pointHelper->getPointsBalance($key);
+			return $pointHelper->getPointsBalance($key);
 		}
 
-		return $total;
+		
 	}
 
 	/**
@@ -426,5 +432,38 @@ class PostManagement extends \Magento\Framework\Model\AbstractModel implements P
 		];
 
 		return $arr;
+	}
+
+	function getColorHex($label){
+		if ($label == "Hitam") return "#000000";
+		if ($label == "Putih") return "#ffffff";
+		if ($label == "Hijau") return "#00ff00";
+		if ($label == "Ungu") return "#800080";
+		if ($label == "Merah") return "#ff0000";
+		if ($label == "Kuning") return "#ffff00";
+		if ($label == "Biru") return "#0000ff";
+		if ($label == "Beige") return "#f5f5dc";
+		if ($label == "Silver") return "#c0c0c0";
+		if ($label == "Pink") return "#ffc0cb";
+		if ($label == "Abu-abu") return "#808080";
+		if ($label == "Orange") return "#ffa500";
+		if ($label == "Gold") return "#ffd700";
+		if ($label == "Navy Blue") return "#000080";
+		if ($label == "Bronze") return "#cd7f32";
+		if ($label == "Copper") return "#b87333";
+		if ($label == "Coklat") return "#d2691e";
+		if ($label == "Titanium") return "#878681";
+		if ($label == "Starlight") return "#f8f9ec";
+		if ($label == "Midnight") return "#302e41";
+		if ($label == "Sierra Blue") return "#bfdaf7";
+		if ($label == "Graphite") return "#41424c";
+		if ($label == "Aurora") return "#b2f3ac";
+		if ($label == "Moonlight") return "#fff8de";
+		if ($label == "Violet") return "#ee82ee";
+		if ($label == "Rainbow") return "no color";
+		if ($label == "Cinnamon ") return "#c58c66";
+		if ($label == "Champagne") return "#f7e7ce";
+		if ($label == "Teal") return "#008080";
+		if ($label == "Army") return "#615e3e";
 	}
 }	
