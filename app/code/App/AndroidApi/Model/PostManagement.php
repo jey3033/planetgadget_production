@@ -287,12 +287,15 @@ class PostManagement extends \Magento\Framework\Model\AbstractModel implements P
 		$pointHelper = $objManager->get("\Magento\Reward\Block\Customer\Reward\History");
 		$history = $pointHelper->getHistory();
 		$total = 0;
+		$account = 'Gold';
 
 		foreach ($history as $key) {
-			return $pointHelper->getPointsBalance($key);
+			return array(
+				'province' => $this->getProvince(), 
+				'level' => $account, 
+				'point' => $pointHelper->getPointsBalance($key)
+			);
 		}
-
-		
 	}
 
 	/**
