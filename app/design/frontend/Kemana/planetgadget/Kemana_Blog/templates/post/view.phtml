@@ -73,7 +73,7 @@ $color = $helper->getBlogConfig('general/font_color');
                     <span><i class="mp-blog-icon mp-blog-calendar-times">&nbsp;</i>
                         <?= /* @noEscape */ $kemanaBlogArticleHelper->getTimeAccordingToTimeZone($_post->getPublishDate(), 'd M Y')?>
                     </span>
-                    <?php if ($categoryHtml = $block->getTopicUrl($_post)) : ?>
+                    <?php if ($categoryHtml = $_post->getSelectedTopicsCollection()) : ?>
                         <span class ="line">|</span>
                         <span><i class="mp-blog-icon mp-folder-open"></i>
                             <?= /* @noEscape */ __($categoryHtml); ?>
