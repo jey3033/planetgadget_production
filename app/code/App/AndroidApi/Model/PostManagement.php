@@ -3,6 +3,7 @@ namespace App\AndroidApi\Model;
 
 use App\AndroidApi\Api\PostManagementInterface;
 use Exception;
+use app\code\core\Mage;
 use Kemana\Blog\Helper\Data;
 use Magento\Catalog\Block\Product\Image;
 use Magento\Catalog\Model\Product\Image\UrlBuilder;
@@ -293,7 +294,8 @@ class PostManagement extends \Magento\Framework\Model\AbstractModel implements P
 			return array(
 				'province' => $this->getProvince(), 
 				'level' => $account, 
-				'point' => $pointHelper->getPointsBalance($key)
+				'point' => $pointHelper->getPointsBalance($key),
+				'payment' => Mage::getModel('payment/config')->getActiveMethods()
 			);
 		}
 	}
