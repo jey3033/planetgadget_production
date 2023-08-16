@@ -283,7 +283,7 @@ class PostManagement extends \Magento\Framework\Model\AbstractModel implements P
 	public function rewardInfo()
 	{
 		// $post = $this->getRequest()->getPostValue();
-		$id = $_POST['id'];
+		// $id = $_POST['id'];
 		$objManager = ObjectManager::getInstance();
 		$pointHelper = $objManager->get("\Magento\Reward\Block\Customer\Reward\History");
 		$history = $pointHelper->getHistory();
