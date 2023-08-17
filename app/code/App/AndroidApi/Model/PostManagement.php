@@ -288,7 +288,7 @@ class PostManagement extends \Magento\Framework\Model\AbstractModel implements P
 		$total = 0;
 		$account = 'Gold';
 		$paymentConfig = $objManager->get('Magento\Payment\Helper\Data');
-		$allPaymentMethods = $paymentConfig->getPaymentMethodList();
+		$allPaymentMethods = $paymentConfig->getPaymentMethods();
 
 		foreach ($history as $key) {
 			return array(
