@@ -287,8 +287,8 @@ class PostManagement extends \Magento\Framework\Model\AbstractModel implements P
 		$history = $pointHelper->getHistory();
 		$total = 0;
 		$account = 'Gold';
-		$paymentConfig = $objManager->get('Magento\Payment\Model\Config');
-		$activePaymentMethods = $paymentConfig->getActiveMethods();
+		$paymentConfig = $objManager->get('Magento\Payment\Helper\Data');
+		$$allPaymentMethods = $paymentConfig->getPaymentMethodList();
 
 		foreach ($history as $key) {
 			return array(
