@@ -282,8 +282,6 @@ class PostManagement extends \Magento\Framework\Model\AbstractModel implements P
 	 */
 	public function rewardInfo()
 	{
-		// $post = $this->getRequest()->getPostValue();
-		// $id = $_POST['id'];
 		$objManager = ObjectManager::getInstance();
 		$pointHelper = $objManager->get("\Magento\Reward\Block\Customer\Reward\History");
 		$history = $pointHelper->getHistory();
@@ -295,7 +293,7 @@ class PostManagement extends \Magento\Framework\Model\AbstractModel implements P
 				'province' => $this->getProvince(), 
 				'level' => $account, 
 				'point' => $pointHelper->getPointsBalance($key),
-				'payment' => Mage::getModel('payment/config')->getActiveMethods()
+				// 'payment' => array(Mage::getModel('payment/config')->getActiveMethods())
 			);
 		}
 	}
