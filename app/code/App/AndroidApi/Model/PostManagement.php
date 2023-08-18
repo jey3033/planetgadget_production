@@ -282,22 +282,26 @@ class PostManagement extends \Magento\Framework\Model\AbstractModel implements P
 	 */
 	public function rewardInfo()
 	{
+		$customerID = $_POST['id'];
 		$objManager = ObjectManager::getInstance();
-		$pointHelper = $objManager->get("\Magento\Reward\Block\Customer\Reward\History");
+		$customerObj = $objManager->create('Magento\Customer\Model\Customer')
+		->load($customerID);
+		$custSession = $objManager->create('\Magento\Customer\Model\Session');
+		$custSession->setCustomer($customerObj);
+		// $customerEmail = $customerObj->getEmail();
+		$pointHelper = $objManager->get("\Magento\Reward\Block\Checkout\Payment\Additional");
 		$history = $pointHelper->getHistory();
 		$total = 0;
 		$account = 'Gold';
 		$paymentConfig = $objManager->get('Magento\Payment\Helper\Data');
 		$allPaymentMethods = $paymentConfig->getPaymentMethods();
 
-		foreach ($history as $key) {
-			return array(
-				'province' => $this->getProvince(), 
-				'level' => $account, 
-				'point' => $pointHelper->getPointsBalance($key),
-				'payment' => array($allPaymentMethods)
-			);
-		}
+		return array(
+			'province' => $this->getProvince(), 
+			'level' => $account, 
+			'point' => $pointHelper->getPointsBalance(),
+			'payment' => array($allPaymentMethods)
+		);
 	}
 
 	/**
