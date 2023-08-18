@@ -282,7 +282,7 @@ class PostManagement extends \Magento\Framework\Model\AbstractModel implements P
 	 */
 	public function rewardInfo()
 	{
-		$customerID = $_POST['id'];
+		$customerID = $_REQUEST['id'];
 		$objManager = ObjectManager::getInstance();
 		$customerObj = $objManager->create('Magento\Customer\Model\Customer')
 		->load($customerID);
