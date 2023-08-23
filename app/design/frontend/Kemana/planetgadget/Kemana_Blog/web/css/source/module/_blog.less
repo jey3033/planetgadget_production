@@ -873,11 +873,7 @@
 //  Desktop Large
 //  _____________________________________________
 
-.media-width(@extremum, @break)
-    when
-    (@extremum = "min")
-    and
-    (@break = @screen__l) {
+.media-width(@extremum, @break) when (@extremum = "min") and (@break = @screen__l) {
     .post-list-content .post-list-body {
         grid-template-columns: repeat(3, 1fr);
     }
