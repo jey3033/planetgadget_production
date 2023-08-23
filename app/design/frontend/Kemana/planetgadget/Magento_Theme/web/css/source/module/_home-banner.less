@@ -22,20 +22,19 @@
 //  Mobile
 //  _____________________________________________
 
-.media-width(@extremum, @break) when (@extremum = "max") and(@break = @screen__m) {
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
     .pg-club-banner-desktop {
         display: none;
     }
 
     .pg-club-banner-mobile {
-        height: 30px;
+        height: 60px;
         .lib-vendor-prefix-display();
         justify-content: center;
         background: @kemana-secondary-brand-color;
 
         img {
-            height: 30px;
-            object-fit: cover;
+            height: 60px;
             width: auto;
             margin-inline: auto;
         }
@@ -46,7 +45,7 @@
 //  Desktop
 //  _____________________________________________
 
-.media-width(@extremum, @break) when (@extremum = "min") and (@break = @screen__m) {
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
     .pg-club-banner-desktop {
         height: 60px;
         .lib-vendor-prefix-display();
