@@ -18,27 +18,27 @@
     <group id="default">
         <job name="msDynamicCustomersFromMagentoToErp" instance="Kemana\MsDynamics\Cron\SyncCustomersToErp"
              method="syncMissingCustomersFromRealTimeSync">
-            <schedule>0 8 * * *</schedule>
+            <schedule>0 6 * * *</schedule>
         </job>
         <job name="msDynamicCustomersFromErpToMagento" instance="Kemana\MsDynamics\Cron\SyncCustomersFromErp"
              method="syncCustomersFromErpToMagento">
-            <schedule>0 8 * * *</schedule>
+            <schedule>0 6 * * *</schedule>
         </job>
         <job name="msDynamicProductsFromErpToMagento" instance="Kemana\MsDynamics\Cron\SyncProductsFromErp"
              method="syncProductsFromErpToMagento">
-            <schedule>0 8 * * *</schedule>
+            <schedule>0 6 * * *</schedule>
         </job>
         <job name="msDynamicGetRewardPointFromErpToMagento" instance="Kemana\MsDynamics\Cron\SyncRewardPointFromErp"
              method="syncRewardPointFromErpToMagento">
-            <schedule>0 8 * * *</schedule>
+            <schedule>0 6 * * *</schedule>
         </job>
         <job name="msDynamicRewardPointFromMagentoToErp" instance="Kemana\MsDynamics\Cron\SyncRewardPointToErp"
              method="syncRewardPointFromMagentoToErp">
-            <schedule>0 8 * * *</schedule>
+            <schedule>0 6 * * *</schedule>
         </job>
         <job name="msDynamicOrdersFromMagentoToErp" instance="Kemana\MsDynamics\Cron\SyncOrdersToErp"
              method="syncOrdersFromMagentoToErp">
-            <schedule>0 8 * * *</schedule>
+            <schedule>0 6 * * *</schedule>
         </job>
     </group>
 </config>
