@@ -13,7 +13,7 @@
  * @author   kemana team <jakartateam@kemana.com>
  */
 
-namespace Kemana\Blog\Block;
+namespace Kemana\BlogArticle\Block;
 
 use Exception;
 use Magento\Cms\Model\Template\FilterProvider;
