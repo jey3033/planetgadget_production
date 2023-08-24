@@ -1,6 +1,7 @@
 <?php
 
-
+/**  <div class="post-list-item col-mp<?= $block->isGridView() ? ' post-item-grid mp-6 mp-xs-12' : ' post-item-list mp-12'; ?>">
+*/
 /** @var \Kemana\Blog\Block\Frontend $block */
 ?>
 <div class="post-list-content" id="mpblog-list-container">
@@ -10,13 +11,13 @@
             <?php $i = 1 ?>
             <?php /** @var \Kemana\Blog\Model\Post $post */
             foreach ($postCollection as $post): ?>
-                <div class="post-list-item col-mp<?= $block->isGridView() ? ' post-item-grid mp-6 mp-xs-12' : ' post-item-list mp-12'; ?>">
+                <div class="post-list-item col-xs-12 col-mp<?= $block->isGridView() ? ' post-item-grid mp-6 mp-xs-12' : ' post-item-list mp-12'; ?>">
                     <div class="post-item-wrapper">
                         <?php if ($post->getImage()): ?>
                             <div class="post-image">
                                 <a href="<?= $post->getUrl() ?>">
                                     <img class="img-responsive"
-                                         src="<?= $block->resizeImage($post->getImage(), '400x'); ?>"
+                                         src="<?= $block->getImageUrl($post->getImage()); ?>"
                                          alt="<?= $block->escapeHtml($post->getName()); ?>"/>
                                 </a>
                             </div>

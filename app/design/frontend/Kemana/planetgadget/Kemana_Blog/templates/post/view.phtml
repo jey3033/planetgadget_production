@@ -3,8 +3,8 @@
 
 use Kemana\Blog\Model\Config\Source\Comments\Type;
 
-/** @var \Kemana\Blog\Block\Post\View $block */
-// add CTA
+/** @var \Kemana\BlogArticle\Block\Post\View $block */
+
 /** @var \Kemana\Blog\Helper\Data $helper */
 $helper = $block->getBlogHelper();
 
@@ -69,14 +69,19 @@ $color = $helper->getBlogConfig('general/font_color');
             <div class="mp-clear"></div>
             <div class="mp-post-info">
                 <hr/>
-                <div class="mp-post-info" style="font-size: 12px;">
+                <div class="mp-post-info">
                     <span><i class="mp-blog-icon mp-blog-calendar-times">&nbsp;</i>
                         <?= /* @noEscape */ $kemanaBlogArticleHelper->getTimeAccordingToTimeZone($_post->getPublishDate(), 'd M Y')?>
                     </span>
-                    <?php if ($categoryHtml = $block->getPostCategoryHtml($_post)) : ?>
+                    <?php if ($categoryHtml = $block->getTopicList($_post)) : ?>
                         <span class ="line">|</span>
                         <span><i class="mp-blog-icon mp-folder-open"></i>
                             <?= /* @noEscape */ __($categoryHtml); ?>
+                        </span>
+                    <?php else : ?>
+                        <span class ="line">|</span>
+                        <span><i class="mp-blog-icon mp-folder-open"></i>
+                            tidak ada password else
                         </span>
                     <?php endif; ?>
                     <?php if ($tagHtml = $block->getTagList($_post)) : ?>
@@ -162,7 +167,7 @@ $color = $helper->getBlogConfig('general/font_color');
                             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
                         })();
 
-                        document.getElementById('reactions__container').style.display = 'none';
+                        setTimeout(document.getElementById('reactions__container').style.display = 'none',3000);
                     </script>
                 </div>
             <?php elseif ($typeComment == Type::FACEBOOK) : ?>

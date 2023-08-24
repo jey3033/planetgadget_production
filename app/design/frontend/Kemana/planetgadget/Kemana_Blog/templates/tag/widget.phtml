@@ -10,7 +10,7 @@ if ($tags && $tags->getSize()): ?>
             <span class="block-mp-sidebar-heading blog-sidebar-heading"><?= $block->escapeHtml(__('Tags')) ?></span>
         </div>
         <div class="mpcss-content-wrapper tags-lists">
-            <?php foreach ($tags->setPageSize(10)->setCurPage(1)->load() as $tag): ?>
+            <?php foreach ($tags->setPageSize(10)->setCurPage(1)->addOrder('RAND()')->load() as $tag): ?>
                 <a class="label label-default tags-list"
                    href="<?= $block->getTagUrl($tag) ?>">
                     <?= $tag->getName(); ?>
