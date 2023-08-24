@@ -136,7 +136,7 @@ class Content extends \Magento\Framework\View\Element\Template
             ->create();
 
         $this->searchCriteriaBuilder->setSortOrders([$sortOrder]);
-        $this->searchCriteriaBuilder->setPageSize(3);
+        $this->searchCriteriaBuilder->setPageSize(4);
 
         $this->searchCriteriaBuilder->setFilterGroups([$filterGroupStatus, $filterGroupImageExist]);
         $searchCriteria = $this->searchCriteriaBuilder->create();
@@ -162,7 +162,7 @@ class Content extends \Magento\Framework\View\Element\Template
             ->create();
 
         $this->searchCriteriaBuilder->setSortOrders([$sortOrder]);
-        $this->searchCriteriaBuilder->setPageSize(3);
+        $this->searchCriteriaBuilder->setPageSize(6);
 
         $this->searchCriteriaBuilder->addFilters($filters);
 
