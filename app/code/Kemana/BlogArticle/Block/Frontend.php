@@ -31,7 +31,7 @@ use Magento\Store\Model\StoreManagerInterface;
 use Kemana\Blog\Block\Adminhtml\Post\Edit\Tab\Renderer\Category as CategoryOptions;
 use Kemana\Blog\Block\Adminhtml\Post\Edit\Tab\Renderer\Tag as TagOptions;
 use Kemana\Blog\Block\Adminhtml\Post\Edit\Tab\Renderer\Topic as TopicOptions;
-use Kemana\Blog\Helper\Data as HelperData;
+use Kemana\BlogArticle\Helper\Data as HelperData;
 use Kemana\Blog\Helper\Image;
 use Kemana\Blog\Model\CategoryFactory;
 use Kemana\Blog\Model\CommentFactory;
@@ -347,6 +347,31 @@ class Frontend extends Template
             $categoryHtml[] = '<a class="mp-info" href="' . $this->helperData->getBlogUrl(
                 $_cat,
                 HelperData::TYPE_CATEGORY
+            ) . '">' . $_cat->getName() . '</a>';
+        }
+
+        return implode(', ', $categoryHtml);
+    }
+
+    /**
+     * get list topic html of post
+     *
+     * @param $post
+     *
+     * @return null|string
+     */
+    public function getPostTopicHtml($post)
+    {
+        if (!$post->getTopicIds()) {
+            return null;
+        }
+
+        $categories = $this->helperData->getTopicCollection($post->getTopicIds());
+        $categoryHtml = [];
+        foreach ($categories as $_cat) {
+            $categoryHtml[] = '<a class="mp-info" href="' . $this->helperData->getBlogUrl(
+                $_cat,
+                HelperData::TYPE_TOPIC
             ) . '">' . $_cat->getName() . '</a>';
         }
 

@@ -527,6 +527,25 @@ class Data extends CoreHelper
     }
 
     /**
+     * @param $array
+     *
+     * @return \Magento\Sales\Model\ResourceModel\Collection\AbstractCollection
+     */
+    public function getTopicCollection($array)
+    {
+        try {
+            $collection = $this->getObjectList(self::TYPE_TOPIC)
+                ->addFieldToFilter('topic_id', ['in' => $array]);
+
+            return $collection;
+        } catch (Exception $exception) {
+            $this->_logger->error($exception->getMessage());
+        }
+
+        return null;
+    }
+
+    /**
      * Get object collection (Category, Tag, Post, Topic)
      *
      * @param null $type
