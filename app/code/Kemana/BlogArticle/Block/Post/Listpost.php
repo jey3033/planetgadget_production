@@ -13,12 +13,12 @@
  * @author   kemana team <jakartateam@kemana.com>
  */
 
-namespace Kemana\Blog\Block\Post;
+namespace Kemana\BlogArticle\Block\Post;
 
 /**
  * Class Listpost
  * @package Kemana\Blog\Block\Post
  */
-class Listpost extends \Kemana\Blog\Block\Listpost
+class Listpost extends \Kemana\BlogArticle\Block\Listpost
 {
 }

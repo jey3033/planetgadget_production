@@ -284,8 +284,10 @@ class Frontend extends Template
             $this->getDateFormat($post->getPublishDate())
         );
 
-        if ($categoryPost = $this->getPostCategoryHtml($post)) {
-            $html .= __(' | Posted in %1', $categoryPost);
+        if ($categoryPost = $this->getPostTopicHtml($post)) {
+            $html .= " | $categoryPost";
+        }else {
+            $html .= " | tidak ada topic";
         }
 
         $author = $this->helperData->getAuthorByPost($post);
