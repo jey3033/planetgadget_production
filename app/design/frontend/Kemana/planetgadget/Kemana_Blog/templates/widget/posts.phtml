@@ -16,7 +16,7 @@ $title = __('News & <span>Updates</span>');
             <div class="widget-title">
                 <a href="<?= $block->getBlogUrl(''); ?>"><?= $block->getTitle(); ?></a>
             </div>
-            <div class="row">
+            <div class="post-slider">
                 <?php foreach ($posts as $post): ?>
                     <div class="col-md-4 col-lg-2 col-12 post-list-item">
                         <div class="post-item-wrapper">
@@ -57,3 +57,14 @@ $title = __('News & <span>Updates</span>');
         </div>
     </div>
 </div>
+<script>
+    require(['jquery', 'slick'], function($, slick){
+        $('.post-slider').slick({
+        arrows: false,
+        dots: false,
+        slidesToShow: 6,
+        centerMode: false,
+        centerPadding: "4%",
+      });
+    })
+</script>
