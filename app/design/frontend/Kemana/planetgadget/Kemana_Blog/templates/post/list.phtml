@@ -54,7 +54,7 @@
             $('.page-title-wrapper').html(`
             <div class="row">
                 <div class="col-2">
-                    <img src="<?= ($author->getImage()) ? $block->resizeImage($author->getImage(), '200x', \Kemana\Blog\Helper\Image::TEMPLATE_MEDIA_TYPE_AUTH) : $block->getDefaultAuthorImage(); ?>">
+                    <img src="<?= ($author->getImage()) ? $block->resizeImage($author->getImage(), '200x', \Kemana\Blog\Helper\Image::TEMPLATE_MEDIA_TYPE_AUTH) : $block->getDefaultAuthorImage(); ?>" class="photo-prof">
                 </div>
                 <div class="col">
                     <h1 class="page-title"><span class="base" data-ui-id="page-title-wrapper"><?= $author->getName() ?></h1>
