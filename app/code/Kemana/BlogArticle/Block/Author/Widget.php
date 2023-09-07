@@ -13,10 +13,10 @@
  * @author   kemana team <jakartateam@kemana.com>
  */
 
-namespace Kemana\Blog\Block\Author;
+namespace Kemana\BlogArticle\Block\Author;
 
-use Kemana\Blog\Block\Frontend;
-use Kemana\Blog\Helper\Data;
+use Kemana\BlogArticle\Block\Frontend;
+use Kemana\BlogArticle\Helper\Data;
 
 /**
  * Class Widget

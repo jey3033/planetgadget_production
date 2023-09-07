@@ -38,6 +38,7 @@
                         </div>
                     </div>
                 </div>
+                <?php $postdata = $post ?>
             <?php endforeach; ?>
             <div class="mp-clear"></div>
         </div>
@@ -47,3 +48,21 @@
     <?php endif; ?>
     <?= $this->getChildHtml('additional'); ?>
 </div>
+<?php if ($author = $block->getAuthor()): ?>
+    <script>
+        require(['jquery'], function($){
+            $('.page-title-wrapper').html(`
+            <div class="row">
+                <div class="col-2">
+                    <img src="<?= ($author->getImage()) ? $block->resizeImage($author->getImage(), '200x', \Kemana\Blog\Helper\Image::TEMPLATE_MEDIA_TYPE_AUTH) : $block->getDefaultAuthorImage(); ?>">
+                </div>
+                <div class="col">
+                    <h1 class="page-title"><span class="base" data-ui-id="page-title-wrapper"><?= $author->getName() ?></h1>
+                    <br>
+                    <?= $author->getShortDescription(); ?>
+                </div>
+            </div>
+            `);
+        });
+    </script>
+<?php endif; ?>

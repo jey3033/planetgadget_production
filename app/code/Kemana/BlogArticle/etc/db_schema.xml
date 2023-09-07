@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright © 2021 PT Kemana Teknologi Solusi. All rights reserved.
+ * http://www.kemana.com
+ */
+
+/**
+ * @category Kemana
+ * @package  Kemana_Blog
+ * @license  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ *
+ *
+ * @author   kemana team <jakartateam@kemana.com>
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="kemana_blog_author" resource="default" engine="innodb" comment="Kemana Blog Author Table">
+        <column xsi:type="int" name="user_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Author ID"/>
+        <column xsi:type="varchar" name="name" nullable="true" length="255" comment="Author Name"/>
+        <column xsi:type="varchar" name="url_key" nullable="true" length="255" comment="Author URL Key"/>
+        <column xsi:type="int" name="customer_id" padding="10" unsigned="true" default="0" nullable="true"
+                comment="Customer ID"/>
+        <column xsi:type="int" name="type" padding="10" unsigned="true" default="0" nullable="true"
+                comment="Author Type"/>
+        <column xsi:type="int" name="status" padding="10" unsigned="true" default="0" nullable="true"
+                comment="Author Status"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="true" default="CURRENT_TIMESTAMP"
+                comment="Author Created At"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="true" default="CURRENT_TIMESTAMP"
+                comment="Author Updated At"/>
+        <column xsi:type="varchar" name="image" nullable="true" length="255" comment="Author Image"/>
+        <column xsi:type="mediumtext" name="short_description" nullable="true" comment="Author Short Description"/>
+        <column xsi:type="varchar" name="facebook_link" nullable="true" length="255" comment="Facebook Link"/>
+        <column xsi:type="varchar" name="twitter_link" nullable="true" length="255" comment="Twitter Link"/>
+        <column xsi:type="varchar" name="linkedin_link" nullable="true" length="255" comment="Linkedin Link"/>
+        <column xsi:type="varchar" name="instagram_link" nullable="true" length="255" comment="Instagram Link"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="user_id"/>
+        </constraint>
+    </table>
+</schema>

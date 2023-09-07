@@ -1,7 +1,7 @@
 <?php
 
 
-/** @var \Kemana\Blog\Block\Author\Widget $block */
+/** @var \Kemana\BlogArticle\Block\Author\Widget $block */
 
 $author = $block->getCurrentAuthor();
 if ($author): ?>
@@ -11,7 +11,7 @@ if ($author): ?>
         </div>
         <div class="author-image col-xs-12">
             <img class="img-responsive"
-                 src="<?= ($author->getImage()) ? $block->resizeImage($author->getImage(), '135x', \Kemana\Blog\Helper\Image::TEMPLATE_MEDIA_TYPE_AUTH) : $block->getDefaultAuthorImage(); ?>"
+                 src="<?= ($author->getImage()) ? $block->resizeImage($author->getImage(), '200x', \Kemana\Blog\Helper\Image::TEMPLATE_MEDIA_TYPE_AUTH) : $block->getDefaultAuthorImage(); ?>"
                  alt="<?= $block->escapeHtml($author->getName()); ?>"/>
         </div>
         <div class="author-content col-xs-12">

@@ -13,7 +13,7 @@
  * @author   kemana team <jakartateam@kemana.com>
  */
 
-namespace Kemana\Blog\Block\Author;
+namespace Kemana\BlogArticle\Block\Author;
 
 use Kemana\Blog\Helper\Data;
 use Kemana\Blog\Model\AuthorFactory;
@@ -47,7 +47,7 @@ class Listpost extends \Kemana\Blog\Block\Listpost
     /**
      * @return mixed
      */
-    protected function getAuthor()
+    public function getAuthor()
     {
         if (!$this->_author) {
             $id = $this->getRequest()->getParam('id');

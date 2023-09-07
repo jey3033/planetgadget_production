@@ -18,10 +18,10 @@
     <update handle="mpblog_design"/>
     <body>
         <referenceContainer name="content">
-            <block class="Kemana\Blog\Block\Author\Listpost" name="mpblog.post.list" template="post/list.phtml"/>
+            <block class="Kemana\BlogArticle\Block\Author\Listpost" name="mpblog.post.list" template="Kemana_Blog::post/list.phtml"/>
         </referenceContainer>
         <referenceContainer name="blog.sidebar.main">
-            <block class="Kemana\Blog\Block\Author\Widget" after="mpblog.sidebar.mostview" name="mpblog.view.sidebar.author" template="author/widget.phtml"/>
+            <block class="Kemana\BlogArticle\Block\Author\Widget" after="mpblog.sidebar.mostview" name="mpblog.view.sidebar.author" template="Kemana_Blog::author/widget.phtml"/>
         </referenceContainer>
         <referenceBlock name="mpblog.sidebar.category" remove="true"/>
         <referenceBlock name="mpblog.sidebar.monthly" remove="true"/>

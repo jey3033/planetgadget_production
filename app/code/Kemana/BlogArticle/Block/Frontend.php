@@ -356,6 +356,23 @@ class Frontend extends Template
     }
 
     /**
+     * @return mixed
+     */
+    public function getCurrentAuthor()
+    {
+        $authorId = "aa";
+        // var_dump($authorId);die();
+        // if ($authorId) {
+        //     $author = $this->helperData->getObjectByParam($authorId, null, HelperData::TYPE_AUTHOR);
+        //     if ($author && $author->getId()) {
+        //         return $author;
+        //     }
+        // }
+
+        return $authorId;
+    }
+
+    /**
      * get list topic html of post
      *
      * @param $post
