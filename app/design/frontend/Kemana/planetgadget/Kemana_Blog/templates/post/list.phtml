@@ -54,12 +54,67 @@
             $('.page-title-wrapper').html(`
             <div class="row">
                 <div class="col-2">
-                    <img src="<?= ($author->getImage()) ? $block->resizeImage($author->getImage(), '200x', \Kemana\Blog\Helper\Image::TEMPLATE_MEDIA_TYPE_AUTH) : $block->getDefaultAuthorImage(); ?>" class="photo-prof">
+                    <img src="<?= ($author->getImage()) ? $block->resizeImage($author->getImage(), '200x', \Kemana\Blog\Helper\Image::TEMPLATE_MEDIA_TYPE_AUTH) : $block->getDefaultAuthorImage(); ?>" class="photo-prof>
                 </div>
                 <div class="col">
                     <h1 class="page-title"><span class="base" data-ui-id="page-title-wrapper"><?= $author->getName() ?></h1>
                     <br>
                     <?= $author->getShortDescription(); ?>
+                    <br>
+                    <div class="inline">
+                    <?php if ($author->getFacebookLink()): ?>
+                        <a href="<?= $author->getFacebookLink() ?>" target="_blank">
+                            <img style="width: unset;"
+                                src="<?= $this->getViewFileUrl('Kemana_Blog::media/images/facebook.png') ?>"
+                                align="middle"
+                                alt="<?= $block->escapeHtml($author->getName()); ?>"/>
+                        </a>
+                    <?php else: ?>
+                        <img style="width: unset;"
+                            src="<?= $this->getViewFileUrl('Kemana_Blog::media/images/facebookoff.png') ?>"
+                            align="middle"
+                            alt="<?= $block->escapeHtml($author->getName()); ?>"/>
+                    <?php endif; ?>
+                    <?php if ($author->getTwitterLink()): ?>
+                        <a href="<?= $author->getTwitterLink() ?>" target="_blank">
+                            <img style="width: unset;"
+                                src="<?= $this->getViewFileUrl('Kemana_Blog::media/images/twitter.png') ?>"
+                                align="middle"
+                                alt="<?= $block->escapeHtml($author->getName()); ?>"/>
+                        </a>
+                    <?php else: ?>
+                        <img style="width: unset;"
+                            src="<?= $this->getViewFileUrl('Kemana_Blog::media/images/twitter-off.png') ?>"
+                            align="middle"
+                            alt="<?= $block->escapeHtml($author->getName()); ?>"/>
+                    <?php endif; ?>
+                    <?php if ($author->getInstagramLink()): ?>
+                        <a href="<?= $author->getInstagramLink() ?>" target="_blank">
+                            <img style="width:40px;height:40px"
+                                src="<?= $this->getViewFileUrl('Kemana_Blog::media/images/instagram.jpg') ?>"
+                                align="middle"
+                                alt="<?= $block->escapeHtml($author->getName()); ?>"/>
+                        </a>
+                    <?php else: ?>
+                        <img style="width:40px;height:40px"
+                            src="<?= $this->getViewFileUrl('Kemana_Blog::media/images/instagram-off.png') ?>"
+                            align="middle"
+                            alt="<?= $block->escapeHtml($author->getName()); ?>"/>
+                    <?php endif; ?>
+                    <?php if ($author->getLinkedinLink()): ?>
+                        <a href="<?= $author->getLinkedinLink() ?>" target="_blank">
+                            <img style="width:40px;height:40px"
+                                src="<?= $this->getViewFileUrl('Kemana_Blog::media/images/linkedin.png') ?>"
+                                align="middle"
+                                alt="<?= $block->escapeHtml($author->getName()); ?>"/>
+                        </a>
+                    <?php else: ?>
+                        <img style="width:40px;height:40px"
+                            src="<?= $this->getViewFileUrl('Kemana_Blog::media/images/linkedin-off.png') ?>"
+                            align="middle"
+                            alt="<?= $block->escapeHtml($author->getName()); ?>"/>
+                    <?php endif; ?>
+                    </div>
                 </div>
             </div>
             `);

@@ -1,0 +1,14 @@
+<div id="category-edit-container" class="category-content">
+    <?= $block->getChildHtml('form') ?>
+</div>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "categoryEdit": {
+                "resetUrl": "<?= $block->getResetUrl();?>",
+                "deleteUrl": "<?= $block->getDeleteUrl();?>",
+                "confirmationDeleteMsg": "<?= $block->escapeHtml(__('Are you sure you want to delete this Category?')) ?>"
+            }
+        }
+    }
+</script>

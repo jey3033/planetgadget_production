@@ -13,7 +13,7 @@
  * @author   kemana team <jakartateam@kemana.com>
  */
 
-namespace Kemana\Blog\Block\Adminhtml\Author\Edit\Tab;
+namespace Kemana\BlogArticle\Block\Adminhtml\Author\Edit\Tab;
 
 use Magento\Backend\Block\Template\Context;
 use Magento\Backend\Block\Widget\Form\Generic;
@@ -246,6 +246,24 @@ class Author extends Generic implements TabInterface
             'label' => __('Twitter'),
             'title' => __('Twitter'),
             'note' => __('Twitter URL'),
+            'required' => false,
+            'class' => 'validate-url'
+        ]);
+
+        $fieldset->addField('instagram_link', 'text', [
+            'name' => 'instagram_link',
+            'label' => __('Instagram'),
+            'title' => __('Instagram'),
+            'note' => __('Instagram URL'),
+            'required' => false,
+            'class' => 'validate-url'
+        ]);
+
+        $fieldset->addField('linkedin_link', 'text', [
+            'name' => 'linkedin_link',
+            'label' => __('Linkedin'),
+            'title' => __('Linkedin'),
+            'note' => __('Linkedin URL'),
             'required' => false,
             'class' => 'validate-url'
         ]);

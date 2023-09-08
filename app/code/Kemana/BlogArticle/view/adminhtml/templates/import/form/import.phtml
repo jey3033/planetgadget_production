@@ -1,0 +1,18 @@
+<?php 
+$errorMsg = $block->getMessagesHtml('adderror', 'False connection. Please check the credentials and try again!');
+$successMsg = $block->getMessagesHtml('addsuccess', 'Connect successfully. To start import process press "Import" button' . $block->getImportButtonHtml()); 
+?>
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "mpBlogImport": {
+                "typeSelector": <?= $block->getTypeSelector()?>,
+                "validateImportUrl": "<?= $block->getUrl('kemana_blog/import/validate', ['form_key' => $block->getFormKey()]);?>",
+                "importUrl": "<?= $block->getUrl('kemana_blog/import/import', ['form_key' => $block->getFormKey()]);?>",
+                "errorMsg": <?= json_encode($errorMsg)?>,
+                "successMsg": <?= json_encode($successMsg)?>
+            }
+        }
+    }
+</script>

@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2021 PT Kemana Teknologi Solusi. All rights reserved.
+ * http://www.kemana.com
+ */
+
+/**
+ * @category Kemana
+ * @package  Kemana_Blog
+ * @license  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ *
+ *
+ * @author   kemana team <jakartateam@kemana.com>
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="editor"/>
+    <body>
+        <referenceContainer name="content">
+            <block class="Kemana\Blog\Block\Adminhtml\Author\Edit" name="kemana_blog_author_edit"/>
+        </referenceContainer>
+        <referenceContainer name="left">
+            <block class="Kemana\Blog\Block\Adminhtml\Author\Edit\Tabs" name="kemana_blog_author_tabs">
+                <block class="Kemana\BlogArticle\Block\Adminhtml\Author\Edit\Tab\Author" name="kemana_blog_author_edit_tab_author"/>
+                <block class="Kemana\Blog\Block\Adminhtml\Author\Edit\Tab\Post" name="kemana_blog_author_edit_tab_post"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">author</argument>
+                    <argument name="block" xsi:type="string">kemana_blog_author_edit_tab_author</argument>
+                </action>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">post</argument>
+                    <argument name="block" xsi:type="string">kemana_blog_author_edit_tab_post</argument>
+                </action>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

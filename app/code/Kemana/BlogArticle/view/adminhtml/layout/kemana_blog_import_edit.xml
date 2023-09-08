@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2021 PT Kemana Teknologi Solusi. All rights reserved.
+ * http://www.kemana.com
+ */
+
+/**
+ * @category Kemana
+ * @package  Kemana_Blog
+ * @license  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ *
+ *
+ * @author   kemana team <jakartateam@kemana.com>
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block class="Kemana\Blog\Block\Adminhtml\Import\Edit\Import" template="Kemana_Blog::import/form/import.phtml" name="mp.import.form.before" as="mp_form_before"/>
+            <block class="Kemana\Blog\Block\Adminhtml\Import\Edit" name="kemana_blog_import_edit"/>
+        </referenceContainer>
+    </body>
+</page>
