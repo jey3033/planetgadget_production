@@ -30,7 +30,7 @@
 			<resource ref="anonymous"/>
 		</resources>
 	</route>
-	<route method="GET" url="/V1/api/getrewardpoint">
+	<route method="POST" url="/V1/api/getrewardpoint">
 		<service class="App\AndroidApi\Api\PostManagementInterface" method="rewardInfo"/>
 		<resources>
 			<resource ref="anonymous"/>
