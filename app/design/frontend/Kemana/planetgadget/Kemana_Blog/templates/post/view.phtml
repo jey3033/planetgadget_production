@@ -82,11 +82,6 @@ $color = $helper->getBlogConfig('general/font_color');
                         <span><i class="mp-blog-icon mp-folder-open"></i>
                             <?= /* @noEscape */ __($categoryHtml); ?>
                         </span>
-                    <?php else : ?>
-                        <span class ="line">|</span>
-                        <span><i class="mp-blog-icon mp-folder-open"></i>
-                            tidak ada password else
-                        </span>
                     <?php endif; ?>
                     <?php if ($tagHtml = $block->getTagList($_post)) : ?>
                         <span class ="line">|</span>
