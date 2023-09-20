@@ -11,7 +11,7 @@ $_session=$block->getSession();
     <div class="block account-menu">
         <div class="account-menu_content" id="account-menu">
             <ul class="menu-content">
-                <li class="main-item pg-club"><a href="<?= $this->getUrl('planet-gadget-club');  ?>"><?= __('Planet Club') ?></a></li>
+                <li class="main-item pg-club"><a href="<?= $this->getUrl('planet-gadget-club');  ?>"><?= __('Planet Reward') ?></a></li>
                 <li class="main-item pg-track"><a href="<?= $this->getUrl('sales/order/history'); ?>"><?= __('Track') ?></a></li>
                 <?php if (!$_session->isLoggedIn()): ?>
                     <li class="main-item account-login"><a href="<?= $this->getUrl('customer/account/login'); ?>"><?=
