@@ -108,7 +108,7 @@ class Job extends Template
                                 [['in' => $filters['loc']]]);
             }
              if(!empty($filters['typ'])){
-                $collection = $collection->addFieldToFilter(['jobs_job_type'],
+                $collection = $collection->addFieldToFilter(['jobs_id'],
                         [['in' => $filters['typ']]]);
             }
             $collection->setOrder('jobs_publish_date', 'DESC'); 

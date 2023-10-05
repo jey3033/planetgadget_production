@@ -486,6 +486,15 @@ class InstallSchema implements InstallSchemaInterface
                     'comment' => 'ID Education Certificate File',
                 ]
             );
+            $setup->getConnection()->addColumn(
+                $setup->getTable('fme_jobs_application'),
+                'eaf',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'nullable' => true,
+                    'comment' => 'ID Education Certificate File',
+                ]
+            );
         }
 
         // End - Added by Kemana

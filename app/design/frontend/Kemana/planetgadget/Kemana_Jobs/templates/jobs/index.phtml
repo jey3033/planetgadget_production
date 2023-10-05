@@ -47,7 +47,7 @@
                         <div class="jump_menu_container">
                             <section class="container">
                                 <div class="dropdown">
-                                    <select name="loc[2]" class="dropdown-select" required>
+                                    <select name="loc" id="location" class="dropdown-select" required>
                                         <option value=""><?php echo __('Location') ?></option>
                                         <?php foreach ($metaCollection as $topMetas):?>
                                         <?php if ($topMetas->getTypeCode() == 1):?>
@@ -64,30 +64,12 @@
                         <div class="jump_menu_container">
                             <section class="container">
                                 <div class="dropdown">
-                                    <select name="dept[1]" class="dropdown-select" required>
-                                        <option value=""><?php echo __('Department') ?></option>
-                                        <?php foreach ($metaCollection as $topMetas):?>
-                                        <?php if ($topMetas->getTypeCode() == 2):?>
-                                        <option name="dept[<?php echo $topMetas->getDataCode() ?>]"
-                                            value="<?php echo __($topMetas->getDataCode())?>">
-                                            <?php echo __($topMetas->getDataName())?></option>
-                                        <?php endif;?>
-                                        <?php endforeach;?>
-                                    </select>
-                                </div>
-                            </section>
-                        </div>
-                        <div class="jump_menu_container">
-                            <section class="container">
-                                <div class="dropdown">
-                                    <select name="typ[3]" class="dropdown-select" required>
+                                    <select name="typ" class="dropdown-select" required>
                                         <option value=""><?php echo __('Job Type') ?></option>
-                                        <?php foreach ($metaCollection as $topMetas):?>
-                                        <?php if ($topMetas->getTypeCode() == 3):?>
-                                        <option name="typ[<?php echo $topMetas->getDataCode() ?>]"
-                                            value="<?php echo __($topMetas->getDataCode())?>">
-                                            <?php echo __($topMetas->getDataName())?></option>
-                                        <?php endif;?>
+                                        <?php foreach ($jobCollection as $jobs):?>
+                                        <option name="typ[<?php echo __($jobs->getId())?>]"
+                                            value="<?php echo __($jobs->getId())?>">
+                                            <?php echo __($jobs->getJobsTitle())?></option>
                                         <?php endforeach;?>
 
                                     </select>
@@ -450,6 +432,31 @@ require([
                     }
                 });
         });
+
+        $('#location').change(function(e) {
+            var formData = $(form).serialize();
+            $.ajax({
+                type: 'POST',
+                url: $(form).attr('action'),
+                showLoader: true,
+                data: formData
+            })
+            .done(function(response) {
+                $(formMessages).html(response);
+            })
+            .fail(function(data) {
+                $(formMessages).removeClass('success');
+                $(formMessages).addClass('error');
+
+                if (data.responseText !== '') {
+                    $(formMessages).text(data.responseText);
+                } else {
+                    $(formMessages).text(
+                        'Oops! An error occured and your message could not be sent.'
+                    );
+                }
+            });
+        })
     });
 });
 </script>
