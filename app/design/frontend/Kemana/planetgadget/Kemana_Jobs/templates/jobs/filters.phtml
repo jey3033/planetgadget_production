@@ -53,7 +53,8 @@
                     <p><?php echo __($department) ?>, <?php echo __($location) ?></p>
                 </div>
                 <div class="job-title">
-                    <h3><?php echo __($jobs->getJobsTitle());?></h3>
+                    <input type="hidden" value="<?php echo __($jobs->getJobsId());?>"/>
+                    <h3 class="job-title-text"><?php echo __($jobs->getJobsTitle());?></h3>
                 </div>
             </div>
             <?php $string = $jobs->getJobsDescription() ?>

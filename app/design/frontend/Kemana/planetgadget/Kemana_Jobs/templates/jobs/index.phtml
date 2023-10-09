@@ -64,14 +64,13 @@
                         <div class="jump_menu_container">
                             <section class="container">
                                 <div class="dropdown">
-                                    <select name="typ" class="dropdown-select" required>
+                                    <select name="typ" id="typ" class="dropdown-select" required>
                                         <option value=""><?php echo __('Job Type') ?></option>
                                         <?php foreach ($jobCollection as $jobs):?>
                                         <option name="typ[<?php echo __($jobs->getId())?>]"
                                             value="<?php echo __($jobs->getId())?>">
                                             <?php echo __($jobs->getJobsTitle())?></option>
                                         <?php endforeach;?>
-
                                     </select>
                                 </div>
                             </section>
@@ -443,11 +442,17 @@ require([
             })
             .done(function(response) {
                 $(formMessages).html(response);
+                $('#typ').html("<option value=''>Pekerjaan</option>");
+                $.each($(formMessages).find('.job-title-text'), function (indexInArray, valueOfElement) { 
+                    let id = $(this).prev().val();
+                    let text = document.getElementsByClassName('job-title-text')[indexInArray].innerHTML; 
+                    // console.log(id);
+                    $('#typ').append(`<option value='${id}'>${text}</option>`);
+                });
             })
             .fail(function(data) {
                 $(formMessages).removeClass('success');
                 $(formMessages).addClass('error');
-
                 if (data.responseText !== '') {
                     $(formMessages).text(data.responseText);
                 } else {
