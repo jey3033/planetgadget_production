@@ -29,7 +29,7 @@ define([
         },
 
         _create: function() {
-            var self = this;
+            var self = this;console.log(self);
             if (self.options.baseUrl) {
                 $.ajax({
                     url: self.options.baseUrl+'/labelmanager/labels/file',
