@@ -324,40 +324,40 @@ define([
             this.options.tierPriceTemplate = $(this.options.tierPriceTemplateSelector).html();
         },
 
-        // _stockAPI: async function($widget){
-        //     $(".product.alert.stock").addClass("stock-loader");
-        //     await $.ajax({
-        //         url: window.location.origin+"/msdynamic/stock/updateStock",
-        //         type: 'POST',
-        //         cache: true,
-        //         data:{
-        //           id: $widget.options.jsonConfig.productId
-        //         },
-        //         success: function(response) {
-        //             if(response.msDynamics){
-        //                 if(response.instock){
-        //                     if(Object.keys(response.attributes).length > 0){
-        //                         $widget.options.jsonConfig.attributes = response.attributes
-        //                     }
-        //                     $widget._swatcherRender($widget);
-        //                     $(".product-add-form").show();
-        //                     $(".product.alert.stock").hide();
-        //                     $(".box-tocart").show();
-        //                     $(".product-info-stock-sku .stock").addClass("available").html("<span>In stock</span>")
-        //                 }else{
-        //                     $(".product-add-form").hide();
-        //                     $(".product.alert.stock").show();
-        //                     $(".product-info-stock-sku .stock").addClass("unavailable").html("<span>Out of stock</span>")
-        //                 }
-        //             }else{
-        //                 $widget._swatcherRender($widget);
-        //                 $(".product-add-form").show();
-        //                 $(".product.alert.stock").show();
-        //             }
-        //             $(".product.alert.stock").removeClass("stock-loader");
-        //         }
-        //     });
-        // },
+        _stockAPI: async function($widget){
+            $(".product.alert.stock").addClass("stock-loader");
+            await $.ajax({
+                url: window.location.origin+"/msdynamic/stock/updateStock",
+                type: 'POST',
+                cache: true,
+                data:{
+                  id: $widget.options.jsonConfig.productId
+                },
+                success: function(response) {
+                    if(response.msDynamics){
+                        if(response.instock){
+                            if(Object.keys(response.attributes).length > 0){
+                                $widget.options.jsonConfig.attributes = response.attributes
+                            }
+                            $widget._swatcherRender($widget);
+                            $(".product-add-form").show();
+                            $(".product.alert.stock").hide();
+                            $(".box-tocart").show();
+                            $(".product-info-stock-sku .stock").addClass("available").html("<span>In stock</span>")
+                        }else{
+                            $(".product-add-form").hide();
+                            $(".product.alert.stock").show();
+                            $(".product-info-stock-sku .stock").addClass("unavailable").html("<span>Out of stock</span>")
+                        }
+                    }else{
+                        $widget._swatcherRender($widget);
+                        $(".product-add-form").show();
+                        $(".product.alert.stock").show();
+                    }
+                    $(".product.alert.stock").removeClass("stock-loader");
+                }
+            });
+        },
 
         _swatcherRender: function($widget){
             if ($widget.options.jsonConfig !== '' && $widget.options.jsonSwatchConfig !== '') {
