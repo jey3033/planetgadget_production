@@ -32,7 +32,7 @@ define([
             var self = this;
             if (self.options.baseUrl) {
                 $.ajax({
-                    url: self.options.baseUrl+'labelmanager/labels/file',
+                    url: 'labelmanager/labels/file',
                     type: 'post',
                     dataType: 'json',
 
