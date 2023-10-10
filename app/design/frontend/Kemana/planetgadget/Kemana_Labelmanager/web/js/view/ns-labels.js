@@ -29,10 +29,10 @@ define([
         },
 
         _create: function() {
-            var self = this;console.log(self);
+            var self = this;
             if (self.options.baseUrl) {
                 $.ajax({
-                    url: self.options.baseUrl+'/labelmanager/labels/file',
+                    url: self.options.baseUrl+'labelmanager/labels/file',
                     type: 'post',
                     dataType: 'json',
 
