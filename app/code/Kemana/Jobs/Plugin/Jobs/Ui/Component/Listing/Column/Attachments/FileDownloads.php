@@ -48,6 +48,10 @@ class FileDownloads extends \FME\Jobs\Ui\Component\Listing\Column\Attachments\Ti
                     $education_cert_file_url = $baseurl.'fme_jobs'.$item['education_cert_file'];
                     $item[$fieldName] .= ("<br><a onclick=\"window.location='$education_cert_file_url'\" href='$education_cert_file_url' >".'Download Education Certificate'."</a>");
                 }
+                if (!empty($item['eaf'])) {
+                    $eaf_url = $baseurl.'fme_jobs'.$item['eaf'];
+                    $item[$fieldName] .= ("<br><a onclick=\"window.location='$eaf_url'\" href='$eaf_url' >".'Download Employee Application Form'."</a>");
+                }
             } 
         }
         return $dataSource;

@@ -9,6 +9,9 @@ use Magento\Catalog\Block\Product\Image;
 use Magento\Catalog\Model\Product\Image\UrlBuilder;
 use Magento\Catalog\Model\Product\Visibility;
 use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory;
+use FME\Jobs\Model\ResourceModel\Job\CollectionFactory as JobFactory;
+use \FME\Jobs\Helper\Job;
+use \Magento\Store\Model\StoreManagerInterface; 
 use Magento\Catalog\Model\Product;
 use Magento\Framework\DataObject;
 use Magento\Framework\App\ObjectManager;
@@ -17,6 +20,7 @@ use Magento\Sales\Model\ResourceModel\Report\Bestsellers\CollectionFactory as Be
 use Magento\Catalog\Helper\Image as ImageHelper;
 use Magento\Framework\App\RequestInterface;
 use Magento\Eav\Model\Entity\Attribute\Option;
+use \Magento\Framework\View\Element\Template\Context;
 
 /**
  * Class PostManagement
@@ -26,6 +30,26 @@ class PostManagement extends \Magento\Framework\Model\AbstractModel implements P
 	/**
 	 * @method int getStoreId();
 	 */
+
+	/**
+	 * @var Context
+	 */
+	protected $context;
+
+	/**
+	 * @var JobFactory
+	 */
+	protected $jobFactory;
+
+	/**
+	 * @var Job
+	 */
+	protected $jobHelper;
+
+	/**
+	 * @var StoreManagerInterface
+	 */
+	protected $storemanager;
 
 	/**
      * @var Data
@@ -441,6 +465,47 @@ class PostManagement extends \Magento\Framework\Model\AbstractModel implements P
 		];
 
 		return $arr;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getJobs() {
+		$this->context = ObjectManager::getInstance()->get(Context::class);
+		$this->storemanager = ObjectManager::getInstance()->get(StoreManagerInterface::class);
+		$this->jobFactory = ObjectManager::getInstance()->get(JobFactory::class);
+		$this->jobHelper = ObjectManager::getInstance()->get(Job::class);
+
+		$date =  $this->getCurrDateTime();
+        $date =  (array)$this->context->getLocaleDate()->date();
+        $storeid=$this->storemanager->getStore()->getStoreId();
+        $date = $date['date'];        
+        $filters = $_REQUEST['loc'];       
+        $collection = $this->jobFactory->create();
+        $collection = $collection->addFieldToFilter('is_active', 1)->addFieldToFilter('jobs_publish_date', array('lt' => $date))->addStoreViewFilter($storeid);
+        if(!($this->jobHelper->getJobExpiredStatus())){
+            $collection = $collection->addFieldToFilter('jobs_applyby_date', array('gt' => $date));
+        }       
+        if(!empty($filters)){
+            if(!empty($filters['loc'])){
+                $collection = $collection
+                ->addFieldToFilter(['jobs_location'],
+                                [['in' => $filters]]);
+            }
+            $collection->setOrder('jobs_publish_date', 'DESC'); 
+            $page = isset($_REQUEST['p']) ? $_REQUEST['p'] : 1;
+            $pageSize = isset($_REQUEST['limit']) ? $_REQUEST['limit'] : 5;
+            $collection->setPageSize($pageSize);
+            $collection->setCurPage($page);
+            return array($collection);
+        }else{
+            $collection->setOrder('jobs_publish_date', 'DESC');
+            $page = $this->getRequest()->getParam('p',1);
+            $pageSize = $this->getRequest()->getParam('limit',5);
+            $collection->setPageSize($pageSize);
+            $collection->setCurPage($page);
+            return array($collection);
+        }
 	}
 
 	function getColorHex($label){

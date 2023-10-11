@@ -17,14 +17,15 @@ $bankPromotions =  $block->getLatestBankPromotions();
 $kemanaPromotionHelper = $this->helper(Kemana\Promotion\Helper\Data::class);
 $title = __('Bank & Partner <span>Promo</span>');
 ?>
-<div class="home-bank-and-promotions">
-    <div class="banner-inner-container widget-title block-title">
+<div class="home-bank-and-promotions full-container post-list-wrapper">
+    <div class="widget-title block-title blog-widget-title">
         <h2><?= /* @escapeNotVerified */ $title ?></h2>
         <span><a href="<?= $kemanaPromotionHelper->getLandingPageFrontName()?>"><?= $block->escapeHtml(__('See more')) ?></a></span>
-        <div class="row">
+    </div>
+    <div class="row">
         <?php if (!empty($bankPromotions)): ?>
             <?php foreach ($bankPromotions as $bankPromotion): ?>
-            <div class="col-md-4 col-12 image-block">
+            <div class="col-md-4 col-lg-3 col-12 image-block">
                 <?php if ($bankPromotion->getLandingImage()): ?>
                     <a href="<?= $bankPromotion->getIdentifier() ?>"><div class="image">
                         <img src="<?= $block->getMediaFolderUrl().$bankPromotion->getLandingImage() ?>">
@@ -38,6 +39,5 @@ $title = __('Bank & Partner <span>Promo</span>');
             </div>
             <?php endforeach; ?>
         <?php endif; ?>
-        </div>
     </div>
 </div>

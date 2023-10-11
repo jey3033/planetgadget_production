@@ -52,4 +52,10 @@ interface PostManagementInterface {
 	 * @return mixed
 	 */
 	public function getProvince();
+
+	/**
+	 * @api
+	 * @return array
+	 */
+	public function getJobs();
 }

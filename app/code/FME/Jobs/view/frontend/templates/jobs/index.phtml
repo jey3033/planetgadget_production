@@ -360,13 +360,7 @@ require([
 
 </script>
 <script type="text/javascript">
-require([
-                    'jquery',
-                    'mage/template',
-                    'jquery/ui',
-                    'mage/translate'
-                    
-                ], function($){
+require(['jquery','mage/template','jquery/ui','mage/translate'], function($){
                   $(function() { 
   var form = $('#ajax-contact-top-filters');  
   var formMessages = $('#form-messages');
@@ -397,7 +391,6 @@ require([
   });
 
 });                   
-
                 });
 
 </script>
@@ -407,33 +400,29 @@ require([
 <!-- Filters End Here -->
  
 <script>
-require([
-                    'jquery',
-                    
-                ], function($){
-                  $(function() { 
+require(['jquery',], function($){
+  $(function() { 
     $(".show_more_l").click(function(){
-        $(".hidden_l").slideToggle();
+      $(".hidden_l").slideToggle();
     });
     $(".show_more_d").click(function(){
-        $(".hidden_t").slideToggle();
+      $(".hidden_t").slideToggle();
     });
     $(".show_more_t").click(function(){
-        $(".hidden_d").slideToggle();
+      $(".hidden_d").slideToggle();
     });
-	
-	 $(".job2").click(function(){
-        $(".job_type").slideToggle();
-    });
-   $(".job1").click(function(){
-        $(".city_selection").slideToggle();
-    });
-   $(".job").click(function(){
-        $(".job_department").slideToggle();
-    });
-	});                   
 
-                });
+    $(".job2").click(function(){
+      $(".job_type").slideToggle();
+    });
+    $(".job1").click(function(){
+      $(".city_selection").slideToggle();
+    });
+    $(".job").click(function(){
+      $(".job_department").slideToggle();
+    });
+  });                   
+});
 
 </script>
 <?php else: ?>

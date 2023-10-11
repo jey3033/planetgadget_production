@@ -48,4 +48,10 @@
 			<resource ref="anonymous"/>
 		</resources>
 	</route>
+	<route method="POST" url="/V1/getjobdesc">
+		<service class="App\AndroidApi\Api\PostManagementInterface" method="getJobs"/>
+		<resources>
+			<resource ref="anonymous"/>
+		</resources>
+	</route>
 </routes>

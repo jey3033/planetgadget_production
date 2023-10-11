@@ -76,42 +76,43 @@ class Inventory
             $productSkus = implode("|", $productSkusArray);
 
             $storeSources = $this->getSources();   
-            // $sources = implode("|", $storeSources);
-        for ($i=0; $i < count($storeSources); $i++) { 
+            $sources = implode("|", $storeSources);
+
             $dataToGetStock = [
                 "productFilter" => $productSkus,
-                "locationFilter" => $storeSources[$i]
+                "locationFilter" => $sources
             ];
-            $this->helper->inventorylog("Request: ".json_encode($dataToGetStock), 'info');
+        $this->helper->inventorylog("Request: ".json_encode($dataToGetStock), 'info');
 
-            $dataToGetStock = $this->helper->convertArrayToXml($dataToGetStock);
-            $response = $this->getUnSyncInventorysFromErp($this->helper->getFunctionInventoryStock(),
-                $this->helper->getSoapActionGetInventoryStock(), $dataToGetStock);
+        $dataToGetStock = $this->helper->convertArrayToXml($dataToGetStock);
+        $response = $this->getUnSyncInventorysFromErp($this->helper->getFunctionInventoryStock(),
+            $this->helper->getSoapActionGetInventoryStock(), $dataToGetStock);
 
-            $this->helper->inventorylog("Response: ".json_encode($response), 'info');
+        $this->helper->inventorylog("Response: ".json_encode($response), 'info');
 
-            $totalStock = [];
-            $inventoryData = [];
-            if(isset($response['curlStatus']) && $response['curlStatus'] != 500 && isset($response['response'])){
-                $inventorysources = explode(";",$response['response']);
-                foreach ($inventorysources as $key => $inventorysource) {
-                    $stockarray = explode(",",$inventorysource);
-                    if(isset($stockarray[0]) && isset($stockarray[1]) && isset($stockarray[2])){
-                        if(isset($totalStock[$stockarray[0]])){
-                            $totalStock[$stockarray[0]] = $totalStock[$stockarray[0]] + $stockarray[2];
-                        }else{
-                            $totalStock[$stockarray[0]] = $stockarray[2];
-                        }
-                        $inventoryData[$stockarray[0]][$stockarray[1]] = $stockarray[2];
+        $totalStock = [];
+        $inventoryData = [];
+        if(isset($response['curlStatus']) && $response['curlStatus'] != 500 && isset($response['response'])){
+            $inventorysources = explode(";",$response['response']);
+            foreach ($inventorysources as $key => $inventorysource) {
+                $stockarray = explode(",",$inventorysource);
+                if(isset($stockarray[0]) && isset($stockarray[1]) && isset($stockarray[2])){
+                    if(isset($totalStock[$stockarray[0]])){
+                        $totalStock[$stockarray[0]] = $totalStock[$stockarray[0]] + $stockarray[2];
+                    }else{
+                        $totalStock[$stockarray[0]] = $stockarray[2];
                     }
+                    $inventoryData[$stockarray[0]][$stockarray[1]] = $stockarray[2];
                 }
-                foreach ($productSkusArray as $sku) {
-                    $qty = isset($inventoryData[$sku][$storeSources[$i]]) ? $inventoryData[$sku][$storeSources[$i]] : 0;
-                    $this->updateStock($sku,$qty,$storeSources[$i]);   
-                }
-            }else{
-                $this->helper->inventorylog('No response.');
             }
+            foreach ($productSkusArray as $sku) {
+                foreach ($storeSources as $sources) {
+                    $qty = isset($inventoryData[$sku][$sources]) ? $inventoryData[$sku][$sources] : 0;
+                    $this->updateStock($sku,$qty,$sources);   
+                }
+            }
+        }else{
+            $this->helper->inventorylog('No response.');
         }
         
         $response['totalStock'] = $totalStock;
