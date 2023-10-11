@@ -446,7 +446,6 @@ require([
                 $.each($(formMessages).find('.job-title-text'), function (indexInArray, valueOfElement) { 
                     let id = $(this).prev().val();
                     let text = document.getElementsByClassName('job-title-text')[indexInArray].innerHTML; 
-                    // console.log(id);
                     $('#typ').append(`<option value='${id}'>${text}</option>`);
                 });
             })
