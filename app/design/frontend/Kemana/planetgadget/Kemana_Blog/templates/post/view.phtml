@@ -97,6 +97,46 @@ $color = $helper->getBlogConfig('general/font_color');
             </div>
         </div>
     </div>
+    <?php if ($helper->isEnabledReview()) :?>
+        <div class="mp-blog-review-title">
+            <span><?= /* @noEscape */ $block->escapeHtml(__('Did you find it helpful?'))?></span>
+        </div>
+        <div id="mp-blog-review">
+            <div class="mp-blog-like">
+                <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                <span><?= /* @noEscape */ $block->escapeHtml(__('LIKE'))?></span>
+                    <span class="mp-blog-view">
+                    <?php if (!empty($block->getPostLike($_post->getId(), '1'))) :?>
+                        (<?= $block->escapeHtml($block->getPostLike($_post->getId(), '1'))?>)
+                    <?php endif; ?>
+                    </span>
+            </div>
+            <div class="mp-blog-dislike">
+                <i class="fa fa-thumbs-down" aria-hidden="true"></i>
+                <span><?= /* @noEscape */ $block->escapeHtml(__('DISLIKE'))?></span>
+                    <span class="mp-blog-view">
+                    <?php if (!empty($block->getPostLike($_post->getId(), '0'))) :?>
+                        (<?= $block->escapeHtml($block->getPostLike($_post->getId(), '0'))?>)
+                    <?php endif; ?>
+                    </span>
+            </div>
+        </div>
+        <div class="mp-blog-review-label"></div>
+        <script type="text/x-magento-init">
+            {
+                "#mp-blog-review": {
+                    "Kemana_Blog/js/helpful-rate": {
+                        "url": "<?= /* @noEscape */ $block->getUrl('mpblog/post/review') ?>",
+                        "post_id" : <?= /* @noEscape */ $_post->getId() ?>,
+                        "mode": <?= /* @noEscape */ $helper->getReviewMode() ?>
+                    }
+                }
+            }
+        </script>
+    <?php endif;?>
+    <?php if ($helper->getBlogConfig('share/enabled')) : ?>
+        <?php echo $block->getChildBlock('km.SocialShare')->toHtml(); ?>
+    <?php endif; ?>
     <?php $relatedPosts = $_post->getRelatedPostsCollection(); ?>
     <?php if ($relatedPosts && count($relatedPosts)) : ?>
         <div class="block-blog-related topic-list">
@@ -198,46 +238,6 @@ $color = $helper->getBlogConfig('general/font_color');
                 </div>
             <?php endif;?>
         </div>
-    <?php endif; ?>
-    <?php if ($helper->isEnabledReview()) :?>
-        <div class="mp-blog-review-title">
-            <span><?= /* @noEscape */ $block->escapeHtml(__('Did you find it helpful?'))?></span>
-        </div>
-        <div id="mp-blog-review">
-            <div class="mp-blog-like">
-                <i class="fa fa-thumbs-up" aria-hidden="true"></i>
-                <span><?= /* @noEscape */ $block->escapeHtml(__('LIKE'))?></span>
-                    <span class="mp-blog-view">
-                    <?php if (!empty($block->getPostLike($_post->getId(), '1'))) :?>
-                        (<?= $block->escapeHtml($block->getPostLike($_post->getId(), '1'))?>)
-                    <?php endif; ?>
-                    </span>
-            </div>
-            <div class="mp-blog-dislike">
-                <i class="fa fa-thumbs-down" aria-hidden="true"></i>
-                <span><?= /* @noEscape */ $block->escapeHtml(__('DISLIKE'))?></span>
-                    <span class="mp-blog-view">
-                    <?php if (!empty($block->getPostLike($_post->getId(), '0'))) :?>
-                        (<?= $block->escapeHtml($block->getPostLike($_post->getId(), '0'))?>)
-                    <?php endif; ?>
-                    </span>
-            </div>
-        </div>
-        <div class="mp-blog-review-label"></div>
-        <script type="text/x-magento-init">
-            {
-                "#mp-blog-review": {
-                    "Kemana_Blog/js/helpful-rate": {
-                        "url": "<?= /* @noEscape */ $block->getUrl('mpblog/post/review') ?>",
-                        "post_id" : <?= /* @noEscape */ $_post->getId() ?>,
-                        "mode": <?= /* @noEscape */ $helper->getReviewMode() ?>
-                    }
-                }
-            }
-        </script>
-    <?php endif;?>
-    <?php if ($helper->getBlogConfig('share/enabled')) : ?>
-        <?php echo $block->getChildBlock('km.SocialShare')->toHtml(); ?>
     <?php endif; ?>
     <?php $typeComment = $block->helperComment('type'); ?>
     <?php if (((int)$typeComment !== Type::DISABLE) && $_post->getAllowComment()) : ?>
