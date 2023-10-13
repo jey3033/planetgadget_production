@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+ /**
+  * @copyright  Vertex. All rights reserved.  https://www.vertexinc.com/
+  * @author     Mediotype                     https://www.mediotype.com/
+  */
+-->
+<sections xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="urn:magento:mftf:Page/etc/SectionObject.xsd">
+    <section name="AdminProductFormSection">
+        <element name="scheduledCommodityCodeFieldSectionHeader" type="button" selector=".scheduled-changes-modal-slide div[data-index='vertex_commodity_code']" timeout="30"/>
+        <element name="scheduledCommodityCodeField" type="input" selector=".scheduled-changes-modal-slide input[name='product[vertex_commodity_code][code]']" />
+        <element name="scheduledCommodityTypeField" type="select" selector=".scheduled-changes-modal-slide select[name='product[vertex_commodity_code][type]']" />
+    </section>
+</sections>

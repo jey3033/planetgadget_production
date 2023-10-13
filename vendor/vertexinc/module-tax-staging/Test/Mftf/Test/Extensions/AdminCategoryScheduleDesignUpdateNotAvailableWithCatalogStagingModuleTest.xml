@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * Copyright © Magento, Inc. All rights reserved.
+  * See COPYING.txt for license details.
+  */
+-->
+
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
+    <test name="AdminCategoryScheduleDesignUpdateNotAvailableWithCatalogStagingModuleTest">
+        <before>
+            <magentoCLI command="module:disable Vertex_TaxStaging"
+                        stepKey="disableVertexStagingModule"
+                        before="disableCatalogStagingAndDependentModules"/>
+        </before>
+        <after>
+            <magentoCLI command="module:enable Vertex_TaxStaging"
+                        stepKey="enableVertexStagingModule"
+                        after="enableCatalogStagingAndDependentModules"/>
+        </after>
+    </test>
+</tests>

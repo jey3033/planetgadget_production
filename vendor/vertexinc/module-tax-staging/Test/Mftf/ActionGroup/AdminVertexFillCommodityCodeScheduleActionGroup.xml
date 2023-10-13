@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * @copyright  Vertex. All rights reserved.  https://www.vertexinc.com/
+  * @author     Mediotype                     https://www.mediotype.com/
+  */
+-->
+<actionGroups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/actionGroupSchema.xsd">
+    <actionGroup name="AdminVertexFillCommodityCodeScheduleActionGroup">
+        <annotations>
+            <description>Sets the commodity code in the schedule dialog on the edit product page in the admin panel.</description>
+        </annotations>
+        <arguments>
+            <argument name="stage" type="entity"/>
+        </arguments>
+
+        <click selector="{{AdminProductFormSection.scheduledCommodityCodeFieldSectionHeader}}" stepKey="openCommodityCodeSection"/>
+        <fillField selector="{{AdminProductFormSection.scheduledCommodityCodeField}}" userInput="{{stage.code}}" stepKey="fillCommodityCode"/>
+        <selectOption selector="{{AdminProductFormSection.scheduledCommodityTypeField}}" userInput="{{stage.type}}" stepKey="fillCommodityType"/>
+        <scrollToTopOfPage stepKey="scrollToTop"/>
+        <click selector="{{AdminStagingSlideOutSection.save}}" stepKey="clickSave"/>
+    </actionGroup>
+</actionGroups>

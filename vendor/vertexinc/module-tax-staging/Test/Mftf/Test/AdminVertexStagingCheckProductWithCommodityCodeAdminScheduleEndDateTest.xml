@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * @copyright  Vertex. All rights reserved.  https://www.vertexinc.com/
+  * @author     Mediotype                     https://www.mediotype.com/
+  */
+-->
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
+    <test name="AdminVertexStagingCheckProductWithCommodityCodeAdminScheduleEndDateTest">
+        <annotations>
+            <features value="Vertex"/>
+            <group value="Vertex"/>
+            <testCaseId value="VRTX-841"/>
+
+            <stories value="As a merchant, I should be able to specify commodity codes for my products"/>
+            <title value="Validate the commodity code when changed via the staging functionality with end date"/>
+            <description value="Update the commodity code via schedule, check if the field was changed during the scheduled period and returned to its original value after the end of the schedule"/>
+
+            <severity value="MAJOR"/>
+        </annotations>
+
+        <before>
+            <actionGroup ref="AdminLoginActionGroup" stepKey="loginToAdminPanel"/>
+            <createData entity="_defaultCategory" stepKey="createCategory"/>
+            <createData entity="VertexProductTaxClass_Clothing" stepKey="createTaxClass" />
+            <createData entity="VertexSimpleProduct" stepKey="createSimpleProduct">
+                <requiredEntity createDataKey="createCategory"/>
+                <requiredEntity createDataKey="createTaxClass"/>
+            </createData>
+        </before>
+
+        <after>
+            <deleteData createDataKey="createSimpleProduct" stepKey="deleteSimpleProduct"/>
+            <deleteData createDataKey="createTaxClass" stepKey="deleteTaxClass"/>
+            <deleteData createDataKey="createCategory" stepKey="deleteCategory"/>
+
+            <actionGroup ref="AdminLogoutActionGroup" stepKey="logoutOfAdmin"/>
+        </after>
+
+        <amOnPage url="{{AdminProductIndexPage.url}}" stepKey="navigateToProductIndex"/>
+
+        <actionGroup ref="FilterProductGridBySkuActionGroup" stepKey="filterProductGrid">
+            <argument name="product" value="$$createSimpleProduct$$"/>
+        </actionGroup>
+
+        <actionGroup ref="OpenEditProductOnBackendActionGroup" stepKey="openProductEditPage">
+            <argument name="product" value="$$createSimpleProduct$$"/>
+        </actionGroup>
+
+        <actionGroup ref="AdminVertexFillCommodityCodeActionGroup" stepKey="fillCommodityCodeSchedule">
+            <argument name="stage" value="Clothing_CommodityCode"/>
+        </actionGroup>
+
+        <!--Create the staging update-->
+        <actionGroup ref="AdminFillTemporaryUpdateActionGroup" stepKey="fillStagingUpdate">
+            <argument name="stage" value="TemporaryUpdatePlusTwoMin"/>
+        </actionGroup>
+        <actionGroup ref="AdminVertexFillCommodityCodeScheduleActionGroup" stepKey="fillCommodityCodeScheduleSecond">
+            <argument name="stage" value="Clothing_CommodityCodeSchedule"/>
+        </actionGroup>
+
+        <!-- Save the update details -->
+        <click selector="{{AdminProductFormActionSection.saveButton}}" stepKey="saveProductSecond"/>
+        <seeElement selector="{{AdminProductMessagesSection.successMessage}}" stepKey="assertSuccessSecond"/>
+
+        <!-- Wait 2 minutes for activation update and run cron -->
+        <wait time="60" stepKey="waitForActivation"/>
+        <magentoCron stepKey="runCron" groups="staging" />
+
+        <!-- Reload product page -->
+        <reloadPage stepKey="reloadPage"/>
+
+        <!-- Check if Commodity Code and Type has changed -->
+        <actionGroup ref="AdminVertexCheckCommodityCodeActionGroup" stepKey="checkCommodityCodeSchedule">
+            <argument name="stage" value="Clothing_CommodityCodeSchedule"/>
+        </actionGroup>
+
+        <!-- Wait 1 minute for activation update and run cron -->
+        <wait time="60" stepKey="waitForActivationSecond"/>
+        <magentoCron stepKey="runCronSecond" groups="staging" />
+
+        <!-- Reload product page -->
+        <reloadPage stepKey="reloadPageSecond"/>
+
+        <!-- Check if Commodity Code and Type has changed -->
+        <actionGroup ref="AdminVertexCheckCommodityCodeActionGroup" stepKey="checkCommodityCodeScheduleSecond">
+            <argument name="stage" value="Clothing_CommodityCode"/>
+        </actionGroup>
+
+    </test>
+</tests>
